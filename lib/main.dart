@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:saasify/screens/onboarding/auhentication_screen.dart';
+import 'package:saasify/screens/onboarding/company_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/authentication/authentication_bloc.dart';
 import 'bloc/authentication/authentication_event.dart';
@@ -45,7 +45,7 @@ class MyPosApp extends StatelessWidget {
                     context
                         .read<AuthenticationBloc>()
                         .add(SwitchLoginScreenEvent(isLogin: false));
-                    return AuthenticationScreen();
+                    return CompanyForm();
                   }
                 },
               ))),

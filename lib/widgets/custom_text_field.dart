@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final Widget? suffix;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final dynamic initialValue;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
@@ -39,7 +40,8 @@ class CustomTextField extends StatelessWidget {
       this.inputFormatters,
       this.prefixIcon,
       this.obscureText = false,
-      this.hintStyle})
+      this.hintStyle,
+      this.suffixIcon})
       : super(key: key);
 
   @override
@@ -54,6 +56,7 @@ class CustomTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle: hintStyle,
         prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
         counterText: "",
       ),
       inputFormatters: inputFormatters,

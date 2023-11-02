@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saasify/configs/app_theme.dart';
 import '../configs/app_color.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -34,7 +35,12 @@ class PrimaryButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           (icon == null) ? const SizedBox.shrink() : Icon(icon),
-          Text(buttonTitle, textAlign: TextAlign.center),
+          Text(buttonTitle,
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .tiniest
+                  .copyWith(color: AppColor.saasifyWhite)),
         ],
       ),
     );
