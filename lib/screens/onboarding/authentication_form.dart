@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:saasify/configs/app_spacing.dart';
-import '../../../bloc/authentication/authentication_bloc.dart';
-import '../../../widgets/header_widget.dart';
+import 'package:saasify/utils/constants/string_constants.dart';
+import '../../configs/app_color.dart';
+import '../../widgets/custom_text_field.dart';
+import '../../widgets/primary_button.dart';
 
 class AuthenticationForm extends StatelessWidget {
   AuthenticationForm({super.key});
@@ -12,29 +11,49 @@ class AuthenticationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      const HeaderWidget(isFromSignUp: true),
-      const SizedBox(height: spacingMedium),
+    return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Expanded(
-          child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Expanded(
-            flex: 4,
-            child: Form(
+          flex: 4,
+          child: Form(
               key: formKey,
-              child: const Padding(
-                  padding:
-                      EdgeInsets.only(left: spacingMedium, top: spacingMedium),
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [])),
-            )),
-        Expanded(
-            flex: 6,
-            child: (context.read<AuthenticationBloc>().isLogin == true)
-                ? SvgPicture.asset('assets/login.svg', fit: BoxFit.cover)
-                : SvgPicture.asset('assets/sign_up.svg', fit: BoxFit.contain))
-      ]))
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset('assets/logo.jpg'),
+                    const Text(StringConstants.kHello),
+                    const Text(StringConstants.kEmailAddress),
+                    CustomTextField(
+                        hintText: StringConstants.kWhatsYourEmail,
+                        keyboardType: TextInputType.text,
+                        onTextFieldChanged: (value) {}),
+                    PrimaryButton(
+                      onPressed: () {},
+                      buttonWidth: double.maxFinite,
+                      buttonTitle: 'SignUp',
+                    ),
+                    const Text(StringConstants.kPassword),
+                    CustomTextField(
+                        hintText: StringConstants.kChoosePassword,
+                        keyboardType: TextInputType.text,
+                        onTextFieldChanged: (value) {}),
+                    PrimaryButton(
+                      onPressed: () {},
+                      buttonWidth: double.maxFinite,
+                      buttonTitle: 'SignUp',
+                    ),
+                    const Row(
+                      children: [
+                        Text(StringConstants.kHaveAnAccountYet),
+                        Text(StringConstants.kLogin),
+                      ],
+                    )
+                  ]))),
+      Expanded(
+          flex: 6,
+          child: Container(
+            color: AppColor.saasifyLightDeepBlue,
+          ))
     ]);
   }
 }

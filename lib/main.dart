@@ -36,7 +36,7 @@ class MyPosApp extends StatelessWidget {
             FocusManager.instance.primaryFocus?.unfocus();
           },
           child: MaterialApp(
-              theme: themeData,
+              theme: appTheme,
               home: BlocBuilder<AuthenticationBloc, AuthenticationStates>(
                 builder: (context, state) {
                   if (state is LoggedIn) {
