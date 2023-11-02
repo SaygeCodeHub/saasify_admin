@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 
 class ClientServices {
-  final Dio dio = Dio(BaseOptions(
-      connectTimeout: const Duration(seconds: 15)));
+  final Dio dio = Dio(BaseOptions(connectTimeout: const Duration(seconds: 15)));
 
   Future<dynamic> get(String requestUrl) async {
     try {

@@ -23,23 +23,23 @@ class CustomTextField extends StatelessWidget {
 
   CustomTextField(
       {Key? key,
-        this.maxLines,
-        this.textInputAction,
-        this.maxLength,
-        this.hintText,
-        this.getText,
-        this.firstCall,
-        this.readOnly = false,
-        this.validator,
-        this.suffix,
-        this.initialValue,
-        this.keyboardType,
-        this.contentPadding,
-        required this.onTextFieldChanged,
-        this.inputFormatters,
-        this.prefixIcon,
-        this.obscureText = false,
-        this.hintStyle})
+      this.maxLines,
+      this.textInputAction,
+      this.maxLength,
+      this.hintText,
+      this.getText,
+      this.firstCall,
+      this.readOnly = false,
+      this.validator,
+      this.suffix,
+      this.initialValue,
+      this.keyboardType,
+      this.contentPadding,
+      required this.onTextFieldChanged,
+      this.inputFormatters,
+      this.prefixIcon,
+      this.obscureText = false,
+      this.hintStyle})
       : super(key: key);
 
   @override

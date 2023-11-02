@@ -15,7 +15,7 @@ class HeaderWidget extends StatelessWidget {
     return Container(
         color: Colors.white,
         child: Padding(
-            padding:  const EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
                 horizontal: spacingMedium, vertical: spacingStandard),
             child: Row(children: [
               SvgPicture.asset('assets/app_logo.svg'),
@@ -24,7 +24,7 @@ class HeaderWidget extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
-                      color: AppColor.deepBlue)),
+                      color: AppColor.sassifyDeepBlue)),
             ])));
   }
 }

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-
+import '../screens/onboarding/auhentication_screen.dart';
 
 class AppRoutes {
   static Route routes(RouteSettings settings) {
     switch (settings.name) {
+      case AuthenticationScreen.routeName:
+        return _createRoute(AuthenticationScreen());
 
       default:
-        return _createRoute(const Scaffold());
+        return _createRoute(AuthenticationScreen());
     }
   }
 
@@ -19,7 +21,7 @@ class AppRoutes {
           const curve = Curves.ease;
 
           var tween =
-          Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
           return SlideTransition(
               position: animation.drive(tween), child: child);
