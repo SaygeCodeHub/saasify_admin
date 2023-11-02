@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/data/customer_cache/customer_cache.dart';
 import '../../data/models/authentication/login_model.dart';
@@ -14,15 +15,14 @@ class AuthenticationBloc
 
   final AuthenticationRepository _authenticationRepository =
       getIt<AuthenticationRepository>();
-  bool isLogin = false;
 
   AuthenticationStates get initialState => SignUpInitial();
 
   AuthenticationBloc() : super(SignUpInitial()) {
     on<SignUp>(_signUp);
     on<Login>(_login);
-    on<SwitchLoginScreenEvent>(_switchLogin);
-    on<CheckIfLoggedIn>(_checkIfLoggedIn);
+    on<SwitchAuthentication>(_switchLogin);
+    on<HidePassword>(_hidePassword);
   }
 
   FutureOr<void> _signUp(
@@ -74,16 +74,17 @@ class AuthenticationBloc
   }
 
   FutureOr<void> _switchLogin(
-      SwitchLoginScreenEvent event, Emitter<AuthenticationStates> emit) {
-    isLogin = event.isLogin;
-    emit(SwitchLoginScreen(login: event.isLogin));
+      SwitchAuthentication event, Emitter<AuthenticationStates> emit) {
+    log('inside switch login');
+    bool isLogin = !event.isLogin;
+    emit(LoadAuthenticationForm(
+        isLogin: isLogin, passwordHidden: event.passwordHidden));
   }
 
-  FutureOr<void> _checkIfLoggedIn(
-      CheckIfLoggedIn event, Emitter<AuthenticationStates> emit) async {
-    bool? isLoggedIn = await _customerCache.getIsLoggedIn();
-    if (isLoggedIn == true) {
-      emit(LoggedIn());
-    }
+  FutureOr<void> _hidePassword(
+      HidePassword event, Emitter<AuthenticationStates> emit) {
+    bool passwordHidden = event.passwordHidden;
+    emit(LoadAuthenticationForm(
+        isLogin: event.isLogin, passwordHidden: passwordHidden));
   }
 }

@@ -19,10 +19,16 @@ class Login extends AuthenticationEvents {
   Login({required this.loginCredentials, required this.companyPassword});
 }
 
-class SwitchLoginScreenEvent extends AuthenticationEvents {
+class SwitchAuthentication extends AuthenticationEvents {
   final bool isLogin;
+  final bool passwordHidden;
 
-  SwitchLoginScreenEvent({required this.isLogin});
+  SwitchAuthentication({required this.passwordHidden, required this.isLogin});
 }
 
-class CheckIfLoggedIn extends AuthenticationEvents {}
+class HidePassword extends AuthenticationEvents {
+  final bool passwordHidden;
+  final bool isLogin;
+
+  HidePassword({required this.isLogin, required this.passwordHidden});
+}

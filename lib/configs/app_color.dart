@@ -6,4 +6,5 @@ class AppColor {
   static const Color sassifyLightestGrey = Color(0xFFF9FAFB);
   static const Color sassifySlateBlueGrey = Color(0xFF737791);
   static const Color sassifyRed = Color(0xCCDC0000);
+  static const Color sassifyDarkBlue = Color(0xFF151D48);
 }

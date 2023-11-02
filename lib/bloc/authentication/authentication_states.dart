@@ -30,10 +30,11 @@ class LoginError extends AuthenticationStates {
   LoginError({required this.message});
 }
 
-class SwitchLoginScreen extends AuthenticationStates {
-  final bool login;
+class LoadAuthenticationForm extends AuthenticationStates {
+  final bool isLogin;
+  final bool passwordHidden;
 
-  SwitchLoginScreen({required this.login});
+  LoadAuthenticationForm({required this.passwordHidden, required this.isLogin});
 }
 
 class LoggedOut extends AuthenticationStates {}

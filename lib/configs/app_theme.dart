@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'app_color.dart';
 import 'app_spacing.dart';
 
-ThemeData themeData =
-    ThemeData(scaffoldBackgroundColor: Colors.white, textTheme: textTheme);
+ThemeData themeData = ThemeData(
+    scaffoldBackgroundColor: Colors.white,
+    textTheme: textTheme,
+    inputDecorationTheme: inputDecorationTheme);
 
 InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     enabledBorder: OutlineInputBorder(
