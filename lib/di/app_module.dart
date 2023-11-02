@@ -4,8 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/customer_cache/customer_cache.dart';
-import '../repositories/authentication/authentication_repository.dart';
-import '../repositories/authentication/authentication_repository_impl.dart';
 import '../services/client_services.dart';
 
 final getIt = GetIt.instance;
@@ -18,6 +16,4 @@ configurableDependencies() {
   getIt.registerLazySingleton<CustomerCache>(
           () => CustomerCache(sharedPreferences: getIt<SharedPreferences>()));
 
-  getIt.registerLazySingleton<AuthenticationRepository>(
-          () => AuthenticationRepositoryImpl());
 }

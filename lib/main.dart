@@ -1,7 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:saasify/bloc/authentication/authentication_bloc.dart';
-import 'package:saasify/bloc/authentication/authentication_states.dart';
-import 'package:saasify/screens/onboarding/authentication_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'configs/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -24,24 +20,12 @@ class MyPosApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [
-          BlocProvider(lazy: false, create: (context) => AuthenticationBloc())
-        ],
-        child: GestureDetector(
-            onTap: () {
-              FocusManager.instance.primaryFocus?.unfocus();
-            },
-            child: MaterialApp(
-                theme: themeData,
-                home: BlocBuilder<AuthenticationBloc, AuthenticationStates>(
-                  builder: (context, state) {
-                    if (state is LoggedIn) {
-                      return const Scaffold();
-                    } else {
-                      return AuthenticationScreen();
-                    }
-                  },
-                ))));
+    return GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: MaterialApp(
+            theme: themeData,
+            home: const Scaffold()));
   }
 }

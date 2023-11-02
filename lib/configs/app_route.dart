@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:saasify/screens/onboarding/authentication_screen.dart';
 
 
 class AppRoutes {
   static Route routes(RouteSettings settings) {
     switch (settings.name) {
-      case AuthenticationScreen.routeName:
-        return _createRoute(AuthenticationScreen());
 
       default:
-        return _createRoute(AuthenticationScreen());
+        return _createRoute(const Scaffold());
     }
   }
 
