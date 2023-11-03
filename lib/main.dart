@@ -28,29 +28,27 @@ class MyPosApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            lazy: false,
-            create: (context) => AuthenticationBloc()),
-        BlocProvider(
-            lazy: false,
-            create: (context) => OnboardingBloc()..add(CheckIfLoggedIn())),
-      ],
-      child: GestureDetector(
-          onTap: () {
-            FocusManager.instance.primaryFocus?.unfocus();
-          },
-          child: MaterialApp(
-              theme: themeData,
-              home: BlocBuilder<OnboardingBloc, OnboardingStates>(
-                builder: (context, state) {
+        providers: [
+          BlocProvider(lazy: false, create: (context) => AuthenticationBloc()),
+          BlocProvider(
+              lazy: false,
+              create: (context) => OnboardingBloc()..add(CheckIfLoggedIn())),
+        ],
+        child: GestureDetector(
+            onTap: () {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
+            child: MaterialApp(
+                theme: appTheme,
+                home: BlocBuilder<OnboardingBloc, OnboardingStates>(
+                    builder: (context, state) {
                   if (state is IsLoggedIn) {
                     return const Scaffold();
                   } else {
                     context.read<AuthenticationBloc>().add(SwitchAuthentication(
                         isLogin: false, passwordHidden: false));
                     return AuthenticationScreen();
-                  }}
-                  ))));
+                  }
+                }))));
   }
 }

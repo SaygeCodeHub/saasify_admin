@@ -1,23 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
+  final int? maxLines;
+  final TextInputAction? textInputAction;
+  final int? maxLength;
   final String? hintText;
+  final String? getText;
+  final bool? firstCall;
   final void Function(String)? onTextFieldChanged;
+  final bool? readOnly;
+  final TextEditingController controller = TextEditingController();
   final bool obscureText;
   final String? Function(String?)? validator;
   final Widget? suffix;
-  final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final dynamic initialValue;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final EdgeInsetsGeometry? contentPadding;
   final TextStyle? hintStyle;
 
-  const CustomTextField(
+  CustomTextField(
       {Key? key,
+      this.maxLines,
+      this.textInputAction,
+      this.maxLength,
       this.hintText,
+      this.getText,
+      this.firstCall,
+      this.readOnly = false,
       this.validator,
       this.suffix,
       this.initialValue,
+      this.keyboardType,
+      this.contentPadding,
       required this.onTextFieldChanged,
+      this.inputFormatters,
       this.prefixIcon,
       this.obscureText = false,
       this.hintStyle,
@@ -26,20 +46,29 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    initialValue == null ? null : controller.text = initialValue.toString();
     return TextFormField(
-      initialValue: initialValue,
+      key: key,
       obscureText: obscureText,
       obscuringCharacter: "*",
       decoration: InputDecoration(
         suffix: suffix,
-        suffixIcon: suffixIcon,
         hintText: hintText,
         hintStyle: hintStyle,
         prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
         counterText: "",
       ),
+      inputFormatters: inputFormatters,
       validator: validator,
+      readOnly: readOnly!,
+      controller: controller,
       onChanged: onTextFieldChanged,
+      textInputAction: textInputAction,
+      maxLines: maxLines ?? 1,
+      maxLength: maxLength,
+      keyboardType: keyboardType,
+      textAlign: TextAlign.start,
     );
   }
 }

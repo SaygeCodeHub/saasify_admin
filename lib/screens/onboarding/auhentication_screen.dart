@@ -2,18 +2,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:saasify/screens/onboarding/authentication_form.dart';
+import 'package:saasify/screens/onboarding/otp_screen.dart';
 import '../../bloc/authentication/authentication_bloc.dart';
 import '../../bloc/authentication/authentication_states.dart';
 import '../../configs/app_color.dart';
-import '../../configs/app_spacing.dart';
 import '../../utils/progress_bar.dart';
-import '../../widgets/header_widget.dart';
 
 class AuthenticationScreen extends StatelessWidget {
   static const routeName = 'SignUpScreen';
-  static Map AuthDetails = {};
+  static Map authDetails = {};
 
   AuthenticationScreen({super.key});
 
@@ -24,12 +21,11 @@ class AuthenticationScreen extends StatelessWidget {
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
-            backgroundColor: AppColor.sassifyWhite,
-            body: Column(
+            backgroundColor: AppColor.saasifyWhite,
+            body: Row(
               children: [
-                const HeaderWidget(isFromSignUp: true),
-                const SizedBox(height: spacingMedium),
                 Expanded(
+                  flex: 4,
                   child: BlocConsumer<AuthenticationBloc, AuthenticationStates>(
                       listener: (context, state) {
                     if (state is SignUpLoading || state is LoggingIn) {
@@ -51,28 +47,20 @@ class AuthenticationScreen extends StatelessWidget {
                   }, builder: (context, state) {
                     if (state is LoadAuthenticationForm) {
                       log('screen loaded');
-                      return Row(
-                        children: [
-                          Expanded(
-                            flex: 4,
-                            child: AuthenticationBody(
-                                isLogin: state.isLogin,
-                                passwordHidden: state.passwordHidden),
-                          ),
-                          Expanded(
-                              flex: 5,
-                              child: (state.isLogin)
-                                  ? SvgPicture.asset('assets/login.svg',
-                                      fit: BoxFit.cover)
-                                  : SvgPicture.asset('assets/sign_up.svg',
-                                      fit: BoxFit.contain))
-                        ],
-                      );
+                      return const OtpScreen();
+                      // AuthenticationBody(
+                      //   isLogin: state.isLogin,
+                      //   passwordHidden: state.passwordHidden);
                     } else {
                       return const SizedBox();
                     }
                   }),
                 ),
+                Expanded(
+                    flex: 6,
+                    child: Container(
+                      color: AppColor.saasifyLightDeepBlue,
+                    ))
               ],
             )));
   }

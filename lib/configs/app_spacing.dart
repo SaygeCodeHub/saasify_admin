@@ -1,6 +1,7 @@
 const double spacingSmallest = 2.00;
 const double spacingXSmall = 4.00;
-const double spacingSmall = 8.00;
+const double spacingXXSmall = 8.00;
+const double spacingSmall = 10.00;
 const double spacingMedium = 12.00;
 const double spacingStandard = 16.00;
 const double spacingLarge = 20.00;
@@ -10,3 +11,4 @@ const double spacingHuge = 32.00;
 const double spacingXHuge = 36.00;
 const double spacingXXHuge = 40.00;
 const double spacingXXXHuge = 100.00;
+const double spacingXXXXHuge = 200.00;

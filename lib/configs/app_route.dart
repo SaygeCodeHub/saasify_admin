@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saasify/screens/onboarding/company_screen.dart';
 import '../screens/onboarding/auhentication_screen.dart';
 
 class AppRoutes {
@@ -6,6 +7,9 @@ class AppRoutes {
     switch (settings.name) {
       case AuthenticationScreen.routeName:
         return _createRoute(AuthenticationScreen());
+
+      case CompanyForm.routeName:
+        return _createRoute(CompanyForm());
 
       default:
         return _createRoute(AuthenticationScreen());
