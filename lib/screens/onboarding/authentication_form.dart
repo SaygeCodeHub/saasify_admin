@@ -21,7 +21,9 @@ class AuthenticationForm extends StatelessWidget {
               key: formKey,
               child: Padding(
                 padding: const EdgeInsets.only(
-                    left: spacingXXXHuge, right: spacingXXXHuge, top: large),
+                    left: spacingXXXHuge,
+                    right: spacingXXXHuge,
+                    top: spacingXXXXHuge),
                 child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,13 +80,15 @@ class AuthenticationForm extends StatelessWidget {
                                   .tiniest
                                   .copyWith(fontWeight: FontWeight.w400)),
                           const SizedBox(width: 4),
-                          Text(StringConstants.kLogin,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .tiniest
-                                  .copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColor.saasifyDarkBlue)),
+                          TextButton(
+                              onPressed: () {},
+                              child: Text(StringConstants.kLogin,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .tiniest
+                                      .copyWith(
+                                          fontWeight: FontWeight.w700,
+                                          color: AppColor.saasifyDarkBlue)))
                         ],
                       )
                     ]),

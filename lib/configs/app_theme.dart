@@ -55,7 +55,7 @@ ExpansionTileThemeData expansionTileThemeData = ExpansionTileThemeData(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(kCardRadius)),
     iconColor: AppColor.saasifyLightDeepBlue,
-    textColor: AppColor.saasifyblack);
+    textColor: AppColor.saasifyBlack);
 
 ElevatedButtonThemeData elevatedButtonThemeData = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -82,131 +82,30 @@ AppBarTheme appBarTheme = AppBarTheme(
     backgroundColor: AppColor.saasifyWhite,
     iconTheme: iconThemeData);
 
-IconThemeData iconThemeData = const IconThemeData(color: AppColor.saasifyblack);
+IconThemeData iconThemeData = const IconThemeData(color: AppColor.saasifyBlack);
 
 CardTheme appCardTheme =
     const CardTheme(elevation: kCardElevation, margin: EdgeInsets.zero);
 
 extension AppTextTheme on TextTheme {
-  TextStyle get xxxXTiniest {
-    return const TextStyle(
-        fontSize: 6, color: AppColor.saasifyblack, fontWeight: FontWeight.w400);
-  }
-
-  TextStyle get xxxTiniest {
-    return const TextStyle(
-        fontSize: 8, color: AppColor.saasifyblack, fontWeight: FontWeight.w400);
-  }
-
-  TextStyle get xxTiniest {
-    return const TextStyle(
-        fontSize: 10,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.w400);
-  }
-
   TextStyle get xTiniest {
     return const TextStyle(
         fontSize: 12,
-        color: AppColor.saasifyblack,
+        color: AppColor.saasifyBlack,
         fontWeight: FontWeight.w400);
   }
 
   TextStyle get tiniest {
     return const TextStyle(
         fontSize: 14,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.w400);
-  }
-
-  TextStyle get xxxTinier {
-    return const TextStyle(
-        fontSize: 16,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.w400);
-  }
-
-  TextStyle get xxTinier {
-    return const TextStyle(
-        fontSize: 18,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.w400);
-  }
-
-  TextStyle get xTinier {
-    return const TextStyle(
-        fontSize: 20,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.w400);
-  }
-
-  TextStyle get tinier {
-    return const TextStyle(
-        fontSize: 22,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.normal);
-  }
-
-  TextStyle get tinierMedium {
-    return const TextStyle(
-        fontSize: 24,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.normal);
-  }
-
-  TextStyle get xxxTiny {
-    return const TextStyle(
-        fontSize: 26,
-        color: AppColor.saasifyblack,
+        color: AppColor.saasifyBlack,
         fontWeight: FontWeight.w400);
   }
 
   TextStyle get xxTiny {
     return const TextStyle(
         fontSize: 28,
-        color: AppColor.saasifyblack,
+        color: AppColor.saasifyBlack,
         fontWeight: FontWeight.w400);
-  }
-
-  TextStyle get xTiny {
-    return const TextStyle(
-        fontSize: 30,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.w700);
-  }
-
-  TextStyle get tiny {
-    return const TextStyle(
-        fontSize: 32,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.w700);
-  }
-
-  TextStyle get xxxSmallest {
-    return const TextStyle(
-        fontSize: 34,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.w700);
-  }
-
-  TextStyle get xxSmallest {
-    return const TextStyle(
-        fontSize: 36,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.w700);
-  }
-
-  TextStyle get xSmallest {
-    return const TextStyle(
-        fontSize: 38,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.w700);
-  }
-
-  TextStyle get smallest {
-    return const TextStyle(
-        fontSize: 40,
-        color: AppColor.saasifyblack,
-        fontWeight: FontWeight.w700);
   }
 }
