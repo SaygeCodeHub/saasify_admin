@@ -1,24 +1,40 @@
-import '../../data/models/authentication/login_model.dart';
-import '../../data/models/authentication/signup_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:saasify/data/models/authentication/authentication_model.dart';
+
 import '../../services/client_services.dart';
 import '../../utils/constants/api_constants.dart';
 import 'authentication_repository.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
-  Future<SignUpModel> signUp(
-      Map signUpDetails, String signUpCredentials) async {
-    final response = await ClientServices().post(
-        "${ApiConstants.baseUrl}signup?signup_credentials=$signUpCredentials",
-        signUpDetails);
-    return SignUpModel.fromJson(response);
+  Future verifyPhoneNumber(
+      {required String phoneNumber,
+      required Function(PhoneAuthCredential) verificationCompleted,
+      required Function(FirebaseAuthException) verificationFailed,
+      required Function(String, int?) codeSent,
+      required Function(String) codeAutoRetrievalTimeout}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    try {
+      await auth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: verificationCompleted,
+        verificationFailed: verificationFailed,
+        codeSent: codeSent,
+        codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+      );
+    } catch (error) {
+      rethrow;
+    }
   }
 
   @override
-  Future<LoginModel> login(Map loginDetails, String loginId) async {
-    final response = await ClientServices().post(
-        "${ApiConstants.baseUrl}login?login_credentials=$loginId",
-        loginDetails);
-    return LoginModel.fromJson(response);
+  Future<AuthenticationModel> authenticateUser(Map userDetailsMap) async {
+    try {
+      final response = await ClientServices()
+          .post("${ApiConstants.baseUrl}AuthenticateUser", userDetailsMap);
+      return AuthenticationModel.fromJson(response);
+    } catch (error) {
+      rethrow;
+    }
   }
 }

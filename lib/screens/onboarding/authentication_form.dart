@@ -6,7 +6,7 @@ import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/onboarding/company_screen.dart';
+import 'package:saasify/screens/onboarding/auhentication_screen.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../utils/constants/string_constants.dart';
@@ -15,12 +15,10 @@ import '../../widgets/primary_button.dart';
 
 class AuthenticationBody extends StatelessWidget {
   final bool isLogin;
-  final bool passwordHidden;
 
   AuthenticationBody({
     super.key,
     required this.isLogin,
-    required this.passwordHidden,
   });
 
   final _formKey = GlobalKey<FormState>();
@@ -69,7 +67,10 @@ class AuthenticationBody extends StatelessWidget {
                                   .xTiniest
                                   .copyWith(fontWeight: FontWeight.w500),
                               keyboardType: TextInputType.text,
-                              onTextFieldChanged: (value) {}),
+                              onTextFieldChanged: (value) {
+                                AuthenticationScreen.authDetails['user_name'] =
+                                    value;
+                              }),
                           const SizedBox(height: spacingXXHuge),
                         ])),
                 Text(StringConstants.kContactNumber,
@@ -94,12 +95,18 @@ class AuthenticationBody extends StatelessWidget {
                     inputFormatters: <TextInputFormatter>[
                       FilteringTextInputFormatter.digitsOnly
                     ],
-                    onTextFieldChanged: (value) {}),
+                    onTextFieldChanged: (value) {
+                      AuthenticationScreen.authDetails['user_contact'] = value;
+                    }),
                 const SizedBox(height: spacingXXHuge),
                 PrimaryButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.pushNamed(context, CompanyForm.routeName);
+                      context.read<AuthenticationBloc>().add(GetOtp(
+                          phoneNo:
+                              AuthenticationScreen.authDetails['user_name'],
+                          userName:
+                              "+91 ${AuthenticationScreen.authDetails['user_contact']}"));
                     }
                   },
                   buttonWidth: double.maxFinite,
@@ -116,10 +123,9 @@ class AuthenticationBody extends StatelessWidget {
                   (isLogin)
                       ? TextButton(
                           onPressed: () {
-                            context.read<AuthenticationBloc>().add(
-                                SwitchAuthentication(
-                                    passwordHidden: passwordHidden,
-                                    isLogin: isLogin));
+                            context
+                                .read<AuthenticationBloc>()
+                                .add(SwitchAuthentication(isLogin: isLogin));
                           },
                           child: Text(StringConstants.kSingUp,
                               style: Theme.of(context)
@@ -130,10 +136,9 @@ class AuthenticationBody extends StatelessWidget {
                                       color: AppColor.saasifyDarkBlue)))
                       : TextButton(
                           onPressed: () {
-                            context.read<AuthenticationBloc>().add(
-                                SwitchAuthentication(
-                                    passwordHidden: passwordHidden,
-                                    isLogin: isLogin));
+                            context
+                                .read<AuthenticationBloc>()
+                                .add(SwitchAuthentication(isLogin: isLogin));
                           },
                           child: Text(StringConstants.kLogin,
                               style: Theme.of(context)

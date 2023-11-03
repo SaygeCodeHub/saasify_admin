@@ -21,4 +21,5 @@ class StringConstants {
   static const kWhatsYourBusinessDomain = "What's your business domain?";
   static const kNext = 'Next';
   static const kWhatsYourCustomerName = "What's your customer name?";
+  static const kVerifyOtp = "Verify Otp";
 }

@@ -1,34 +1,51 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 abstract class AuthenticationEvents {}
 
-class SignUp extends AuthenticationEvents {
-  final String signUpCredentials;
-  final String companyPassword;
-  final String fullName;
+class GetOtp extends AuthenticationEvents {
+  final String userName;
+  final String phoneNo;
 
-  SignUp({
-    required this.signUpCredentials,
-    required this.companyPassword,
-    required this.fullName,
-  });
-}
-
-class Login extends AuthenticationEvents {
-  final String loginCredentials;
-  final String companyPassword;
-
-  Login({required this.loginCredentials, required this.companyPassword});
+  GetOtp({required this.phoneNo, required this.userName});
 }
 
 class SwitchAuthentication extends AuthenticationEvents {
   final bool isLogin;
-  final bool passwordHidden;
 
-  SwitchAuthentication({required this.passwordHidden, required this.isLogin});
+  SwitchAuthentication({required this.isLogin});
 }
 
-class HidePassword extends AuthenticationEvents {
-  final bool passwordHidden;
-  final bool isLogin;
+class OtpReceivedOnPhone extends AuthenticationEvents {
+  final String verificationId;
+  final int? token;
+  final String userName;
 
-  HidePassword({required this.isLogin, required this.passwordHidden});
+  OtpReceivedOnPhone(
+      {required this.verificationId,
+      required this.token,
+      required this.userName});
+}
+
+class VerifyOtp extends AuthenticationEvents {
+  final String otpCode;
+  final String verificationId;
+  final String userName;
+
+  VerifyOtp(
+      {required this.otpCode,
+      required this.verificationId,
+      required this.userName});
+}
+
+class OtpVerified extends AuthenticationEvents {
+  final AuthCredential credential;
+  final String userName;
+
+  OtpVerified({required this.credential, required this.userName});
+}
+
+class OtpVerificationError extends AuthenticationEvents {
+  final String error;
+
+  OtpVerificationError({required this.error});
 }

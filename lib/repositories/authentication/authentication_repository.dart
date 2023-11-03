@@ -1,8 +1,13 @@
-import '../../data/models/authentication/login_model.dart';
-import '../../data/models/authentication/signup_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:saasify/data/models/authentication/authentication_model.dart';
 
 abstract class AuthenticationRepository {
-  Future<SignUpModel> signUp(Map signUpDetails, String signUpCredentials);
+  Future<void> verifyPhoneNumber(
+      {required String phoneNumber,
+      required Function(PhoneAuthCredential) verificationCompleted,
+      required Function(FirebaseAuthException) verificationFailed,
+      required Function(String, int?) codeSent,
+      required Function(String) codeAutoRetrievalTimeout});
 
-  Future<LoginModel> login(Map loginDetails, String loginId);
+  Future<AuthenticationModel> authenticateUser(Map userDetailsMap);
 }

@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/data/customer_cache/customer_cache.dart';
-import '../../data/models/authentication/login_model.dart';
-import '../../data/models/authentication/signup_model.dart';
+import 'package:saasify/data/models/authentication/authentication_model.dart';
 import '../../di/app_module.dart';
 import '../../repositories/authentication/authentication_repository.dart';
 import 'authentication_event.dart';
@@ -12,79 +12,112 @@ import 'authentication_states.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvents, AuthenticationStates> {
   final CustomerCache _customerCache = getIt<CustomerCache>();
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   final AuthenticationRepository _authenticationRepository =
       getIt<AuthenticationRepository>();
 
-  AuthenticationStates get initialState => SignUpInitial();
+  AuthenticationStates get initialState => AuthenticationInitial();
 
-  AuthenticationBloc() : super(SignUpInitial()) {
-    on<SignUp>(_signUp);
-    on<Login>(_login);
+  AuthenticationBloc() : super(AuthenticationInitial()) {
     on<SwitchAuthentication>(_switchLogin);
-    on<HidePassword>(_hidePassword);
-  }
-
-  FutureOr<void> _signUp(
-      SignUp event, Emitter<AuthenticationStates> emit) async {
-    emit(SignUpLoading());
-    try {
-      Map signUpDetails = {
-        "company_password": event.companyPassword,
-        "full_name": event.fullName
-      };
-      SignUpModel signUpModel = await _authenticationRepository.signUp(
-          signUpDetails, event.signUpCredentials);
-      if (signUpModel.status == 200) {
-        emit(SignUpLoaded(
-            signUpModel: signUpModel, signUpDetails: signUpDetails));
-
-        _customerCache.setSignUpCredentials(signUpModel.data.companyEmail);
-
-        _customerCache.setCompanyId(signUpModel.data.companyId);
-      } else {
-        emit(SignUpError(message: signUpModel.message));
-      }
-    } catch (e) {
-      emit(SignUpError(message: e.toString()));
-    }
-  }
-
-  FutureOr<void> _login(Login event, Emitter<AuthenticationStates> emit) async {
-    emit(LoggingIn());
-
-    try {
-      Map loginDetails = {
-        "login_password": event.companyPassword,
-      };
-      LoginModel loginModel = await _authenticationRepository.login(
-          loginDetails, event.loginCredentials);
-      if (loginModel.status == 200) {
-        emit(LoggedIn());
-
-        _customerCache.setIsLoggedIn(true);
-
-        _customerCache.setCompanyId(loginModel.data.companyId);
-      } else {
-        emit(LoginError(message: loginModel.message));
-      }
-    } catch (e) {
-      emit(LoginError(message: e.toString()));
-    }
+    on<GetOtp>(_getOtp);
+    on<OtpReceivedOnPhone>(_otpReceivedOnPhone);
+    on<VerifyOtp>(_onVerifyOtp);
+    on<OtpVerified>(_loginWithCredential);
+    on<OtpVerificationError>(_onOtpVerificationError);
   }
 
   FutureOr<void> _switchLogin(
       SwitchAuthentication event, Emitter<AuthenticationStates> emit) {
     log('inside switch login');
     bool isLogin = !event.isLogin;
-    emit(LoadAuthenticationForm(
-        isLogin: isLogin, passwordHidden: event.passwordHidden));
+    emit(AuthenticationFormLoaded(isLogin: isLogin));
   }
 
-  FutureOr<void> _hidePassword(
-      HidePassword event, Emitter<AuthenticationStates> emit) {
-    bool passwordHidden = event.passwordHidden;
-    emit(LoadAuthenticationForm(
-        isLogin: event.isLogin, passwordHidden: passwordHidden));
+  _otpReceivedOnPhone(
+      OtpReceivedOnPhone event, Emitter<AuthenticationStates> emit) async {
+    emit(OtpReceived(
+        verificationId: event.verificationId, userName: event.userName));
+  }
+
+  FutureOr<void> _getOtp(
+      GetOtp event, Emitter<AuthenticationStates> emit) async {
+    emit(OtpLoading());
+    try {
+      await _authenticationRepository.verifyPhoneNumber(
+        phoneNumber: event.phoneNo,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          add(OtpVerified(credential: credential, userName: event.userName));
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          add(OtpReceivedOnPhone(
+              verificationId: verificationId,
+              token: resendToken,
+              userName: event.userName));
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          add(OtpVerificationError(error: e.code));
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    } catch (e) {
+      emit(PhoneAuthError(error: e.toString()));
+    }
+  }
+
+  FutureOr<void> _onVerifyOtp(
+      VerifyOtp event, Emitter<AuthenticationStates> emit) async {
+    try {
+      emit(OtpLoading());
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: event.verificationId,
+        smsCode: event.otpCode,
+      );
+      add(OtpVerified(credential: credential, userName: event.userName));
+    } catch (e) {
+      emit(PhoneAuthError(error: e.toString()));
+    }
+  }
+
+  FutureOr<void> _loginWithCredential(
+      OtpVerified event, Emitter<AuthenticationStates> emit) async {
+    try {
+      await auth.signInWithCredential(event.credential).then((user) async {
+        if (user.user != null) {
+          Map userDetailsMap = {
+            'customer_id': user.user!.uid,
+            'customer_name': (event.userName.toString() == "null")
+                ? "null"
+                : event.userName.toString(),
+            'customer_contact': user.user?.phoneNumber
+          };
+          log("post map====>$userDetailsMap");
+          AuthenticationModel authenticationModel =
+              await _authenticationRepository.authenticateUser(userDetailsMap);
+          if (authenticationModel.status == 200) {
+            _customerCache
+                .setCompanyId(authenticationModel.data.companies[0].companyId);
+
+            emit(PhoneOtpVerified());
+          } else if (authenticationModel.status == 404) {
+            emit(PhoneAuthError(error: authenticationModel.message.toString()));
+            emit(AuthenticationFormLoaded(isLogin: true));
+          } else {
+            emit(PhoneAuthError(error: 'Something went wrong!'));
+          }
+        }
+      });
+    } on FirebaseAuthException catch (e) {
+      emit(PhoneAuthError(error: e.code));
+    } catch (e) {
+      emit(PhoneAuthError(error: e.toString()));
+    }
+  }
+
+  _onOtpVerificationError(
+      OtpVerificationError event, Emitter<AuthenticationStates> emit) async {
+    emit(PhoneAuthError(error: 'Something went wrong'));
+    emit(AuthenticationFormLoaded(isLogin: true));
   }
 }

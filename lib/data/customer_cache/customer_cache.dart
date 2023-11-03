@@ -12,20 +12,12 @@ class CustomerCache {
     await sharedPreferences.setBool(CacheKeys.isLoggedIn, boolValue);
   }
 
-  void setSignUpCredentials(String string) async {
-    await sharedPreferences.setString(CacheKeys.signUpCredentials, string);
-  }
-
   void setCompanyId(String string) async {
     await sharedPreferences.setString(CacheKeys.companyId, string);
   }
 
   Future<bool?> getIsLoggedIn() async {
     return sharedPreferences.getBool(CacheKeys.isLoggedIn);
-  }
-
-  Future<String?> getSignUpCredentials() async {
-    return sharedPreferences.getString(CacheKeys.signUpCredentials) ?? '';
   }
 
   Future<String> getCompanyId() async {

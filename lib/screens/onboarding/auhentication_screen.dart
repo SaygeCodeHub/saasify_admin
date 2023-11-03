@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/screens/onboarding/authentication_form.dart';
 import 'package:saasify/screens/onboarding/otp_screen.dart';
 import '../../bloc/authentication/authentication_bloc.dart';
 import '../../bloc/authentication/authentication_states.dart';
@@ -28,32 +29,29 @@ class AuthenticationScreen extends StatelessWidget {
                   flex: 4,
                   child: BlocConsumer<AuthenticationBloc, AuthenticationStates>(
                       listener: (context, state) {
-                    if (state is SignUpLoading || state is LoggingIn) {
+                    if (state is OtpLoading) {
                       ProgressBar.show(context);
-                    } else if (state is SignUpLoaded || state is LoggedIn) {
-                      ProgressBar.dismiss(context);
-                      // Navigator.pushNamed(context, CompanyDetailsScreen.routeName);
-                    } else if (state is SignUpError) {
-                      ProgressBar.dismiss(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(state.message.toString())));
-                    } else if (state is LoginError) {
-                      ProgressBar.dismiss(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(state.message.toString())));
                     }
-                  }, buildWhen: (prev, curr) {
-                    return curr is LoadAuthenticationForm;
+                    if (state is PhoneOtpVerified) {
+                      ProgressBar.dismiss(context);
+                      log('Done Hai');
+                    }
+                    if (state is PhoneAuthError) {
+                      ProgressBar.dismiss(context);
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(state.error)));
+                    }
                   }, builder: (context, state) {
-                    if (state is LoadAuthenticationForm) {
-                      log('screen loaded');
-                      return const OtpScreen();
-                      // AuthenticationBody(
-                      //   isLogin: state.isLogin,
-                      //   passwordHidden: state.passwordHidden);
-                    } else {
-                      return const SizedBox();
+                    if (state is AuthenticationFormLoaded) {
+                      return AuthenticationBody(isLogin: state.isLogin);
+                    } else if (state is OtpReceived) {
+                      ProgressBar.dismiss(context);
+                      return OtpScreen(
+                        verificationId: state.verificationId,
+                        userName: state.userName,
+                      );
                     }
+                    return const SizedBox();
                   }),
                 ),
                 Expanded(

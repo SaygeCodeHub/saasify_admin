@@ -8,7 +8,11 @@ import '../../utils/constants/string_constants.dart';
 import '../../widgets/primary_button.dart';
 
 class OtpScreen extends StatelessWidget {
-  const OtpScreen({super.key});
+  final String verificationId;
+  final String userName;
+
+  const OtpScreen(
+      {super.key, required this.verificationId, required this.userName});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +51,7 @@ class OtpScreen extends StatelessWidget {
                   PrimaryButton(
                     onPressed: () {},
                     buttonWidth: double.maxFinite,
-                    buttonTitle: 'Verify Otp',
+                    buttonTitle: StringConstants.kVerifyOtp,
                   ),
                   const SizedBox(height: spacingXXLarge),
                 ]),

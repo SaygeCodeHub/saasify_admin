@@ -1,40 +1,26 @@
-import '../../data/models/authentication/signup_model.dart';
-
 abstract class AuthenticationStates {}
 
-class SignUpInitial extends AuthenticationStates {}
+class AuthenticationInitial extends AuthenticationStates {}
 
-class SignUpLoading extends AuthenticationStates {}
-
-class SignUpLoaded extends AuthenticationStates {
-  final SignUpModel signUpModel;
-
-  final Map signUpDetails;
-
-  SignUpLoaded({required this.signUpModel, required this.signUpDetails});
-}
-
-class SignUpError extends AuthenticationStates {
-  final String message;
-
-  SignUpError({required this.message});
-}
-
-class LoggingIn extends AuthenticationStates {}
-
-class LoggedIn extends AuthenticationStates {}
-
-class LoginError extends AuthenticationStates {
-  final String message;
-
-  LoginError({required this.message});
-}
-
-class LoadAuthenticationForm extends AuthenticationStates {
+class AuthenticationFormLoaded extends AuthenticationStates {
   final bool isLogin;
-  final bool passwordHidden;
 
-  LoadAuthenticationForm({required this.passwordHidden, required this.isLogin});
+  AuthenticationFormLoaded({required this.isLogin});
 }
 
-class LoggedOut extends AuthenticationStates {}
+class OtpLoading extends AuthenticationStates {}
+
+class OtpReceived extends AuthenticationStates {
+  final String verificationId;
+  final String userName;
+
+  OtpReceived({required this.verificationId, required this.userName});
+}
+
+class PhoneOtpVerified extends AuthenticationStates {}
+
+class PhoneAuthError extends AuthenticationStates {
+  final String error;
+
+  PhoneAuthError({required this.error});
+}
