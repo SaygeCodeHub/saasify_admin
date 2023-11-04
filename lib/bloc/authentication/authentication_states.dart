@@ -3,9 +3,10 @@ abstract class AuthenticationStates {}
 class AuthenticationInitial extends AuthenticationStates {}
 
 class AuthenticationFormLoaded extends AuthenticationStates {
+  final String focusField;
   final bool isLogin;
 
-  AuthenticationFormLoaded({required this.isLogin});
+  AuthenticationFormLoaded({required this.focusField, required this.isLogin});
 }
 
 class OtpLoading extends AuthenticationStates {}

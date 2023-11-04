@@ -3,9 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 abstract class AuthenticationEvents {}
 
 class TextFieldChange extends AuthenticationEvents {
+  final String focusField;
   final bool isLogin;
 
-  TextFieldChange({required this.isLogin});
+  TextFieldChange({required this.focusField, required this.isLogin});
 }
 
 class GetOtp extends AuthenticationEvents {
@@ -16,9 +17,10 @@ class GetOtp extends AuthenticationEvents {
 }
 
 class SwitchAuthentication extends AuthenticationEvents {
+  final String focusField;
   final bool isLogin;
 
-  SwitchAuthentication({required this.isLogin});
+  SwitchAuthentication({required this.focusField, required this.isLogin});
 }
 
 class OtpReceivedOnPhone extends AuthenticationEvents {

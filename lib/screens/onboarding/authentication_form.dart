@@ -14,14 +14,23 @@ import '../../widgets/custom_text_field.dart';
 import '../../widgets/primary_button.dart';
 
 class AuthenticationBody extends StatelessWidget {
+  final String focusField;
   final bool isLogin;
 
   AuthenticationBody({
     super.key,
     required this.isLogin,
+    required this.focusField,
   });
 
   final _formKey = GlobalKey<FormState>();
+
+  bool _checkIfNullOrEmpty(String? value) {
+    if (value == null || value == '' || value.trim() == '') {
+      return false;
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +47,7 @@ class AuthenticationBody extends StatelessWidget {
                     height: kGeneralButtonHeight, width: kLogoWidth),
                 const SizedBox(height: spacingStandard),
                 (isLogin)
-                    ? Text(StringConstants.kWelcomeBack,
+                    ? Text(StringConstants.kWelcome,
                         style: Theme.of(context)
                             .textTheme
                             .xxTiny
@@ -61,6 +70,9 @@ class AuthenticationBody extends StatelessWidget {
                                   .copyWith(fontWeight: FontWeight.w700)),
                           const SizedBox(height: spacingMedium),
                           CustomTextField(
+                              autofocus: focusField == 'user_name',
+                              initialValue:
+                                  AuthenticationScreen.authDetails['user_name'],
                               hintText: StringConstants.kWhatsYourName,
                               hintStyle: Theme.of(context)
                                   .textTheme
@@ -68,9 +80,10 @@ class AuthenticationBody extends StatelessWidget {
                                   .copyWith(fontWeight: FontWeight.w500),
                               keyboardType: TextInputType.text,
                               onTextFieldChanged: (value) {
-                                context
-                                    .read<AuthenticationBloc>()
-                                    .add(TextFieldChange(isLogin: isLogin));
+                                context.read<AuthenticationBloc>().add(
+                                    TextFieldChange(
+                                        isLogin: isLogin,
+                                        focusField: 'user_name'));
                                 AuthenticationScreen.authDetails['user_name'] =
                                     value;
                               }),
@@ -83,6 +96,9 @@ class AuthenticationBody extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w700)),
                 const SizedBox(height: spacingMedium),
                 CustomTextField(
+                    autofocus: focusField == 'user_contact',
+                    initialValue:
+                        AuthenticationScreen.authDetails['user_contact'],
                     hintText: StringConstants.kAddYourContactNumber,
                     hintStyle: Theme.of(context)
                         .textTheme
@@ -99,66 +115,74 @@ class AuthenticationBody extends StatelessWidget {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     onTextFieldChanged: (value) {
-                      context
-                          .read<AuthenticationBloc>()
-                          .add(TextFieldChange(isLogin: isLogin));
+                      context.read<AuthenticationBloc>().add(TextFieldChange(
+                          isLogin: isLogin, focusField: 'user_contact'));
                       AuthenticationScreen.authDetails['user_contact'] = value;
                     }),
                 const SizedBox(height: spacingXXHuge),
                 PrimaryButton(
-                  onPressed:
-                      (AuthenticationScreen.authDetails['user_contact'] !=
-                                  null &&
-                              AuthenticationScreen.authDetails['user_name'])
-                          ? () {
-                              if (_formKey.currentState!.validate()) {
-                                context.read<AuthenticationBloc>().add(GetOtp(
-                                    userName: AuthenticationScreen
-                                        .authDetails['user_name'],
-                                    phoneNo:
-                                        "+91 ${AuthenticationScreen.authDetails['user_contact']}"));
-                              }
-                            }
-                          : null,
+                  onPressed: (((!isLogin)
+                              ? _checkIfNullOrEmpty(
+                                  AuthenticationScreen.authDetails['user_name'])
+                              : true) &&
+                          _checkIfNullOrEmpty(
+                              AuthenticationScreen.authDetails['user_contact']))
+                      ? () {
+                          if (_formKey.currentState!.validate()) {
+                            context.read<AuthenticationBloc>().add(GetOtp(
+                                userName: AuthenticationScreen
+                                    .authDetails['user_name'],
+                                phoneNo:
+                                    "+91 ${AuthenticationScreen.authDetails['user_contact']}"));
+                          }
+                        }
+                      : null,
                   buttonWidth: double.maxFinite,
                   buttonTitle: (isLogin) ? 'Login' : 'SignUp',
                 ),
                 const SizedBox(height: spacingXXLarge),
-                Row(children: [
-                  Text(StringConstants.kHaveAnAccountYet,
-                      style: Theme.of(context)
-                          .textTheme
-                          .tiniest
-                          .copyWith(fontWeight: FontWeight.w400)),
-                  const SizedBox(width: 4),
-                  (isLogin)
-                      ? TextButton(
-                          onPressed: () {
-                            context
-                                .read<AuthenticationBloc>()
-                                .add(SwitchAuthentication(isLogin: isLogin));
-                          },
-                          child: Text(StringConstants.kSingUp,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .tiniest
-                                  .copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColor.saasifyDarkBlue)))
-                      : TextButton(
-                          onPressed: () {
-                            context
-                                .read<AuthenticationBloc>()
-                                .add(SwitchAuthentication(isLogin: isLogin));
-                          },
-                          child: Text(StringConstants.kLogin,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .tiniest
-                                  .copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColor.saasifyDarkBlue)))
-                ])
+
+                // Visibility false because as we only have a login screen in user flow
+                Visibility(
+                  visible: false,
+                  child: Row(children: [
+                    Text(StringConstants.kHaveAnAccountYet,
+                        style: Theme.of(context)
+                            .textTheme
+                            .tiniest
+                            .copyWith(fontWeight: FontWeight.w400)),
+                    const SizedBox(width: 4),
+                    (isLogin)
+                        ? TextButton(
+                            onPressed: () {
+                              context.read<AuthenticationBloc>().add(
+                                  SwitchAuthentication(
+                                      isLogin: isLogin,
+                                      focusField: focusField));
+                            },
+                            child: Text(StringConstants.kSingUp,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .tiniest
+                                    .copyWith(
+                                        fontWeight: FontWeight.w700,
+                                        color: AppColor.saasifyDarkBlue)))
+                        : TextButton(
+                            onPressed: () {
+                              context.read<AuthenticationBloc>().add(
+                                  SwitchAuthentication(
+                                      isLogin: isLogin,
+                                      focusField: focusField));
+                            },
+                            child: Text(StringConstants.kLogin,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .tiniest
+                                    .copyWith(
+                                        fontWeight: FontWeight.w700,
+                                        color: AppColor.saasifyDarkBlue)))
+                  ]),
+                )
               ]),
         ));
   }

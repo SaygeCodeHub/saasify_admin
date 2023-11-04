@@ -33,12 +33,14 @@ class AuthenticationBloc
       SwitchAuthentication event, Emitter<AuthenticationStates> emit) {
     log('inside switch login');
     bool isLogin = !event.isLogin;
-    emit(AuthenticationFormLoaded(isLogin: isLogin));
+    emit(AuthenticationFormLoaded(
+        isLogin: isLogin, focusField: event.focusField));
   }
 
   FutureOr<void> _textFieldChange(
       TextFieldChange event, Emitter<AuthenticationStates> emit) {
-    emit(AuthenticationFormLoaded(isLogin: event.isLogin));
+    emit(AuthenticationFormLoaded(
+        isLogin: event.isLogin, focusField: event.focusField));
   }
 
   _otpReceivedOnPhone(
@@ -109,12 +111,12 @@ class AuthenticationBloc
               await _authenticationRepository.authenticateUser(userDetailsMap);
           if (authenticationModel.status == 200) {
             _customerCache
-                .setCompanyId(authenticationModel.data.companies[0].companyId);
+                .setUserId(authenticationModel.data.companies[0].companyId);
 
             emit(PhoneOtpVerified());
           } else if (authenticationModel.status == 404) {
             emit(PhoneAuthError(error: authenticationModel.message.toString()));
-            emit(AuthenticationFormLoaded(isLogin: true));
+            emit(AuthenticationFormLoaded(isLogin: true, focusField: ''));
           } else {
             emit(PhoneAuthError(error: 'Something went wrong!'));
           }
@@ -130,6 +132,6 @@ class AuthenticationBloc
   _onOtpVerificationError(
       OtpVerificationError event, Emitter<AuthenticationStates> emit) async {
     emit(PhoneAuthError(error: 'Something went wrong'));
-    emit(AuthenticationFormLoaded(isLogin: true));
+    emit(AuthenticationFormLoaded(isLogin: true, focusField: ''));
   }
 }

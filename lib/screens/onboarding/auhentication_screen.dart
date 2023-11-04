@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:saasify/screens/onboarding/authentication_form.dart';
 import 'package:saasify/screens/onboarding/otp_screen.dart';
 import '../../bloc/authentication/authentication_bloc.dart';
 import '../../bloc/authentication/authentication_states.dart';
@@ -34,7 +31,6 @@ class AuthenticationScreen extends StatelessWidget {
                     }
                     if (state is PhoneOtpVerified) {
                       ProgressBar.dismiss(context);
-                      log('Done Hai');
                     }
                     if (state is PhoneAuthError) {
                       ProgressBar.dismiss(context);
@@ -43,12 +39,15 @@ class AuthenticationScreen extends StatelessWidget {
                     }
                   }, builder: (context, state) {
                     if (state is AuthenticationFormLoaded) {
-                      return AuthenticationBody(isLogin: state.isLogin);
-                    } else if (state is OtpReceived) {
-                      ProgressBar.dismiss(context);
+                      //   return AuthenticationBody(
+                      //       isLogin: state.isLogin,
+                      //       focusField : state.focusField
+                      //   );
+                      // } else if (state is OtpReceived) {
+                      //   ProgressBar.dismiss(context);
                       return OtpScreen(
-                        verificationId: state.verificationId,
-                        userName: state.userName,
+                        verificationId: 'state.verificationId',
+                        userName: 'state.userName',
                       );
                     }
                     return const SizedBox();

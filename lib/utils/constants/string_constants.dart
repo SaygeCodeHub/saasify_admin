@@ -10,7 +10,7 @@ class StringConstants {
   static const kPleaseAddYourContactNumber = 'Please Add your contact number';
   static const kSingUp = 'Sign Up';
   static const kHaveAnAccountYet = 'Have an account yet?';
-  static const kWelcomeBack = 'Welcome Back :)';
+  static const kWelcome = 'Welcome :)';
   static const kEnterOtp = 'Enter Otp :)';
   static const kOtp = 'Otp';
   static const kLogin = 'Login';

@@ -16,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffix;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final bool autofocus;
   final dynamic initialValue;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
@@ -41,7 +42,8 @@ class CustomTextField extends StatelessWidget {
       this.prefixIcon,
       this.obscureText = false,
       this.hintStyle,
-      this.suffixIcon})
+      this.suffixIcon,
+      this.autofocus = false})
       : super(key: key);
 
   @override
@@ -49,6 +51,7 @@ class CustomTextField extends StatelessWidget {
     initialValue == null ? null : controller.text = initialValue.toString();
     return TextFormField(
       key: key,
+      autofocus: autofocus,
       obscureText: obscureText,
       obscuringCharacter: "*",
       decoration: InputDecoration(

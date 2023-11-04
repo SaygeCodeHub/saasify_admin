@@ -12,7 +12,6 @@ import 'bloc/authentication/authentication_bloc.dart';
 import 'bloc/authentication/authentication_event.dart';
 import 'configs/app_theme.dart';
 import 'package:flutter/material.dart';
-
 import 'di/app_module.dart';
 
 void main() async {
@@ -22,7 +21,6 @@ void main() async {
 }
 
 _initFirebase() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }
 
@@ -42,7 +40,7 @@ class MyPosApp extends StatelessWidget {
           BlocProvider(
               lazy: false,
               create: (context) => AuthenticationBloc()
-                ..add(SwitchAuthentication(isLogin: false))),
+                ..add(SwitchAuthentication(isLogin: false, focusField: ''))),
           BlocProvider(
               lazy: false,
               create: (context) => OnboardingBloc()..add(CheckIfLoggedIn())),
@@ -53,7 +51,7 @@ class MyPosApp extends StatelessWidget {
             },
             child: MaterialApp(
               theme: appTheme,
-              home: context.responsive(const CannotBeMinimizeScreen(), desktop:
+              home: context.responsive(const CannotBeMinimizeScreen(), tablets:
                   BlocBuilder<OnboardingBloc, OnboardingStates>(
                       builder: (context, state) {
                 if (state is IsLoggedIn) {

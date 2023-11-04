@@ -52,11 +52,13 @@ class OtpScreen extends StatelessWidget {
                   const SizedBox(height: spacingMedium),
                   Pinput(
                       defaultPinTheme: PinTheme(
-                          constraints: BoxConstraints(
-                              maxWidth: 50,
-                              minWidth: 50,
-                              maxHeight: 55,
-                              minHeight: 55),
+                          height: 50,
+                          width: 55,
+                          // constraints: const BoxConstraints(
+                          //     maxWidth: 50,
+                          //     minWidth: 50,
+                          //     maxHeight: 55,
+                          //     minHeight: 55),
                           decoration: BoxDecoration(
                               color: AppColor.saasifyLighterGrey,
                               borderRadius: BorderRadius.circular(12))),
