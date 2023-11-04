@@ -103,9 +103,9 @@ class AuthenticationBody extends StatelessWidget {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       context.read<AuthenticationBloc>().add(GetOtp(
-                          phoneNo:
-                              AuthenticationScreen.authDetails['user_name'],
                           userName:
+                              AuthenticationScreen.authDetails['user_name'],
+                          phoneNo:
                               "+91 ${AuthenticationScreen.authDetails['user_contact']}"));
                     }
                   },

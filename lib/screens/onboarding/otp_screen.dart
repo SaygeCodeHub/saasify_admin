@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pinput/pinput.dart';
+import 'package:saasify/bloc/authentication/authentication_bloc.dart';
+import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/screens/onboarding/auhentication_screen.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
@@ -44,12 +48,20 @@ class OtpScreen extends StatelessWidget {
                           .tiniest
                           .copyWith(fontWeight: FontWeight.w700)),
                   const SizedBox(height: spacingMedium),
-                  const Pinput(
+                  Pinput(
+                    onChanged: (value) {
+                      AuthenticationScreen.authDetails['otp'] = value;
+                    },
                     length: 6,
                   ),
                   const SizedBox(height: spacingXXHuge),
                   PrimaryButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<AuthenticationBloc>().add(VerifyOtp(
+                          otpCode: AuthenticationScreen.authDetails['otp'],
+                          verificationId: verificationId,
+                          userName: userName));
+                    },
                     buttonWidth: double.maxFinite,
                     buttonTitle: StringConstants.kVerifyOtp,
                   ),

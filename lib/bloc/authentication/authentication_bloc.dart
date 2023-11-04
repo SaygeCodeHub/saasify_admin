@@ -43,21 +43,27 @@ class AuthenticationBloc
 
   FutureOr<void> _getOtp(
       GetOtp event, Emitter<AuthenticationStates> emit) async {
+    log("here===>_getOtp");
+    log("here===>${event.phoneNo}");
+    log("here===>_getOtp");
     emit(OtpLoading());
     try {
       await _authenticationRepository.verifyPhoneNumber(
         phoneNumber: event.phoneNo,
         verificationCompleted: (PhoneAuthCredential credential) async {
           add(OtpVerified(credential: credential, userName: event.userName));
+          log("here===>verificationCompleted");
         },
         codeSent: (String verificationId, int? resendToken) {
           add(OtpReceivedOnPhone(
               verificationId: verificationId,
               token: resendToken,
               userName: event.userName));
+          log("here===>codeSent");
         },
         verificationFailed: (FirebaseAuthException e) {
           add(OtpVerificationError(error: e.code));
+          log("here===>${e.message}");
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
