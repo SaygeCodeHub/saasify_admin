@@ -26,6 +26,7 @@ class AuthenticationBloc
     on<VerifyOtp>(_onVerifyOtp);
     on<OtpVerified>(_loginWithCredential);
     on<OtpVerificationError>(_onOtpVerificationError);
+    on<TextFieldChange>(_textFieldChange);
   }
 
   FutureOr<void> _switchLogin(
@@ -33,6 +34,11 @@ class AuthenticationBloc
     log('inside switch login');
     bool isLogin = !event.isLogin;
     emit(AuthenticationFormLoaded(isLogin: isLogin));
+  }
+
+  FutureOr<void> _textFieldChange(
+      TextFieldChange event, Emitter<AuthenticationStates> emit) {
+    emit(AuthenticationFormLoaded(isLogin: event.isLogin));
   }
 
   _otpReceivedOnPhone(

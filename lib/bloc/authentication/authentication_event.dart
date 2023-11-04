@@ -2,6 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthenticationEvents {}
 
+class TextFieldChange extends AuthenticationEvents {
+  final bool isLogin;
+
+  TextFieldChange({required this.isLogin});
+}
+
 class GetOtp extends AuthenticationEvents {
   final String userName;
   final String phoneNo;

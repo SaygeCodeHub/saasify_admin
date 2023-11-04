@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pinput/pinput.dart';
 import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
+import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
 import '../../configs/app_dimensions.dart';
@@ -49,11 +51,25 @@ class OtpScreen extends StatelessWidget {
                           .copyWith(fontWeight: FontWeight.w700)),
                   const SizedBox(height: spacingMedium),
                   Pinput(
-                    onChanged: (value) {
-                      AuthenticationScreen.authDetails['otp'] = value;
-                    },
-                    length: 6,
-                  ),
+                      defaultPinTheme: PinTheme(
+                          constraints: BoxConstraints(
+                              maxWidth: 50,
+                              minWidth: 50,
+                              maxHeight: 55,
+                              minHeight: 55),
+                          decoration: BoxDecoration(
+                              color: AppColor.saasifyLighterGrey,
+                              borderRadius: BorderRadius.circular(12))),
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      onChanged: (value) {
+                        AuthenticationScreen.authDetails['otp'] = value;
+                      },
+                      // separatorBuilder: (index){
+                      //   return const Spacer();
+                      // },
+                      isCursorAnimationEnabled: false,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      length: 6),
                   const SizedBox(height: spacingXXHuge),
                   PrimaryButton(
                     onPressed: () {

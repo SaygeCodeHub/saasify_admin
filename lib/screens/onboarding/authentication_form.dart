@@ -68,6 +68,9 @@ class AuthenticationBody extends StatelessWidget {
                                   .copyWith(fontWeight: FontWeight.w500),
                               keyboardType: TextInputType.text,
                               onTextFieldChanged: (value) {
+                                context
+                                    .read<AuthenticationBloc>()
+                                    .add(TextFieldChange(isLogin: isLogin));
                                 AuthenticationScreen.authDetails['user_name'] =
                                     value;
                               }),
@@ -96,19 +99,27 @@ class AuthenticationBody extends StatelessWidget {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     onTextFieldChanged: (value) {
+                      context
+                          .read<AuthenticationBloc>()
+                          .add(TextFieldChange(isLogin: isLogin));
                       AuthenticationScreen.authDetails['user_contact'] = value;
                     }),
                 const SizedBox(height: spacingXXHuge),
                 PrimaryButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      context.read<AuthenticationBloc>().add(GetOtp(
-                          userName:
-                              AuthenticationScreen.authDetails['user_name'],
-                          phoneNo:
-                              "+91 ${AuthenticationScreen.authDetails['user_contact']}"));
-                    }
-                  },
+                  onPressed:
+                      (AuthenticationScreen.authDetails['user_contact'] !=
+                                  null &&
+                              AuthenticationScreen.authDetails['user_name'])
+                          ? () {
+                              if (_formKey.currentState!.validate()) {
+                                context.read<AuthenticationBloc>().add(GetOtp(
+                                    userName: AuthenticationScreen
+                                        .authDetails['user_name'],
+                                    phoneNo:
+                                        "+91 ${AuthenticationScreen.authDetails['user_contact']}"));
+                              }
+                            }
+                          : null,
                   buttonWidth: double.maxFinite,
                   buttonTitle: (isLogin) ? 'Login' : 'SignUp',
                 ),
