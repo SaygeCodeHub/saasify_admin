@@ -5,6 +5,7 @@ const double spacingSmall = 10.00;
 const double spacingMedium = 12.00;
 const double spacingStandard = 16.00;
 const double spacingLarge = 20.00;
+const double spacingLarger = 22.00;
 const double spacingXLarge = 24.00;
 const double spacingXXLarge = 28.00;
 const double spacingHuge = 32.00;

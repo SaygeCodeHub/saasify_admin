@@ -5,7 +5,7 @@ import 'package:saasify/bloc/onboarding/onboarding_event.dart';
 import 'package:saasify/bloc/onboarding/onboarding_state.dart';
 import 'package:saasify/firebase_options.dart';
 import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
-import 'package:saasify/screens/onboarding/auhentication_screen.dart';
+import 'package:saasify/screens/onboarding/add_company_screen.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/authentication/authentication_bloc.dart';
@@ -57,7 +57,7 @@ class MyPosApp extends StatelessWidget {
                 if (state is IsLoggedIn) {
                   return const Scaffold();
                 } else {
-                  return AuthenticationScreen();
+                  return CompanyForm();
                 }
               })),
             )));

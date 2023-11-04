@@ -60,8 +60,7 @@ ExpansionTileThemeData expansionTileThemeData = ExpansionTileThemeData(
 ElevatedButtonThemeData elevatedButtonThemeData = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.maxFinite, kGeneralButtonHeight),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))));
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))));
 
 TextButtonThemeData textButtonTheme =
     TextButtonThemeData(style: TextButton.styleFrom(padding: EdgeInsets.zero));
@@ -91,13 +90,20 @@ extension AppTextTheme on TextTheme {
   TextStyle get xTiniest {
     return const TextStyle(
         fontSize: 12,
+        color: AppColor.saasifyLightGrey,
+        fontWeight: FontWeight.w400);
+  }
+
+  TextStyle get xxTiniest {
+    return const TextStyle(
+        fontSize: 14,
         color: AppColor.saasifyBlack,
         fontWeight: FontWeight.w400);
   }
 
   TextStyle get tiniest {
     return const TextStyle(
-        fontSize: 14,
+        fontSize: 16,
         color: AppColor.saasifyBlack,
         fontWeight: FontWeight.w400);
   }

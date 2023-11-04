@@ -39,7 +39,7 @@ class PrimaryButton extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
-                  .tiniest
+                  .xxTiniest
                   .copyWith(color: AppColor.saasifyWhite)),
         ],
       ),
