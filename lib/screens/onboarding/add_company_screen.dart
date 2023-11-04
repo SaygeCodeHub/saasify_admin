@@ -5,6 +5,7 @@ import 'package:saasify/utils/constants/string_constants.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
+import '../../widgets/custom_alert_box.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../widgets/primary_button.dart';
 
@@ -39,13 +40,25 @@ class CompanyForm extends StatelessWidget {
                                   .xxTiny
                                   .copyWith(fontWeight: FontWeight.w700)),
                           const SizedBox(height: spacingMedium),
-                          Text(StringConstants.kWhyDoINeedToAddCompany,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .xTiniest
-                                  .copyWith(
-                                      color: AppColor.saasifyLightGrey,
-                                      decoration: TextDecoration.underline)),
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => CustomAlertBox(
+                                        title: StringConstants.kInformation,
+                                        message: StringConstants.kAlertText,
+                                        buttonTitle:
+                                            StringConstants.kUnderstood,
+                                        onPressed: () {},
+                                      ));
+                            },
+                            child: Text(StringConstants.kWhyDoINeedToAddCompany,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .xTiniest
+                                    .copyWith(
+                                        decoration: TextDecoration.underline)),
+                          ),
                           const SizedBox(height: kHelloSpacingHeight),
                           Text(StringConstants.kCompanyName,
                               style: Theme.of(context)
