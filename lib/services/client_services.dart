@@ -21,7 +21,7 @@ class ClientServices {
     }
   }
 
-  Future<dynamic> post(String requestUrl, Map body) async {
+  Future<Map<String, dynamic>> post(String requestUrl, Map body) async {
     try {
       final response = await dio.post(requestUrl, data: body);
       dynamic jsonResponse = response.data;

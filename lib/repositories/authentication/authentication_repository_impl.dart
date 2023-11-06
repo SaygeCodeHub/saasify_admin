@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
-
 import '../../services/client_services.dart';
 import '../../utils/constants/api_constants.dart';
 import 'authentication_repository.dart';
@@ -31,7 +30,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Future<AuthenticationModel> authenticateUser(Map userDetailsMap) async {
     try {
       final response = await ClientServices()
-          .post("${ApiConstants.baseUrl}AuthenticateUser", userDetailsMap);
+          .post("${ApiConstants.baseUrl}v1/authenticateUser", userDetailsMap);
       return AuthenticationModel.fromJson(response);
     } catch (error) {
       rethrow;

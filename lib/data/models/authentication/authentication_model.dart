@@ -9,7 +9,7 @@ String authenticationModelToJson(AuthenticationModel data) =>
 class AuthenticationModel {
   final int status;
   final String message;
-  final Data data;
+  final UserData data;
 
   AuthenticationModel({
     required this.status,
@@ -21,7 +21,7 @@ class AuthenticationModel {
       AuthenticationModel(
         status: json["status"],
         message: json["message"],
-        data: Data.fromJson(json["data"]),
+        data: UserData.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,31 +31,23 @@ class AuthenticationModel {
       };
 }
 
-class Data {
-  final String userName;
-  final String userId;
-  final int userContact;
+class UserData {
+  final User user;
   final List<Company> companies;
 
-  Data({
-    required this.userName,
-    required this.userId,
-    required this.userContact,
+  UserData({
+    required this.user,
     required this.companies,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        userName: json["user_name"],
-        userId: json["user_id"],
-        userContact: json["user_contact"],
+  factory UserData.fromJson(Map<String, dynamic> json) => UserData(
+        user: User.fromJson(json["user"]),
         companies: List<Company>.from(
             json["companies"].map((x) => Company.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "user_name": userName,
-        "user_id": userId,
-        "user_contact": userContact,
+        "user": user.toJson(),
         "companies": List<dynamic>.from(companies.map((x) => x.toJson())),
       };
 }
@@ -67,9 +59,9 @@ class Company {
   final String companyName;
   final String services;
   final String companyLogo;
-  final int companyContact;
-  final String companyAddress;
   final DateTime onboardingDate;
+  final bool isOwner;
+  final List<Branch> branches;
 
   Company({
     required this.companyId,
@@ -78,9 +70,9 @@ class Company {
     required this.companyName,
     required this.services,
     required this.companyLogo,
-    required this.companyContact,
-    required this.companyAddress,
     required this.onboardingDate,
+    required this.isOwner,
+    required this.branches,
   });
 
   factory Company.fromJson(Map<String, dynamic> json) => Company(
@@ -90,9 +82,10 @@ class Company {
         companyName: json["company_name"],
         services: json["services"],
         companyLogo: json["company_logo"],
-        companyContact: json["company_contact"],
-        companyAddress: json["company_address"],
         onboardingDate: DateTime.parse(json["onboarding_date"]),
+        isOwner: json["is_owner"],
+        branches:
+            List<Branch>.from(json["branches"].map((x) => Branch.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -102,8 +95,60 @@ class Company {
         "company_name": companyName,
         "services": services,
         "company_logo": companyLogo,
-        "company_contact": companyContact,
-        "company_address": companyAddress,
         "onboarding_date": onboardingDate.toIso8601String(),
+        "is_owner": isOwner,
+        "branches": List<dynamic>.from(branches.map((x) => x.toJson())),
+      };
+}
+
+class Branch {
+  final int branchId;
+  final String branchName;
+  final int branchContact;
+  final String branchAddress;
+
+  Branch({
+    required this.branchId,
+    required this.branchName,
+    required this.branchContact,
+    required this.branchAddress,
+  });
+
+  factory Branch.fromJson(Map<String, dynamic> json) => Branch(
+        branchId: json["branch_id"],
+        branchName: json["branch_name"],
+        branchContact: json["branch_contact"],
+        branchAddress: json["branch_address"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "branch_id": branchId,
+        "branch_name": branchName,
+        "branch_contact": branchContact,
+        "branch_address": branchAddress,
+      };
+}
+
+class User {
+  final String userName;
+  final String userId;
+  final int? userContact;
+
+  User({
+    required this.userName,
+    required this.userId,
+    required this.userContact,
+  });
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        userName: json["user_name"] ?? '',
+        userId: json["user_id"] ?? '',
+        userContact: json["user_contact"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "user_name": userName,
+        "user_id": userId,
+        "user_contact": userContact,
       };
 }

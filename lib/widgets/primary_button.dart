@@ -4,7 +4,7 @@ import '../configs/app_color.dart';
 
 class PrimaryButton extends StatelessWidget {
   final void Function()? onPressed;
-  final double buttonWidth;
+  final double? buttonWidth;
   final ButtonStyle? style;
   final Color? backgroundColor;
   final BorderSide? side;
@@ -14,7 +14,7 @@ class PrimaryButton extends StatelessWidget {
   const PrimaryButton(
       {Key? key,
       required this.onPressed,
-      required this.buttonWidth,
+      this.buttonWidth,
       this.style,
       this.backgroundColor,
       this.side,
@@ -28,7 +28,7 @@ class PrimaryButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColor.saasifyLightDeepBlue,
-        minimumSize: Size(buttonWidth, 50),
+        minimumSize: Size(buttonWidth ?? double.maxFinite, 50),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

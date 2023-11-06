@@ -12,6 +12,9 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingStates> {
 
   OnboardingBloc() : super(OnboardingInitial()) {
     on<CheckIfLoggedIn>(_checkIfLoggedIn);
+    on<SelectBranch>(_selectBranch);
+    on<SelectCompany>(_selectCompany);
+    on<SetCompanyAndBranchIds>(_setCompanyAndBranchIds);
   }
 
   FutureOr<void> _checkIfLoggedIn(
@@ -20,5 +23,21 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingStates> {
     if (isLoggedIn == true) {
       emit(IsLoggedIn());
     }
+  }
+
+  FutureOr<void> _selectCompany(
+      SelectCompany event, Emitter<OnboardingStates> emit) {
+    emit(CompaniesLoaded(selectedCompanyIndex: event.companyIndex));
+  }
+
+  FutureOr<void> _selectBranch(
+      SelectBranch event, Emitter<OnboardingStates> emit) {
+    emit(BranchesLoaded(selectedBranchIndex: event.branchIndex));
+  }
+
+  FutureOr<void> _setCompanyAndBranchIds(
+      SetCompanyAndBranchIds event, Emitter<OnboardingStates> emit) {
+    _customerCache.setCompanyId(event.companyId);
+    _customerCache.setBranchId(event.branchId);
   }
 }

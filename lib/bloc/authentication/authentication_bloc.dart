@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/data/customer_cache/customer_cache.dart';
@@ -31,7 +30,6 @@ class AuthenticationBloc
 
   FutureOr<void> _switchLogin(
       SwitchAuthentication event, Emitter<AuthenticationStates> emit) {
-    log('inside switch login');
     bool isLogin = !event.isLogin;
     emit(AuthenticationFormLoaded(
         isLogin: isLogin, focusField: event.focusField));
@@ -51,27 +49,21 @@ class AuthenticationBloc
 
   FutureOr<void> _getOtp(
       GetOtp event, Emitter<AuthenticationStates> emit) async {
-    log("here===>_getOtp");
-    log("here===>${event.phoneNo}");
-    log("here===>_getOtp");
     emit(OtpLoading());
     try {
       await _authenticationRepository.verifyPhoneNumber(
         phoneNumber: event.phoneNo,
         verificationCompleted: (PhoneAuthCredential credential) async {
           add(OtpVerified(credential: credential, userName: event.userName));
-          log("here===>verificationCompleted");
         },
         codeSent: (String verificationId, int? resendToken) {
           add(OtpReceivedOnPhone(
               verificationId: verificationId,
               token: resendToken,
               userName: event.userName));
-          log("here===>codeSent");
         },
         verificationFailed: (FirebaseAuthException e) {
           add(OtpVerificationError(error: e.code));
-          log("here===>${e.message}");
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
@@ -100,25 +92,23 @@ class AuthenticationBloc
       await auth.signInWithCredential(event.credential).then((user) async {
         if (user.user != null) {
           Map userDetailsMap = {
-            'customer_id': user.user!.uid,
-            'customer_name': (event.userName.toString() == "null")
-                ? "null"
+            'user_id': user.user!.uid,
+            'user_name': (event.userName.toString() == "")
+                ? ""
                 : event.userName.toString(),
-            'customer_contact': user.user?.phoneNumber
+            'user_contact': user.user?.phoneNumber!.replaceAll('+', '')
           };
-          log("post map====>$userDetailsMap");
           AuthenticationModel authenticationModel =
               await _authenticationRepository.authenticateUser(userDetailsMap);
           if (authenticationModel.status == 200) {
-            _customerCache
-                .setUserId(authenticationModel.data.companies[0].companyId);
-
-            emit(PhoneOtpVerified());
+            _customerCache.setIsLoggedIn(true);
+            _customerCache.setUserId(user.user!.uid);
+            emit(PhoneOtpVerified(userData: authenticationModel.data));
           } else if (authenticationModel.status == 404) {
             emit(PhoneAuthError(error: authenticationModel.message.toString()));
             emit(AuthenticationFormLoaded(isLogin: true, focusField: ''));
           } else {
-            emit(PhoneAuthError(error: 'Something went wrong!'));
+            emit(PhoneAuthError(error: authenticationModel.message));
           }
         }
       });
@@ -131,7 +121,7 @@ class AuthenticationBloc
 
   _onOtpVerificationError(
       OtpVerificationError event, Emitter<AuthenticationStates> emit) async {
-    emit(PhoneAuthError(error: 'Something went wrong'));
+    emit(PhoneAuthError(error: event.error));
     emit(AuthenticationFormLoaded(isLogin: true, focusField: ''));
   }
 }

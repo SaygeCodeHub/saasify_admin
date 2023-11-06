@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
 import 'app_color.dart';
-import 'app_dimensions.dart';
 
 ThemeData appTheme = ThemeData(
   colorScheme: colorScheme,
   fontFamily: 'Poppins',
-  appBarTheme: appBarTheme,
-  listTileTheme: listTileTheme,
-  cardTheme: appCardTheme,
-  bottomAppBarTheme: bottomAppBarTheme,
-  bottomNavigationBarTheme: bottomNavigationBarTheme,
-  textButtonTheme: textButtonTheme,
+  splashColor: AppColor.saasifytransparent,
+  hoverColor: AppColor.saasifytransparent,
+  highlightColor: AppColor.saasifytransparent,
+  focusColor: AppColor.saasifytransparent,
   scaffoldBackgroundColor: AppColor.saasifyWhite,
-  elevatedButtonTheme: elevatedButtonThemeData,
-  floatingActionButtonTheme: floatingActionButtonThemeData,
-  expansionTileTheme: expansionTileThemeData,
-  iconTheme: iconThemeData,
   inputDecorationTheme: inputDecorationTheme,
 );
 
@@ -44,47 +37,6 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
       borderSide: const BorderSide(color: AppColor.saasifyWhite),
     ),
     hintStyle: const TextStyle(color: AppColor.saasifyLightGrey));
-
-FloatingActionButtonThemeData floatingActionButtonThemeData =
-    const FloatingActionButtonThemeData(
-        backgroundColor: AppColor.saasifyWhite,
-        iconSize: kFloatingActionButtonIconSize,
-        foregroundColor: AppColor.saasifyWhite);
-
-ExpansionTileThemeData expansionTileThemeData = ExpansionTileThemeData(
-    shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(kCardRadius)),
-    iconColor: AppColor.saasifyLightDeepBlue,
-    textColor: AppColor.saasifyBlack);
-
-ElevatedButtonThemeData elevatedButtonThemeData = ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.maxFinite, kGeneralButtonHeight),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))));
-
-TextButtonThemeData textButtonTheme =
-    TextButtonThemeData(style: TextButton.styleFrom(padding: EdgeInsets.zero));
-
-BottomNavigationBarThemeData bottomNavigationBarTheme =
-    const BottomNavigationBarThemeData(
-        backgroundColor: AppColor.saasifyWhite, elevation: kZero);
-
-BottomAppBarTheme? bottomAppBarTheme = const BottomAppBarTheme(
-    color: AppColor.saasifyWhite,
-    elevation: kZero,
-    padding: EdgeInsets.all(14));
-
-ListTileThemeData listTileTheme = const ListTileThemeData(dense: true);
-
-AppBarTheme appBarTheme = AppBarTheme(
-    elevation: kZero,
-    backgroundColor: AppColor.saasifyWhite,
-    iconTheme: iconThemeData);
-
-IconThemeData iconThemeData = const IconThemeData(color: AppColor.saasifyBlack);
-
-CardTheme appCardTheme =
-    const CardTheme(elevation: kCardElevation, margin: EdgeInsets.zero);
 
 extension AppTextTheme on TextTheme {
   TextStyle get xTiniest {

@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/onboarding/onboarding_bloc.dart';
 import 'package:saasify/bloc/onboarding/onboarding_event.dart';
 import 'package:saasify/bloc/onboarding/onboarding_state.dart';
+import 'package:saasify/configs/app_route.dart';
 import 'package:saasify/firebase_options.dart';
 import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
-import 'package:saasify/screens/onboarding/add_company_screen.dart';
+import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/authentication/authentication_bloc.dart';
@@ -50,16 +51,20 @@ class MyPosApp extends StatelessWidget {
               FocusManager.instance.primaryFocus?.unfocus();
             },
             child: MaterialApp(
+              scrollBehavior:
+                  const MaterialScrollBehavior().copyWith(scrollbars: false),
+              onGenerateRoute: AppRoutes.routes,
               theme: appTheme,
-              home: context.responsive(const CannotBeMinimizeScreen(), tablets:
-                  BlocBuilder<OnboardingBloc, OnboardingStates>(
-                      builder: (context, state) {
-                if (state is IsLoggedIn) {
-                  return const Scaffold();
-                } else {
-                  return CompanyForm();
-                }
-              })),
+              home: context.responsive(const CannotBeMinimizeScreen(),
+                  tablets: BlocListener<OnboardingBloc, OnboardingStates>(
+                    listener: (context, state) {
+                      if (state is IsLoggedIn) {
+                        Navigator.pushReplacementNamed(
+                            context, DashboardsScreen.routeName);
+                      }
+                    },
+                    child: DashboardsScreen(),
+                  )),
             )));
   }
 }

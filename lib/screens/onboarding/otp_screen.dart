@@ -8,6 +8,7 @@ import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
+import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
@@ -52,23 +53,16 @@ class OtpScreen extends StatelessWidget {
                   const SizedBox(height: spacingMedium),
                   Pinput(
                       defaultPinTheme: PinTheme(
-                          height: 50,
-                          width: 55,
-                          // constraints: const BoxConstraints(
-                          //     maxWidth: 50,
-                          //     minWidth: 50,
-                          //     maxHeight: 55,
-                          //     minHeight: 55),
+                          height: context.responsive(33, desktop: 60),
+                          width: context.responsive(30, desktop: 55),
                           decoration: BoxDecoration(
                               color: AppColor.saasifyLighterGrey,
-                              borderRadius: BorderRadius.circular(12))),
+                              borderRadius: BorderRadius.circular(
+                                  context.responsive(8, desktop: 12)))),
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       onChanged: (value) {
                         AuthenticationScreen.authDetails['otp'] = value;
                       },
-                      // separatorBuilder: (index){
-                      //   return const Spacer();
-                      // },
                       isCursorAnimationEnabled: false,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       length: 6),

@@ -1,3 +1,5 @@
+// This Screen will be used later
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:saasify/configs/app_theme.dart';
@@ -44,9 +46,9 @@ class CompanyForm extends StatelessWidget {
                             onTap: () {
                               showDialog(
                                   context: context,
-                                  builder: (context) => CustomAlertBox(
+                                  builder: (context) => CustomAlertDialog(
                                         title: StringConstants.kInformation,
-                                        message: StringConstants.kAlertText,
+                                        message: "",
                                         buttonTitle:
                                             StringConstants.kUnderstood,
                                         onPressed: () {},
