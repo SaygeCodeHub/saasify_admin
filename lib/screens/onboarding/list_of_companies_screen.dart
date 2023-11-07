@@ -70,9 +70,8 @@ class CompanyListScreen extends StatelessWidget {
                                       ? () {
                                           Navigator.pushNamed(context,
                                               BranchesListScreen.routeName,
-                                              arguments: companyList[state
-                                                      .selectedCompanyIndex]
-                                                  .branches);
+                                              arguments: companyList[
+                                                  state.selectedCompanyIndex]);
                                         }
                                       : null,
                                   buttonTitle: 'Next')

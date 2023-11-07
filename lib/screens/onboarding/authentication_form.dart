@@ -44,8 +44,7 @@ class AuthenticationBody extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SvgPicture.asset("assets/SaaSify.svg",
-                      height: kGeneralButtonHeight, width: kLogoWidth),
+                  SvgPicture.asset("assets/SaaSify.svg", width: kLogoWidth),
                   const SizedBox(height: spacingStandard),
                   (isLogin)
                       ? Text(StringConstants.kWelcome,
