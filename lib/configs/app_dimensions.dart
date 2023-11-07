@@ -6,3 +6,4 @@ const double kSidebarLogoWidth = 100;
 const double kHelloSpacingHeight = 68;
 const double kDropdownWidth = 500;
 const double kAlertBoxWidth = 620;
+const double kIconDistanceWidth = 280;
