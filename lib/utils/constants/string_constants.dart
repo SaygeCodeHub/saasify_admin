@@ -14,12 +14,16 @@ class StringConstants {
   static const kAddCompany = 'Add Company :)';
   static const kCompanies = 'Companies';
   static const kAddProduct = 'Add Product';
-  static const kAddVariant = 'ADD VARIANT';
+  static const kAddVariantButton = 'ADD VARIANT';
+  static const kAddNewVariantButton = 'ADD NEW VARIANT';
+  static const kAddVariant = 'Add Variant';
   static const kNewProductAdded = 'New product added successfully!';
+  static const kNewVariantAdded = 'New variant added successfully!';
   static const kCategory = 'Category';
   static const kBrand = 'Brand';
   static const kProductId = 'Product ID';
-  static const kComment = 'Comment';
+  static const kVariantId = 'Variant ID';
+  static const kQuantity = 'Quantity';
   static const kPrice = 'Price';
   static const kDiscountPercent = 'Discount Percent';
   static const kMeasuringQuantity = 'Measuring Quantity';
@@ -30,6 +34,7 @@ class StringConstants {
   static const kMaxLines = '(Max lines 200 characters)';
   static const kContinueAddingVariant =
       'Continue adding variant of this product?';
+  static const kContinueAddingNewVariant = 'Continue adding new variant? ';
   static const kBranches = 'Branches';
   static const kSearchBranches = 'Search branches';
   static const kSearchCompanies = 'Search companies';

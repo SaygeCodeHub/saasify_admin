@@ -9,6 +9,7 @@ import 'package:saasify/firebase_options.dart';
 import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
+import 'package:saasify/screens/product/product_list.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'configs/app_theme.dart';
@@ -65,7 +66,7 @@ class MyPosApp extends StatelessWidget {
                             AuthenticationScreen.routeName, (route) => false);
                       }
                     },
-                    child: const DashboardsScreen(),
+                    child: const ProductListScreen(),
                   )),
             )));
   }

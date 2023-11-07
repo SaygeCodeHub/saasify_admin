@@ -25,11 +25,10 @@ class SideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: AppColor.saasifyWhite,
-      surfaceTintColor: AppColor.saasifytransparent,
-      elevation: 4,
-      child: Column(
-        children: [
+        backgroundColor: AppColor.saasifyWhite,
+        surfaceTintColor: AppColor.saasifyTransparent,
+        elevation: 4,
+        child: Column(children: [
           Padding(
             padding: const EdgeInsets.all(spacingStandard),
             child: Row(
@@ -58,9 +57,8 @@ class SideBar extends StatelessWidget {
           const Divider(),
           const SizedBox(height: spacingMedium),
           Padding(
-            padding: const EdgeInsets.only(left: spacingLarge),
-            child: Column(
-              children: [
+              padding: const EdgeInsets.only(left: spacingLarge),
+              child: Column(children: [
                 ListTile(
                   title: Text('Dashboard',
                       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
@@ -114,26 +112,21 @@ class SideBar extends StatelessWidget {
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {},
-                ),
-              ],
-            ),
-          ),
+                )
+              ])),
           const Divider(),
           Padding(
-            padding: const EdgeInsets.only(left: spacingLarge),
-            child: ListTile(
-              title: Text('Log Out',
-                  style: Theme.of(context)
-                      .textTheme
-                      .xxxTiniest
-                      .copyWith(color: AppColor.saasifyRed)),
-              onTap: () {
-                context.read<AuthenticationBloc>().add(LogOut());
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+              padding: const EdgeInsets.only(left: spacingLarge),
+              child: ListTile(
+                title: Text('Log Out',
+                    style: Theme.of(context)
+                        .textTheme
+                        .xxxTiniest
+                        .copyWith(color: AppColor.saasifyRed)),
+                onTap: () {
+                  context.read<AuthenticationBloc>().add(LogOut());
+                },
+              ))
+        ]));
   }
 }

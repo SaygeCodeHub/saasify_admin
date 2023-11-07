@@ -30,19 +30,12 @@ class PrimaryButton extends StatelessWidget {
         backgroundColor: AppColor.saasifyLightDeepBlue,
         minimumSize: Size(buttonWidth ?? double.maxFinite, 50),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          (icon == null) ? const SizedBox.shrink() : Icon(icon),
-          Text(buttonTitle,
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .xxTiniest
-                  .copyWith(color: AppColor.saasifyWhite)),
-        ],
-      ),
+      child: Text(buttonTitle,
+          textAlign: TextAlign.center,
+          style: Theme.of(context)
+              .textTheme
+              .xxTiniest
+              .copyWith(color: AppColor.saasifyWhite)),
     );
   }
 }

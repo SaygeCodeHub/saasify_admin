@@ -5,6 +5,7 @@ import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import '../screens/onboarding/auhentication_screen.dart';
+import '../screens/product/add_product_screen.dart';
 
 class AppRoutes {
   static Route routes(RouteSettings settings) {
@@ -21,6 +22,8 @@ class AppRoutes {
       case BranchesListScreen.routeName:
         return _createRoute(
             BranchesListScreen(selectedCompany: settings.arguments as Company));
+      case AddProductScreen.routeName:
+        return _createRoute(const AddProductScreen());
 
       default:
         return _createRoute(AuthenticationScreen());
