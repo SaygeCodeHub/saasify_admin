@@ -4,10 +4,10 @@ import 'app_color.dart';
 ThemeData appTheme = ThemeData(
   colorScheme: colorScheme,
   fontFamily: 'Poppins',
-  splashColor: AppColor.saasifytransparent,
-  hoverColor: AppColor.saasifytransparent,
-  highlightColor: AppColor.saasifytransparent,
-  focusColor: AppColor.saasifytransparent,
+  splashColor: AppColor.saasifyTransparent,
+  hoverColor: AppColor.saasifyTransparent,
+  highlightColor: AppColor.saasifyTransparent,
+  focusColor: AppColor.saasifyTransparent,
   scaffoldBackgroundColor: AppColor.saasifyWhite,
   inputDecorationTheme: inputDecorationTheme,
 );
@@ -49,7 +49,7 @@ extension AppTextTheme on TextTheme {
   TextStyle get xxTiniest {
     return const TextStyle(
         fontSize: 14,
-        color: AppColor.saasifyBlack,
+        color: AppColor.saasifyLightBlack,
         fontWeight: FontWeight.w400);
   }
 

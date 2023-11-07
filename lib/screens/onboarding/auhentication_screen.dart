@@ -52,18 +52,21 @@ class AuthenticationScreen extends StatelessWidget {
                       showDialog(
                           context: context,
                           builder: (ctx) => CustomAlertDialog(
-                              title: StringConstants.kSomethingWentWrong,
-                              message: state.error,
-                              buttonTitle: StringConstants.kUnderstood,
-                              onPressed: () {
-                                Navigator.pop(ctx);
-                                authDetails.clear();
-                                context.read<AuthenticationBloc>().add(
-                                    SwitchAuthentication(
-                                        isLogin: false, focusField: ''));
-                                Navigator.pushReplacementNamed(
-                                    context, AuthenticationScreen.routeName);
-                              }));
+                                title: StringConstants.kSomethingWentWrong,
+                                message: state.error,
+                                primaryButtonTitle: StringConstants.kUnderstood,
+                                secondaryOnPressed: () {
+                                  Navigator.pop(ctx);
+                                  authDetails.clear();
+                                  context.read<AuthenticationBloc>().add(
+                                      SwitchAuthentication(
+                                          isLogin: false, focusField: ''));
+                                  Navigator.pushReplacementNamed(
+                                      context, AuthenticationScreen.routeName);
+                                },
+                                checkMarkVisible: false,
+                                primaryOnPressed: () {},
+                              ));
                     }
                   }, buildWhen: (prev, curr) {
                     return curr is AuthenticationFormLoaded ||
