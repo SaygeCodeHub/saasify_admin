@@ -2,8 +2,6 @@ abstract class OnboardingStates {}
 
 class OnboardingInitial extends OnboardingStates {}
 
-class IsLoggedIn extends OnboardingStates {}
-
 class CompaniesLoaded extends OnboardingStates {
   final int selectedCompanyIndex;
 

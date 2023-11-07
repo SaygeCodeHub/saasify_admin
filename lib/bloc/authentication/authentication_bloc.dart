@@ -26,6 +26,8 @@ class AuthenticationBloc
     on<OtpVerified>(_loginWithCredential);
     on<OtpVerificationError>(_onOtpVerificationError);
     on<TextFieldChange>(_textFieldChange);
+    on<CheckIfLoggedIn>(_checkIfLoggedIn);
+    on<LogOut>(_logOut);
   }
 
   FutureOr<void> _switchLogin(
@@ -123,5 +125,18 @@ class AuthenticationBloc
       OtpVerificationError event, Emitter<AuthenticationStates> emit) async {
     emit(PhoneAuthError(error: event.error));
     emit(AuthenticationFormLoaded(isLogin: true, focusField: ''));
+  }
+
+  FutureOr<void> _checkIfLoggedIn(
+      CheckIfLoggedIn event, Emitter<AuthenticationStates> emit) async {
+    bool? isLoggedIn = await _customerCache.getIsLoggedIn();
+    if (isLoggedIn == true) {
+      emit(IsLoggedIn());
+    }
+  }
+
+  FutureOr<void> _logOut(LogOut event, Emitter<AuthenticationStates> emit) {
+    _customerCache.clearAll();
+    emit(LoggedOut());
   }
 }

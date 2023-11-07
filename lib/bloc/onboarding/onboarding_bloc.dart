@@ -11,18 +11,9 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingStates> {
   final CustomerCache _customerCache = getIt<CustomerCache>();
 
   OnboardingBloc() : super(OnboardingInitial()) {
-    on<CheckIfLoggedIn>(_checkIfLoggedIn);
     on<SelectBranch>(_selectBranch);
     on<SelectCompany>(_selectCompany);
     on<SetCompanyAndBranchIds>(_setCompanyAndBranchIds);
-  }
-
-  FutureOr<void> _checkIfLoggedIn(
-      CheckIfLoggedIn event, Emitter<OnboardingStates> emit) async {
-    bool? isLoggedIn = await _customerCache.getIsLoggedIn();
-    if (isLoggedIn == true) {
-      emit(IsLoggedIn());
-    }
   }
 
   FutureOr<void> _selectCompany(

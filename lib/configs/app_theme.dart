@@ -39,6 +39,13 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     hintStyle: const TextStyle(color: AppColor.saasifyLightGrey));
 
 extension AppTextTheme on TextTheme {
+  TextStyle get xxxTiniest {
+    return const TextStyle(
+        fontSize: 10,
+        color: AppColor.saasifyLightGrey,
+        fontWeight: FontWeight.w400);
+  }
+
   TextStyle get xTiniest {
     return const TextStyle(
         fontSize: 12,

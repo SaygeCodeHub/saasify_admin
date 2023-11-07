@@ -57,3 +57,7 @@ class OtpVerificationError extends AuthenticationEvents {
 
   OtpVerificationError({required this.error});
 }
+
+class CheckIfLoggedIn extends AuthenticationEvents {}
+
+class LogOut extends AuthenticationEvents {}

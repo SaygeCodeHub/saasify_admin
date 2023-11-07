@@ -31,3 +31,7 @@ class PhoneAuthError extends AuthenticationStates {
 
   PhoneAuthError({required this.error});
 }
+
+class IsLoggedIn extends AuthenticationStates {}
+
+class LoggedOut extends AuthenticationStates {}

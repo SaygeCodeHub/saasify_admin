@@ -1,7 +1,5 @@
 abstract class OnboardingEvent {}
 
-class CheckIfLoggedIn extends OnboardingEvent {}
-
 class SelectCompany extends OnboardingEvent {
   final int companyIndex;
 
