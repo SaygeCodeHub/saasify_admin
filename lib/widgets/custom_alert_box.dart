@@ -13,6 +13,7 @@ class CustomAlertDialog extends StatelessWidget {
       required this.message,
       required this.primaryButtonTitle,
       required this.checkMarkVisible,
+      required this.crossIconVisible,
       required this.secondaryOnPressed,
       this.secondaryButtonTitle,
       required this.primaryOnPressed});
@@ -24,6 +25,7 @@ class CustomAlertDialog extends StatelessWidget {
   final void Function()? secondaryOnPressed;
   final void Function()? primaryOnPressed;
   final bool checkMarkVisible;
+  final bool crossIconVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +40,9 @@ class CustomAlertDialog extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Visibility(
-                          visible: true,
-                          child: Icon(Icons.check_circle_rounded,
+                      Visibility(
+                          visible: checkMarkVisible,
+                          child: const Icon(Icons.check_circle_rounded,
                               color: AppColor.saasifyGreen)),
                       const SizedBox(width: spacingXXSmall),
                       Text(title,
@@ -48,15 +50,18 @@ class CustomAlertDialog extends StatelessWidget {
                               .textTheme
                               .tiniest
                               .copyWith(fontWeight: FontWeight.w700)),
-                      const SizedBox(width: kIconDistanceWidth),
-                      InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Icon(
-                            Icons.close,
-                            color: AppColor.saasifyGrey,
-                          )),
+                      // const SizedBox(width: kIconDistanceWidth),
+                      // InkWell(
+                      //     onTap: () {
+                      //       Navigator.pop(context);
+                      //     },
+                      //     child: Visibility(
+                      //       visible: crossIconVisible,
+                      //       child: const Icon(
+                      //         Icons.close,
+                      //         color: AppColor.saasifyGrey,
+                      //       ),
+                      //     )),
                     ],
                   ),
                   const SizedBox(height: spacingXLarge),
@@ -69,6 +74,8 @@ class CustomAlertDialog extends StatelessWidget {
                         child: (secondaryButtonTitle == null)
                             ? const SizedBox.shrink()
                             : SecondaryButton(
+                                side: const BorderSide(
+                                    color: AppColor.saasifyLightWhite),
                                 onPressed: secondaryOnPressed,
                                 buttonTitle: secondaryButtonTitle ?? ''),
                       ),

@@ -4,12 +4,13 @@ import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/bloc/authentication/authentication_states.dart';
 import 'package:saasify/bloc/onboarding/onboarding_bloc.dart';
+import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/configs/app_route.dart';
 import 'package:saasify/firebase_options.dart';
 import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
-import 'package:saasify/screens/product/product_list.dart';
+import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'configs/app_theme.dart';
@@ -44,12 +45,14 @@ class MyPosApp extends StatelessWidget {
               create: (context) =>
                   AuthenticationBloc()..add(CheckIfLoggedIn())),
           BlocProvider(lazy: false, create: (context) => OnboardingBloc()),
+          BlocProvider(lazy: false, create: (context) => ProductBloc()),
         ],
         child: GestureDetector(
             onTap: () {
               FocusManager.instance.primaryFocus?.unfocus();
             },
             child: MaterialApp(
+              debugShowCheckedModeBanner: false,
               scrollBehavior:
                   const MaterialScrollBehavior().copyWith(scrollbars: false),
               onGenerateRoute: AppRoutes.routes,

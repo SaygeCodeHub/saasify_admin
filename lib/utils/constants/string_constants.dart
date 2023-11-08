@@ -20,6 +20,7 @@ class StringConstants {
   static const kNewProductAdded = 'New product added successfully!';
   static const kNewVariantAdded = 'New variant added successfully!';
   static const kCategory = 'Category';
+  static const kProducts = 'Products';
   static const kBrand = 'Brand';
   static const kProductId = 'Product ID';
   static const kVariantId = 'Variant ID';
@@ -28,6 +29,7 @@ class StringConstants {
   static const kDiscountPercent = 'Discount Percent';
   static const kMeasuringQuantity = 'Measuring Quantity';
   static const kStock = 'Stock';
+  static const kLowStock = 'Low Stock Reminder';
   static const kUploadImages = 'Upload Images';
   static const kMinimumOneImage = '(Minimum 1 image mandatory)';
   static const kProductDescription = 'Product Description';
@@ -39,9 +41,15 @@ class StringConstants {
   static const kSearchBranches = 'Search branches';
   static const kSearchCompanies = 'Search companies';
   static const kOtp = 'Otp';
+  static const kNo = 'No';
   static const kLogin = 'Login';
   static const kProductImage = 'Product Image';
+  static const kAddManually = 'ADD MANUALLY';
+  static const kScanBarcode = 'SCAN BARCODE';
   static const kInformation = 'Information';
+  static const kAddNewProduct = 'Add new product';
+  static const kScanTheBarcode =
+      'Scan the barcode to add the product or continue adding manually';
   static const kBusinessDomain = 'Business Domain';
   static const kUnderstood = 'Understood';
   static const kWhatsYourBusinessDomain = "What's your business domain?";

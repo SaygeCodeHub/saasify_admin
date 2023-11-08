@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_alert_box.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
@@ -91,7 +92,7 @@ class AddProductScreen extends StatelessWidget {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                Row(children: [
+                                Wrap(children: [
                                   Text(StringConstants.kProductDescription,
                                       style: Theme.of(context)
                                           .textTheme
@@ -123,13 +124,46 @@ class AddProductScreen extends StatelessWidget {
                                 const SizedBox(height: spacingXMedium),
                                 CustomTextField(onTextFieldChanged: (value) {}),
                                 const SizedBox(height: spacingHuge),
-                                Text(StringConstants.kQuantity,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .xxTiniest
-                                        .copyWith(fontWeight: FontWeight.w700)),
-                                const SizedBox(height: spacingXMedium),
-                                CustomTextField(onTextFieldChanged: (value) {})
+                                Row(
+                                  children: [
+                                    Expanded(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(StringConstants.kQuantity,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .xxTiniest
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w700)),
+                                        const SizedBox(height: spacingXMedium),
+                                        CustomTextField(
+                                            onTextFieldChanged: (value) {}),
+                                      ],
+                                    )),
+                                    const SizedBox(width: spacingLarger),
+                                    const SizedBox(width: spacingLarger),
+                                    Expanded(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(StringConstants.kMeasuringQuantity,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .xxTiniest
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w700)),
+                                        const SizedBox(height: spacingXMedium),
+                                        CustomTextField(
+                                            onTextFieldChanged: (value) {})
+                                      ],
+                                    ))
+                                  ],
+                                ),
                               ])),
                           const SizedBox(width: spacingXXHuge),
                           Expanded(
@@ -178,7 +212,7 @@ class AddProductScreen extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                        Text(StringConstants.kMeasuringQuantity,
+                                        Text(StringConstants.kStock,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .xxTiniest
@@ -195,7 +229,7 @@ class AddProductScreen extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                        Text(StringConstants.kStock,
+                                        Text(StringConstants.kLowStock,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .xxTiniest
@@ -268,12 +302,17 @@ class AddProductScreen extends StatelessWidget {
                                           ? StringConstants.kAddNewVariantButton
                                           : StringConstants.kAddVariantButton,
                                       checkMarkVisible: true,
+                                      secondaryButtonTitle: StringConstants.kNo,
                                       primaryOnPressed: () {
                                         variantToggle = true;
                                         Navigator.pushReplacementNamed(context,
                                             AddProductScreen.routeName);
                                       },
-                                      secondaryOnPressed: () {},
+                                      secondaryOnPressed: () {
+                                        Navigator.pushReplacementNamed(context,
+                                            ProductListScreen.routeName);
+                                      },
+                                      crossIconVisible: false,
                                     ));
                           },
                           buttonWidth: spacingXXXXHuge,

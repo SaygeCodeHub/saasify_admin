@@ -28,7 +28,9 @@ class SecondaryButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
           backgroundColor: AppColor.saasifyWhite,
-          side: const BorderSide(color: AppColor.saasifyLightDeepBlue),
+          side: (side == null)
+              ? const BorderSide(color: AppColor.saasifyLightDeepBlue)
+              : side,
           minimumSize: Size(buttonWidth ?? double.maxFinite, 50)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
