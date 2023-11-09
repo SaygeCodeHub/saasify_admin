@@ -9,7 +9,7 @@ String productListModelToJson(ProductListModel data) =>
 class ProductListModel {
   final int status;
   final String message;
-  final List<Datum> data;
+  final List<Product> data;
 
   ProductListModel({
     required this.status,
@@ -21,7 +21,7 @@ class ProductListModel {
       ProductListModel(
         status: json["status"],
         message: json["message"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<Product>.from(json["data"].map((x) => Product.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,7 +31,7 @@ class ProductListModel {
       };
 }
 
-class Datum {
+class Product {
   final int categoryId;
   final String categoryName;
   final int productId;
@@ -49,7 +49,7 @@ class Datum {
   final String measuringUnit;
   final int barcodeNo;
 
-  Datum({
+  Product({
     required this.categoryId,
     required this.categoryName,
     required this.productId,
@@ -68,7 +68,7 @@ class Datum {
     required this.barcodeNo,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
         categoryId: json["category_id"],
         categoryName: json["category_name"],
         productId: json["product_id"],

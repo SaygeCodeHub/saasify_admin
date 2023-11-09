@@ -12,12 +12,10 @@ class CustomAlertDialog extends StatelessWidget {
       required this.title,
       required this.message,
       required this.primaryButtonTitle,
-      required this.checkMarkVisible,
-      required this.crossIconVisible,
-      required this.secondaryOnPressed,
+      this.checkMarkVisible = false,
+      this.secondaryOnPressed,
       this.secondaryButtonTitle,
-      required this.primaryOnPressed,
-      required this.sizedBoxVisible});
+      required this.primaryOnPressed});
 
   final String title;
   final String message;
@@ -26,8 +24,6 @@ class CustomAlertDialog extends StatelessWidget {
   final void Function()? secondaryOnPressed;
   final void Function()? primaryOnPressed;
   final bool checkMarkVisible;
-  final bool crossIconVisible;
-  final bool sizedBoxVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +43,7 @@ class CustomAlertDialog extends StatelessWidget {
                               child: const Icon(Icons.check_circle_rounded,
                                   color: AppColor.saasifyGreen)),
                           Visibility(
-                              visible: sizedBoxVisible,
+                              visible: checkMarkVisible,
                               child: const SizedBox(width: spacingXXSmall)),
                           Text(title,
                               style: Theme.of(context)
@@ -59,10 +55,8 @@ class CustomAlertDialog extends StatelessWidget {
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: Visibility(
-                                visible: crossIconVisible,
-                                child: const Icon(Icons.close,
-                                    color: AppColor.saasifyGrey)))
+                            child: const Icon(Icons.close,
+                                color: AppColor.saasifyGrey))
                       ]),
                   const SizedBox(height: spacingXLarge),
                   Text(message, style: Theme.of(context).textTheme.xxTiniest),

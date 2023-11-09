@@ -68,8 +68,6 @@ class AuthenticationScreen extends StatelessWidget {
                                   Navigator.pushReplacementNamed(
                                       context, AuthenticationScreen.routeName);
                                 },
-                                crossIconVisible: true,
-                                secondaryOnPressed: () {},
                               ));
                     }
                   }, buildWhen: (prev, curr) {

@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/product/product_bloc.dart';
+import 'package:saasify/bloc/product/product_event.dart';
+import 'package:saasify/bloc/product/product_state.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
 import 'package:saasify/screens/product/add_product_screen.dart';
+import 'package:saasify/screens/product/widgets/product_list_data_table.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/primary_button.dart';
 import 'package:saasify/widgets/sidebar.dart';
-import '../../bloc/product/product_bloc.dart';
-import '../../bloc/product/product_event.dart';
-import '../../bloc/product/product_state.dart';
-import '../../configs/app_color.dart';
 import '../../widgets/custom_alert_box.dart';
 
-class ProductListScreen extends StatefulWidget {
+class ProductListScreen extends StatelessWidget {
   static const String routeName = 'ProductListScreen';
+
+  static List<bool> selectedCheckboxes = List.generate(10, (index) => false);
 
   const ProductListScreen({Key? key}) : super(key: key);
 
-  @override
-  State<ProductListScreen> createState() => _ProductListScreenState();
-}
-
-final List<ProductListScreen> rowDataList = [];
-var selectedCheckboxes = List.generate(10, (index) => false);
-
-class _ProductListScreenState extends State<ProductListScreen> {
   @override
   Widget build(BuildContext context) {
     context.read<ProductBloc>().add(FetchProductList());
@@ -66,262 +61,48 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                           StringConstants.kAddManually,
                                       checkMarkVisible: false,
                                       secondaryOnPressed: () {
-                                        Navigator.pushReplacementNamed(context,
-                                            AddProductScreen.routeName);
+                                        Navigator.pushReplacementNamed(
+                                            context, AddProductScreen.routeName,
+                                            arguments:
+                                                AddProductScreenArguments(
+                                                    isEdit: false,
+                                                    isVariant: false,
+                                                    dataMap: {}));
                                       },
                                       primaryOnPressed: () {},
-                                      crossIconVisible: true,
-                                      sizedBoxVisible: false,
                                     ));
                           },
                           buttonTitle: StringConstants.kAddProduct))
                 ]),
                 const SizedBox(height: spacingStandard),
-                BlocBuilder<ProductBloc, ProductStates>(
+                BlocConsumer<ProductBloc, ProductStates>(
+                  listener: (context, state) {
+                    if (state is FetchProductError) {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) => CustomAlertDialog(
+                                title: StringConstants.kSomethingWentWrong,
+                                message: state.message,
+                                primaryButtonTitle: StringConstants.kUnderstood,
+                                checkMarkVisible: false,
+                                primaryOnPressed: () {
+                                  Navigator.pop(ctx);
+                                },
+                                secondaryOnPressed: () {},
+                              ));
+                    }
+                  },
                   builder: (context, state) {
                     if (state is FetchingProduct) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is FetchedProduct) {
-                      return Expanded(
-                          child: ListView(children: <Widget>[
-                        DataTable(
-                            columnSpacing: 0,
-                            horizontalMargin: 20,
-                            showCheckboxColumn: true,
-                            headingRowHeight: 50,
-                            dataRowMaxHeight: 50,
-                            columns: [
-                              DataColumn(
-                                label: Expanded(
-                                  child: Center(
-                                    child: InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            if (selectedCheckboxes
-                                                .contains(false)) {
-                                              selectedCheckboxes =
-                                                  List.generate(
-                                                      state.productListModel
-                                                          .data.length,
-                                                      (index) => true);
-                                            } else {
-                                              selectedCheckboxes;
-                                              selectedCheckboxes =
-                                                  List.generate(
-                                                      state.productListModel
-                                                          .data.length,
-                                                      (index) => false);
-                                            }
-                                          });
-                                        },
-                                        child: Icon(
-                                            (selectedCheckboxes
-                                                        .contains(true) &&
-                                                    selectedCheckboxes
-                                                        .contains(false))
-                                                ? Icons
-                                                    .indeterminate_check_box_outlined
-                                                : (selectedCheckboxes
-                                                        .contains(true))
-                                                    ? Icons.check_box
-                                                    : Icons
-                                                        .check_box_outline_blank,
-                                            color: (selectedCheckboxes
-                                                    .contains(true))
-                                                ? AppColor.saasifyLightDeepBlue
-                                                : AppColor
-                                                    .saasifyLightDeepBlue)),
-                                  ),
-                                ),
-                              ),
-                              DataColumn(
-                                  label: Text(StringConstants.kName,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiniest
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500))),
-                              DataColumn(
-                                  label: Expanded(
-                                child: Center(
-                                  child: Text(StringConstants.kProductId,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiniest
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500)),
-                                ),
-                              )),
-                              DataColumn(
-                                  label: Text(StringConstants.kCategory,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiniest
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500))),
-                              DataColumn(
-                                  label: Expanded(
-                                child: Center(
-                                  child: Text(StringConstants.kPrice,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiniest
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500)),
-                                ),
-                              )),
-                              DataColumn(
-                                  label: Expanded(
-                                child: Center(
-                                  child: Text(StringConstants.kDiscountPercent,
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiniest
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500)),
-                                ),
-                              )),
-                              DataColumn(
-                                  label: Expanded(
-                                child: Center(
-                                  child: Text(StringConstants.kStock,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiniest
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500)),
-                                ),
-                              )),
-                              DataColumn(
-                                  label: Expanded(
-                                      child: Center(
-                                          child: Text('',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .xxTiniest
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w500)))))
-                            ],
-                            rows: List.generate(
-                                state.productListModel.data.length,
-                                (index) => DataRow(cells: [
-                                      DataCell(Align(
-                                        alignment: Alignment.center,
-                                        child: InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                selectedCheckboxes[index] =
-                                                    !selectedCheckboxes[index];
-                                              });
-                                            },
-                                            child: Icon(
-                                                selectedCheckboxes[index]
-                                                    ? Icons.check_box
-                                                    : Icons
-                                                        .check_box_outline_blank_rounded,
-                                                color: selectedCheckboxes[index]
-                                                    ? AppColor
-                                                        .saasifyLightDeepBlue
-                                                    : AppColor
-                                                        .saasifyLightDeepBlue)),
-                                      )),
-                                      DataCell(Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                            state.productListModel.data[index]
-                                                .productName,
-                                            textAlign: TextAlign.left,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .xxTiniest),
-                                      )),
-                                      DataCell(
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                              state.productListModel.data[index]
-                                                  .productId
-                                                  .toString(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .xxTiniest),
-                                        ),
-                                      ),
-                                      DataCell(Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                            state.productListModel.data[index]
-                                                .categoryName,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .xxTiniest),
-                                      )),
-                                      DataCell(Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            state.productListModel.data[index]
-                                                .variantCost
-                                                .toString(),
-                                            textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .xxTiniest),
-                                      )),
-                                      DataCell(Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            state.productListModel.data[index]
-                                                .discountedCost
-                                                .toString(),
-                                            textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .xxTiniest),
-                                      )),
-                                      DataCell(Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            state.productListModel.data[index]
-                                                .stock
-                                                .toString(),
-                                            textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .xxTiniest),
-                                      )),
-                                      DataCell(
-                                        PopupMenuButton(
-                                            itemBuilder: (context) {
-                                              return [
-                                                PopupMenuItem(
-                                                    onTap: () {
-                                                      Navigator
-                                                          .pushReplacementNamed(
-                                                              context,
-                                                              AddProductScreen
-                                                                  .routeName);
-                                                    },
-                                                    child: const Text(
-                                                        StringConstants.kEdit)),
-                                                const PopupMenuItem(
-                                                    child: Text(StringConstants
-                                                        .kDelete))
-                                              ];
-                                            },
-                                            child: const Align(
-                                                alignment:
-                                                    Alignment.centerRight,
-                                                child: Icon(Icons.more_vert))),
-                                      )
-                                    ])))
-                      ]));
+                      return ProductListDataTable(
+                          productList: state.productList);
                     } else if (state is FetchProductError) {
                       return const Expanded(
                           child: Text(StringConstants.kNoDataAvailable));
                     } else {
-                      return const SizedBox();
+                      return const SizedBox.shrink();
                     }
                   },
                 )

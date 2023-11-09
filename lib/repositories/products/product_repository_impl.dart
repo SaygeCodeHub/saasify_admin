@@ -1,9 +1,11 @@
+import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
 import 'package:saasify/data/models/products/product_list_model.dart';
 import 'package:saasify/repositories/products/product_repository.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
   @override
-  Future<ProductListModel> productList() async {
+  Future<ProductListModel> fetchProductList(
+      String userId, String companyId, int branchId) async {
     final response = {
       "status": 200,
       "message": "success",
@@ -17,7 +19,7 @@ class ProductRepositoryImpl implements ProductRepository {
           "variant_id": 5,
           "variant_cost": 84.0,
           "quantity": 420,
-          "discounted_cost": 52.0,
+          "discounted_cost": null,
           "discount": null,
           "stock": 150,
           "description": "sdfghjkl;'",
@@ -29,5 +31,32 @@ class ProductRepositoryImpl implements ProductRepository {
       ]
     };
     return ProductListModel.fromJson(response);
+  }
+
+  @override
+  Future<FetchAllCategoriesModel> fetchAllCategoriesModel() async {
+    final response = {
+      "status": 200,
+      "message": "success",
+      "data": [
+        {"category_id": 1, "category_name": "Snacks"}
+      ]
+    };
+
+    return FetchAllCategoriesModel.fromJson(response);
+  }
+
+  @override
+  Future saveProduct(String userId, String companyId, int branchId) async {
+    final response = {};
+
+    return response;
+  }
+
+  @override
+  Future deleteProduct(String userId, String companyId, int branchId) async {
+    final response = {};
+
+    return response;
   }
 }

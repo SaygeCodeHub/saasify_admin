@@ -54,8 +54,6 @@ class CompanyForm extends StatelessWidget {
                                         secondaryOnPressed: () {},
                                         checkMarkVisible: false,
                                         primaryOnPressed: () {},
-                                        crossIconVisible: true,
-                                        sizedBoxVisible: false,
                                       ));
                             },
                             child: Text(StringConstants.kWhyDoINeedToAddCompany,

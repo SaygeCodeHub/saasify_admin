@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
+import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
 import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
@@ -23,7 +24,12 @@ class AppRoutes {
         return _createRoute(
             BranchesListScreen(selectedCompany: settings.arguments as Company));
       case AddProductScreen.routeName:
-        return _createRoute(const AddProductScreen());
+        AddProductScreenArguments args =
+            settings.arguments as AddProductScreenArguments;
+        return _createRoute(AddProductScreen(
+            isEdit: args.isEdit,
+            isVariant: args.isVariant,
+            dataMap: args.dataMap));
 
       default:
         return _createRoute(AuthenticationScreen());
