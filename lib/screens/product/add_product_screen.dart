@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_alert_box.dart';
+import 'package:saasify/widgets/custom_dropdown.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/secondary_button.dart';
 import '../../configs/app_color.dart';
@@ -55,7 +57,16 @@ class AddProductScreen extends StatelessWidget {
                                         .xxTiniest
                                         .copyWith(fontWeight: FontWeight.w700)),
                                 const SizedBox(height: spacingXMedium),
-                                CustomTextField(onTextFieldChanged: (value) {})
+                                const SizedBox(
+                                    height: kDropdownHeight,
+                                    child: CustomDropdownWidget(
+                                        dropdownValue: "",
+                                        listItems: [
+                                          "Grocery",
+                                          "Bakery",
+                                          "Clothing",
+                                          "Other"
+                                        ]))
                               ])),
                           const SizedBox(width: spacingXXHuge),
                           Expanded(
@@ -122,7 +133,11 @@ class AddProductScreen extends StatelessWidget {
                                         .xxTiniest
                                         .copyWith(fontWeight: FontWeight.w700)),
                                 const SizedBox(height: spacingXMedium),
-                                CustomTextField(onTextFieldChanged: (value) {}),
+                                CustomTextField(
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    onTextFieldChanged: (value) {}),
                                 const SizedBox(height: spacingHuge),
                                 Row(children: [
                                   Expanded(
@@ -139,6 +154,10 @@ class AddProductScreen extends StatelessWidget {
                                                         FontWeight.w700)),
                                         const SizedBox(height: spacingXMedium),
                                         CustomTextField(
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly
+                                            ],
                                             onTextFieldChanged: (value) {})
                                       ])),
                                   const SizedBox(width: spacingLarger),
@@ -149,6 +168,8 @@ class AddProductScreen extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                         Text(StringConstants.kMeasuringQuantity,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .xxTiniest
@@ -156,8 +177,16 @@ class AddProductScreen extends StatelessWidget {
                                                     fontWeight:
                                                         FontWeight.w700)),
                                         const SizedBox(height: spacingXMedium),
-                                        CustomTextField(
-                                            onTextFieldChanged: (value) {})
+                                        const SizedBox(
+                                            height: kDropdownHeight,
+                                            child: CustomDropdownWidget(
+                                                dropdownValue: "",
+                                                listItems: [
+                                                  "kg",
+                                                  "l",
+                                                  "gm",
+                                                  "m"
+                                                ]))
                                       ]))
                                 ])
                               ])),
@@ -181,6 +210,10 @@ class AddProductScreen extends StatelessWidget {
                                                         FontWeight.w700)),
                                         const SizedBox(height: spacingXMedium),
                                         CustomTextField(
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly
+                                            ],
                                             onTextFieldChanged: (value) {})
                                       ])),
                                   const SizedBox(width: spacingLarger),
@@ -190,6 +223,8 @@ class AddProductScreen extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                         Text(StringConstants.kDiscountPercent,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .xxTiniest
@@ -198,6 +233,10 @@ class AddProductScreen extends StatelessWidget {
                                                         FontWeight.w700)),
                                         const SizedBox(height: spacingXMedium),
                                         CustomTextField(
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly
+                                            ],
                                             onTextFieldChanged: (value) {})
                                       ]))
                                 ]),
@@ -217,6 +256,10 @@ class AddProductScreen extends StatelessWidget {
                                                         FontWeight.w700)),
                                         const SizedBox(height: spacingXMedium),
                                         CustomTextField(
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly
+                                            ],
                                             onTextFieldChanged: (value) {})
                                       ])),
                                   const SizedBox(width: spacingLarger),
@@ -226,6 +269,8 @@ class AddProductScreen extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                         Text(StringConstants.kLowStock,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .xxTiniest
@@ -234,6 +279,10 @@ class AddProductScreen extends StatelessWidget {
                                                         FontWeight.w700)),
                                         const SizedBox(height: spacingXMedium),
                                         CustomTextField(
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly
+                                            ],
                                             onTextFieldChanged: (value) {})
                                       ]))
                                 ])
@@ -284,32 +333,38 @@ class AddProductScreen extends StatelessWidget {
                           onPressed: () {
                             showDialog(
                                 context: context,
-                                builder: (context) => CustomAlertDialog(
-                                      title: (variantToggle == true)
-                                          ? StringConstants.kNewVariantAdded
-                                          : StringConstants.kNewProductAdded,
-                                      message: (variantToggle == true)
-                                          ? StringConstants
-                                              .kContinueAddingNewVariant
-                                          : StringConstants
-                                              .kContinueAddingVariant,
-                                      primaryButtonTitle: (variantToggle ==
-                                              true)
-                                          ? StringConstants.kAddNewVariantButton
-                                          : StringConstants.kAddVariantButton,
-                                      checkMarkVisible: true,
-                                      secondaryButtonTitle: StringConstants.kNo,
-                                      primaryOnPressed: () {
-                                        variantToggle = true;
-                                        Navigator.pushReplacementNamed(context,
-                                            AddProductScreen.routeName);
-                                      },
-                                      secondaryOnPressed: () {
-                                        Navigator.pushReplacementNamed(context,
-                                            ProductListScreen.routeName);
-                                      },
-                                      crossIconVisible: false,
-                                      sizedBoxVisible: true,
+                                builder: (context) => Expanded(
+                                      child: CustomAlertDialog(
+                                        title: (variantToggle == true)
+                                            ? StringConstants.kNewVariantAdded
+                                            : StringConstants.kNewProductAdded,
+                                        message: (variantToggle == true)
+                                            ? StringConstants
+                                                .kContinueAddingNewVariant
+                                            : StringConstants
+                                                .kContinueAddingVariant,
+                                        primaryButtonTitle: (variantToggle ==
+                                                true)
+                                            ? StringConstants
+                                                .kAddNewVariantButton
+                                            : StringConstants.kAddVariantButton,
+                                        checkMarkVisible: true,
+                                        secondaryButtonTitle:
+                                            StringConstants.kNo,
+                                        primaryOnPressed: () {
+                                          variantToggle = true;
+                                          Navigator.pushReplacementNamed(
+                                              context,
+                                              AddProductScreen.routeName);
+                                        },
+                                        secondaryOnPressed: () {
+                                          Navigator.pushReplacementNamed(
+                                              context,
+                                              ProductListScreen.routeName);
+                                        },
+                                        crossIconVisible: false,
+                                        sizedBoxVisible: true,
+                                      ),
                                     ));
                           },
                           buttonWidth: spacingXXXXHuge,
