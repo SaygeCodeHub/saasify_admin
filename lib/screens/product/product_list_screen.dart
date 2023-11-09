@@ -47,7 +47,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   Expanded(
                     flex: 5,
                     child: CustomTextField(
-                        hintText: 'Search here....',
+                        hintText: StringConstants.kSearchHere,
                         onTextFieldChanged: (value) {}),
                   ),
                   const Spacer(),
@@ -71,9 +71,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                       },
                                       primaryOnPressed: () {},
                                       crossIconVisible: true,
+                                      sizedBoxVisible: false,
                                     ));
                           },
-                          buttonTitle: 'Add Product'))
+                          buttonTitle: StringConstants.kAddProduct))
                 ]),
                 const SizedBox(height: spacingStandard),
                 BlocBuilder<ProductBloc, ProductStates>(
@@ -96,12 +97,16 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                       setState(() {
                                         if (selectedCheckboxes
                                             .contains(false)) {
-                                          selectedCheckboxes =
-                                              List.generate(1, (index) => true);
+                                          selectedCheckboxes = List.generate(
+                                              state
+                                                  .productListModel.data.length,
+                                              (index) => true);
                                         } else {
                                           selectedCheckboxes;
                                           selectedCheckboxes = List.generate(
-                                              1, (index) => false);
+                                              state
+                                                  .productListModel.data.length,
+                                              (index) => false);
                                         }
                                       });
                                     },
@@ -121,49 +126,49 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                             : AppColor.saasifyLightDeepBlue)),
                               ),
                               DataColumn(
-                                  label: Text('Name',
+                                  label: Text(StringConstants.kName,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
                                               fontWeight: FontWeight.w500))),
                               DataColumn(
-                                  label: Text('Product ID',
+                                  label: Text(StringConstants.kProductId,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
                                               fontWeight: FontWeight.w500))),
                               DataColumn(
-                                  label: Text('Category',
+                                  label: Text(StringConstants.kCategory,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
                                               fontWeight: FontWeight.w500))),
                               DataColumn(
-                                  label: Text('Price',
+                                  label: Text(StringConstants.kPrice,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
                                               fontWeight: FontWeight.w500))),
                               DataColumn(
-                                  label: Text('Discounted Price',
+                                  label: Text(StringConstants.kDiscountPercent,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
                                               fontWeight: FontWeight.w500))),
                               DataColumn(
-                                  label: Text('Stock',
+                                  label: Text(StringConstants.kStock,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
                                               fontWeight: FontWeight.w500))),
                               DataColumn(
-                                  label: Text('Actions',
+                                  label: Text('',
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
@@ -173,15 +178,14 @@ class _ProductListScreenState extends State<ProductListScreen> {
                             rows: List.generate(
                                 state.productListModel.data.length,
                                 (index) => DataRow(cells: [
-                                      DataCell(
-                                        InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                selectedCheckboxes[index] =
-                                                    !selectedCheckboxes[index];
-                                              });
-                                            },
-                                            child: Icon(
+                                      DataCell(InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              selectedCheckboxes[index] =
+                                                  !selectedCheckboxes[index];
+                                            });
+                                          },
+                                          child: Icon(
                                               selectedCheckboxes[index]
                                                   ? Icons.check_box
                                                   : Icons
@@ -190,9 +194,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                                   ? AppColor
                                                       .saasifyLightDeepBlue
                                                   : AppColor
-                                                      .saasifyLightDeepBlue,
-                                            )),
-                                      ),
+                                                      .saasifyLightDeepBlue))),
                                       DataCell(Text(
                                           state.productListModel.data[index]
                                               .productName,
@@ -221,13 +223,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                           style: Theme.of(context)
                                               .textTheme
                                               .xxTiniest)),
-                                      DataCell(Text(
-                                          state.productListModel.data[index]
-                                              .discountedCost
-                                              .toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xxTiniest)),
+                                      DataCell(Center(
+                                          child: Text(
+                                              state.productListModel.data[index]
+                                                  .discountedCost
+                                                  .toString(),
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .xxTiniest))),
                                       DataCell(Text(
                                           state.productListModel.data[index]
                                               .stock
@@ -247,9 +251,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                                               AddProductScreen
                                                                   .routeName);
                                                     },
-                                                    child: const Text('Edit')),
+                                                    child: const Text(
+                                                        StringConstants.kEdit)),
                                                 const PopupMenuItem(
-                                                    child: Text('Delete'))
+                                                    child: Text(StringConstants
+                                                        .kDelete))
                                               ];
                                             },
                                             child: const Icon(Icons.more_vert)),
@@ -257,7 +263,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                     ])))
                       ]));
                     } else if (state is FetchProductError) {
-                      return const Expanded(child: Text('No Data Available'));
+                      return const Expanded(
+                          child: Text(StringConstants.kNoDataAvailable));
                     } else {
                       return const SizedBox();
                     }

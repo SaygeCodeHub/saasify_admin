@@ -124,13 +124,12 @@ class AddProductScreen extends StatelessWidget {
                                 const SizedBox(height: spacingXMedium),
                                 CustomTextField(onTextFieldChanged: (value) {}),
                                 const SizedBox(height: spacingHuge),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                        child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
+                                Row(children: [
+                                  Expanded(
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
                                         Text(StringConstants.kQuantity,
                                             style: Theme.of(context)
                                                 .textTheme
@@ -140,16 +139,15 @@ class AddProductScreen extends StatelessWidget {
                                                         FontWeight.w700)),
                                         const SizedBox(height: spacingXMedium),
                                         CustomTextField(
-                                            onTextFieldChanged: (value) {}),
-                                      ],
-                                    )),
-                                    const SizedBox(width: spacingLarger),
-                                    const SizedBox(width: spacingLarger),
-                                    Expanded(
-                                        child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
+                                            onTextFieldChanged: (value) {})
+                                      ])),
+                                  const SizedBox(width: spacingLarger),
+                                  const SizedBox(width: spacingLarger),
+                                  Expanded(
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
                                         Text(StringConstants.kMeasuringQuantity,
                                             style: Theme.of(context)
                                                 .textTheme
@@ -160,10 +158,8 @@ class AddProductScreen extends StatelessWidget {
                                         const SizedBox(height: spacingXMedium),
                                         CustomTextField(
                                             onTextFieldChanged: (value) {})
-                                      ],
-                                    ))
-                                  ],
-                                ),
+                                      ]))
+                                ])
                               ])),
                           const SizedBox(width: spacingXXHuge),
                           Expanded(
@@ -282,7 +278,7 @@ class AddProductScreen extends StatelessWidget {
                       PrimaryButton(
                           onPressed: () {},
                           buttonWidth: spacingXXXXHuge,
-                          buttonTitle: 'Save'),
+                          buttonTitle: StringConstants.kSave),
                       const SizedBox(width: spacingLarge),
                       SecondaryButton(
                           onPressed: () {
@@ -313,10 +309,11 @@ class AddProductScreen extends StatelessWidget {
                                             ProductListScreen.routeName);
                                       },
                                       crossIconVisible: false,
+                                      sizedBoxVisible: true,
                                     ));
                           },
                           buttonWidth: spacingXXXXHuge,
-                          buttonTitle: 'Publish'),
+                          buttonTitle: StringConstants.kPublish),
                     ])
                   ])))
     ]));

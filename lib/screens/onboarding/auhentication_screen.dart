@@ -67,6 +67,7 @@ class AuthenticationScreen extends StatelessWidget {
                                 checkMarkVisible: false,
                                 primaryOnPressed: () {},
                                 crossIconVisible: true,
+                                sizedBoxVisible: false,
                               ));
                     }
                   }, buildWhen: (prev, curr) {
