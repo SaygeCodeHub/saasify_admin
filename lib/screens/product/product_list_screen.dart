@@ -47,7 +47,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   Expanded(
                     flex: 5,
                     child: CustomTextField(
-                        hintText: 'Search here....',
+                        hintText: StringConstants.kSearchHere,
                         onTextFieldChanged: (value) {}),
                   ),
                   const Spacer(),
@@ -71,9 +71,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                       },
                                       primaryOnPressed: () {},
                                       crossIconVisible: true,
+                                      sizedBoxVisible: false,
                                     ));
                           },
-                          buttonTitle: 'Add Product'))
+                          buttonTitle: StringConstants.kAddProduct))
                 ]),
                 const SizedBox(height: spacingStandard),
                 BlocBuilder<ProductBloc, ProductStates>(
@@ -85,96 +86,130 @@ class _ProductListScreenState extends State<ProductListScreen> {
                           child: ListView(children: <Widget>[
                         DataTable(
                             columnSpacing: 0,
-                            horizontalMargin: 30,
+                            horizontalMargin: 20,
                             showCheckboxColumn: true,
                             headingRowHeight: 50,
                             dataRowMaxHeight: 50,
                             columns: [
                               DataColumn(
-                                label: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        if (selectedCheckboxes
-                                            .contains(false)) {
-                                          selectedCheckboxes =
-                                              List.generate(1, (index) => true);
-                                        } else {
-                                          selectedCheckboxes;
-                                          selectedCheckboxes = List.generate(
-                                              1, (index) => false);
-                                        }
-                                      });
-                                    },
-                                    child: Icon(
-                                        (selectedCheckboxes.contains(true) &&
-                                                selectedCheckboxes
-                                                    .contains(false))
-                                            ? Icons
-                                                .indeterminate_check_box_outlined
-                                            : (selectedCheckboxes
+                                label: Expanded(
+                                  child: Center(
+                                    child: InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            if (selectedCheckboxes
+                                                .contains(false)) {
+                                              selectedCheckboxes =
+                                                  List.generate(
+                                                      state.productListModel
+                                                          .data.length,
+                                                      (index) => true);
+                                            } else {
+                                              selectedCheckboxes;
+                                              selectedCheckboxes =
+                                                  List.generate(
+                                                      state.productListModel
+                                                          .data.length,
+                                                      (index) => false);
+                                            }
+                                          });
+                                        },
+                                        child: Icon(
+                                            (selectedCheckboxes
+                                                        .contains(true) &&
+                                                    selectedCheckboxes
+                                                        .contains(false))
+                                                ? Icons
+                                                    .indeterminate_check_box_outlined
+                                                : (selectedCheckboxes
+                                                        .contains(true))
+                                                    ? Icons.check_box
+                                                    : Icons
+                                                        .check_box_outline_blank,
+                                            color: (selectedCheckboxes
                                                     .contains(true))
-                                                ? Icons.check_box
-                                                : Icons.check_box_outline_blank,
-                                        color: (selectedCheckboxes
-                                                .contains(true))
-                                            ? AppColor.saasifyLightDeepBlue
-                                            : AppColor.saasifyLightDeepBlue)),
+                                                ? AppColor.saasifyLightDeepBlue
+                                                : AppColor
+                                                    .saasifyLightDeepBlue)),
+                                  ),
+                                ),
                               ),
                               DataColumn(
-                                  label: Text('Name',
+                                  label: Text(StringConstants.kName,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
                                               fontWeight: FontWeight.w500))),
                               DataColumn(
-                                  label: Text('Product ID',
+                                  label: Expanded(
+                                child: Center(
+                                  child: Text(StringConstants.kProductId,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .xxTiniest
+                                          .copyWith(
+                                              fontWeight: FontWeight.w500)),
+                                ),
+                              )),
+                              DataColumn(
+                                  label: Text(StringConstants.kCategory,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
                                               fontWeight: FontWeight.w500))),
                               DataColumn(
-                                  label: Text('Category',
+                                  label: Expanded(
+                                child: Center(
+                                  child: Text(StringConstants.kPrice,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
-                                              fontWeight: FontWeight.w500))),
+                                              fontWeight: FontWeight.w500)),
+                                ),
+                              )),
                               DataColumn(
-                                  label: Text('Price',
+                                  label: Expanded(
+                                child: Center(
+                                  child: Text(StringConstants.kDiscountPercent,
+                                      textAlign: TextAlign.center,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
-                                              fontWeight: FontWeight.w500))),
+                                              fontWeight: FontWeight.w500)),
+                                ),
+                              )),
                               DataColumn(
-                                  label: Text('Discounted Price',
+                                  label: Expanded(
+                                child: Center(
+                                  child: Text(StringConstants.kStock,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
-                                              fontWeight: FontWeight.w500))),
+                                              fontWeight: FontWeight.w500)),
+                                ),
+                              )),
                               DataColumn(
-                                  label: Text('Stock',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiniest
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500))),
-                              DataColumn(
-                                  label: Text('Actions',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiniest
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500)))
+                                  label: Expanded(
+                                      child: Center(
+                                          child: Text('',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .xxTiniest
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w500)))))
                             ],
                             rows: List.generate(
                                 state.productListModel.data.length,
                                 (index) => DataRow(cells: [
-                                      DataCell(
-                                        InkWell(
+                                      DataCell(Align(
+                                        alignment: Alignment.center,
+                                        child: InkWell(
                                             onTap: () {
                                               setState(() {
                                                 selectedCheckboxes[index] =
@@ -182,59 +217,80 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                               });
                                             },
                                             child: Icon(
-                                              selectedCheckboxes[index]
-                                                  ? Icons.check_box
-                                                  : Icons
-                                                      .check_box_outline_blank_rounded,
-                                              color: selectedCheckboxes[index]
-                                                  ? AppColor
-                                                      .saasifyLightDeepBlue
-                                                  : AppColor
-                                                      .saasifyLightDeepBlue,
-                                            )),
-                                      ),
-                                      DataCell(Text(
-                                          state.productListModel.data[index]
-                                              .productName,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xxTiniest)),
-                                      DataCell(
-                                        Text(
+                                                selectedCheckboxes[index]
+                                                    ? Icons.check_box
+                                                    : Icons
+                                                        .check_box_outline_blank_rounded,
+                                                color: selectedCheckboxes[index]
+                                                    ? AppColor
+                                                        .saasifyLightDeepBlue
+                                                    : AppColor
+                                                        .saasifyLightDeepBlue)),
+                                      )),
+                                      DataCell(Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
                                             state.productListModel.data[index]
-                                                .productId
-                                                .toString(),
+                                                .productName,
+                                            textAlign: TextAlign.left,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .xxTiniest),
+                                      )),
+                                      DataCell(
+                                        Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                              state.productListModel.data[index]
+                                                  .productId
+                                                  .toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .xxTiniest),
+                                        ),
                                       ),
-                                      DataCell(Text(
-                                          state.productListModel.data[index]
-                                              .categoryName,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xxTiniest)),
-                                      DataCell(Text(
-                                          state.productListModel.data[index]
-                                              .variantCost
-                                              .toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xxTiniest)),
-                                      DataCell(Text(
-                                          state.productListModel.data[index]
-                                              .discountedCost
-                                              .toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xxTiniest)),
-                                      DataCell(Text(
-                                          state.productListModel.data[index]
-                                              .stock
-                                              .toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xxTiniest)),
+                                      DataCell(Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                            state.productListModel.data[index]
+                                                .categoryName,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .xxTiniest),
+                                      )),
+                                      DataCell(Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                            state.productListModel.data[index]
+                                                .variantCost
+                                                .toString(),
+                                            textAlign: TextAlign.center,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .xxTiniest),
+                                      )),
+                                      DataCell(Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                            state.productListModel.data[index]
+                                                .discountedCost
+                                                .toString(),
+                                            textAlign: TextAlign.center,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .xxTiniest),
+                                      )),
+                                      DataCell(Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                            state.productListModel.data[index]
+                                                .stock
+                                                .toString(),
+                                            textAlign: TextAlign.center,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .xxTiniest),
+                                      )),
                                       DataCell(
                                         PopupMenuButton(
                                             itemBuilder: (context) {
@@ -247,17 +303,23 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                                               AddProductScreen
                                                                   .routeName);
                                                     },
-                                                    child: const Text('Edit')),
+                                                    child: const Text(
+                                                        StringConstants.kEdit)),
                                                 const PopupMenuItem(
-                                                    child: Text('Delete'))
+                                                    child: Text(StringConstants
+                                                        .kDelete))
                                               ];
                                             },
-                                            child: const Icon(Icons.more_vert)),
+                                            child: const Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Icon(Icons.more_vert))),
                                       )
                                     ])))
                       ]));
                     } else if (state is FetchProductError) {
-                      return const Expanded(child: Text('No Data Available'));
+                      return const Expanded(
+                          child: Text(StringConstants.kNoDataAvailable));
                     } else {
                       return const SizedBox();
                     }

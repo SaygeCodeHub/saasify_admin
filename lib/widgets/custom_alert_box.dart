@@ -16,7 +16,8 @@ class CustomAlertDialog extends StatelessWidget {
       required this.crossIconVisible,
       required this.secondaryOnPressed,
       this.secondaryButtonTitle,
-      required this.primaryOnPressed});
+      required this.primaryOnPressed,
+      required this.sizedBoxVisible});
 
   final String title;
   final String message;
@@ -26,6 +27,7 @@ class CustomAlertDialog extends StatelessWidget {
   final void Function()? primaryOnPressed;
   final bool checkMarkVisible;
   final bool crossIconVisible;
+  final bool sizedBoxVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -37,33 +39,31 @@ class CustomAlertDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Visibility(
-                          visible: checkMarkVisible,
-                          child: const Icon(Icons.check_circle_rounded,
-                              color: AppColor.saasifyGreen)),
-                      const SizedBox(width: spacingXXSmall),
-                      Text(title,
-                          style: Theme.of(context)
-                              .textTheme
-                              .tiniest
-                              .copyWith(fontWeight: FontWeight.w700)),
-                      // const SizedBox(width: kIconDistanceWidth),
-                      // InkWell(
-                      //     onTap: () {
-                      //       Navigator.pop(context);
-                      //     },
-                      //     child: Visibility(
-                      //       visible: crossIconVisible,
-                      //       child: const Icon(
-                      //         Icons.close,
-                      //         color: AppColor.saasifyGrey,
-                      //       ),
-                      //     )),
-                    ],
-                  ),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(children: [
+                          Visibility(
+                              visible: checkMarkVisible,
+                              child: const Icon(Icons.check_circle_rounded,
+                                  color: AppColor.saasifyGreen)),
+                          Visibility(
+                              visible: sizedBoxVisible,
+                              child: const SizedBox(width: spacingXXSmall)),
+                          Text(title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .tiniest
+                                  .copyWith(fontWeight: FontWeight.w700))
+                        ]),
+                        InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Visibility(
+                                visible: crossIconVisible,
+                                child: const Icon(Icons.close,
+                                    color: AppColor.saasifyGrey)))
+                      ]),
                   const SizedBox(height: spacingXLarge),
                   Text(message, style: Theme.of(context).textTheme.xxTiniest),
                   const SizedBox(height: spacingXLarge),

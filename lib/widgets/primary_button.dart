@@ -30,12 +30,14 @@ class PrimaryButton extends StatelessWidget {
         backgroundColor: AppColor.saasifyLightDeepBlue,
         minimumSize: Size(buttonWidth ?? double.maxFinite, 50),
       ),
-      child: Text(buttonTitle,
-          textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .xxTiniest
-              .copyWith(color: AppColor.saasifyWhite)),
+      child: FittedBox(
+        child: Text(buttonTitle,
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .xxTiniest
+                .copyWith(color: AppColor.saasifyWhite)),
+      ),
     );
   }
 }

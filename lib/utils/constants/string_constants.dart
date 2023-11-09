@@ -27,8 +27,14 @@ class StringConstants {
   static const kQuantity = 'Quantity';
   static const kPrice = 'Price';
   static const kDiscountPercent = 'Discount Percent';
+  static const kPublish = 'Publish';
+  static const kSave = 'Save';
   static const kMeasuringQuantity = 'Measuring Quantity';
   static const kStock = 'Stock';
+  static const kEdit = 'Edit';
+  static const kDelete = 'Delete';
+  static const kSearchHere = 'Search here....';
+  static const kNoDataAvailable = 'No Data Available';
   static const kLowStock = 'Low Stock Reminder';
   static const kUploadImages = 'Upload Images';
   static const kMinimumOneImage = '(Minimum 1 image mandatory)';
