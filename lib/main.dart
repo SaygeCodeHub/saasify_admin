@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_bloc.dart';
@@ -8,9 +10,7 @@ import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/configs/app_route.dart';
 import 'package:saasify/firebase_options.dart';
 import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
-import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
-import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'configs/app_theme.dart';
@@ -62,14 +62,15 @@ class MyPosApp extends StatelessWidget {
                       BlocListener<AuthenticationBloc, AuthenticationStates>(
                     listener: (context, state) {
                       if (state is IsLoggedIn) {
-                        Navigator.pushReplacementNamed(
-                            context, DashboardsScreen.routeName);
+                        // Navigator.pushReplacementNamed(
+                        //     context, DashboardsScreen.routeName);
                       } else if (state is LoggedOut) {
+                        log('message');
                         Navigator.pushNamedAndRemoveUntil(context,
                             AuthenticationScreen.routeName, (route) => false);
                       }
                     },
-                    child: const ProductListScreen(),
+                    child: AuthenticationScreen(),
                   )),
             )));
   }

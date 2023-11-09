@@ -105,6 +105,10 @@ class AuthenticationBloc
           if (authenticationModel.status == 200) {
             _customerCache.setIsLoggedIn(true);
             _customerCache.setUserId(user.user!.uid);
+            _customerCache
+                .setCompanyId(authenticationModel.data.companies[0].companyId);
+            _customerCache.setBranchId(
+                authenticationModel.data.companies[0].branches[0].branchId);
             emit(PhoneOtpVerified(userData: authenticationModel.data));
           } else if (authenticationModel.status == 404) {
             emit(PhoneAuthError(error: authenticationModel.message.toString()));
@@ -135,8 +139,9 @@ class AuthenticationBloc
     }
   }
 
-  FutureOr<void> _logOut(LogOut event, Emitter<AuthenticationStates> emit) {
-    _customerCache.clearAll();
+  FutureOr<void> _logOut(
+      LogOut event, Emitter<AuthenticationStates> emit) async {
+    await _customerCache.clearAll();
     emit(LoggedOut());
   }
 }

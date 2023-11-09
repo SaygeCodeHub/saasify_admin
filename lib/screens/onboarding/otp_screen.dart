@@ -51,21 +51,25 @@ class OtpScreen extends StatelessWidget {
                           .tiniest
                           .copyWith(fontWeight: FontWeight.w700)),
                   const SizedBox(height: spacingMedium),
-                  Pinput(
-                      defaultPinTheme: PinTheme(
-                          height: context.responsive(33, desktop: 60),
-                          width: context.responsive(30, desktop: 55),
-                          decoration: BoxDecoration(
-                              color: AppColor.saasifyLighterGrey,
-                              borderRadius: BorderRadius.circular(
-                                  context.responsive(8, desktop: 12)))),
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      onChanged: (value) {
-                        AuthenticationScreen.authDetails['otp'] = value;
-                      },
-                      isCursorAnimationEnabled: false,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      length: 6),
+                  AspectRatio(
+                    aspectRatio: 360 / 55,
+                    child: Pinput(
+                        defaultPinTheme: PinTheme(
+                            decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                color: AppColor.saasifyLighterGrey,
+                                borderRadius: BorderRadius.circular(
+                                    context.responsive(8, desktop: 12)))),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        onChanged: (value) {
+                          AuthenticationScreen.authDetails['otp'] = value;
+                        },
+                        isCursorAnimationEnabled: false,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        length: 6),
+                  ),
                   const SizedBox(height: spacingXXHuge),
                   PrimaryButton(
                     onPressed: () {

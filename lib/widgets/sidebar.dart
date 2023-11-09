@@ -13,15 +13,6 @@ class SideBar extends StatelessWidget {
 
   const SideBar({Key? key, required this.selectedIndex}) : super(key: key);
 
-  final List<String> sideBarOptions = const [
-    'DashBoard',
-    'Products',
-    'Orders',
-    'Inventory Management',
-    'Profile Management',
-    'Insights'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Drawer(

@@ -22,6 +22,9 @@ class AuthenticationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context
+        .read<AuthenticationBloc>()
+        .add(SwitchAuthentication(isLogin: false, focusField: ''));
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -55,7 +58,8 @@ class AuthenticationScreen extends StatelessWidget {
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.error,
                                 primaryButtonTitle: StringConstants.kUnderstood,
-                                secondaryOnPressed: () {
+                                checkMarkVisible: false,
+                                primaryOnPressed: () {
                                   Navigator.pop(ctx);
                                   authDetails.clear();
                                   context.read<AuthenticationBloc>().add(
@@ -64,9 +68,8 @@ class AuthenticationScreen extends StatelessWidget {
                                   Navigator.pushReplacementNamed(
                                       context, AuthenticationScreen.routeName);
                                 },
-                                checkMarkVisible: false,
-                                primaryOnPressed: () {},
                                 crossIconVisible: true,
+                                secondaryOnPressed: () {},
                               ));
                     }
                   }, buildWhen: (prev, curr) {

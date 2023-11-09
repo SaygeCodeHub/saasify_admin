@@ -1,4 +1,4 @@
-const double kCardRadius = 22;
+const double kCardRadius = 12;
 const double kGeneralButtonHeight = 50;
 const double kButtonHeight = 75;
 const double kLogoWidth = 80;
