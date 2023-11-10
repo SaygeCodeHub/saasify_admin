@@ -50,6 +50,17 @@ class StringConstants {
   static const kNo = 'No';
   static const kLogin = 'Login';
   static const kProductImage = 'Product Image';
+  static const kMembershipNO = 'Membership no :';
+  static const kCustomerName = 'Customer Name :';
+  static const k8888881800 = '8888881800';
+  static const kAdityaRastogi = 'Aditya Rastogi';
+  static const kHotDishes = 'Hot Dishes';
+  static const kColdDishes = 'Cold Dishes';
+  static const kSoup = 'Soup';
+  static const kGrill = 'Grill';
+  static const kAppetizer = 'Appetizer';
+  static const kDessert = 'Dessert';
+  static const kSearchProduct = 'Search Product';
   static const kAddManually = 'ADD MANUALLY';
   static const kScanBarcode = 'SCAN BARCODE';
   static const kInformation = 'Information';
