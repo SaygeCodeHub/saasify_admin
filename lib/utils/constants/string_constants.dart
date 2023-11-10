@@ -52,6 +52,7 @@ class StringConstants {
   static const kNo = 'No';
   static const kLogin = 'Login';
   static const kProductImage = 'Product Image';
+  static const kUpdateStock = 'Update Stock';
   static const kAddManually = 'ADD MANUALLY';
   static const kScanBarcode = 'SCAN BARCODE';
   static const kInformation = 'Information';

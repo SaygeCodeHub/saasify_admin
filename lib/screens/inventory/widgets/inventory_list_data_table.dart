@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/screens/inventory/widgets/edit_inventory_stock_widget.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import '../../../configs/app_spacing.dart';
+import '../../../data/models/inventory/inventory_list_model.dart';
 
 class InventoryListDataTable extends StatelessWidget {
-  const InventoryListDataTable({Key? key}) : super(key: key);
+  final List<InventoryProductList> inventoryProductList;
+
+  const InventoryListDataTable({Key? key, required this.inventoryProductList})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,50 +86,59 @@ class InventoryListDataTable extends StatelessWidget {
                                 .copyWith(fontWeight: FontWeight.w500)))))
           ],
           rows: List.generate(
-              10,
+              inventoryProductList.length,
               (index) => DataRow(cells: [
                     DataCell(Align(
                       alignment: Alignment.centerLeft,
-                      child: Text("maggie",
+                      child: Text(inventoryProductList[index].productName,
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
                     DataCell(
                       Align(
                         alignment: Alignment.center,
-                        child: Text("5",
+                        child: Text(
+                            inventoryProductList[index].productId.toString(),
                             style: Theme.of(context).textTheme.xxTiniest),
                       ),
                     ),
                     DataCell(Align(
                       alignment: Alignment.centerLeft,
-                      child: Text("grocery",
+                      child: Text(inventoryProductList[index].categoryName,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
                     DataCell(Align(
                       alignment: Alignment.center,
-                      child: Text("82",
+                      child: Text(inventoryProductList[index].cost.toString(),
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
                     DataCell(Align(
                       alignment: Alignment.center,
-                      child: Text("62",
+                      child: Text(inventoryProductList[index].cost.toString(),
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
                     DataCell(Align(
                       alignment: Alignment.center,
-                      child: Text("14",
+                      child: Text(inventoryProductList[index].stock.toString(),
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
-                    const DataCell(Align(
+                    DataCell(Align(
                         alignment: Alignment.centerRight,
-                        child: Icon(
-                          Icons.edit,
-                          size: spacingStandard,
-                          color: AppColor.saasifyLightBlack,
+                        child: InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) =>
+                                    const EditInventoryStock());
+                          },
+                          child: const Icon(
+                            Icons.edit,
+                            size: spacingStandard,
+                            color: AppColor.saasifyLightBlack,
+                          ),
                         ))),
                   ])))
     ]));
