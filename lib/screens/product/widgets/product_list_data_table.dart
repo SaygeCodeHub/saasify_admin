@@ -5,6 +5,7 @@ import 'package:saasify/bloc/product/product_event.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/products/product_list_model.dart';
+import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
 import 'package:saasify/screens/product/add_product_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
@@ -31,31 +32,25 @@ class ProductListDataTable extends StatelessWidget {
                 child: Center(
                   child: InkWell(
                       onTap: () {
-                        if (ProductListScreen.selectedCheckboxes
-                            .contains(false)) {
-                          ProductListScreen.selectedCheckboxes = List.generate(
-                              productList.length, (index) => true);
+                        if (ProductListScreen.selectedIds.length <
+                            productList.length) {
+                          ProductListScreen.selectedIds =
+                              productList.map((e) => e.variantId).toList();
                         } else {
-                          ProductListScreen.selectedCheckboxes;
-                          ProductListScreen.selectedCheckboxes = List.generate(
-                              productList.length, (index) => false);
+                          ProductListScreen.selectedIds.clear();
                         }
                         context
                             .read<ProductBloc>()
                             .add(ProductSelected(productList: productList));
                       },
                       child: Icon(
-                          (ProductListScreen.selectedCheckboxes
-                                      .contains(true) &&
-                                  ProductListScreen.selectedCheckboxes
-                                      .contains(false))
-                              ? Icons.indeterminate_check_box_outlined
-                              : (ProductListScreen.selectedCheckboxes
-                                      .contains(true))
-                                  ? Icons.check_box
-                                  : Icons.check_box_outline_blank,
-                          color: (ProductListScreen.selectedCheckboxes
-                                  .contains(true))
+                          (ProductListScreen.selectedIds.isEmpty)
+                              ? Icons.check_box_outline_blank
+                              : (ProductListScreen.selectedIds.length <
+                                      productList.length)
+                                  ? Icons.indeterminate_check_box_outlined
+                                  : Icons.check_box,
+                          color: (ProductListScreen.selectedIds.isNotEmpty)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyLightDeepBlue)),
                 ),
@@ -130,17 +125,23 @@ class ProductListDataTable extends StatelessWidget {
                       alignment: Alignment.center,
                       child: InkWell(
                           onTap: () {
-                            ProductListScreen.selectedCheckboxes[index] =
-                                !ProductListScreen.selectedCheckboxes[index];
+                            (ProductListScreen.selectedIds
+                                    .contains(productList[index].variantId))
+                                ? ProductListScreen.selectedIds
+                                    .remove(productList[index].variantId)
+                                : ProductListScreen.selectedIds
+                                    .add(productList[index].variantId);
                             context
                                 .read<ProductBloc>()
                                 .add(ProductSelected(productList: productList));
                           },
                           child: Icon(
-                              ProductListScreen.selectedCheckboxes[index]
+                              (ProductListScreen.selectedIds
+                                      .contains(productList[index].variantId))
                                   ? Icons.check_box
                                   : Icons.check_box_outline_blank_rounded,
-                              color: ProductListScreen.selectedCheckboxes[index]
+                              color: (ProductListScreen.selectedIds
+                                      .contains(productList[index].variantId))
                                   ? AppColor.saasifyLightDeepBlue
                                   : AppColor.saasifyLightDeepBlue)),
                     )),
@@ -164,13 +165,13 @@ class ProductListDataTable extends StatelessWidget {
                     )),
                     DataCell(Align(
                       alignment: Alignment.center,
-                      child: Text(productList[index].variantCost.toString(),
+                      child: Text(productList[index].cost.toString(),
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
                     DataCell(Align(
                       alignment: Alignment.center,
-                      child: Text(productList[index].discountedCost.toString(),
+                      child: Text(productList[index].discountPercent.toString(),
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
@@ -180,24 +181,16 @@ class ProductListDataTable extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
-                    DataCell(
-                      PopupMenuButton(
-                          itemBuilder: (context) {
-                            return [
-                              PopupMenuItem(
-                                  onTap: () {
-                                    Navigator.pushReplacementNamed(
-                                        context, AddProductScreen.routeName);
-                                  },
-                                  child: const Text(StringConstants.kEdit)),
-                              const PopupMenuItem(
-                                  child: Text(StringConstants.kDelete))
-                            ];
-                          },
-                          child: const Align(
-                              alignment: Alignment.centerRight,
-                              child: Icon(Icons.more_vert))),
-                    )
+                    DataCell(IconButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, AddProductScreen.routeName,
+                              arguments: AddProductScreenArguments(
+                                  isEdit: true,
+                                  isVariant: false,
+                                  dataMap: productList[index].toJson()));
+                        },
+                        icon: const Icon(Icons.edit)))
                   ])))
     ]));
   }
