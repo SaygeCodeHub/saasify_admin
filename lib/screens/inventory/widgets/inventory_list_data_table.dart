@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-
 import '../../../configs/app_spacing.dart';
 
 class InventoryListDataTable extends StatelessWidget {

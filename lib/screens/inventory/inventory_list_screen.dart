@@ -46,20 +46,7 @@ class InventoryListScreen extends StatelessWidget {
                           buttonTitle: StringConstants.kAddNewOrder))
                 ]),
                 const SizedBox(height: spacingStandard),
-                // BlocConsumer<ProductBloc, ProductStates>(
-                //   builder: (context, state) {
-                //     if (state is FetchingInventoryList) {
-                //       return const Center(child: CircularProgressIndicator());
-                //     } else if (state is FetchedInventoryList) {
                 const InventoryListDataTable(),
-                //     } else if (state is FetchInventoryListError) {
-                //       return const Expanded(
-                //           child: Text(StringConstants.kNoDataAvailable));
-                //     } else {
-                //       return const SizedBox.shrink();
-                //     }
-                //   }, listener: (BuildContext context, ProductStates state) {  },
-                // )
               ])))
     ]));
   }
