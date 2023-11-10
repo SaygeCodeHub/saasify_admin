@@ -3,6 +3,8 @@ import 'package:saasify/repositories/authentication/authentication_repository.da
 import 'package:saasify/repositories/authentication/authentication_repository_impl.dart';
 import 'package:saasify/repositories/products/product_repository.dart';
 import 'package:saasify/repositories/products/product_repository_impl.dart';
+import 'package:saasify/repositories/upload/upload_repository.dart';
+import 'package:saasify/repositories/upload/upload_repository_impl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/customer_cache/customer_cache.dart';
@@ -20,4 +22,5 @@ configurableDependencies() {
   getIt.registerLazySingleton<AuthenticationRepository>(
       () => AuthenticationRepositoryImpl());
   getIt.registerLazySingleton<ProductRepository>(() => ProductRepositoryImpl());
+  getIt.registerLazySingleton<UploadRepository>(() => UploadRepositoryImpl());
 }

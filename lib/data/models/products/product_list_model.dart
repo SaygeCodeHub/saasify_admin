@@ -1,33 +1,33 @@
 import 'dart:convert';
 
-ProductListModel productListModelFromJson(String str) =>
-    ProductListModel.fromJson(json.decode(str));
+FetchProductListModel fetchProductListModelFromJson(String str) =>
+    FetchProductListModel.fromJson(json.decode(str));
 
-String productListModelToJson(ProductListModel data) =>
+String fetchProductListModelToJson(FetchProductListModel data) =>
     json.encode(data.toJson());
 
-class ProductListModel {
+class FetchProductListModel {
   final int status;
-  final String message;
   final List<Product> data;
+  final String message;
 
-  ProductListModel({
+  FetchProductListModel({
     required this.status,
-    required this.message,
     required this.data,
+    required this.message,
   });
 
-  factory ProductListModel.fromJson(Map<String, dynamic> json) =>
-      ProductListModel(
+  factory FetchProductListModel.fromJson(Map<String, dynamic> json) =>
+      FetchProductListModel(
         status: json["status"],
-        message: json["message"],
         data: List<Product>.from(json["data"].map((x) => Product.fromJson(x))),
+        message: json["message"],
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
-        "message": message,
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "message": message,
       };
 }
 
@@ -37,16 +37,15 @@ class Product {
   final int productId;
   final String productName;
   final String brandName;
+  final int brandId;
   final int variantId;
-  final int variantCost;
+  final int cost;
   final int quantity;
-  final dynamic discountedCost;
-  final dynamic discount;
+  final dynamic discountPercent;
   final int stock;
-  final String description;
+  final String productDescription;
   final List<String> image;
-  final int ratings;
-  final String measuringUnit;
+  final String unit;
   final int barcodeNo;
 
   Product({
@@ -55,16 +54,15 @@ class Product {
     required this.productId,
     required this.productName,
     required this.brandName,
+    required this.brandId,
     required this.variantId,
-    required this.variantCost,
+    required this.cost,
     required this.quantity,
-    required this.discountedCost,
-    required this.discount,
+    required this.discountPercent,
     required this.stock,
-    required this.description,
+    required this.productDescription,
     required this.image,
-    required this.ratings,
-    required this.measuringUnit,
+    required this.unit,
     required this.barcodeNo,
   });
 
@@ -74,16 +72,15 @@ class Product {
         productId: json["product_id"],
         productName: json["product_name"],
         brandName: json["brand_name"],
+        brandId: json["brand_id"],
         variantId: json["variant_id"],
-        variantCost: json["variant_cost"],
+        cost: json["cost"],
         quantity: json["quantity"],
-        discountedCost: json["discounted_cost"],
-        discount: json["discount"],
+        discountPercent: json["discount_percent"],
         stock: json["stock"],
-        description: json["description"],
+        productDescription: json["product_description"],
         image: List<String>.from(json["image"].map((x) => x)),
-        ratings: json["ratings"],
-        measuringUnit: json["measuring_unit"],
+        unit: json["unit"],
         barcodeNo: json["barcode_no"],
       );
 
@@ -93,16 +90,15 @@ class Product {
         "product_id": productId,
         "product_name": productName,
         "brand_name": brandName,
+        "brand_id": brandId,
         "variant_id": variantId,
-        "variant_cost": variantCost,
+        "cost": cost,
         "quantity": quantity,
-        "discounted_cost": discountedCost,
-        "discount": discount,
+        "discount_percent": discountPercent,
         "stock": stock,
-        "description": description,
+        "product_description": productDescription,
         "image": List<dynamic>.from(image.map((x) => x)),
-        "ratings": ratings,
-        "measuring_unit": measuringUnit,
+        "unit": unit,
         "barcode_no": barcodeNo,
       };
 }

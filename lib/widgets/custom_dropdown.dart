@@ -11,8 +11,8 @@ class CustomDropdownWidget extends StatefulWidget {
   final bool canEdit;
   final String dropdownValue;
   final List listItems;
-  // final Map dataMap;
-  // final String mapKey;
+  final Map dataMap;
+  final String mapKey;
   final Widget? disabledHint;
 
   const CustomDropdownWidget({
@@ -22,8 +22,8 @@ class CustomDropdownWidget extends StatefulWidget {
     this.initialValue,
     this.canEdit = true,
     required this.listItems,
-    // required this.dataMap,
-    // required this.mapKey,
+    required this.dataMap,
+    required this.mapKey,
     this.disabledHint,
   });
 
@@ -35,11 +35,11 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
   String? selectedValue;
 
   @override
-  // void initState() {
-  //   widget.dataMap[widget.mapKey] = widget.listItems[0];
-  //   selectedValue = widget.listItems[0];
-  //   super.initState();
-  // }
+  void initState() {
+    widget.dataMap[widget.mapKey] = widget.listItems[0];
+    selectedValue = widget.listItems[0];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
                       setState(() {
                         selectedValue = value.toString();
                       });
-                      // widget.dataMap[widget.mapKey] = value;
+                      widget.dataMap[widget.mapKey] = value;
                     }))));
   }
 }

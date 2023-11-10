@@ -7,6 +7,7 @@ import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/bloc/authentication/authentication_states.dart';
 import 'package:saasify/bloc/onboarding/onboarding_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
+import 'package:saasify/bloc/upload/upload_bloc.dart';
 import 'package:saasify/configs/app_route.dart';
 import 'package:saasify/firebase_options.dart';
 import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
@@ -47,6 +48,7 @@ class MyPosApp extends StatelessWidget {
                   AuthenticationBloc()..add(CheckIfLoggedIn())),
           BlocProvider(lazy: false, create: (context) => OnboardingBloc()),
           BlocProvider(lazy: false, create: (context) => ProductBloc()),
+          BlocProvider(lazy: false, create: (context) => UploadBloc()),
         ],
         child: GestureDetector(
             onTap: () {

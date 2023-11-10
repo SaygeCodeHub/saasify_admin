@@ -22,8 +22,8 @@ class StringConstants {
   static const kCategory = 'Category';
   static const kProducts = 'Products';
   static const kBrand = 'Brand';
-  static const kProductId = 'Product ID';
-  static const kVariantId = 'Variant ID';
+  static const kBarcode = 'Barcode';
+  static const kProductId = 'ProductId';
   static const kQuantity = 'Quantity';
   static const kPrice = 'Price';
   static const kDiscountPercent = 'Discount Percent';
