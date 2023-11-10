@@ -14,6 +14,7 @@ class StringConstants {
   static const kAddCompany = 'Add Company :)';
   static const kCompanies = 'Companies';
   static const kAddProduct = 'Add Product';
+  static const kAddNewOrder = 'Add new order';
   static const kAddVariantButton = 'ADD VARIANT';
   static const kAddNewVariantButton = 'ADD NEW VARIANT';
   static const kAddVariant = 'Add Variant';
@@ -21,6 +22,7 @@ class StringConstants {
   static const kNewVariantAdded = 'New variant added successfully!';
   static const kCategory = 'Category';
   static const kProducts = 'Products';
+  static const kInventoryManagement = 'Inventory Management';
   static const kBrand = 'Brand';
   static const kProductId = 'Product ID';
   static const kVariantId = 'Variant ID';
