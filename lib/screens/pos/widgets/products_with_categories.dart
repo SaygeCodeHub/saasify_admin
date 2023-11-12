@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import 'package:saasify/screens/pos/widgets/product_grid.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../../configs/app_color.dart';
-import '../../../configs/app_spacing.dart';
-import '../../../data/models/billing/fetch_products_by_category_model.dart';
 import 'category_grid.dart';
 
 class ProductsWithCategories extends StatelessWidget {
@@ -20,7 +20,7 @@ class ProductsWithCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(
-            horizontal: spacingXXLarge, vertical: spacingXXLarge),
+            horizontal: spacingSmall, vertical: spacingSmall),
         child: Column(children: [
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: spacingStandard),
@@ -33,12 +33,13 @@ class ProductsWithCategories extends StatelessWidget {
                             prefixIcon: Icon(Icons.search,
                                 color: AppColor.saasifyLightDeepBlue, size: 27),
                             hintText: 'Search here...'))),
-                const SizedBox(width: spacingStandard),
+                const SizedBox(width: spacingSmall),
                 Container(
-                    padding: const EdgeInsets.all(spacingXMedium),
+                    padding: const EdgeInsets.all(spacingSmall),
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.lightBlue),
-                        borderRadius: BorderRadius.circular(spacingXMedium)),
+                        border:
+                            Border.all(color: AppColor.saasifyLightDeepBlue),
+                        borderRadius: BorderRadius.circular(12)),
                     child: Row(children: [
                       SvgPicture.asset('assets/exchange.svg'),
                       const SizedBox(width: spacingXXSmall),
@@ -46,8 +47,8 @@ class ProductsWithCategories extends StatelessWidget {
                         'Filter',
                         style: Theme.of(context)
                             .textTheme
-                            .xxTiniest
-                            .copyWith(color: AppColor.saasifyRed),
+                            .tiniest
+                            .copyWith(color: AppColor.saasifyLightDeepBlue),
                       )
                     ]))
               ])),

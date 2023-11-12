@@ -11,7 +11,7 @@ import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 
 class ProductListDataTable extends StatelessWidget {
-  final List<Product> productList;
+  final List<ProductWithVariant> productList;
 
   const ProductListDataTable({Key? key, required this.productList})
       : super(key: key);
@@ -35,7 +35,7 @@ class ProductListDataTable extends StatelessWidget {
                         if (ProductListScreen.selectedIds.length <
                             productList.length) {
                           ProductListScreen.selectedIds =
-                              productList.map((e) => e.variantId).toList();
+                              productList.map((e) => e.productId).toList();
                         } else {
                           ProductListScreen.selectedIds.clear();
                         }

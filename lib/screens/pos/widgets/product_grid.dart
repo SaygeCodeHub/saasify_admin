@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/configs/app_dimensions.dart';
+import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import 'package:saasify/screens/pos/widgets/variant_dialogue.dart';
 import '../../../bloc/pos/billing_bloc.dart';
 import '../../../configs/app_color.dart';
-import '../../../configs/app_spacing.dart';
-import '../../../data/models/billing/fetch_products_by_category_model.dart';
 
 class ProductGrid extends StatelessWidget {
   const ProductGrid({
@@ -33,7 +34,7 @@ class ProductGrid extends StatelessWidget {
                 childAspectRatio: 182 / 186),
             itemBuilder: (context, index) {
               return Padding(
-                  padding: const EdgeInsets.all(spacingXSmall),
+                  padding: const EdgeInsets.all(spacingStandard),
                   child: InkWell(
                       onTap: () {
                         showDialog(
@@ -46,10 +47,10 @@ class ProductGrid extends StatelessWidget {
                                 productsByCategories: productsByCategories));
                       },
                       child: Container(
-                          padding: const EdgeInsets.all(spacingXSmall),
+                          padding: const EdgeInsets.all(spacingXXSmall),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(spacingXMedium),
-                            color: AppColor.saasifyWhite,
+                            borderRadius: BorderRadius.circular(kGeneralRadius),
+                            color: AppColor.saasifyLightWhite,
                           ),
                           child: Column(children: [
                             const Row(),
@@ -60,11 +61,11 @@ class ProductGrid extends StatelessWidget {
                                         .selectedCategoryIndex]
                                     .products[index]
                                     .variants[0]
-                                    .image[0],
+                                    .images[0],
                                 fit: BoxFit.fitHeight,
                               ),
                             ),
-                            const SizedBox(height: spacingXMedium),
+                            const SizedBox(height: spacingStandard),
                             SizedBox(
                                 height: 40,
                                 child: Center(
@@ -75,14 +76,13 @@ class ProductGrid extends StatelessWidget {
                                             .products[index]
                                             .productName,
                                         textAlign: TextAlign.center,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .xxTiniest,
+                                        style:
+                                            Theme.of(context).textTheme.tiniest,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2))),
-                            const SizedBox(height: spacingXMedium),
+                            const SizedBox(height: spacingStandard),
                             Text(
-                                '₹${productsByCategories[context.read<BillingBloc>().selectedCategoryIndex].products[index].variants[0].discountedCost.toString()}',
+                                '₹${productsByCategories[context.read<BillingBloc>().selectedCategoryIndex].products[index].variants[0].cost.toString()}',
                                 style: Theme.of(context)
                                     .textTheme
                                     .tiniest

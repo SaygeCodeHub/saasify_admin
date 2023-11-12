@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/pos/billing_bloc.dart';
+import 'package:saasify/bloc/pos/billing_event.dart';
+import 'package:saasify/configs/app_color.dart';
+import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/data/models/billing/bill_model.dart';
+import 'package:saasify/data/models/billing/selected_product_model.dart';
 import 'package:saasify/screens/pos/widgets/payment_dialogue.dart';
-import '../../../bloc/pos/billing_bloc.dart';
-import '../../../bloc/pos/billing_event.dart';
-import '../../../configs/app_color.dart';
-import '../../../configs/app_spacing.dart';
 
 class BillingSectionFooter extends StatelessWidget {
-  const BillingSectionFooter({super.key});
+  const BillingSectionFooter(
+      {super.key, required this.selectedProducts, required this.billDetails});
+
+  final List<SelectedProductModel> selectedProducts;
+  final BillModel billDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +27,11 @@ class BillingSectionFooter extends StatelessWidget {
               child: Text(
                 'Pay Later',
                 style: Theme.of(context).textTheme.tiniest.copyWith(
-                      color: AppColor.saasifyLighterGrey,
+                      color: AppColor.saasifyGreyBlue,
                       decoration: TextDecoration.underline,
                     ),
               ))),
-      const SizedBox(height: spacingXMedium),
+      const SizedBox(height: spacingStandard),
       Row(children: [
         Flexible(
             child: Center(
@@ -34,7 +40,8 @@ class BillingSectionFooter extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
               const Text('Total '),
-              Text('₹ 1104', style: Theme.of(context).textTheme.tiniest)
+              Text('₹${billDetails.total.toStringAsFixed(2)}',
+                  style: Theme.of(context).textTheme.tinier)
             ]))),
         Flexible(
             child: ElevatedButton(

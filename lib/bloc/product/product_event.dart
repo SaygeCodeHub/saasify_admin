@@ -23,7 +23,7 @@ class DeleteProducts extends ProductEvents {
 }
 
 class ProductSelected extends ProductEvents {
-  List<Product> productList;
+  List<ProductWithVariant> productList;
 
   ProductSelected({required this.productList});
 }

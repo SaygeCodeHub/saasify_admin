@@ -9,7 +9,7 @@ class ProductInitial extends ProductStates {}
 class FetchingProduct extends ProductStates {}
 
 class FetchedProduct extends ProductStates {
-  List<Product> productList;
+  List<ProductWithVariant> productList;
 
   FetchedProduct({required this.productList});
 }

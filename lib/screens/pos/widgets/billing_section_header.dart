@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:saasify/bloc/pos/billing_bloc.dart';
+import 'package:saasify/bloc/pos/billing_event.dart';
+import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
-import '../../../bloc/pos/billing_bloc.dart';
+import 'package:saasify/data/models/billing/bill_model.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import '../../../configs/app_color.dart';
-import '../../../configs/app_spacing.dart';
+import '../../../configs/app_dimensions.dart';
 import 'bill_details.dart';
 
 class BillingSectionHeader extends StatelessWidget {
   const BillingSectionHeader({
     super.key,
+    required this.productsByCategories,
+    required this.billDetails,
   });
+
+  final List<CategoryWithProductsDatum> productsByCategories;
+  final BillModel billDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -20,22 +29,24 @@ class BillingSectionHeader extends StatelessWidget {
         children: [
           Text(
             'Your Order',
-            style: Theme.of(context).textTheme.tiniest,
+            style: Theme.of(context).textTheme.xxTiniest,
           ),
           InkWell(
-              onTap: () {},
-              child: SvgPicture.asset('assets/maximize.svg',
-                  height: spacingMedium)),
+              onTap: () {
+                context.read<BillingBloc>().add(
+                    ExpandBilling(productsByCategories: productsByCategories));
+              },
+              child: SvgPicture.asset('assets/maximize.svg', height: 14)),
         ],
       ),
-      const SizedBox(height: spacingMedium),
+      const SizedBox(height: spacingSmall),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'Order no. - 000',
           style: Theme.of(context)
               .textTheme
-              .xxTiniest
-              .copyWith(color: AppColor.saasifyLighterGrey),
+              .tiniest
+              .copyWith(color: AppColor.saasifyLightGrey),
         ),
         InkWell(
             onTap: () {
@@ -44,32 +55,29 @@ class BillingSectionHeader extends StatelessWidget {
                   builder: (context) => AlertDialog(
                         shape: RoundedRectangleBorder(
                             borderRadius:
-                                BorderRadius.circular(spacingXMedium)),
-                        contentPadding: const EdgeInsets.all(spacingXHuge),
-                        content: SizedBox(
-                          height: 450,
-                          width: 370,
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  InkWell(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Icon(Icons.close)),
-                                ],
-                              ),
-                              const BillDetails(),
-                              const Spacer(),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('Settle Bill'))
-                            ],
-                          ),
+                                BorderRadius.circular(kGeneralRadius)),
+                        contentPadding: const EdgeInsets.all(spacingSmall),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Icon(Icons.close)),
+                              ],
+                            ),
+                            BillDetails(billDetails: billDetails),
+                            const Spacer(),
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Settle Bill'))
+                          ],
                         ),
                       ));
             },
@@ -78,7 +86,7 @@ class BillingSectionHeader extends StatelessWidget {
                     color: AppColor.saasifyLightDeepBlue,
                     decoration: TextDecoration.underline))),
       ]),
-      const SizedBox(height: spacingSmallest),
+      const SizedBox(height: spacingXXSmall),
       const ContactTile(),
     ]);
   }
@@ -109,17 +117,17 @@ class _ContactTileState extends State<ContactTile> {
                   style: Theme.of(context)
                       .textTheme
                       .tiniest
-                      .copyWith(color: AppColor.saasifyLighterGrey),
+                      .copyWith(color: AppColor.saasifyLightDeepBlue),
                 ),
-                const SizedBox(width: spacingXSmall),
+                const SizedBox(width: spacingMedium),
                 InkWell(
                     onTap: () {
                       setState(() {
                         addedContact = false;
                       });
                     },
-                    child: const Icon(Icons.edit,
-                        color: AppColor.saasifyLighterGrey))
+                    child:
+                        const Icon(Icons.edit, color: AppColor.saasifyGreyBlue))
               ],
             ),
             InkWell(

@@ -28,7 +28,7 @@ class ProductListScreen extends StatelessWidget {
     context.read<ProductBloc>().add(FetchProductList());
     return Scaffold(
         body: Row(children: [
-      const Expanded(child: SideBar(selectedIndex: 2)),
+      const Expanded(child: SideBar(selectedIndex: 3)),
       Expanded(
           flex: 5,
           child: Padding(

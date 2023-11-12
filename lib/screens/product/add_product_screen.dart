@@ -42,7 +42,7 @@ class AddProductScreen extends StatelessWidget {
     context.read<ProductBloc>().add(FetchAllCategories());
     return Scaffold(
         body: Row(children: [
-      const Expanded(child: SideBar(selectedIndex: 2)),
+      const Expanded(child: SideBar(selectedIndex: 3)),
       Expanded(
           flex: 5,
           child: BlocConsumer<ProductBloc, ProductStates>(

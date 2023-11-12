@@ -8,7 +8,7 @@ String fetchProductListModelToJson(FetchProductListModel data) =>
 
 class FetchProductListModel {
   final int status;
-  final List<Product> data;
+  final List<ProductWithVariant> data;
   final String message;
 
   FetchProductListModel({
@@ -20,7 +20,8 @@ class FetchProductListModel {
   factory FetchProductListModel.fromJson(Map<String, dynamic> json) =>
       FetchProductListModel(
         status: json["status"],
-        data: List<Product>.from(json["data"].map((x) => Product.fromJson(x))),
+        data: List<ProductWithVariant>.from(
+            json["data"].map((x) => ProductWithVariant.fromJson(x))),
         message: json["message"],
       );
 
@@ -31,7 +32,7 @@ class FetchProductListModel {
       };
 }
 
-class Product {
+class ProductWithVariant {
   final int categoryId;
   final String categoryName;
   final int productId;
@@ -41,14 +42,16 @@ class Product {
   final int variantId;
   final int cost;
   final int quantity;
-  final dynamic discountPercent;
+  final int discountPercent;
   final int stock;
   final String productDescription;
   final List<String> image;
   final String unit;
-  final int barcodeNo;
+  final int barcode;
+  final bool draft;
+  final int restockReminder;
 
-  Product({
+  ProductWithVariant({
     required this.categoryId,
     required this.categoryName,
     required this.productId,
@@ -63,10 +66,13 @@ class Product {
     required this.productDescription,
     required this.image,
     required this.unit,
-    required this.barcodeNo,
+    required this.barcode,
+    required this.draft,
+    required this.restockReminder,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
+  factory ProductWithVariant.fromJson(Map<String, dynamic> json) =>
+      ProductWithVariant(
         categoryId: json["category_id"],
         categoryName: json["category_name"],
         productId: json["product_id"],
@@ -76,12 +82,14 @@ class Product {
         variantId: json["variant_id"],
         cost: json["cost"],
         quantity: json["quantity"],
-        discountPercent: json["discount_percent"],
+        discountPercent: json["discount_percent"] ?? 0,
         stock: json["stock"],
         productDescription: json["product_description"],
         image: List<String>.from(json["image"].map((x) => x)),
         unit: json["unit"],
-        barcodeNo: json["barcode_no"],
+        barcode: json["barcode"],
+        draft: json["draft"],
+        restockReminder: json["restock_reminder"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -99,6 +107,8 @@ class Product {
         "product_description": productDescription,
         "image": List<dynamic>.from(image.map((x) => x)),
         "unit": unit,
-        "barcode_no": barcodeNo,
+        "barcode": barcode,
+        "draft": draft,
+        "restock_reminder": restockReminder,
       };
 }

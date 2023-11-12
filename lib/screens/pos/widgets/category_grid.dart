@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/configs/app_spacing.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import '../../../bloc/pos/billing_bloc.dart';
 import '../../../bloc/pos/billing_event.dart';
 import '../../../configs/app_color.dart';
-import '../../../configs/app_spacing.dart';
-import '../../../data/models/billing/fetch_products_by_category_model.dart';
 
 class CategoryGrid extends StatelessWidget {
   const CategoryGrid({
@@ -17,7 +17,7 @@ class CategoryGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        itemCount: 9,
+        itemCount: productsByCategories.length,
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount:
@@ -27,7 +27,7 @@ class CategoryGrid extends StatelessWidget {
             childAspectRatio: 160 / 58),
         itemBuilder: (context, index) {
           return Padding(
-              padding: const EdgeInsets.all(spacingXSmall),
+              padding: const EdgeInsets.all(spacingXXSmall),
               child: InkWell(
                   onTap: () {
                     context.read<BillingBloc>().selectedCategoryIndex = index;
@@ -36,13 +36,13 @@ class CategoryGrid extends StatelessWidget {
                   },
                   child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(spacingXMedium),
+                        borderRadius: BorderRadius.circular(12),
                         color: (index ==
                                 context
                                     .read<BillingBloc>()
                                     .selectedCategoryIndex)
                             ? AppColor.saasifyLightDeepBlue
-                            : AppColor.saasifyWhite,
+                            : AppColor.saasifyLightWhite,
                       ),
                       child: Center(
                           child: Text(productsByCategories[index].categoryName,

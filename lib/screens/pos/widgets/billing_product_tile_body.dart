@@ -1,31 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/pos/billing_bloc.dart';
+import 'package:saasify/bloc/pos/billing_event.dart';
+import 'package:saasify/configs/app_color.dart';
+import 'package:saasify/configs/app_dimensions.dart';
+import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
-import '../../../configs/app_color.dart';
-import '../../../configs/app_dimensions.dart';
-import '../../../configs/app_spacing.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
+import 'package:saasify/data/models/billing/selected_product_model.dart';
 
 class BillingProductTileBody extends StatelessWidget {
   const BillingProductTileBody({
     super.key,
+    required this.selectedProducts,
+    required this.productsByCategories,
+    required this.index,
   });
+
+  final int index;
+  final List<SelectedProductModel> selectedProducts;
+  final List<CategoryWithProductsDatum> productsByCategories;
 
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       SizedBox(
-        height: 40,
+        height: 150,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Expanded(
+            Expanded(
                 child: Text(
-              "Cake",
+              selectedProducts[index].product.productName,
               maxLines: 2,
-              style: TextStyle(),
+              style: const TextStyle(),
             )),
-            const SizedBox(width: 38),
-            Text('₹ 425',
+            const SizedBox(width: spacingMedium),
+            Text(
+                '₹${selectedProducts[index].product.variants[0].cost.toString()}',
                 style: Theme.of(context)
                     .textTheme
                     .tiniest
@@ -33,7 +46,7 @@ class BillingProductTileBody extends StatelessWidget {
           ],
         ),
       ),
-      Text("400gm",
+      Text(selectedProducts[index].product.variants[0].stock.toString(),
           style: Theme.of(context)
               .textTheme
               .xTiniest
@@ -41,36 +54,44 @@ class BillingProductTileBody extends StatelessWidget {
       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
         Row(children: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              context.read<BillingBloc>().add(RemoveProduct(
+                  product: selectedProducts[0].product,
+                  productsByCategories: productsByCategories));
+            },
             child: Container(
-              height: 22,
-              width: 22,
+              height: kCounterContainerSize,
+              width: kCounterContainerSize,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.lightBlue),
+                border: Border.all(color: AppColor.saasifyLightDeepBlue),
               ),
-              child: const Center(child: Icon(Icons.remove, size: 12)),
+              child: const Center(child: Icon(Icons.remove)),
             ),
           ),
           Container(
-            height: 22,
-            width: 22,
+            height: kCounterContainerSize,
+            width: kCounterContainerSize,
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.lightBlue),
+              border: Border.all(color: AppColor.saasifyLightDeepBlue),
             ),
             child: Center(
-                child: Text("5", style: Theme.of(context).textTheme.xxTiniest)),
+                child: Text(selectedProducts[0].count.toString(),
+                    style: Theme.of(context).textTheme.tiniest)),
           ),
           InkWell(
-              onTap: () {},
+              onTap: () {
+                context.read<BillingBloc>().add(SelectProduct(
+                    product: selectedProducts[0].product,
+                    productsByCategories: productsByCategories,
+                    variantIndex: 0));
+              },
               child: Container(
-                  height: 22,
-                  width: 22,
+                  height: kCounterContainerSize,
+                  width: kCounterContainerSize,
                   decoration: BoxDecoration(
-                    border: Border.all(color: AppColor.saasifyLighterGrey),
+                    border: Border.all(color: AppColor.saasifyLightDeepBlue),
                   ),
-                  child: const Center(
-                      child: Icon(Icons.add,
-                          size: spacingXMedium, weight: kAlertBoxWidth))))
+                  child: const Center(child: Icon(Icons.add))))
         ])
       ])
     ]);

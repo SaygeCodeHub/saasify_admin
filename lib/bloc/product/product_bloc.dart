@@ -31,20 +31,20 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
   FutureOr<void> _fetchProductList(
       FetchProductList event, Emitter<ProductStates> emit) async {
     emit(FetchingProduct());
-    try {
-      String userId = await _customerCache.getUserId();
-      String companyId = await _customerCache.getCompanyId();
-      int branchId = await _customerCache.getBranchId();
-      FetchProductListModel fetchproductListModel = await _productRepository
-          .fetchProductList(userId, companyId, branchId);
-      if (fetchproductListModel.status == 200) {
-        emit(FetchedProduct(productList: fetchproductListModel.data));
-      } else {
-        emit(ErrorFetchingProduct(message: fetchproductListModel.message));
-      }
-    } catch (e) {
-      emit(ErrorFetchingProduct(message: e.toString()));
+    // try {
+    String userId = await _customerCache.getUserId();
+    String companyId = await _customerCache.getCompanyId();
+    int branchId = await _customerCache.getBranchId();
+    FetchProductListModel fetchproductListModel =
+        await _productRepository.fetchProductList(userId, companyId, branchId);
+    if (fetchproductListModel.status == 200) {
+      emit(FetchedProduct(productList: fetchproductListModel.data));
+    } else {
+      emit(ErrorFetchingProduct(message: fetchproductListModel.message));
     }
+    // } catch (e) {
+    //   emit(ErrorFetchingProduct(message: e.toString()));
+    // }
   }
 
   FutureOr<void> _saveProduct(

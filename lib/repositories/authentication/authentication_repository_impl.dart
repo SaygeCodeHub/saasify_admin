@@ -30,7 +30,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Future<AuthenticationModel> authenticateUser(Map userDetailsMap) async {
     try {
       final response = await ClientServices()
-          .post("${ApiConstants.baseUrl}v1/authenticateUser", userDetailsMap);
+          .post("${ApiConstants.baseUrl}authenticateUser", userDetailsMap);
       return AuthenticationModel.fromJson(response);
     } catch (error) {
       rethrow;

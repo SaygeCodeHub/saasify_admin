@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../bloc/pos/billing_bloc.dart';
-import '../../../bloc/pos/billing_event.dart';
-import '../../../configs/app_color.dart';
-import '../../../configs/app_spacing.dart';
-import '../../../data/models/billing/fetch_products_by_category_model.dart';
+import 'package:saasify/bloc/pos/billing_bloc.dart';
+import 'package:saasify/bloc/pos/billing_event.dart';
+import 'package:saasify/configs/app_color.dart';
+import 'package:saasify/configs/app_spacing.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 
 class VariantDialogue extends StatelessWidget {
   final Product product;
@@ -19,9 +19,8 @@ class VariantDialogue extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(spacingXMedium)),
-        contentPadding: const EdgeInsets.all(spacingXHuge),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        contentPadding: const EdgeInsets.all(spacingStandard),
         content: SizedBox(
             height: 450,
             width: 370,
@@ -47,7 +46,7 @@ class VariantDialogue extends StatelessWidget {
                           itemCount: product.variants.length,
                           itemBuilder: (context, index) {
                             return Padding(
-                                padding: const EdgeInsets.all(spacingXMedium),
+                                padding: const EdgeInsets.all(spacingStandard),
                                 child: InkWell(
                                     onTap: () {
                                       context
@@ -65,11 +64,11 @@ class VariantDialogue extends StatelessWidget {
                                             color:
                                                 AppColor.saasifyLightDeepBlue,
                                             borderRadius: BorderRadius.circular(
-                                                spacingXMedium)),
+                                                spacingStandard)),
                                         child: Center(
                                             child: Padding(
                                                 padding: const EdgeInsets.all(
-                                                    spacingXXSmall),
+                                                    spacingMedium),
                                                 child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -78,7 +77,8 @@ class VariantDialogue extends StatelessWidget {
                                                       Text(
                                                           product
                                                               .variants[index]
-                                                              .quantity,
+                                                              .stock
+                                                              .toString(),
                                                           maxLines: 2,
                                                           overflow: TextOverflow
                                                               .ellipsis,
@@ -88,10 +88,9 @@ class VariantDialogue extends StatelessWidget {
                                                               color: AppColor
                                                                   .saasifyWhite)),
                                                       const SizedBox(
-                                                          height:
-                                                              spacingXXSmall),
+                                                          height: spacingSmall),
                                                       Text(
-                                                          '₹${product.variants[index].discountedCost.toString()}',
+                                                          '₹${product.variants[index].cost.toString()}',
                                                           style: const TextStyle(
                                                               color: AppColor
                                                                   .saasifyWhite))

@@ -62,9 +62,20 @@ class SideBar extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text('Products',
+                  title: Text('POS',
                       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
                           color: (selectedIndex == 2)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyBlack)),
+                  onTap: () {
+                    // Navigator.pushReplacementNamed(
+                    //     context, BillingScreen.routeName);
+                  },
+                ),
+                ListTile(
+                  title: Text('Products',
+                      style: Theme.of(context).textTheme.xxxTiniest.copyWith(
+                          color: (selectedIndex == 3)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {
@@ -75,7 +86,7 @@ class SideBar extends StatelessWidget {
                 ListTile(
                   title: Text('Orders',
                       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
-                          color: (selectedIndex == 3)
+                          color: (selectedIndex == 4)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {},
@@ -83,7 +94,7 @@ class SideBar extends StatelessWidget {
                 ListTile(
                   title: Text('Inventory Management',
                       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
-                          color: (selectedIndex == 4)
+                          color: (selectedIndex == 5)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {},
@@ -91,7 +102,7 @@ class SideBar extends StatelessWidget {
                 ListTile(
                   title: Text('Profile Management',
                       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
-                          color: (selectedIndex == 5)
+                          color: (selectedIndex == 6)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {},
@@ -99,7 +110,7 @@ class SideBar extends StatelessWidget {
                 ListTile(
                   title: Text('Insights',
                       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
-                          color: (selectedIndex == 6)
+                          color: (selectedIndex == 7)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {},

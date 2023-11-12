@@ -4,6 +4,7 @@ import 'package:saasify/data/models/screen_arguments/add_product_screen_argument
 import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
+import 'package:saasify/screens/pos/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import '../screens/onboarding/auhentication_screen.dart';
 import '../screens/product/add_product_screen.dart';
@@ -13,6 +14,8 @@ class AppRoutes {
     switch (settings.name) {
       case AuthenticationScreen.routeName:
         return _createRoute(AuthenticationScreen());
+      case BillingScreen.routeName:
+        return _createRoute(const BillingScreen());
       case DashboardsScreen.routeName:
         return _createRoute(const DashboardsScreen());
       case ProductListScreen.routeName:

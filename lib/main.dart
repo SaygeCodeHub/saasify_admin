@@ -10,19 +10,19 @@ import 'package:saasify/bloc/onboarding/onboarding_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/bloc/upload/upload_bloc.dart';
 import 'package:saasify/configs/app_route.dart';
+import 'package:saasify/data/models/billing/bill_model.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
+import 'package:saasify/data/models/billing/selected_product_model.dart';
 import 'package:saasify/firebase_options.dart';
 import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
+import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
-import 'package:saasify/screens/pos_new/pos_screen_new.dart';
 import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/pos/billing_bloc.dart';
 import 'configs/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'data/models/billing/bill_model.dart';
-import 'data/models/billing/fetch_products_by_category_model.dart';
-import 'data/models/billing/selected_product_model.dart';
 import 'data/models/hive_keys.dart';
 import 'di/app_module.dart';
 
@@ -98,15 +98,15 @@ class MyPosApp extends StatelessWidget {
                       BlocListener<AuthenticationBloc, AuthenticationStates>(
                     listener: (context, state) {
                       if (state is IsLoggedIn) {
-                        // Navigator.pushReplacementNamed(
-                        //     context, DashboardsScreen.routeName);
+                        Navigator.pushReplacementNamed(
+                            context, DashboardsScreen.routeName);
                       } else if (state is LoggedOut) {
                         log('message');
                         Navigator.pushNamedAndRemoveUntil(context,
                             AuthenticationScreen.routeName, (route) => false);
                       }
                     },
-                    child: const DashboardsScreen(),
+                    child: AuthenticationScreen(),
                   )),
             )));
   }

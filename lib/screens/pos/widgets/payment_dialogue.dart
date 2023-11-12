@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../bloc/pos/billing_bloc.dart';
-import '../../../bloc/pos/billing_event.dart';
+import 'package:saasify/bloc/pos/billing_bloc.dart';
+import 'package:saasify/bloc/pos/billing_event.dart';
+import 'package:saasify/configs/app_spacing.dart';
 import '../../../configs/app_color.dart';
-import '../../../configs/app_spacing.dart';
+import '../../../configs/app_dimensions.dart';
 
 class PaymentDialogue extends StatefulWidget {
   const PaymentDialogue({super.key});
@@ -20,10 +21,10 @@ class _PaymentDialogueState extends State<PaymentDialogue> {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      contentPadding: const EdgeInsets.all(spacingXHuge),
+      contentPadding: const EdgeInsets.all(spacingStandard),
       content: SizedBox(
-        height: 450,
-        width: 370,
+        height: kDialogueHeight,
+        width: kDialogueWidth,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -45,7 +46,7 @@ class _PaymentDialogueState extends State<PaymentDialogue> {
                     itemCount: 4,
                     itemBuilder: (context, index) {
                       return Padding(
-                          padding: const EdgeInsets.all(spacingXMedium),
+                          padding: const EdgeInsets.all(spacingStandard),
                           child: InkWell(
                               onTap: () {
                                 setState(() {
@@ -57,9 +58,9 @@ class _PaymentDialogueState extends State<PaymentDialogue> {
                                       color:
                                           (selectedPayment == payments[index])
                                               ? AppColor.saasifyLightDeepBlue
-                                              : AppColor.saasifyGreen,
+                                              : AppColor.saasifyLightGrey,
                                       borderRadius: BorderRadius.circular(
-                                          spacingXMedium)),
+                                          kGeneralRadius)),
                                   child:
                                       Center(child: Text(payments[index])))));
                     })),
