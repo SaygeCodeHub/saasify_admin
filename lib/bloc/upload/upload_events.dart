@@ -1,3 +1,4 @@
+
 import 'package:image_picker/image_picker.dart';
 
 abstract class UploadEvents {}
@@ -9,3 +10,5 @@ class UploadImage extends UploadEvents {
 }
 
 class PickImage extends UploadEvents {}
+
+class RemoveImage extends UploadEvents {}

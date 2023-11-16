@@ -41,6 +41,10 @@ class AddProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<UploadBloc>().pickedImageList.clear();
+    if (isEdit) {
+      context.read<UploadBloc>().pickedImageList.addAll(dataMap['image']);
+    }
     context.read<ProductBloc>().add(FetchAllCategories());
     return Scaffold(
         drawer: const SideBar(selectedIndex: 3),
@@ -688,103 +692,61 @@ class AddProductScreen extends StatelessWidget {
                                                     .xTiniest)
                                           ]),
                                           const SizedBox(height: spacingLarge),
-                                          InkWell(
-                                            onTap: () {
-                                              context
-                                                  .read<UploadBloc>()
-                                                  .add(PickImage());
+                                          BlocConsumer<UploadBloc,
+                                              UploadStates>(
+                                            listener: (context, state) {
+                                              if (state is UploadImageLoading) {
+                                                ProgressBar.show(context);
+                                              } else if (state
+                                                  is UploadImageLoaded) {
+                                                ProgressBar.dismiss(context);
+                                                dataMap['images'] =
+                                                    state.uploadImageModel.data;
+                                                if (isEdit) {
+                                                  context
+                                                      .read<ProductBloc>()
+                                                      .add(EditProduct(
+                                                          productDetailsMap:
+                                                              dataMap));
+                                                } else {
+                                                  context
+                                                      .read<ProductBloc>()
+                                                      .add(SaveProduct(
+                                                          productDetailsMap:
+                                                              dataMap));
+                                                }
+                                              }
+                                              if (state is UploadImageError) {
+                                                ProgressBar.dismiss(context);
+                                                showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (context) => Expanded(
+                                                              child:
+                                                                  CustomAlertDialog(
+                                                                      title: StringConstants
+                                                                          .kSomethingWentWrong,
+                                                                      message: state
+                                                                          .message,
+                                                                      primaryButtonTitle:
+                                                                          StringConstants
+                                                                              .kUnderstood,
+                                                                      checkMarkVisible:
+                                                                          false,
+                                                                      primaryOnPressed:
+                                                                          () {
+                                                                        Navigator.pushReplacementNamed(
+                                                                            context,
+                                                                            ProductListScreen.routeName);
+                                                                      }),
+                                                            ));
+                                              }
                                             },
-                                            child: BlocConsumer<UploadBloc,
-                                                UploadStates>(
-                                              listener: (context, state) {
-                                                if (state
-                                                    is UploadImageLoading) {
-                                                  ProgressBar.show(context);
-                                                } else if (state
-                                                    is UploadImageLoaded) {
-                                                  ProgressBar.dismiss(context);
-                                                  dataMap['images'] = state
-                                                      .uploadImageModel.data;
-                                                  if (isEdit) {
-                                                    context
-                                                        .read<ProductBloc>()
-                                                        .add(EditProduct(
-                                                            productDetailsMap:
-                                                                dataMap));
-                                                  } else {
-                                                    context
-                                                        .read<ProductBloc>()
-                                                        .add(SaveProduct(
-                                                            productDetailsMap:
-                                                                dataMap));
-                                                  }
-                                                }
-                                                if (state is UploadImageError) {
-                                                  ProgressBar.dismiss(context);
-                                                  showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (context) => Expanded(
-                                                                child:
-                                                                    CustomAlertDialog(
-                                                                        title: StringConstants
-                                                                            .kSomethingWentWrong,
-                                                                        message:
-                                                                            state
-                                                                                .message,
-                                                                        primaryButtonTitle:
-                                                                            StringConstants
-                                                                                .kUnderstood,
-                                                                        checkMarkVisible:
-                                                                            false,
-                                                                        primaryOnPressed:
-                                                                            () {
-                                                                          Navigator.pushReplacementNamed(
-                                                                              context,
-                                                                              ProductListScreen.routeName);
-                                                                        }),
-                                                              ));
-                                                }
-                                              },
-                                              builder: (context, state) {
-                                                if (state is ImagePicked) {
-                                                  return GridView.builder(
-                                                      shrinkWrap: true,
-                                                      itemCount: 6,
-                                                      gridDelegate:
-                                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                                              crossAxisCount: 6,
-                                                              childAspectRatio:
-                                                                  1,
-                                                              crossAxisSpacing:
-                                                                  spacingStandard),
-                                                      itemBuilder:
-                                                          (context, index) {
-                                                        if (index <
-                                                            state
-                                                                .pickedImageList
-                                                                .length) {
-                                                          return Container(
-                                                              decoration: BoxDecoration(
-                                                                  image: DecorationImage(
-                                                                      image: MemoryImage(
-                                                                          state.pickedImageList[
-                                                                              index])),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              spacingSmall)));
-                                                        }
-                                                        return Container(
-                                                            decoration: BoxDecoration(
-                                                                color: AppColor
-                                                                    .saasifyLighterGrey,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            spacingSmall)));
-                                                      });
-                                                }
+                                            buildWhen: (prev, curr) {
+                                              return curr is! ImageCouldNotPick;
+                                            },
+                                            builder: (context, state) {
+                                              if (state is ImagePicked) {
                                                 return GridView.builder(
                                                     shrinkWrap: true,
                                                     itemCount: 6,
@@ -796,17 +758,97 @@ class AddProductScreen extends StatelessWidget {
                                                                 spacingStandard),
                                                     itemBuilder:
                                                         (context, index) {
-                                                      return Container(
+                                                      if (index <
+                                                          context
+                                                              .read<
+                                                                  UploadBloc>()
+                                                              .pickedImageList
+                                                              .length) {
+                                                        return Stack(
+                                                          children: [
+                                                            (context.read<UploadBloc>().pickedImageList[
+                                                                        index]
+                                                                    is String)
+                                                                ? Container(
+                                                                    decoration: BoxDecoration(
+                                                                        image: DecorationImage(
+                                                                            image: NetworkImage(context.read<UploadBloc>().pickedImageList[
+                                                                                index])),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                spacingSmall)))
+                                                                : Container(
+                                                                    decoration: BoxDecoration(
+                                                                        image: DecorationImage(
+                                                                            image:
+                                                                                MemoryImage(context.read<UploadBloc>().pickedImageList[index])),
+                                                                        borderRadius: BorderRadius.circular(spacingSmall))),
+                                                            IconButton(
+                                                                onPressed: () {
+                                                                  context
+                                                                      .read<
+                                                                          UploadBloc>()
+                                                                      .pickedImageList
+                                                                      .removeAt(
+                                                                          index);
+                                                                  context
+                                                                      .read<
+                                                                          UploadBloc>()
+                                                                      .add(
+                                                                          RemoveImage());
+                                                                },
+                                                                icon: const Icon(
+                                                                    Icons
+                                                                        .close))
+                                                          ],
+                                                        );
+                                                      }
+                                                      return InkWell(
+                                                        onTap: () {
+                                                          context
+                                                              .read<
+                                                                  UploadBloc>()
+                                                              .add(PickImage());
+                                                        },
+                                                        child: Container(
+                                                            decoration: BoxDecoration(
+                                                                color: AppColor
+                                                                    .saasifyLighterGrey,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            spacingSmall))),
+                                                      );
+                                                    });
+                                              }
+                                              return GridView.builder(
+                                                  shrinkWrap: true,
+                                                  itemCount: 6,
+                                                  gridDelegate:
+                                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                                          crossAxisCount: 6,
+                                                          childAspectRatio: 1,
+                                                          crossAxisSpacing:
+                                                              spacingStandard),
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return InkWell(
+                                                      onTap: () {
+                                                        context
+                                                            .read<UploadBloc>()
+                                                            .add(PickImage());
+                                                      },
+                                                      child: Container(
                                                           decoration: BoxDecoration(
                                                               color: AppColor
                                                                   .saasifyLighterGrey,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          spacingSmall)));
-                                                    });
-                                              },
-                                            ),
+                                                                          spacingSmall))),
+                                                    );
+                                                  });
+                                            },
                                           )
                                         ]),
                                     const SizedBox(height: spacingSmall),
