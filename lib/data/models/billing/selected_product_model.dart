@@ -1,6 +1,5 @@
 import 'package:hive_flutter/adapters.dart';
-
-import 'fetch_products_by_category_model.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 
 part 'selected_product_model.g.dart';
 

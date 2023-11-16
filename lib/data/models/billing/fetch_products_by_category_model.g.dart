@@ -20,22 +20,19 @@ class CategoryWithProductsDatumAdapter
     return CategoryWithProductsDatum(
       categoryId: fields[0] as int,
       categoryName: fields[1] as String,
-      categoryImage: fields[2] as String,
-      products: (fields[3] as List).cast<Product>(),
+      products: (fields[2] as List).cast<Product>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, CategoryWithProductsDatum obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.categoryId)
       ..writeByte(1)
       ..write(obj.categoryName)
       ..writeByte(2)
-      ..write(obj.categoryImage)
-      ..writeByte(3)
       ..write(obj.products);
   }
 
@@ -63,22 +60,25 @@ class ProductAdapter extends TypeAdapter<Product> {
     return Product(
       productId: fields[0] as int,
       productName: fields[1] as String,
-      details: fields[2] as String,
-      variants: (fields[3] as List).cast<Variant>(),
+      brandName: fields[2] as String,
+      productDescription: fields[3] as String,
+      variants: (fields[4] as List).cast<Variant>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Product obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.productId)
       ..writeByte(1)
       ..write(obj.productName)
       ..writeByte(2)
-      ..write(obj.details)
+      ..write(obj.brandName)
       ..writeByte(3)
+      ..write(obj.productDescription)
+      ..writeByte(4)
       ..write(obj.variants);
   }
 
@@ -105,15 +105,15 @@ class VariantAdapter extends TypeAdapter<Variant> {
     };
     return Variant(
       variantId: fields[0] as int,
-      variantCost: fields[1] as double,
-      count: fields[2] as int,
-      brandName: fields[3] as String,
-      discountedCost: fields[4] as double,
-      discount: fields[5] as int,
-      quantity: fields[6] as String,
-      description: fields[7] as String,
-      image: (fields[8] as List).cast<String>(),
-      ratings: fields[9] as int,
+      cost: fields[1] as int,
+      quantity: fields[2] as String,
+      discountPercent: fields[3] as int,
+      stock: fields[4] as int,
+      images: (fields[5] as List).cast<String>(),
+      unit: fields[6] as String,
+      barcode: fields[7] as int,
+      restockReminder: fields[8] as int,
+      draft: fields[9] as bool,
     );
   }
 
@@ -124,23 +124,23 @@ class VariantAdapter extends TypeAdapter<Variant> {
       ..writeByte(0)
       ..write(obj.variantId)
       ..writeByte(1)
-      ..write(obj.variantCost)
+      ..write(obj.cost)
       ..writeByte(2)
-      ..write(obj.count)
-      ..writeByte(3)
-      ..write(obj.brandName)
-      ..writeByte(4)
-      ..write(obj.discountedCost)
-      ..writeByte(5)
-      ..write(obj.discount)
-      ..writeByte(6)
       ..write(obj.quantity)
+      ..writeByte(3)
+      ..write(obj.discountPercent)
+      ..writeByte(4)
+      ..write(obj.stock)
+      ..writeByte(5)
+      ..write(obj.images)
+      ..writeByte(6)
+      ..write(obj.unit)
       ..writeByte(7)
-      ..write(obj.description)
+      ..write(obj.barcode)
       ..writeByte(8)
-      ..write(obj.image)
+      ..write(obj.restockReminder)
       ..writeByte(9)
-      ..write(obj.ratings);
+      ..write(obj.draft);
   }
 
   @override

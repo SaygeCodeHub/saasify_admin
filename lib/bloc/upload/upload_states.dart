@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:saasify/data/models/upload/upload_image_model.dart';
 
 abstract class UploadStates {}
@@ -19,11 +18,9 @@ class UploadImageError extends UploadStates {
   UploadImageError({required this.message});
 }
 
-class ImagePicked extends UploadStates {
-  final List<Uint8List> pickedImageList;
+class ImagePicked extends UploadStates {}
 
-  ImagePicked({required this.pickedImageList});
-}
+class RemovedImage extends UploadStates {}
 
 class ImageCouldNotPick extends UploadStates {
   final String imageNotPicked;

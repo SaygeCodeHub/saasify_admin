@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
 import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
+import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
+import 'package:saasify/screens/pos/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import '../screens/onboarding/auhentication_screen.dart';
+import '../screens/pos_two/pos_two_screen.dart';
 import '../screens/product/add_product_screen.dart';
 
 class AppRoutes {
@@ -13,10 +16,18 @@ class AppRoutes {
     switch (settings.name) {
       case AuthenticationScreen.routeName:
         return _createRoute(AuthenticationScreen());
+
+      case POSTwoScreen.routeName:
+        return _createRoute(const POSTwoScreen());
+
+      case BillingScreen.routeName:
+        return _createRoute(BillingScreen());
       case DashboardsScreen.routeName:
-        return _createRoute(const DashboardsScreen());
+        return _createRoute(DashboardsScreen());
       case ProductListScreen.routeName:
-        return _createRoute(const ProductListScreen());
+        return _createRoute(ProductListScreen());
+      case InventoryListScreen.routeName:
+        return _createRoute(InventoryListScreen());
       case CompanyListScreen.routeName:
         return _createRoute(CompanyListScreen(
             companyList: settings.arguments as List<Company>));

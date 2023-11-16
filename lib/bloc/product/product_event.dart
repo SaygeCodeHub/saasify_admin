@@ -10,14 +10,22 @@ class SaveProduct extends ProductEvents {
   SaveProduct({required this.productDetailsMap});
 }
 
-class DeleteProducts extends ProductEvents {
+class EditProduct extends ProductEvents {
   final Map productDetailsMap;
 
-  DeleteProducts({required this.productDetailsMap});
+  EditProduct({required this.productDetailsMap});
+}
+
+class DeleteProducts extends ProductEvents {
+  final List<int> variantIds;
+
+  DeleteProducts({required this.variantIds});
 }
 
 class ProductSelected extends ProductEvents {
-  List<Product> productList;
+  List<ProductWithVariant> productList;
 
   ProductSelected({required this.productList});
 }
+
+class FetchAllCategories extends ProductEvents {}

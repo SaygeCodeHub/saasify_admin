@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final bool? firstCall;
   final void Function(String)? onTextFieldChanged;
   final bool? readOnly;
+  final Color? fillColor;
   final TextEditingController controller = TextEditingController();
   final bool obscureText;
   final String? Function(String?)? validator;
@@ -43,7 +44,8 @@ class CustomTextField extends StatelessWidget {
       this.obscureText = false,
       this.hintStyle,
       this.suffixIcon,
-      this.autofocus = false})
+      this.autofocus = false,
+      this.fillColor})
       : super(key: key);
 
   @override
@@ -55,6 +57,7 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       obscuringCharacter: "*",
       decoration: InputDecoration(
+        fillColor: fillColor,
         suffix: suffix,
         hintText: hintText,
         hintStyle: hintStyle,

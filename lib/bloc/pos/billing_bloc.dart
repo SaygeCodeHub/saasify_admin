@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/data/customer_cache/customer_cache.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import '../../data/models/billing/bill_model.dart';
-import '../../data/models/billing/fetch_products_by_category_model.dart';
 import '../../data/models/billing/selected_product_model.dart';
 import '../../data/models/hive_keys.dart';
 import '../../di/app_module.dart';
@@ -12,6 +13,7 @@ import 'billing_event.dart';
 import 'billing_state.dart';
 
 class BillingBloc extends Bloc<BillingEvents, BillingStates> {
+  final CustomerCache _customerCache = getIt<CustomerCache>();
   final BillingRepository _billingRepository = getIt<BillingRepository>();
   List<SelectedProductModel> selectedProducts = [];
   String customerContact = '-';
@@ -69,27 +71,31 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   FutureOr<void> _fetchProductsByCategory(
       FetchProductsByCategory event, Emitter<BillingStates> emit) async {
     emit(FetchingProductsByCategory());
-    try {
-      List<CategoryWithProductsDatum> data = [];
-      FetchProductsByCategoryModel fetchProductsByCategoryModel;
-      if (DatabaseUtil.products.isEmpty) {
-        fetchProductsByCategoryModel =
-            await _billingRepository.fetchProductsByCategory();
-        data = fetchProductsByCategoryModel.data;
-        DatabaseUtil.products
-            .put('products', fetchProductsByCategoryModel.data);
-      } else {
-        data = DatabaseUtil.products.get('products');
-      }
-
-      emit(ProductsFetched(
-          productsByCategories: data,
-          selectedCategoryIndex: selectedCategoryIndex,
-          selectedProducts: selectedProducts,
-          billDetails: billDetails));
-    } catch (e) {
-      emit(ErrorFetchingProductsByCategory());
+    // try {
+    List<CategoryWithProductsDatum> data = [];
+    FetchProductsByCategoryModel fetchProductsByCategoryModel;
+    String userId = await _customerCache.getUserId();
+    String companyId = await _customerCache.getCompanyId();
+    int branchId = await _customerCache.getBranchId();
+    if (DatabaseUtil.products.isEmpty) {
+      fetchProductsByCategoryModel = await _billingRepository
+          .fetchProductsByCategory(userId, companyId, branchId);
+      data = fetchProductsByCategoryModel.data;
+      DatabaseUtil.products.put('products', fetchProductsByCategoryModel.data);
+    } else {
+      data = DatabaseUtil.products
+          .get('products')
+          .cast<CategoryWithProductsDatum>();
     }
+
+    emit(ProductsFetched(
+        productsByCategories: data,
+        selectedCategoryIndex: selectedCategoryIndex,
+        selectedProducts: selectedProducts,
+        billDetails: billDetails));
+    // } catch (e) {
+    //   emit(ErrorFetchingProductsByCategory());
+    // }
   }
 
   FutureOr<void> _selectCategory(
@@ -118,8 +124,9 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
             product: Product(
                 productId: event.product.productId,
                 productName: event.product.productName,
-                details: event.product.details,
-                variants: [event.product.variants[event.variantIndex]])));
+                variants: [event.product.variants[event.variantIndex]],
+                brandName: event.product.brandName,
+                productDescription: event.product.productDescription)));
       }
     } else {
       selectedProducts
@@ -163,9 +170,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     billDetails.itemTotal = 0;
 
     for (var i = 0; i < selectedProducts.length; i++) {
-      billDetails.itemTotal +=
-          selectedProducts[i].product.variants[0].discountedCost *
-              selectedProducts[i].count;
+      billDetails.itemTotal += selectedProducts[i].product.variants[0].cost *
+          selectedProducts[i].count;
     }
 
     billDetails.gSTCharges = billDetails.itemTotal * 0.1;

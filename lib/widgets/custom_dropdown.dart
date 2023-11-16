@@ -7,24 +7,24 @@ typedef StringCallBack = Function(String textField);
 
 class CustomDropdownWidget extends StatefulWidget {
   final String? Function(String?)? validator;
-  final String? initialValue;
   final bool canEdit;
-  final String dropdownValue;
+  final String? initialValue;
   final List listItems;
   final Color? color;
   // final Map dataMap;
   // final String mapKey;
+  final Map dataMap;
+  final String mapKey;
   final Widget? disabledHint;
 
   const CustomDropdownWidget({
     super.key,
     this.validator,
-    required this.dropdownValue,
     this.initialValue,
     this.canEdit = true,
     required this.listItems,
-    // required this.dataMap,
-    // required this.mapKey,
+    required this.dataMap,
+    required this.mapKey,
     this.disabledHint,
     this.color,
   });
@@ -37,11 +37,11 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
   String? selectedValue;
 
   @override
-  // void initState() {
-  //   widget.dataMap[widget.mapKey] = widget.listItems[0];
-  //   selectedValue = widget.listItems[0];
-  //   super.initState();
-  // }
+  void initState() {
+    widget.dataMap[widget.mapKey] = widget.initialValue ?? widget.listItems[0];
+    selectedValue = widget.initialValue ?? widget.listItems[0];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
                       setState(() {
                         selectedValue = value.toString();
                       });
-                      // widget.dataMap[widget.mapKey] = value;
+                      widget.dataMap[widget.mapKey] = value;
                     }))));
   }
 }

@@ -1,5 +1,6 @@
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
+
 import '../../data/models/billing/selected_product_model.dart';
-import '../../data/models/billing/fetch_products_by_category_model.dart';
 
 abstract class BillingEvents {}
 

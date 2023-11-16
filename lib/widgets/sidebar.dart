@@ -6,7 +6,10 @@ import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
+import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
+
+import '../screens/pos_two/pos_two_screen.dart';
 
 class SideBar extends StatelessWidget {
   final int selectedIndex;
@@ -62,9 +65,20 @@ class SideBar extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text('Products',
+                  title: Text('POS',
                       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
                           color: (selectedIndex == 2)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyBlack)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, POSTwoScreen.routeName);
+                  },
+                ),
+                ListTile(
+                  title: Text('Products',
+                      style: Theme.of(context).textTheme.xxxTiniest.copyWith(
+                          color: (selectedIndex == 3)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {
@@ -75,7 +89,7 @@ class SideBar extends StatelessWidget {
                 ListTile(
                   title: Text('Orders',
                       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
-                          color: (selectedIndex == 3)
+                          color: (selectedIndex == 4)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {},
@@ -83,15 +97,18 @@ class SideBar extends StatelessWidget {
                 ListTile(
                   title: Text('Inventory Management',
                       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
-                          color: (selectedIndex == 4)
+                          color: (selectedIndex == 5)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, InventoryListScreen.routeName);
+                  },
                 ),
                 ListTile(
                   title: Text('Profile Management',
                       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
-                          color: (selectedIndex == 5)
+                          color: (selectedIndex == 6)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {},
@@ -99,7 +116,7 @@ class SideBar extends StatelessWidget {
                 ListTile(
                   title: Text('Insights',
                       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
-                          color: (selectedIndex == 6)
+                          color: (selectedIndex == 7)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {},

@@ -11,30 +11,30 @@ import '../../di/app_module.dart';
 class UploadBloc extends Bloc<UploadEvents, UploadStates> {
   final UploadRepository _uploadRepository = getIt<UploadRepository>();
 
+  List<XFile> pickedFiles = [];
+  List pickedImageList = [];
   UploadStates get initialState => UploadImageInitial();
 
   UploadBloc() : super(UploadImageInitial()) {
     on<UploadImage>(_uploadImage);
     on<PickImage>(_pickImage);
+    on<RemoveImage>(_removeImage);
   }
 
   Future _pickImage(PickImage event, Emitter<UploadStates> emit) async {
     if (kIsWeb) {
       final ImagePicker picker = ImagePicker();
       List<XFile> image = await picker.pickMultiImage();
-      final List<XFile> multipartFile = [];
-      List<Uint8List> pickedImageList = [];
       if (image.isNotEmpty) {
-        multipartFile.addAll(image);
+        pickedFiles.clear();
+        pickedFiles.addAll(image);
         for (var item in image) {
           Uint8List image1 = await item.readAsBytes();
           pickedImageList.add(image1);
         }
-        emit(ImagePicked(pickedImageList: pickedImageList));
+        emit(ImagePicked());
       } else {
-        if (kDebugMode) {
-          print('No Image selected');
-        }
+        emit(ImageCouldNotPick(imageNotPicked: 'Something went Wrong'));
       }
     }
   }
@@ -53,5 +53,10 @@ class UploadBloc extends Bloc<UploadEvents, UploadStates> {
     } catch (e) {
       emit(UploadImageError(message: e.toString()));
     }
+  }
+
+  FutureOr<void> _removeImage(
+      RemoveImage event, Emitter<UploadStates> emit) async {
+    emit(ImagePicked());
   }
 }

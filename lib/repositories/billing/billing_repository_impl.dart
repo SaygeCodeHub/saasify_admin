@@ -1,41 +1,17 @@
-import 'package:saasify/services/client_services.dart';
+import 'dart:developer';
 
-import '../../data/models/billing/coupons_model.dart';
-import '../../data/models/billing/fetch_products_by_category_model.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
+import 'package:saasify/services/client_services.dart';
+import 'package:saasify/utils/constants/api_constants.dart';
 import 'billing_repository.dart';
 
-class BillingRepositoryImpl extends BillingRepository {
+class BillingRepositoryImpl implements BillingRepository {
   @override
-  Future<FetchProductsByCategoryModel> fetchProductsByCategory() async {
-    final response = await ClientServices()
-        .get("https://oneart.onrender.com/getAllCategoriesProducts");
+  Future<FetchProductsByCategoryModel> fetchProductsByCategory(
+      String userId, String companyId, int branchId) async {
+    final response = await ClientServices().get(
+        '${ApiConstants.baseUrl}$userId/$companyId/$branchId/getProductsByCategory');
+    log('${ApiConstants.baseUrl}$userId/$companyId/$branchId/getProductsByCategory');
     return FetchProductsByCategoryModel.fromJson(response);
-  }
-
-  @override
-  Future<CouponsModel> fetchCoupons() async {
-    final response = {
-      "status": 200,
-      "message": "Shops fetched",
-      "data": [
-        {
-          "coupon_name": "PAYTM TREATS",
-          "isActive": true,
-          "description": "get 300 off",
-          "discount_amount": 300.0,
-          "coupon_id": 111,
-          "coupon_image": "https://oneart.onrender.com/images/paytm.jpeg"
-        },
-        {
-          "coupon_name": "PAYTM TREATS",
-          "isActive": true,
-          "description": "get 300 off",
-          "discount_amount": 300.0,
-          "coupon_id": 111,
-          "coupon_image": "https://oneart.onrender.com/images/paytm.jpeg"
-        }
-      ]
-    };
-    return CouponsModel.fromJson(response);
   }
 }
