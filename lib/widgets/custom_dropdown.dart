@@ -7,9 +7,8 @@ typedef StringCallBack = Function(String textField);
 
 class CustomDropdownWidget extends StatefulWidget {
   final String? Function(String?)? validator;
-  final String? initialValue;
   final bool canEdit;
-  final String dropdownValue;
+  final String? initialValue;
   final List listItems;
   final Map dataMap;
   final String mapKey;
@@ -18,7 +17,6 @@ class CustomDropdownWidget extends StatefulWidget {
   const CustomDropdownWidget({
     super.key,
     this.validator,
-    required this.dropdownValue,
     this.initialValue,
     this.canEdit = true,
     required this.listItems,
@@ -36,8 +34,8 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
 
   @override
   void initState() {
-    widget.dataMap[widget.mapKey] = widget.listItems[0];
-    selectedValue = widget.listItems[0];
+    widget.dataMap[widget.mapKey] = widget.initialValue ?? widget.listItems[0];
+    selectedValue = widget.initialValue ?? widget.listItems[0];
     super.initState();
   }
 

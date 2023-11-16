@@ -4,6 +4,7 @@ import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/bloc/product/product_event.dart';
 import 'package:saasify/bloc/product/product_state.dart';
 import 'package:saasify/configs/app_color.dart';
+import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
@@ -53,7 +54,6 @@ class ProductListScreen extends StatelessWidget {
                                     .add(FetchProductList());
                                 Navigator.pop(ctx);
                               },
-                              secondaryOnPressed: () {},
                             ));
                   }
                   if (state is ErrorDeletingProducts) {
@@ -68,7 +68,6 @@ class ProductListScreen extends StatelessWidget {
                               primaryOnPressed: () {
                                 Navigator.pop(ctx);
                               },
-                              secondaryOnPressed: () {},
                             ));
                   }
                   if (state is ErrorFetchingProduct) {
@@ -82,7 +81,6 @@ class ProductListScreen extends StatelessWidget {
                               primaryOnPressed: () {
                                 Navigator.pop(ctx);
                               },
-                              secondaryOnPressed: () {},
                             ));
                   }
                 },
@@ -93,8 +91,7 @@ class ProductListScreen extends StatelessWidget {
                 },
                 builder: (context, state) {
                   if (state is FetchingProduct) {
-                    return const Expanded(
-                        child: Center(child: CircularProgressIndicator()));
+                    return const Center(child: CircularProgressIndicator());
                   } else if (state is FetchedProduct) {
                     return Column(
                       children: [
@@ -115,7 +112,7 @@ class ProductListScreen extends StatelessWidget {
                           Visibility(
                             visible: selectedIds.isNotEmpty,
                             child: SizedBox(
-                                width: 180,
+                                width: kGeneralActionButtonWidth,
                                 child: PrimaryButton(
                                     backgroundColor: AppColor.saasifyRed,
                                     onPressed: () {
@@ -146,7 +143,7 @@ class ProductListScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: spacingStandard),
                           SizedBox(
-                              width: 180,
+                              width: kGeneralActionButtonWidth,
                               child: PrimaryButton(
                                   onPressed: () {
                                     showDialog(

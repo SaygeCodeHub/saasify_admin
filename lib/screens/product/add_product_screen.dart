@@ -50,17 +50,15 @@ class AddProductScreen extends StatelessWidget {
               if (state is ErrorFetchingCategories) {
                 showDialog(
                     context: context,
-                    builder: (context) => Expanded(
-                          child: CustomAlertDialog(
-                              title: StringConstants.kSomethingWentWrong,
-                              message: state.message,
-                              primaryButtonTitle: StringConstants.kUnderstood,
-                              checkMarkVisible: false,
-                              primaryOnPressed: () {
-                                Navigator.pushReplacementNamed(
-                                    context, ProductListScreen.routeName);
-                              }),
-                        ));
+                    builder: (context) => CustomAlertDialog(
+                        title: StringConstants.kSomethingWentWrong,
+                        message: state.message,
+                        primaryButtonTitle: StringConstants.kUnderstood,
+                        checkMarkVisible: false,
+                        primaryOnPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, ProductListScreen.routeName);
+                        }));
               }
 
               if (state is SavingProduct || state is EditingProduct) {
@@ -69,81 +67,71 @@ class AddProductScreen extends StatelessWidget {
                 ProgressBar.dismiss(ctx);
                 showDialog(
                     context: context,
-                    builder: (context) => Expanded(
-                          child: CustomAlertDialog(
-                            title: StringConstants.kNewProductAdded,
-                            message: StringConstants.kContinueAddingVariant,
-                            primaryButtonTitle:
-                                StringConstants.kAddVariantButton,
-                            checkMarkVisible: true,
-                            secondaryButtonTitle: StringConstants.kNo,
-                            primaryOnPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, AddProductScreen.routeName,
-                                  arguments: AddProductScreenArguments(
-                                      isEdit: false,
-                                      isVariant: true,
-                                      dataMap: {
-                                        'product_name': state.data.productName,
-                                        'category_name':
-                                            state.data.categoryName,
-                                        'brand_name': state.data.brandName,
-                                        'product_id': state.data.productId,
-                                        'product_description':
-                                            state.data.productDescription,
-                                      }));
-                            },
-                            secondaryOnPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, ProductListScreen.routeName);
-                            },
-                          ),
+                    builder: (context) => CustomAlertDialog(
+                          title: StringConstants.kNewProductAdded,
+                          message: StringConstants.kContinueAddingVariant,
+                          primaryButtonTitle: StringConstants.kAddVariantButton,
+                          checkMarkVisible: true,
+                          secondaryButtonTitle: StringConstants.kNo,
+                          primaryOnPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, AddProductScreen.routeName,
+                                arguments: AddProductScreenArguments(
+                                    isEdit: false,
+                                    isVariant: true,
+                                    dataMap: {
+                                      'product_name': state.data.productName,
+                                      'category_name': state.data.categoryName,
+                                      'brand_name': state.data.brandName,
+                                      'product_id': state.data.productId,
+                                      'product_description':
+                                          state.data.productDescription,
+                                    }));
+                          },
+                          secondaryOnPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, ProductListScreen.routeName);
+                          },
                         ));
               } else if (state is EditedProduct) {
                 ProgressBar.dismiss(ctx);
                 showDialog(
                     context: context,
-                    builder: (context) => Expanded(
-                          child: CustomAlertDialog(
-                              title: StringConstants.kNewProductAdded,
-                              message: state.message,
-                              primaryButtonTitle: StringConstants.kUnderstood,
-                              checkMarkVisible: true,
-                              primaryOnPressed: () {
-                                Navigator.pushReplacementNamed(
-                                    context, ProductListScreen.routeName);
-                              }),
-                        ));
+                    builder: (context) => CustomAlertDialog(
+                        title: StringConstants.kNewProductAdded,
+                        message: state.message,
+                        primaryButtonTitle: StringConstants.kUnderstood,
+                        checkMarkVisible: true,
+                        primaryOnPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, ProductListScreen.routeName);
+                        }));
               } else if (state is ErrorSavingProduct) {
                 ProgressBar.dismiss(ctx);
                 showDialog(
                     context: context,
-                    builder: (context) => Expanded(
-                          child: CustomAlertDialog(
-                              title: StringConstants.kSomethingWentWrong,
-                              message: state.message,
-                              primaryButtonTitle: StringConstants.kUnderstood,
-                              checkMarkVisible: false,
-                              primaryOnPressed: () {
-                                Navigator.pushReplacementNamed(
-                                    context, ProductListScreen.routeName);
-                              }),
-                        ));
+                    builder: (context) => CustomAlertDialog(
+                        title: StringConstants.kSomethingWentWrong,
+                        message: state.message,
+                        primaryButtonTitle: StringConstants.kUnderstood,
+                        checkMarkVisible: false,
+                        primaryOnPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, ProductListScreen.routeName);
+                        }));
               } else if (state is ErrorEditingProduct) {
                 ProgressBar.dismiss(ctx);
                 showDialog(
                     context: context,
-                    builder: (context) => Expanded(
-                          child: CustomAlertDialog(
-                              title: StringConstants.kSomethingWentWrong,
-                              message: state.message,
-                              primaryButtonTitle: StringConstants.kUnderstood,
-                              checkMarkVisible: false,
-                              primaryOnPressed: () {
-                                Navigator.pushReplacementNamed(
-                                    context, ProductListScreen.routeName);
-                              }),
-                        ));
+                    builder: (context) => CustomAlertDialog(
+                        title: StringConstants.kSomethingWentWrong,
+                        message: state.message,
+                        primaryButtonTitle: StringConstants.kUnderstood,
+                        checkMarkVisible: false,
+                        primaryOnPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, ProductListScreen.routeName);
+                        }));
               }
             },
             buildWhen: (prev, curr) {
@@ -164,14 +152,26 @@ class AddProductScreen extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                                (isEdit == true)
-                                    ? StringConstants.kAddVariant
-                                    : StringConstants.kAddProduct,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .xxTiny
-                                    .copyWith(fontWeight: FontWeight.w700)),
+                            Row(
+                              children: [
+                                IconButton(
+                                    onPressed: () {
+                                      Navigator.pushReplacementNamed(
+                                          context, ProductListScreen.routeName);
+                                    },
+                                    icon: const Icon(Icons.arrow_back_ios_new)),
+                                Text(
+                                    (isVariant == true)
+                                        ? StringConstants.kAddVariant
+                                        : (isEdit)
+                                            ? 'Edit Product'
+                                            : StringConstants.kAddProduct,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .xxTiny
+                                        .copyWith(fontWeight: FontWeight.w700)),
+                              ],
+                            ),
                             const SizedBox(height: spacingXHuge),
                             Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,11 +192,18 @@ class AddProductScreen extends StatelessWidget {
                                         SizedBox(
                                             height: kDropdownHeight,
                                             child: CustomDropdownWidget(
+                                                validator: (value) {
+                                                  if (value == null ||
+                                                      value.trim() == '') {
+                                                    return 'Please Select a Category';
+                                                  }
+                                                  return null;
+                                                },
                                                 canEdit:
                                                     !(isVariant && !isEdit),
                                                 dataMap: dataMap,
                                                 mapKey: 'category_name',
-                                                dropdownValue:
+                                                initialValue:
                                                     dataMap['category_name'] ??
                                                         state.categoryList
                                                             .map((e) =>
@@ -225,6 +232,14 @@ class AddProductScreen extends StatelessWidget {
                                         const SizedBox(height: spacingXMedium),
                                         CustomTextField(
                                             maxLines: 5,
+                                            validator: (value) {
+                                              if ((value == null ||
+                                                      value.trim() == '') &&
+                                                  dataMap['draft'] == true) {
+                                                return 'Please Enter the Product Description';
+                                              }
+                                              return null;
+                                            },
                                             readOnly: isVariant && !isEdit,
                                             initialValue: dataMap[
                                                     'product_description'] ??
@@ -249,6 +264,13 @@ class AddProductScreen extends StatelessWidget {
                                                         FontWeight.w700)),
                                         const SizedBox(height: spacingXMedium),
                                         CustomTextField(
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.trim() == '') {
+                                                return 'Please Enter the Product Name';
+                                              }
+                                              return null;
+                                            },
                                             readOnly: isVariant && !isEdit,
                                             initialValue:
                                                 dataMap['product_name'] ?? '',
@@ -265,6 +287,13 @@ class AddProductScreen extends StatelessWidget {
                                                         FontWeight.w700)),
                                         const SizedBox(height: spacingXMedium),
                                         CustomTextField(
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.trim() == '') {
+                                                return 'Please Enter the Product Barcode';
+                                              }
+                                              return null;
+                                            },
                                             inputFormatters: <TextInputFormatter>[
                                               FilteringTextInputFormatter
                                                   .digitsOnly
@@ -292,6 +321,16 @@ class AddProductScreen extends StatelessWidget {
                                                 const SizedBox(
                                                     height: spacingXMedium),
                                                 CustomTextField(
+                                                    validator: (value) {
+                                                      if ((value == null ||
+                                                              value.trim() ==
+                                                                  '') &&
+                                                          dataMap['draft'] ==
+                                                              true) {
+                                                        return 'Please Enter the Product Quantity';
+                                                      }
+                                                      return null;
+                                                    },
                                                     inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
@@ -330,9 +369,10 @@ class AddProductScreen extends StatelessWidget {
                                                     height: kDropdownHeight,
                                                     child: CustomDropdownWidget(
                                                         initialValue:
-                                                            dataMap['unit'],
-                                                        dropdownValue: "",
+                                                            dataMap['unit'] ??
+                                                                "units",
                                                         listItems: const [
+                                                          "units",
                                                           "kg",
                                                           "l",
                                                           "gm",
@@ -358,6 +398,13 @@ class AddProductScreen extends StatelessWidget {
                                                         FontWeight.w700)),
                                         const SizedBox(height: spacingXMedium),
                                         CustomTextField(
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.trim() == '') {
+                                                return 'Please Enter the Brand Name';
+                                              }
+                                              return null;
+                                            },
                                             readOnly: isVariant && !isEdit,
                                             initialValue:
                                                 dataMap['brand_name'] ?? '',
@@ -382,6 +429,16 @@ class AddProductScreen extends StatelessWidget {
                                                 const SizedBox(
                                                     height: spacingXMedium),
                                                 CustomTextField(
+                                                    validator: (value) {
+                                                      if ((value == null ||
+                                                              value.trim() ==
+                                                                  '') &&
+                                                          dataMap['draft'] ==
+                                                              true) {
+                                                        return 'Please Enter the Product Cost';
+                                                      }
+                                                      return null;
+                                                    },
                                                     inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
@@ -421,7 +478,7 @@ class AddProductScreen extends StatelessWidget {
                                                     ],
                                                     initialValue: dataMap[
                                                             'discount_percent'] ??
-                                                        '',
+                                                        '0',
                                                     onTextFieldChanged:
                                                         (value) {
                                                       dataMap['discount_percent'] =
@@ -495,123 +552,98 @@ class AddProductScreen extends StatelessWidget {
                                       ]))
                                 ]),
                             const SizedBox(height: spacingHuge),
-                            Row(children: [
-                              Expanded(
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                    Row(children: [
-                                      Text(StringConstants.kUploadImages,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xxTiniest
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w700)),
-                                      const SizedBox(width: spacingXSmall),
-                                      Text(StringConstants.kMinimumOneImage,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xTiniest)
-                                    ]),
-                                    const SizedBox(height: spacingLarge),
-                                    InkWell(
-                                      onTap: () {
-                                        context
-                                            .read<UploadBloc>()
-                                            .add(PickImage());
+                            Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(children: [
+                                    Text(StringConstants.kUploadImages,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .xxTiniest
+                                            .copyWith(
+                                                fontWeight: FontWeight.w700)),
+                                    const SizedBox(width: spacingXSmall),
+                                    Text(StringConstants.kMinimumOneImage,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .xTiniest)
+                                  ]),
+                                  const SizedBox(height: spacingLarge),
+                                  InkWell(
+                                    onTap: () {
+                                      context
+                                          .read<UploadBloc>()
+                                          .add(PickImage());
+                                    },
+                                    child:
+                                        BlocConsumer<UploadBloc, UploadStates>(
+                                      listener: (context, state) {
+                                        if (state is UploadImageLoading) {
+                                          ProgressBar.show(context);
+                                        } else if (state is UploadImageLoaded) {
+                                          ProgressBar.dismiss(context);
+                                          dataMap['images'] =
+                                              state.uploadImageModel.data;
+                                          if (isEdit) {
+                                            context.read<ProductBloc>().add(
+                                                EditProduct(
+                                                    productDetailsMap:
+                                                        dataMap));
+                                          } else {
+                                            context.read<ProductBloc>().add(
+                                                SaveProduct(
+                                                    productDetailsMap:
+                                                        dataMap));
+                                          }
+                                        }
+                                        if (state is UploadImageError) {
+                                          ProgressBar.dismiss(context);
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) => Expanded(
+                                                    child: CustomAlertDialog(
+                                                        title: StringConstants
+                                                            .kSomethingWentWrong,
+                                                        message: state.message,
+                                                        primaryButtonTitle:
+                                                            StringConstants
+                                                                .kUnderstood,
+                                                        checkMarkVisible: false,
+                                                        primaryOnPressed: () {
+                                                          Navigator.pushReplacementNamed(
+                                                              context,
+                                                              ProductListScreen
+                                                                  .routeName);
+                                                        }),
+                                                  ));
+                                        }
                                       },
-                                      child: BlocConsumer<UploadBloc,
-                                          UploadStates>(
-                                        listener: (context, state) {
-                                          if (state is UploadImageLoading) {
-                                            ProgressBar.show(context);
-                                          } else if (state
-                                              is UploadImageLoaded) {
-                                            ProgressBar.dismiss(context);
-                                            dataMap['images'] =
-                                                state.uploadImageModel.data;
-                                            if (isEdit) {
-                                              context.read<ProductBloc>().add(
-                                                  EditProduct(
-                                                      productDetailsMap:
-                                                          dataMap));
-                                            } else {
-                                              context.read<ProductBloc>().add(
-                                                  SaveProduct(
-                                                      productDetailsMap:
-                                                          dataMap));
-                                            }
-                                          }
-                                          if (state is UploadImageError) {
-                                            ProgressBar.dismiss(context);
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) => Expanded(
-                                                      child: CustomAlertDialog(
-                                                          title: StringConstants
-                                                              .kSomethingWentWrong,
-                                                          message:
-                                                              state.message,
-                                                          primaryButtonTitle:
-                                                              StringConstants
-                                                                  .kUnderstood,
-                                                          checkMarkVisible:
-                                                              false,
-                                                          primaryOnPressed: () {
-                                                            Navigator.pushReplacementNamed(
-                                                                context,
-                                                                ProductListScreen
-                                                                    .routeName);
-                                                          }),
-                                                    ));
-                                          }
-                                        },
-                                        builder: (context, state) {
-                                          if (state is ImagePicked) {
-                                            return GridView.builder(
-                                                shrinkWrap: true,
-                                                itemCount: 6,
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                        crossAxisCount: 6,
-                                                        childAspectRatio: 0.9,
-                                                        crossAxisSpacing:
-                                                            spacingStandard),
-                                                itemBuilder: (context, index) {
-                                                  if (index <
-                                                      state.pickedImageList
-                                                          .length) {
-                                                    return Container(
-                                                        decoration: BoxDecoration(
-                                                            image: DecorationImage(
-                                                                image: MemoryImage(
-                                                                    state.pickedImageList[
-                                                                        index])),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        spacingSmall)));
-                                                  }
-                                                  return Container(
-                                                      decoration: BoxDecoration(
-                                                          color: AppColor
-                                                              .saasifyLighterGrey,
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  spacingSmall)));
-                                                });
-                                          }
+                                      builder: (context, state) {
+                                        if (state is ImagePicked) {
                                           return GridView.builder(
                                               shrinkWrap: true,
                                               itemCount: 6,
                                               gridDelegate:
                                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                                       crossAxisCount: 6,
-                                                      childAspectRatio: 0.9,
+                                                      childAspectRatio: 1,
                                                       crossAxisSpacing:
                                                           spacingStandard),
                                               itemBuilder: (context, index) {
+                                                if (index <
+                                                    state.pickedImageList
+                                                        .length) {
+                                                  return Container(
+                                                      decoration: BoxDecoration(
+                                                          image: DecorationImage(
+                                                              image: MemoryImage(
+                                                                  state.pickedImageList[
+                                                                      index])),
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  spacingSmall)));
+                                                }
                                                 return Container(
                                                     decoration: BoxDecoration(
                                                         color: AppColor
@@ -620,29 +652,41 @@ class AddProductScreen extends StatelessWidget {
                                                             BorderRadius.circular(
                                                                 spacingSmall)));
                                               });
-                                        },
-                                      ),
-                                    )
-                                  ]))
-                            ]),
-                            const SizedBox(height: kGeneralButtonHeight),
+                                        }
+                                        return GridView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: 6,
+                                            gridDelegate:
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 6,
+                                                    childAspectRatio: 1,
+                                                    crossAxisSpacing:
+                                                        spacingStandard),
+                                            itemBuilder: (context, index) {
+                                              return Container(
+                                                  decoration: BoxDecoration(
+                                                      color: AppColor
+                                                          .saasifyLighterGrey,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              spacingSmall)));
+                                            });
+                                      },
+                                    ),
+                                  )
+                                ]),
+                            const SizedBox(height: spacingSmall),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   SecondaryButton(
                                       onPressed: () {
                                         dataMap['draft'] = true;
-                                        if (_formKey.currentState!.validate() &&
-                                            context
-                                                .read<UploadBloc>()
-                                                .pickedFiles
-                                                .isNotEmpty) {
-                                          context.read<UploadBloc>().add(
-                                              UploadImage(
-                                                  multiplePartFileList: context
-                                                      .read<UploadBloc>()
-                                                      .pickedFiles));
-                                        }
+                                        context.read<UploadBloc>().add(
+                                            UploadImage(
+                                                multiplePartFileList: context
+                                                    .read<UploadBloc>()
+                                                    .pickedFiles));
                                       },
                                       buttonWidth: spacingXXXXHuge,
                                       buttonTitle: StringConstants.kSave),

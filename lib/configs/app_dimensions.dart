@@ -12,3 +12,4 @@ const double kGeneralRadius = 12;
 const double kDialogueHeight = 450;
 const double kDialogueWidth = 370;
 const double kCounterContainerSize = 22;
+const double kGeneralActionButtonWidth = 180;

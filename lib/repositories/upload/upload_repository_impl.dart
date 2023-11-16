@@ -4,7 +4,7 @@ import 'package:saasify/repositories/upload/upload_repository.dart';
 import 'package:saasify/services/client_services.dart';
 import 'package:saasify/utils/constants/api_constants.dart';
 
-class UploadRepositoryImpl extends UploadRepository {
+class UploadRepositoryImpl implements UploadRepository {
   @override
   Future<UploadImageModel> uploadImage(List<XFile> multiplePartFileList) async {
     final response = await ClientServices()

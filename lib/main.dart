@@ -6,6 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/bloc/authentication/authentication_states.dart';
+import 'package:saasify/bloc/inventory/inventory_bloc.dart';
 import 'package:saasify/bloc/onboarding/onboarding_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/bloc/upload/upload_bloc.dart';
@@ -82,6 +83,7 @@ class MyPosApp extends StatelessWidget {
           BlocProvider(lazy: false, create: (context) => ProductBloc()),
           BlocProvider(lazy: false, create: (context) => BillingBloc()),
           BlocProvider(lazy: false, create: (context) => UploadBloc()),
+          BlocProvider(lazy: false, create: (context) => InventoryBloc())
         ],
         child: GestureDetector(
             onTap: () {
@@ -96,18 +98,19 @@ class MyPosApp extends StatelessWidget {
               home: context.responsive(const CannotBeMinimizeScreen(),
                   tablets:
                       BlocListener<AuthenticationBloc, AuthenticationStates>(
-                    listener: (context, state) {
-                      if (state is IsLoggedIn) {
-                        Navigator.pushReplacementNamed(
-                            context, DashboardsScreen.routeName);
-                      } else if (state is LoggedOut) {
-                        log('message');
-                        Navigator.pushNamedAndRemoveUntil(context,
-                            AuthenticationScreen.routeName, (route) => false);
-                      }
-                    },
-                    child: AuthenticationScreen(),
-                  )),
+                          listener: (context, state) {
+                            if (state is IsLoggedIn) {
+                              Navigator.pushReplacementNamed(
+                                  context, DashboardsScreen.routeName);
+                            } else if (state is LoggedOut) {
+                              log('message');
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  AuthenticationScreen.routeName,
+                                  (route) => false);
+                            }
+                          },
+                          child: AuthenticationScreen())),
             )));
   }
 }

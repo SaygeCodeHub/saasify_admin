@@ -6,6 +6,7 @@ import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
+import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 
 class SideBar extends StatelessWidget {
@@ -97,7 +98,10 @@ class SideBar extends StatelessWidget {
                           color: (selectedIndex == 5)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, InventoryListScreen.routeName);
+                  },
                 ),
                 ListTile(
                   title: Text('Profile Management',

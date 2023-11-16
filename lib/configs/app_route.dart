@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
 import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
+import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
@@ -20,6 +21,8 @@ class AppRoutes {
         return _createRoute(const DashboardsScreen());
       case ProductListScreen.routeName:
         return _createRoute(const ProductListScreen());
+      case InventoryListScreen.routeName:
+        return _createRoute(InventoryListScreen());
       case CompanyListScreen.routeName:
         return _createRoute(CompanyListScreen(
             companyList: settings.arguments as List<Company>));

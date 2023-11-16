@@ -1,3 +1,5 @@
+import 'package:saasify/data/models/products/product_list_model.dart';
+
 abstract class InventoryStates {}
 
 class InventoryInitial extends InventoryStates {}
@@ -5,11 +7,27 @@ class InventoryInitial extends InventoryStates {}
 class FetchingInventoryList extends InventoryStates {}
 
 class FetchedInventoryList extends InventoryStates {
-  FetchedInventoryList();
+  List<ProductWithVariant> productList;
+
+  FetchedInventoryList({required this.productList});
 }
 
-class FetchInventoryListError extends InventoryStates {
+class ErrorFetchingInventoryList extends InventoryStates {
   final String message;
 
-  FetchInventoryListError({required this.message});
+  ErrorFetchingInventoryList({required this.message});
+}
+
+class UpdatingStock extends InventoryStates {}
+
+class UpdatedStock extends InventoryStates {
+  final String message;
+
+  UpdatedStock({required this.message});
+}
+
+class ErrorUpdatingStock extends InventoryStates {
+  final String message;
+
+  ErrorUpdatingStock({required this.message});
 }

@@ -5,7 +5,7 @@ import 'package:saasify/services/client_services.dart';
 import 'package:saasify/utils/constants/api_constants.dart';
 import 'billing_repository.dart';
 
-class BillingRepositoryImpl extends BillingRepository {
+class BillingRepositoryImpl implements BillingRepository {
   @override
   Future<FetchProductsByCategoryModel> fetchProductsByCategory(
       String userId, String companyId, int branchId) async {
