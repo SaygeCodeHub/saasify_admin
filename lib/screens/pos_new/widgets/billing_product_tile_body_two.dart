@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/utils/constants/string_constants.dart';
 
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
@@ -16,27 +17,27 @@ class BillingProductTileBodyTwo extends StatelessWidget {
         children: [
           const Expanded(
               child: Text(
-            'Lychee Cake',
+            StringConstants.kLycheeCake,
             maxLines: 2,
             style: TextStyle(),
           )),
-          Text('₹425',
+          Text(StringConstants.k425,
               style: Theme.of(context)
                   .textTheme
-                  .tiniest
+                  .xxTiniest
                   .copyWith(color: AppColor.saasifyLightDeepBlue))
         ],
       ),
-      Text('300 gms',
+      Text(StringConstants.k300gms,
           style: Theme.of(context)
               .textTheme
-              .xTiniest
+              .xxxTiniest
               .copyWith(color: AppColor.saasifyGrey)),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text('Add Instructions',
+        Text(StringConstants.kAddInstructions,
             style: Theme.of(context)
                 .textTheme
-                .xTiniest
+                .xxxTiniest
                 .copyWith(color: AppColor.saasifyLightDeepBlue)),
         Row(children: [
           InkWell(
@@ -47,7 +48,11 @@ class BillingProductTileBodyTwo extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(color: AppColor.saasifyLightDeepBlue),
               ),
-              child: const Center(child: Icon(Icons.remove)),
+              child: const Center(
+                  child: Icon(
+                Icons.remove,
+                size: kGeneralRadius,
+              )),
             ),
           ),
           Container(
@@ -57,7 +62,8 @@ class BillingProductTileBodyTwo extends StatelessWidget {
               border: Border.all(color: AppColor.saasifyLightDeepBlue),
             ),
             child: Center(
-                child: Text('1', style: Theme.of(context).textTheme.tiniest)),
+                child: Text(StringConstants.k1,
+                    style: Theme.of(context).textTheme.xxTiniest)),
           ),
           InkWell(
               onTap: () {},
@@ -67,7 +73,11 @@ class BillingProductTileBodyTwo extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: Border.all(color: AppColor.saasifyLightDeepBlue),
                   ),
-                  child: const Center(child: Icon(Icons.add))))
+                  child: const Center(
+                      child: Icon(
+                    Icons.add,
+                    size: kGeneralRadius,
+                  ))))
         ])
       ])
     ]);

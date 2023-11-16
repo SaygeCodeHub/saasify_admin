@@ -11,7 +11,7 @@ class BillingProductsListTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: kProductContainerHeight,
       decoration: BoxDecoration(
         color: AppColor.saasifyWhite,
         borderRadius: BorderRadius.circular(kGeneralRadius),
@@ -28,8 +28,8 @@ class BillingProductsListTwo extends StatelessWidget {
                     horizontal: spacingSmall, vertical: spacingSmall),
                 child: Row(children: [
                   SizedBox(
-                    height: 70,
-                    width: 70,
+                    height: kImageHeight,
+                    width: kImageHeight,
                     child: Image.asset(
                       'assets/cake_img.png',
                     ),

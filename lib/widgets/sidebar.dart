@@ -9,7 +9,7 @@ import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 
-import '../screens/pos_two/pos_two_screen.dart';
+import '../screens/pos_new/pos_screen_new.dart';
 
 class SideBar extends StatelessWidget {
   final int selectedIndex;

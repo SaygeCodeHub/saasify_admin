@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -16,7 +15,9 @@ import 'package:saasify/data/models/billing/fetch_products_by_category_model.dar
 import 'package:saasify/data/models/billing/selected_product_model.dart';
 import 'package:saasify/firebase_options.dart';
 import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
+import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
+import 'package:saasify/screens/pos_new/pos_screen_new.dart';
 import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -109,7 +110,7 @@ class MyPosApp extends StatelessWidget {
                                   (route) => false);
                             }
                           },
-                          child: AuthenticationScreen())),
+                          child: const POSTwoScreen())),
             )));
   }
 }

@@ -246,8 +246,8 @@ class AddProductScreen extends StatelessWidget {
                                                         },
                                                         canEdit: !(isVariant &&
                                                             !isEdit),
-                                                        dataMap: dataMap,
-                                                        mapKey: 'category_name',
+                                                        // dataMap: dataMap,
+                                                        // mapKey: 'category_name',
                                                         initialValue: dataMap[
                                                                 'category_name'] ??
                                                             state.categoryList
@@ -448,20 +448,22 @@ class AddProductScreen extends StatelessWidget {
                                                         SizedBox(
                                                             height:
                                                                 kDropdownHeight,
-                                                            child: CustomDropdownWidget(
-                                                                initialValue:
-                                                                    dataMap['unit'] ??
-                                                                        "units",
-                                                                listItems: const [
-                                                                  "units",
-                                                                  "kg",
-                                                                  "l",
-                                                                  "gm",
-                                                                  "m"
-                                                                ],
-                                                                dataMap:
-                                                                    dataMap,
-                                                                mapKey: 'unit'))
+                                                            child:
+                                                                CustomDropdownWidget(
+                                                              initialValue:
+                                                                  dataMap['unit'] ??
+                                                                      "units",
+                                                              listItems: const [
+                                                                "units",
+                                                                "kg",
+                                                                "l",
+                                                                "gm",
+                                                                "m"
+                                                              ],
+                                                              // dataMap:
+                                                              //     dataMap,
+                                                              // mapKey: 'unit'
+                                                            ))
                                                       ]))
                                                 ])
                                               ])),

@@ -5,10 +5,9 @@ import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
-import 'package:saasify/screens/pos/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import '../screens/onboarding/auhentication_screen.dart';
-import '../screens/pos_two/pos_two_screen.dart';
+import '../screens/pos_new/pos_screen_new.dart';
 import '../screens/product/add_product_screen.dart';
 
 class AppRoutes {
@@ -20,8 +19,6 @@ class AppRoutes {
       case POSTwoScreen.routeName:
         return _createRoute(const POSTwoScreen());
 
-      case BillingScreen.routeName:
-        return _createRoute(BillingScreen());
       case DashboardsScreen.routeName:
         return _createRoute(DashboardsScreen());
       case ProductListScreen.routeName:

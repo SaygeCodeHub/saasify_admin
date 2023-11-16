@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:saasify/configs/app_dimensions.dart';
+import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/utils/constants/string_constants.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_spacing.dart';
 
@@ -14,12 +17,13 @@ class VariantDialogue extends StatelessWidget {
             borderRadius: BorderRadius.circular(spacingXMedium)),
         contentPadding: const EdgeInsets.all(spacingXHuge),
         content: SizedBox(
-            height: 400,
-            width: 370,
+            height: kDialogueWidth,
+            width: kDialogueWidth,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                const Text('Choose Variant'),
+                Text(StringConstants.kChooseVariant,
+                    style: Theme.of(context).textTheme.tiniest),
                 InkWell(
                     onTap: () {
                       Navigator.pop(context);
@@ -51,7 +55,7 @@ class VariantDialogue extends StatelessWidget {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text("200 gm",
+                                                  Text(StringConstants.k300gms,
                                                       maxLines: 2,
                                                       overflow:
                                                           TextOverflow.ellipsis,
