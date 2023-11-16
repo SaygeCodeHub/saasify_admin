@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../bloc/pos/billing_bloc.dart';
-import '../../../bloc/pos/billing_event.dart';
-import '../../../configs/app_color.dart';
-import '../../../configs/app_spacing.dart';
+import '../../bloc/pos/billing_bloc.dart';
+import '../../bloc/pos/billing_event.dart';
+import '../../configs/app_color.dart';
+import '../../configs/app_spacing.dart';
 
 class PaymentDialogue extends StatefulWidget {
   const PaymentDialogue({super.key});

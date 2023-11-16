@@ -11,6 +11,7 @@ class CustomDropdownWidget extends StatefulWidget {
   final bool canEdit;
   final String dropdownValue;
   final List listItems;
+  final Color? color;
   // final Map dataMap;
   // final String mapKey;
   final Widget? disabledHint;
@@ -25,6 +26,7 @@ class CustomDropdownWidget extends StatefulWidget {
     // required this.dataMap,
     // required this.mapKey,
     this.disabledHint,
+    this.color,
   });
 
   @override
@@ -46,7 +48,9 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
     return Container(
         width: kDropdownWidth,
         decoration: BoxDecoration(
-          color: AppColor.saasifyLighterGrey,
+          color: (widget.color == null)
+              ? AppColor.saasifyLighterGrey
+              : widget.color,
           border: Border.all(color: AppColor.saasifyWhite),
           borderRadius: BorderRadius.circular(spacingMedium),
         ),

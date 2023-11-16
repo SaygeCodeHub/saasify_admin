@@ -4,7 +4,9 @@ import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_dropdown.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
 import '../../configs/app_color.dart';
+import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
+import 'variant_dialogue.dart';
 
 class PosScreenNew extends StatelessWidget {
   const PosScreenNew({super.key});
@@ -19,14 +21,20 @@ class PosScreenNew extends StatelessWidget {
             flex: 6,
             child: Padding(
                 padding: const EdgeInsets.only(
-                    top: 23, bottom: 30, right: 23, left: 28),
+                    top: spacingLarger,
+                    bottom: spacingHuge,
+                    right: spacingLarger,
+                    left: spacingXXLarge),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          const Expanded(
+                          const SizedBox(
+                            width: kDropdownWidthTwo,
+                            height: kDropdownHeight,
                             child: CustomDropdownWidget(
+                                color: AppColor.saasifyCementGrey,
                                 dropdownValue: "Hot Dishes",
                                 listItems: [
                                   "Cold Dishes",
@@ -36,16 +44,16 @@ class PosScreenNew extends StatelessWidget {
                                   "Dessert"
                                 ]),
                           ),
-                          const SizedBox(width: 49),
+                          const SizedBox(width: kGeneralButtonHeight),
                           Expanded(
                             child: CustomTextField(
                                 hintText: StringConstants.kSearchProduct,
                                 onTextFieldChanged: (value) {}),
                           ),
-                          const SizedBox(height: 23),
+                          const SizedBox(height: spacingLarger),
                         ],
                       ),
-                      const SizedBox(height: 23),
+                      const SizedBox(height: spacingLarger),
                       Row(
                         children: [
                           Text(StringConstants.kHotDishes,
@@ -53,22 +61,22 @@ class PosScreenNew extends StatelessWidget {
                                   .textTheme
                                   .xxTiniest
                                   .copyWith(color: AppColor.saasifyRed)),
-                          const SizedBox(width: 32),
+                          const SizedBox(width: spacingHuge),
                           Text(StringConstants.kColdDishes,
                               style: Theme.of(context).textTheme.xxTiniest),
-                          const SizedBox(width: 32),
+                          const SizedBox(width: spacingHuge),
                           Text(StringConstants.kSoup,
                               style: Theme.of(context).textTheme.xxTiniest),
-                          const SizedBox(width: 32),
+                          const SizedBox(width: spacingHuge),
                           Text(StringConstants.kGrill,
                               style: Theme.of(context).textTheme.xxTiniest),
-                          const SizedBox(width: 32),
+                          const SizedBox(width: spacingHuge),
                           Text(StringConstants.kAppetizer,
                               style: Theme.of(context).textTheme.xxTiniest),
-                          const SizedBox(width: 32),
+                          const SizedBox(width: spacingHuge),
                         ],
                       ),
-                      const SizedBox(height: 53),
+                      const SizedBox(height: kGeneralButtonHeight),
                       GridView.builder(
                           physics: const BouncingScrollPhysics(),
                           itemCount: 10,
@@ -81,8 +89,14 @@ class PosScreenNew extends StatelessWidget {
                             return Padding(
                                 padding: const EdgeInsets.all(spacingXSmall),
                                 child: InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              const VariantDialogue());
+                                    },
                                     child: Container(
+                                        height: 200,
                                         padding:
                                             const EdgeInsets.all(spacingXSmall),
                                         decoration: BoxDecoration(
@@ -92,27 +106,25 @@ class PosScreenNew extends StatelessWidget {
                                         ),
                                         child: Column(children: [
                                           const Row(),
-                                          Expanded(
+                                          SizedBox(
+                                            height: kLogoWidth,
                                             child: Image.asset(
                                               'assets/cake_img.png',
                                             ),
                                           ),
                                           const SizedBox(
                                               height: spacingXMedium),
-                                          SizedBox(
-                                              height: 20,
-                                              child: Center(
-                                                  child: Text("Cake",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .xxTiniest,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 2))),
+                                          Center(
+                                              child: Text("Cake",
+                                                  textAlign: TextAlign.center,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .xxTiniest,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 2)),
                                           const SizedBox(
-                                              height: spacingXMedium),
+                                              height: spacingXXSmall),
                                           Text('₹425',
                                               style: Theme.of(context)
                                                   .textTheme
@@ -123,45 +135,10 @@ class PosScreenNew extends StatelessWidget {
                                         ]))));
                           }),
                     ]))),
-        Expanded(
-            flex: 4,
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(children: [
-                Column(children: [
-                  Row(
-                    children: [
-                      Text(StringConstants.kMembershipNO,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                      const SizedBox(width: 20),
-                      Text(StringConstants.k8888881800,
-                          style: Theme.of(context).textTheme.xxTiniest.copyWith(
-                              color: AppColor.saasifyLighterGrey,
-                              fontWeight: FontWeight.w500)),
-                      const SizedBox(width: 40),
-                      const Icon(
-                        Icons.edit,
-                        size: 12,
-                        color: AppColor.saasifyLightDeepBlue,
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Row(children: [
-                    Text(StringConstants.kCustomerName,
-                        style: Theme.of(context).textTheme.xxTiniest),
-                    const SizedBox(width: 20),
-                    Text(StringConstants.kAdityaRastogi,
-                        style: Theme.of(context).textTheme.xxTiniest.copyWith(
-                            color: AppColor.saasifyLighterGrey,
-                            fontWeight: FontWeight.w500,
-                            decoration: TextDecoration.underline)),
-                    const SizedBox(width: 40),
-                  ])
-                ]),
-                const Divider(),
-              ]),
-            ))
+        const Expanded(
+          flex: 4,
+          child: SizedBox(),
+        )
       ]))
     ]));
   }

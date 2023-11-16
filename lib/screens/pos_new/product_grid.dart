@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/pos/widgets/variant_dialogue.dart';
-import '../../../bloc/pos/billing_bloc.dart';
-import '../../../configs/app_color.dart';
-import '../../../configs/app_spacing.dart';
-import '../../../data/models/billing/fetch_products_by_category_model.dart';
+import 'package:saasify/screens/pos_new/variant_dialogue.dart';
+import '../../bloc/pos/billing_bloc.dart';
+import '../../configs/app_color.dart';
+import '../../configs/app_spacing.dart';
+import '../../data/models/billing/fetch_products_by_category_model.dart';
 
 class ProductGrid extends StatelessWidget {
   const ProductGrid({
@@ -38,12 +38,7 @@ class ProductGrid extends StatelessWidget {
                       onTap: () {
                         showDialog(
                             context: context,
-                            builder: (context) => VariantDialogue(
-                                product: productsByCategories[context
-                                        .read<BillingBloc>()
-                                        .selectedCategoryIndex]
-                                    .products[index],
-                                productsByCategories: productsByCategories));
+                            builder: (context) => const VariantDialogue());
                       },
                       child: Container(
                           padding: const EdgeInsets.all(spacingXSmall),

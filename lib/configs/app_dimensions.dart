@@ -4,6 +4,7 @@ const double kButtonHeight = 75;
 const double kDropdownHeight = 45;
 const double kLogoWidth = 80;
 const double kSidebarLogoWidth = 100;
+const double kDropdownWidthTwo = 334;
 const double kHelloSpacingHeight = 68;
 const double kDropdownWidth = 500;
 const double kAlertBoxWidth = 620;
