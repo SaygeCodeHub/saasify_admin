@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/screens/pos_new/payment_dialogue.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_spacing.dart';
@@ -43,28 +44,37 @@ class VariantDialogue extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Padding(
                                 padding: const EdgeInsets.all(spacingXMedium),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                        color: AppColor.saasifyCementGrey,
-                                        borderRadius: BorderRadius.circular(
-                                            spacingXMedium)),
-                                    child: const Center(
-                                        child: Padding(
-                                            padding: EdgeInsets.all(0),
-                                            child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(StringConstants.k300gms,
-                                                      maxLines: 2,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          color: AppColor
-                                                              .saasifyWhite)),
-                                                ])))));
+                                child: InkWell(
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            const PaymentDialogue());
+                                  },
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          color: AppColor.saasifyCementGrey,
+                                          borderRadius: BorderRadius.circular(
+                                              spacingXMedium)),
+                                      child: const Center(
+                                          child: Padding(
+                                              padding: EdgeInsets.all(0),
+                                              child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                        StringConstants.k300gms,
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            color: AppColor
+                                                                .saasifyWhite)),
+                                                  ])))),
+                                ));
                           })))
             ])));
   }
