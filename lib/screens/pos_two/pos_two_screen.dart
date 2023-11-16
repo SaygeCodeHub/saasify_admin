@@ -25,6 +25,7 @@ class POSTwoScreen extends StatelessWidget {
                   child: Icon(Icons.menu,
                       color: AppColor.saasifyWhite, size: 35)))),
       const Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+
         BillingSectionTwo(),
       ])
     ]));
