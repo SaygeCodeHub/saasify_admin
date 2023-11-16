@@ -8,6 +8,7 @@ import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/pos/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import '../screens/onboarding/auhentication_screen.dart';
+import '../screens/pos_two/pos_two_screen.dart';
 import '../screens/product/add_product_screen.dart';
 
 class AppRoutes {
@@ -15,6 +16,10 @@ class AppRoutes {
     switch (settings.name) {
       case AuthenticationScreen.routeName:
         return _createRoute(AuthenticationScreen());
+
+      case POSTwoScreen.routeName:
+        return _createRoute(const POSTwoScreen());
+
       case BillingScreen.routeName:
         return _createRoute(BillingScreen());
       case DashboardsScreen.routeName:

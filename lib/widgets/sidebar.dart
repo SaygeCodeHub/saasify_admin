@@ -9,6 +9,8 @@ import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 
+import '../screens/pos_two/pos_two_screen.dart';
+
 class SideBar extends StatelessWidget {
   final int selectedIndex;
 
@@ -69,8 +71,8 @@ class SideBar extends StatelessWidget {
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {
-                    // Navigator.pushReplacementNamed(
-                    //     context, BillingScreen.routeName);
+                    Navigator.pushReplacementNamed(
+                        context, POSTwoScreen.routeName);
                   },
                 ),
                 ListTile(
