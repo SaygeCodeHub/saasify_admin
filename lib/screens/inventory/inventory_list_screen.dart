@@ -35,11 +35,17 @@ class InventoryListScreen extends StatelessWidget {
                   Container(
                       color: AppColor.saasifyLightDeepBlue,
                       child: Row(children: [
-                        IconButton(
-                            onPressed: () {
-                              _scaffoldKey.currentState!.openDrawer();
-                            },
-                            icon: const Icon(Icons.menu))
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: spacingSmall, horizontal: spacingLarge),
+                          child: IconButton(
+                              onPressed: () {
+                                _scaffoldKey.currentState!.openDrawer();
+                              },
+                              iconSize: 30,
+                              icon: const Icon(Icons.menu,
+                                  color: AppColor.saasifyWhite)),
+                        )
                       ])),
                   desktop: const Expanded(
                     child: SideBar(selectedIndex: 1),

@@ -16,11 +16,11 @@ class AppRoutes {
       case AuthenticationScreen.routeName:
         return _createRoute(AuthenticationScreen());
       case BillingScreen.routeName:
-        return _createRoute(const BillingScreen());
+        return _createRoute(BillingScreen());
       case DashboardsScreen.routeName:
-        return _createRoute(const DashboardsScreen());
+        return _createRoute(DashboardsScreen());
       case ProductListScreen.routeName:
-        return _createRoute(const ProductListScreen());
+        return _createRoute(ProductListScreen());
       case InventoryListScreen.routeName:
         return _createRoute(InventoryListScreen());
       case CompanyListScreen.routeName:

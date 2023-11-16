@@ -8,21 +8,44 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/pos/widgets/billing_section.dart';
 import 'package:saasify/screens/pos/widgets/products_with_categories.dart';
 import 'package:saasify/utils/database_util.dart';
+import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import '../../configs/app_color.dart';
 
 class BillingScreen extends StatelessWidget {
   static const routeName = 'POSScreen';
 
-  const BillingScreen({Key? key}) : super(key: key);
+  BillingScreen({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     context.read<BillingBloc>().add(LoadAllOrders());
     return Scaffold(
-      body: Row(
+      key: _scaffoldKey,
+      drawer: const SideBar(selectedIndex: 2),
+      body: Flex(
+        direction: context.responsive(Axis.vertical, desktop: Axis.horizontal),
         children: [
-          const Expanded(child: SideBar(selectedIndex: 2)),
+          context.responsive(
+              Container(
+                  color: AppColor.saasifyLightDeepBlue,
+                  child: Row(children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: spacingSmall, horizontal: spacingLarge),
+                      child: IconButton(
+                          onPressed: () {
+                            _scaffoldKey.currentState!.openDrawer();
+                          },
+                          iconSize: 30,
+                          icon: const Icon(Icons.menu,
+                              color: AppColor.saasifyWhite)),
+                    )
+                  ])),
+              desktop: const Expanded(
+                child: SideBar(selectedIndex: 2),
+              )),
           Expanded(
             flex: 5,
             child: Container(

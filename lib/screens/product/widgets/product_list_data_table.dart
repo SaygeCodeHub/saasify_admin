@@ -22,7 +22,7 @@ class ProductListDataTable extends StatelessWidget {
         child: ListView(children: <Widget>[
       DataTable(
           columnSpacing: 0,
-          horizontalMargin: 20,
+          horizontalMargin: 0,
           showCheckboxColumn: true,
           headingRowHeight: 50,
           dataRowMaxHeight: 50,
