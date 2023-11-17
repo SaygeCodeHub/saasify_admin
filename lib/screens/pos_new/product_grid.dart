@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/pos_new/variant_dialogue.dart';
-import 'package:saasify/utils/constants/string_constants.dart';
+import '../../bloc/pos/billing_bloc.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
+import '../../data/models/billing/fetch_products_by_category_model.dart';
 
 class ProductGrid extends StatelessWidget {
   const ProductGrid({
     super.key,
+    required this.posData,
   });
+
+  final List<CategoryWithProductsDatum> posData;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
         physics: const BouncingScrollPhysics(),
-        itemCount: 10,
+        itemCount: posData[context.read<BillingBloc>().selectedCategoryIndex]
+            .products
+            .length,
         shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 5, childAspectRatio: 172 / 146),
@@ -26,10 +33,11 @@ class ProductGrid extends StatelessWidget {
                   onTap: () {
                     showDialog(
                         context: context,
-                        builder: (context) => const VariantDialogue());
+                        builder: (context) =>
+                            VariantDialogue(posData: posData));
                   },
                   child: Container(
-                      height: 200,
+                      height: spacingXXXXHuge,
                       padding: const EdgeInsets.all(spacingXXSmall),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(spacingXMedium),
@@ -39,19 +47,34 @@ class ProductGrid extends StatelessWidget {
                         const Row(),
                         SizedBox(
                           height: kButtonHeight,
-                          child: Image.asset(
-                            'assets/cake_img.png',
-                          ),
+                          child: Image.network(posData[context
+                                  .read<BillingBloc>()
+                                  .selectedCategoryIndex]
+                              .products[index]
+                              .variants[index]
+                              .images[index]),
                         ),
                         const SizedBox(height: spacingXMedium),
                         Center(
-                            child: Text(StringConstants.kLycheeCake,
+                            child: Text(
+                                posData[context
+                                        .read<BillingBloc>()
+                                        .selectedCategoryIndex]
+                                    .products[index]
+                                    .productName,
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.xxTiniest,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2)),
                         const SizedBox(height: spacingXXSmall),
-                        Text(StringConstants.k425,
+                        Text(
+                            posData[context
+                                    .read<BillingBloc>()
+                                    .selectedCategoryIndex]
+                                .products[index]
+                                .variants[index]
+                                .cost
+                                .toString(),
                             style: Theme.of(context)
                                 .textTheme
                                 .tiniest

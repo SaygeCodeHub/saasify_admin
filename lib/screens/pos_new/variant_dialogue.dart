@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/pos_new/payment_dialogue.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
+import '../../bloc/pos/billing_bloc.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_spacing.dart';
+import '../../data/models/billing/fetch_products_by_category_model.dart';
 
 class VariantDialogue extends StatelessWidget {
   const VariantDialogue({
     super.key,
+    required this.posData,
   });
+
+  final List<CategoryWithProductsDatum> posData;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +46,11 @@ class VariantDialogue extends StatelessWidget {
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, childAspectRatio: 1.2),
-                          itemCount: 4,
+                          itemCount: posData[context
+                                  .read<BillingBloc>()
+                                  .selectedCategoryIndex]
+                              .products
+                              .length,
                           itemBuilder: (context, index) {
                             return Padding(
                                 padding: const EdgeInsets.all(spacingXMedium),
@@ -56,24 +66,48 @@ class VariantDialogue extends StatelessWidget {
                                           color: AppColor.saasifyCementGrey,
                                           borderRadius: BorderRadius.circular(
                                               spacingXMedium)),
-                                      child: const Center(
-                                          child: Padding(
-                                              padding: EdgeInsets.all(0),
-                                              child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                        StringConstants.k300gms,
-                                                        maxLines: 2,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: TextStyle(
-                                                            color: AppColor
-                                                                .saasifyWhite)),
-                                                  ])))),
+                                      child: Center(
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                            Text(
+                                                posData[context
+                                                        .read<BillingBloc>()
+                                                        .selectedCategoryIndex]
+                                                    .products[index]
+                                                    .variants[index]
+                                                    .quantity
+                                                    .toString(),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .xxTiniest
+                                                    .copyWith(
+                                                        color: AppColor
+                                                            .saasifyWhite)),
+                                            const SizedBox(
+                                                width: spacingXSmall),
+                                            Text(
+                                                posData[context
+                                                        .read<BillingBloc>()
+                                                        .selectedCategoryIndex]
+                                                    .products[index]
+                                                    .variants[index]
+                                                    .unit
+                                                    .toString(),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .xxTiniest
+                                                    .copyWith(
+                                                        color: AppColor
+                                                            .saasifyWhite)),
+                                          ]))),
                                 ));
                           })))
             ])));

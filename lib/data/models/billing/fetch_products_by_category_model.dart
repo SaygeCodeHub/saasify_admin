@@ -1,28 +1,26 @@
 import 'dart:convert';
 
-import 'package:hive_flutter/adapters.dart';
+FetchProductsByCategoryPosModel fetchProductsByCategoryPosModelFromJson(
+        String str) =>
+    FetchProductsByCategoryPosModel.fromJson(json.decode(str));
 
-part 'fetch_products_by_category_model.g.dart';
-
-FetchProductsByCategoryModel fetchProductsByCategoryModelFromJson(String str) =>
-    FetchProductsByCategoryModel.fromJson(json.decode(str));
-
-String fetchProductsByCategoryModelToJson(FetchProductsByCategoryModel data) =>
+String fetchProductsByCategoryPosModelToJson(
+        FetchProductsByCategoryPosModel data) =>
     json.encode(data.toJson());
 
-class FetchProductsByCategoryModel {
+class FetchProductsByCategoryPosModel {
   final int status;
   final List<CategoryWithProductsDatum> data;
   final String message;
 
-  FetchProductsByCategoryModel({
+  FetchProductsByCategoryPosModel({
     required this.status,
     required this.data,
     required this.message,
   });
 
-  factory FetchProductsByCategoryModel.fromJson(Map<String, dynamic> json) =>
-      FetchProductsByCategoryModel(
+  factory FetchProductsByCategoryPosModel.fromJson(Map<String, dynamic> json) =>
+      FetchProductsByCategoryPosModel(
         status: json["status"],
         data: List<CategoryWithProductsDatum>.from(
             json["data"].map((x) => CategoryWithProductsDatum.fromJson(x))),
@@ -36,13 +34,9 @@ class FetchProductsByCategoryModel {
       };
 }
 
-@HiveType(typeId: 4)
 class CategoryWithProductsDatum {
-  @HiveField(0)
   final int categoryId;
-  @HiveField(1)
   final String categoryName;
-  @HiveField(2)
   final List<Product> products;
 
   CategoryWithProductsDatum({
@@ -66,17 +60,11 @@ class CategoryWithProductsDatum {
       };
 }
 
-@HiveType(typeId: 3)
 class Product {
-  @HiveField(0)
   final int productId;
-  @HiveField(1)
   final String productName;
-  @HiveField(2)
   final String brandName;
-  @HiveField(3)
   final String productDescription;
-  @HiveField(4)
   final List<Variant> variants;
 
   Product({
@@ -105,27 +93,17 @@ class Product {
       };
 }
 
-@HiveType(typeId: 2)
 class Variant {
-  @HiveField(0)
   final int variantId;
-  @HiveField(1)
   final int cost;
-  @HiveField(2)
-  final String quantity;
-  @HiveField(3)
+  final int quantity;
   final int discountPercent;
-  @HiveField(4)
+  final int stockId;
   final int stock;
-  @HiveField(5)
   final List<String> images;
-  @HiveField(6)
   final String unit;
-  @HiveField(7)
   final int barcode;
-  @HiveField(8)
   final int restockReminder;
-  @HiveField(9)
   final bool draft;
 
   Variant({
@@ -133,6 +111,7 @@ class Variant {
     required this.cost,
     required this.quantity,
     required this.discountPercent,
+    required this.stockId,
     required this.stock,
     required this.images,
     required this.unit,
@@ -146,6 +125,7 @@ class Variant {
         cost: json["cost"],
         quantity: json["quantity"],
         discountPercent: json["discount_percent"],
+        stockId: json["stock_id"],
         stock: json["stock"],
         images: List<String>.from(json["images"].map((x) => x)),
         unit: json["unit"],
@@ -159,6 +139,7 @@ class Variant {
         "cost": cost,
         "quantity": quantity,
         "discount_percent": discountPercent,
+        "stock_id": stockId,
         "stock": stock,
         "images": List<dynamic>.from(images.map((x) => x)),
         "unit": unit,

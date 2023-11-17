@@ -7,11 +7,11 @@ import 'billing_repository.dart';
 
 class BillingRepositoryImpl implements BillingRepository {
   @override
-  Future<FetchProductsByCategoryModel> fetchProductsByCategory(
+  Future<FetchProductsByCategoryPosModel> fetchProductsByCategory(
       String userId, String companyId, int branchId) async {
     final response = await ClientServices().get(
-        '${ApiConstants.baseUrl}$userId/$companyId/$branchId/getProductsByCategory');
+        'https://saasify-qm2p.onrender.com/v1/OvcqwTKNuHSL5ILAOZ6Y3OGcmrj2/1699579724/4/getProductsByCategory');
     log('${ApiConstants.baseUrl}$userId/$companyId/$branchId/getProductsByCategory');
-    return FetchProductsByCategoryModel.fromJson(response);
+    return FetchProductsByCategoryPosModel.fromJson(response);
   }
 }

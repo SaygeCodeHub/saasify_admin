@@ -7,9 +7,12 @@ import 'package:saasify/widgets/custom_text_field.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
+import '../../data/models/billing/fetch_products_by_category_model.dart';
 
 class POSScreenLeftPart extends StatelessWidget {
-  const POSScreenLeftPart({super.key});
+  const POSScreenLeftPart({super.key, required this.posData});
+
+  final List<CategoryWithProductsDatum> posData;
 
   @override
   Widget build(BuildContext context) {
@@ -48,29 +51,20 @@ class POSScreenLeftPart extends StatelessWidget {
           ),
           const SizedBox(height: spacingLarger),
           Row(
-            children: [
-              Text(StringConstants.kHotDishes,
-                  style: Theme.of(context).textTheme.xxTiniest.copyWith(
-                      color: AppColor.saasifyRed,
-                      decoration: TextDecoration.underline)),
-              const SizedBox(width: spacingHuge),
-              Text(StringConstants.kColdDishes,
-                  style: Theme.of(context).textTheme.xxTiniest),
-              const SizedBox(width: spacingHuge),
-              Text(StringConstants.kSoup,
-                  style: Theme.of(context).textTheme.xxTiniest),
-              const SizedBox(width: spacingHuge),
-              Text(StringConstants.kGrill,
-                  style: Theme.of(context).textTheme.xxTiniest),
-              const SizedBox(width: spacingHuge),
-              Text(StringConstants.kAppetizer,
-                  style: Theme.of(context).textTheme.xxTiniest),
-              const SizedBox(width: spacingHuge),
-            ],
-          ),
+              children: List.generate(posData.length, (index) {
+            return Row(
+              children: [
+                Text(posData[index].categoryName,
+                    style: Theme.of(context).textTheme.xxTiniest.copyWith(
+                        color: AppColor.saasifyRed,
+                        decoration: TextDecoration.underline)),
+                const SizedBox(width: spacingHuge),
+              ],
+            );
+          })),
           const Divider(),
           const SizedBox(height: kGeneralButtonHeight),
-          const ProductGrid()
+          ProductGrid(posData: posData)
         ]));
   }
 }
