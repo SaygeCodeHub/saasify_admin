@@ -71,31 +71,32 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   FutureOr<void> _fetchProductsByCategory(
       FetchProductsByCategory event, Emitter<BillingStates> emit) async {
     emit(FetchingProductsByCategory());
-    // try {
-    List<CategoryWithProductsDatum> data = [];
-    FetchProductsByCategoryModel fetchProductsByCategoryModel;
-    String userId = await _customerCache.getUserId();
-    String companyId = await _customerCache.getCompanyId();
-    int branchId = await _customerCache.getBranchId();
-    if (DatabaseUtil.products.isEmpty) {
-      fetchProductsByCategoryModel = await _billingRepository
-          .fetchProductsByCategory(userId, companyId, branchId);
-      data = fetchProductsByCategoryModel.data;
-      DatabaseUtil.products.put('products', fetchProductsByCategoryModel.data);
-    } else {
-      data = DatabaseUtil.products
-          .get('products')
-          .cast<CategoryWithProductsDatum>();
-    }
+    try {
+      List<CategoryWithProductsDatum> data = [];
+      FetchProductsByCategoryModel fetchProductsByCategoryModel;
+      String userId = await _customerCache.getUserId();
+      String companyId = await _customerCache.getCompanyId();
+      int branchId = await _customerCache.getBranchId();
+      if (DatabaseUtil.products.isEmpty) {
+        fetchProductsByCategoryModel = await _billingRepository
+            .fetchProductsByCategory(userId, companyId, branchId);
+        data = fetchProductsByCategoryModel.data;
+        DatabaseUtil.products
+            .put('products', fetchProductsByCategoryModel.data);
+      } else {
+        data = DatabaseUtil.products
+            .get('products')
+            .cast<CategoryWithProductsDatum>();
+      }
 
-    emit(ProductsFetched(
-        productsByCategories: data,
-        selectedCategoryIndex: selectedCategoryIndex,
-        selectedProducts: selectedProducts,
-        billDetails: billDetails));
-    // } catch (e) {
-    //   emit(ErrorFetchingProductsByCategory());
-    // }
+      emit(ProductsFetched(
+          productsByCategories: data,
+          selectedCategoryIndex: selectedCategoryIndex,
+          selectedProducts: selectedProducts,
+          billDetails: billDetails));
+    } catch (e) {
+      emit(ErrorFetchingProductsByCategory());
+    }
   }
 
   FutureOr<void> _selectCategory(

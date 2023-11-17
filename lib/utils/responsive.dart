@@ -7,7 +7,7 @@ extension Responsive on BuildContext {
     T? desktop,
     T? widescreen,
   }) {
-    final wd = MediaQuery.sizeOf(this).width;
+    double wd = MediaQuery.sizeOf(this).width;
     return wd >= 2000
         ? (widescreen ?? desktop ?? defaultVal)
         : wd >= 1500

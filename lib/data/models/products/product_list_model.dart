@@ -38,7 +38,7 @@ class ProductWithVariant {
   final int productId;
   final String productName;
   final String brandName;
-  final int brandId;
+  final dynamic brandId;
   final int variantId;
   final int cost;
   final int quantity;

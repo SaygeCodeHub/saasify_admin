@@ -90,27 +90,23 @@ class MyPosApp extends StatelessWidget {
               FocusManager.instance.primaryFocus?.unfocus();
             },
             child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              scrollBehavior:
-                  const MaterialScrollBehavior().copyWith(scrollbars: false),
-              onGenerateRoute: AppRoutes.routes,
-              theme: appTheme,
-              home: context.responsive(const CannotBeMinimizeScreen(),
-                  tablets:
-                      BlocListener<AuthenticationBloc, AuthenticationStates>(
-                          listener: (context, state) {
-                            if (state is IsLoggedIn) {
-                              Navigator.pushReplacementNamed(
-                                  context, DashboardsScreen.routeName);
-                            } else if (state is LoggedOut) {
-                              log('message');
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context,
-                                  AuthenticationScreen.routeName,
-                                  (route) => false);
-                            }
-                          },
-                          child: AuthenticationScreen())),
-            )));
+                debugShowCheckedModeBanner: false,
+                scrollBehavior:
+                    const MaterialScrollBehavior().copyWith(scrollbars: false),
+                onGenerateRoute: AppRoutes.routes,
+                theme: appTheme,
+                home: BlocListener<AuthenticationBloc, AuthenticationStates>(
+                    listener: (context, state) {
+                      if (state is IsLoggedIn) {
+                        Navigator.pushReplacementNamed(
+                            context, DashboardsScreen.routeName);
+                      } else if (state is LoggedOut) {
+                        log('message');
+                        Navigator.pushNamedAndRemoveUntil(context,
+                            AuthenticationScreen.routeName, (route) => false);
+                      }
+                    },
+                    child: context.responsive(const CannotBeMinimizeScreen(),
+                        tablets: AuthenticationScreen())))));
   }
 }
