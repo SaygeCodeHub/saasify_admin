@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saasify/widgets/custom_text_field.dart';
 import '../configs/app_color.dart';
 import '../configs/app_dimensions.dart';
 import '../configs/app_spacing.dart';
@@ -12,6 +13,8 @@ class CustomDropdownWidget extends StatefulWidget {
   final List listItems;
   final Map dataMap;
   final String mapKey;
+  final bool addOption;
+  final String hintText;
   final Widget? disabledHint;
 
   const CustomDropdownWidget({
@@ -23,6 +26,8 @@ class CustomDropdownWidget extends StatefulWidget {
     required this.dataMap,
     required this.mapKey,
     this.disabledHint,
+    this.addOption = false,
+    this.hintText = '',
   });
 
   @override
@@ -41,31 +46,49 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: kDropdownWidth,
-        decoration: BoxDecoration(
-          color: AppColor.saasifyLighterGrey,
-          border: Border.all(color: AppColor.saasifyWhite),
-          borderRadius: BorderRadius.circular(spacingMedium),
-        ),
-        child: DropdownButtonHideUnderline(
-            child: Padding(
-                padding: const EdgeInsets.all(spacingSmall),
-                child: DropdownButton(
-                    disabledHint: const Text(""),
-                    underline: const SizedBox(),
-                    value: selectedValue,
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: List.generate(
-                        widget.listItems.length,
-                        (index) => DropdownMenuItem(
-                            value: widget.listItems[index],
-                            child: Text(widget.listItems[index]))),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedValue = value.toString();
-                      });
-                      widget.dataMap[widget.mapKey] = value;
-                    }))));
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+            height: kDropdownHeight,
+            width: kDropdownWidth,
+            decoration: BoxDecoration(
+              color: AppColor.saasifyLighterGrey,
+              border: Border.all(color: AppColor.saasifyWhite),
+              borderRadius: BorderRadius.circular(spacingMedium),
+            ),
+            child: DropdownButtonHideUnderline(
+                child: Padding(
+                    padding: const EdgeInsets.all(spacingSmall),
+                    child: DropdownButton(
+                        disabledHint: const Text(""),
+                        underline: const SizedBox(),
+                        value: selectedValue,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        items: List.generate(
+                            widget.listItems.length,
+                            (index) => DropdownMenuItem(
+                                value: widget.listItems[index],
+                                child: Text(widget.listItems[index]))),
+                        onChanged: (widget.canEdit)
+                            ? (value) {
+                                setState(() {
+                                  selectedValue = value.toString();
+                                });
+                                widget.dataMap[widget.mapKey] = value;
+                              }
+                            : null)))),
+        const SizedBox(height: spacingSmall),
+        Visibility(
+          visible: widget.addOption,
+          child: CustomTextField(
+              enabled: selectedValue == widget.listItems.last,
+              hintText: 'Add New Category',
+              onTextFieldChanged: (value) {
+                widget.dataMap[widget.mapKey] = value;
+              }),
+        )
+      ],
+    );
   }
 }

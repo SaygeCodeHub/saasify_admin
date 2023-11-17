@@ -3,7 +3,7 @@ abstract class InventoryEvents {}
 class FetchInventoryList extends InventoryEvents {}
 
 class UpdateStock extends InventoryEvents {
-  final Map productDetailsMap;
+  final Map updateStockMap;
 
-  UpdateStock({required this.productDetailsMap});
+  UpdateStock({required this.updateStockMap});
 }

@@ -2,16 +2,16 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_state.dart';
 import 'package:saasify/data/customer_cache/customer_cache.dart';
-import 'package:saasify/data/models/products/product_list_model.dart';
-import 'package:saasify/data/models/products/save_product_model.dart';
+import 'package:saasify/data/models/inventory/fetch_inventory_list_model.dart';
+import 'package:saasify/data/models/inventory/update_stock_model.dart';
 import 'package:saasify/di/app_module.dart';
-import 'package:saasify/repositories/products/product_repository.dart';
+import 'package:saasify/repositories/inventory/inventory_repository.dart';
 import 'inventory_event.dart';
 import 'inventory_states.dart';
 
 class InventoryBloc extends Bloc<InventoryEvents, InventoryStates> {
   final CustomerCache _customerCache = getIt<CustomerCache>();
-  final ProductRepository _productRepository = getIt<ProductRepository>();
+  final InventoryRepository _inventoryRepository = getIt<InventoryRepository>();
 
   ProductStates get initialState => ProductInitial();
 
@@ -27,13 +27,15 @@ class InventoryBloc extends Bloc<InventoryEvents, InventoryStates> {
       String userId = await _customerCache.getUserId();
       String companyId = await _customerCache.getCompanyId();
       int branchId = await _customerCache.getBranchId();
-      FetchProductListModel fetchProductListModel = await _productRepository
-          .fetchProductList(userId, companyId, branchId);
-      if (fetchProductListModel.status == 200) {
-        emit(FetchedInventoryList(productList: fetchProductListModel.data));
+      FetchInventoryProductsModel fetchInventoryProductsModel =
+          await _inventoryRepository.fetchInventoryProductList(
+              userId, companyId, branchId);
+      if (fetchInventoryProductsModel.status == 200) {
+        emit(FetchedInventoryList(
+            productList: fetchInventoryProductsModel.data));
       } else {
-        emit(
-            ErrorFetchingInventoryList(message: fetchProductListModel.message));
+        emit(ErrorFetchingInventoryList(
+            message: fetchInventoryProductsModel.message));
       }
     } catch (e) {
       emit(ErrorFetchingInventoryList(message: e.toString()));
@@ -48,13 +50,13 @@ class InventoryBloc extends Bloc<InventoryEvents, InventoryStates> {
       String companyId = await _customerCache.getCompanyId();
       int branchId = await _customerCache.getBranchId();
 
-      SaveProductModel saveProductModel = await _productRepository.saveProduct(
-          userId, companyId, branchId, event.productDetailsMap);
+      UpdateStockModel updateStockModel = await _inventoryRepository
+          .updateStock(userId, companyId, branchId, event.updateStockMap);
 
-      if (saveProductModel.status == 200) {
-        emit(UpdatedStock(message: saveProductModel.message));
+      if (updateStockModel.status == 200) {
+        emit(UpdatedStock(message: updateStockModel.message));
       } else {
-        emit(ErrorUpdatingStock(message: saveProductModel.message));
+        emit(ErrorUpdatingStock(message: updateStockModel.message));
       }
     } catch (e) {
       emit(ErrorUpdatingStock(message: e.toString()));

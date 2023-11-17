@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/bloc/product/product_event.dart';
 import 'package:saasify/configs/app_color.dart';
+import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/products/product_list_model.dart';
 import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
@@ -18,6 +19,7 @@ class ProductListDataTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductListScreen.selectedIds = [];
     return Expanded(
         child: ListView(children: <Widget>[
       DataTable(
@@ -191,7 +193,11 @@ class ProductListDataTable extends StatelessWidget {
                                   dataMap: productList[index].toJson()));
                         },
                         icon: const Icon(Icons.edit)))
-                  ])))
+                  ]))),
+      const SizedBox(height: spacingSmall),
+      Visibility(
+          visible: productList.isEmpty,
+          child: const Center(child: Text(StringConstants.kNoDataAvailable)))
     ]));
   }
 }

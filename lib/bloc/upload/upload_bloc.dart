@@ -12,30 +12,37 @@ class UploadBloc extends Bloc<UploadEvents, UploadStates> {
   final UploadRepository _uploadRepository = getIt<UploadRepository>();
 
   List<XFile> pickedFiles = [];
-  List pickedImageList = [];
+  List<Uint8List> pickedImageList = [];
+  List displayImageList = [];
   UploadStates get initialState => UploadImageInitial();
 
   UploadBloc() : super(UploadImageInitial()) {
     on<UploadImage>(_uploadImage);
     on<PickImage>(_pickImage);
-    on<RemoveImage>(_removeImage);
+    on<LoadImage>(_removeImage);
+    on<NoImageSelected>(_noImageSelected);
   }
 
   Future _pickImage(PickImage event, Emitter<UploadStates> emit) async {
-    if (kIsWeb) {
-      final ImagePicker picker = ImagePicker();
-      List<XFile> image = await picker.pickMultiImage();
-      if (image.isNotEmpty) {
-        pickedFiles.clear();
-        pickedFiles.addAll(image);
-        for (var item in image) {
-          Uint8List image1 = await item.readAsBytes();
-          pickedImageList.add(image1);
+    try {
+      if (kIsWeb) {
+        final ImagePicker picker = ImagePicker();
+        List<XFile> image = await picker.pickMultiImage();
+        if (image.isNotEmpty) {
+          pickedFiles.clear();
+          pickedFiles.addAll(image);
+          for (var item in image) {
+            Uint8List image1 = await item.readAsBytes();
+            pickedImageList.add(image1);
+          }
+          displayImageList.addAll(pickedImageList);
+          emit(ImagePicked());
+        } else {
+          emit(ImageCouldNotPick());
         }
-        emit(ImagePicked());
-      } else {
-        emit(ImageCouldNotPick(imageNotPicked: 'Something went Wrong'));
       }
+    } catch (e) {
+      emit(ImageCouldNotPick());
     }
   }
 
@@ -56,7 +63,12 @@ class UploadBloc extends Bloc<UploadEvents, UploadStates> {
   }
 
   FutureOr<void> _removeImage(
-      RemoveImage event, Emitter<UploadStates> emit) async {
+      LoadImage event, Emitter<UploadStates> emit) async {
     emit(ImagePicked());
+  }
+
+  FutureOr<void> _noImageSelected(
+      NoImageSelected event, Emitter<UploadStates> emit) async {
+    emit(NoImage());
   }
 }

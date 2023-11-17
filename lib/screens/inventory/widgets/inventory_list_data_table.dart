@@ -3,15 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/inventory/inventory_bloc.dart';
 import 'package:saasify/bloc/inventory/inventory_event.dart';
 import 'package:saasify/configs/app_color.dart';
+import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/data/models/products/product_list_model.dart';
+import 'package:saasify/data/models/inventory/fetch_inventory_list_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/primary_button.dart';
 import '../../../configs/app_spacing.dart';
 
 class InventoryListDataTable extends StatelessWidget {
-  final List<ProductWithVariant> productList;
+  final List<InventoryProduct> productList;
 
   const InventoryListDataTable({Key? key, required this.productList})
       : super(key: key);
@@ -129,41 +130,98 @@ class InventoryListDataTable extends StatelessWidget {
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
                     DataCell(Align(
-                        alignment: Alignment.centerRight,
-                        child: IconButton(
+                        child: Row(children: [
+                      IconButton(
+                        onPressed: () {
+                          int addedStock = 0;
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                  content: SizedBox(
+                                      width: kDialogueWidth,
+                                      child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            CustomTextField(
+                                                onTextFieldChanged: (value) {
+                                              addedStock = int.parse(value);
+                                            }),
+                                            const SizedBox(
+                                                height: spacingSmall),
+                                            PrimaryButton(
+                                                onPressed: () {
+                                                  context
+                                                      .read<InventoryBloc>()
+                                                      .add(UpdateStock(
+                                                          updateStockMap: {
+                                                            "stock_id":
+                                                                productList[
+                                                                        index]
+                                                                    .stockId,
+                                                            "stock": addedStock,
+                                                            "variant_id":
+                                                                productList[
+                                                                        index]
+                                                                    .variantId,
+                                                            "increment": true
+                                                          }));
+                                                  Navigator.pop(ctx);
+                                                },
+                                                buttonTitle: 'Update')
+                                          ]))));
+                        },
+                        icon: const Icon(
+                          Icons.add,
+                          size: spacingStandard,
+                          color: AppColor.saasifyLightBlack,
+                        ),
+                      ),
+                      IconButton(
                           onPressed: () {
-                            Map productDetailsMap = productList[index].toJson();
-                            int addedStock = 0;
+                            int removedStock = 0;
                             showDialog(
                                 context: context,
                                 builder: (ctx) => AlertDialog(
-                                      content: Column(
-                                        children: [
-                                          CustomTextField(
-                                              onTextFieldChanged: (value) {
-                                            addedStock = int.parse(value);
-                                          }),
-                                          PrimaryButton(
-                                              onPressed: () {
-                                                productDetailsMap['stock'] +=
-                                                    addedStock;
-                                                context
-                                                    .read<InventoryBloc>()
-                                                    .add(UpdateStock(
-                                                        productDetailsMap:
-                                                            productDetailsMap));
-                                              },
-                                              buttonTitle: 'Update')
-                                        ],
-                                      ),
-                                    ));
+                                    content: SizedBox(
+                                        width: kDialogueWidth,
+                                        child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              CustomTextField(
+                                                  onTextFieldChanged: (value) {
+                                                removedStock = int.parse(value);
+                                              }),
+                                              const SizedBox(
+                                                  height: spacingSmall),
+                                              PrimaryButton(
+                                                  onPressed: () {
+                                                    context
+                                                        .read<InventoryBloc>()
+                                                        .add(UpdateStock(
+                                                            updateStockMap: {
+                                                              "stock_id":
+                                                                  productList[
+                                                                          index]
+                                                                      .stockId,
+                                                              "stock":
+                                                                  removedStock,
+                                                              "variant_id":
+                                                                  productList[
+                                                                          index]
+                                                                      .variantId,
+                                                              "increment": false
+                                                            }));
+                                                    Navigator.pop(ctx);
+                                                  },
+                                                  buttonTitle: 'Update')
+                                            ]))));
                           },
                           icon: const Icon(
-                            Icons.add,
+                            Icons.remove,
                             size: spacingStandard,
                             color: AppColor.saasifyLightBlack,
-                          ),
-                        ))),
+                          ))
+                    ])))
                   ])))
     ]));
   }

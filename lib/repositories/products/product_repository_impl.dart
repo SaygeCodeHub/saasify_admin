@@ -51,6 +51,7 @@ class ProductRepositoryImpl implements ProductRepository {
     final response = await ClientServices().delete(
         '${ApiConstants.baseUrl}$userId/$companyId/$branchId/deleteVariant',
         variantIdMap);
+    log('${ApiConstants.baseUrl}$userId/$companyId/$branchId/deleteVariant');
     return DeleteProductsModel.fromJson(response);
   }
 }

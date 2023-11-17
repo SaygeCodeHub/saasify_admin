@@ -1,27 +1,27 @@
 import 'dart:convert';
 
-FetchProductListModel fetchProductListModelFromJson(String str) =>
-    FetchProductListModel.fromJson(json.decode(str));
+FetchInventoryProductsModel fetchInventoryProductsModelFromJson(String str) =>
+    FetchInventoryProductsModel.fromJson(json.decode(str));
 
-String fetchProductListModelToJson(FetchProductListModel data) =>
+String fetchInventoryProductsModelToJson(FetchInventoryProductsModel data) =>
     json.encode(data.toJson());
 
-class FetchProductListModel {
+class FetchInventoryProductsModel {
   final int status;
-  final List<ProductWithVariant> data;
+  final List<InventoryProduct> data;
   final String message;
 
-  FetchProductListModel({
+  FetchInventoryProductsModel({
     required this.status,
     required this.data,
     required this.message,
   });
 
-  factory FetchProductListModel.fromJson(Map<String, dynamic> json) =>
-      FetchProductListModel(
+  factory FetchInventoryProductsModel.fromJson(Map<String, dynamic> json) =>
+      FetchInventoryProductsModel(
         status: json["status"],
-        data: List<ProductWithVariant>.from(
-            json["data"].map((x) => ProductWithVariant.fromJson(x))),
+        data: List<InventoryProduct>.from(
+            json["data"].map((x) => InventoryProduct.fromJson(x))),
         message: json["message"],
       );
 
@@ -32,7 +32,7 @@ class FetchProductListModel {
       };
 }
 
-class ProductWithVariant {
+class InventoryProduct {
   final int categoryId;
   final String categoryName;
   final int productId;
@@ -40,10 +40,11 @@ class ProductWithVariant {
   final String brandName;
   final int brandId;
   final int variantId;
-  final int cost;
+  final double cost;
   final int quantity;
   final int discountPercent;
   final int stock;
+  final int stockId;
   final String productDescription;
   final List<String> images;
   final String unit;
@@ -51,7 +52,7 @@ class ProductWithVariant {
   final bool draft;
   final int restockReminder;
 
-  ProductWithVariant({
+  InventoryProduct({
     required this.categoryId,
     required this.categoryName,
     required this.productId,
@@ -63,6 +64,7 @@ class ProductWithVariant {
     required this.quantity,
     required this.discountPercent,
     required this.stock,
+    required this.stockId,
     required this.productDescription,
     required this.images,
     required this.unit,
@@ -71,8 +73,8 @@ class ProductWithVariant {
     required this.restockReminder,
   });
 
-  factory ProductWithVariant.fromJson(Map<String, dynamic> json) =>
-      ProductWithVariant(
+  factory InventoryProduct.fromJson(Map<String, dynamic> json) =>
+      InventoryProduct(
         categoryId: json["category_id"],
         categoryName: json["category_name"],
         productId: json["product_id"],
@@ -84,6 +86,7 @@ class ProductWithVariant {
         quantity: json["quantity"],
         discountPercent: json["discount_percent"] ?? 0,
         stock: json["stock"],
+        stockId: json["stock_id"],
         productDescription: json["product_description"],
         images: List<String>.from(json["images"].map((x) => x)),
         unit: json["unit"],
@@ -104,6 +107,7 @@ class ProductWithVariant {
         "quantity": quantity,
         "discount_percent": discountPercent,
         "stock": stock,
+        "stock_id": stockId,
         "product_description": productDescription,
         "images": List<dynamic>.from(images.map((x) => x)),
         "unit": unit,

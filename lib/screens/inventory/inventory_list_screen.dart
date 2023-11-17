@@ -8,7 +8,9 @@ import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/inventory/widgets/inventory_list_data_table.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
+import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
+import 'package:saasify/widgets/custom_alert_box.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/sidebar.dart';
 
@@ -70,18 +72,59 @@ class InventoryListScreen extends StatelessWidget {
                                 onTextFieldChanged: (value) {}),
                           ),
                           const Spacer(),
-                          // SizedBox(
-                          //     width: 180,
-                          //     child: PrimaryButton(
-                          //         onPressed: () {},
-                          //         buttonTitle: StringConstants.kAddNewOrder))
                         ]),
                         const SizedBox(height: spacingStandard),
-                        BlocBuilder<InventoryBloc, InventoryStates>(
+                        BlocConsumer<InventoryBloc, InventoryStates>(
+                          listener: (context, state) {
+                            if (state is UpdatingStock) {
+                              ProgressBar.show(context);
+                            } else if (state is UpdatedStock) {
+                              ProgressBar.dismiss(context);
+                              showDialog(
+                                  context: context,
+                                  builder: (dialogueCtx) {
+                                    return CustomAlertDialog(
+                                        title: 'Success',
+                                        message: state.message,
+                                        primaryButtonTitle:
+                                            StringConstants.kUnderstood,
+                                        primaryOnPressed: () {
+                                          Navigator.pop(dialogueCtx);
+                                          context
+                                              .read<InventoryBloc>()
+                                              .add(FetchInventoryList());
+                                        });
+                                  });
+                            } else if (state is ErrorUpdatingStock) {
+                              ProgressBar.dismiss(context);
+                              showDialog(
+                                  context: context,
+                                  builder: (dialogueCtx) {
+                                    return CustomAlertDialog(
+                                        title:
+                                            StringConstants.kSomethingWentWrong,
+                                        message: state.message,
+                                        primaryButtonTitle:
+                                            StringConstants.kUnderstood,
+                                        primaryOnPressed: () {
+                                          Navigator.pop(dialogueCtx);
+                                        });
+                                  });
+                            }
+                          },
+                          buildWhen: (prev, curr) {
+                            return curr is FetchedInventoryList ||
+                                curr is FetchingInventoryList;
+                          },
                           builder: (context, state) {
                             if (state is FetchedInventoryList) {
                               return InventoryListDataTable(
                                   productList: state.productList);
+                            }
+                            if (state is FetchingInventoryList) {
+                              return const Expanded(
+                                  child: Center(
+                                      child: CircularProgressIndicator()));
                             }
                             return const SizedBox.shrink();
                           },

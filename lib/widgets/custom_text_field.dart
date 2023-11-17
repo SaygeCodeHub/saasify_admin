@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final bool? firstCall;
   final void Function(String)? onTextFieldChanged;
   final bool? readOnly;
+  final bool? enabled;
   final TextEditingController controller = TextEditingController();
   final bool obscureText;
   final String? Function(String?)? validator;
@@ -43,7 +44,8 @@ class CustomTextField extends StatelessWidget {
       this.obscureText = false,
       this.hintStyle,
       this.suffixIcon,
-      this.autofocus = false})
+      this.autofocus = false,
+      this.enabled})
       : super(key: key);
 
   @override
@@ -51,6 +53,7 @@ class CustomTextField extends StatelessWidget {
     initialValue == null ? null : controller.text = initialValue.toString();
     return TextFormField(
       key: key,
+      enabled: enabled,
       autofocus: autofocus,
       obscureText: obscureText,
       obscuringCharacter: "*",

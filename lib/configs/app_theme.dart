@@ -69,7 +69,9 @@ extension AppTextTheme on TextTheme {
 
   TextStyle get tinier {
     return const TextStyle(
-        fontSize: 1, color: AppColor.saasifyBlack, fontWeight: FontWeight.w400);
+        fontSize: 18,
+        color: AppColor.saasifyBlack,
+        fontWeight: FontWeight.w400);
   }
 
   TextStyle get xxTiny {

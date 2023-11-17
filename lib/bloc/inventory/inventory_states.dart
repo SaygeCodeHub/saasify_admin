@@ -1,4 +1,4 @@
-import 'package:saasify/data/models/products/product_list_model.dart';
+import 'package:saasify/data/models/inventory/fetch_inventory_list_model.dart';
 
 abstract class InventoryStates {}
 
@@ -7,7 +7,7 @@ class InventoryInitial extends InventoryStates {}
 class FetchingInventoryList extends InventoryStates {}
 
 class FetchedInventoryList extends InventoryStates {
-  List<ProductWithVariant> productList;
+  List<InventoryProduct> productList;
 
   FetchedInventoryList({required this.productList});
 }

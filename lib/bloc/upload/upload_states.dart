@@ -20,10 +20,8 @@ class UploadImageError extends UploadStates {
 
 class ImagePicked extends UploadStates {}
 
+class NoImage extends UploadStates {}
+
 class RemovedImage extends UploadStates {}
 
-class ImageCouldNotPick extends UploadStates {
-  final String imageNotPicked;
-
-  ImageCouldNotPick({required this.imageNotPicked});
-}
+class ImageCouldNotPick extends UploadStates {}

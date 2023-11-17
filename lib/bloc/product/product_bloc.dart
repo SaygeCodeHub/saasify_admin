@@ -7,6 +7,7 @@ import 'package:saasify/bloc/product/product_event.dart';
 import 'package:saasify/bloc/product/product_state.dart';
 import 'package:saasify/data/customer_cache/customer_cache.dart';
 import 'package:saasify/data/models/products/delete_product_model.dart';
+import 'package:saasify/data/models/products/edit_product_model.dart';
 import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
 import 'package:saasify/data/models/products/product_list_model.dart';
 import 'package:saasify/data/models/products/save_product_model.dart';
@@ -79,15 +80,15 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
       String companyId = await _customerCache.getCompanyId();
       int branchId = await _customerCache.getBranchId();
 
-      log(jsonEncode(event.productDetailsMap));
+      debugPrint(jsonEncode(event.productDetailsMap));
 
-      SaveProductModel saveProductModel = await _productRepository.saveProduct(
+      EditProductModel editProductModel = await _productRepository.editProduct(
           userId, companyId, branchId, event.productDetailsMap);
 
-      if (saveProductModel.status == 200) {
-        emit(EditedProduct(message: saveProductModel.message));
+      if (editProductModel.status == 200) {
+        emit(EditedProduct(message: editProductModel.message));
       } else {
-        emit(ErrorEditingProduct(message: saveProductModel.message));
+        emit(ErrorEditingProduct(message: editProductModel.message));
       }
     } catch (e) {
       emit(ErrorEditingProduct(message: e.toString()));
