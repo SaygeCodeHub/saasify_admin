@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/pos/billing_bloc.dart';
+import 'package:saasify/bloc/pos/billing_event.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-import '../../../bloc/pos/billing_bloc.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
-import '../../../data/models/billing/fetch_products_by_category_model.dart';
 
 class VariantDialogue extends StatelessWidget {
   const VariantDialogue({
@@ -57,7 +58,17 @@ class VariantDialogue extends StatelessWidget {
                             return Padding(
                                 padding: const EdgeInsets.all(spacingXMedium),
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    context.read<BillingBloc>().add(
+                                        SelectProduct(
+                                            variantIndex: index,
+                                            productsByCategories: posData,
+                                            product: posData[context
+                                                    .read<BillingBloc>()
+                                                    .selectedCategoryIndex]
+                                                .products[productIndex]));
+                                    Navigator.pop(context);
+                                  },
                                   child: Container(
                                       padding:
                                           const EdgeInsets.all(spacingSmallest),

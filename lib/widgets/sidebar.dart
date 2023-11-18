@@ -7,6 +7,7 @@ import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/inventory/inventory_list_screen.dart';
+import 'package:saasify/screens/onboarding/auhentication_screen.dart';
 import 'package:saasify/screens/pos_new/pos_screen_new.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 
@@ -132,6 +133,8 @@ class SideBar extends StatelessWidget {
                         .copyWith(color: AppColor.saasifyRed)),
                 onTap: () {
                   context.read<AuthenticationBloc>().add(LogOut());
+                  Navigator.pushNamedAndRemoveUntil(context,
+                      AuthenticationScreen.routeName, (route) => false);
                 },
               ))
         ]));

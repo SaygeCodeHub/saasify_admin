@@ -82,7 +82,7 @@ class ProductListDataTable extends StatelessWidget {
             DataColumn(
                 label: Expanded(
               child: Center(
-                child: Text(StringConstants.kPrice,
+                child: Text(StringConstants.kBrand,
                     style: Theme.of(context)
                         .textTheme
                         .xxTiniest
@@ -92,7 +92,7 @@ class ProductListDataTable extends StatelessWidget {
             DataColumn(
                 label: Expanded(
               child: Center(
-                child: Text(StringConstants.kDiscountPercent,
+                child: Text(StringConstants.kPrice,
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
@@ -155,7 +155,7 @@ class ProductListDataTable extends StatelessWidget {
                     DataCell(
                       Align(
                         alignment: Alignment.center,
-                        child: Text(productList[index].productId.toString(),
+                        child: Text(productList[index].barcode.toString(),
                             style: Theme.of(context).textTheme.xxTiniest),
                       ),
                     ),
@@ -166,13 +166,13 @@ class ProductListDataTable extends StatelessWidget {
                     )),
                     DataCell(Align(
                       alignment: Alignment.center,
-                      child: Text(productList[index].cost.toString(),
+                      child: Text(productList[index].brandName ?? '',
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
                     DataCell(Align(
                       alignment: Alignment.center,
-                      child: Text(productList[index].discountPercent.toString(),
+                      child: Text(productList[index].cost.toString(),
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),

@@ -55,7 +55,7 @@ class ProductFormSection3 extends StatelessWidget {
               validator: (value) {
                 if ((value == null || value.trim() == '') &&
                     dataMap['draft'] == false) {
-                  return 'Please Enter the Product Cost';
+                  return 'This field cannot be blank';
                 }
                 return null;
               },
@@ -83,7 +83,7 @@ class ProductFormSection3 extends StatelessWidget {
               validator: (value) {
                 if ((value == null || value.trim() == '') &&
                     dataMap['draft'] == false) {
-                  return 'Please Enter the Product Cost';
+                  return 'This field cannot be blank';
                 }
                 return null;
               },
@@ -111,7 +111,7 @@ class ProductFormSection3 extends StatelessWidget {
               validator: (value) {
                 if ((value == null || value.trim() == '') &&
                     dataMap['draft'] == false) {
-                  return 'Please Enter the Product Cost';
+                  return 'This field cannot be blank';
                 }
                 return null;
               },
@@ -139,7 +139,7 @@ class ProductFormSection3 extends StatelessWidget {
               validator: (value) {
                 if ((value == null || value.trim() == '') &&
                     dataMap['draft'] == false) {
-                  return 'Please Enter the Product Cost';
+                  return 'This field cannot be blank';
                 }
                 return null;
               },

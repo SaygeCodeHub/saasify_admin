@@ -19,21 +19,18 @@ class BillModelAdapter extends TypeAdapter<BillModel> {
     return BillModel(
       itemTotal: fields[0] as double,
       total: fields[3] as double,
-      additionalCharges: fields[2] as double,
-      gSTCharges: fields[1] as double,
+      discount: fields[2] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, BillModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.itemTotal)
-      ..writeByte(1)
-      ..write(obj.gSTCharges)
       ..writeByte(2)
-      ..write(obj.additionalCharges)
+      ..write(obj.discount)
       ..writeByte(3)
       ..write(obj.total);
   }

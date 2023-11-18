@@ -80,15 +80,7 @@ class InventoryListDataTable extends StatelessWidget {
                         .xxTiniest
                         .copyWith(fontWeight: FontWeight.w500)),
               ),
-            )),
-            DataColumn(
-                label: Expanded(
-                    child: Center(
-                        child: Text('',
-                            style: Theme.of(context)
-                                .textTheme
-                                .xxTiniest
-                                .copyWith(fontWeight: FontWeight.w500)))))
+            ))
           ],
           rows: List.generate(
               productList.length,
@@ -124,104 +116,144 @@ class InventoryListDataTable extends StatelessWidget {
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
                     DataCell(Align(
-                      alignment: Alignment.center,
-                      child: Text(productList[index].stock.toString(),
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    )),
-                    DataCell(Align(
-                        child: Row(children: [
-                      IconButton(
-                        onPressed: () {
-                          int addedStock = 0;
-                          showDialog(
-                              context: context,
-                              builder: (ctx) => AlertDialog(
-                                  content: SizedBox(
-                                      width: kDialogueWidth,
-                                      child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            CustomTextField(
-                                                onTextFieldChanged: (value) {
-                                              addedStock = int.parse(value);
-                                            }),
-                                            const SizedBox(
-                                                height: spacingSmall),
-                                            PrimaryButton(
-                                                onPressed: () {
-                                                  context
-                                                      .read<InventoryBloc>()
-                                                      .add(UpdateStock(
-                                                          updateStockMap: {
-                                                            "stock_id":
-                                                                productList[
-                                                                        index]
-                                                                    .stockId,
-                                                            "stock": addedStock,
-                                                            "variant_id":
-                                                                productList[
-                                                                        index]
-                                                                    .variantId,
-                                                            "increment": true
-                                                          }));
-                                                  Navigator.pop(ctx);
-                                                },
-                                                buttonTitle: 'Update')
-                                          ]))));
-                        },
-                        icon: const Icon(
-                          Icons.add,
-                          size: spacingStandard,
-                          color: AppColor.saasifyLightBlack,
-                        ),
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            int removedStock = 0;
-                            showDialog(
-                                context: context,
-                                builder: (ctx) => AlertDialog(
-                                    content: SizedBox(
-                                        width: kDialogueWidth,
-                                        child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              CustomTextField(
-                                                  onTextFieldChanged: (value) {
-                                                removedStock = int.parse(value);
-                                              }),
-                                              const SizedBox(
-                                                  height: spacingSmall),
-                                              PrimaryButton(
-                                                  onPressed: () {
-                                                    context
-                                                        .read<InventoryBloc>()
-                                                        .add(UpdateStock(
-                                                            updateStockMap: {
-                                                              "stock_id":
-                                                                  productList[
-                                                                          index]
-                                                                      .stockId,
-                                                              "stock":
-                                                                  removedStock,
-                                                              "variant_id":
-                                                                  productList[
-                                                                          index]
-                                                                      .variantId,
-                                                              "increment": false
-                                                            }));
-                                                    Navigator.pop(ctx);
-                                                  },
-                                                  buttonTitle: 'Update')
-                                            ]))));
-                          },
-                          icon: const Icon(
-                            Icons.remove,
-                            size: spacingStandard,
-                            color: AppColor.saasifyLightBlack,
-                          ))
-                    ])))
+                        alignment: Alignment.center,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: (productList[index].stock != 0)
+                                    ? () {
+                                        int removedStock = 0;
+                                        showDialog(
+                                            context: context,
+                                            builder: (ctx) => AlertDialog(
+                                                content: SizedBox(
+                                                    width: kDialogueWidth,
+                                                    child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          CustomTextField(
+                                                              onTextFieldChanged:
+                                                                  (value) {
+                                                            removedStock =
+                                                                int.parse(
+                                                                    value);
+                                                          }),
+                                                          const SizedBox(
+                                                              height:
+                                                                  spacingSmall),
+                                                          PrimaryButton(
+                                                              onPressed: () {
+                                                                context
+                                                                    .read<
+                                                                        InventoryBloc>()
+                                                                    .add(UpdateStock(
+                                                                        updateStockMap: {
+                                                                          "stock_id":
+                                                                              productList[index].stockId,
+                                                                          "stock":
+                                                                              removedStock,
+                                                                          "variant_id":
+                                                                              productList[index].variantId,
+                                                                          "increment":
+                                                                              false
+                                                                        }));
+                                                                Navigator.pop(
+                                                                    ctx);
+                                                              },
+                                                              buttonTitle:
+                                                                  'Update')
+                                                        ]))));
+                                      }
+                                    : null,
+                                child: Container(
+                                  height: kCounterContainerSize,
+                                  width: kCounterContainerSize,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: AppColor.saasifyLightDeepBlue),
+                                  ),
+                                  child: Center(
+                                      child: (productList[index].stock != 0)
+                                          ? const Icon(
+                                              Icons.remove,
+                                              size: kGeneralRadius,
+                                            )
+                                          : const SizedBox.shrink()),
+                                ),
+                              ),
+                              Container(
+                                height: kCounterContainerSize,
+                                width: kStockContainerSize,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: AppColor.saasifyLightDeepBlue),
+                                ),
+                                child: Center(
+                                    child: Text(
+                                        productList[index].stock.toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .xxTiniest)),
+                              ),
+                              InkWell(
+                                  onTap: () {
+                                    int addedStock = 0;
+                                    showDialog(
+                                        context: context,
+                                        builder: (ctx) => AlertDialog(
+                                            content: SizedBox(
+                                                width: kDialogueWidth,
+                                                child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      CustomTextField(
+                                                          onTextFieldChanged:
+                                                              (value) {
+                                                        addedStock =
+                                                            int.parse(value);
+                                                      }),
+                                                      const SizedBox(
+                                                          height: spacingSmall),
+                                                      PrimaryButton(
+                                                          onPressed: () {
+                                                            context
+                                                                .read<
+                                                                    InventoryBloc>()
+                                                                .add(UpdateStock(
+                                                                    updateStockMap: {
+                                                                      "stock_id":
+                                                                          productList[index]
+                                                                              .stockId,
+                                                                      "stock":
+                                                                          addedStock,
+                                                                      "variant_id":
+                                                                          productList[index]
+                                                                              .variantId,
+                                                                      "increment":
+                                                                          true
+                                                                    }));
+                                                            Navigator.pop(ctx);
+                                                          },
+                                                          buttonTitle: 'Update')
+                                                    ]))));
+                                  },
+                                  child: Container(
+                                      height: kCounterContainerSize,
+                                      width: kCounterContainerSize,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color:
+                                                AppColor.saasifyLightDeepBlue),
+                                      ),
+                                      child: const Center(
+                                          child: Icon(
+                                        Icons.add,
+                                        size: kGeneralRadius,
+                                      ))))
+                            ])))
                   ])))
     ]));
   }

@@ -61,7 +61,7 @@ class BranchesListScreen extends StatelessWidget {
                                   keyboardType: TextInputType.text,
                                   onTextFieldChanged: (value) {}),
                               const SizedBox(height: spacingXXHuge),
-                              BranchListGridview(
+                              BranchList(
                                   selectedBranchIndex:
                                       state.selectedBranchIndex,
                                   branchList: selectedCompany.branches),

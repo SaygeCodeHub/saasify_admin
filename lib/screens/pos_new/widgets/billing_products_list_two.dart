@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
-
-import '../../../configs/app_color.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/pos/billing_bloc.dart';
+import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import 'billing_product_tile_body_two.dart';
 
 class BillingProductsListTwo extends StatelessWidget {
-  const BillingProductsListTwo({super.key});
+  final List<CategoryWithProductsDatum> posData;
+
+  const BillingProductsListTwo({super.key, required this.posData});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: kProductContainerHeight,
-      decoration: BoxDecoration(
-        color: AppColor.saasifyWhite,
-        borderRadius: BorderRadius.circular(kGeneralRadius),
-      ),
+    return Expanded(
       child: ListView.separated(
           physics: const BouncingScrollPhysics(),
-          itemCount: 10,
+          itemCount: context.read<BillingBloc>().selectedProducts.length,
           shrinkWrap: true,
           separatorBuilder: (context, index) =>
               const SizedBox(height: spacingXSmall),
@@ -30,12 +28,22 @@ class BillingProductsListTwo extends StatelessWidget {
                   SizedBox(
                     height: kImageHeight,
                     width: kImageHeight,
-                    child: Image.asset(
-                      'assets/cake_img.png',
+                    child: Image.network(
+                      context
+                          .read<BillingBloc>()
+                          .selectedProducts[index]
+                          .product
+                          .variants[0]
+                          .images[0],
                     ),
                   ),
                   const SizedBox(width: spacingSmall),
-                  const Expanded(child: BillingProductTileBodyTwo())
+                  Expanded(
+                      child: BillingProductTileBodyTwo(
+                    selectedProduct:
+                        context.read<BillingBloc>().selectedProducts[index],
+                    posData: posData,
+                  ))
                 ]));
           }),
     );

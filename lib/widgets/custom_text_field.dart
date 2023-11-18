@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:saasify/configs/app_color.dart';
 
 class CustomTextField extends StatelessWidget {
   final int? maxLines;
@@ -57,7 +58,9 @@ class CustomTextField extends StatelessWidget {
       autofocus: autofocus,
       obscureText: obscureText,
       obscuringCharacter: "*",
+      cursorColor: AppColor.saasifyLightDeepBlue,
       decoration: InputDecoration(
+        errorMaxLines: 2,
         suffix: suffix,
         hintText: hintText,
         hintStyle: hintStyle,

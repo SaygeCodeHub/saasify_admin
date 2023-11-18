@@ -60,7 +60,7 @@ class CompanyListScreen extends StatelessWidget {
                                   keyboardType: TextInputType.text,
                                   onTextFieldChanged: (value) {}),
                               const SizedBox(height: spacingXXHuge),
-                              CompanyListGridview(
+                              CompanyList(
                                   companyList: companyList,
                                   selectedCompanyIndex:
                                       state.selectedCompanyIndex),

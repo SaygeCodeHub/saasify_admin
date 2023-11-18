@@ -10,8 +10,7 @@ class BillingSectionHeaderTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         Text(
           StringConstants.kMembershipNO,
@@ -57,6 +56,6 @@ class BillingSectionHeaderTwo extends StatelessWidget {
       const Divider(
         color: AppColor.saasifyGreyBlue,
       )
-    ]));
+    ]);
   }
 }

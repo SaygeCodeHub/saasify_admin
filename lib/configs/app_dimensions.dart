@@ -16,4 +16,5 @@ const double kDialogueHeight = 450;
 const double kProductContainerHeight = 300;
 const double kDialogueWidth = 370;
 const double kCounterContainerSize = 22;
+const double kStockContainerSize = 50;
 const double kGeneralActionButtonWidth = 180;

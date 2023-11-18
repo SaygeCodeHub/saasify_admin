@@ -9,11 +9,11 @@ import 'package:saasify/data/models/authentication/authentication_model.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
 
-class BranchListGridview extends StatelessWidget {
+class BranchList extends StatelessWidget {
   final int selectedBranchIndex;
   final List<Branch> branchList;
 
-  const BranchListGridview(
+  const BranchList(
       {super.key, required this.branchList, required this.selectedBranchIndex});
 
   @override
@@ -42,14 +42,20 @@ class BranchListGridview extends StatelessWidget {
                           color: (selectedBranchIndex == index)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyCementGrey),
-                      child: Text(branchList[index].branchName,
-                          maxLines: 1,
-                          textScaleFactor: context.responsive(0.8, desktop: 1),
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context)
-                              .textTheme
-                              .tiniest
-                              .copyWith(color: AppColor.saasifyWhite)))),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(branchList[index].branchName,
+                              maxLines: 1,
+                              textScaleFactor:
+                                  context.responsive(0.8, desktop: 1),
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .tiniest
+                                  .copyWith(color: AppColor.saasifyWhite)),
+                        ],
+                      ))),
             );
           }),
     );

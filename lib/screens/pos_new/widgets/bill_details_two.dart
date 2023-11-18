@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/pos/billing_bloc.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 
@@ -33,7 +35,7 @@ class BillDetailsTwo extends StatelessWidget {
                   const SizedBox(
                     height: spacingStandard,
                   ),
-                  Text(StringConstants.k1230,
+                  Text('₹ ${context.read<BillingBloc>().billDetails.itemTotal}',
                       style: Theme.of(context)
                           .textTheme
                           .xxTiniest
@@ -65,7 +67,7 @@ class BillDetailsTwo extends StatelessWidget {
                         .textTheme
                         .xxTiniest
                         .copyWith(fontWeight: FontWeight.w600)),
-                Text(StringConstants.k1230,
+                Text('₹ ${context.read<BillingBloc>().billDetails.total}',
                     style: Theme.of(context)
                         .textTheme
                         .xxTiniest

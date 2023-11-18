@@ -9,11 +9,11 @@ import 'package:saasify/utils/responsive.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
 
-class CompanyListGridview extends StatelessWidget {
+class CompanyList extends StatelessWidget {
   final int selectedCompanyIndex;
   final List<Company> companyList;
 
-  const CompanyListGridview({
+  const CompanyList({
     super.key,
     required this.companyList,
     required this.selectedCompanyIndex,
@@ -45,14 +45,20 @@ class CompanyListGridview extends StatelessWidget {
                           color: (selectedCompanyIndex == index)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyCementGrey),
-                      child: Text(companyList[index].companyName,
-                          maxLines: 1,
-                          textScaleFactor: context.responsive(0.8, desktop: 1),
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context)
-                              .textTheme
-                              .tiniest
-                              .copyWith(color: AppColor.saasifyWhite)))),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(companyList[index].companyName,
+                              maxLines: 1,
+                              textScaleFactor:
+                                  context.responsive(0.8, desktop: 1),
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .tiniest
+                                  .copyWith(color: AppColor.saasifyWhite)),
+                        ],
+                      ))),
             );
           }),
     );

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/bloc/authentication/authentication_states.dart';
+import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/onboarding/authentication_form.dart';
 import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
@@ -45,9 +46,15 @@ class AuthenticationScreen extends StatelessWidget {
                             context, CompanyListScreen.routeName,
                             arguments: state.userData.companies);
                       } else {
-                        Navigator.pushNamed(
-                            context, BranchesListScreen.routeName,
-                            arguments: state.userData.companies.first);
+                        if (state.userData.companies.first.branches.length >
+                            1) {
+                          Navigator.pushReplacementNamed(
+                              context, BranchesListScreen.routeName,
+                              arguments: state.userData.companies.first);
+                        } else {
+                          Navigator.pushReplacementNamed(
+                              context, DashboardsScreen.routeName);
+                        }
                       }
                     }
                     if (state is PhoneAuthError) {

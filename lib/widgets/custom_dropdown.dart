@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
 import '../configs/app_color.dart';
-import '../configs/app_dimensions.dart';
 import '../configs/app_spacing.dart';
 
 typedef StringCallBack = Function(String textField);

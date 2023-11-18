@@ -18,8 +18,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   List<SelectedProductModel> selectedProducts = [];
   String customerContact = '-';
   int selectedCategoryIndex = 0;
-  BillModel billDetails =
-      BillModel(itemTotal: 0, total: 0, additionalCharges: 0, gSTCharges: 0);
+  BillModel billDetails = BillModel(itemTotal: 0, total: 0, discount: 0);
   bool billExpanded = false;
   int orderIndex = 1;
   int completedOrderIndex = 0;
@@ -61,8 +60,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       orderIndex = DatabaseUtil.ordersBox.length + 1;
       selectedCategoryIndex = 0;
       selectedProducts = [];
-      billDetails = BillModel(
-          itemTotal: 0, total: 0, additionalCharges: 0, gSTCharges: 0);
+      billDetails = BillModel(itemTotal: 0, total: 0, discount: 0);
     }
 
     add(FetchProductsByCategory());
@@ -173,14 +171,13 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     for (var i = 0; i < selectedProducts.length; i++) {
       billDetails.itemTotal += selectedProducts[i].product.variants[0].cost *
           selectedProducts[i].count;
+
+      billDetails.itemTotal += selectedProducts[i].product.variants[0].cost *
+          selectedProducts[i].product.variants[0].discountPercent *
+          selectedProducts[i].count;
     }
 
-    billDetails.gSTCharges = billDetails.itemTotal * 0.1;
-    billDetails.additionalCharges = 50;
-
-    billDetails.total = billDetails.itemTotal +
-        billDetails.gSTCharges +
-        billDetails.additionalCharges;
+    billDetails.total = billDetails.itemTotal - billDetails.discount;
 
     DatabaseUtil.ordersBox.put(orderIndex,
         {"orderItems": selectedProducts, "billDetails": billDetails});
@@ -232,8 +229,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       "order_no": orderID,
       "product_list": productList,
       "item_total": billDetails.itemTotal,
-      "gst": billDetails.gSTCharges,
-      "additional_charges": billDetails.additionalCharges,
+      "discount": billDetails.discount,
       "total": billDetails.total,
     };
     log(orderMap.toString());

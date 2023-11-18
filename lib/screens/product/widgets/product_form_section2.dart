@@ -76,7 +76,7 @@ class ProductFormSection2 extends StatelessWidget {
               validator: (value) {
                 if ((value == null || value.trim() == '') &&
                     dataMap['draft'] == false) {
-                  return 'Please Enter the Product Quantity';
+                  return 'This field cannot be blank';
                 }
                 return null;
               },

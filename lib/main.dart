@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -66,7 +64,6 @@ _initApp() async {
   DatabaseUtil.companyDetails = await Hive.openBox(HiveKeys.companyDetails);
   DatabaseUtil.completedOrdersBox =
       await Hive.openBox(HiveKeys.completedOrdersBox);
-  await DatabaseUtil.products.clear();
 }
 
 class MyPosApp extends StatelessWidget {

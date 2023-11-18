@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/pos_new/widgets/billing_section_two.dart';
+import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import '../../bloc/pos/billing_bloc.dart';
 import '../../bloc/pos/billing_event.dart';
 import '../../bloc/pos/billing_state.dart';
 import '../../configs/app_color.dart';
-import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
 import 'widgets/products_section.dart';
@@ -21,7 +22,7 @@ class POSTwoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<BillingBloc>().add(FetchProductsByCategory());
+    context.read<BillingBloc>().add(LoadAllOrders());
     return Scaffold(
         key: _scaffoldKey,
         drawer: const SideBar(selectedIndex: 2),
@@ -54,6 +55,105 @@ class POSTwoScreen extends StatelessWidget {
                   builder: (context, state) {
                     if (state is FetchingProductsByCategory) {
                       return const Center(child: CircularProgressIndicator());
+                    } else if (state is LoadDataBaseOrders) {
+                      if (DatabaseUtil.ordersBox.isEmpty) {
+                        context.read<BillingBloc>().add(BillingInitialEvent(
+                            orderIndex:
+                                context.read<BillingBloc>().orderIndex));
+                      }
+                      return GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 5),
+                          itemCount: state.customerIdList.length + 1,
+                          itemBuilder: (context, index) {
+                            if (state.customerIdList.length == index) {
+                              return Padding(
+                                  padding:
+                                      const EdgeInsets.all(spacingStandard),
+                                  child: InkWell(
+                                      onTap: () {
+                                        context.read<BillingBloc>().add(
+                                            BillingInitialEvent(
+                                                orderIndex: -1));
+                                      },
+                                      child: Container(
+                                          padding: const EdgeInsets.all(
+                                              spacingStandard),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                AppColor.saasifyLightDeepBlue,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          child: Center(
+                                              child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                Text(
+                                                  'Add Customer',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .tiniest
+                                                      .copyWith(
+                                                          color: AppColor
+                                                              .saasifyWhite),
+                                                ),
+                                                const SizedBox(
+                                                    height: spacingStandard),
+                                                Expanded(
+                                                  child: Image.asset(
+                                                      'assets/add.png',
+                                                      fit: BoxFit.fill),
+                                                )
+                                              ])))));
+                            }
+                            return Padding(
+                                padding: const EdgeInsets.all(spacingStandard),
+                                child: InkWell(
+                                    onTap: () {
+                                      context.read<BillingBloc>().orderIndex =
+                                          state.customerIdList[index];
+                                      context.read<BillingBloc>().add(
+                                          BillingInitialEvent(
+                                              orderIndex:
+                                                  state.customerIdList[index]));
+                                    },
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            color:
+                                                AppColor.saasifyLightDeepBlue,
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        child: Padding(
+                                            padding: const EdgeInsets.all(
+                                                spacingStandard),
+                                            child: Center(
+                                                child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                  Text(
+                                                    'Customer no. - ${state.customerIdList[index]}',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .tiniest
+                                                        .copyWith(
+                                                            color: AppColor
+                                                                .saasifyWhite),
+                                                  ),
+                                                  const SizedBox(
+                                                      height: spacingStandard),
+                                                  Expanded(
+                                                    child: Image.asset(
+                                                        'assets/user.png',
+                                                        fit: BoxFit.fill),
+                                                  )
+                                                ]))))));
+                          });
                     } else if (state is ProductsLoaded) {
                       return Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -66,8 +166,10 @@ class POSTwoScreen extends StatelessWidget {
                                     .read<BillingBloc>()
                                     .selectedProducts
                                     .isNotEmpty
-                                ? const Expanded(
-                                    flex: 2, child: BillingSectionTwo())
+                                ? Expanded(
+                                    flex: 2,
+                                    child: BillingSectionTwo(
+                                        posData: state.productsByCategories))
                                 : const SizedBox.shrink()
                           ]);
                     } else if (state is ErrorFetchingProductsByCategory) {
