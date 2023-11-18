@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
-import 'package:saasify/screens/pos_new/variant_dialogue.dart';
+import 'package:saasify/screens/pos_new/widgets/variant_dialogue.dart';
 import '../../../bloc/pos/billing_bloc.dart';
 import '../../../configs/app_color.dart';
-import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 
 class ProductGrid extends StatelessWidget {
@@ -24,8 +23,10 @@ class ProductGrid extends StatelessWidget {
             .products
             .length,
         shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5, childAspectRatio: 172 / 146),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount:
+                context.read<BillingBloc>().selectedProducts.isNotEmpty ? 5 : 7,
+            childAspectRatio: 172 / 146),
         itemBuilder: (context, index) {
           return Padding(
               padding: const EdgeInsets.all(spacingXSmall),
@@ -33,8 +34,8 @@ class ProductGrid extends StatelessWidget {
                   onTap: () {
                     showDialog(
                         context: context,
-                        builder: (context) =>
-                            VariantDialogue(posData: posData));
+                        builder: (context) => VariantDialogue(
+                            posData: posData, productIndex: index));
                   },
                   child: Container(
                       height: spacingXXXXHuge,
@@ -45,15 +46,6 @@ class ProductGrid extends StatelessWidget {
                       ),
                       child: Column(children: [
                         const Row(),
-                        SizedBox(
-                          height: kButtonHeight,
-                          child: Image.network(posData[context
-                                  .read<BillingBloc>()
-                                  .selectedCategoryIndex]
-                              .products[index]
-                              .variants[index]
-                              .images[index]),
-                        ),
                         const SizedBox(height: spacingXMedium),
                         Center(
                             child: Text(
@@ -72,8 +64,7 @@ class ProductGrid extends StatelessWidget {
                                     .read<BillingBloc>()
                                     .selectedCategoryIndex]
                                 .products[index]
-                                .variants[index]
-                                .cost
+                                .brandName
                                 .toString(),
                             style: Theme.of(context)
                                 .textTheme

@@ -47,7 +47,7 @@ class AuthenticationScreen extends StatelessWidget {
                       } else {
                         Navigator.pushNamed(
                             context, BranchesListScreen.routeName,
-                            arguments: state.userData.companies.first.branches);
+                            arguments: state.userData.companies.first);
                       }
                     }
                     if (state is PhoneAuthError) {

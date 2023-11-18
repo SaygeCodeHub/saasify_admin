@@ -68,7 +68,8 @@ class CompanyListScreen extends StatelessWidget {
                               PrimaryButton(
                                   onPressed: (state.selectedCompanyIndex != -1)
                                       ? () {
-                                          Navigator.pushNamed(context,
+                                          Navigator.pushReplacementNamed(
+                                              context,
                                               BranchesListScreen.routeName,
                                               arguments: companyList[
                                                   state.selectedCompanyIndex]);

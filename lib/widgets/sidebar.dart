@@ -7,6 +7,7 @@ import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/inventory/inventory_list_screen.dart';
+import 'package:saasify/screens/pos_new/pos_screen_new.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 
 class SideBar extends StatelessWidget {
@@ -69,8 +70,8 @@ class SideBar extends StatelessWidget {
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyBlack)),
                   onTap: () {
-                    // Navigator.pushReplacementNamed(
-                    //     context, BillingScreen.routeName);
+                    Navigator.pushReplacementNamed(
+                        context, POSTwoScreen.routeName);
                   },
                 ),
                 ListTile(

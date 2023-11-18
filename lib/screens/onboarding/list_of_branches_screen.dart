@@ -77,7 +77,8 @@ class BranchesListScreen extends StatelessWidget {
                                                       .branches[state
                                                           .selectedBranchIndex]
                                                       .branchId));
-                                          Navigator.pushNamed(context,
+                                          Navigator.pushReplacementNamed(
+                                              context,
                                               DashboardsScreen.routeName);
                                         }
                                       : null,

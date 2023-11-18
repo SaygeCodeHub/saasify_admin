@@ -4,7 +4,7 @@ import 'package:saasify/utils/constants/string_constants.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../widgets/primary_button.dart';
-import '../../pos_new/payment_dialogue.dart';
+import 'payment_dialogue.dart';
 
 class BillingSectionFooterTwo extends StatelessWidget {
   const BillingSectionFooterTwo({super.key});

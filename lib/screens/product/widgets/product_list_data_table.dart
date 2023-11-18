@@ -19,7 +19,6 @@ class ProductListDataTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProductListScreen.selectedIds = [];
     return Expanded(
         child: ListView(children: <Widget>[
       DataTable(

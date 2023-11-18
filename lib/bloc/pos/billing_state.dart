@@ -11,13 +11,13 @@ class FetchingProductsByCategory extends BillingStates {}
 
 class ErrorFetchingProductsByCategory extends BillingStates {}
 
-class ProductsFetched extends BillingStates {
+class ProductsLoaded extends BillingStates {
   final List<CategoryWithProductsDatum> productsByCategories;
   final int selectedCategoryIndex;
   final List<SelectedProductModel> selectedProducts;
   final BillModel billDetails;
 
-  ProductsFetched(
+  ProductsLoaded(
       {required this.billDetails,
       required this.selectedProducts,
       required this.selectedCategoryIndex,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/primary_button.dart';
-import '../../configs/app_color.dart';
-import '../../configs/app_spacing.dart';
+import '../../../configs/app_color.dart';
+import '../../../configs/app_spacing.dart';
 
 class PaymentDialogue extends StatefulWidget {
   const PaymentDialogue({super.key});

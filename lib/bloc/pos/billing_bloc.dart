@@ -71,37 +71,36 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   FutureOr<void> _fetchProductsByCategory(
       FetchProductsByCategory event, Emitter<BillingStates> emit) async {
     emit(FetchingProductsByCategory());
-    try {
-      List<CategoryWithProductsDatum> data = [];
-      FetchProductsByCategoryModel fetchProductsByCategoryModel;
-      String userId = await _customerCache.getUserId();
-      String companyId = await _customerCache.getCompanyId();
-      int branchId = await _customerCache.getBranchId();
-      if (DatabaseUtil.products.isEmpty) {
-        fetchProductsByCategoryModel = await _billingRepository
-            .fetchProductsByCategory(userId, companyId, branchId);
-        data = fetchProductsByCategoryModel.data;
-        DatabaseUtil.products
-            .put('products', fetchProductsByCategoryModel.data);
-      } else {
-        data = DatabaseUtil.products
-            .get('products')
-            .cast<CategoryWithProductsDatum>();
-      }
-
-      emit(ProductsFetched(
-          productsByCategories: data,
-          selectedCategoryIndex: selectedCategoryIndex,
-          selectedProducts: selectedProducts,
-          billDetails: billDetails));
-    } catch (e) {
-      emit(ErrorFetchingProductsByCategory());
+    // try {
+    List<CategoryWithProductsDatum> data = [];
+    FetchProductsByCategoryModel fetchProductsByCategoryModel;
+    String userId = await _customerCache.getUserId();
+    String companyId = await _customerCache.getCompanyId();
+    int branchId = await _customerCache.getBranchId();
+    if (DatabaseUtil.products.isEmpty) {
+      fetchProductsByCategoryModel = await _billingRepository
+          .fetchProductsByCategory(userId, companyId, branchId);
+      data = fetchProductsByCategoryModel.data;
+      DatabaseUtil.products.put('products', fetchProductsByCategoryModel.data);
+    } else {
+      data = DatabaseUtil.products
+          .get('products')
+          .cast<CategoryWithProductsDatum>();
     }
+
+    emit(ProductsLoaded(
+        productsByCategories: data,
+        selectedCategoryIndex: selectedCategoryIndex,
+        selectedProducts: selectedProducts,
+        billDetails: billDetails));
+    // } catch (e) {
+    //   emit(ErrorFetchingProductsByCategory());
+    // }
   }
 
   FutureOr<void> _selectCategory(
       SelectCategory event, Emitter<BillingStates> emit) async {
-    emit(ProductsFetched(
+    emit(ProductsLoaded(
         selectedCategoryIndex: selectedCategoryIndex,
         productsByCategories: event.productsByCategories,
         selectedProducts: selectedProducts,
@@ -127,7 +126,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
                 productName: event.product.productName,
                 variants: [event.product.variants[event.variantIndex]],
                 brandName: event.product.brandName,
-                productDescription: event.product.productDescription)));
+                productDescription: event.product.productDescription,
+                brandId: event.product.brandId)));
       }
     } else {
       selectedProducts
@@ -185,7 +185,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     DatabaseUtil.ordersBox.put(orderIndex,
         {"orderItems": selectedProducts, "billDetails": billDetails});
 
-    emit(ProductsFetched(
+    emit(ProductsLoaded(
         selectedCategoryIndex: selectedCategoryIndex,
         productsByCategories: event.productsByCategories,
         selectedProducts: selectedProducts,
@@ -196,7 +196,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       ExpandBilling event, Emitter<BillingStates> emit) async {
     billExpanded = !billExpanded;
 
-    emit(ProductsFetched(
+    emit(ProductsLoaded(
         selectedCategoryIndex: selectedCategoryIndex,
         productsByCategories: event.productsByCategories,
         selectedProducts: selectedProducts,

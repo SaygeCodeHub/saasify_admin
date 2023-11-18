@@ -67,6 +67,7 @@ class ProductListScreen extends StatelessWidget {
                           }
                           if (state is DeletedProducts) {
                             ProgressBar.dismiss(context);
+
                             showDialog(
                                 context: context,
                                 builder: (ctx) => CustomAlertDialog(
@@ -79,6 +80,7 @@ class ProductListScreen extends StatelessWidget {
                                         context
                                             .read<ProductBloc>()
                                             .add(FetchProductList());
+                                        ProductListScreen.selectedIds = [];
                                         Navigator.pop(ctx);
                                       },
                                     ));

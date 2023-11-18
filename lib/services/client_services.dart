@@ -2,7 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ClientServices {
-  final Dio dio = Dio(BaseOptions(connectTimeout: const Duration(seconds: 15)));
+  final Dio dio =
+      Dio(BaseOptions(connectTimeout: const Duration(seconds: 15), headers: {
+    'Content-Type': 'application/json',
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": "true"
+  }));
 
   Future<dynamic> get(String requestUrl) async {
     try {

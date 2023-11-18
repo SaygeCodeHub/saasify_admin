@@ -37,19 +37,19 @@ class ProductWithVariant {
   final String categoryName;
   final int productId;
   final String productName;
-  final String brandName;
-  final dynamic brandId;
+  final String? brandName;
+  final int? brandId;
   final int variantId;
-  final int cost;
-  final int quantity;
-  final int discountPercent;
-  final int stock;
-  final String productDescription;
+  final int? cost;
+  final int? quantity;
+  final int? discountPercent;
+  final int? stock;
+  final String? productDescription;
   final List<String> images;
   final String unit;
   final int barcode;
   final bool draft;
-  final int restockReminder;
+  final int? restockReminder;
 
   ProductWithVariant({
     required this.categoryId,
@@ -82,7 +82,7 @@ class ProductWithVariant {
         variantId: json["variant_id"],
         cost: json["cost"],
         quantity: json["quantity"],
-        discountPercent: json["discount_percent"] ?? 0,
+        discountPercent: json["discount_percent"],
         stock: json["stock"],
         productDescription: json["product_description"],
         images: List<String>.from(json["images"].map((x) => x)),

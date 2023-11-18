@@ -60,25 +60,28 @@ class ProductAdapter extends TypeAdapter<Product> {
     return Product(
       productId: fields[0] as int,
       productName: fields[1] as String,
-      brandName: fields[2] as String,
-      productDescription: fields[3] as String,
-      variants: (fields[4] as List).cast<Variant>(),
+      brandId: fields[2] as int,
+      brandName: fields[3] as String,
+      productDescription: fields[4] as String,
+      variants: (fields[5] as List).cast<Variant>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Product obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.productId)
       ..writeByte(1)
       ..write(obj.productName)
       ..writeByte(2)
-      ..write(obj.brandName)
+      ..write(obj.brandId)
       ..writeByte(3)
-      ..write(obj.productDescription)
+      ..write(obj.brandName)
       ..writeByte(4)
+      ..write(obj.productDescription)
+      ..writeByte(5)
       ..write(obj.variants);
   }
 
@@ -106,21 +109,22 @@ class VariantAdapter extends TypeAdapter<Variant> {
     return Variant(
       variantId: fields[0] as int,
       cost: fields[1] as int,
-      quantity: fields[2] as String,
+      quantity: fields[2] as int,
       discountPercent: fields[3] as int,
-      stock: fields[4] as int,
-      images: (fields[5] as List).cast<String>(),
-      unit: fields[6] as String,
-      barcode: fields[7] as int,
-      restockReminder: fields[8] as int,
-      draft: fields[9] as bool,
+      stockId: fields[4] as int,
+      stock: fields[5] as int,
+      images: (fields[6] as List).cast<String>(),
+      unit: fields[7] as String,
+      barcode: fields[8] as int,
+      restockReminder: fields[9] as int,
+      draft: fields[10] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Variant obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.variantId)
       ..writeByte(1)
@@ -130,16 +134,18 @@ class VariantAdapter extends TypeAdapter<Variant> {
       ..writeByte(3)
       ..write(obj.discountPercent)
       ..writeByte(4)
-      ..write(obj.stock)
+      ..write(obj.stockId)
       ..writeByte(5)
-      ..write(obj.images)
+      ..write(obj.stock)
       ..writeByte(6)
-      ..write(obj.unit)
+      ..write(obj.images)
       ..writeByte(7)
-      ..write(obj.barcode)
+      ..write(obj.unit)
       ..writeByte(8)
-      ..write(obj.restockReminder)
+      ..write(obj.barcode)
       ..writeByte(9)
+      ..write(obj.restockReminder)
+      ..writeByte(10)
       ..write(obj.draft);
   }
 

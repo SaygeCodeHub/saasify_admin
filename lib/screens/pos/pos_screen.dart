@@ -153,7 +153,7 @@ class BillingScreen extends StatelessWidget {
                                                       height: 120)
                                                 ]))))));
                           });
-                    } else if (state is ProductsFetched) {
+                    } else if (state is ProductsLoaded) {
                       return Expanded(
                         child: Row(
                           children: [

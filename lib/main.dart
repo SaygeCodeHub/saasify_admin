@@ -66,6 +66,7 @@ _initApp() async {
   DatabaseUtil.companyDetails = await Hive.openBox(HiveKeys.companyDetails);
   DatabaseUtil.completedOrdersBox =
       await Hive.openBox(HiveKeys.completedOrdersBox);
+  await DatabaseUtil.products.clear();
 }
 
 class MyPosApp extends StatelessWidget {
@@ -100,10 +101,6 @@ class MyPosApp extends StatelessWidget {
                       if (state is IsLoggedIn) {
                         Navigator.pushReplacementNamed(
                             context, DashboardsScreen.routeName);
-                      } else if (state is LoggedOut) {
-                        log('message');
-                        Navigator.pushNamedAndRemoveUntil(context,
-                            AuthenticationScreen.routeName, (route) => false);
                       }
                     },
                     child: context.responsive(const CannotBeMinimizeScreen(),

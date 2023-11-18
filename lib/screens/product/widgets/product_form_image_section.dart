@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
@@ -77,7 +79,9 @@ class FormImageSection extends StatelessWidget {
               }
             },
             buildWhen: (prev, curr) {
-              return curr is ImagePicked || curr is NoImage;
+              return curr is ImagePicked ||
+                  curr is NoImage ||
+                  curr is ImageCouldNotPick;
             },
             builder: (context, state) {
               if (state is ImagePicked) {
@@ -99,9 +103,18 @@ class FormImageSection extends StatelessWidget {
                                 ? Container(
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
-                                            image: NetworkImage(context
-                                                .read<UploadBloc>()
-                                                .displayImageList[index])),
+                                            image: NetworkImage(
+                                                context
+                                                    .read<UploadBloc>()
+                                                    .displayImageList[index],
+                                                headers: {
+                                              'Content-Type':
+                                                  'application/json',
+                                              "Access-Control-Allow-Origin":
+                                                  "*",
+                                              "Access-Control-Allow-Credentials":
+                                                  "true"
+                                            })),
                                         borderRadius: BorderRadius.circular(
                                             spacingSmall)))
                                 : Container(
@@ -147,7 +160,8 @@ class FormImageSection extends StatelessWidget {
                                       BorderRadius.circular(spacingSmall))));
                     });
               }
-              if (state is NoImage && state is ImageCouldNotPick) {
+              if (state is NoImage || state is ImageCouldNotPick) {
+                log('NoImage');
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

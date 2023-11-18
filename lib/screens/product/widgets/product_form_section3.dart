@@ -29,7 +29,8 @@ class ProductFormSection3 extends StatelessWidget {
       const SizedBox(height: spacingXMedium),
       CustomTextField(
           validator: (value) {
-            if (value == null || value.trim() == '') {
+            if ((value == null || value.trim() == '') &&
+                dataMap['draft'] == false) {
               return 'Please Enter the Brand Name';
             }
             return null;

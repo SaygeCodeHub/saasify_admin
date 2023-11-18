@@ -73,15 +73,18 @@ class Product {
   @HiveField(1)
   final String productName;
   @HiveField(2)
-  final String brandName;
+  final int brandId;
   @HiveField(3)
-  final String productDescription;
+  final String brandName;
   @HiveField(4)
+  final String productDescription;
+  @HiveField(5)
   final List<Variant> variants;
 
   Product({
     required this.productId,
     required this.productName,
+    required this.brandId,
     required this.brandName,
     required this.productDescription,
     required this.variants,
@@ -90,6 +93,7 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         productId: json["product_id"],
         productName: json["product_name"],
+        brandId: json["brand_id"],
         brandName: json["brand_name"],
         productDescription: json["product_description"],
         variants: List<Variant>.from(
@@ -99,6 +103,7 @@ class Product {
   Map<String, dynamic> toJson() => {
         "product_id": productId,
         "product_name": productName,
+        "brand_id": brandId,
         "brand_name": brandName,
         "product_description": productDescription,
         "variants": List<dynamic>.from(variants.map((x) => x.toJson())),
@@ -112,20 +117,22 @@ class Variant {
   @HiveField(1)
   final int cost;
   @HiveField(2)
-  final String quantity;
+  final int quantity;
   @HiveField(3)
   final int discountPercent;
   @HiveField(4)
-  final int stock;
+  final int stockId;
   @HiveField(5)
-  final List<String> images;
+  final int stock;
   @HiveField(6)
-  final String unit;
+  final List<String> images;
   @HiveField(7)
-  final int barcode;
+  final String unit;
   @HiveField(8)
-  final int restockReminder;
+  final int barcode;
   @HiveField(9)
+  final int restockReminder;
+  @HiveField(10)
   final bool draft;
 
   Variant({
@@ -133,6 +140,7 @@ class Variant {
     required this.cost,
     required this.quantity,
     required this.discountPercent,
+    required this.stockId,
     required this.stock,
     required this.images,
     required this.unit,
@@ -146,6 +154,7 @@ class Variant {
         cost: json["cost"],
         quantity: json["quantity"],
         discountPercent: json["discount_percent"],
+        stockId: json["stock_id"],
         stock: json["stock"],
         images: List<String>.from(json["images"].map((x) => x)),
         unit: json["unit"],
@@ -159,6 +168,7 @@ class Variant {
         "cost": cost,
         "quantity": quantity,
         "discount_percent": discountPercent,
+        "stock_id": stockId,
         "stock": stock,
         "images": List<dynamic>.from(images.map((x) => x)),
         "unit": unit,

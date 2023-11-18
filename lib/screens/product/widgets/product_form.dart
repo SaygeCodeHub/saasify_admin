@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/product/product_bloc.dart';
+import 'package:saasify/bloc/product/product_event.dart';
 import 'package:saasify/bloc/upload/upload_bloc.dart';
 import 'package:saasify/bloc/upload/upload_events.dart';
 import 'package:saasify/configs/app_spacing.dart';
@@ -76,13 +78,26 @@ class ProductForm extends StatelessWidget {
           SecondaryButton(
               onPressed: () {
                 dataMap['draft'] = true;
-                if (_formKey.currentState!.validate() &&
-                    context.read<UploadBloc>().pickedFiles.isNotEmpty) {
-                  context.read<UploadBloc>().add(UploadImage(
-                      multiplePartFileList:
-                          context.read<UploadBloc>().pickedFiles));
-                } else if (context.read<UploadBloc>().pickedFiles.isEmpty) {
-                  context.read<UploadBloc>().add(NoImageSelected());
+                if (_formKey.currentState!.validate()) {
+                  if (context.read<UploadBloc>().displayImageList.isNotEmpty) {
+                    if (context.read<UploadBloc>().pickedImageList.isNotEmpty) {
+                      context.read<UploadBloc>().add(UploadImage(
+                          multiplePartFileList:
+                              context.read<UploadBloc>().pickedFiles));
+                    } else {
+                      if (isEdit) {
+                        context
+                            .read<ProductBloc>()
+                            .add(EditProduct(productDetailsMap: dataMap));
+                      } else {
+                        context
+                            .read<ProductBloc>()
+                            .add(SaveProduct(productDetailsMap: dataMap));
+                      }
+                    }
+                  } else {
+                    context.read<UploadBloc>().add(NoImageSelected());
+                  }
                 }
               },
               buttonWidth: spacingXXXXHuge,
@@ -93,9 +108,21 @@ class ProductForm extends StatelessWidget {
                 dataMap['draft'] = false;
                 if (_formKey.currentState!.validate()) {
                   if (context.read<UploadBloc>().displayImageList.isNotEmpty) {
-                    context.read<UploadBloc>().add(UploadImage(
-                        multiplePartFileList:
-                            context.read<UploadBloc>().pickedFiles));
+                    if (context.read<UploadBloc>().pickedImageList.isNotEmpty) {
+                      context.read<UploadBloc>().add(UploadImage(
+                          multiplePartFileList:
+                              context.read<UploadBloc>().pickedFiles));
+                    } else {
+                      if (isEdit) {
+                        context
+                            .read<ProductBloc>()
+                            .add(EditProduct(productDetailsMap: dataMap));
+                      } else {
+                        context
+                            .read<ProductBloc>()
+                            .add(SaveProduct(productDetailsMap: dataMap));
+                      }
+                    }
                   } else {
                     context.read<UploadBloc>().add(NoImageSelected());
                   }
