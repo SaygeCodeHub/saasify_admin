@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:saasify/data/models/inventory/fetch_inventory_list_model.dart';
-
 import 'package:saasify/data/models/inventory/update_stock_model.dart';
 import 'package:saasify/services/client_services.dart';
 import 'package:saasify/utils/constants/api_constants.dart';
@@ -12,7 +9,6 @@ class InventoryRepositoryImpl implements InventoryRepository {
   @override
   Future<FetchInventoryProductsModel> fetchInventoryProductList(
       String userId, String companyId, int branchId) async {
-    log('${ApiConstants.baseUrl}$userId/$companyId/$branchId/getInventoryProducts');
     final response = await ClientServices().get(
         '${ApiConstants.baseUrl}$userId/$companyId/$branchId/getInventoryProducts');
 

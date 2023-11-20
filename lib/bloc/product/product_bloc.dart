@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_event.dart';
@@ -32,20 +31,20 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
   FutureOr<void> _fetchProductList(
       FetchProductList event, Emitter<ProductStates> emit) async {
     emit(FetchingProduct());
-    // try {
-    String userId = await _customerCache.getUserId();
-    String companyId = await _customerCache.getCompanyId();
-    int branchId = await _customerCache.getBranchId();
-    FetchProductListModel fetchproductListModel =
-        await _productRepository.fetchProductList(userId, companyId, branchId);
-    if (fetchproductListModel.status == 200) {
-      emit(FetchedProduct(productList: fetchproductListModel.data));
-    } else {
-      emit(ErrorFetchingProduct(message: fetchproductListModel.message));
+    try {
+      String userId = await _customerCache.getUserId();
+      String companyId = await _customerCache.getCompanyId();
+      int branchId = await _customerCache.getBranchId();
+      FetchProductListModel fetchproductListModel = await _productRepository
+          .fetchProductList(userId, companyId, branchId);
+      if (fetchproductListModel.status == 200) {
+        emit(FetchedProduct(productList: fetchproductListModel.data));
+      } else {
+        emit(ErrorFetchingProduct(message: fetchproductListModel.message));
+      }
+    } catch (e) {
+      emit(ErrorFetchingProduct(message: e.toString()));
     }
-    // } catch (e) {
-    //   emit(ErrorFetchingProduct(message: e.toString()));
-    // }
   }
 
   FutureOr<void> _saveProduct(
@@ -133,12 +132,9 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
 
       FetchAllCategoriesModel fetchAllCategoriesModel = await _productRepository
           .fetchAllCategories(userId, companyId, branchId);
-      log('api called');
       if (fetchAllCategoriesModel.status == 200) {
-        log('api success');
         emit(FetchedCategories(categoryList: fetchAllCategoriesModel.data));
       } else {
-        log('api failed');
         emit(ErrorFetchingCategories(message: fetchAllCategoriesModel.message));
       }
     } catch (e) {

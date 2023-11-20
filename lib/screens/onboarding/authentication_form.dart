@@ -7,6 +7,7 @@ import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
+import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../utils/constants/string_constants.dart';
 import '../../widgets/custom_text_field.dart';
@@ -37,21 +38,20 @@ class AuthenticationBody extends StatelessWidget {
         key: _formKey,
         child: Padding(
             padding: const EdgeInsets.only(
-                left: spacingXXXHuge,
-                right: spacingXXXHuge,
-                top: kButtonHeight),
+              left: spacingXXXHuge,
+              right: spacingXXXHuge,
+            ),
             child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SvgPicture.asset("assets/SaaSify.svg", width: kLogoWidth),
-                  const SizedBox(height: spacingStandard),
+                  const SizedBox(height: kImageHeight),
                   (isLogin)
                       ? Text(StringConstants.kWelcome,
-                          style: Theme.of(context)
-                              .textTheme
-                              .xxTiny
-                              .copyWith(fontWeight: FontWeight.w700))
+                          style: Theme.of(context).textTheme.xxTiny.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: AppColor.saasifyDarkBlack))
                       : Text(StringConstants.kHello,
                           style: Theme.of(context)
                               .textTheme
@@ -86,11 +86,10 @@ class AuthenticationBody extends StatelessWidget {
                             const SizedBox(height: spacingXXHuge),
                           ])),
                   Text(StringConstants.kContactNumber,
-                      style: Theme.of(context)
-                          .textTheme
-                          .tiniest
-                          .copyWith(fontWeight: FontWeight.w700)),
-                  const SizedBox(height: spacingMedium),
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: AppColor.saasifyLightBlack)),
+                  const SizedBox(height: spacingXMedium),
                   CustomTextField(
                       autofocus: focusField == 'user_contact',
                       initialValue:

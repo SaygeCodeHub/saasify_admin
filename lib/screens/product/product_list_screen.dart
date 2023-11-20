@@ -48,7 +48,7 @@ class ProductListScreen extends StatelessWidget {
                               onPressed: () {
                                 _scaffoldKey.currentState!.openDrawer();
                               },
-                              iconSize: 30,
+                              iconSize: kGeneralRadius,
                               icon: const Icon(Icons.menu,
                                   color: AppColor.saasifyWhite)),
                         )
@@ -71,7 +71,7 @@ class ProductListScreen extends StatelessWidget {
                             showDialog(
                                 context: context,
                                 builder: (ctx) => CustomAlertDialog(
-                                      title: 'Success',
+                                      title: StringConstants.kSuccess,
                                       message: state.message,
                                       primaryButtonTitle:
                                           StringConstants.kUnderstood,
@@ -156,13 +156,16 @@ class ProductListScreen extends StatelessWidget {
                                                   context: context,
                                                   builder: (context) =>
                                                       CustomAlertDialog(
-                                                        title: 'Warning',
-                                                        message:
-                                                            'The selected Products will be deleted',
+                                                        title: StringConstants
+                                                            .kWarning,
+                                                        message: StringConstants
+                                                            .kTheSelectedProducts,
                                                         primaryButtonTitle:
-                                                            'Confirm',
+                                                            StringConstants
+                                                                .kConfirm,
                                                         secondaryButtonTitle:
-                                                            'Cancel',
+                                                            StringConstants
+                                                                .kCancel,
                                                         checkMarkVisible: false,
                                                         secondaryOnPressed: () {
                                                           Navigator.pop(
@@ -180,7 +183,8 @@ class ProductListScreen extends StatelessWidget {
                                                         },
                                                       ));
                                             },
-                                            buttonTitle: 'Delete')),
+                                            buttonTitle:
+                                                StringConstants.kDelete)),
                                   ),
                                   const SizedBox(width: spacingStandard),
                                   SizedBox(
@@ -228,7 +232,9 @@ class ProductListScreen extends StatelessWidget {
                             );
                           } else if (state is ErrorFetchingProduct) {
                             return const Expanded(
-                                child: Text(StringConstants.kNoDataAvailable));
+                                child: Center(
+                                    child: Text(
+                                        StringConstants.kNoDataAvailable)));
                           } else {
                             return const SizedBox.shrink();
                           }

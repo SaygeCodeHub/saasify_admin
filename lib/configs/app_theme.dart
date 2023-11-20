@@ -3,7 +3,7 @@ import 'app_color.dart';
 
 ThemeData appTheme = ThemeData(
   colorScheme: colorScheme,
-  fontFamily: 'Poppins',
+  fontFamily: 'Inter',
   splashColor: AppColor.saasifyTransparent,
   hoverColor: AppColor.saasifyTransparent,
   highlightColor: AppColor.saasifyTransparent,
@@ -17,11 +17,11 @@ ColorScheme colorScheme = const ColorScheme.light(
 
 InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(10),
       borderSide: const BorderSide(color: AppColor.saasifyWhite),
     ),
     disabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(10),
       borderSide: const BorderSide(color: AppColor.saasifyWhite),
     ),
     filled: true,
@@ -29,19 +29,19 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
     fillColor: AppColor.saasifyLighterGrey,
     focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(10),
       borderSide: const BorderSide(color: AppColor.saasifyLightGrey),
     ),
     border: const OutlineInputBorder(),
     errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         borderSide: const BorderSide(color: AppColor.saasifyRed)),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(10),
       borderSide: const BorderSide(color: AppColor.saasifyWhite),
     ),
     hintStyle: const TextStyle(
-        fontSize: 14,
+        fontSize: 13,
         color: AppColor.saasifyLightGrey,
         fontWeight: FontWeight.w500));
 

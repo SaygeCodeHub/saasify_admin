@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_state.dart';
 import 'package:saasify/data/customer_cache/customer_cache.dart';
@@ -23,25 +22,24 @@ class InventoryBloc extends Bloc<InventoryEvents, InventoryStates> {
 
   FutureOr<void> _fetchInventoryList(
       FetchInventoryList event, Emitter<InventoryStates> emit) async {
-    log('here');
     emit(FetchingInventoryList());
-    // try {
-    String userId = await _customerCache.getUserId();
-    String companyId = await _customerCache.getCompanyId();
-    int branchId = await _customerCache.getBranchId();
-    log('inside try');
-    FetchInventoryProductsModel fetchInventoryProductsModel =
-        await _inventoryRepository.fetchInventoryProductList(
-            userId, companyId, branchId);
-    if (fetchInventoryProductsModel.status == 200) {
-      emit(FetchedInventoryList(productList: fetchInventoryProductsModel.data));
-    } else {
-      emit(ErrorFetchingInventoryList(
-          message: fetchInventoryProductsModel.message));
+    try {
+      String userId = await _customerCache.getUserId();
+      String companyId = await _customerCache.getCompanyId();
+      int branchId = await _customerCache.getBranchId();
+      FetchInventoryProductsModel fetchInventoryProductsModel =
+          await _inventoryRepository.fetchInventoryProductList(
+              userId, companyId, branchId);
+      if (fetchInventoryProductsModel.status == 200) {
+        emit(FetchedInventoryList(
+            productList: fetchInventoryProductsModel.data));
+      } else {
+        emit(ErrorFetchingInventoryList(
+            message: fetchInventoryProductsModel.message));
+      }
+    } catch (e) {
+      emit(ErrorFetchingInventoryList(message: e.toString()));
     }
-    // } catch (e) {
-    //   emit(ErrorFetchingInventoryList(message: e.toString()));
-    // }
   }
 
   FutureOr<void> _updateStock(

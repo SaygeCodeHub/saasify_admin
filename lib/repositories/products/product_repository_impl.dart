@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:saasify/data/models/products/delete_product_model.dart';
 import 'package:saasify/data/models/products/edit_product_model.dart';
 import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
@@ -15,7 +13,6 @@ class ProductRepositoryImpl implements ProductRepository {
       String userId, String companyId, int branchId) async {
     final response = await ClientServices().get(
         '${ApiConstants.baseUrl}$userId/$companyId/$branchId/getAllProducts');
-    log('${ApiConstants.baseUrl}$userId/$companyId/$branchId/getAllProducts');
     return FetchProductListModel.fromJson(response);
   }
 
@@ -51,7 +48,6 @@ class ProductRepositoryImpl implements ProductRepository {
     final response = await ClientServices().delete(
         '${ApiConstants.baseUrl}$userId/$companyId/$branchId/deleteVariant',
         variantIdMap);
-    log('${ApiConstants.baseUrl}$userId/$companyId/$branchId/deleteVariant');
     return DeleteProductsModel.fromJson(response);
   }
 }

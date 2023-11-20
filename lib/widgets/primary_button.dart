@@ -33,10 +33,8 @@ class PrimaryButton extends StatelessWidget {
       child: FittedBox(
         child: Text(buttonTitle,
             textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .xxTiniest
-                .copyWith(color: AppColor.saasifyWhite)),
+            style: Theme.of(context).textTheme.xTiniest.copyWith(
+                color: AppColor.saasifyWhite, fontWeight: FontWeight.w700)),
       ),
     );
   }

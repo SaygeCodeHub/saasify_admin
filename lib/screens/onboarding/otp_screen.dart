@@ -36,20 +36,17 @@ class OtpScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SvgPicture.asset("assets/SaaSify.svg",
-                      height: kGeneralButtonHeight, width: kLogoWidth),
-                  const SizedBox(height: spacingXXHuge),
+                  SvgPicture.asset("assets/SaaSify.svg", width: kLogoWidth),
+                  const SizedBox(height: kImageHeight),
                   Text(StringConstants.kEnterOtp,
-                      style: Theme.of(context)
-                          .textTheme
-                          .xxTiny
-                          .copyWith(fontWeight: FontWeight.w700)),
-                  const SizedBox(height: kHelloSpacingHeight),
+                      style: Theme.of(context).textTheme.xxTiny.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: AppColor.saasifyDarkBlack)),
+                  const SizedBox(height: kGeneralButtonHeight),
                   Text(StringConstants.kOtp,
-                      style: Theme.of(context)
-                          .textTheme
-                          .tiniest
-                          .copyWith(fontWeight: FontWeight.w700)),
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: AppColor.saasifyLightBlack)),
                   const SizedBox(height: spacingMedium),
                   AspectRatio(
                     aspectRatio: 360 / 55,

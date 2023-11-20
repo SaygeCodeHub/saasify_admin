@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_spacing.dart';
+import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/sidebar.dart';
 
@@ -38,7 +39,14 @@ class DashboardsScreen extends StatelessWidget {
                 desktop: const Expanded(
                   child: SideBar(selectedIndex: 1),
                 )),
-            const Expanded(flex: 5, child: Center(child: Text('Dashboard')))
+            Expanded(
+                flex: 5,
+                child: Center(
+                    child: Text('Dashboard',
+                        style: Theme.of(context)
+                            .textTheme
+                            .tinier
+                            .copyWith(fontWeight: FontWeight.w500))))
           ],
         ));
   }

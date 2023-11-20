@@ -112,6 +112,16 @@ class ProductListDataTable extends StatelessWidget {
             )),
             DataColumn(
                 label: Expanded(
+              child: Center(
+                child: Text('',
+                    style: Theme.of(context)
+                        .textTheme
+                        .xxTiniest
+                        .copyWith(fontWeight: FontWeight.w500)),
+              ),
+            )),
+            DataColumn(
+                label: Expanded(
                     child: Center(
                         child: Text('',
                             style: Theme.of(context)
@@ -182,6 +192,25 @@ class ProductListDataTable extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
+                    DataCell(Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 8),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: AppColor.saasifyLighterGreen),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.circle,
+                                size: 8, color: AppColor.saasifyGreen),
+                            const SizedBox(width: 6),
+                            Text('Active',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .xxTiniest
+                                    .copyWith(color: AppColor.saasifyGreen)),
+                          ],
+                        ))),
                     DataCell(IconButton(
                         onPressed: () {
                           Navigator.pushReplacementNamed(
@@ -191,7 +220,10 @@ class ProductListDataTable extends StatelessWidget {
                                   isVariant: false,
                                   dataMap: productList[index].toJson()));
                         },
-                        icon: const Icon(Icons.edit)))
+                        icon: const Icon(
+                          Icons.edit,
+                          size: spacingStandard,
+                        )))
                   ]))),
       const SizedBox(height: spacingSmall),
       Visibility(

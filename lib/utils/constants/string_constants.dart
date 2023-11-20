@@ -6,7 +6,7 @@ class StringConstants {
   static const kContactNumber = 'Contact Number';
   static const kCompanyName = 'Company Name';
   static const kWhatsYourCompany = "What's your company name?";
-  static const kAddYourContactNumber = 'Add your contact number';
+  static const kAddYourContactNumber = "What's your contact number?";
   static const kPleaseAddAValidContact = 'Please enter a valid contact';
   static const kSingUp = 'Sign Up';
   static const kWelcome = 'Welcome :)';
@@ -22,6 +22,7 @@ class StringConstants {
   static const kNewVariantAdded = 'New variant added successfully!';
   static const kCategory = 'Category';
   static const kProducts = 'Products';
+  static const kOpenTabs = 'Open Tabs';
   static const kInventoryManagement = 'Inventory Management';
   static const kBrand = 'Brand';
   static const kBarcode = 'Barcode';
@@ -47,6 +48,11 @@ class StringConstants {
   static const kStock = 'Stock';
   static const kEdit = 'Edit';
   static const kDelete = 'Delete';
+  static const kConfirm = 'Confirm';
+  static const kWarning = 'Warning';
+  static const kCancel = 'Cancel';
+  static const kSuccess = 'Success';
+  static const kTheSelectedProducts = 'The selected Products will be deleted';
   static const kSearchHere = 'Search here....';
   static const kNoDataAvailable = 'No Data Available';
   static const kLowStock = 'Low Stock Reminder';
@@ -68,6 +74,7 @@ class StringConstants {
   static const kCustomerName = 'Customer Name :';
   static const k8888881800 = '8888881800';
   static const kAdityaRastogi = 'Aditya Rastogi';
+  static const kAdityaKumar = 'Aditya Kumar';
   static const kLycheeCake = 'Lychee Cake';
   static const k425 = '₹425';
   static const k1 = '1';
