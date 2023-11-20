@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/pos/billing_bloc.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
@@ -22,7 +24,7 @@ class BillingSectionTwo extends StatelessWidget {
           const SizedBox(height: spacingXXSmall),
           BillingProductsListTwo(posData: posData),
           const SizedBox(height: spacingSmall),
-          BillDetailsTwo(),
+          BillDetailsTwo(billDetails: context.read<BillingBloc>().billDetails),
           const SizedBox(height: spacingMedium),
           const BillingSectionFooterTwo()
         ]));

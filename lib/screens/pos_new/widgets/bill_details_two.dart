@@ -1,14 +1,16 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:saasify/bloc/pos/billing_bloc.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/data/models/billing/bill_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
 
 class BillDetailsTwo extends StatelessWidget {
-  const BillDetailsTwo({super.key});
+  final BillModel billDetails;
+
+  const BillDetailsTwo({super.key, required this.billDetails});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class BillDetailsTwo extends StatelessWidget {
                   const SizedBox(
                     height: spacingStandard,
                   ),
-                  Text('₹ ${context.read<BillingBloc>().billDetails.itemTotal}',
+                  Text('₹ ${billDetails.itemTotal.toStringAsFixed(2)}',
                       style: Theme.of(context)
                           .textTheme
                           .xxTiniest
@@ -53,7 +55,7 @@ class BillDetailsTwo extends StatelessWidget {
                           .textTheme
                           .xxTiniest
                           .copyWith(fontWeight: FontWeight.w600)),
-                  Text(StringConstants.k0,
+                  Text('₹ ${billDetails.discount.toStringAsFixed(2)}',
                       style: Theme.of(context)
                           .textTheme
                           .xxTiniest
@@ -67,7 +69,7 @@ class BillDetailsTwo extends StatelessWidget {
                         .textTheme
                         .xxTiniest
                         .copyWith(fontWeight: FontWeight.w600)),
-                Text('₹ ${context.read<BillingBloc>().billDetails.total}',
+                Text('₹ ${billDetails.total.toStringAsFixed(2)}',
                     style: Theme.of(context)
                         .textTheme
                         .xxTiniest

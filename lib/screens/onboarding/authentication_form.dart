@@ -74,10 +74,6 @@ class AuthenticationBody extends StatelessWidget {
                                 initialValue: AuthenticationScreen
                                     .authDetails['user_name'],
                                 hintText: StringConstants.kWhatsYourName,
-                                hintStyle: Theme.of(context)
-                                    .textTheme
-                                    .xTiniest
-                                    .copyWith(fontWeight: FontWeight.w500),
                                 keyboardType: TextInputType.text,
                                 onTextFieldChanged: (value) {
                                   context.read<AuthenticationBloc>().add(
@@ -100,10 +96,6 @@ class AuthenticationBody extends StatelessWidget {
                       initialValue:
                           AuthenticationScreen.authDetails['user_contact'],
                       hintText: StringConstants.kAddYourContactNumber,
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .xTiniest
-                          .copyWith(fontWeight: FontWeight.w500),
                       validator: (value) {
                         if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)')
                             .hasMatch(value!)) {

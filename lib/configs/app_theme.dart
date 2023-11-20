@@ -40,7 +40,10 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
       borderRadius: BorderRadius.circular(12),
       borderSide: const BorderSide(color: AppColor.saasifyWhite),
     ),
-    hintStyle: const TextStyle(color: AppColor.saasifyLightGrey));
+    hintStyle: const TextStyle(
+        fontSize: 14,
+        color: AppColor.saasifyLightGrey,
+        fontWeight: FontWeight.w500));
 
 extension AppTextTheme on TextTheme {
   TextStyle get xxxTiniest {
