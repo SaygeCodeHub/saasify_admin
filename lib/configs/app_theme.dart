@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_color.dart';
+import 'app_dimensions.dart';
 
 ThemeData appTheme = ThemeData(
   colorScheme: colorScheme,
@@ -17,11 +18,11 @@ ColorScheme colorScheme = const ColorScheme.light(
 
 InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(kCircularRadius),
       borderSide: const BorderSide(color: AppColor.saasifyWhite),
     ),
     disabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(kCircularRadius),
       borderSide: const BorderSide(color: AppColor.saasifyWhite),
     ),
     filled: true,
@@ -29,17 +30,15 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
     fillColor: AppColor.saasifyLighterGrey,
     focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(color: AppColor.saasifyLightGrey),
-    ),
+        borderRadius: BorderRadius.circular(kCircularRadius),
+        borderSide: const BorderSide(color: AppColor.saasifyLightGrey)),
     border: const OutlineInputBorder(),
     errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(kCircularRadius),
         borderSide: const BorderSide(color: AppColor.saasifyRed)),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(color: AppColor.saasifyWhite),
-    ),
+        borderRadius: BorderRadius.circular(kCircularRadius),
+        borderSide: const BorderSide(color: AppColor.saasifyWhite)),
     hintStyle: const TextStyle(
         fontSize: 13,
         color: AppColor.saasifyLightGrey,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
 import '../configs/app_color.dart';
+import '../configs/app_dimensions.dart';
 
 class PrimaryButton extends StatelessWidget {
   final void Function()? onPressed;
@@ -27,15 +28,15 @@ class PrimaryButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: backgroundColor ?? AppColor.saasifyLightDeepBlue,
-        minimumSize: Size(buttonWidth ?? double.maxFinite, 50),
-      ),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(kCircularRadius)),
+          backgroundColor: backgroundColor ?? AppColor.saasifyLightDeepBlue,
+          minimumSize: Size(buttonWidth ?? double.maxFinite, 50)),
       child: FittedBox(
-        child: Text(buttonTitle,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.xTiniest.copyWith(
-                color: AppColor.saasifyWhite, fontWeight: FontWeight.w700)),
-      ),
+          child: Text(buttonTitle,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.xTiniest.copyWith(
+                  color: AppColor.saasifyWhite, fontWeight: FontWeight.w700))),
     );
   }
 }

@@ -228,7 +228,10 @@ class ProductListDataTable extends StatelessWidget {
       const SizedBox(height: spacingSmall),
       Visibility(
           visible: productList.isEmpty,
-          child: const Center(child: Text(StringConstants.kNoDataAvailable)))
+          child: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 250),
+            child: Center(child: Text(StringConstants.kNoDataAvailable)),
+          ))
     ]));
   }
 }

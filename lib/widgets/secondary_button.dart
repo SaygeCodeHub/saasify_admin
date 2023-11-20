@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
 import '../configs/app_color.dart';
 
@@ -27,6 +28,8 @@ class SecondaryButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(kCircularRadius)),
           backgroundColor: AppColor.saasifyWhite,
           side: (side == null)
               ? const BorderSide(color: AppColor.saasifyLightDeepBlue)
