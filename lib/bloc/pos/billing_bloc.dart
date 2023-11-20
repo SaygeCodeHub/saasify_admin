@@ -53,8 +53,9 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       BillingInitialEvent event, Emitter<BillingStates> emit) async {
     if (DatabaseUtil.ordersBox.isNotEmpty && event.orderIndex != -1) {
       orderIndex = event.orderIndex;
-      selectedProducts =
-          DatabaseUtil.ordersBox.get(event.orderIndex)["orderItems"];
+      selectedProducts = DatabaseUtil.ordersBox
+          .get(event.orderIndex)["orderItems"]
+          .cast<SelectedProductModel>();
       billDetails = DatabaseUtil.ordersBox.get(event.orderIndex)["billDetails"];
     } else {
       orderIndex = DatabaseUtil.ordersBox.length + 1;

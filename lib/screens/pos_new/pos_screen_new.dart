@@ -27,6 +27,7 @@ class POSTwoScreen extends StatelessWidget {
         key: _scaffoldKey,
         drawer: const SideBar(selectedIndex: 2),
         body: Flex(
+            crossAxisAlignment: CrossAxisAlignment.start,
             direction:
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
             children: [

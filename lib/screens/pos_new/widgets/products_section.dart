@@ -33,7 +33,7 @@ class ProductsSection extends StatelessWidget {
                   child: Container(
                       width: double.maxFinite,
                       decoration: BoxDecoration(
-                        color: AppColor.saasifyLighterGrey,
+                        color: AppColor.saasifyCementGrey,
                         border: Border.all(color: AppColor.saasifyWhite),
                         borderRadius: BorderRadius.circular(spacingMedium),
                       ),
@@ -74,8 +74,8 @@ class ProductsSection extends StatelessWidget {
               const SizedBox(width: kGeneralButtonHeight),
               Expanded(
                 flex: context.read<BillingBloc>().selectedProducts.isNotEmpty
-                    ? 5
-                    : 3,
+                    ? 3
+                    : 5,
                 child: CustomTextField(
                     hintText: StringConstants.kSearchProduct,
                     onTextFieldChanged: (value) {}),
@@ -87,10 +87,28 @@ class ProductsSection extends StatelessWidget {
               children: List.generate(posData.length, (index) {
             return Row(
               children: [
-                Text(posData[index].categoryName,
-                    style: Theme.of(context).textTheme.xxTiniest.copyWith(
-                        color: AppColor.saasifyRed,
-                        decoration: TextDecoration.underline)),
+                InkWell(
+                  onTap: () {
+                    context.read<BillingBloc>().selectedCategoryIndex = index;
+                    context
+                        .read<BillingBloc>()
+                        .add(SelectCategory(productsByCategories: posData));
+                  },
+                  child: Text(posData[index].categoryName,
+                      style: Theme.of(context).textTheme.xxTiniest.copyWith(
+                          color: (index ==
+                                  context
+                                      .read<BillingBloc>()
+                                      .selectedCategoryIndex)
+                              ? AppColor.saasifyRed
+                              : AppColor.saasifyBlack,
+                          decoration: (index ==
+                                  context
+                                      .read<BillingBloc>()
+                                      .selectedCategoryIndex)
+                              ? TextDecoration.underline
+                              : TextDecoration.none)),
+                ),
                 const SizedBox(width: spacingHuge),
               ],
             );

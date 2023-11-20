@@ -46,18 +46,18 @@ extension AppTextTheme on TextTheme {
   TextStyle get xxxTiniest {
     return const TextStyle(
         fontSize: 10,
-        color: AppColor.saasifyLightGrey,
-        fontWeight: FontWeight.w400);
-  }
-
-  TextStyle get xTiniest {
-    return const TextStyle(
-        fontSize: 12,
-        color: AppColor.saasifyLightGrey,
+        color: AppColor.saasifyBlack,
         fontWeight: FontWeight.w400);
   }
 
   TextStyle get xxTiniest {
+    return const TextStyle(
+        fontSize: 12,
+        color: AppColor.saasifyBlack,
+        fontWeight: FontWeight.w400);
+  }
+
+  TextStyle get xTiniest {
     return const TextStyle(
         fontSize: 14,
         color: AppColor.saasifyLightBlack,

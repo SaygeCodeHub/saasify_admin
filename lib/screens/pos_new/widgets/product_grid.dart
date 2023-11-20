@@ -45,8 +45,16 @@ class ProductGrid extends StatelessWidget {
                         color: AppColor.saasifyLighterGrey,
                       ),
                       child: Column(children: [
-                        const Row(),
-                        const SizedBox(height: spacingXMedium),
+                        Expanded(
+                            child: Image.network(
+                                posData[context
+                                        .read<BillingBloc>()
+                                        .selectedCategoryIndex]
+                                    .products[index]
+                                    .variants[0]
+                                    .images[0],
+                                fit: BoxFit.fill)),
+                        const SizedBox(height: spacingXSmall),
                         Center(
                             child: Text(
                                 posData[context
@@ -58,7 +66,7 @@ class ProductGrid extends StatelessWidget {
                                 style: Theme.of(context).textTheme.xxTiniest,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2)),
-                        const SizedBox(height: spacingXXSmall),
+                        const SizedBox(height: spacingXSmall),
                         Text(
                             posData[context
                                     .read<BillingBloc>()
@@ -68,7 +76,7 @@ class ProductGrid extends StatelessWidget {
                                 .toString(),
                             style: Theme.of(context)
                                 .textTheme
-                                .tiniest
+                                .xxTiniest
                                 .copyWith(color: AppColor.saasifyLightDeepBlue))
                       ]))));
         });
