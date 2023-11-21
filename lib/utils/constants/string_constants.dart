@@ -17,11 +17,12 @@ class StringConstants {
   static const kAddVariant = 'Add Variant';
   static const kNewProductAdded = 'New product added successfully!';
   static const kCategory = 'Category';
+  static const kAddCustomer = 'Add Customer';
   static const kProducts = 'Products';
   static const kOpenTabs = 'Open Tabs';
   static const kInventoryManagement = 'Inventory Management';
   static const kBrand = 'Brand';
-  static const kOrders = 'kOrders';
+  static const kOrders = 'Orders';
   static const kBarcode = 'Barcode';
   static const kProductId = 'ProductId';
   static const kSettleBill = 'Settle Bill';
