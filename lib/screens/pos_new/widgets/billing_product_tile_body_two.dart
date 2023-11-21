@@ -56,30 +56,25 @@ class BillingProductTileBody extends StatelessWidget {
                     .copyWith(color: AppColor.saasifyPaleBlue)),
             Row(children: [
               InkWell(
-                onTap: () {
-                  context.read<BillingBloc>().add(RemoveProduct(
-                      productsByCategories: posData,
-                      product: selectedProduct.product));
-                },
-                child: Container(
-                  height: kCounterContainerSize,
-                  width: kCounterContainerSize,
-                  decoration: BoxDecoration(
-                    color: AppColor.saasifyLightGreyBlue,
-                    border: Border.all(color: AppColor.saasifyLightDeepBlue),
-                  ),
-                  child: const Center(
-                      child: Icon(
-                    Icons.remove,
-                    size: kGeneralRadius,
-                  )),
-                ),
-              ),
+                  onTap: () {
+                    context.read<BillingBloc>().add(RemoveProduct(
+                        productsByCategories: posData,
+                        product: selectedProduct.product));
+                  },
+                  child: Container(
+                      height: kCounterContainerSize,
+                      width: kCounterContainerSize,
+                      decoration: BoxDecoration(
+                          color: AppColor.saasifyLightGreyBlue,
+                          border:
+                              Border.all(color: AppColor.saasifyLightPaleGrey)),
+                      child: const Center(
+                          child: Icon(Icons.remove, size: kGeneralRadius)))),
               Container(
                 height: kCounterContainerSize,
                 width: kCounterContainerSize,
                 decoration: BoxDecoration(
-                  border: Border.all(color: AppColor.saasifyLightDeepBlue),
+                  border: Border.all(color: AppColor.saasifyLightPaleGrey),
                 ),
                 child: Center(
                     child: Text(selectedProduct.count.toString(),
@@ -96,8 +91,9 @@ class BillingProductTileBody extends StatelessWidget {
                       height: kCounterContainerSize,
                       width: kCounterContainerSize,
                       decoration: BoxDecoration(
+                        color: AppColor.saasifyLightGreyBlue,
                         border:
-                            Border.all(color: AppColor.saasifyLightDeepBlue),
+                            Border.all(color: AppColor.saasifyLightPaleGrey),
                       ),
                       child: const Center(
                           child: Icon(
