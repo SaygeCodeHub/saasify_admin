@@ -29,37 +29,37 @@ class ProductListDataTable extends StatelessWidget {
           dataRowMaxHeight: 50,
           columns: [
             DataColumn(
-              label: Expanded(
-                child: Center(
-                  child: Visibility(
-                    visible: productList.isNotEmpty,
-                    child: InkWell(
-                        onTap: () {
-                          if (ProductListScreen.selectedIds.length <
-                              productList.length) {
-                            ProductListScreen.selectedIds =
-                                productList.map((e) => e.productId).toList();
-                          } else {
-                            ProductListScreen.selectedIds.clear();
-                          }
-                          context
-                              .read<ProductBloc>()
-                              .add(ProductSelected(productList: productList));
-                        },
-                        child: Icon(
-                            (ProductListScreen.selectedIds.isEmpty)
-                                ? Icons.check_box_outline_blank
-                                : (ProductListScreen.selectedIds.length <
-                                        productList.length)
-                                    ? Icons.indeterminate_check_box_outlined
-                                    : Icons.check_box,
-                            color: (ProductListScreen.selectedIds.isNotEmpty)
-                                ? AppColor.saasifyLightDeepBlue
-                                : AppColor.saasifyLightDeepBlue)),
-                  ),
-                ),
-              ),
-            ),
+                label: Expanded(
+                    child: Center(
+                        child: Visibility(
+                            visible: productList.isNotEmpty,
+                            child: InkWell(
+                                onTap: () {
+                                  if (ProductListScreen.selectedIds.length <
+                                      productList.length) {
+                                    ProductListScreen.selectedIds = productList
+                                        .map((e) => e.productId)
+                                        .toList();
+                                  } else {
+                                    ProductListScreen.selectedIds.clear();
+                                  }
+                                  context.read<ProductBloc>().add(
+                                      ProductSelected(
+                                          productList: productList));
+                                },
+                                child: Icon(
+                                    (ProductListScreen.selectedIds.isEmpty)
+                                        ? Icons.check_box_outline_blank
+                                        : (ProductListScreen
+                                                    .selectedIds.length <
+                                                productList.length)
+                                            ? Icons
+                                                .indeterminate_check_box_outlined
+                                            : Icons.check_box,
+                                    color: (ProductListScreen
+                                            .selectedIds.isNotEmpty)
+                                        ? AppColor.saasifyLightDeepBlue
+                                        : AppColor.saasifyLightDeepBlue)))))),
             DataColumn(
                 label: Text(StringConstants.kName,
                     style: Theme.of(context)

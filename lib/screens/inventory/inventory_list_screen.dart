@@ -56,80 +56,102 @@ class InventoryListScreen extends StatelessWidget {
                   flex: 5,
                   child: Padding(
                       padding: const EdgeInsets.all(spacingLarge),
-                      child: Column(children: [
-                        Row(children: [
-                          Text(StringConstants.kInventoryManagement,
-                              maxLines: 2,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .xxTiny
-                                  .copyWith(fontWeight: FontWeight.w700)),
-                          const Spacer(),
-                          Expanded(
-                            flex: 5,
-                            child: CustomTextField(
-                                hintText: StringConstants.kSearchHere,
-                                onTextFieldChanged: (value) {}),
-                          ),
-                          const Spacer(),
-                        ]),
-                        const SizedBox(height: spacingStandard),
-                        BlocConsumer<InventoryBloc, InventoryStates>(
-                          listener: (context, state) {
-                            if (state is UpdatingStock) {
-                              ProgressBar.show(context);
-                            } else if (state is UpdatedStock) {
-                              ProgressBar.dismiss(context);
-                              showDialog(
-                                  context: context,
-                                  builder: (dialogueCtx) {
-                                    return CustomAlertDialog(
-                                        title: 'Success',
-                                        message: state.message,
-                                        primaryButtonTitle:
-                                            StringConstants.kUnderstood,
-                                        primaryOnPressed: () {
-                                          Navigator.pop(dialogueCtx);
-                                          context
-                                              .read<InventoryBloc>()
-                                              .add(FetchInventoryList());
-                                        });
-                                  });
-                            } else if (state is ErrorUpdatingStock) {
-                              ProgressBar.dismiss(context);
-                              showDialog(
-                                  context: context,
-                                  builder: (dialogueCtx) {
-                                    return CustomAlertDialog(
-                                        title:
-                                            StringConstants.kSomethingWentWrong,
-                                        message: state.message,
-                                        primaryButtonTitle:
-                                            StringConstants.kUnderstood,
-                                        primaryOnPressed: () {
-                                          Navigator.pop(dialogueCtx);
-                                        });
-                                  });
-                            }
-                          },
-                          buildWhen: (prev, curr) {
-                            return curr is FetchedInventoryList ||
-                                curr is FetchingInventoryList;
-                          },
-                          builder: (context, state) {
-                            if (state is FetchedInventoryList) {
-                              return InventoryListDataTable(
-                                  productList: state.productList);
-                            }
-                            if (state is FetchingInventoryList) {
-                              return const Expanded(
-                                  child: Center(
-                                      child: CircularProgressIndicator()));
-                            }
+                      child: BlocConsumer<InventoryBloc, InventoryStates>(
+                        listener: (context, state) {
+                          if (state is UpdatingStock) {
+                            ProgressBar.show(context);
+                          } else if (state is UpdatedStock) {
+                            ProgressBar.dismiss(context);
+                            showDialog(
+                                context: context,
+                                builder: (dialogueCtx) {
+                                  return CustomAlertDialog(
+                                      title: 'Success',
+                                      message: state.message,
+                                      primaryButtonTitle:
+                                          StringConstants.kUnderstood,
+                                      primaryOnPressed: () {
+                                        Navigator.pop(dialogueCtx);
+                                        context
+                                            .read<InventoryBloc>()
+                                            .add(FetchInventoryList());
+                                      });
+                                });
+                          } else if (state is ErrorUpdatingStock) {
+                            ProgressBar.dismiss(context);
+                            showDialog(
+                                context: context,
+                                builder: (dialogueCtx) {
+                                  return CustomAlertDialog(
+                                      title:
+                                          StringConstants.kSomethingWentWrong,
+                                      message: state.message,
+                                      primaryButtonTitle:
+                                          StringConstants.kUnderstood,
+                                      primaryOnPressed: () {
+                                        Navigator.pop(dialogueCtx);
+                                      });
+                                });
+                          }
+                        },
+                        buildWhen: (prev, curr) {
+                          return curr is FetchedInventoryList ||
+                              curr is FetchingInventoryList;
+                        },
+                        builder: (context, state) {
+                          if (state is FetchingInventoryList) {
+                            return const Expanded(
+                                child:
+                                    Center(child: CircularProgressIndicator()));
+                          } else if (state is FetchedInventoryList) {
+                            return Column(
+                              children: [
+                                Row(children: [
+                                  Text(StringConstants.kInventoryManagement,
+                                      maxLines: 2,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .xxTiny
+                                          .copyWith(
+                                              fontWeight: FontWeight.w700)),
+                                  const Spacer(),
+                                  Expanded(
+                                    flex: 5,
+                                    child: CustomTextField(
+                                        hintText: StringConstants.kSearchHere,
+                                        onTextFieldChanged: (value) {}),
+                                  ),
+                                  const Spacer(),
+                                ]),
+                                const SizedBox(height: spacingStandard),
+                                InventoryListDataTable(
+                                    productList: state.productList),
+                                Visibility(
+                                    visible: state.productList.isEmpty,
+                                    child: Center(
+                                        child: Text(
+                                            StringConstants.kNoDataAvailable,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .tinier
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w500)))),
+                                Visibility(
+                                    visible: state.productList.isEmpty,
+                                    child: const Spacer())
+                              ],
+                            );
+                          } else if (state is ErrorFetchingInventoryList) {
+                            return const Expanded(
+                                child: Center(
+                                    child: Text(
+                                        StringConstants.kNoDataAvailable)));
+                          } else {
                             return const SizedBox.shrink();
-                          },
-                        ),
-                      ])))
+                          }
+                        },
+                      )))
             ]));
   }
 }
