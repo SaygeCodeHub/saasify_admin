@@ -13,7 +13,7 @@ class StringConstants {
   static const kOrderNo = 'Order No';
   static const kOrderedOn = 'Ordered On';
   static const kStatus = 'Status';
-  static const kProductAmount = 'Product Amount';
+  static const kProductAmount = 'Total Amount';
   static const kCustomerContact = 'Customer Contact';
   static const kCustomerName = 'Customer Name';
   static const kModeOfPayment = 'Mode of Payment';
