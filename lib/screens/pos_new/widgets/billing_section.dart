@@ -10,9 +10,11 @@ import 'billing_section_footer.dart';
 import 'billing_section_header.dart';
 
 class BillingSection extends StatelessWidget {
-  const BillingSection({super.key, required this.posData});
+  BillingSection({super.key, required this.posData});
 
   final List<CategoryWithProductsDatum> posData;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +22,13 @@ class BillingSection extends StatelessWidget {
         padding: const EdgeInsets.all(spacingMedium),
         decoration: const BoxDecoration(color: AppColor.saasifyLightGreyBlue),
         child: Column(children: [
-          const BillingSectionHeader(),
+          BillingSectionHeader(formKey: _formKey),
           const SizedBox(height: spacingLarge),
           BillingProductsList(posData: posData),
           const SizedBox(height: spacingSmall),
           BillDetails(billDetails: context.read<BillingBloc>().billDetails),
           const SizedBox(height: spacingMedium),
-          const BillingSectionFooter()
+          BillingSectionFooter(formKey: _formKey)
         ]));
   }
 }

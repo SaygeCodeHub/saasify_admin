@@ -18,6 +18,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   final BillingRepository _billingRepository = getIt<BillingRepository>();
   List<SelectedProductModel> selectedProducts = [];
   String customerContact = '-';
+  String customerName = '-';
   int selectedCategoryIndex = 0;
   BillModel billDetails = BillModel(itemTotal: 0, total: 0, discount: 0);
   bool billExpanded = false;
@@ -233,10 +234,10 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
       Map<String, dynamic> orderMap = {
         "items_ordered": productList,
-        "customer_contact": 1234567890,
+        "customer_contact": int.parse(customerContact),
         "payment_status": "paid",
         "mode_of_payment": event.paymentMethod,
-        "customer_name": "qwertyui",
+        "customer_name": customerName,
         "discount_total": billDetails.discount,
         "total_amount": billDetails.total,
         "subtotal": billDetails.itemTotal

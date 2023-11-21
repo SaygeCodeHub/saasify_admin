@@ -64,25 +64,28 @@ class ProductForm extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w700)),
               ],
             ),
-            SizedBox(
-              width: kGeneralActionButtonWidth,
-              child: PrimaryButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, AddProductScreen.routeName,
-                        arguments: AddProductScreenArguments(
-                            isEdit: false,
-                            isVariant: true,
-                            dataMap: {
-                              'product_name': dataMap['product_name'],
-                              'category_name': dataMap['category_name'],
-                              'brand_name': dataMap['brand_name'],
-                              'product_id': dataMap['product_id'],
-                              'product_description':
-                                  dataMap['product_description'],
-                            }));
-                  },
-                  buttonTitle: 'Add Variant'),
+            Visibility(
+              visible: isEdit,
+              child: SizedBox(
+                width: kGeneralActionButtonWidth,
+                child: PrimaryButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, AddProductScreen.routeName,
+                          arguments: AddProductScreenArguments(
+                              isEdit: false,
+                              isVariant: true,
+                              dataMap: {
+                                'product_name': dataMap['product_name'],
+                                'category_name': dataMap['category_name'],
+                                'brand_name': dataMap['brand_name'],
+                                'product_id': dataMap['product_id'],
+                                'product_description':
+                                    dataMap['product_description'],
+                              }));
+                    },
+                    buttonTitle: 'Add Variant'),
+              ),
             )
           ],
         ),

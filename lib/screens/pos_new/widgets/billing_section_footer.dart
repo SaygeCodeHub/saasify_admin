@@ -10,7 +10,10 @@ import '../../../widgets/primary_button.dart';
 import 'payment_dialogue.dart';
 
 class BillingSectionFooter extends StatelessWidget {
-  const BillingSectionFooter({super.key});
+  final GlobalKey<FormState> _formKey;
+
+  const BillingSectionFooter({super.key, required GlobalKey<FormState> formKey})
+      : _formKey = formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +33,17 @@ class BillingSectionFooter extends StatelessWidget {
       const SizedBox(height: spacingMedium),
       PrimaryButton(
         onPressed: () {
-          showDialog(
-              context: context, builder: (context) => const PaymentDialogue());
+          if (_formKey.currentState != null) {
+            if (_formKey.currentState!.validate()) {
+              showDialog(
+                  context: context,
+                  builder: (context) => const PaymentDialogue());
+            }
+          } else {
+            showDialog(
+                context: context,
+                builder: (context) => const PaymentDialogue());
+          }
         },
         buttonTitle: StringConstants.kSettleBill,
       )

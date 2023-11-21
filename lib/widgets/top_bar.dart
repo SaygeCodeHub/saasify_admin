@@ -26,7 +26,7 @@ class TopBar extends StatelessWidget {
                 icon: const Icon(Icons.menu, color: AppColor.saasifyWhite)),
           ),
           Text(headingText,
-              style: Theme.of(context).textTheme.tinier.copyWith(
+              style: Theme.of(context).textTheme.xxTiny.copyWith(
                   fontWeight: FontWeight.w500, color: AppColor.saasifyWhite)),
         ]));
   }

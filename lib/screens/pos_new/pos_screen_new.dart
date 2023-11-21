@@ -7,6 +7,7 @@ import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/custom_alert_box.dart';
 import 'package:saasify/widgets/sidebar.dart';
+import 'package:saasify/widgets/top_bar.dart';
 import '../../bloc/pos/billing_bloc.dart';
 import '../../bloc/pos/billing_event.dart';
 import '../../bloc/pos/billing_state.dart';
@@ -35,21 +36,9 @@ class POSScreen extends StatelessWidget {
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
             children: [
               context.responsive(
-                  Container(
-                      color: AppColor.saasifyLightDeepBlue,
-                      child: Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: spacingSmall, horizontal: spacingLarge),
-                          child: IconButton(
-                              onPressed: () {
-                                _scaffoldKey.currentState!.openDrawer();
-                              },
-                              iconSize: 30,
-                              icon: const Icon(Icons.menu,
-                                  color: AppColor.saasifyWhite)),
-                        )
-                      ])),
+                  TopBar(
+                      scaffoldKey: _scaffoldKey,
+                      headingText: StringConstants.kOpenTabs),
                   desktop: const Expanded(
                     child: SideBar(selectedIndex: 2),
                   )),
@@ -84,11 +73,18 @@ class POSScreen extends StatelessWidget {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(StringConstants.kOpenTabs,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .xxTiny
-                                        .copyWith(fontWeight: FontWeight.w700)),
+                                context.responsive(const SizedBox.shrink(),
+                                    desktop: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: spacingMedium,
+                                          vertical: spacingLarge),
+                                      child: Text(StringConstants.kOpenTabs,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .xxTiny
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w700)),
+                                    )),
                                 GridView.builder(
                                     physics: const BouncingScrollPhysics(),
                                     shrinkWrap: true,

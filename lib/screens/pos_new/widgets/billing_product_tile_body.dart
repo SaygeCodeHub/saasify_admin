@@ -5,7 +5,6 @@ import 'package:saasify/bloc/pos/billing_event.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import 'package:saasify/data/models/billing/selected_product_model.dart';
-import 'package:saasify/utils/constants/string_constants.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
@@ -48,59 +47,51 @@ class BillingProductTileBody extends StatelessWidget {
                   .xxTiniest
                   .copyWith(color: AppColor.saasifyPaleBlack)),
           const SizedBox(height: spacingXXSmall),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text(StringConstants.kAddInstructions,
-                style: Theme.of(context)
-                    .textTheme
-                    .xxTiniest
-                    .copyWith(color: AppColor.saasifyPaleBlue)),
-            Row(children: [
-              InkWell(
-                  onTap: () {
-                    context.read<BillingBloc>().add(RemoveProduct(
-                        productsByCategories: posData,
-                        product: selectedProduct.product));
-                  },
-                  child: Container(
-                      height: kCounterContainerSize,
-                      width: kCounterContainerSize,
-                      decoration: BoxDecoration(
-                          color: AppColor.saasifyLightGreyBlue,
-                          border:
-                              Border.all(color: AppColor.saasifyLightPaleGrey)),
-                      child: const Center(
-                          child: Icon(Icons.remove, size: kGeneralRadius)))),
-              Container(
-                height: kCounterContainerSize,
-                width: kCounterContainerSize,
-                decoration: BoxDecoration(
-                  border: Border.all(color: AppColor.saasifyLightPaleGrey),
-                ),
-                child: Center(
-                    child: Text(selectedProduct.count.toString(),
-                        style: Theme.of(context).textTheme.tiniest)),
-              ),
-              InkWell(
-                  onTap: () {
-                    context.read<BillingBloc>().add(SelectProduct(
-                        variantIndex: 0,
-                        productsByCategories: posData,
-                        product: selectedProduct.product));
-                  },
-                  child: Container(
-                      height: kCounterContainerSize,
-                      width: kCounterContainerSize,
-                      decoration: BoxDecoration(
+          Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+            InkWell(
+                onTap: () {
+                  context.read<BillingBloc>().add(RemoveProduct(
+                      productsByCategories: posData,
+                      product: selectedProduct.product));
+                },
+                child: Container(
+                    height: kCounterContainerSize,
+                    width: kCounterContainerSize,
+                    decoration: BoxDecoration(
                         color: AppColor.saasifyLightGreyBlue,
                         border:
-                            Border.all(color: AppColor.saasifyLightPaleGrey),
-                      ),
-                      child: const Center(
-                          child: Icon(
-                        Icons.add,
-                        size: kGeneralRadius,
-                      ))))
-            ])
+                            Border.all(color: AppColor.saasifyLightPaleGrey)),
+                    child: const Center(
+                        child: Icon(Icons.remove, size: kGeneralRadius)))),
+            Container(
+              height: kCounterContainerSize,
+              width: kCounterContainerSize,
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColor.saasifyLightPaleGrey),
+              ),
+              child: Center(
+                  child: Text(selectedProduct.count.toString(),
+                      style: Theme.of(context).textTheme.tiniest)),
+            ),
+            InkWell(
+                onTap: () {
+                  context.read<BillingBloc>().add(SelectProduct(
+                      variantIndex: 0,
+                      productsByCategories: posData,
+                      product: selectedProduct.product));
+                },
+                child: Container(
+                    height: kCounterContainerSize,
+                    width: kCounterContainerSize,
+                    decoration: BoxDecoration(
+                      color: AppColor.saasifyLightGreyBlue,
+                      border: Border.all(color: AppColor.saasifyLightPaleGrey),
+                    ),
+                    child: const Center(
+                        child: Icon(
+                      Icons.add,
+                      size: kGeneralRadius,
+                    ))))
           ])
         ]);
   }
