@@ -13,6 +13,7 @@ import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/custom_alert_box.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/sidebar.dart';
+import 'package:saasify/widgets/top_bar.dart';
 
 class InventoryListScreen extends StatelessWidget {
   static const String routeName = 'InventoryListScreen';
@@ -34,21 +35,9 @@ class InventoryListScreen extends StatelessWidget {
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
             children: [
               context.responsive(
-                  Container(
-                      color: AppColor.saasifyLightDeepBlue,
-                      child: Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: spacingSmall, horizontal: spacingLarge),
-                          child: IconButton(
-                              onPressed: () {
-                                _scaffoldKey.currentState!.openDrawer();
-                              },
-                              iconSize: 30,
-                              icon: const Icon(Icons.menu,
-                                  color: AppColor.saasifyWhite)),
-                        )
-                      ])),
+                  TopBar(
+                      scaffoldKey: _scaffoldKey,
+                      headingText: StringConstants.kInventoryManagement),
                   desktop: const Expanded(
                     child: SideBar(selectedIndex: 1),
                   )),
@@ -107,14 +96,18 @@ class InventoryListScreen extends StatelessWidget {
                             return Column(
                               children: [
                                 Row(children: [
-                                  Text(StringConstants.kInventoryManagement,
-                                      maxLines: 2,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiny
-                                          .copyWith(
-                                              fontWeight: FontWeight.w700)),
-                                  const Spacer(),
+                                  context.responsive(const SizedBox(),
+                                      desktop: Text(
+                                          StringConstants.kInventoryManagement,
+                                          maxLines: 2,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .xxTiny
+                                              .copyWith(
+                                                  fontWeight:
+                                                      FontWeight.w700))),
+                                  context.responsive(const SizedBox(),
+                                      desktop: const Spacer()),
                                   Expanded(
                                     flex: 5,
                                     child: CustomTextField(
@@ -135,8 +128,9 @@ class InventoryListScreen extends StatelessWidget {
                                                 .textTheme
                                                 .tinier
                                                 .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w500)))),
+                                                    fontWeight: FontWeight.w500,
+                                                    color: AppColor
+                                                        .saasifyLightGrey)))),
                                 Visibility(
                                     visible: state.productList.isEmpty,
                                     child: const Spacer())
