@@ -10,6 +10,7 @@ import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
 import 'package:saasify/screens/pos_new/pos_screen_new.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
+import 'package:saasify/utils/constants/string_constants.dart';
 
 class SideBar extends StatelessWidget {
   static String userName = '';
@@ -51,7 +52,7 @@ class SideBar extends StatelessWidget {
               padding: const EdgeInsets.only(left: spacingLarge),
               child: Column(children: [
                 ListTile(
-                  title: Text('Dashboard',
+                  title: Text(StringConstants.kDashboard,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 1)
                               ? AppColor.saasifyLightDeepBlue
@@ -63,7 +64,7 @@ class SideBar extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text('POS',
+                  title: Text(StringConstants.kPOS,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 2)
                               ? AppColor.saasifyLightDeepBlue
@@ -75,7 +76,7 @@ class SideBar extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text('Products',
+                  title: Text(StringConstants.kProducts,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 3)
                               ? AppColor.saasifyLightDeepBlue
@@ -87,7 +88,7 @@ class SideBar extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text('Orders',
+                  title: Text(StringConstants.kOrders,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 4)
                               ? AppColor.saasifyLightDeepBlue
@@ -96,7 +97,7 @@ class SideBar extends StatelessWidget {
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Text('Inventory Management',
+                  title: Text(StringConstants.kInventoryManagement,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 5)
                               ? AppColor.saasifyLightDeepBlue
@@ -128,7 +129,7 @@ class SideBar extends StatelessWidget {
           Padding(
               padding: const EdgeInsets.only(left: spacingLarge),
               child: ListTile(
-                title: Text('Log Out',
+                title: Text(StringConstants.kLogout,
                     style: Theme.of(context).textTheme.xTiniest.copyWith(
                         color: AppColor.saasifyRed,
                         fontWeight: FontWeight.w700)),
