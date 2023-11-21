@@ -23,6 +23,14 @@ class CustomerCache {
     await sharedPreferences.setInt(CacheKeys.branchId, branchId);
   }
 
+  void setUserName(String userName) async {
+    await sharedPreferences.setString(CacheKeys.userName, userName);
+  }
+
+  void setUserContact(int userContact) async {
+    await sharedPreferences.setInt(CacheKeys.userContact, userContact);
+  }
+
   Future<bool?> getIsLoggedIn() async {
     return sharedPreferences.getBool(CacheKeys.isLoggedIn);
   }
@@ -37,6 +45,14 @@ class CustomerCache {
 
   Future<String> getCompanyId() async {
     return sharedPreferences.getString(CacheKeys.companyId) ?? '';
+  }
+
+  Future<String> getUserName() async {
+    return sharedPreferences.getString(CacheKeys.userName) ?? '';
+  }
+
+  Future<int> getUserContact() async {
+    return sharedPreferences.getInt(CacheKeys.userContact) ?? 0;
   }
 
   Future<bool> clearAll() async {

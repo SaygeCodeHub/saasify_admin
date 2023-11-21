@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/data/customer_cache/customer_cache.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
+import 'package:saasify/widgets/sidebar.dart';
 import '../../di/app_module.dart';
 import '../../repositories/authentication/authentication_repository.dart';
 import 'authentication_event.dart';
@@ -109,6 +110,12 @@ class AuthenticationBloc
                 .setCompanyId(authenticationModel.data.companies[0].companyId);
             _customerCache.setBranchId(
                 authenticationModel.data.companies[0].branches[0].branchId);
+            _customerCache
+                .setUserContact(authenticationModel.data.user.userContact ?? 0);
+            _customerCache.setUserName(authenticationModel.data.user.userName);
+            SideBar.userContact =
+                authenticationModel.data.user.userContact ?? 0;
+            SideBar.userName = authenticationModel.data.user.userName;
             emit(PhoneOtpVerified(userData: authenticationModel.data));
           } else if (authenticationModel.status == 404) {
             emit(PhoneAuthError(error: authenticationModel.message.toString()));
@@ -134,7 +141,11 @@ class AuthenticationBloc
   FutureOr<void> _checkIfLoggedIn(
       CheckIfLoggedIn event, Emitter<AuthenticationStates> emit) async {
     bool? isLoggedIn = await _customerCache.getIsLoggedIn();
+    String userName = await _customerCache.getUserName();
+    int userContact = await _customerCache.getUserContact();
     if (isLoggedIn == true) {
+      SideBar.userContact = userContact;
+      SideBar.userName = userName;
       emit(IsLoggedIn());
     }
   }

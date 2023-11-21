@@ -228,6 +228,14 @@ class ProductListScreen extends StatelessWidget {
                                 const SizedBox(height: spacingStandard),
                                 ProductListDataTable(
                                     productList: state.productList),
+                                Visibility(
+                                    visible: state.productList.isEmpty,
+                                    child: const Center(
+                                        child: Text(
+                                            StringConstants.kNoDataAvailable))),
+                                Visibility(
+                                    visible: state.productList.isEmpty,
+                                    child: const Spacer())
                               ],
                             );
                           } else if (state is ErrorFetchingProduct) {

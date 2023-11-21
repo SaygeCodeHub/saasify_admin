@@ -9,6 +9,7 @@ import 'package:saasify/data/models/screen_arguments/add_product_screen_argument
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/screens/product/widgets/product_form.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
+import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/custom_alert_box.dart';
@@ -122,6 +123,7 @@ class AddProductScreen extends StatelessWidget {
                                             }));
                                   },
                                   secondaryOnPressed: () {
+                                    DatabaseUtil.products.clear();
                                     Navigator.pop(dialogueCtx);
                                     Navigator.pushReplacementNamed(
                                         context, ProductListScreen.routeName);

@@ -20,7 +20,7 @@ class ProductListDataTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: ListView(children: <Widget>[
+        child: ListView(shrinkWrap: true, children: <Widget>[
       DataTable(
           columnSpacing: 0,
           horizontalMargin: 0,
@@ -31,29 +31,32 @@ class ProductListDataTable extends StatelessWidget {
             DataColumn(
               label: Expanded(
                 child: Center(
-                  child: InkWell(
-                      onTap: () {
-                        if (ProductListScreen.selectedIds.length <
-                            productList.length) {
-                          ProductListScreen.selectedIds =
-                              productList.map((e) => e.productId).toList();
-                        } else {
-                          ProductListScreen.selectedIds.clear();
-                        }
-                        context
-                            .read<ProductBloc>()
-                            .add(ProductSelected(productList: productList));
-                      },
-                      child: Icon(
-                          (ProductListScreen.selectedIds.isEmpty)
-                              ? Icons.check_box_outline_blank
-                              : (ProductListScreen.selectedIds.length <
-                                      productList.length)
-                                  ? Icons.indeterminate_check_box_outlined
-                                  : Icons.check_box,
-                          color: (ProductListScreen.selectedIds.isNotEmpty)
-                              ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyLightDeepBlue)),
+                  child: Visibility(
+                    visible: productList.isNotEmpty,
+                    child: InkWell(
+                        onTap: () {
+                          if (ProductListScreen.selectedIds.length <
+                              productList.length) {
+                            ProductListScreen.selectedIds =
+                                productList.map((e) => e.productId).toList();
+                          } else {
+                            ProductListScreen.selectedIds.clear();
+                          }
+                          context
+                              .read<ProductBloc>()
+                              .add(ProductSelected(productList: productList));
+                        },
+                        child: Icon(
+                            (ProductListScreen.selectedIds.isEmpty)
+                                ? Icons.check_box_outline_blank
+                                : (ProductListScreen.selectedIds.length <
+                                        productList.length)
+                                    ? Icons.indeterminate_check_box_outlined
+                                    : Icons.check_box,
+                            color: (ProductListScreen.selectedIds.isNotEmpty)
+                                ? AppColor.saasifyLightDeepBlue
+                                : AppColor.saasifyLightDeepBlue)),
+                  ),
                 ),
               ),
             ),
@@ -66,7 +69,7 @@ class ProductListDataTable extends StatelessWidget {
             DataColumn(
                 label: Expanded(
               child: Center(
-                child: Text(StringConstants.kProductId,
+                child: Text(StringConstants.kBarcode,
                     style: Theme.of(context)
                         .textTheme
                         .xxTiniest
@@ -225,13 +228,6 @@ class ProductListDataTable extends StatelessWidget {
                           size: spacingStandard,
                         )))
                   ]))),
-      const SizedBox(height: spacingSmall),
-      Visibility(
-          visible: productList.isEmpty,
-          child: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 250),
-            child: Center(child: Text(StringConstants.kNoDataAvailable)),
-          ))
     ]));
   }
 }

@@ -11,9 +11,9 @@ import 'package:saasify/screens/onboarding/auhentication_screen.dart';
 import 'package:saasify/screens/pos_new/pos_screen_new.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 
-import '../utils/constants/string_constants.dart';
-
 class SideBar extends StatelessWidget {
+  static String userName = '';
+  static int userContact = 0;
   final int selectedIndex;
 
   const SideBar({Key? key, required this.selectedIndex}) : super(key: key);
@@ -34,11 +34,11 @@ class SideBar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(StringConstants.kAdityaKumar,
+                    Text(userName,
                         style: Theme.of(context).textTheme.xTiniest.copyWith(
                             color: AppColor.saasifyLighterBlack,
                             fontWeight: FontWeight.w600)),
-                    Text('AK781299',
+                    Text(userContact.toString(),
                         style: Theme.of(context).textTheme.xxxTiniest.copyWith(
                             color: AppColor.saasifyLighterBlack,
                             fontWeight: FontWeight.w300))
