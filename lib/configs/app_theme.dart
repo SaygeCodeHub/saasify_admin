@@ -14,7 +14,9 @@ ThemeData appTheme = ThemeData(
 );
 
 ColorScheme colorScheme = const ColorScheme.light(
-    surface: AppColor.saasifyWhite, background: AppColor.saasifyWhite);
+    surface: AppColor.saasifyWhite,
+    background: AppColor.saasifyWhite,
+    primary: AppColor.saasifyLightDeepBlue);
 
 InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     enabledBorder: OutlineInputBorder(
