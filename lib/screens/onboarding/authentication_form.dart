@@ -38,15 +38,15 @@ class AuthenticationBody extends StatelessWidget {
         key: _formKey,
         child: Padding(
             padding: const EdgeInsets.only(
-              left: spacingXXXHuge,
-              right: spacingXXXHuge,
-            ),
+                left: spacingXXXHuge,
+                right: spacingXXXHuge,
+                top: spacingXXXHuge),
             child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SvgPicture.asset("assets/SaaSify.svg", width: kLogoWidth),
-                  const SizedBox(height: kImageHeight),
+                  const SizedBox(height: spacingXXXHuge),
                   (isLogin)
                       ? Text(StringConstants.kWelcome,
                           style: Theme.of(context).textTheme.xxTiny.copyWith(

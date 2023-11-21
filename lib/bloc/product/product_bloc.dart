@@ -35,12 +35,12 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
       String userId = await _customerCache.getUserId();
       String companyId = await _customerCache.getCompanyId();
       int branchId = await _customerCache.getBranchId();
-      FetchProductListModel fetchproductListModel = await _productRepository
+      FetchProductListModel fetchProductListModel = await _productRepository
           .fetchProductList(userId, companyId, branchId);
-      if (fetchproductListModel.status == 200) {
-        emit(FetchedProduct(productList: fetchproductListModel.data));
+      if (fetchProductListModel.status == 200) {
+        emit(FetchedProduct(productList: fetchProductListModel.data));
       } else {
-        emit(ErrorFetchingProduct(message: fetchproductListModel.message));
+        emit(ErrorFetchingProduct(message: fetchProductListModel.message));
       }
     } catch (e) {
       emit(ErrorFetchingProduct(message: e.toString()));

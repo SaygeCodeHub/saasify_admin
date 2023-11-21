@@ -68,13 +68,11 @@ class ProductListDataTable extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w500))),
             DataColumn(
                 label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kBarcode,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
-              ),
+              child: Text(StringConstants.kBarcode,
+                  style: Theme.of(context)
+                      .textTheme
+                      .xxTiniest
+                      .copyWith(fontWeight: FontWeight.w500)),
             )),
             DataColumn(
                 label: Text(StringConstants.kCategory,
@@ -167,7 +165,7 @@ class ProductListDataTable extends StatelessWidget {
                     )),
                     DataCell(
                       Align(
-                        alignment: Alignment.center,
+                        alignment: Alignment.centerLeft,
                         child: Text(productList[index].barcode.toString(),
                             style: Theme.of(context).textTheme.xxTiniest),
                       ),
@@ -200,18 +198,27 @@ class ProductListDataTable extends StatelessWidget {
                             vertical: 4, horizontal: 8),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: AppColor.saasifyLighterGreen),
+                            color: (productList[index].draft)
+                                ? AppColor.saasifyLighterGrey
+                                : AppColor.saasifyLighterGreen),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.circle,
-                                size: 8, color: AppColor.saasifyGreen),
+                            Icon(Icons.circle,
+                                size: 8,
+                                color: (productList[index].draft)
+                                    ? AppColor.saasifyLightGrey
+                                    : AppColor.saasifyGreen),
                             const SizedBox(width: 6),
-                            Text('Active',
+                            Text(
+                                (productList[index].draft) ? 'Draft' : 'Active',
                                 style: Theme.of(context)
                                     .textTheme
                                     .xxTiniest
-                                    .copyWith(color: AppColor.saasifyGreen)),
+                                    .copyWith(
+                                        color: (productList[index].draft)
+                                            ? AppColor.saasifyLightGrey
+                                            : AppColor.saasifyGreen)),
                           ],
                         ))),
                     DataCell(IconButton(

@@ -120,7 +120,7 @@ class VariantDialogue extends StatelessWidget {
                                                     posData[context
                                                             .read<BillingBloc>()
                                                             .selectedCategoryIndex]
-                                                        .products[index]
+                                                        .products[productIndex]
                                                         .variants[index]
                                                         .unit
                                                         .toString(),
