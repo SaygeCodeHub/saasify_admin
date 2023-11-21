@@ -10,6 +10,13 @@ class StringConstants {
   static const kPleaseAddAValidContact = 'Please enter a valid contact';
   static const kWelcome = 'Welcome :)';
   static const kEnterOtp = 'Enter Otp :)';
+  static const kOrderNo = 'Order No';
+  static const kOrderedOn = 'Ordered On';
+  static const kStatus = 'Status';
+  static const kProductAmount = 'Product Amount';
+  static const kCustomerContact = 'Customer Contact';
+  static const kCustomerName = 'Customer Name';
+  static const kModeOfPayment = 'Mode of Payment';
   static const kAddCompany = 'Add Company :)';
   static const kCompanies = 'Companies';
   static const kAddProduct = 'Add Product';
@@ -61,7 +68,7 @@ class StringConstants {
   static const kNo = 'No';
   static const kLogout = 'Log out';
   static const kMembershipNO = 'Membership no :';
-  static const kCustomerName = 'Customer Name :';
+  static const kCustomerNameWithColon = 'Customer Name :';
   static const k8888881800 = '8888881800';
   static const kAdityaRastogi = 'Aditya Rastogi';
   static const kAddInstructions = 'Add Instructions';
