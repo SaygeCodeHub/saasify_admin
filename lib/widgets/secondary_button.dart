@@ -26,28 +26,25 @@ class SecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(kCircularRadius)),
-          backgroundColor: AppColor.saasifyWhite,
-          side: (side == null)
-              ? const BorderSide(color: AppColor.saasifyLightDeepBlue)
-              : side,
-          minimumSize: Size(buttonWidth ?? double.maxFinite, 50)),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          (icon == null) ? const SizedBox.shrink() : Icon(icon),
-          Text(buttonTitle,
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .xxTiniest
-                  .copyWith(color: AppColor.saasifyBlack)),
-        ],
-      ),
-    );
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(kCircularRadius)),
+            backgroundColor: AppColor.saasifyWhite,
+            side: (side == null)
+                ? const BorderSide(color: AppColor.saasifyLightDeepBlue)
+                : side,
+            minimumSize: Size(buttonWidth ?? double.maxFinite, 50)),
+        child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              (icon == null) ? const SizedBox.shrink() : Icon(icon),
+              Text(buttonTitle,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.xTiniest.copyWith(
+                      color: AppColor.saasifyBlack,
+                      fontWeight: FontWeight.w600)),
+            ]));
   }
 }

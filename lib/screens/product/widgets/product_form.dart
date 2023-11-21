@@ -4,12 +4,9 @@ import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/bloc/product/product_event.dart';
 import 'package:saasify/bloc/upload/upload_bloc.dart';
 import 'package:saasify/bloc/upload/upload_events.dart';
-import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
-import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
-import 'package:saasify/screens/product/add_product_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/screens/product/widgets/product_form_image_section.dart';
 import 'package:saasify/screens/product/widgets/product_form_section1.dart';
@@ -41,49 +38,28 @@ class ProductForm extends StatelessWidget {
       key: _formKey,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, ProductListScreen.routeName);
-                    },
-                    icon: const Icon(Icons.arrow_back_ios_new)),
-                Text(
-                    (isVariant == true)
-                        ? StringConstants.kAddVariant
-                        : (isEdit)
-                            ? 'Edit Product'
-                            : StringConstants.kAddProduct,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xxTiny
-                        .copyWith(fontWeight: FontWeight.w700)),
-              ],
+            InkWell(
+                onTap: () {
+                  Navigator.pushReplacementNamed(
+                      context, ProductListScreen.routeName);
+                },
+                child: const Icon(Icons.arrow_back_ios_new)),
+            const SizedBox(
+              width: 10,
             ),
-            SizedBox(
-              width: kGeneralActionButtonWidth,
-              child: PrimaryButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, AddProductScreen.routeName,
-                        arguments: AddProductScreenArguments(
-                            isEdit: false,
-                            isVariant: true,
-                            dataMap: {
-                              'product_name': dataMap['product_name'],
-                              'category_name': dataMap['category_name'],
-                              'brand_name': dataMap['brand_name'],
-                              'product_id': dataMap['product_id'],
-                              'product_description':
-                                  dataMap['product_description'],
-                            }));
-                  },
-                  buttonTitle: 'Add Variant'),
-            )
+            Text(
+                (isVariant == true)
+                    ? StringConstants.kAddVariant
+                    : (isEdit)
+                        ? 'Edit Product'
+                        : StringConstants.kAddProduct,
+                style: Theme.of(context)
+                    .textTheme
+                    .xxTiny
+                    .copyWith(fontWeight: FontWeight.w700)),
           ],
         ),
         const SizedBox(height: spacingXHuge),
