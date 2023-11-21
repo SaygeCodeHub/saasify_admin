@@ -5,8 +5,8 @@ import 'package:saasify/utils/constants/string_constants.dart';
 
 import '../../../configs/app_spacing.dart';
 
-class BillingSectionHeaderTwo extends StatelessWidget {
-  const BillingSectionHeaderTwo({super.key});
+class BillingSectionHeader extends StatelessWidget {
+  const BillingSectionHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +14,8 @@ class BillingSectionHeaderTwo extends StatelessWidget {
       Row(children: [
         Text(
           StringConstants.kMembershipNO,
-          style: Theme.of(context)
-              .textTheme
-              .xxTiniest
-              .copyWith(fontWeight: FontWeight.w600),
+          style: Theme.of(context).textTheme.xTiniest.copyWith(
+              fontWeight: FontWeight.w600, color: AppColor.saasifyDarkestBlack),
         ),
         const SizedBox(
           width: spacingXXSmall,
@@ -26,7 +24,7 @@ class BillingSectionHeaderTwo extends StatelessWidget {
           StringConstants.k8888881800,
           style: Theme.of(context)
               .textTheme
-              .xxTiniest
+              .xTiniest
               .copyWith(color: AppColor.saasifyGreyBlue),
         ),
         const SizedBox(
@@ -35,27 +33,28 @@ class BillingSectionHeaderTwo extends StatelessWidget {
         const Icon(
           Icons.mode_edit_outlined,
           color: AppColor.saasifyLightDeepBlue,
-          size: spacingStandard,
+          size: spacingMedium,
         )
       ]),
+      const SizedBox(
+        height: spacingSmall,
+      ),
       Row(children: [
-        Text(StringConstants.kCustomerName,
-            style: Theme.of(context)
-                .textTheme
-                .xxTiniest
-                .copyWith(fontWeight: FontWeight.w600)),
+        Text(
+          StringConstants.kCustomerName,
+          style: Theme.of(context).textTheme.xTiniest.copyWith(
+              fontWeight: FontWeight.w600, color: AppColor.saasifyDarkestBlack),
+        ),
         const SizedBox(
           width: spacingXXSmall,
         ),
         Text(StringConstants.kAdityaRastogi,
-            style: Theme.of(context)
-                .textTheme
-                .xxTiniest
-                .copyWith(color: AppColor.saasifyGreyBlue))
+            style: Theme.of(context).textTheme.xTiniest.copyWith(
+                color: AppColor.saasifyGreyBlue,
+                decoration: TextDecoration.underline))
       ]),
-      const Divider(
-        color: AppColor.saasifyGreyBlue,
-      )
+      const SizedBox(height: spacingStandard),
+      const Divider(color: AppColor.saasifyPaleGrey, thickness: 1)
     ]);
   }
 }

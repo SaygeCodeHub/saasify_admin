@@ -27,7 +27,7 @@ class BillingSectionFooterTwo extends StatelessWidget {
                       decoration: TextDecoration.underline,
                     ),
               ))),
-      const SizedBox(height: spacingXXSmall),
+      const SizedBox(height: spacingMedium),
       PrimaryButton(
         onPressed: () {
           showDialog(

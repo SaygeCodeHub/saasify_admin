@@ -20,11 +20,11 @@ class BillingSectionTwo extends StatelessWidget {
         padding: const EdgeInsets.all(spacingMedium),
         decoration: const BoxDecoration(color: AppColor.saasifyLightGreyBlue),
         child: Column(children: [
-          const BillingSectionHeaderTwo(),
-          const SizedBox(height: spacingXXSmall),
-          BillingProductsListTwo(posData: posData),
+          const BillingSectionHeader(),
+          const SizedBox(height: spacingLarge),
+          BillingProductsList(posData: posData),
           const SizedBox(height: spacingSmall),
-          BillDetailsTwo(billDetails: context.read<BillingBloc>().billDetails),
+          BillDetails(billDetails: context.read<BillingBloc>().billDetails),
           const SizedBox(height: spacingMedium),
           const BillingSectionFooterTwo()
         ]));
