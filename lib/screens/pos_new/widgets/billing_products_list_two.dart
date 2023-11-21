@@ -7,10 +7,10 @@ import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import 'billing_product_tile_body_two.dart';
 
-class BillingProductsListTwo extends StatelessWidget {
+class BillingProductsList extends StatelessWidget {
   final List<CategoryWithProductsDatum> posData;
 
-  const BillingProductsListTwo({super.key, required this.posData});
+  const BillingProductsList({super.key, required this.posData});
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +40,9 @@ class BillingProductsListTwo extends StatelessWidget {
                             .images[0],
                       ),
                     ),
-                    const SizedBox(width: spacingSmall),
+                    const SizedBox(width: spacingLarge),
                     Expanded(
-                        child: BillingProductTileBodyTwo(
+                        child: BillingProductTileBody(
                       selectedProduct:
                           context.read<BillingBloc>().selectedProducts[index],
                       posData: posData,

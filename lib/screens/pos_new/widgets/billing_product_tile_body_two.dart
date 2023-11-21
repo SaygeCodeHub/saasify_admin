@@ -8,95 +8,104 @@ import 'package:saasify/data/models/billing/selected_product_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
+import '../../../configs/app_spacing.dart';
 
-class BillingProductTileBodyTwo extends StatelessWidget {
+class BillingProductTileBody extends StatelessWidget {
   final SelectedProductModel selectedProduct;
   final List<CategoryWithProductsDatum> posData;
 
-  const BillingProductTileBodyTwo(
+  const BillingProductTileBody(
       {super.key, required this.selectedProduct, required this.posData});
 
   @override
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-              child: Text(
-            selectedProduct.product.productName,
-            maxLines: 2,
-          )),
-          Text('₹ ${selectedProduct.product.variants[0].cost}',
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                  child: Text(
+                selectedProduct.product.productName,
+                maxLines: 2,
+                style: Theme.of(context).textTheme.xTiniest,
+              )),
+              Text('₹ ${selectedProduct.product.variants[0].cost}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .xTiniest
+                      .copyWith(color: AppColor.saasifyPaleBlue))
+            ],
+          ),
+          const SizedBox(height: spacingXSmall),
+          Text(
+              '${selectedProduct.product.variants[0].quantity} ${selectedProduct.product.variants[0].unit}',
               style: Theme.of(context)
                   .textTheme
                   .xxTiniest
-                  .copyWith(color: AppColor.saasifyLightDeepBlue))
-        ],
-      ),
-      Text(
-          '${selectedProduct.product.variants[0].quantity} ${selectedProduct.product.variants[0].unit}',
-          style: Theme.of(context)
-              .textTheme
-              .xxxTiniest
-              .copyWith(color: AppColor.saasifyGrey)),
-      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text(StringConstants.kAddInstructions,
-            style: Theme.of(context)
-                .textTheme
-                .xxxTiniest
-                .copyWith(color: AppColor.saasifyLightDeepBlue)),
-        Row(children: [
-          InkWell(
-            onTap: () {
-              context.read<BillingBloc>().add(RemoveProduct(
-                  productsByCategories: posData,
-                  product: selectedProduct.product));
-            },
-            child: Container(
-              height: kCounterContainerSize,
-              width: kCounterContainerSize,
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColor.saasifyLightDeepBlue),
-              ),
-              child: const Center(
-                  child: Icon(
-                Icons.remove,
-                size: kGeneralRadius,
-              )),
-            ),
-          ),
-          Container(
-            height: kCounterContainerSize,
-            width: kCounterContainerSize,
-            decoration: BoxDecoration(
-              border: Border.all(color: AppColor.saasifyLightDeepBlue),
-            ),
-            child: Center(
-                child: Text(selectedProduct.count.toString(),
-                    style: Theme.of(context).textTheme.xxTiniest)),
-          ),
-          InkWell(
-              onTap: () {
-                context.read<BillingBloc>().add(SelectProduct(
-                    variantIndex: 0,
-                    productsByCategories: posData,
-                    product: selectedProduct.product));
-              },
-              child: Container(
+                  .copyWith(color: AppColor.saasifyPaleBlack)),
+          const SizedBox(height: spacingXXSmall),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text(StringConstants.kAddInstructions,
+                style: Theme.of(context)
+                    .textTheme
+                    .xxTiniest
+                    .copyWith(color: AppColor.saasifyPaleBlue)),
+            Row(children: [
+              InkWell(
+                onTap: () {
+                  context.read<BillingBloc>().add(RemoveProduct(
+                      productsByCategories: posData,
+                      product: selectedProduct.product));
+                },
+                child: Container(
                   height: kCounterContainerSize,
                   width: kCounterContainerSize,
                   decoration: BoxDecoration(
+                    color: AppColor.saasifyLightGreyBlue,
                     border: Border.all(color: AppColor.saasifyLightDeepBlue),
                   ),
                   child: const Center(
                       child: Icon(
-                    Icons.add,
+                    Icons.remove,
                     size: kGeneralRadius,
-                  ))))
-        ])
-      ])
-    ]);
+                  )),
+                ),
+              ),
+              Container(
+                height: kCounterContainerSize,
+                width: kCounterContainerSize,
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColor.saasifyLightDeepBlue),
+                ),
+                child: Center(
+                    child: Text(selectedProduct.count.toString(),
+                        style: Theme.of(context).textTheme.tiniest)),
+              ),
+              InkWell(
+                  onTap: () {
+                    context.read<BillingBloc>().add(SelectProduct(
+                        variantIndex: 0,
+                        productsByCategories: posData,
+                        product: selectedProduct.product));
+                  },
+                  child: Container(
+                      height: kCounterContainerSize,
+                      width: kCounterContainerSize,
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(color: AppColor.saasifyLightDeepBlue),
+                      ),
+                      child: const Center(
+                          child: Icon(
+                        Icons.add,
+                        size: kGeneralRadius,
+                      ))))
+            ])
+          ])
+        ]);
   }
 }
