@@ -15,10 +15,10 @@ import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
 import 'widgets/products_section.dart';
 
-class POSTwoScreen extends StatelessWidget {
+class POSScreen extends StatelessWidget {
   static const routeName = 'POSScreen';
 
-  POSTwoScreen({super.key});
+  POSScreen({super.key});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -54,9 +54,9 @@ class POSTwoScreen extends StatelessWidget {
                     child: SideBar(selectedIndex: 2),
                   )),
               Expanded(
-                flex: 5,
-                child: BlocConsumer<BillingBloc, BillingStates>(
-                  listener: (context, state) {
+                  flex: 5,
+                  child: BlocConsumer<BillingBloc, BillingStates>(
+                      listener: (context, state) {
                     if (state is ErrorFetchingProductsByCategory) {
                       showDialog(
                           context: context,
@@ -70,8 +70,7 @@ class POSTwoScreen extends StatelessWidget {
                                 });
                           });
                     }
-                  },
-                  builder: (context, state) {
+                  }, builder: (context, state) {
                     if (state is FetchingProductsByCategory) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is LoadDataBaseOrders) {

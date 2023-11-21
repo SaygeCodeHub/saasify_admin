@@ -23,8 +23,8 @@ class AppRoutes {
         return _createRoute(ProductListScreen());
       case InventoryListScreen.routeName:
         return _createRoute(InventoryListScreen());
-      case POSTwoScreen.routeName:
-        return _createRoute(POSTwoScreen());
+      case POSScreen.routeName:
+        return _createRoute(POSScreen());
       case CompanyListScreen.routeName:
         return _createRoute(CompanyListScreen(
             companyList: settings.arguments as List<Company>));

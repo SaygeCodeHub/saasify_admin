@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pinput/pinput.dart';
 import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
+import 'package:saasify/bloc/authentication/authentication_states.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
@@ -60,15 +61,22 @@ class OtpScreen extends StatelessWidget {
                   length: 6),
             ),
             const SizedBox(height: spacingXXHuge),
-            PrimaryButton(
-              onPressed: () {
-                context.read<AuthenticationBloc>().add(VerifyOtp(
-                    otpCode: AuthenticationScreen.authDetails['otp'],
-                    verificationId: verificationId,
-                    userName: userName));
+            BlocBuilder<AuthenticationBloc, AuthenticationStates>(
+              builder: (context, state) {
+                if (state is OtpLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return PrimaryButton(
+                  onPressed: () {
+                    context.read<AuthenticationBloc>().add(VerifyOtp(
+                        otpCode: AuthenticationScreen.authDetails['otp'],
+                        verificationId: verificationId,
+                        userName: userName));
+                  },
+                  buttonWidth: double.maxFinite,
+                  buttonTitle: StringConstants.kVerifyOtp,
+                );
               },
-              buttonWidth: double.maxFinite,
-              buttonTitle: StringConstants.kVerifyOtp,
             ),
             const SizedBox(height: spacingXXLarge),
           ]),

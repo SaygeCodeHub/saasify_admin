@@ -11,7 +11,6 @@ import 'package:saasify/screens/onboarding/otp_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_alert_box.dart';
 import '../../configs/app_color.dart';
-import '../../utils/progress_bar.dart';
 
 class AuthenticationScreen extends StatelessWidget {
   static const routeName = 'SignUpScreen';
@@ -35,11 +34,7 @@ class AuthenticationScreen extends StatelessWidget {
                   flex: 4,
                   child: BlocConsumer<AuthenticationBloc, AuthenticationStates>(
                       listener: (context, state) {
-                    if (state is OtpLoading) {
-                      ProgressBar.show(context);
-                    }
                     if (state is PhoneOtpVerified) {
-                      ProgressBar.dismiss(context);
                       if (state.userData.companies.length > 1) {
                         Navigator.pushReplacementNamed(
                             context, CompanyListScreen.routeName,
@@ -57,7 +52,6 @@ class AuthenticationScreen extends StatelessWidget {
                       }
                     }
                     if (state is PhoneAuthError) {
-                      ProgressBar.dismiss(context);
                       showDialog(
                           context: context,
                           builder: (ctx) => CustomAlertDialog(
@@ -83,7 +77,6 @@ class AuthenticationScreen extends StatelessWidget {
                       return AuthenticationBody(
                           isLogin: state.isLogin, focusField: state.focusField);
                     } else if (state is OtpReceived) {
-                      ProgressBar.dismiss(context);
                       return OtpScreen(
                           verificationId: state.verificationId,
                           userName: state.userName);

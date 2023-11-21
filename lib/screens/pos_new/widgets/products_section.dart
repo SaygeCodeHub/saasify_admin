@@ -96,6 +96,7 @@ class ProductsSection extends StatelessWidget {
                   },
                   child: Text(posData[index].categoryName,
                       style: Theme.of(context).textTheme.xxTiniest.copyWith(
+                          fontWeight: FontWeight.w600,
                           color: (index ==
                                   context
                                       .read<BillingBloc>()
@@ -115,7 +116,17 @@ class ProductsSection extends StatelessWidget {
           })),
           const Divider(),
           const SizedBox(height: kGeneralButtonHeight),
-          ProductGrid(posData: posData)
+          (posData[context.read<BillingBloc>().selectedCategoryIndex]
+                  .products
+                  .isNotEmpty)
+              ? ProductGrid(posData: posData)
+              : Expanded(
+                  child: Center(
+                      child: Text(StringConstants.kNoDataAvailable,
+                          style: Theme.of(context)
+                              .textTheme
+                              .tinier
+                              .copyWith(color: AppColor.saasifyLightGrey))))
         ]));
   }
 }

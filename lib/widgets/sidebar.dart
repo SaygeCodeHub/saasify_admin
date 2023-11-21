@@ -72,7 +72,7 @@ class SideBar extends StatelessWidget {
                           fontWeight: FontWeight.w700)),
                   onTap: () {
                     Navigator.pushReplacementNamed(
-                        context, POSTwoScreen.routeName);
+                        context, POSScreen.routeName);
                   },
                 ),
                 ListTile(

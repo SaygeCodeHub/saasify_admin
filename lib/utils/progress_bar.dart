@@ -6,7 +6,6 @@ class ProgressBar {
   static void show(BuildContext context) {
     showDialog(
         context: context,
-        barrierColor: Colors.transparent,
         barrierDismissible: false,
         builder: (context) {
           return const Center(

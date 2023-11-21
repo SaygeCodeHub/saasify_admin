@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
+import 'package:saasify/bloc/authentication/authentication_states.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
@@ -113,27 +114,34 @@ class AuthenticationBody extends StatelessWidget {
                             value;
                       }),
                   const SizedBox(height: spacingXXHuge),
-                  PrimaryButton(
-                    onPressed: (((!isLogin)
-                                ? _checkIfNullOrEmpty(AuthenticationScreen
-                                    .authDetails['user_name'])
-                                : true) &&
-                            _checkIfNullOrEmpty(AuthenticationScreen
-                                .authDetails['user_contact']))
-                        ? () {
-                            if (_formKey.currentState!.validate()) {
-                              context.read<AuthenticationBloc>().add(GetOtp(
-                                  userName: AuthenticationScreen
-                                          .authDetails['user_name'] ??
-                                      "",
-                                  phoneNo:
-                                      "+91 ${AuthenticationScreen.authDetails['user_contact']}"));
-                            }
-                          }
-                        : null,
-                    buttonWidth: double.maxFinite,
-                    buttonTitle: (isLogin) ? 'Login' : 'SignUp',
-                  )
+                  BlocBuilder<AuthenticationBloc, AuthenticationStates>(
+                      builder: (context, state) {
+                    if (state is OtpLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return PrimaryButton(
+                        onPressed: (((!isLogin)
+                                    ? _checkIfNullOrEmpty(AuthenticationScreen
+                                        .authDetails['user_name'])
+                                    : true) &&
+                                _checkIfNullOrEmpty(AuthenticationScreen
+                                    .authDetails['user_contact']))
+                            ? () {
+                                if (_formKey.currentState!.validate()) {
+                                  context.read<AuthenticationBloc>().add(GetOtp(
+                                      userName: AuthenticationScreen
+                                              .authDetails['user_name'] ??
+                                          "",
+                                      phoneNo:
+                                          "+91 ${AuthenticationScreen.authDetails['user_contact']}"));
+                                }
+                              }
+                            : null,
+                        buttonWidth: double.maxFinite,
+                        buttonTitle: (isLogin) ? 'Login' : 'SignUp',
+                      );
+                    }
+                  })
                 ])));
   }
 }
