@@ -9,7 +9,11 @@ class BillingInitial extends BillingStates {}
 
 class FetchingProductsByCategory extends BillingStates {}
 
-class ErrorFetchingProductsByCategory extends BillingStates {}
+class ErrorFetchingProductsByCategory extends BillingStates {
+  final String message;
+
+  ErrorFetchingProductsByCategory({required this.message});
+}
 
 class ProductsLoaded extends BillingStates {
   final List<CategoryWithProductsDatum> productsByCategories;
@@ -28,4 +32,14 @@ class LoadDataBaseOrders extends BillingStates {
   List<dynamic> customerIdList;
 
   LoadDataBaseOrders({required this.customerIdList});
+}
+
+class SettlingOrder extends BillingStates {}
+
+class OrderSettled extends BillingStates {}
+
+class ErrorSettlingOrder extends BillingStates {
+  final String message;
+
+  ErrorSettlingOrder({required this.message});
 }

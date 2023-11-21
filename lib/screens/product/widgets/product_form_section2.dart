@@ -35,7 +35,7 @@ class ProductFormSection2 extends StatelessWidget {
             }
             return null;
           },
-          readOnly: isVariant && !isEdit,
+          enabled: !(isVariant && !isEdit),
           initialValue: dataMap['product_name'] ?? '',
           onTextFieldChanged: (value) {
             dataMap['product_name'] = value;
@@ -93,7 +93,6 @@ class ProductFormSection2 extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(StringConstants.kMeasuringQuantity,
-              maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context)
                   .textTheme

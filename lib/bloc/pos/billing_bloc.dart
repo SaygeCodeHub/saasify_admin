@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/data/customer_cache/customer_cache.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
+import 'package:saasify/data/models/billing/settle_order_model.dart';
 import '../../data/models/billing/bill_model.dart';
 import '../../data/models/billing/selected_product_model.dart';
-import '../../data/models/hive_keys.dart';
 import '../../di/app_module.dart';
 import '../../repositories/billing/billing_repository.dart';
 import '../../utils/database_util.dart';
@@ -20,7 +22,6 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   BillModel billDetails = BillModel(itemTotal: 0, total: 0, discount: 0);
   bool billExpanded = false;
   int orderIndex = 1;
-  int completedOrderIndex = 0;
 
   BillingBloc() : super(BillingInitial()) {
     on<LoadAllOrders>(_loadAllOrders);
@@ -78,9 +79,14 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       if (DatabaseUtil.products.isEmpty) {
         fetchProductsByCategoryModel = await _billingRepository
             .fetchProductsByCategory(userId, companyId, branchId);
-        data = fetchProductsByCategoryModel.data;
-        DatabaseUtil.products
-            .put('products', fetchProductsByCategoryModel.data);
+        if (fetchProductsByCategoryModel.status == 200) {
+          data = fetchProductsByCategoryModel.data;
+          DatabaseUtil.products
+              .put('products', fetchProductsByCategoryModel.data);
+        } else {
+          emit(ErrorFetchingProductsByCategory(
+              message: fetchProductsByCategoryModel.message));
+        }
       } else {
         data = DatabaseUtil.products
             .get('products')
@@ -93,7 +99,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
           selectedProducts: selectedProducts,
           billDetails: billDetails));
     } catch (e) {
-      emit(ErrorFetchingProductsByCategory());
+      emit(ErrorFetchingProductsByCategory(message: e.toString()));
     }
   }
 
@@ -210,31 +216,46 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
   FutureOr<void> _settleOrder(
       SettleOrder event, Emitter<BillingStates> emit) async {
-    DatabaseUtil.ordersBox.delete(orderIndex);
-    String companyName = DatabaseUtil.companyDetails
-        .get(HiveKeys.companyDetails)['company_name'];
-    String orderID =
-        '${companyName.substring(0, 2)}-${DateTime.now().microsecondsSinceEpoch.toString()}';
+    emit(SettlingOrder());
+    try {
+      String userId = await _customerCache.getUserId();
+      String companyId = await _customerCache.getCompanyId();
+      int branchId = await _customerCache.getBranchId();
 
-    List<Map<String, int>> productList = [];
+      List<Map<String, int>> productList = [];
 
-    for (SelectedProductModel selectProduct in selectedProducts) {
-      productList.add({
-        "product_id": selectProduct.product.productId,
-        "variant_id": selectProduct.product.variants[0].variantId,
-        "count": selectProduct.count
-      });
+      for (SelectedProductModel selectProduct in selectedProducts) {
+        productList.add({
+          "variant_id": selectProduct.product.variants[0].variantId,
+          "count": selectProduct.count
+        });
+      }
+
+      Map<String, dynamic> orderMap = {
+        "items_ordered": productList,
+        "customer_contact": 1234567890,
+        "payment_status": "paid",
+        "mode_of_payment": event.paymentMethod,
+        "customer_name": "qwertyui",
+        "discount_total": billDetails.discount,
+        "total_amount": billDetails.total,
+        "subtotal": billDetails.itemTotal
+      };
+
+      debugPrint(jsonEncode(orderMap));
+
+      SettleOrderModel settleOrderModel = await _billingRepository.settleOrder(
+          userId, companyId, branchId, orderMap);
+
+      if (settleOrderModel.status == 200) {
+        DatabaseUtil.ordersBox.delete(orderIndex);
+        add(LoadAllOrders());
+        emit(OrderSettled());
+      } else {
+        emit(ErrorSettlingOrder(message: settleOrderModel.message));
+      }
+    } catch (e) {
+      emit(ErrorSettlingOrder(message: e.toString()));
     }
-
-    Map<String, dynamic> orderMap = {
-      "order_no": orderID,
-      "product_list": productList,
-      "item_total": billDetails.itemTotal,
-      "discount": billDetails.discount,
-      "total": billDetails.total,
-    };
-
-    completedOrderIndex++;
-    add(LoadAllOrders());
   }
 }

@@ -76,7 +76,9 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
                             widget.dataMap[widget.mapKey] = value;
                           }
                         : null))),
-        const SizedBox(height: spacingSmall),
+        Visibility(
+            visible: widget.addOption,
+            child: const SizedBox(height: spacingSmall)),
         Visibility(
           visible: widget.addOption,
           child: CustomTextField(

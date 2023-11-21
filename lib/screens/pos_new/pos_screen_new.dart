@@ -4,6 +4,7 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/pos_new/widgets/billing_section_two.dart';
 import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/responsive.dart';
+import 'package:saasify/widgets/custom_alert_box.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import '../../bloc/pos/billing_bloc.dart';
 import '../../bloc/pos/billing_event.dart';
@@ -22,6 +23,7 @@ class POSTwoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DatabaseUtil.products.clear();
     context.read<BillingBloc>().add(LoadAllOrders());
     return Scaffold(
         key: _scaffoldKey,
@@ -52,7 +54,22 @@ class POSTwoScreen extends StatelessWidget {
                   )),
               Expanded(
                 flex: 5,
-                child: BlocBuilder<BillingBloc, BillingStates>(
+                child: BlocConsumer<BillingBloc, BillingStates>(
+                  listener: (context, state) {
+                    if (state is ErrorFetchingProductsByCategory) {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) {
+                            return CustomAlertDialog(
+                                title: StringConstants.kSomethingWentWrong,
+                                message: state.message,
+                                primaryButtonTitle: StringConstants.kUnderstood,
+                                primaryOnPressed: () {
+                                  Navigator.pop(ctx);
+                                });
+                          });
+                    }
+                  },
                   builder: (context, state) {
                     if (state is FetchingProductsByCategory) {
                       return const Center(child: CircularProgressIndicator());
@@ -195,7 +212,7 @@ class POSTwoScreen extends StatelessWidget {
                                 : const SizedBox.shrink()
                           ]);
                     } else if (state is ErrorFetchingProductsByCategory) {
-                      return const Expanded(
+                      return const Center(
                           child: Text(StringConstants.kNoDataAvailable));
                     } else {
                       return const SizedBox.shrink();

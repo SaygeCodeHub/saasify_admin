@@ -35,7 +35,7 @@ class ProductFormSection3 extends StatelessWidget {
             }
             return null;
           },
-          readOnly: isVariant && !isEdit,
+          enabled: !(isVariant && !isEdit),
           initialValue: dataMap['brand_name'] ?? '',
           onTextFieldChanged: (value) {
             dataMap['brand_name'] = value;

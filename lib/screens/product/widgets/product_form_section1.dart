@@ -67,7 +67,7 @@ class ProductFormSection1 extends StatelessWidget {
             }
             return null;
           },
-          readOnly: isVariant && !isEdit,
+          enabled: !(isVariant && !isEdit),
           initialValue: dataMap['product_description'] ?? '',
           onTextFieldChanged: (value) {
             dataMap['product_description'] = value;
