@@ -51,9 +51,9 @@ class POSTwoScreen extends StatelessWidget {
                     child: SideBar(selectedIndex: 2),
                   )),
               Expanded(
-                flex: 5,
-                child: BlocBuilder<BillingBloc, BillingStates>(
-                  builder: (context, state) {
+                  flex: 5,
+                  child: BlocBuilder<BillingBloc, BillingStates>(
+                      builder: (context, state) {
                     if (state is FetchingProductsByCategory) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is LoadDataBaseOrders) {
@@ -200,9 +200,7 @@ class POSTwoScreen extends StatelessWidget {
                     } else {
                       return const SizedBox.shrink();
                     }
-                  },
-                ),
-              )
+                  }))
             ]));
   }
 }

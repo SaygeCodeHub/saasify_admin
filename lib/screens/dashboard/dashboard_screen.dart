@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/sidebar.dart';
 
@@ -42,7 +43,7 @@ class DashboardsScreen extends StatelessWidget {
             Expanded(
                 flex: 5,
                 child: Center(
-                    child: Text('Dashboard',
+                    child: Text(StringConstants.kDashboard,
                         style: Theme.of(context)
                             .textTheme
                             .tinier
