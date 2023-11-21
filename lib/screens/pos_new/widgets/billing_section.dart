@@ -6,8 +6,8 @@ import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
 import 'bill_details.dart';
 import 'billing_products_list.dart';
-import 'billing_section_footer_two.dart';
-import 'billing_section_header_two.dart';
+import 'billing_section_footer.dart';
+import 'billing_section_header.dart';
 
 class BillingSection extends StatelessWidget {
   const BillingSection({super.key, required this.posData});

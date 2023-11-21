@@ -5,7 +5,7 @@ import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
-import 'billing_product_tile_body_two.dart';
+import 'billing_product_tile_body.dart';
 
 class BillingProductsList extends StatelessWidget {
   final List<CategoryWithProductsDatum> posData;
@@ -27,8 +27,10 @@ class BillingProductsList extends StatelessWidget {
                     const SizedBox(height: spacingXSmall),
                 itemBuilder: (context, index) {
                   return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: spacingSmall, vertical: spacingSmall),
+                      padding: const EdgeInsets.only(
+                          right: spacingLarge,
+                          top: spacingXLarge,
+                          left: spacingSmall),
                       child: Row(children: [
                         SizedBox(
                           height: kImageHeight,

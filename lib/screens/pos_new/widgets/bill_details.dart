@@ -4,6 +4,7 @@ import 'package:saasify/data/models/billing/bill_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 
 import '../../../configs/app_color.dart';
+import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 
 class BillDetails extends StatelessWidget {
@@ -14,9 +15,9 @@ class BillDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: const BoxDecoration(
-          color: AppColor.saasifyWhite,
-        ),
+        decoration: BoxDecoration(
+            color: AppColor.saasifyWhite,
+            borderRadius: BorderRadius.circular(kCircularRadius)),
         child: Padding(
             padding: const EdgeInsets.only(
                 left: spacingStandard,
