@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/pos_new/widgets/billing_section_two.dart';
+import 'package:saasify/screens/pos_new/widgets/billing_section.dart';
 import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/sidebar.dart';
@@ -190,7 +190,7 @@ class POSTwoScreen extends StatelessWidget {
                                     .isNotEmpty
                                 ? Expanded(
                                     flex: 2,
-                                    child: BillingSectionTwo(
+                                    child: BillingSection(
                                         posData: state.productsByCategories))
                                 : const SizedBox.shrink()
                           ]);

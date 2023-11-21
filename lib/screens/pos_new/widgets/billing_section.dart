@@ -4,13 +4,13 @@ import 'package:saasify/bloc/pos/billing_bloc.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
-import 'bill_details_two.dart';
-import 'billing_products_list_two.dart';
+import 'bill_details.dart';
+import 'billing_products_list.dart';
 import 'billing_section_footer_two.dart';
 import 'billing_section_header_two.dart';
 
-class BillingSectionTwo extends StatelessWidget {
-  const BillingSectionTwo({super.key, required this.posData});
+class BillingSection extends StatelessWidget {
+  const BillingSection({super.key, required this.posData});
 
   final List<CategoryWithProductsDatum> posData;
 
@@ -26,7 +26,7 @@ class BillingSectionTwo extends StatelessWidget {
           const SizedBox(height: spacingSmall),
           BillDetails(billDetails: context.read<BillingBloc>().billDetails),
           const SizedBox(height: spacingMedium),
-          const BillingSectionFooterTwo()
+          const BillingSectionFooter()
         ]));
   }
 }

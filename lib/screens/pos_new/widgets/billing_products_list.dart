@@ -17,8 +17,8 @@ class BillingProductsList extends StatelessWidget {
     return Expanded(
         child: Container(
             decoration: BoxDecoration(
+                color: AppColor.saasifyWhite,
                 borderRadius: BorderRadius.circular(kCircularRadius)),
-            color: AppColor.saasifyWhite,
             child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 itemCount: context.read<BillingBloc>().selectedProducts.length,
