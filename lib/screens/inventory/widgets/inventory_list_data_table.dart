@@ -23,7 +23,7 @@ class InventoryListDataTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: ListView(children: <Widget>[
+        child: ListView(shrinkWrap: true, children: <Widget>[
       DataTable(
           columnSpacing: 0,
           horizontalMargin: 20,

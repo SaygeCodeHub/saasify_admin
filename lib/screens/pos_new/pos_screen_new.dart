@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/pos_new/widgets/billing_section_two.dart';
+import 'package:saasify/screens/pos_new/widgets/billing_section.dart';
 import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/custom_alert_box.dart';
@@ -80,119 +81,128 @@ class POSTwoScreen extends StatelessWidget {
                                 context.read<BillingBloc>().orderIndex));
                       }
                       return Padding(
-                        padding: const EdgeInsets.all(spacingStandard),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(StringConstants.kOpenTabs,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .xxTiny
-                                    .copyWith(fontWeight: FontWeight.w700)),
-                            GridView.builder(
-                                physics: const BouncingScrollPhysics(),
-                                shrinkWrap: true,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 5),
-                                itemCount: state.customerIdList.length + 1,
-                                itemBuilder: (context, index) {
-                                  if (state.customerIdList.length == index) {
-                                    return Padding(
-                                        padding: const EdgeInsets.all(
-                                            spacingStandard),
-                                        child: InkWell(
-                                            onTap: () {
-                                              context.read<BillingBloc>().add(
-                                                  BillingInitialEvent(
-                                                      orderIndex: -1));
-                                            },
-                                            child: Container(
-                                                padding: const EdgeInsets.all(
-                                                    spacingStandard),
-                                                decoration: BoxDecoration(
-                                                  color: AppColor
-                                                      .saasifyLightDeepBlue,
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                child: Center(
-                                                    child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                      Text(
-                                                        'Add Customer',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .tiniest
-                                                            .copyWith(
-                                                                color: AppColor
-                                                                    .saasifyWhite),
-                                                      ),
-                                                      const SizedBox(
-                                                          height:
-                                                              spacingStandard),
-                                                      Expanded(
-                                                        child: Image.asset(
-                                                            'assets/add.png',
-                                                            fit: BoxFit.fill),
-                                                      )
-                                                    ])))));
-                                  }
-                                  return Padding(
-                                      padding:
-                                          const EdgeInsets.all(spacingStandard),
-                                      child: InkWell(
-                                          onTap: () {
-                                            context
-                                                    .read<BillingBloc>()
-                                                    .orderIndex =
-                                                state.customerIdList[index];
-                                            context.read<BillingBloc>().add(
-                                                BillingInitialEvent(
-                                                    orderIndex:
-                                                        state.customerIdList[
+                          padding: const EdgeInsets.all(spacingStandard),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(StringConstants.kOpenTabs,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .xxTiny
+                                        .copyWith(fontWeight: FontWeight.w700)),
+                                GridView.builder(
+                                    physics: const BouncingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 5),
+                                    itemCount: state.customerIdList.length + 1,
+                                    itemBuilder: (context, index) {
+                                      if (state.customerIdList.length ==
+                                          index) {
+                                        return Padding(
+                                            padding: const EdgeInsets.all(
+                                                spacingStandard),
+                                            child: InkWell(
+                                                onTap: () {
+                                                  context
+                                                      .read<BillingBloc>()
+                                                      .add(BillingInitialEvent(
+                                                          orderIndex: -1));
+                                                },
+                                                child: Container(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            spacingStandard),
+                                                    decoration: BoxDecoration(
+                                                      color: AppColor
+                                                          .saasifyLightDeepBlue,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                    ),
+                                                    child: Center(
+                                                        child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
+                                                            children: [
+                                                          Text(
+                                                            StringConstants
+                                                                .kAddCustomer,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .tiniest
+                                                                .copyWith(
+                                                                    color: AppColor
+                                                                        .saasifyWhite),
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                                  spacingStandard),
+                                                          Expanded(
+                                                            child: Image.asset(
+                                                                'assets/add.png',
+                                                                fit: BoxFit
+                                                                    .fill),
+                                                          )
+                                                        ])))));
+                                      }
+                                      return Padding(
+                                          padding: const EdgeInsets.all(
+                                              spacingStandard),
+                                          child: InkWell(
+                                              onTap: () {
+                                                context
+                                                        .read<BillingBloc>()
+                                                        .orderIndex =
+                                                    state.customerIdList[index];
+                                                context.read<BillingBloc>().add(
+                                                    BillingInitialEvent(
+                                                        orderIndex: state
+                                                                .customerIdList[
                                                             index]));
-                                          },
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                                  color: AppColor
-                                                      .saasifyLightDeepBlue,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12)),
-                                              child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      spacingStandard),
-                                                  child: Center(
-                                                      child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                        Text(
-                                                          'Customer no. - ${state.customerIdList[index]}',
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .tiniest
-                                                              .copyWith(
-                                                                  color: AppColor
-                                                                      .saasifyWhite),
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                spacingStandard),
-                                                        Expanded(
-                                                          child: Image.asset(
-                                                              'assets/user.png',
-                                                              fit: BoxFit.fill),
-                                                        )
-                                                      ]))))));
-                                }),
-                          ],
-                        ),
-                      );
+                                              },
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                      color: AppColor
+                                                          .saasifyLightDeepBlue,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              kCircularRadius)),
+                                                  child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              spacingStandard),
+                                                      child: Center(
+                                                          child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              children: [
+                                                            Text(
+                                                              'Customer no. - ${state.customerIdList[index]}',
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .tiniest
+                                                                  .copyWith(
+                                                                      color: AppColor
+                                                                          .saasifyWhite),
+                                                            ),
+                                                            const SizedBox(
+                                                                height:
+                                                                    spacingStandard),
+                                                            Expanded(
+                                                              child: Image.asset(
+                                                                  'assets/user.png',
+                                                                  fit: BoxFit
+                                                                      .fill),
+                                                            )
+                                                          ]))))));
+                                    }),
+                              ]));
                     } else if (state is ProductsLoaded) {
                       return Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -207,7 +217,7 @@ class POSTwoScreen extends StatelessWidget {
                                     .isNotEmpty
                                 ? Expanded(
                                     flex: 2,
-                                    child: BillingSectionTwo(
+                                    child: BillingSection(
                                         posData: state.productsByCategories))
                                 : const SizedBox.shrink()
                           ]);
@@ -217,9 +227,7 @@ class POSTwoScreen extends StatelessWidget {
                     } else {
                       return const SizedBox.shrink();
                     }
-                  },
-                ),
-              )
+                  }))
             ]));
   }
 }

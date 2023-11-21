@@ -9,8 +9,8 @@ import '../../../configs/app_spacing.dart';
 import '../../../widgets/primary_button.dart';
 import 'payment_dialogue.dart';
 
-class BillingSectionFooterTwo extends StatelessWidget {
-  const BillingSectionFooterTwo({super.key});
+class BillingSectionFooter extends StatelessWidget {
+  const BillingSectionFooter({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class BillingSectionFooterTwo extends StatelessWidget {
                       decoration: TextDecoration.underline,
                     ),
               ))),
-      const SizedBox(height: spacingXXSmall),
+      const SizedBox(height: spacingMedium),
       PrimaryButton(
         onPressed: () {
           showDialog(

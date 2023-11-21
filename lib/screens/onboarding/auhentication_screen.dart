@@ -30,9 +30,8 @@ class AuthenticationScreen extends StatelessWidget {
         onWillPop: () async => false,
         child: Scaffold(
             backgroundColor: AppColor.saasifyWhite,
-            body: Row(
-              children: [
-                Expanded(
+            body: Row(children: [
+              Expanded(
                   flex: 4,
                   child: BlocConsumer<AuthenticationBloc, AuthenticationStates>(
                       listener: (context, state) {
@@ -62,20 +61,19 @@ class AuthenticationScreen extends StatelessWidget {
                       showDialog(
                           context: context,
                           builder: (ctx) => CustomAlertDialog(
-                                title: StringConstants.kSomethingWentWrong,
-                                message: state.error,
-                                primaryButtonTitle: StringConstants.kUnderstood,
-                                checkMarkVisible: false,
-                                primaryOnPressed: () {
-                                  Navigator.pop(ctx);
-                                  authDetails.clear();
-                                  context.read<AuthenticationBloc>().add(
-                                      SwitchAuthentication(
-                                          isLogin: false, focusField: ''));
-                                  Navigator.pushReplacementNamed(
-                                      context, AuthenticationScreen.routeName);
-                                },
-                              ));
+                              title: StringConstants.kSomethingWentWrong,
+                              message: state.error,
+                              primaryButtonTitle: StringConstants.kUnderstood,
+                              checkMarkVisible: false,
+                              primaryOnPressed: () {
+                                Navigator.pop(ctx);
+                                authDetails.clear();
+                                context.read<AuthenticationBloc>().add(
+                                    SwitchAuthentication(
+                                        isLogin: false, focusField: ''));
+                                Navigator.pushReplacementNamed(
+                                    context, AuthenticationScreen.routeName);
+                              }));
                     }
                   }, buildWhen: (prev, curr) {
                     return curr is AuthenticationFormLoaded ||
@@ -87,19 +85,14 @@ class AuthenticationScreen extends StatelessWidget {
                     } else if (state is OtpReceived) {
                       ProgressBar.dismiss(context);
                       return OtpScreen(
-                        verificationId: state.verificationId,
-                        userName: state.userName,
-                      );
+                          verificationId: state.verificationId,
+                          userName: state.userName);
                     }
                     return const SizedBox();
-                  }),
-                ),
-                Expanded(
-                    flex: 6,
-                    child: Container(
-                      color: AppColor.saasifyLightDeepBlue,
-                    ))
-              ],
-            )));
+                  })),
+              Expanded(
+                  flex: 6,
+                  child: Container(color: AppColor.saasifyLightDeepBlue))
+            ])));
   }
 }
