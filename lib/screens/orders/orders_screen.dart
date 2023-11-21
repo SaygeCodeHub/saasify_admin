@@ -12,8 +12,6 @@ import 'orders_list_screen.dart';
 class OrdersScreen extends StatelessWidget {
   static const String routeName = 'OrdersScreen';
 
-  static List<bool> selectedCheckboxes = List.generate(10, (index) => false);
-
   OrdersScreen({Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
