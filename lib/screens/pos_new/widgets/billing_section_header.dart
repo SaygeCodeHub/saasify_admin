@@ -41,7 +41,7 @@ class BillingSectionHeader extends StatelessWidget {
       ),
       Row(children: [
         Text(
-          StringConstants.kCustomerName,
+          StringConstants.kCustomerNameWithColon,
           style: Theme.of(context).textTheme.xTiniest.copyWith(
               fontWeight: FontWeight.w600, color: AppColor.saasifyDarkestBlack),
         ),
