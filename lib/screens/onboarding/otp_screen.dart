@@ -23,61 +23,55 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Expanded(
-          flex: 4,
-          child: Padding(
-              padding: const EdgeInsets.only(
-                  left: spacingXXXHuge,
-                  right: spacingXXXHuge,
-                  top: spacingXXXHuge),
-              child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SvgPicture.asset("assets/SaaSify.svg", width: kLogoWidth),
-                    const SizedBox(height: kImageHeight),
-                    Text(StringConstants.kEnterOtp,
-                        style: Theme.of(context).textTheme.xxTiny.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: AppColor.saasifyDarkBlack)),
-                    const SizedBox(height: kGeneralButtonHeight),
-                    Text(StringConstants.kOtp,
-                        style: Theme.of(context).textTheme.xTiniest.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: AppColor.saasifyLightBlack)),
-                    const SizedBox(height: spacingMedium),
-                    AspectRatio(
-                      aspectRatio: 360 / 55,
-                      child: Pinput(
-                          defaultPinTheme: PinTheme(
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: AppColor.saasifyLighterGrey,
-                                  borderRadius: BorderRadius.circular(
-                                      context.responsive(8, desktop: 12)))),
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          onChanged: (value) {
-                            AuthenticationScreen.authDetails['otp'] = value;
-                          },
-                          isCursorAnimationEnabled: false,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          length: 6),
-                    ),
-                    const SizedBox(height: spacingXXHuge),
-                    PrimaryButton(
-                        onPressed: () {
-                          context.read<AuthenticationBloc>().add(VerifyOtp(
-                              otpCode: AuthenticationScreen.authDetails['otp'],
-                              verificationId: verificationId,
-                              userName: userName));
-                        },
-                        buttonWidth: double.maxFinite,
-                        buttonTitle: StringConstants.kVerifyOtp),
-                    const SizedBox(height: spacingXXLarge)
-                  ])))
-    ]);
+    return Padding(
+        padding: const EdgeInsets.only(
+          left: spacingXXXHuge,
+          right: spacingXXXHuge,
+        ),
+        child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SvgPicture.asset("assets/SaaSify.svg", width: kLogoWidth),
+              const SizedBox(height: kImageHeight),
+              Text(StringConstants.kEnterOtp,
+                  style: Theme.of(context).textTheme.xxTiny.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: AppColor.saasifyDarkBlack)),
+              const SizedBox(height: kGeneralButtonHeight),
+              Text(StringConstants.kOtp,
+                  style: Theme.of(context).textTheme.xTiniest.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: AppColor.saasifyLightBlack)),
+              const SizedBox(height: spacingMedium),
+              AspectRatio(
+                aspectRatio: 360 / 55,
+                child: Pinput(
+                    defaultPinTheme: PinTheme(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            color: AppColor.saasifyLighterGrey,
+                            borderRadius: BorderRadius.circular(
+                                context.responsive(8, desktop: 12)))),
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    onChanged: (value) {
+                      AuthenticationScreen.authDetails['otp'] = value;
+                    },
+                    isCursorAnimationEnabled: false,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    length: 6),
+              ),
+              const SizedBox(height: spacingXXHuge),
+              PrimaryButton(
+                  onPressed: () {
+                    context.read<AuthenticationBloc>().add(VerifyOtp(
+                        otpCode: AuthenticationScreen.authDetails['otp'],
+                        verificationId: verificationId,
+                        userName: userName));
+                  },
+                  buttonWidth: double.maxFinite,
+                  buttonTitle: StringConstants.kVerifyOtp),
+              const SizedBox(height: spacingXXLarge)
+            ]));
   }
 }
