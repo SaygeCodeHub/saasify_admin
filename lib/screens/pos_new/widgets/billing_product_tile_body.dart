@@ -39,7 +39,7 @@ class BillingProductTileBody extends StatelessWidget {
                       .copyWith(color: AppColor.saasifyPaleBlue))
             ],
           ),
-          const SizedBox(height: spacingXSmall),
+          const SizedBox(height: spacingXXSmall),
           Text(
               '${selectedProduct.product.variants[0].quantity} ${selectedProduct.product.variants[0].unit}',
               style: Theme.of(context)

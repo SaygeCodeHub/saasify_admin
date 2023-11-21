@@ -61,14 +61,14 @@ class BillDetails extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: spacingXXLarge,
+                height: spacingStandard,
               ),
               const Divider(
                 color: AppColor.saasifyPaleWhite,
                 thickness: 0.5,
               ),
               const SizedBox(
-                height: spacingMedium,
+                height: spacingXXSmall,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text(StringConstants.kGrandTotal,

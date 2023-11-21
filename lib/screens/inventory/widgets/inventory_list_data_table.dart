@@ -40,7 +40,7 @@ class InventoryListDataTable extends StatelessWidget {
             DataColumn(
                 label: Expanded(
               child: Center(
-                child: Text(StringConstants.kProductId,
+                child: Text(StringConstants.kBarcode,
                     style: Theme.of(context)
                         .textTheme
                         .xxTiniest

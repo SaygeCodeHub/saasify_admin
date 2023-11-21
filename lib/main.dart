@@ -19,6 +19,7 @@ import 'package:saasify/screens/onboarding/auhentication_screen.dart';
 import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'bloc/orders/orders_bloc.dart';
 import 'bloc/pos/billing_bloc.dart';
 import 'configs/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +82,8 @@ class MyPosApp extends StatelessWidget {
           BlocProvider(lazy: false, create: (context) => ProductBloc()),
           BlocProvider(lazy: false, create: (context) => BillingBloc()),
           BlocProvider(lazy: false, create: (context) => UploadBloc()),
-          BlocProvider(lazy: false, create: (context) => InventoryBloc())
+          BlocProvider(lazy: false, create: (context) => InventoryBloc()),
+          BlocProvider(lazy: false, create: (context) => OrdersBloc())
         ],
         child: GestureDetector(
             onTap: () {

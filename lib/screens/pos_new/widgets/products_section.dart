@@ -95,7 +95,7 @@ class ProductsSection extends StatelessWidget {
                         .add(SelectCategory(productsByCategories: posData));
                   },
                   child: Text(posData[index].categoryName,
-                      style: Theme.of(context).textTheme.xxTiniest.copyWith(
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
                           fontWeight: FontWeight.w600,
                           color: (index ==
                                   context
