@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/pos/billing_bloc.dart';
 import 'package:saasify/configs/app_color.dart';
@@ -81,6 +82,12 @@ class _ContactTileState extends State<ContactTile> {
                 child: Form(
                     key: formKey,
                     child: TextFormField(
+                      inputFormatters: (widget.isContact)
+                          ? <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly
+                            ]
+                          : null,
+                      maxLength: (widget.isContact) ? 10 : null,
                       validator: (widget.isContact)
                           ? (value) {
                               if (value!.isEmpty) {
@@ -93,6 +100,7 @@ class _ContactTileState extends State<ContactTile> {
                             }
                           : null,
                       decoration: InputDecoration(
+                        counterText: "",
                         hintText: (widget.isContact)
                             ? 'Enter Contact no.'
                             : 'Enter Name',

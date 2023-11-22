@@ -7,9 +7,9 @@ class OrdersInitial extends OrdersStates {}
 class FetchingOrders extends OrdersStates {}
 
 class FetchedOrders extends OrdersStates {
-  final FetchOrdersModel fetchOrdersModel;
+  List<OrdersData> fetchOrdersList;
 
-  FetchedOrders({required this.fetchOrdersModel});
+  FetchedOrders({required this.fetchOrdersList});
 }
 
 class ErrorFetchingOrders extends OrdersStates {

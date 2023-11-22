@@ -5,7 +5,8 @@ import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 
 class OrdersListDataTable extends StatelessWidget {
-  final FetchOrdersModel ordersData;
+  final List<OrdersData> ordersData;
+
   const OrdersListDataTable({Key? key, required this.ordersData})
       : super(key: key);
 
@@ -65,27 +66,24 @@ class OrdersListDataTable extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w500)))
           ],
           rows: List.generate(
-              ordersData.data.length,
+              ordersData.length,
               (index) => DataRow(cells: [
-                    DataCell(Text(ordersData.data[index].orderId.toString(),
+                    DataCell(Text(ordersData[index].orderId.toString(),
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.xxTiniest)),
                     DataCell(
-                      Text(ordersData.data[index].orderedOn.toString(),
+                      Text(ordersData[index].orderedOn.toString(),
                           style: Theme.of(context).textTheme.xxTiniest),
                     ),
-                    DataCell(Text(
-                        ordersData.data[index].customerContact.toString(),
+                    DataCell(Text(ordersData[index].customerContact.toString(),
                         style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(
-                        ordersData.data[index].customerName.toString(),
+                    DataCell(Text(ordersData[index].customerName.toString(),
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(
-                        ordersData.data[index].modeOfPayment.toString(),
+                    DataCell(Text(ordersData[index].modeOfPayment.toString(),
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(ordersData.data[index].totalAmount.toString(),
+                    DataCell(Text(ordersData[index].totalAmount.toString(),
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
                     DataCell(Container(
@@ -100,8 +98,7 @@ class OrdersListDataTable extends StatelessWidget {
                             const Icon(Icons.circle,
                                 size: 8, color: AppColor.saasifyGreen),
                             const SizedBox(width: 6),
-                            Text(
-                                ordersData.data[index].paymentStatus.toString(),
+                            Text(ordersData[index].paymentStatus.toString(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .xxTiniest
