@@ -83,37 +83,37 @@ class ProductsSection extends StatelessWidget {
             ],
           ),
           const SizedBox(height: spacingLarger),
-          Row(
+          Wrap(
+              direction: Axis.horizontal,
               children: List.generate(posData.length, (index) {
-            return Row(
-              children: [
-                InkWell(
+                return InkWell(
                   onTap: () {
                     context.read<BillingBloc>().selectedCategoryIndex = index;
                     context
                         .read<BillingBloc>()
                         .add(SelectCategory(productsByCategories: posData));
                   },
-                  child: Text(posData[index].categoryName,
-                      style: Theme.of(context).textTheme.xTiniest.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: (index ==
-                                  context
-                                      .read<BillingBloc>()
-                                      .selectedCategoryIndex)
-                              ? AppColor.saasifyRed
-                              : AppColor.saasifyBlack,
-                          decoration: (index ==
-                                  context
-                                      .read<BillingBloc>()
-                                      .selectedCategoryIndex)
-                              ? TextDecoration.underline
-                              : TextDecoration.none)),
-                ),
-                const SizedBox(width: spacingHuge),
-              ],
-            );
-          })),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        right: spacingHuge, bottom: spacingLarge),
+                    child: Text(posData[index].categoryName,
+                        style: Theme.of(context).textTheme.xTiniest.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: (index ==
+                                    context
+                                        .read<BillingBloc>()
+                                        .selectedCategoryIndex)
+                                ? AppColor.saasifyRed
+                                : AppColor.saasifyBlack,
+                            decoration: (index ==
+                                    context
+                                        .read<BillingBloc>()
+                                        .selectedCategoryIndex)
+                                ? TextDecoration.underline
+                                : TextDecoration.none)),
+                  ),
+                );
+              })),
           const Divider(),
           const SizedBox(height: kGeneralButtonHeight),
           (posData[context.read<BillingBloc>().selectedCategoryIndex]

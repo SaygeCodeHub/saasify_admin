@@ -196,7 +196,7 @@ class InventoryListDataTable extends StatelessWidget {
                                   width: kCounterContainerSize,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                        color: AppColor.saasifyLightDeepBlue),
+                                        color: AppColor.saasifyLightPaleGrey),
                                   ),
                                   child: Center(
                                       child: (productList[index].stock != 0)
@@ -212,7 +212,7 @@ class InventoryListDataTable extends StatelessWidget {
                                 width: kStockContainerSize,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: AppColor.saasifyLightDeepBlue),
+                                      color: AppColor.saasifyLightPaleGrey),
                                 ),
                                 child: Center(
                                     child: Text(
@@ -281,7 +281,7 @@ class InventoryListDataTable extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                             color:
-                                                AppColor.saasifyLightDeepBlue),
+                                                AppColor.saasifyLightPaleGrey),
                                       ),
                                       child: const Center(
                                           child: Icon(

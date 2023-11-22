@@ -100,17 +100,10 @@ class FormImageSection extends StatelessWidget {
                                     is String)
                                 ? Container(
                                     decoration: BoxDecoration(
-                                        image: const DecorationImage(
-                                            image: NetworkImage(
-                                                "https://storage.googleapis.com/saasify-5ddd8.appspot.com/uploaded_images/cake_img.png?Expires=1710861115&GoogleAccessId=firebase-adminsdk-o8vl8%40saasify-5ddd8.iam.gserviceaccount.com&Signature=DRZVj%2FO2ZrCMcatdcF00KJNpRp4uAGBwP9DCiAvKuymkLQVysLHrBS1iOEh3RiCgsOAIeynlURxMrC5xEXuRYFCNM2wWsFGsU%2Fx9z8fFMofO0IkKhdcMhPcmLU2OaICYseTZv0O%2FuMwdvEGzidvydO7s3HYSTXc9Gn1Bp0Yw%2BnOwW%2FCxkHeb7IVeH%2F%2FM9wZ3WkTLl6yrNM5D5%2Fq3IJ2ryVMWi0%2BZFrd6w%2BY5fTDMZFAFUbwqOpZ8LSQrRkkOGDx5ea%2BToFDhzRhh3bTF%2BUSqJVoj%2FInOy1pGsvBsmS0hWgx0ozCbnLe9QQpn22rRzCu6S5ePRr7NErCCMkZLeesiWw%3D%3D",
-                                                headers: {
-                                              'Content-Type':
-                                                  'application/json',
-                                              "Access-Control-Allow-Origin":
-                                                  "*",
-                                              "Access-Control-Allow-Credentials":
-                                                  "true"
-                                            })),
+                                        image: DecorationImage(
+                                            image: NetworkImage(context
+                                                .read<UploadBloc>()
+                                                .displayImageList[index])),
                                         borderRadius: BorderRadius.circular(
                                             spacingSmall)))
                                 : Container(

@@ -89,9 +89,8 @@ class InventoryListScreen extends StatelessWidget {
                         },
                         builder: (context, state) {
                           if (state is FetchingInventoryList) {
-                            return const Expanded(
-                                child:
-                                    Center(child: CircularProgressIndicator()));
+                            return const Center(
+                                child: CircularProgressIndicator());
                           } else if (state is FetchedInventoryList) {
                             return Column(
                               children: [
