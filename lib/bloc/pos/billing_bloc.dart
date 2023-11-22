@@ -136,14 +136,15 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
                 brandId: event.product.brandId)));
       }
     } else {
-      selectedProducts
-          .add(SelectedProductModel(count: 1, product: Product(
-          productId: event.product.productId,
-          productName: event.product.productName,
-          variants: [event.product.variants[event.variantIndex]],
-          brandName: event.product.brandName,
-          productDescription: event.product.productDescription,
-          brandId: event.product.brandId)));
+      selectedProducts.add(SelectedProductModel(
+          count: 1,
+          product: Product(
+              productId: event.product.productId,
+              productName: event.product.productName,
+              variants: [event.product.variants[event.variantIndex]],
+              brandName: event.product.brandName,
+              productDescription: event.product.productDescription,
+              brandId: event.product.brandId)));
     }
     add(CalculateBill(
         discount: 10,

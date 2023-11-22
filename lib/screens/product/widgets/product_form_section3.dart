@@ -41,9 +41,7 @@ class ProductFormSection3 extends StatelessWidget {
             dataMap['brand_name'] = value;
           }),
       const SizedBox(height: spacingHuge),
-      Row(
-          crossAxisAlignment:CrossAxisAlignment.start,
-          children: [
+      Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -99,9 +97,7 @@ class ProductFormSection3 extends StatelessWidget {
         ]))
       ]),
       const SizedBox(height: spacingHuge),
-      Row(
-          crossAxisAlignment:CrossAxisAlignment.start,
-          children: [
+      Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

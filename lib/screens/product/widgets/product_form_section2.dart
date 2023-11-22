@@ -62,9 +62,7 @@ class ProductFormSection2 extends StatelessWidget {
             dataMap['barcode'] = value;
           }),
       const SizedBox(height: spacingHuge),
-      Row(
-          crossAxisAlignment:CrossAxisAlignment.start,
-          children: [
+      Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

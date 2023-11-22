@@ -74,18 +74,14 @@ class AddProductScreen extends StatelessWidget {
                                 checkMarkVisible: false,
                                 primaryOnPressed: () {
                                   Navigator.pop(context);
-                                  Navigator.pushReplacementNamed(
-                                      context, ProductListScreen.routeName);
+                                  Navigator.of(context).pushReplacementNamed(
+                                      ProductListScreen.routeName);
                                 }));
-                      }
-
-                      else if (state is SavingProduct) {
+                      } else if (state is SavingProduct) {
                         ProgressBar.show(context);
-                      }
-                      else if (state is EditingProduct) {
+                      } else if (state is EditingProduct) {
                         ProgressBar.show(context);
-                      }
-                      else if (state is SavedProduct) {
+                      } else if (state is SavedProduct) {
                         ProgressBar.dismiss(context);
                         showDialog(
                             context: context,
@@ -122,6 +118,7 @@ class AddProductScreen extends StatelessWidget {
                                     Navigator.pop(context);
                                     Navigator.pushReplacementNamed(
                                         context, ProductListScreen.routeName);
+                                    // Navigator.pop(context);
                                   },
                                 ));
                       } else if (state is EditedProduct) {

@@ -124,91 +124,87 @@ class InventoryListDataTable extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
-                                onTap: (productList[index].stock != 0)
-                                    ? () {
-                                        int removedStock = 0;
-                                        showDialog(
-                                            context: context,
-                                            builder: (ctx) => AlertDialog(
-                                                content: SizedBox(
-                                                    width: kDialogueWidth,
-                                                    child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                          Form(
-                                                            key: _formKey,
-                                                            child:
-                                                                CustomTextField(
-                                                                    validator:
-                                                                        (value) {
-                                                                      if (removedStock >
-                                                                          productList[index]
-                                                                              .stock) {
-                                                                        return 'Please enter a number less than current stock';
-                                                                      } else if (removedStock == 0) {
-                                                                        return 'Please enter a no. greater than 0';
-                                                                      }
-                                                                      return null;
-                                                                    },
-                                                                    inputFormatters: [
-                                                                      FilteringTextInputFormatter
-                                                                          .digitsOnly
-                                                                    ],
-                                                                    onTextFieldChanged:
-                                                                        (value) {
-                                                                      removedStock =
-                                                                          int.parse(
-                                                                              value);
-                                                                    }),
-                                                          ),
-                                                          const SizedBox(
-                                                              height:
-                                                                  spacingSmall),
-                                                          PrimaryButton(
-                                                              onPressed: () {
-                                                                if (_formKey
-                                                                    .currentState!
-                                                                    .validate()) {
-                                                                  context
-                                                                      .read<
-                                                                          InventoryBloc>()
-                                                                      .add(UpdateStock(
-                                                                          updateStockMap: {
-                                                                            "stock_id":
-                                                                                productList[index].stockId,
-                                                                            "stock":
-                                                                                removedStock,
-                                                                            "variant_id":
-                                                                                productList[index].variantId,
-                                                                            "increment":
-                                                                                false
-                                                                          }));
-                                                                  Navigator.pop(
-                                                                      ctx);
-                                                                }
-                                                              },
-                                                              buttonTitle:
-                                                                  'Update')
-                                                        ]))));
-                                      }
-                                    : null,
-                                child: Container(
-                                  height: kCounterContainerSize,
-                                  width: kCounterContainerSize,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: AppColor.saasifyLightPaleGrey),
-                                  ),
-                                  child: Center(
-                                      child: (productList[index].stock != 0)
-                                          ? const Icon(
-                                              Icons.remove,
-                                              size: kGeneralRadius,
-                                            )
-                                          : const SizedBox.shrink())
-                                )
-                              ),
+                                  onTap: (productList[index].stock != 0)
+                                      ? () {
+                                          int removedStock = 0;
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                  content: SizedBox(
+                                                      width: kDialogueWidth,
+                                                      child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          children: [
+                                                            Form(
+                                                              key: _formKey,
+                                                              child:
+                                                                  CustomTextField(
+                                                                      validator:
+                                                                          (value) {
+                                                                        if (removedStock >
+                                                                            productList[index]
+                                                                                .stock) {
+                                                                          return 'Please enter a number less than current stock';
+                                                                        } else if (removedStock ==
+                                                                            0) {
+                                                                          return 'Please enter a no. greater than 0';
+                                                                        }
+                                                                        return null;
+                                                                      },
+                                                                      inputFormatters: [
+                                                                        FilteringTextInputFormatter
+                                                                            .digitsOnly
+                                                                      ],
+                                                                      onTextFieldChanged:
+                                                                          (value) {
+                                                                        removedStock =
+                                                                            int.parse(value);
+                                                                      }),
+                                                            ),
+                                                            const SizedBox(
+                                                                height:
+                                                                    spacingSmall),
+                                                            PrimaryButton(
+                                                                onPressed: () {
+                                                                  if (_formKey
+                                                                      .currentState!
+                                                                      .validate()) {
+                                                                    context
+                                                                        .read<
+                                                                            InventoryBloc>()
+                                                                        .add(UpdateStock(
+                                                                            updateStockMap: {
+                                                                              "stock_id": productList[index].stockId,
+                                                                              "stock": removedStock,
+                                                                              "variant_id": productList[index].variantId,
+                                                                              "increment": false
+                                                                            }));
+                                                                    Navigator
+                                                                        .pop(
+                                                                            ctx);
+                                                                  }
+                                                                },
+                                                                buttonTitle:
+                                                                    'Update')
+                                                          ]))));
+                                        }
+                                      : null,
+                                  child: Container(
+                                      height: kCounterContainerSize,
+                                      width: kCounterContainerSize,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color:
+                                                AppColor.saasifyLightPaleGrey),
+                                      ),
+                                      child: Center(
+                                          child: (productList[index].stock != 0)
+                                              ? const Icon(
+                                                  Icons.remove,
+                                                  size: kGeneralRadius,
+                                                )
+                                              : const SizedBox.shrink()))),
                               Container(
                                 height: kCounterContainerSize,
                                 width: kStockContainerSize,

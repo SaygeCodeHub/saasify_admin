@@ -44,8 +44,7 @@ class FormImageSection extends StatelessWidget {
             listener: (context, state) {
               if (state is UploadImageLoading) {
                 ProgressBar.show(context);
-              }
-              else if (state is UploadImageLoaded) {
+              } else if (state is UploadImageLoaded) {
                 ProgressBar.dismiss(context);
                 if (isEdit) {
                   dataMap['images'].addAll(state.uploadImageModel.data);
@@ -58,8 +57,7 @@ class FormImageSection extends StatelessWidget {
                       .read<ProductBloc>()
                       .add(SaveProduct(productDetailsMap: dataMap));
                 }
-              }
-              else if (state is UploadImageError) {
+              } else if (state is UploadImageError) {
                 ProgressBar.dismiss(context);
                 showDialog(
                     context: context,

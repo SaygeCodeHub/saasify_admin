@@ -74,7 +74,7 @@ class SideBar extends StatelessWidget {
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyDarkGrey,
                           fontWeight: FontWeight.w700)),
-                  onTap: () async{
+                  onTap: () async {
                     await DatabaseUtil.products.clear();
                     if (context.mounted) {
                       Navigator.pushReplacementNamed(

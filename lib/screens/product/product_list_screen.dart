@@ -150,7 +150,7 @@ class ProductListScreen extends StatelessWidget {
                                             onPressed: () {
                                               showDialog(
                                                   context: context,
-                                                  builder: (ctx) =>
+                                                  builder: (context) =>
                                                       CustomAlertDialog(
                                                         title: StringConstants
                                                             .kWarning,
@@ -165,12 +165,12 @@ class ProductListScreen extends StatelessWidget {
                                                         checkMarkVisible: false,
                                                         secondaryOnPressed: () {
                                                           Navigator.pop(
-                                                              ctx);
+                                                              context);
                                                         },
                                                         primaryOnPressed: () {
                                                           log('confirm button pressed');
                                                           Navigator.pop(
-                                                              ctx);
+                                                              context);
                                                           context
                                                               .read<
                                                                   ProductBloc>()
@@ -204,6 +204,7 @@ class ProductListScreen extends StatelessWidget {
                                                               .kAddManually,
                                                       checkMarkVisible: false,
                                                       secondaryOnPressed: () {
+                                                        Navigator.pop(context);
                                                         Navigator.pushReplacementNamed(
                                                             context,
                                                             AddProductScreen
