@@ -216,8 +216,9 @@ class InventoryListDataTable extends StatelessWidget {
                                             .xxTiniest
                                             .copyWith(
                                                 color: (productList[index]
-                                                            .stock ==
-                                                        0)
+                                                            .stock <
+                                                        productList[index]
+                                                            .restockReminder)
                                                     ? AppColor.saasifyRed
                                                     : AppColor.saasifyBlack))),
                               ),

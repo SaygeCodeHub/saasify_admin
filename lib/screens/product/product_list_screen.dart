@@ -32,6 +32,7 @@ class ProductListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<ProductBloc>().add(FetchProductList());
     return Scaffold(
         key: _scaffoldKey,
         drawer: const SideBar(selectedIndex: 3),

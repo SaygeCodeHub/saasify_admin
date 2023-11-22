@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
-import 'package:saasify/bloc/product/product_bloc.dart';
-import 'package:saasify/bloc/product/product_event.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
@@ -90,7 +88,6 @@ class SideBar extends StatelessWidget {
                               : AppColor.saasifyDarkGrey,
                           fontWeight: FontWeight.w700)),
                   onTap: () {
-                    context.read<ProductBloc>().add(FetchProductList());
                     Navigator.pushReplacementNamed(
                         context, ProductListScreen.routeName);
                   },

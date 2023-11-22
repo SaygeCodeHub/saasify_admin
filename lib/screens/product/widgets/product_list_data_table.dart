@@ -64,31 +64,29 @@ class ProductListDataTable extends StatelessWidget {
                 label: Text(StringConstants.kName,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
               child: Text(StringConstants.kBarcode,
                   style: Theme.of(context)
                       .textTheme
-                      .xxTiniest
-                      .copyWith(fontWeight: FontWeight.w500)),
+                      .xTiniest
+                      .copyWith(fontWeight: FontWeight.w600)),
             )),
             DataColumn(
                 label: Text(StringConstants.kCategory,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kBrand,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
-              ),
+              child: Text(StringConstants.kBrand,
+                  style: Theme.of(context)
+                      .textTheme
+                      .xTiniest
+                      .copyWith(fontWeight: FontWeight.w600)),
             )),
             DataColumn(
                 label: Expanded(
@@ -97,8 +95,8 @@ class ProductListDataTable extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
               ),
             )),
             DataColumn(
@@ -107,8 +105,8 @@ class ProductListDataTable extends StatelessWidget {
                 child: Text(StringConstants.kStock,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
               ),
             )),
             DataColumn(
@@ -117,8 +115,8 @@ class ProductListDataTable extends StatelessWidget {
                 child: Text('',
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
               ),
             )),
             DataColumn(
@@ -127,8 +125,8 @@ class ProductListDataTable extends StatelessWidget {
                         child: Text('',
                             style: Theme.of(context)
                                 .textTheme
-                                .xxTiniest
-                                .copyWith(fontWeight: FontWeight.w500)))))
+                                .xTiniest
+                                .copyWith(fontWeight: FontWeight.w600)))))
           ],
           rows: List.generate(
               productList.length,
@@ -176,7 +174,7 @@ class ProductListDataTable extends StatelessWidget {
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
                     DataCell(Align(
-                      alignment: Alignment.center,
+                      alignment: Alignment.centerLeft,
                       child: Text(productList[index].brandName ?? '',
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
@@ -191,7 +189,16 @@ class ProductListDataTable extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Text(productList[index].stock.toString(),
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.xxTiniest),
+                          style: Theme.of(context).textTheme.xxTiniest.copyWith(
+                              color: (productList[index].stock != null &&
+                                      productList[index].restockReminder !=
+                                          null)
+                                  ? ((productList[index].stock ?? 0) <
+                                          (productList[index].restockReminder ??
+                                              0))
+                                      ? AppColor.saasifyRed
+                                      : AppColor.saasifyBlack
+                                  : AppColor.saasifyBlack)),
                     )),
                     DataCell(Container(
                         padding: const EdgeInsets.symmetric(
@@ -211,7 +218,9 @@ class ProductListDataTable extends StatelessWidget {
                                     : AppColor.saasifyGreen),
                             const SizedBox(width: 6),
                             Text(
-                                (productList[index].draft) ? 'Draft' : 'Active',
+                                (productList[index].draft)
+                                    ? 'Draft'
+                                    : 'Published',
                                 style: Theme.of(context)
                                     .textTheme
                                     .xxTiniest
