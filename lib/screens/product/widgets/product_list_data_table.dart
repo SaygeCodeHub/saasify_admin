@@ -38,7 +38,7 @@ class ProductListDataTable extends StatelessWidget {
                                   if (ProductListScreen.selectedIds.length <
                                       productList.length) {
                                     ProductListScreen.selectedIds = productList
-                                        .map((e) => e.productId)
+                                        .map((e) => e.variantId)
                                         .toList();
                                   } else {
                                     ProductListScreen.selectedIds.clear();

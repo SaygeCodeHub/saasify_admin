@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
+import 'package:saasify/bloc/product/product_bloc.dart';
+import 'package:saasify/bloc/product/product_event.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
@@ -9,9 +11,10 @@ import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
 import 'package:saasify/screens/orders/orders_screen.dart';
-import 'package:saasify/screens/pos_new/pos_screen_new.dart';
+import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
+import 'package:saasify/utils/database_util.dart';
 
 class SideBar extends StatelessWidget {
   static String userName = '';
@@ -71,9 +74,12 @@ class SideBar extends StatelessWidget {
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyDarkGrey,
                           fontWeight: FontWeight.w700)),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(
-                        context, POSScreen.routeName);
+                  onTap: () async{
+                    await DatabaseUtil.products.clear();
+                    if (context.mounted) {
+                      Navigator.pushReplacementNamed(
+                          context, POSScreen.routeName);
+                    }
                   },
                 ),
                 ListTile(
@@ -84,6 +90,7 @@ class SideBar extends StatelessWidget {
                               : AppColor.saasifyDarkGrey,
                           fontWeight: FontWeight.w700)),
                   onTap: () {
+                    context.read<ProductBloc>().add(FetchProductList());
                     Navigator.pushReplacementNamed(
                         context, ProductListScreen.routeName);
                   },

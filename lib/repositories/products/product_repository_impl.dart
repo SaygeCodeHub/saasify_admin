@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:saasify/data/models/products/delete_product_model.dart';
 import 'package:saasify/data/models/products/edit_product_model.dart';
 import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
@@ -45,6 +47,8 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<DeleteProductsModel> deleteProduct(
       String userId, String companyId, int branchId, Map variantIdMap) async {
+    log('inside DeletedProducts repository');
+
     final response = await ClientServices().delete(
         '${ApiConstants.baseUrl}$userId/$companyId/$branchId/deleteVariant',
         variantIdMap);

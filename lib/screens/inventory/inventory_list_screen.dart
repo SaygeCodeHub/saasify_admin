@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/inventory/inventory_bloc.dart';
@@ -47,6 +49,7 @@ class InventoryListScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingLarge),
                       child: BlocConsumer<InventoryBloc, InventoryStates>(
                         listener: (context, state) {
+                          log('states===>$state');
                           if (state is UpdatingStock) {
                             ProgressBar.show(context);
                           } else if (state is UpdatedStock) {

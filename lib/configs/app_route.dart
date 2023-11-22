@@ -7,7 +7,7 @@ import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/orders/orders_screen.dart';
-import 'package:saasify/screens/pos_new/pos_screen_new.dart';
+import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../screens/onboarding/auhentication_screen.dart';

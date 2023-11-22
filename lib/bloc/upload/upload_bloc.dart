@@ -10,7 +10,6 @@ import '../../di/app_module.dart';
 
 class UploadBloc extends Bloc<UploadEvents, UploadStates> {
   final UploadRepository _uploadRepository = getIt<UploadRepository>();
-
   List<XFile> pickedFiles = [];
   List<Uint8List> pickedImageList = [];
   List displayImageList = [];

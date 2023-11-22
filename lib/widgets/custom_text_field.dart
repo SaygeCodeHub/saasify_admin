@@ -60,7 +60,6 @@ class CustomTextField extends StatelessWidget {
       obscuringCharacter: "*",
       cursorColor: AppColor.saasifyLightDeepBlue,
       decoration: InputDecoration(
-        errorMaxLines: 2,
         suffix: suffix,
         hintText: hintText,
         hintStyle: hintStyle,

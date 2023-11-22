@@ -47,6 +47,7 @@ class AddProductScreen extends StatelessWidget {
         drawer: const SideBar(selectedIndex: 3),
         key: _scaffoldKey,
         body: Flex(
+            crossAxisAlignment: CrossAxisAlignment.start,
             direction:
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
             children: [
@@ -62,29 +63,33 @@ class AddProductScreen extends StatelessWidget {
               Expanded(
                   flex: 5,
                   child: BlocConsumer<ProductBloc, ProductStates>(
-                    listener: (ctx, state) {
+                    listener: (context, state) {
                       if (state is ErrorFetchingCategories) {
                         showDialog(
                             context: context,
-                            builder: (dialogueCtx) => CustomAlertDialog(
+                            builder: (context) => CustomAlertDialog(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
                                 primaryButtonTitle: StringConstants.kUnderstood,
                                 checkMarkVisible: false,
                                 primaryOnPressed: () {
-                                  Navigator.pop(dialogueCtx);
+                                  Navigator.pop(context);
                                   Navigator.pushReplacementNamed(
                                       context, ProductListScreen.routeName);
                                 }));
                       }
 
-                      if (state is SavingProduct || state is EditingProduct) {
-                        ProgressBar.show(ctx);
-                      } else if (state is SavedProduct) {
-                        ProgressBar.dismiss(ctx);
+                      else if (state is SavingProduct) {
+                        ProgressBar.show(context);
+                      }
+                      else if (state is EditingProduct) {
+                        ProgressBar.show(context);
+                      }
+                      else if (state is SavedProduct) {
+                        ProgressBar.dismiss(context);
                         showDialog(
                             context: context,
-                            builder: (dialogueCtx) => CustomAlertDialog(
+                            builder: (context) => CustomAlertDialog(
                                   title: StringConstants.kNewProductAdded,
                                   message:
                                       StringConstants.kContinueAddingVariant,
@@ -93,7 +98,7 @@ class AddProductScreen extends StatelessWidget {
                                   checkMarkVisible: true,
                                   secondaryButtonTitle: StringConstants.kNo,
                                   primaryOnPressed: () {
-                                    Navigator.pop(dialogueCtx);
+                                    Navigator.pop(context);
                                     Navigator.pushReplacementNamed(
                                         context, AddProductScreen.routeName,
                                         arguments: AddProductScreenArguments(
@@ -114,13 +119,13 @@ class AddProductScreen extends StatelessWidget {
                                   },
                                   secondaryOnPressed: () {
                                     DatabaseUtil.products.clear();
-                                    Navigator.pop(dialogueCtx);
+                                    Navigator.pop(context);
                                     Navigator.pushReplacementNamed(
                                         context, ProductListScreen.routeName);
                                   },
                                 ));
                       } else if (state is EditedProduct) {
-                        ProgressBar.dismiss(ctx);
+                        ProgressBar.dismiss(context);
                         showDialog(
                             context: context,
                             builder: (dialogueCtx) => CustomAlertDialog(
@@ -134,30 +139,30 @@ class AddProductScreen extends StatelessWidget {
                                       context, ProductListScreen.routeName);
                                 }));
                       } else if (state is ErrorSavingProduct) {
-                        ProgressBar.dismiss(ctx);
+                        ProgressBar.dismiss(context);
                         showDialog(
                             context: context,
-                            builder: (dialogueCtx) => CustomAlertDialog(
+                            builder: (context) => CustomAlertDialog(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
                                 primaryButtonTitle: StringConstants.kUnderstood,
                                 checkMarkVisible: false,
                                 primaryOnPressed: () {
-                                  Navigator.pop(dialogueCtx);
+                                  Navigator.pop(context);
                                   Navigator.pushReplacementNamed(
                                       context, ProductListScreen.routeName);
                                 }));
                       } else if (state is ErrorEditingProduct) {
-                        ProgressBar.dismiss(ctx);
+                        ProgressBar.dismiss(context);
                         showDialog(
                             context: context,
-                            builder: (dialogueCtx) => CustomAlertDialog(
+                            builder: (context) => CustomAlertDialog(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
                                 primaryButtonTitle: StringConstants.kUnderstood,
                                 checkMarkVisible: false,
                                 primaryOnPressed: () {
-                                  Navigator.pop(dialogueCtx);
+                                  Navigator.pop(context);
                                   Navigator.pushReplacementNamed(
                                       context, ProductListScreen.routeName);
                                 }));

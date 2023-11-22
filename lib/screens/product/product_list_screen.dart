@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
@@ -30,11 +32,11 @@ class ProductListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ProductBloc>().add(FetchProductList());
     return Scaffold(
         key: _scaffoldKey,
         drawer: const SideBar(selectedIndex: 3),
         body: Flex(
+            crossAxisAlignment: CrossAxisAlignment.start,
             direction:
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
             children: [
@@ -51,12 +53,14 @@ class ProductListScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingLarge),
                       child: BlocConsumer<ProductBloc, ProductStates>(
                         listener: (context, state) {
+                          log('states===>$state');
                           if (state is DeletingProducts) {
+                            log('inside DeletingProducts');
                             ProgressBar.show(context);
                           }
                           if (state is DeletedProducts) {
+                            log('inside DeletedProducts');
                             ProgressBar.dismiss(context);
-
                             showDialog(
                                 context: context,
                                 builder: (ctx) => CustomAlertDialog(
@@ -146,7 +150,7 @@ class ProductListScreen extends StatelessWidget {
                                             onPressed: () {
                                               showDialog(
                                                   context: context,
-                                                  builder: (context) =>
+                                                  builder: (ctx) =>
                                                       CustomAlertDialog(
                                                         title: StringConstants
                                                             .kWarning,
@@ -161,11 +165,12 @@ class ProductListScreen extends StatelessWidget {
                                                         checkMarkVisible: false,
                                                         secondaryOnPressed: () {
                                                           Navigator.pop(
-                                                              context);
+                                                              ctx);
                                                         },
                                                         primaryOnPressed: () {
+                                                          log('confirm button pressed');
                                                           Navigator.pop(
-                                                              context);
+                                                              ctx);
                                                           context
                                                               .read<
                                                                   ProductBloc>()

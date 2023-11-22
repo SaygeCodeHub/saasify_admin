@@ -25,7 +25,6 @@ class POSScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DatabaseUtil.products.clear();
     context.read<BillingBloc>().add(LoadAllOrders());
     return Scaffold(
         key: _scaffoldKey,

@@ -146,6 +146,8 @@ class InventoryListDataTable extends StatelessWidget {
                                                                           productList[index]
                                                                               .stock) {
                                                                         return 'Please enter a number less than current stock';
+                                                                      } else if (removedStock == 0) {
+                                                                        return 'Please enter a no. greater than 0';
                                                                       }
                                                                       return null;
                                                                     },
@@ -204,8 +206,8 @@ class InventoryListDataTable extends StatelessWidget {
                                               Icons.remove,
                                               size: kGeneralRadius,
                                             )
-                                          : const SizedBox.shrink()),
-                                ),
+                                          : const SizedBox.shrink())
+                                )
                               ),
                               Container(
                                 height: kCounterContainerSize,

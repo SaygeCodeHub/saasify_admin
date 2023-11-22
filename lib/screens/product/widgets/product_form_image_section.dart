@@ -44,7 +44,8 @@ class FormImageSection extends StatelessWidget {
             listener: (context, state) {
               if (state is UploadImageLoading) {
                 ProgressBar.show(context);
-              } else if (state is UploadImageLoaded) {
+              }
+              else if (state is UploadImageLoaded) {
                 ProgressBar.dismiss(context);
                 if (isEdit) {
                   dataMap['images'].addAll(state.uploadImageModel.data);
@@ -58,18 +59,18 @@ class FormImageSection extends StatelessWidget {
                       .add(SaveProduct(productDetailsMap: dataMap));
                 }
               }
-              if (state is UploadImageError) {
+              else if (state is UploadImageError) {
                 ProgressBar.dismiss(context);
                 showDialog(
                     context: context,
-                    builder: (ctx) => Expanded(
+                    builder: (context) => Expanded(
                           child: CustomAlertDialog(
                               title: StringConstants.kSomethingWentWrong,
                               message: state.message,
                               primaryButtonTitle: StringConstants.kUnderstood,
                               checkMarkVisible: false,
                               primaryOnPressed: () {
-                                Navigator.pop(ctx);
+                                Navigator.pop(context);
                                 Navigator.pushReplacementNamed(
                                     context, ProductListScreen.routeName);
                               }),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_event.dart';
@@ -96,6 +97,7 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
 
   FutureOr<void> _deleteProducts(
       DeleteProducts event, Emitter<ProductStates> emit) async {
+    log('inside delete function');
     emit(DeletingProducts());
     try {
       String userId = await _customerCache.getUserId();
@@ -106,6 +108,7 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
 
       DeleteProductsModel deleteProductsModel = await _productRepository
           .deleteProduct(userId, companyId, branchId, idsMap);
+      log('api success');
 
       if (deleteProductsModel.status == 200) {
         emit(DeletedProducts(message: deleteProductsModel.message));
