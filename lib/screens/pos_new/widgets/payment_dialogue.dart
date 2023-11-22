@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-import 'package:saasify/widgets/primary_button.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
 
@@ -59,9 +58,7 @@ class _PaymentDialogueState extends State<PaymentDialogue> {
                                             spacingXMedium)),
                                     child:
                                         Center(child: Text(payments[index])))));
-                      })),
-              const SizedBox(height: spacingXMedium),
-              PrimaryButton(onPressed: () {}, buttonTitle: StringConstants.kPay)
+                      }))
             ])));
   }
 }
