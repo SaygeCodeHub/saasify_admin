@@ -91,6 +91,7 @@ class VariantDialogue extends StatelessWidget {
                                                   .images[0]),
                                             ),
                                           ),
+                                          const SizedBox(height: spacingXSmall),
                                           Center(
                                               child: Row(
                                                   mainAxisAlignment:
@@ -110,10 +111,7 @@ class VariantDialogue extends StatelessWidget {
                                                     textAlign: TextAlign.center,
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .xxTiniest
-                                                        .copyWith(
-                                                            color: AppColor
-                                                                .saasifyWhite)),
+                                                        .xxTiniest),
                                                 const SizedBox(
                                                     width: spacingXSmall),
                                                 Text(
@@ -130,11 +128,9 @@ class VariantDialogue extends StatelessWidget {
                                                     textAlign: TextAlign.center,
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .xxTiniest
-                                                        .copyWith(
-                                                            color: AppColor
-                                                                .saasifyWhite)),
+                                                        .xxTiniest),
                                               ])),
+                                          const SizedBox(height: spacingXSmall),
                                           Text(
                                               '₹ ${posData[context.read<BillingBloc>().selectedCategoryIndex].products[productIndex].variants[index].cost.toString()}',
                                               maxLines: 2,
@@ -142,10 +138,8 @@ class VariantDialogue extends StatelessWidget {
                                               textAlign: TextAlign.center,
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .xxTiniest
-                                                  .copyWith(
-                                                      color: AppColor
-                                                          .saasifyWhite))
+                                                  .xxTiniest),
+                                          const SizedBox(height: spacingSmall)
                                         ],
                                       )),
                                 ));

@@ -60,7 +60,7 @@ class _ContactTileState extends State<ContactTile> {
                   color: AppColor.saasifyDarkestBlack),
             ),
             const SizedBox(
-              width: spacingXXSmall,
+              width: spacingSmall,
             ),
             Text(
               contactController.text,
@@ -69,13 +69,15 @@ class _ContactTileState extends State<ContactTile> {
                   .xTiniest
                   .copyWith(color: AppColor.saasifyGreyBlue),
             ),
+            const SizedBox(width: spacingXSmall),
             InkWell(
                 onTap: () {
                   setState(() {
                     addedContact = false;
                   });
                 },
-                child: const Icon(Icons.edit, color: AppColor.saasifyGreyBlue))
+                child: const Icon(Icons.mode_edit_outline_outlined,
+                    size: spacingStandard, color: AppColor.saasifyGreyBlue))
           ])
         : Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Expanded(
