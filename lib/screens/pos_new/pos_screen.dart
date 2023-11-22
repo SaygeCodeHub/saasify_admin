@@ -37,7 +37,7 @@ class POSScreen extends StatelessWidget {
               context.responsive(
                   TopBar(
                       scaffoldKey: _scaffoldKey,
-                      headingText: StringConstants.kOpenTabs),
+                      headingText: StringConstants.kUnsettledTabs),
                   desktop: const Expanded(
                     child: SideBar(selectedIndex: 2),
                   )),
@@ -52,7 +52,7 @@ class POSScreen extends StatelessWidget {
                             return CustomAlertDialog(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
-                                primaryButtonTitle: StringConstants.kUnderstood,
+                                primaryButtonTitle: StringConstants.kOk,
                                 primaryOnPressed: () {
                                   Navigator.pop(ctx);
                                 });
@@ -77,7 +77,8 @@ class POSScreen extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: spacingMedium,
                                           vertical: spacingLarge),
-                                      child: Text(StringConstants.kOpenTabs,
+                                      child: Text(
+                                          StringConstants.kUnsettledTabs,
                                           style: Theme.of(context)
                                               .textTheme
                                               .xxTiny
@@ -121,6 +122,14 @@ class POSScreen extends StatelessWidget {
                                                                 MainAxisSize
                                                                     .min,
                                                             children: [
+                                                          Expanded(
+                                                              child: Image.asset(
+                                                                  'assets/add.png',
+                                                                  fit: BoxFit
+                                                                      .fill)),
+                                                          const SizedBox(
+                                                              height:
+                                                                  spacingStandard),
                                                           Text(
                                                             StringConstants
                                                                 .kAddCustomer,
@@ -132,15 +141,6 @@ class POSScreen extends StatelessWidget {
                                                                     color: AppColor
                                                                         .saasifyWhite),
                                                           ),
-                                                          const SizedBox(
-                                                              height:
-                                                                  spacingStandard),
-                                                          Expanded(
-                                                            child: Image.asset(
-                                                                'assets/add.png',
-                                                                fit: BoxFit
-                                                                    .fill),
-                                                          )
                                                         ])))));
                                       }
                                       return Padding(
@@ -175,6 +175,29 @@ class POSScreen extends StatelessWidget {
                                                                   MainAxisSize
                                                                       .min,
                                                               children: [
+                                                            Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  InkWell(
+                                                                      onTap:
+                                                                          () {},
+                                                                      child: const Icon(
+                                                                          Icons
+                                                                              .close,
+                                                                          color:
+                                                                              AppColor.saasifyWhite))
+                                                                ]),
+                                                            Expanded(
+                                                              child: Image.asset(
+                                                                  'assets/user.png',
+                                                                  fit: BoxFit
+                                                                      .fill),
+                                                            ),
+                                                            const SizedBox(
+                                                                height:
+                                                                    spacingXXSmall),
                                                             Text(
                                                               'Customer no. - ${state.customerIdList[index]}',
                                                               style: Theme.of(
@@ -185,15 +208,6 @@ class POSScreen extends StatelessWidget {
                                                                       color: AppColor
                                                                           .saasifyWhite),
                                                             ),
-                                                            const SizedBox(
-                                                                height:
-                                                                    spacingStandard),
-                                                            Expanded(
-                                                              child: Image.asset(
-                                                                  'assets/user.png',
-                                                                  fit: BoxFit
-                                                                      .fill),
-                                                            )
                                                           ]))))));
                                     }),
                               ]));

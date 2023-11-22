@@ -35,32 +35,30 @@ class InventoryListDataTable extends StatelessWidget {
                 label: Text(StringConstants.kName,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kBarcode,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
-              ),
+              child: Text(StringConstants.kBarcode,
+                  style: Theme.of(context)
+                      .textTheme
+                      .xTiniest
+                      .copyWith(fontWeight: FontWeight.w600)),
             )),
             DataColumn(
                 label: Text(StringConstants.kCategory,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
               child: Center(
                 child: Text(StringConstants.kPrice,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
               ),
             )),
             DataColumn(
@@ -70,8 +68,8 @@ class InventoryListDataTable extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
               ),
             )),
             DataColumn(
@@ -80,8 +78,8 @@ class InventoryListDataTable extends StatelessWidget {
                 child: Text(StringConstants.kStock,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
               ),
             ))
           ],
@@ -96,7 +94,7 @@ class InventoryListDataTable extends StatelessWidget {
                     )),
                     DataCell(
                       Align(
-                        alignment: Alignment.center,
+                        alignment: Alignment.centerLeft,
                         child: Text(productList[index].barcode.toString(),
                             style: Theme.of(context).textTheme.xxTiniest),
                       ),
@@ -124,94 +122,92 @@ class InventoryListDataTable extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
-                                  onTap: (productList[index].stock != 0)
-                                      ? () {
-                                          int removedStock = 0;
-                                          showDialog(
-                                              context: context,
-                                              builder: (ctx) => AlertDialog(
-                                                  content: SizedBox(
-                                                      width: kDialogueWidth,
-                                                      child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            Form(
-                                                              key: _formKey,
-                                                              child:
-                                                                  CustomTextField(
-                                                                      validator:
-                                                                          (value) {
-                                                                        if (removedStock >
-                                                                            productList[index]
-                                                                                .stock) {
-                                                                          return 'Please enter a number less than current stock';
-                                                                        } else if (removedStock ==
-                                                                            0) {
-                                                                          return 'Please enter a no. greater than 0';
-                                                                        }
-                                                                        return null;
-                                                                      },
-                                                                      inputFormatters: [
-                                                                        FilteringTextInputFormatter
-                                                                            .digitsOnly
-                                                                      ],
-                                                                      onTextFieldChanged:
-                                                                          (value) {
-                                                                        removedStock =
-                                                                            int.parse(value);
-                                                                      }),
-                                                            ),
-                                                            const SizedBox(
-                                                                height:
-                                                                    spacingSmall),
-                                                            PrimaryButton(
-                                                                onPressed: () {
-                                                                  if (_formKey
-                                                                      .currentState!
-                                                                      .validate()) {
-                                                                    context
-                                                                        .read<
-                                                                            InventoryBloc>()
-                                                                        .add(UpdateStock(
-                                                                            updateStockMap: {
-                                                                              "stock_id": productList[index].stockId,
-                                                                              "stock": removedStock,
-                                                                              "variant_id": productList[index].variantId,
-                                                                              "increment": false
-                                                                            }));
-                                                                    Navigator
-                                                                        .pop(
-                                                                            ctx);
-                                                                  }
-                                                                },
-                                                                buttonTitle:
-                                                                    'Update')
-                                                          ]))));
-                                        }
-                                      : null,
-                                  child: Container(
-                                      height: kCounterContainerSize,
-                                      width: kCounterContainerSize,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color:
-                                                AppColor.saasifyLightPaleGrey),
-                                      ),
-                                      child: Center(
-                                          child: (productList[index].stock != 0)
-                                              ? const Icon(
-                                                  Icons.remove,
-                                                  size: kGeneralRadius,
-                                                )
-                                              : const SizedBox.shrink()))),
-                              Container(
+                                onTap: (productList[index].stock != 0)
+                                    ? () {
+                                        int removedStock = 0;
+                                        showDialog(
+                                            context: context,
+                                            builder: (ctx) => AlertDialog(
+                                                content: SizedBox(
+                                                    width: kDialogueWidth,
+                                                    child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          Form(
+                                                            key: _formKey,
+                                                            child:
+                                                                CustomTextField(
+                                                                    validator:
+                                                                        (value) {
+                                                                      if (removedStock >
+                                                                          productList[index]
+                                                                              .stock) {
+                                                                        return 'Please enter a number less than current stock';
+                                                                      }
+                                                                      return null;
+                                                                    },
+                                                                    inputFormatters: [
+                                                                      FilteringTextInputFormatter
+                                                                          .digitsOnly
+                                                                    ],
+                                                                    onTextFieldChanged:
+                                                                        (value) {
+                                                                      removedStock =
+                                                                          int.parse(
+                                                                              value);
+                                                                    }),
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                                  spacingSmall),
+                                                          PrimaryButton(
+                                                              onPressed: () {
+                                                                if (_formKey
+                                                                    .currentState!
+                                                                    .validate()) {
+                                                                  context
+                                                                      .read<
+                                                                          InventoryBloc>()
+                                                                      .add(UpdateStock(
+                                                                          updateStockMap: {
+                                                                            "stock_id":
+                                                                                productList[index].stockId,
+                                                                            "stock":
+                                                                                removedStock,
+                                                                            "variant_id":
+                                                                                productList[index].variantId,
+                                                                            "increment":
+                                                                                false
+                                                                          }));
+                                                                  Navigator.pop(
+                                                                      ctx);
+                                                                }
+                                                              },
+                                                              buttonTitle:
+                                                                  'Update')
+                                                        ]))));
+                                      }
+                                    : null,
+                                child: Container(
+                                  height: kCounterContainerSize,
+                                  width: kCounterContainerSize,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: AppColor.saasifyLightPaleGrey),
+                                  ),
+                                  child: Center(
+                                      child: (productList[index].stock != 0)
+                                          ? const Icon(
+                                              Icons.remove,
+                                              size: kGeneralRadius,
+                                            )
+                                          : const SizedBox.shrink()),
+                                ),
+                              ),
+                              SizedBox(
                                 height: kCounterContainerSize,
                                 width: kStockContainerSize,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: AppColor.saasifyLightPaleGrey),
-                                ),
                                 child: Center(
                                     child: Text(
                                         productList[index].stock.toString(),
@@ -282,10 +278,8 @@ class InventoryListDataTable extends StatelessWidget {
                                                 AppColor.saasifyLightPaleGrey),
                                       ),
                                       child: const Center(
-                                          child: Icon(
-                                        Icons.add,
-                                        size: kGeneralRadius,
-                                      ))))
+                                          child: Icon(Icons.add,
+                                              size: kGeneralRadius))))
                             ])))
                   ])))
     ]));

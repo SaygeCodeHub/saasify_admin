@@ -63,12 +63,9 @@ class BillingProductTileBody extends StatelessWidget {
                             Border.all(color: AppColor.saasifyLightPaleGrey)),
                     child: const Center(
                         child: Icon(Icons.remove, size: kGeneralRadius)))),
-            Container(
+            SizedBox(
               height: kCounterContainerSize,
               width: kCounterContainerSize,
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColor.saasifyLightPaleGrey),
-              ),
               child: Center(
                   child: Text(selectedProduct.count.toString(),
                       style: Theme.of(context).textTheme.tiniest)),

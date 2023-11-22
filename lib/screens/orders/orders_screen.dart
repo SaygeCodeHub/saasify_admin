@@ -59,8 +59,7 @@ class OrdersScreen extends StatelessWidget {
                                       title:
                                           StringConstants.kSomethingWentWrong,
                                       message: state.message,
-                                      primaryButtonTitle:
-                                          StringConstants.kUnderstood,
+                                      primaryButtonTitle: StringConstants.kOk,
                                       primaryOnPressed: () {
                                         Navigator.pop(dialogueCtx);
                                       });
@@ -100,8 +99,23 @@ class OrdersScreen extends StatelessWidget {
                                 ]),
                                 const SizedBox(height: spacingStandard),
                                 OrdersListDataTable(
-                                  ordersData: state.fetchOrdersModel,
+                                  ordersData: state.fetchOrdersList,
                                 ),
+                                Visibility(
+                                    visible: state.fetchOrdersList.isEmpty,
+                                    child: Center(
+                                        child: Text(
+                                            StringConstants.kNoDataAvailable,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .tinier
+                                                .copyWith(
+                                                    fontWeight: FontWeight.w500,
+                                                    color: AppColor
+                                                        .saasifyLightGrey)))),
+                                Visibility(
+                                    visible: state.fetchOrdersList.isEmpty,
+                                    child: const Spacer())
                               ],
                             );
                           } else if (state is ErrorFetchingOrders) {

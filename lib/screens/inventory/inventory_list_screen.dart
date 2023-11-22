@@ -60,8 +60,7 @@ class InventoryListScreen extends StatelessWidget {
                                   return CustomAlertDialog(
                                       title: 'Success',
                                       message: state.message,
-                                      primaryButtonTitle:
-                                          StringConstants.kUnderstood,
+                                      primaryButtonTitle: StringConstants.kOk,
                                       primaryOnPressed: () {
                                         Navigator.pop(dialogueCtx);
                                         context
@@ -78,8 +77,7 @@ class InventoryListScreen extends StatelessWidget {
                                       title:
                                           StringConstants.kSomethingWentWrong,
                                       message: state.message,
-                                      primaryButtonTitle:
-                                          StringConstants.kUnderstood,
+                                      primaryButtonTitle: StringConstants.kOk,
                                       primaryOnPressed: () {
                                         Navigator.pop(dialogueCtx);
                                       });

@@ -70,7 +70,7 @@ class AddProductScreen extends StatelessWidget {
                             builder: (context) => CustomAlertDialog(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
-                                primaryButtonTitle: StringConstants.kUnderstood,
+                                primaryButtonTitle: StringConstants.kOk,
                                 checkMarkVisible: false,
                                 primaryOnPressed: () {
                                   Navigator.pop(context);
@@ -128,7 +128,7 @@ class AddProductScreen extends StatelessWidget {
                             builder: (dialogueCtx) => CustomAlertDialog(
                                 title: StringConstants.kNewProductAdded,
                                 message: state.message,
-                                primaryButtonTitle: StringConstants.kUnderstood,
+                                primaryButtonTitle: StringConstants.kOk,
                                 checkMarkVisible: true,
                                 primaryOnPressed: () {
                                   Navigator.pop(dialogueCtx);
@@ -142,7 +142,7 @@ class AddProductScreen extends StatelessWidget {
                             builder: (context) => CustomAlertDialog(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
-                                primaryButtonTitle: StringConstants.kUnderstood,
+                                primaryButtonTitle: StringConstants.kOk,
                                 checkMarkVisible: false,
                                 primaryOnPressed: () {
                                   Navigator.pop(context);
@@ -156,7 +156,7 @@ class AddProductScreen extends StatelessWidget {
                             builder: (context) => CustomAlertDialog(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
-                                primaryButtonTitle: StringConstants.kUnderstood,
+                                primaryButtonTitle: StringConstants.kOk,
                                 checkMarkVisible: false,
                                 primaryOnPressed: () {
                                   Navigator.pop(context);

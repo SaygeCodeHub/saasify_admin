@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/pos/billing_bloc.dart';
 import 'package:saasify/configs/app_color.dart';
@@ -59,7 +60,7 @@ class _ContactTileState extends State<ContactTile> {
                   color: AppColor.saasifyDarkestBlack),
             ),
             const SizedBox(
-              width: spacingXXSmall,
+              width: spacingSmall,
             ),
             Text(
               contactController.text,
@@ -68,19 +69,27 @@ class _ContactTileState extends State<ContactTile> {
                   .xTiniest
                   .copyWith(color: AppColor.saasifyGreyBlue),
             ),
+            const SizedBox(width: spacingXSmall),
             InkWell(
                 onTap: () {
                   setState(() {
                     addedContact = false;
                   });
                 },
-                child: const Icon(Icons.edit, color: AppColor.saasifyGreyBlue))
+                child: const Icon(Icons.mode_edit_outline_outlined,
+                    size: spacingStandard, color: AppColor.saasifyGreyBlue))
           ])
         : Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Expanded(
                 child: Form(
                     key: formKey,
                     child: TextFormField(
+                      inputFormatters: (widget.isContact)
+                          ? <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly
+                            ]
+                          : null,
+                      maxLength: (widget.isContact) ? 10 : null,
                       validator: (widget.isContact)
                           ? (value) {
                               if (value!.isEmpty) {
@@ -93,6 +102,7 @@ class _ContactTileState extends State<ContactTile> {
                             }
                           : null,
                       decoration: InputDecoration(
+                        counterText: "",
                         hintText: (widget.isContact)
                             ? 'Enter Contact no.'
                             : 'Enter Name',

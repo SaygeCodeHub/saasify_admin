@@ -66,8 +66,7 @@ class ProductListScreen extends StatelessWidget {
                                 builder: (ctx) => CustomAlertDialog(
                                       title: StringConstants.kSuccess,
                                       message: state.message,
-                                      primaryButtonTitle:
-                                          StringConstants.kUnderstood,
+                                      primaryButtonTitle: StringConstants.kOk,
                                       checkMarkVisible: false,
                                       primaryOnPressed: () {
                                         context
@@ -86,8 +85,7 @@ class ProductListScreen extends StatelessWidget {
                                       title:
                                           StringConstants.kSomethingWentWrong,
                                       message: state.message,
-                                      primaryButtonTitle:
-                                          StringConstants.kUnderstood,
+                                      primaryButtonTitle: StringConstants.kOk,
                                       checkMarkVisible: false,
                                       primaryOnPressed: () {
                                         Navigator.pop(ctx);
@@ -101,8 +99,7 @@ class ProductListScreen extends StatelessWidget {
                                       title:
                                           StringConstants.kSomethingWentWrong,
                                       message: state.message,
-                                      primaryButtonTitle:
-                                          StringConstants.kUnderstood,
+                                      primaryButtonTitle: StringConstants.kOk,
                                       checkMarkVisible: false,
                                       primaryOnPressed: () {
                                         Navigator.pop(ctx);

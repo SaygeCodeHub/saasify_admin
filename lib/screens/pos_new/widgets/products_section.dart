@@ -44,28 +44,47 @@ class ProductsSection extends StatelessWidget {
                                   horizontal: 16, vertical: 10),
                               borderRadius: BorderRadius.circular(12),
                               icon: const Icon(Icons.keyboard_arrow_down),
-                              value: posData[context
-                                      .read<BillingBloc>()
-                                      .selectedCategoryIndex]
-                                  .categoryName,
+                              value: posData[context.read<BillingBloc>().selectedCategoryIndex]
+                                      .categoryName
+                                      .trim()
+                                      .substring(0, 1)
+                                      .toUpperCase() +
+                                  posData[context.read<BillingBloc>().selectedCategoryIndex]
+                                      .categoryName
+                                      .trim()
+                                      .substring(1)
+                                      .toLowerCase(),
                               items: List.generate(
                                   posData
-                                      .map((e) => e.categoryName)
+                                      .map((e) =>
+                                          e.categoryName.trim().substring(0, 1).toUpperCase() +
+                                          e.categoryName
+                                              .trim()
+                                              .substring(1)
+                                              .toLowerCase())
                                       .toList()
                                       .length,
                                   (index) => DropdownMenuItem(
                                       value: posData
-                                          .map((e) => e.categoryName)
+                                          .map((e) =>
+                                              e.categoryName.trim().substring(0, 1).toUpperCase() +
+                                              e.categoryName.trim().substring(1).toLowerCase())
                                           .toList()[index],
-                                      child: Text(posData
-                                          .map((e) => e.categoryName)
-                                          .toList()[index]))),
+                                      child: Text(posData.map((e) => e.categoryName.trim().substring(0, 1).toUpperCase() + e.categoryName.trim().substring(1).toLowerCase()).toList()[index]))),
                               onChanged: (value) {
                                 context
                                         .read<BillingBloc>()
                                         .selectedCategoryIndex =
                                     posData
-                                        .map((e) => e.categoryName)
+                                        .map((e) =>
+                                            e.categoryName
+                                                .trim()
+                                                .substring(0, 1)
+                                                .toUpperCase() +
+                                            e.categoryName
+                                                .trim()
+                                                .substring(1)
+                                                .toLowerCase())
                                         .toList()
                                         .indexOf(value!);
                                 context.read<BillingBloc>().add(SelectCategory(
@@ -96,7 +115,17 @@ class ProductsSection extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         right: spacingHuge, bottom: spacingLarge),
-                    child: Text(posData[index].categoryName,
+                    child: Text(
+                        posData[index]
+                                .categoryName
+                                .trim()
+                                .substring(0, 1)
+                                .toUpperCase() +
+                            posData[index]
+                                .categoryName
+                                .trim()
+                                .substring(1)
+                                .toLowerCase(),
                         style: Theme.of(context).textTheme.xTiniest.copyWith(
                             fontWeight: FontWeight.w600,
                             color: (index ==

@@ -5,7 +5,8 @@ import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 
 class OrdersListDataTable extends StatelessWidget {
-  final FetchOrdersModel ordersData;
+  final List<OrdersData> ordersData;
+
   const OrdersListDataTable({Key? key, required this.ordersData})
       : super(key: key);
 
@@ -21,73 +22,84 @@ class OrdersListDataTable extends StatelessWidget {
           dataRowMaxHeight: 50,
           columns: [
             DataColumn(
-                label: Text(StringConstants.kOrderNo,
+                label: Expanded(
+              child: Center(
+                child: Text(StringConstants.kOrderNo,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
+              ),
+            )),
             DataColumn(
                 label: Text(StringConstants.kOrderedOn,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Text(StringConstants.kCustomerContact,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Text(StringConstants.kCustomerName,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Text(StringConstants.kModeOfPayment,
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
-                label: Text(StringConstants.kProductAmount,
+                label: Expanded(
+              child: Center(
+                child: Text(StringConstants.kProductAmount,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
+              ),
+            )),
             DataColumn(
-                label: Text(StringConstants.kStatus,
+                label: Text(StringConstants.kPaymentStatus,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)))
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)))
           ],
           rows: List.generate(
-              ordersData.data.length,
+              ordersData.length,
               (index) => DataRow(cells: [
-                    DataCell(Text(ordersData.data[index].orderId.toString(),
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.xxTiniest)),
+                    DataCell(Align(
+                      alignment: Alignment.center,
+                      child: Text(ordersData[index].orderId.toString(),
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.xxTiniest),
+                    )),
                     DataCell(
-                      Text(ordersData.data[index].orderedOn.toString(),
+                      Text(ordersData[index].orderedOn.toString(),
                           style: Theme.of(context).textTheme.xxTiniest),
                     ),
-                    DataCell(Text(
-                        ordersData.data[index].customerContact.toString(),
+                    DataCell(Text(ordersData[index].customerContact.toString(),
                         style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(
-                        ordersData.data[index].customerName.toString(),
+                    DataCell(Text(ordersData[index].customerName.toString(),
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(
-                        ordersData.data[index].modeOfPayment.toString(),
+                    DataCell(Text(ordersData[index].modeOfPayment.toString(),
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(ordersData.data[index].totalAmount.toString(),
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.xxTiniest)),
+                    DataCell(Align(
+                      alignment: Alignment.center,
+                      child: Text(ordersData[index].totalAmount.toString(),
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.xxTiniest),
+                    )),
                     DataCell(Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 4, horizontal: 8),
@@ -101,7 +113,20 @@ class OrdersListDataTable extends StatelessWidget {
                                 size: 8, color: AppColor.saasifyGreen),
                             const SizedBox(width: 6),
                             Text(
-                                ordersData.data[index].paymentStatus.toString(),
+                                ordersData[index]
+                                        .paymentStatus
+                                        .trim()
+                                        .substring(0, 1)
+                                        .toUpperCase()
+                                        .toString() +
+                                    ordersData[index]
+                                        .paymentStatus
+                                        .trim()
+                                        .substring(
+                                          1,
+                                        )
+                                        .toLowerCase()
+                                        .toString(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .xxTiniest

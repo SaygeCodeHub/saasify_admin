@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_dimensions.dart';
+import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-import 'package:saasify/widgets/primary_button.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
 
@@ -23,7 +23,7 @@ class _PaymentDialogueState extends State<PaymentDialogue> {
             borderRadius: BorderRadius.circular(kGeneralRadius)),
         contentPadding: const EdgeInsets.all(spacingXHuge),
         content: SizedBox(
-            height: kDialogueHeight,
+            height: kDialogueWidth,
             width: kDialogueWidth,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -57,11 +57,12 @@ class _PaymentDialogueState extends State<PaymentDialogue> {
                                         color: AppColor.saasifyCementGrey,
                                         borderRadius: BorderRadius.circular(
                                             spacingXMedium)),
-                                    child:
-                                        Center(child: Text(payments[index])))));
-                      })),
-              const SizedBox(height: spacingXMedium),
-              PrimaryButton(onPressed: () {}, buttonTitle: StringConstants.kPay)
+                                    child: Center(
+                                        child: Text(payments[index],
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .tinier)))));
+                      }))
             ])));
   }
 }
