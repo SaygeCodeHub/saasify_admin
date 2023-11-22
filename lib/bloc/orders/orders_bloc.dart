@@ -30,7 +30,7 @@ class OrdersBloc extends Bloc<OrdersEvents, OrdersStates> {
       FetchOrdersModel fetchOrdersModel =
           await _ordersRepository.fetchOrdersList(userId, companyId, branchId);
       if (fetchOrdersModel.status == 200) {
-        emit(FetchedOrders(fetchOrdersModel: fetchOrdersModel));
+        emit(FetchedOrders(fetchOrdersList: fetchOrdersModel.data));
       } else {
         emit(ErrorFetchingOrders(message: fetchOrdersModel.message));
       }
