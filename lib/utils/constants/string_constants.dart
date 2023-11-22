@@ -12,7 +12,7 @@ class StringConstants {
   static const kEnterOtp = 'Enter Otp :)';
   static const kOrderNo = 'Order No';
   static const kOrderedOn = 'Ordered On';
-  static const kStatus = 'Status';
+  static const kPaymentStatus = 'Payment Status';
   static const kProductAmount = 'Total Amount';
   static const kCustomerContact = 'Customer Contact';
   static const kCustomerName = 'Customer Name';
@@ -26,7 +26,7 @@ class StringConstants {
   static const kCategory = 'Category';
   static const kAddCustomer = 'Add Customer';
   static const kProducts = 'Products';
-  static const kOpenTabs = 'Open Tabs';
+  static const kUnsettledTabs = 'Unsettled Tabs';
   static const kInventoryManagement = 'Inventory Management';
   static const kBrand = 'Brand';
   static const kOrders = 'Orders';
@@ -83,7 +83,7 @@ class StringConstants {
   static const kScanTheBarcode =
       'Scan the barcode to add the product or continue adding manually';
   static const kBusinessDomain = 'Business Domain';
-  static const kUnderstood = 'Understood';
+  static const kOk = 'Ok';
   static const kWhatsYourBusinessDomain = "What's your business domain?";
   static const kSomethingWentWrong = "Something went wrong :(";
   static const kNext = 'Next';

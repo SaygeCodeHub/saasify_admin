@@ -38,7 +38,7 @@ class POSScreen extends StatelessWidget {
               context.responsive(
                   TopBar(
                       scaffoldKey: _scaffoldKey,
-                      headingText: StringConstants.kOpenTabs),
+                      headingText: StringConstants.kUnsettledTabs),
                   desktop: const Expanded(
                     child: SideBar(selectedIndex: 2),
                   )),
@@ -53,7 +53,7 @@ class POSScreen extends StatelessWidget {
                             return CustomAlertDialog(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
-                                primaryButtonTitle: StringConstants.kUnderstood,
+                                primaryButtonTitle: StringConstants.kOk,
                                 primaryOnPressed: () {
                                   Navigator.pop(ctx);
                                 });
@@ -78,7 +78,8 @@ class POSScreen extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: spacingMedium,
                                           vertical: spacingLarge),
-                                      child: Text(StringConstants.kOpenTabs,
+                                      child: Text(
+                                          StringConstants.kUnsettledTabs,
                                           style: Theme.of(context)
                                               .textTheme
                                               .xxTiny

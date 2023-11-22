@@ -57,7 +57,7 @@ class AuthenticationScreen extends StatelessWidget {
                           builder: (ctx) => CustomAlertDialog(
                               title: StringConstants.kSomethingWentWrong,
                               message: state.error,
-                              primaryButtonTitle: StringConstants.kUnderstood,
+                              primaryButtonTitle: StringConstants.kOk,
                               checkMarkVisible: false,
                               primaryOnPressed: () {
                                 Navigator.pop(ctx);

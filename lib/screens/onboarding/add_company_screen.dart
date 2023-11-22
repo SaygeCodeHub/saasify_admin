@@ -49,8 +49,7 @@ class CompanyForm extends StatelessWidget {
                                   builder: (context) => CustomAlertDialog(
                                         title: StringConstants.kInformation,
                                         message: "",
-                                        primaryButtonTitle:
-                                            StringConstants.kUnderstood,
+                                        primaryButtonTitle: StringConstants.kOk,
                                         secondaryOnPressed: () {},
                                         checkMarkVisible: false,
                                         primaryOnPressed: () {},
