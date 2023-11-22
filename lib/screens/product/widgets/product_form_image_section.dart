@@ -66,7 +66,7 @@ class FormImageSection extends StatelessWidget {
                           child: CustomAlertDialog(
                               title: StringConstants.kSomethingWentWrong,
                               message: state.message,
-                              primaryButtonTitle: StringConstants.kUnderstood,
+                              primaryButtonTitle: StringConstants.kOk,
                               checkMarkVisible: false,
                               primaryOnPressed: () {
                                 Navigator.pop(ctx);

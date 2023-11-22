@@ -35,32 +35,30 @@ class InventoryListDataTable extends StatelessWidget {
                 label: Text(StringConstants.kName,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kBarcode,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
-              ),
+              child: Text(StringConstants.kBarcode,
+                  style: Theme.of(context)
+                      .textTheme
+                      .xTiniest
+                      .copyWith(fontWeight: FontWeight.w600)),
             )),
             DataColumn(
                 label: Text(StringConstants.kCategory,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500))),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
               child: Center(
                 child: Text(StringConstants.kPrice,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
               ),
             )),
             DataColumn(
@@ -70,8 +68,8 @@ class InventoryListDataTable extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
               ),
             )),
             DataColumn(
@@ -80,8 +78,8 @@ class InventoryListDataTable extends StatelessWidget {
                 child: Text(StringConstants.kStock,
                     style: Theme.of(context)
                         .textTheme
-                        .xxTiniest
-                        .copyWith(fontWeight: FontWeight.w500)),
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
               ),
             ))
           ],
@@ -96,7 +94,7 @@ class InventoryListDataTable extends StatelessWidget {
                     )),
                     DataCell(
                       Align(
-                        alignment: Alignment.center,
+                        alignment: Alignment.centerLeft,
                         child: Text(productList[index].barcode.toString(),
                             style: Theme.of(context).textTheme.xxTiniest),
                       ),
@@ -207,13 +205,9 @@ class InventoryListDataTable extends StatelessWidget {
                                           : const SizedBox.shrink()),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 height: kCounterContainerSize,
                                 width: kStockContainerSize,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: AppColor.saasifyLightPaleGrey),
-                                ),
                                 child: Center(
                                     child: Text(
                                         productList[index].stock.toString(),
@@ -284,10 +278,8 @@ class InventoryListDataTable extends StatelessWidget {
                                                 AppColor.saasifyLightPaleGrey),
                                       ),
                                       child: const Center(
-                                          child: Icon(
-                                        Icons.add,
-                                        size: kGeneralRadius,
-                                      ))))
+                                          child: Icon(Icons.add,
+                                              size: kGeneralRadius))))
                             ])))
                   ])))
     ]));

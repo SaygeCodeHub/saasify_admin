@@ -59,8 +59,7 @@ class OrdersScreen extends StatelessWidget {
                                       title:
                                           StringConstants.kSomethingWentWrong,
                                       message: state.message,
-                                      primaryButtonTitle:
-                                          StringConstants.kUnderstood,
+                                      primaryButtonTitle: StringConstants.kOk,
                                       primaryOnPressed: () {
                                         Navigator.pop(dialogueCtx);
                                       });
