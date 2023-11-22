@@ -16,6 +16,7 @@ import 'package:saasify/screens/product/widgets/product_form_section1.dart';
 import 'package:saasify/screens/product/widgets/product_form_section2.dart';
 import 'package:saasify/screens/product/widgets/product_form_section3.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
+import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/primary_button.dart';
 import 'package:saasify/widgets/secondary_button.dart';
 
@@ -52,16 +53,19 @@ class ProductForm extends StatelessWidget {
                           context, ProductListScreen.routeName);
                     },
                     icon: const Icon(Icons.arrow_back_ios_new)),
-                Text(
-                    (isVariant == true)
-                        ? StringConstants.kAddVariant
-                        : (isEdit)
-                            ? 'Edit Product'
-                            : StringConstants.kAddProduct,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xxTiny
-                        .copyWith(fontWeight: FontWeight.w700)),
+                context.responsive(
+                  const SizedBox.shrink(),
+                  desktop: Text(
+                      (isVariant == true)
+                          ? StringConstants.kAddVariant
+                          : (isEdit)
+                              ? 'Edit Product'
+                              : StringConstants.kAddProduct,
+                      style: Theme.of(context)
+                          .textTheme
+                          .xxTiny
+                          .copyWith(fontWeight: FontWeight.w700)),
+                )
               ],
             ),
             Visibility(

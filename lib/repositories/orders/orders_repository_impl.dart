@@ -3,7 +3,8 @@ import 'orders_repository.dart';
 
 class OrdersRepositoryImpl implements OrdersRepository {
   @override
-  Future<FetchOrdersModel> fetchOrdersList() async {
+  Future<FetchOrdersModel> fetchOrdersList(
+      String userId, String companyId, int branchId) async {
     final response = {
       "status": 200,
       "data": [

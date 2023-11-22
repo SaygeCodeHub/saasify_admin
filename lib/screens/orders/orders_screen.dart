@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/orders/orders_bloc.dart';
+import 'package:saasify/bloc/orders/orders_event.dart';
 import 'package:saasify/bloc/orders/orders_state.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
@@ -8,9 +10,6 @@ import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
-
-import '../../bloc/orders/orders_bloc.dart';
-import '../../bloc/orders/orders_event.dart';
 import '../../configs/app_color.dart';
 import '../../utils/progress_bar.dart';
 import '../../widgets/custom_alert_box.dart';
@@ -29,7 +28,7 @@ class OrdersScreen extends StatelessWidget {
 
     return Scaffold(
         key: _scaffoldKey,
-        drawer: const SideBar(selectedIndex: 5),
+        drawer: const SideBar(selectedIndex: 4),
         body: Flex(
             direction:
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
@@ -39,7 +38,7 @@ class OrdersScreen extends StatelessWidget {
                       scaffoldKey: _scaffoldKey,
                       headingText: StringConstants.kOrders),
                   desktop: const Expanded(
-                    child: SideBar(selectedIndex: 1),
+                    child: SideBar(selectedIndex: 4),
                   )),
               Expanded(
                   flex: 5,

@@ -13,7 +13,7 @@ import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/custom_alert_box.dart';
-import '../../configs/app_color.dart';
+import 'package:saasify/widgets/top_bar.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
 import '../../widgets/sidebar.dart';
@@ -51,24 +51,14 @@ class AddProductScreen extends StatelessWidget {
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
             children: [
               context.responsive(
-                  Container(
-                      color: AppColor.saasifyLightDeepBlue,
-                      child: Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: spacingSmall, horizontal: spacingLarge),
-                          child: IconButton(
-                              onPressed: () {
-                                _scaffoldKey.currentState!.openDrawer();
-                              },
-                              iconSize: 30,
-                              icon: const Icon(Icons.menu,
-                                  color: AppColor.saasifyWhite)),
-                        )
-                      ])),
-                  desktop: const Expanded(
-                    child: SideBar(selectedIndex: 3),
-                  )),
+                  TopBar(
+                      scaffoldKey: _scaffoldKey,
+                      headingText: (isVariant == true)
+                          ? StringConstants.kAddVariant
+                          : (isEdit)
+                              ? 'Edit Product'
+                              : StringConstants.kAddProduct),
+                  desktop: const Expanded(child: SideBar(selectedIndex: 3))),
               Expanded(
                   flex: 5,
                   child: BlocConsumer<ProductBloc, ProductStates>(

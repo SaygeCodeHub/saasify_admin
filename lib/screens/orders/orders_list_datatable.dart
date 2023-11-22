@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-
-import '../../data/models/orders/fetch_orders_model.dart';
 
 class OrdersListDataTable extends StatelessWidget {
   final FetchOrdersModel ordersData;

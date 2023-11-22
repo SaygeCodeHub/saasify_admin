@@ -39,7 +39,7 @@ class InventoryListScreen extends StatelessWidget {
                       scaffoldKey: _scaffoldKey,
                       headingText: StringConstants.kInventoryManagement),
                   desktop: const Expanded(
-                    child: SideBar(selectedIndex: 1),
+                    child: SideBar(selectedIndex: 5),
                   )),
               Expanded(
                   flex: 5,
