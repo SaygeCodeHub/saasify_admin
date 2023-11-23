@@ -69,7 +69,7 @@ class OrderDetailsScreen extends StatelessWidget {
                             const SizedBox(
                               height: spacingMedium,
                             ),
-                            const OrderDetailsProductList()
+                            OrderDetailsProductList(ordersData: ordersData[0])
                           ])))
             ]));
   }

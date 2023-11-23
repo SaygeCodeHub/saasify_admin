@@ -4,10 +4,13 @@ import 'package:saasify/configs/app_theme.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
+import '../../../data/models/orders/fetch_orders_model.dart';
 import '../order_details_list_datatable.dart';
 
 class OrderDetailsProductList extends StatelessWidget {
-  const OrderDetailsProductList({super.key});
+  final OrdersData ordersData;
+
+  const OrderDetailsProductList({super.key, required this.ordersData});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,10 @@ class OrderDetailsProductList extends StatelessWidget {
                               .tiniest
                               .copyWith(fontWeight: FontWeight.w600)),
                       const SizedBox(height: spacingXXSmall),
-                      const Expanded(child: OrderDetailsListDataTable())
+                      Expanded(
+                          child: OrderDetailsListDataTable(
+                        ordersData: ordersData,
+                      ))
                     ]))));
   }
 }
