@@ -34,10 +34,21 @@ class POSScreen extends StatelessWidget {
             direction:
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
             children: [
-              context.responsive(
-                  TopBar(
-                      scaffoldKey: _scaffoldKey,
-                      headingText: StringConstants.kUnsettledTabs),
+              context.responsive(BlocBuilder<BillingBloc, BillingStates>(
+                builder: (context, state) {
+                  if (state is FetchingProductsByCategory ||
+                      state is ErrorFetchingProductsByCategory ||
+                      state is ProductsLoaded) {
+                    return TopBar(scaffoldKey: _scaffoldKey, headingText: '');
+                  } else if (state is LoadDataBaseOrders) {
+                    return TopBar(
+                        scaffoldKey: _scaffoldKey,
+                        headingText: StringConstants.kUnsettledTabs);
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
                   desktop: const Expanded(
                     child: SideBar(selectedIndex: 2),
                   )),
@@ -182,7 +193,11 @@ class POSScreen extends StatelessWidget {
                                                                 children: [
                                                                   InkWell(
                                                                       onTap:
-                                                                          () {},
+                                                                          () {
+                                                                        context
+                                                                            .read<BillingBloc>()
+                                                                            .add(RemovePendingOrder(orderID: state.customerIdList[index]));
+                                                                      },
                                                                       child: const Icon(
                                                                           Icons
                                                                               .close,

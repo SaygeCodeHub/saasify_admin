@@ -35,6 +35,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     on<ExpandBilling>(_expandBilling);
     on<AddOrderToPayLater>(_addOrderToPayLater);
     on<SettleOrder>(_settleOrder);
+    on<RemovePendingOrder>(_removePendingOrder);
   }
 
   FutureOr<void> _loadAllOrders(
@@ -265,5 +266,11 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     } catch (e) {
       emit(ErrorSettlingOrder(message: e.toString()));
     }
+  }
+
+  FutureOr<void> _removePendingOrder(
+      RemovePendingOrder event, Emitter<BillingStates> emit) async {
+    DatabaseUtil.ordersBox.delete(event.orderID);
+    add(LoadAllOrders());
   }
 }
