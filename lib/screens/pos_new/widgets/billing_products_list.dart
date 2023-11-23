@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/pos/billing_bloc.dart';
+import 'package:saasify/bloc/pos/billing_event.dart';
 import 'package:saasify/configs/app_color.dart';
+import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import 'billing_product_tile_body.dart';
 
 class BillingProductsList extends StatelessWidget {
-  final List<CategoryWithProductsDatum> posData;
+  final List<CategoryWithProductsDatum> productsByCategories;
 
-  const BillingProductsList({super.key, required this.posData});
+  const BillingProductsList({super.key, required this.productsByCategories});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: Container(
+        child: Column(
+      children: [
+        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          TextButton(
+              onPressed: () {
+                context.read<BillingBloc>().add(RemoveAllProduct(
+                    productsByCategories: productsByCategories));
+              },
+              child: Text('Clear All',
+                  style: Theme.of(context)
+                      .textTheme
+                      .xxTiniest
+                      .copyWith(color: AppColor.saasifyRed))),
+        ]),
+        Container(
             decoration: BoxDecoration(
                 color: AppColor.saasifyWhite,
                 borderRadius: BorderRadius.circular(kCircularRadius)),
             child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
-                itemCount: context.read<BillingBloc>().selectedProducts.length,
+                itemCount:
+                    context.read<BillingBloc>().customer.productList.length,
                 shrinkWrap: true,
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: spacingXSmall),
@@ -38,7 +55,8 @@ class BillingProductsList extends StatelessWidget {
                           child: Image.network(
                             context
                                 .read<BillingBloc>()
-                                .selectedProducts[index]
+                                .customer
+                                .productList[index]
                                 .product
                                 .variants[0]
                                 .images[0],
@@ -49,10 +67,13 @@ class BillingProductsList extends StatelessWidget {
                             child: BillingProductTileBody(
                           selectedProduct: context
                               .read<BillingBloc>()
-                              .selectedProducts[index],
-                          posData: posData,
+                              .customer
+                              .productList[index],
+                          productsByCategories: productsByCategories,
                         ))
                       ]));
-                })));
+                })),
+      ],
+    ));
   }
 }

@@ -16,9 +16,9 @@ class BillingRepositoryImpl implements BillingRepository {
   @override
   Future<SettleOrderModel> settleOrder(
       String userId, String companyId, int branchId, Map orderMap) async {
-    final response = {"status": 200, "data": {}, "message": "success"};
-    // final response = await ClientServices().post(
-    //     '${ApiConstants.baseUrl}$userId/$companyId/$branchId/settleOrder',orderMap);
+    final response = await ClientServices().post(
+        '${ApiConstants.baseUrl}$userId/$companyId/$branchId/bookOrder',
+        orderMap);
     return SettleOrderModel.fromJson(response);
   }
 }

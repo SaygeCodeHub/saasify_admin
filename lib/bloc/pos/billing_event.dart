@@ -1,6 +1,5 @@
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
-
-import '../../data/models/billing/selected_product_model.dart';
+import 'package:saasify/data/models/billing/selected_product_model.dart';
 
 abstract class BillingEvents {}
 
@@ -44,6 +43,12 @@ class RemoveProduct extends BillingEvents {
   final List<CategoryWithProductsDatum> productsByCategories;
 
   RemoveProduct({required this.productsByCategories, required this.product});
+}
+
+class RemoveAllProduct extends BillingEvents {
+  final List<CategoryWithProductsDatum> productsByCategories;
+
+  RemoveAllProduct({required this.productsByCategories});
 }
 
 class CalculateBill extends BillingEvents {

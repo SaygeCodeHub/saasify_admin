@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/data/customer_cache/customer_cache.dart';
+import 'package:saasify/data/models/billing/bill_model.dart';
+import 'package:saasify/data/models/billing/customer_model.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
+import 'package:saasify/data/models/billing/selected_product_model.dart';
 import 'package:saasify/data/models/billing/settle_order_model.dart';
-import '../../data/models/billing/bill_model.dart';
-import '../../data/models/billing/selected_product_model.dart';
 import '../../di/app_module.dart';
 import '../../repositories/billing/billing_repository.dart';
 import '../../utils/database_util.dart';
@@ -16,13 +15,14 @@ import 'billing_state.dart';
 class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   final CustomerCache _customerCache = getIt<CustomerCache>();
   final BillingRepository _billingRepository = getIt<BillingRepository>();
-  List<SelectedProductModel> selectedProducts = [];
-  String customerContact = '-';
-  String customerName = '-';
   int selectedCategoryIndex = 0;
-  BillModel billDetails = BillModel(itemTotal: 0, total: 0, discount: 0);
   bool billExpanded = false;
   int orderIndex = 1;
+  Customer customer = Customer(
+      customerName: '',
+      customerContact: '',
+      billDetails: BillModel(itemTotal: 0, total: 0, discount: 0),
+      productList: []);
 
   BillingBloc() : super(BillingInitial()) {
     on<LoadAllOrders>(_loadAllOrders);
@@ -31,6 +31,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     on<SelectCategory>(_selectCategory);
     on<SelectProduct>(_selectProduct);
     on<RemoveProduct>(_removeProduct);
+    on<RemoveAllProduct>(_removeAllProduct);
     on<CalculateBill>(_calculateBill);
     on<ExpandBilling>(_expandBilling);
     on<AddOrderToPayLater>(_addOrderToPayLater);
@@ -40,14 +41,21 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
   FutureOr<void> _loadAllOrders(
       LoadAllOrders event, Emitter<BillingStates> emit) async {
+    Map<String, Customer> customerData = {};
+
     List<dynamic> customerIdList = [];
 
     customerIdList = DatabaseUtil.ordersBox.keys.toList();
 
+    for (var id in customerIdList) {
+      customerData['$id'] = DatabaseUtil.ordersBox.get(id);
+    }
+
     if (DatabaseUtil.ordersBox.isEmpty) {
       add(BillingInitialEvent(orderIndex: orderIndex));
     } else {
-      emit(LoadDataBaseOrders(customerIdList: customerIdList));
+      emit(LoadDataBaseOrders(
+          customerIdList: customerIdList, customerData: customerData));
     }
   }
 
@@ -55,15 +63,21 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       BillingInitialEvent event, Emitter<BillingStates> emit) async {
     if (DatabaseUtil.ordersBox.isNotEmpty && event.orderIndex != -1) {
       orderIndex = event.orderIndex;
-      selectedProducts = DatabaseUtil.ordersBox
-          .get(event.orderIndex)["orderItems"]
+      customer.productList = DatabaseUtil.ordersBox
+          .get(event.orderIndex)
+          .productList
           .cast<SelectedProductModel>();
-      billDetails = DatabaseUtil.ordersBox.get(event.orderIndex)["billDetails"];
+      customer.billDetails =
+          DatabaseUtil.ordersBox.get(event.orderIndex).billDetails;
+      customer.customerContact =
+          DatabaseUtil.ordersBox.get(event.orderIndex).customerContact;
+      customer.customerName =
+          DatabaseUtil.ordersBox.get(event.orderIndex).customerName;
     } else {
       orderIndex = DatabaseUtil.ordersBox.length + 1;
       selectedCategoryIndex = 0;
-      selectedProducts = [];
-      billDetails = BillModel(itemTotal: 0, total: 0, discount: 0);
+      customer.productList = [];
+      customer.billDetails = BillModel(itemTotal: 0, total: 0, discount: 0);
     }
 
     add(FetchProductsByCategory());
@@ -98,8 +112,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       emit(ProductsLoaded(
           productsByCategories: data,
           selectedCategoryIndex: selectedCategoryIndex,
-          selectedProducts: selectedProducts,
-          billDetails: billDetails));
+          selectedProducts: customer.productList,
+          billDetails: customer.billDetails));
     } catch (e) {
       emit(ErrorFetchingProductsByCategory(message: e.toString()));
     }
@@ -110,23 +124,23 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     emit(ProductsLoaded(
         selectedCategoryIndex: selectedCategoryIndex,
         productsByCategories: event.productsByCategories,
-        selectedProducts: selectedProducts,
-        billDetails: billDetails));
+        selectedProducts: customer.productList,
+        billDetails: customer.billDetails));
   }
 
   FutureOr<void> _selectProduct(
       SelectProduct event, Emitter<BillingStates> emit) async {
-    if (selectedProducts.isNotEmpty) {
-      if (selectedProducts
+    if (customer.productList.isNotEmpty) {
+      if (customer.productList
           .map((e) => e.product.variants[0].variantId)
           .contains(event.product.variants[event.variantIndex].variantId)) {
-        selectedProducts
+        customer.productList
             .firstWhere((element) =>
                 element.product.variants[0].variantId ==
                 event.product.variants[event.variantIndex].variantId)
             .count++;
       } else {
-        selectedProducts.add(SelectedProductModel(
+        customer.productList.add(SelectedProductModel(
             count: 1,
             product: Product(
                 productId: event.product.productId,
@@ -137,7 +151,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
                 brandId: event.product.brandId)));
       }
     } else {
-      selectedProducts.add(SelectedProductModel(
+      customer.productList.add(SelectedProductModel(
           count: 1,
           product: Product(
               productId: event.product.productId,
@@ -149,60 +163,63 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     }
     add(CalculateBill(
         discount: 10,
-        selectedProducts: selectedProducts,
+        selectedProducts: customer.productList,
         productsByCategories: event.productsByCategories));
   }
 
   FutureOr<void> _removeProduct(
       RemoveProduct event, Emitter<BillingStates> emit) async {
-    if (selectedProducts
+    if (customer.productList
             .firstWhere((element) =>
                 element.product.variants[0].variantId ==
                 event.product.variants[0].variantId)
             .count >
         1) {
-      selectedProducts
+      customer.productList
           .firstWhere(
               (element) => element.product.productId == event.product.productId)
           .count--;
-    } else if (selectedProducts
+    } else if (customer.productList
             .firstWhere((element) =>
                 element.product.productId == event.product.productId)
             .count ==
         1) {
-      selectedProducts.remove(selectedProducts.firstWhere(
+      customer.productList.remove(customer.productList.firstWhere(
           (element) => element.product.productId == event.product.productId));
     }
 
     add(CalculateBill(
         discount: 10,
-        selectedProducts: selectedProducts,
+        selectedProducts: customer.productList,
         productsByCategories: event.productsByCategories));
   }
 
   FutureOr<void> _calculateBill(
       CalculateBill event, Emitter<BillingStates> emit) async {
-    billDetails.itemTotal = 0;
+    customer.billDetails.itemTotal = 0;
 
-    for (var i = 0; i < selectedProducts.length; i++) {
-      billDetails.itemTotal += selectedProducts[i].product.variants[0].cost *
-          selectedProducts[i].count;
+    for (var i = 0; i < customer.productList.length; i++) {
+      customer.billDetails.itemTotal +=
+          customer.productList[i].product.variants[0].cost *
+              customer.productList[i].count;
 
-      billDetails.itemTotal += selectedProducts[i].product.variants[0].cost *
-          selectedProducts[i].product.variants[0].discountPercent *
-          selectedProducts[i].count;
+      customer.billDetails.discount +=
+          customer.productList[i].product.variants[0].cost *
+              customer.productList[i].product.variants[0].discountPercent /
+              100 *
+              customer.productList[i].count;
     }
 
-    billDetails.total = billDetails.itemTotal - billDetails.discount;
+    customer.billDetails.total =
+        customer.billDetails.itemTotal - customer.billDetails.discount;
 
-    DatabaseUtil.ordersBox.put(orderIndex,
-        {"orderItems": selectedProducts, "billDetails": billDetails});
+    DatabaseUtil.ordersBox.put(orderIndex, customer);
 
     emit(ProductsLoaded(
         selectedCategoryIndex: selectedCategoryIndex,
         productsByCategories: event.productsByCategories,
-        selectedProducts: selectedProducts,
-        billDetails: billDetails));
+        selectedProducts: customer.productList,
+        billDetails: customer.billDetails));
   }
 
   FutureOr<void> _expandBilling(
@@ -212,14 +229,13 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     emit(ProductsLoaded(
         selectedCategoryIndex: selectedCategoryIndex,
         productsByCategories: event.productsByCategories,
-        selectedProducts: selectedProducts,
-        billDetails: billDetails));
+        selectedProducts: customer.productList,
+        billDetails: customer.billDetails));
   }
 
   FutureOr<void> _addOrderToPayLater(
       AddOrderToPayLater event, Emitter<BillingStates> emit) async {
-    DatabaseUtil.ordersBox.put(orderIndex,
-        {"orderItems": selectedProducts, "billDetails": billDetails});
+    DatabaseUtil.ordersBox.put(orderIndex, customer);
     add(LoadAllOrders());
   }
 
@@ -233,7 +249,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
       List<Map<String, int>> productList = [];
 
-      for (SelectedProductModel selectProduct in selectedProducts) {
+      for (SelectedProductModel selectProduct in customer.productList) {
         productList.add({
           "variant_id": selectProduct.product.variants[0].variantId,
           "count": selectProduct.count
@@ -242,24 +258,21 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
       Map<String, dynamic> orderMap = {
         "items_ordered": productList,
-        "customer_contact": int.parse(customerContact),
+        "customer_contact": int.parse(customer.customerContact),
         "payment_status": "paid",
-        "mode_of_payment": event.paymentMethod,
-        "customer_name": customerName,
-        "discount_total": billDetails.discount,
-        "total_amount": billDetails.total,
-        "subtotal": billDetails.itemTotal
+        "payment_type": event.paymentMethod,
+        "customer_name": customer.customerName,
+        "discount_total": customer.billDetails.discount,
+        "total_amount": customer.billDetails.total,
+        "subtotal": customer.billDetails.itemTotal
       };
-
-      debugPrint(jsonEncode(orderMap));
 
       SettleOrderModel settleOrderModel = await _billingRepository.settleOrder(
           userId, companyId, branchId, orderMap);
 
       if (settleOrderModel.status == 200) {
         DatabaseUtil.ordersBox.delete(orderIndex);
-        add(LoadAllOrders());
-        emit(OrderSettled());
+        emit(OrderSettled(message: settleOrderModel.message));
       } else {
         emit(ErrorSettlingOrder(message: settleOrderModel.message));
       }
@@ -272,5 +285,15 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       RemovePendingOrder event, Emitter<BillingStates> emit) async {
     DatabaseUtil.ordersBox.delete(event.orderID);
     add(LoadAllOrders());
+  }
+
+  FutureOr<void> _removeAllProduct(
+      RemoveAllProduct event, Emitter<BillingStates> emit) async {
+    customer.productList.clear();
+    emit(ProductsLoaded(
+        billDetails: customer.billDetails,
+        selectedProducts: customer.productList,
+        selectedCategoryIndex: selectedCategoryIndex,
+        productsByCategories: event.productsByCategories));
   }
 }

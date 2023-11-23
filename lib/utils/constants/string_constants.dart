@@ -24,7 +24,7 @@ class StringConstants {
   static const kAddVariant = 'Add Variant';
   static const kNewProductAdded = 'New product added successfully!';
   static const kCategory = 'Category';
-  static const kAddCustomer = 'Add Customer';
+  static const kNewTab = 'New Tab';
   static const kProducts = 'Products';
   static const kUnsettledTabs = 'Unsettled Tabs';
   static const kInventoryManagement = 'Inventory Management';

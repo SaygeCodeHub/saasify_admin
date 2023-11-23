@@ -12,9 +12,9 @@ import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 
 class ProductsSection extends StatelessWidget {
-  const ProductsSection({super.key, required this.posData});
+  const ProductsSection({super.key, required this.productsByCategories});
 
-  final List<CategoryWithProductsDatum> posData;
+  final List<CategoryWithProductsDatum> productsByCategories;
 
   @override
   Widget build(BuildContext context) {
@@ -44,18 +44,20 @@ class ProductsSection extends StatelessWidget {
                                   horizontal: 16, vertical: 10),
                               borderRadius: BorderRadius.circular(12),
                               icon: const Icon(Icons.keyboard_arrow_down),
-                              value: posData[context.read<BillingBloc>().selectedCategoryIndex]
+                              value: productsByCategories[context
+                                          .read<BillingBloc>()
+                                          .selectedCategoryIndex]
                                       .categoryName
                                       .trim()
                                       .substring(0, 1)
                                       .toUpperCase() +
-                                  posData[context.read<BillingBloc>().selectedCategoryIndex]
+                                  productsByCategories[context.read<BillingBloc>().selectedCategoryIndex]
                                       .categoryName
                                       .trim()
                                       .substring(1)
                                       .toLowerCase(),
                               items: List.generate(
-                                  posData
+                                  productsByCategories
                                       .map((e) =>
                                           e.categoryName.trim().substring(0, 1).toUpperCase() +
                                           e.categoryName
@@ -65,17 +67,15 @@ class ProductsSection extends StatelessWidget {
                                       .toList()
                                       .length,
                                   (index) => DropdownMenuItem(
-                                      value: posData
-                                          .map((e) =>
-                                              e.categoryName.trim().substring(0, 1).toUpperCase() +
-                                              e.categoryName.trim().substring(1).toLowerCase())
+                                      value: productsByCategories
+                                          .map((e) => e.categoryName.trim().substring(0, 1).toUpperCase() + e.categoryName.trim().substring(1).toLowerCase())
                                           .toList()[index],
-                                      child: Text(posData.map((e) => e.categoryName.trim().substring(0, 1).toUpperCase() + e.categoryName.trim().substring(1).toLowerCase()).toList()[index]))),
+                                      child: Text(productsByCategories.map((e) => e.categoryName.trim().substring(0, 1).toUpperCase() + e.categoryName.trim().substring(1).toLowerCase()).toList()[index]))),
                               onChanged: (value) {
                                 context
                                         .read<BillingBloc>()
                                         .selectedCategoryIndex =
-                                    posData
+                                    productsByCategories
                                         .map((e) =>
                                             e.categoryName
                                                 .trim()
@@ -88,13 +88,15 @@ class ProductsSection extends StatelessWidget {
                                         .toList()
                                         .indexOf(value!);
                                 context.read<BillingBloc>().add(SelectCategory(
-                                    productsByCategories: posData));
+                                    productsByCategories:
+                                        productsByCategories));
                               })))),
               const SizedBox(width: kGeneralButtonHeight),
               Expanded(
-                flex: context.read<BillingBloc>().selectedProducts.isNotEmpty
-                    ? 3
-                    : 5,
+                flex:
+                    context.read<BillingBloc>().customer.productList.isNotEmpty
+                        ? 3
+                        : 5,
                 child: CustomTextField(
                     hintText: StringConstants.kSearchProduct,
                     onTextFieldChanged: (value) {}),
@@ -104,24 +106,23 @@ class ProductsSection extends StatelessWidget {
           const SizedBox(height: spacingLarger),
           Wrap(
               direction: Axis.horizontal,
-              children: List.generate(posData.length, (index) {
+              children: List.generate(productsByCategories.length, (index) {
                 return InkWell(
                   onTap: () {
                     context.read<BillingBloc>().selectedCategoryIndex = index;
-                    context
-                        .read<BillingBloc>()
-                        .add(SelectCategory(productsByCategories: posData));
+                    context.read<BillingBloc>().add(SelectCategory(
+                        productsByCategories: productsByCategories));
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(
                         right: spacingHuge, bottom: spacingLarge),
                     child: Text(
-                        posData[index]
+                        productsByCategories[index]
                                 .categoryName
                                 .trim()
                                 .substring(0, 1)
                                 .toUpperCase() +
-                            posData[index]
+                            productsByCategories[index]
                                 .categoryName
                                 .trim()
                                 .substring(1)
@@ -145,10 +146,11 @@ class ProductsSection extends StatelessWidget {
               })),
           const Divider(),
           const SizedBox(height: kGeneralButtonHeight),
-          (posData[context.read<BillingBloc>().selectedCategoryIndex]
+          (productsByCategories[
+                      context.read<BillingBloc>().selectedCategoryIndex]
                   .products
                   .isNotEmpty)
-              ? ProductGrid(posData: posData)
+              ? ProductGrid(productsByCategories: productsByCategories)
               : Expanded(
                   child: Center(
                       child: Text(StringConstants.kNoDataAvailable,

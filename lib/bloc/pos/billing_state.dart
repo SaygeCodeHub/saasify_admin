@@ -1,7 +1,7 @@
+import 'package:saasify/data/models/billing/bill_model.dart';
+import 'package:saasify/data/models/billing/customer_model.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
-
-import '../../data/models/billing/selected_product_model.dart';
-import '../../data/models/billing/bill_model.dart';
+import 'package:saasify/data/models/billing/selected_product_model.dart';
 
 abstract class BillingStates {}
 
@@ -30,13 +30,19 @@ class ProductsLoaded extends BillingStates {
 
 class LoadDataBaseOrders extends BillingStates {
   List<dynamic> customerIdList;
+  Map<String, Customer> customerData;
 
-  LoadDataBaseOrders({required this.customerIdList});
+  LoadDataBaseOrders(
+      {required this.customerIdList, required this.customerData});
 }
 
 class SettlingOrder extends BillingStates {}
 
-class OrderSettled extends BillingStates {}
+class OrderSettled extends BillingStates {
+  final String message;
+
+  OrderSettled({required this.message});
+}
 
 class ErrorSettlingOrder extends BillingStates {
   final String message;

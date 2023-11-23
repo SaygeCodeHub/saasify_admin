@@ -10,6 +10,7 @@ import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/bloc/upload/upload_bloc.dart';
 import 'package:saasify/configs/app_route.dart';
 import 'package:saasify/data/models/billing/bill_model.dart';
+import 'package:saasify/data/models/billing/customer_model.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import 'package:saasify/data/models/billing/selected_product_model.dart';
 import 'package:saasify/firebase_options.dart';
@@ -60,9 +61,11 @@ _initApp() async {
   if (!Hive.isAdapterRegistered(4)) {
     Hive.registerAdapter(CategoryWithProductsDatumAdapter());
   }
+  if (!Hive.isAdapterRegistered(5)) {
+    Hive.registerAdapter(CustomerAdapter());
+  }
   DatabaseUtil.ordersBox = await Hive.openBox(HiveKeys.ordersBox);
   DatabaseUtil.products = await Hive.openBox(HiveKeys.products);
-  DatabaseUtil.companyDetails = await Hive.openBox(HiveKeys.companyDetails);
   DatabaseUtil.completedOrdersBox =
       await Hive.openBox(HiveKeys.completedOrdersBox);
 }

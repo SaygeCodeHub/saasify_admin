@@ -10,10 +10,7 @@ import '../../../widgets/primary_button.dart';
 import 'payment_dialogue.dart';
 
 class BillingSectionFooter extends StatelessWidget {
-  final GlobalKey<FormState> _formKey;
-
-  const BillingSectionFooter({super.key, required GlobalKey<FormState> formKey})
-      : _formKey = formKey;
+  const BillingSectionFooter({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +18,13 @@ class BillingSectionFooter extends StatelessWidget {
       Center(
           child: InkWell(
               onTap: () {
-                context.read<BillingBloc>().add(AddOrderToPayLater());
+                if (context.read<BillingBloc>().customer.customerContact !=
+                    '') {
+                  context.read<BillingBloc>().add(AddOrderToPayLater());
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Please Add Contact')));
+                }
               },
               child: Text(
                 StringConstants.kPayLater,
@@ -33,16 +36,13 @@ class BillingSectionFooter extends StatelessWidget {
       const SizedBox(height: spacingMedium),
       PrimaryButton(
         onPressed: () {
-          if (_formKey.currentState != null) {
-            if (_formKey.currentState!.validate()) {
-              showDialog(
-                  context: context,
-                  builder: (context) => const PaymentDialogue());
-            }
-          } else {
+          if (context.read<BillingBloc>().customer.customerContact != '') {
             showDialog(
                 context: context,
                 builder: (context) => const PaymentDialogue());
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Please Add Contact')));
           }
         },
         buttonTitle: StringConstants.kSettleBill,

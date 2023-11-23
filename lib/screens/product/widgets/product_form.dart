@@ -17,6 +17,7 @@ import 'package:saasify/screens/product/widgets/product_form_section2.dart';
 import 'package:saasify/screens/product/widgets/product_form_section3.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/responsive.dart';
+import 'package:saasify/widgets/custom_alert_box.dart';
 import 'package:saasify/widgets/primary_button.dart';
 import 'package:saasify/widgets/secondary_button.dart';
 
@@ -49,8 +50,22 @@ class ProductForm extends StatelessWidget {
               children: [
                 IconButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, ProductListScreen.routeName);
+                      showDialog(
+                          context: context,
+                          builder: (context) => CustomAlertDialog(
+                                title: StringConstants.kWarning,
+                                message: 'Do you want to discard the changes',
+                                primaryButtonTitle: StringConstants.kConfirm,
+                                primaryOnPressed: () {
+                                  Navigator.pop(context);
+                                  Navigator.pushReplacementNamed(
+                                      context, ProductListScreen.routeName);
+                                },
+                                secondaryButtonTitle: StringConstants.kCancel,
+                                secondaryOnPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ));
                     },
                     icon: const Icon(Icons.arrow_back_ios_new)),
                 context.responsive(

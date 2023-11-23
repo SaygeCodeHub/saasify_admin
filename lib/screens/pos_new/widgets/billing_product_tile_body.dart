@@ -11,10 +11,12 @@ import '../../../configs/app_spacing.dart';
 
 class BillingProductTileBody extends StatelessWidget {
   final SelectedProductModel selectedProduct;
-  final List<CategoryWithProductsDatum> posData;
+  final List<CategoryWithProductsDatum> productsByCategories;
 
   const BillingProductTileBody(
-      {super.key, required this.selectedProduct, required this.posData});
+      {super.key,
+      required this.selectedProduct,
+      required this.productsByCategories});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class BillingProductTileBody extends StatelessWidget {
             InkWell(
                 onTap: () {
                   context.read<BillingBloc>().add(RemoveProduct(
-                      productsByCategories: posData,
+                      productsByCategories: productsByCategories,
                       product: selectedProduct.product));
                 },
                 child: Container(
@@ -74,7 +76,7 @@ class BillingProductTileBody extends StatelessWidget {
                 onTap: () {
                   context.read<BillingBloc>().add(SelectProduct(
                       variantIndex: 0,
-                      productsByCategories: posData,
+                      productsByCategories: productsByCategories,
                       product: selectedProduct.product));
                 },
                 child: Container(

@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/pos/billing_bloc.dart';
+import 'package:saasify/bloc/pos/billing_event.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
 
-class PaymentDialogue extends StatefulWidget {
+class PaymentDialogue extends StatelessWidget {
   const PaymentDialogue({super.key});
 
   @override
-  State<PaymentDialogue> createState() => _PaymentDialogueState();
-}
-
-class _PaymentDialogueState extends State<PaymentDialogue> {
-  List payments = ["Bank Card", "UPI", "Card", "Other"];
-  String selectedPayment = '';
-
-  @override
   Widget build(BuildContext context) {
+    final List payments = ["Bank Card", "UPI", "Card", "Other"];
     return AlertDialog(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(kGeneralRadius)),
@@ -48,9 +44,9 @@ class _PaymentDialogueState extends State<PaymentDialogue> {
                             padding: const EdgeInsets.all(spacingXMedium),
                             child: InkWell(
                                 onTap: () {
-                                  setState(() {
-                                    selectedPayment = payments[index];
-                                  });
+                                  context.read<BillingBloc>().add(SettleOrder(
+                                      paymentMethod: payments[index]));
+                                  Navigator.pop(context);
                                 },
                                 child: Container(
                                     decoration: BoxDecoration(

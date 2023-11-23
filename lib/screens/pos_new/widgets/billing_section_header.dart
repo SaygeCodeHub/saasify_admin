@@ -19,8 +19,6 @@ class BillingSectionHeader extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       ContactTile(isContact: true, formKey: _formKey),
       const SizedBox(height: spacingSmall),
-      const ContactTile(isContact: false),
-      const SizedBox(height: spacingStandard),
       const Divider(color: AppColor.saasifyPaleGrey, thickness: 1)
     ]);
   }
@@ -28,8 +26,8 @@ class BillingSectionHeader extends StatelessWidget {
 
 class ContactTile extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
-
   final bool isContact;
+
   const ContactTile({super.key, required this.isContact, this.formKey});
 
   @override
@@ -39,10 +37,13 @@ class ContactTile extends StatefulWidget {
 class _ContactTileState extends State<ContactTile> {
   late GlobalKey<FormState> formKey;
   TextEditingController contactController = TextEditingController();
-  bool addedContact = false;
+  static bool addedContact = false;
 
   @override
   void initState() {
+    addedContact = context.read<BillingBloc>().customer.customerContact != '';
+    contactController.text =
+        context.read<BillingBloc>().customer.customerContact;
     formKey = widget.formKey ?? GlobalKey<FormState>();
     super.initState();
   }
@@ -50,34 +51,51 @@ class _ContactTileState extends State<ContactTile> {
   @override
   Widget build(BuildContext context) {
     return (addedContact)
-        ? Row(children: [
-            Text(
-              (widget.isContact)
-                  ? StringConstants.kMembershipNO
-                  : StringConstants.kCustomerName,
-              style: Theme.of(context).textTheme.xTiniest.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: AppColor.saasifyDarkestBlack),
-            ),
-            const SizedBox(
-              width: spacingSmall,
-            ),
-            Text(
-              contactController.text,
-              style: Theme.of(context)
-                  .textTheme
-                  .xTiniest
-                  .copyWith(color: AppColor.saasifyGreyBlue),
-            ),
-            const SizedBox(width: spacingXSmall),
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    addedContact = false;
-                  });
-                },
-                child: const Icon(Icons.mode_edit_outline_outlined,
-                    size: spacingStandard, color: AppColor.saasifyGreyBlue))
+        ? Column(children: [
+            Row(children: [
+              Text(
+                StringConstants.kMembershipNO,
+                style: Theme.of(context).textTheme.xTiniest.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColor.saasifyDarkestBlack),
+              ),
+              const SizedBox(width: spacingSmall),
+              Text(
+                contactController.text,
+                style: Theme.of(context)
+                    .textTheme
+                    .xTiniest
+                    .copyWith(color: AppColor.saasifyGreyBlue),
+              ),
+              const SizedBox(width: spacingXSmall),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      context.read<BillingBloc>().customer.customerContact = '';
+                      context.read<BillingBloc>().customer.customerName = '';
+                      addedContact = false;
+                    });
+                  },
+                  child: const Icon(Icons.mode_edit_outline_outlined,
+                      size: spacingStandard, color: AppColor.saasifyGreyBlue))
+            ]),
+            const SizedBox(height: spacingXXSmall),
+            Row(children: [
+              Text(
+                StringConstants.kCustomerName,
+                style: Theme.of(context).textTheme.xTiniest.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColor.saasifyDarkestBlack),
+              ),
+              const SizedBox(width: spacingSmall),
+              Text(
+                context.read<BillingBloc>().customer.customerName,
+                style: Theme.of(context)
+                    .textTheme
+                    .xTiniest
+                    .copyWith(color: AppColor.saasifyGreyBlue),
+              )
+            ])
           ])
         : Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Expanded(
@@ -89,46 +107,33 @@ class _ContactTileState extends State<ContactTile> {
                               FilteringTextInputFormatter.digitsOnly
                             ]
                           : null,
-                      maxLength: (widget.isContact) ? 10 : null,
-                      validator: (widget.isContact)
-                          ? (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter Contact no.';
-                              }
-                              if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
-                                return "Please Enter a valid Phone No.";
-                              }
-                              return null;
-                            }
-                          : null,
-                      decoration: InputDecoration(
-                        counterText: "",
-                        hintText: (widget.isContact)
-                            ? 'Enter Contact no.'
-                            : 'Enter Name',
-                      ),
+                      maxLength: 10,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter Contact no.';
+                        }
+                        if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
+                          return "Please Enter a valid Phone No.";
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                          counterText: '', hintText: 'Enter Contact no.'),
                       controller: contactController,
                     ))),
-            TextButton(
+            IconButton(
                 onPressed: () {
                   setState(() {
                     if (formKey.currentState!.validate()) {
-                      (widget.isContact)
-                          ? context.read<BillingBloc>().customerContact =
-                              contactController.text
-                          : context.read<BillingBloc>().customerName =
-                              contactController.text;
+                      context.read<BillingBloc>().customer.customerContact =
+                          contactController.text;
+                      context.read<BillingBloc>().customer.customerName =
+                          'Customer';
                       addedContact = true;
                     }
                   });
                 },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: spacingSmall),
-                  child: Text("Add",
-                      style: Theme.of(context).textTheme.tiniest.copyWith(
-                          color: AppColor.saasifyLightDeepBlue,
-                          decoration: TextDecoration.underline)),
-                ))
+                icon: const Icon(Icons.search))
           ]);
   }
 }

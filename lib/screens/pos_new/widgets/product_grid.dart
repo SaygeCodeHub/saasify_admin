@@ -10,22 +10,25 @@ import '../../../configs/app_spacing.dart';
 class ProductGrid extends StatelessWidget {
   const ProductGrid({
     super.key,
-    required this.posData,
+    required this.productsByCategories,
   });
 
-  final List<CategoryWithProductsDatum> posData;
+  final List<CategoryWithProductsDatum> productsByCategories;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
         physics: const BouncingScrollPhysics(),
-        itemCount: posData[context.read<BillingBloc>().selectedCategoryIndex]
+        itemCount: productsByCategories[
+                context.read<BillingBloc>().selectedCategoryIndex]
             .products
             .length,
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount:
-                context.read<BillingBloc>().selectedProducts.isNotEmpty ? 5 : 7,
+                context.read<BillingBloc>().customer.productList.isNotEmpty
+                    ? 5
+                    : 7,
             childAspectRatio: 172 / 146),
         itemBuilder: (context, index) {
           return Padding(
@@ -35,7 +38,8 @@ class ProductGrid extends StatelessWidget {
                     showDialog(
                         context: context,
                         builder: (context) => VariantDialogue(
-                            posData: posData, productIndex: index));
+                            productsByCategories: productsByCategories,
+                            productIndex: index));
                   },
                   child: Container(
                       height: spacingXXXXHuge,
@@ -47,7 +51,7 @@ class ProductGrid extends StatelessWidget {
                       child: Column(children: [
                         Expanded(
                             child: Image.network(
-                                posData[context
+                                productsByCategories[context
                                         .read<BillingBloc>()
                                         .selectedCategoryIndex]
                                     .products[index]
@@ -57,7 +61,7 @@ class ProductGrid extends StatelessWidget {
                         const SizedBox(height: spacingXSmall),
                         Center(
                             child: Text(
-                                posData[context
+                                productsByCategories[context
                                         .read<BillingBloc>()
                                         .selectedCategoryIndex]
                                     .products[index]
@@ -68,7 +72,7 @@ class ProductGrid extends StatelessWidget {
                                 maxLines: 2)),
                         const SizedBox(height: spacingXSmall),
                         Text(
-                            posData[context
+                            productsByCategories[context
                                     .read<BillingBloc>()
                                     .selectedCategoryIndex]
                                 .products[index]

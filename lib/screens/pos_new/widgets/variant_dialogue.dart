@@ -12,12 +12,12 @@ import '../../../configs/app_spacing.dart';
 class VariantDialogue extends StatelessWidget {
   const VariantDialogue({
     super.key,
-    required this.posData,
+    required this.productsByCategories,
     required this.productIndex,
   });
 
   final int productIndex;
-  final List<CategoryWithProductsDatum> posData;
+  final List<CategoryWithProductsDatum> productsByCategories;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class VariantDialogue extends StatelessWidget {
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, childAspectRatio: 1.2),
-                          itemCount: posData[context
+                          itemCount: productsByCategories[context
                                   .read<BillingBloc>()
                                   .selectedCategoryIndex]
                               .products[productIndex]
@@ -62,10 +62,12 @@ class VariantDialogue extends StatelessWidget {
                                     context.read<BillingBloc>().add(
                                         SelectProduct(
                                             variantIndex: index,
-                                            productsByCategories: posData,
-                                            product: posData[context
-                                                    .read<BillingBloc>()
-                                                    .selectedCategoryIndex]
+                                            productsByCategories:
+                                                productsByCategories,
+                                            product: productsByCategories[
+                                                    context
+                                                        .read<BillingBloc>()
+                                                        .selectedCategoryIndex]
                                                 .products[productIndex]));
                                     Navigator.pop(context);
                                   },
@@ -82,13 +84,13 @@ class VariantDialogue extends StatelessWidget {
                                             child: Padding(
                                               padding: const EdgeInsets.all(
                                                   spacingSmall),
-                                              child: Image.network(posData[
-                                                      context
+                                              child: Image.network(
+                                                  productsByCategories[context
                                                           .read<BillingBloc>()
                                                           .selectedCategoryIndex]
-                                                  .products[productIndex]
-                                                  .variants[index]
-                                                  .images[0]),
+                                                      .products[productIndex]
+                                                      .variants[index]
+                                                      .images[0]),
                                             ),
                                           ),
                                           const SizedBox(height: spacingXSmall),
@@ -98,7 +100,7 @@ class VariantDialogue extends StatelessWidget {
                                                       MainAxisAlignment.center,
                                                   children: [
                                                 Text(
-                                                    posData[context
+                                                    productsByCategories[context
                                                             .read<BillingBloc>()
                                                             .selectedCategoryIndex]
                                                         .products[productIndex]
@@ -115,7 +117,7 @@ class VariantDialogue extends StatelessWidget {
                                                 const SizedBox(
                                                     width: spacingXSmall),
                                                 Text(
-                                                    posData[context
+                                                    productsByCategories[context
                                                             .read<BillingBloc>()
                                                             .selectedCategoryIndex]
                                                         .products[productIndex]
@@ -132,7 +134,7 @@ class VariantDialogue extends StatelessWidget {
                                               ])),
                                           const SizedBox(height: spacingXSmall),
                                           Text(
-                                              '₹ ${posData[context.read<BillingBloc>().selectedCategoryIndex].products[productIndex].variants[index].cost.toString()}',
+                                              '₹ ${productsByCategories[context.read<BillingBloc>().selectedCategoryIndex].products[productIndex].variants[index].cost.toString()}',
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.center,
