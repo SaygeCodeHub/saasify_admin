@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
 
+import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
 import '../../data/models/orders/fetch_orders_model.dart';
 import '../../utils/constants/string_constants.dart';
@@ -52,8 +53,8 @@ class OrderDetailsListDataTable extends StatelessWidget {
                         child: Row(
                           children: [
                             SizedBox(
-                                height: 25,
-                                width: 25,
+                                height: kProductImageHeight,
+                                width: kProductImageWidth,
                                 child: Image.network(ordersData
                                     .itemsOrdered[index].images[0]
                                     .toString())),

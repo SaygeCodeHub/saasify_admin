@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
 
 import '../../../configs/app_color.dart';
+import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../data/models/orders/fetch_orders_model.dart';
 
@@ -17,7 +18,7 @@ class OrderInfoWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const CircleAvatar(
-            radius: 25,
+            radius: kAvatarRadius,
             backgroundColor: AppColor.saasifyLightestPaleGrey,
             child: Icon(
               Icons.shopping_cart_outlined,

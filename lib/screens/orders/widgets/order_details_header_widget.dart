@@ -44,9 +44,11 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                               const SizedBox(height: spacingXXSmall),
                               Container(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 4, horizontal: 8),
+                                      vertical: spacingXSmall,
+                                      horizontal: spacingXXSmall),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
+                                      borderRadius:
+                                          BorderRadius.circular(kGeneralRadius),
                                       color: AppColor.saasifyLighterGreen),
                                   child: Text(ordersData.paymentStatus,
                                       style: Theme.of(context)
