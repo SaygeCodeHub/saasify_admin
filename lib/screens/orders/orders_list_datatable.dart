@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/orders/fetch_orders_model.dart';
@@ -90,7 +91,9 @@ class OrdersListDataTable extends StatelessWidget {
                               style: Theme.of(context).textTheme.xxTiniest),
                         )),
                         DataCell(
-                          Text(ordersData[index].orderedOn.toString(),
+                          Text(
+                              DateFormat('dd MMM yyyy')
+                                  .format(ordersData[index].orderDate),
                               style: Theme.of(context).textTheme.xxTiniest),
                         ),
                         DataCell(Text(
@@ -99,8 +102,7 @@ class OrdersListDataTable extends StatelessWidget {
                         DataCell(Text(ordersData[index].customerName.toString(),
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.xxTiniest)),
-                        DataCell(Text(
-                            ordersData[index].modeOfPayment.toString(),
+                        DataCell(Text(ordersData[index].paymentType.toString(),
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.xxTiniest)),
                         DataCell(Align(
