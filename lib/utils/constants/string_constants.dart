@@ -12,6 +12,7 @@ class StringConstants {
   static const kEnterOtp = 'Enter Otp :)';
   static const kOrderNo = 'Order No';
   static const kOrderedOn = 'Ordered On';
+  static const kUnitPrice = 'Unit Price';
   static const kPaymentStatus = 'Payment Status';
   static const kProductAmount = 'Total Amount';
   static const kCustomerContact = 'Customer Contact';
@@ -30,6 +31,7 @@ class StringConstants {
   static const kInventoryManagement = 'Inventory Management';
   static const kBrand = 'Brand';
   static const kOrders = 'Orders';
+  static const kOrderDetails = 'Order Details';
   static const kBarcode = 'Barcode';
   static const kProductId = 'ProductId';
   static const kSettleBill = 'Settle Bill';
