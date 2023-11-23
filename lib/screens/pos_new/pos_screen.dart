@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/screens/pos_new/widgets/billing_section.dart';
 import 'package:saasify/screens/pos_new/widgets/unsettled_tabs.dart';
-import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/custom_alert_box.dart';
@@ -107,11 +108,7 @@ class POSScreen extends StatelessWidget {
                     if (state is FetchingProductsByCategory) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is LoadDataBaseOrders) {
-                      if (DatabaseUtil.ordersBox.isEmpty) {
-                        context.read<BillingBloc>().add(BillingInitialEvent(
-                            orderIndex:
-                                context.read<BillingBloc>().orderIndex));
-                      }
+                      log(state.customerIdList.toString());
                       return UnsettledTabs(
                           customerIdList: state.customerIdList,
                           customerData: state.customerData);

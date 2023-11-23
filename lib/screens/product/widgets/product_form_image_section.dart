@@ -62,17 +62,16 @@ class FormImageSection extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (context) => Expanded(
-                          child: CustomAlertDialog(
-                              title: StringConstants.kSomethingWentWrong,
-                              message: state.message,
-                              primaryButtonTitle: StringConstants.kOk,
-                              checkMarkVisible: false,
-                              primaryOnPressed: () {
-                                Navigator.pop(context);
-                                Navigator.pushReplacementNamed(
-                                    context, ProductListScreen.routeName);
-                              }),
-                        ));
+                        child: CustomAlertDialog(
+                            title: StringConstants.kSomethingWentWrong,
+                            message: state.message,
+                            primaryButtonTitle: StringConstants.kOk,
+                            checkMarkVisible: false,
+                            primaryOnPressed: () {
+                              Navigator.pop(context);
+                              Navigator.pushReplacementNamed(
+                                  context, ProductListScreen.routeName);
+                            })));
               }
             },
             buildWhen: (prev, curr) {
@@ -142,10 +141,14 @@ class FormImageSection extends StatelessWidget {
                             context.read<UploadBloc>().add(PickImage());
                           },
                           child: Container(
-                              decoration: BoxDecoration(
-                                  color: AppColor.saasifyLighterGrey,
-                                  borderRadius:
-                                      BorderRadius.circular(spacingSmall))));
+                            decoration: BoxDecoration(
+                                color: AppColor.saasifyLighterGrey,
+                                borderRadius:
+                                    BorderRadius.circular(spacingSmall)),
+                            child: const Center(
+                                child: Icon(Icons.file_download_outlined,
+                                    size: 50, color: AppColor.saasifyGrey)),
+                          ));
                     });
               }
               if (state is NoImage || state is ImageCouldNotPick) {
@@ -171,10 +174,15 @@ class FormImageSection extends StatelessWidget {
                                   context.read<UploadBloc>().add(PickImage());
                                 },
                                 child: Container(
-                                    decoration: BoxDecoration(
-                                        color: AppColor.saasifyLighterGrey,
-                                        borderRadius: BorderRadius.circular(
-                                            spacingSmall))));
+                                  decoration: BoxDecoration(
+                                      color: AppColor.saasifyLighterGrey,
+                                      borderRadius:
+                                          BorderRadius.circular(spacingSmall)),
+                                  child: const Center(
+                                      child: Icon(Icons.file_download_outlined,
+                                          size: 50,
+                                          color: AppColor.saasifyGrey)),
+                                ));
                           }),
                     ),
                     const SizedBox(height: spacingSmall),

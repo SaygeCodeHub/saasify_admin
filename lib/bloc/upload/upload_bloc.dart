@@ -36,7 +36,7 @@ class UploadBloc extends Bloc<UploadEvents, UploadStates> {
           }
           displayImageList.addAll(pickedImageList);
           emit(ImagePicked());
-        } else {
+        } else if (displayImageList.isEmpty) {
           emit(ImageCouldNotPick());
         }
       }

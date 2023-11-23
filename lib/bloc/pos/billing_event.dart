@@ -8,7 +8,7 @@ class FetchProductsByCategory extends BillingEvents {}
 class LoadAllOrders extends BillingEvents {}
 
 class BillingInitialEvent extends BillingEvents {
-  int orderIndex;
+  String orderIndex;
 
   BillingInitialEvent({required this.orderIndex});
 }

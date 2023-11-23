@@ -17,7 +17,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   final BillingRepository _billingRepository = getIt<BillingRepository>();
   int selectedCategoryIndex = 0;
   bool billExpanded = false;
-  int orderIndex = 1;
+  String orderId = '';
   Customer customer = Customer(
       customerName: '',
       customerContact: '',
@@ -43,16 +43,17 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       LoadAllOrders event, Emitter<BillingStates> emit) async {
     Map<String, Customer> customerData = {};
 
-    List<dynamic> customerIdList = [];
+    List<String> customerIdList = [];
 
-    customerIdList = DatabaseUtil.ordersBox.keys.toList();
+    customerIdList = DatabaseUtil.ordersBox.keys.toList().cast<String>();
 
     for (var id in customerIdList) {
-      customerData['$id'] = DatabaseUtil.ordersBox.get(id);
+      customerData[id] = DatabaseUtil.ordersBox.get(id);
     }
 
     if (DatabaseUtil.ordersBox.isEmpty) {
-      add(BillingInitialEvent(orderIndex: orderIndex));
+      add(BillingInitialEvent(
+          orderIndex: DateTime.now().millisecondsSinceEpoch.toString()));
     } else {
       emit(LoadDataBaseOrders(
           customerIdList: customerIdList, customerData: customerData));
@@ -61,8 +62,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
   FutureOr<void> _billingInitialEvent(
       BillingInitialEvent event, Emitter<BillingStates> emit) async {
-    if (DatabaseUtil.ordersBox.isNotEmpty && event.orderIndex != -1) {
-      orderIndex = event.orderIndex;
+    if (DatabaseUtil.ordersBox.isNotEmpty && event.orderIndex != '-1') {
+      orderId = event.orderIndex;
       customer.productList = DatabaseUtil.ordersBox
           .get(event.orderIndex)
           .productList
@@ -74,7 +75,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       customer.customerName =
           DatabaseUtil.ordersBox.get(event.orderIndex).customerName;
     } else {
-      orderIndex = DatabaseUtil.ordersBox.length + 1;
+      orderId = DateTime.now().millisecondsSinceEpoch.toString();
       selectedCategoryIndex = 0;
       customer.productList = [];
       customer.billDetails = BillModel(itemTotal: 0, total: 0, discount: 0);
@@ -213,7 +214,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     customer.billDetails.total =
         customer.billDetails.itemTotal - customer.billDetails.discount;
 
-    DatabaseUtil.ordersBox.put(orderIndex, customer);
+    DatabaseUtil.ordersBox.put(orderId, customer);
 
     emit(ProductsLoaded(
         selectedCategoryIndex: selectedCategoryIndex,
@@ -235,7 +236,12 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
   FutureOr<void> _addOrderToPayLater(
       AddOrderToPayLater event, Emitter<BillingStates> emit) async {
-    DatabaseUtil.ordersBox.put(orderIndex, customer);
+    DatabaseUtil.ordersBox.put(orderId, customer);
+    customer = Customer(
+        customerName: '',
+        customerContact: '',
+        billDetails: BillModel(itemTotal: 0, total: 0, discount: 0),
+        productList: []);
     add(LoadAllOrders());
   }
 
@@ -271,7 +277,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
           userId, companyId, branchId, orderMap);
 
       if (settleOrderModel.status == 200) {
-        DatabaseUtil.ordersBox.delete(orderIndex);
+        DatabaseUtil.ordersBox.delete(orderId);
         emit(OrderSettled(message: settleOrderModel.message));
       } else {
         emit(ErrorSettlingOrder(message: settleOrderModel.message));

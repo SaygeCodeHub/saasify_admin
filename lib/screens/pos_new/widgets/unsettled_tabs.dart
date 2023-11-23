@@ -9,6 +9,7 @@ import 'package:saasify/data/models/billing/customer_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/custom_alert_box.dart';
+import 'package:saasify/widgets/primary_button.dart';
 
 class UnsettledTabs extends StatelessWidget {
   final List customerIdList;
@@ -38,7 +39,7 @@ class UnsettledTabs extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5),
+                  childAspectRatio: 1.2, crossAxisCount: 5),
               itemCount: customerIdList.length + 1,
               itemBuilder: (context, index) {
                 if (customerIdList.length == index) {
@@ -48,7 +49,7 @@ class UnsettledTabs extends StatelessWidget {
                           onTap: () {
                             context
                                 .read<BillingBloc>()
-                                .add(BillingInitialEvent(orderIndex: -1));
+                                .add(BillingInitialEvent(orderIndex: '-1'));
                           },
                           child: Card(
                               elevation: 4,
@@ -82,7 +83,7 @@ class UnsettledTabs extends StatelessWidget {
                     padding: const EdgeInsets.all(spacingStandard),
                     child: InkWell(
                         onTap: () {
-                          context.read<BillingBloc>().orderIndex =
+                          context.read<BillingBloc>().orderId =
                               customerIdList[index];
                           context.read<BillingBloc>().add(BillingInitialEvent(
                               orderIndex: customerIdList[index]));
@@ -94,10 +95,9 @@ class UnsettledTabs extends StatelessWidget {
                             margin: EdgeInsets.zero,
                             child: Padding(
                                 padding: const EdgeInsets.all(spacingStandard),
-                                child: Center(
-                                    child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
+                                child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
                                       Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
@@ -143,19 +143,48 @@ class UnsettledTabs extends StatelessWidget {
                                                         AppColor.saasifyBlack))
                                           ]),
                                       Expanded(
-                                        child: Image.asset('assets/user.png',
-                                            fit: BoxFit.fill),
+                                        child: Row(children: [
+                                          Expanded(
+                                            child: Image.asset(
+                                                'assets/user.png',
+                                                fit: BoxFit.fill),
+                                          ),
+                                          const SizedBox(width: spacingXXSmall),
+                                          Expanded(
+                                              flex: 2,
+                                              child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                        '${customerData["${customerIdList[index]}"]!.customerName} - ${index + 1}',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .tiniest
+                                                            .copyWith(
+                                                                color: AppColor
+                                                                    .saasifyBlack)),
+                                                    const SizedBox(
+                                                        height:
+                                                            spacingSmallest),
+                                                    Text(
+                                                        'Total - ₹ ${customerData["${customerIdList[index]}"]!.billDetails.total}',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .tiniest
+                                                            .copyWith(
+                                                                color: AppColor
+                                                                    .saasifyBlack))
+                                                  ]))
+                                        ]),
                                       ),
-                                      const SizedBox(height: spacingXXSmall),
-                                      Text(
-                                        '${customerData["${customerIdList[index]}"]!.customerName} - ${customerIdList[index]}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .tiniest
-                                            .copyWith(
-                                                color: AppColor.saasifyBlack),
-                                      ),
-                                    ]))))));
+                                      PrimaryButton(
+                                          onPressed: () {},
+                                          buttonTitle:
+                                              StringConstants.kSettleBill)
+                                    ])))));
               }),
         ]));
   }
