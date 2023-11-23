@@ -26,12 +26,11 @@ class OrderDetailsPaymentInfo extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomerInfoWidget(ordersData: ordersData),
-                        OrderInfoWidget(ordersData: ordersData)
-                      ]),
+                  Row(children: [
+                    CustomerInfoWidget(ordersData: ordersData),
+                    const SizedBox(width: spacingXExcel),
+                    OrderInfoWidget(ordersData: ordersData)
+                  ]),
                   const SizedBox(height: spacingExcel),
                   PaymentInfoWidget(ordersData: ordersData),
                 ])));
