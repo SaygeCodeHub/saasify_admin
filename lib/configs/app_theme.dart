@@ -95,4 +95,11 @@ extension AppTextTheme on TextTheme {
         color: AppColor.saasifyBlack,
         fontWeight: FontWeight.w400);
   }
+
+  TextStyle get xTiny {
+    return const TextStyle(
+        fontSize: 26,
+        color: AppColor.saasifyBlack,
+        fontWeight: FontWeight.w400);
+  }
 }

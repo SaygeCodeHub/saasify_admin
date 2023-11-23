@@ -16,7 +16,7 @@ class StringConstants {
   static const kProductAmount = 'Total Amount';
   static const kCustomerContact = 'Customer Contact';
   static const kCustomerName = 'Customer Name';
-  static const kModeOfPayment = 'Mode of Payment';
+  static const kModeOfPayment = 'Payment Type';
   static const kAddCompany = 'Add Company :)';
   static const kCompanies = 'Companies';
   static const kAddProduct = 'Add Product';

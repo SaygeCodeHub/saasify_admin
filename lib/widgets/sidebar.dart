@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/configs/app_color.dart';
@@ -29,24 +30,27 @@ class SideBar extends StatelessWidget {
         elevation: 4,
         child: Column(children: [
           Padding(
-              padding: const EdgeInsets.all(spacingStandard),
+              padding: const EdgeInsets.all(spacingMedium),
               child: Row(children: [
-                const CircleAvatar(),
-                const SizedBox(width: spacingSmall),
+                SvgPicture.asset("assets/Profile.svg", height: 70),
+                const SizedBox(width: spacingXXSmall),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(userName,
-                        style: Theme.of(context).textTheme.xTiniest.copyWith(
-                            color: AppColor.saasifyLighterBlack,
-                            fontWeight: FontWeight.w600)),
-                    Text(userContact.toString(),
-                        style: Theme.of(context).textTheme.xxxTiniest.copyWith(
-                            color: AppColor.saasifyLighterBlack,
-                            fontWeight: FontWeight.w300))
-                  ],
-                )
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(userName,
+                          style: Theme.of(context).textTheme.xTiniest.copyWith(
+                              color: AppColor.saasifyLighterBlack,
+                              fontWeight: FontWeight.w600)),
+                      const SizedBox(height: spacingXXSmall),
+                      Text(userContact.toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .xxxTiniest
+                              .copyWith(
+                                  color: AppColor.saasifyLighterBlack,
+                                  fontWeight: FontWeight.w300))
+                    ])
               ])),
           const Divider(),
           const SizedBox(height: spacingMedium),
@@ -59,7 +63,7 @@ class SideBar extends StatelessWidget {
                           color: (selectedIndex == 1)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyDarkGrey,
-                          fontWeight: FontWeight.w700)),
+                          fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.pushReplacementNamed(
                         context, DashboardsScreen.routeName);
@@ -71,7 +75,7 @@ class SideBar extends StatelessWidget {
                           color: (selectedIndex == 2)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyDarkGrey,
-                          fontWeight: FontWeight.w700)),
+                          fontWeight: FontWeight.w600)),
                   onTap: () async {
                     await DatabaseUtil.products.clear();
                     if (context.mounted) {
@@ -86,7 +90,7 @@ class SideBar extends StatelessWidget {
                           color: (selectedIndex == 3)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyDarkGrey,
-                          fontWeight: FontWeight.w700)),
+                          fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.pushReplacementNamed(
                         context, ProductListScreen.routeName);
@@ -98,7 +102,7 @@ class SideBar extends StatelessWidget {
                           color: (selectedIndex == 4)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyDarkGrey,
-                          fontWeight: FontWeight.w700)),
+                          fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.pushReplacementNamed(
                         context, OrdersScreen.routeName);
@@ -110,7 +114,7 @@ class SideBar extends StatelessWidget {
                           color: (selectedIndex == 5)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyDarkGrey,
-                          fontWeight: FontWeight.w700)),
+                          fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.pushReplacementNamed(
                         context, InventoryListScreen.routeName);
@@ -140,7 +144,7 @@ class SideBar extends StatelessWidget {
                 title: Text(StringConstants.kLogout,
                     style: Theme.of(context).textTheme.xTiniest.copyWith(
                         color: AppColor.saasifyRed,
-                        fontWeight: FontWeight.w700)),
+                        fontWeight: FontWeight.w600)),
                 onTap: () {
                   context.read<AuthenticationBloc>().add(LogOut());
                   Navigator.pushNamedAndRemoveUntil(context,
