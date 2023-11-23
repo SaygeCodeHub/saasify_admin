@@ -34,59 +34,59 @@ class FetchOrdersModel {
 
 class OrdersData {
   final int orderId;
-  final int orderNumber;
-  final String orderedOn;
-  final List<ItemsOrdered> itemsOrdered;
+  final String orderNumber;
+  final DateTime orderDate;
   final int customerContact;
   final String paymentStatus;
-  final String modeOfPayment;
+  final String paymentType;
   final String customerName;
-  final int discountTotal;
+  final dynamic discountTotal;
   final int totalAmount;
   final int subtotal;
+  final List<ItemsOrdered> itemsOrdered;
 
   OrdersData({
     required this.orderId,
     required this.orderNumber,
-    required this.orderedOn,
-    required this.itemsOrdered,
+    required this.orderDate,
     required this.customerContact,
     required this.paymentStatus,
-    required this.modeOfPayment,
+    required this.paymentType,
     required this.customerName,
     required this.discountTotal,
     required this.totalAmount,
     required this.subtotal,
+    required this.itemsOrdered,
   });
 
   factory OrdersData.fromJson(Map<String, dynamic> json) => OrdersData(
         orderId: json["order_id"],
         orderNumber: json["order_number"],
-        orderedOn: json["ordered_on"],
-        itemsOrdered: List<ItemsOrdered>.from(
-            json["items_ordered"].map((x) => ItemsOrdered.fromJson(x))),
+        orderDate: DateTime.parse(json["order_date"]),
         customerContact: json["customer_contact"],
         paymentStatus: json["payment_status"],
-        modeOfPayment: json["mode_of_payment"],
+        paymentType: json["payment_type"],
         customerName: json["customer_name"],
         discountTotal: json["discount_total"],
         totalAmount: json["total_amount"],
         subtotal: json["subtotal"],
+        itemsOrdered: List<ItemsOrdered>.from(
+            json["items_ordered"].map((x) => ItemsOrdered.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "order_id": orderId,
         "order_number": orderNumber,
-        "ordered_on": orderedOn,
-        "items_ordered":
-            List<dynamic>.from(itemsOrdered.map((x) => x.toJson())),
+        "order_date": orderDate.toIso8601String(),
         "customer_contact": customerContact,
         "payment_status": paymentStatus,
-        "mode_of_payment": modeOfPayment,
+        "payment_type": paymentType,
         "customer_name": customerName,
         "discount_total": discountTotal,
         "total_amount": totalAmount,
         "subtotal": subtotal,
+        "items_ordered":
+            List<dynamic>.from(itemsOrdered.map((x) => x.toJson())),
       };
 }
 
@@ -109,6 +109,7 @@ class ItemsOrdered {
   final int barcode;
   final bool draft;
   final int restockReminder;
+  final int count;
 
   ItemsOrdered({
     required this.categoryId,
@@ -129,6 +130,7 @@ class ItemsOrdered {
     required this.barcode,
     required this.draft,
     required this.restockReminder,
+    required this.count,
   });
 
   factory ItemsOrdered.fromJson(Map<String, dynamic> json) => ItemsOrdered(
@@ -150,6 +152,7 @@ class ItemsOrdered {
         barcode: json["barcode"],
         draft: json["draft"],
         restockReminder: json["restock_reminder"],
+        count: json["count"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -171,5 +174,6 @@ class ItemsOrdered {
         "barcode": barcode,
         "draft": draft,
         "restock_reminder": restockReminder,
+        "count": count,
       };
 }

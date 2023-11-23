@@ -10,7 +10,9 @@ import 'package:saasify/screens/orders/orders_screen.dart';
 import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/responsive.dart';
+import '../data/models/orders/fetch_orders_model.dart';
 import '../screens/onboarding/auhentication_screen.dart';
+import '../screens/orders/order_details_screen.dart';
 import '../screens/product/add_product_screen.dart';
 
 class AppRoutes {
@@ -28,6 +30,12 @@ class AppRoutes {
         return _createRoute(OrdersScreen());
       case POSScreen.routeName:
         return _createRoute(POSScreen());
+
+      case OrderDetailsScreen.routeName:
+        return _createRoute(OrderDetailsScreen(
+          ordersData: settings.arguments as List<OrdersData>,
+        ));
+
       case CompanyListScreen.routeName:
         return _createRoute(CompanyListScreen(
             companyList: settings.arguments as List<Company>));

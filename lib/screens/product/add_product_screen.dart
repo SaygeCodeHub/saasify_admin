@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
@@ -64,6 +66,7 @@ class AddProductScreen extends StatelessWidget {
                   flex: 5,
                   child: BlocConsumer<ProductBloc, ProductStates>(
                     listener: (context, state) {
+                      log('add prod state===========>$state');
                       if (state is ErrorFetchingCategories) {
                         showDialog(
                             context: context,
@@ -115,6 +118,10 @@ class AddProductScreen extends StatelessWidget {
                                   },
                                   secondaryOnPressed: () {
                                     DatabaseUtil.products.clear();
+                                    context
+                                        .read<ProductBloc>()
+                                        .add(FetchProductList());
+                                    Navigator.pop(context);
                                     Navigator.pop(context);
                                     Navigator.pushReplacementNamed(
                                         context, ProductListScreen.routeName);
@@ -160,8 +167,11 @@ class AddProductScreen extends StatelessWidget {
                                 checkMarkVisible: false,
                                 primaryOnPressed: () {
                                   Navigator.pop(context);
-                                  Navigator.pushReplacementNamed(
-                                      context, ProductListScreen.routeName);
+                                  context
+                                      .read<ProductBloc>()
+                                      .add(FetchProductList());
+                                  // Navigator.pushReplacementNamed(
+                                  //     context, ProductListScreen.routeName);
                                 }));
                       }
                     },

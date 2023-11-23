@@ -46,11 +46,7 @@ class OrdersScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingLarge),
                       child: BlocConsumer<OrdersBloc, OrdersStates>(
                         listener: (context, state) {
-                          if (state is FetchingOrders) {
-                            ProgressBar.show(context);
-                          } else if (state is FetchedOrders) {
-                            ProgressBar.dismiss(context);
-                          } else if (state is ErrorFetchingOrders) {
+                          if (state is ErrorFetchingOrders) {
                             ProgressBar.dismiss(context);
                             showDialog(
                                 context: context,
@@ -72,9 +68,8 @@ class OrdersScreen extends StatelessWidget {
                         },
                         builder: (context, state) {
                           if (state is FetchingOrders) {
-                            return const Expanded(
-                                child:
-                                    Center(child: CircularProgressIndicator()));
+                            return const Center(
+                                child: CircularProgressIndicator());
                           } else if (state is FetchedOrders) {
                             return Column(
                               children: [
