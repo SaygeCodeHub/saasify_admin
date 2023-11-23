@@ -49,7 +49,7 @@ class OrderInfoWidget extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
-                          .copyWith(fontWeight: FontWeight.w500),
+                          .copyWith(fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
@@ -67,7 +67,7 @@ class OrderInfoWidget extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
-                          .copyWith(fontWeight: FontWeight.w500),
+                          .copyWith(fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
@@ -83,7 +83,7 @@ class OrderInfoWidget extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
-                          .copyWith(fontWeight: FontWeight.w500))
+                          .copyWith(fontWeight: FontWeight.w600))
                 ])
               ])
         ]);
