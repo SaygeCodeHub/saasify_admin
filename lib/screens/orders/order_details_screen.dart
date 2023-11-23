@@ -4,15 +4,18 @@ import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
+import '../../data/models/orders/fetch_orders_model.dart';
 import '../../utils/constants/string_constants.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 import 'order_details_list_datatable.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
+  final List<OrdersData> ordersData;
+
   static const String routeName = 'OrderDetailsScreen';
 
-  OrderDetailsScreen({super.key});
+  OrderDetailsScreen({super.key, required this.ordersData});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -542,34 +545,38 @@ class OrderDetailsScreen extends StatelessWidget {
                             const SizedBox(
                               height: spacingMedium,
                             ),
-                            Container(
-                                decoration: BoxDecoration(
-                                    color: AppColor.saasifyWhite,
-                                    borderRadius:
-                                        BorderRadius.circular(kCircularRadius)),
-                                child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: spacingLarge,
-                                        vertical: spacingLarge),
-                                    child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Products',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .tiniest
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                          ),
-                                          const SizedBox(
-                                            height: spacingXXSmall,
-                                          ),
-                                          const OrderDetailsListDataTable()
-                                        ]))),
+                            Expanded(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: AppColor.saasifyWhite,
+                                      borderRadius: BorderRadius.circular(
+                                          kCircularRadius)),
+                                  child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: spacingLarge,
+                                          vertical: spacingLarge),
+                                      child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Products',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .tiniest
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                            ),
+                                            const SizedBox(
+                                              height: spacingXXSmall,
+                                            ),
+                                            const Expanded(
+                                                child:
+                                                    OrderDetailsListDataTable())
+                                          ]))),
+                            ),
                           ])))
             ]));
   }

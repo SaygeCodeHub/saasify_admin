@@ -8,7 +8,7 @@ import 'package:saasify/utils/constants/string_constants.dart';
 import 'order_details_screen.dart';
 
 class OrdersListDataTable extends StatelessWidget {
-  final List<OrdersData> ordersData;
+  final List ordersData;
 
   const OrdersListDataTable({Key? key, required this.ordersData})
       : super(key: key);
@@ -81,7 +81,8 @@ class OrdersListDataTable extends StatelessWidget {
               (index) => DataRow(
                       onLongPress: () {
                         Navigator.pushReplacementNamed(
-                            context, OrderDetailsScreen.routeName);
+                            context, OrderDetailsScreen.routeName,
+                            arguments: ordersData as List<OrdersData>);
                       },
                       cells: [
                         DataCell(Align(
