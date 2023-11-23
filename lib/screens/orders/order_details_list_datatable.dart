@@ -57,22 +57,20 @@ class OrderDetailsListDataTable extends StatelessWidget {
             DataColumn(
                 label: Expanded(
                     child: Center(
-              child: Text(StringConstants.kUnitPrice,
+                        child: Text(StringConstants.kUnitPrice,
+                            style: Theme.of(context)
+                                .textTheme
+                                .xTiniest
+                                .copyWith(fontWeight: FontWeight.w600))))),
+            DataColumn(
+                label: Expanded(
+                    child: Center(
+              child: Text(StringConstants.kQuantity,
                   style: Theme.of(context)
                       .textTheme
                       .xTiniest
                       .copyWith(fontWeight: FontWeight.w600)),
-            ))),
-            DataColumn(
-                label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kQuantity,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600)),
-              ),
-            ))
+            )))
           ],
           rows: List.generate(
               4,
