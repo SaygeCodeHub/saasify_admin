@@ -71,7 +71,7 @@ class OrderDetailsListDataTable extends StatelessWidget {
                     DataCell(Align(
                         alignment: Alignment.center,
                         child: Text(
-                            ordersData.itemsOrdered[index].quantity.toString(),
+                            ordersData.itemsOrdered[index].count.toString(),
                             style: Theme.of(context).textTheme.xxTiniest)))
                   ])))
     ]);
