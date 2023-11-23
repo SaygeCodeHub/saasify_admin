@@ -15,6 +15,7 @@ class AppColor {
   static const Color saasifyLightGrey = Color(0xFFAAAAAA);
   static const Color saasifyLighterGrey = Color(0xFFF7F7F7);
   static const Color saasifyLightDeepBlue = Color(0xFF5D76BF);
+  static const Color saasifyDeepBlue = Color(0xFF5162E7);
   static const Color saasifyGreen = Color(0xff15ba6d);
   static const Color saasifyLighterGreen = Color(0xFFEBFDF2);
   static const Color saasifyLightWhite = Color(0xFFD0D0CE);
@@ -24,6 +25,7 @@ class AppColor {
   static const Color saasifyPaleWhite = Color(0xFFE8E8E8);
   static const Color saasifyPaleGrey = Color(0xFFEAECF0);
   static const Color saasifyPaleBlue = Color(0xFF5D5FEF);
+  static const Color saasifyLightBlue = Color(0xFFF8FAFF);
   static const Color saasifyPaleBlack = Color(0xFF8C8FA4);
   static const Color saasifyLightPaleGrey = Color(0xFFbdbdbe);
   static const Color saasifyLightestPaleGrey = Color(0xFFf4f4f4);

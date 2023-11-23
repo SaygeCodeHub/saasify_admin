@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/data/models/orders/fetch_orders_model.dart';
-import 'package:saasify/utils/constants/string_constants.dart';
+import '../../../configs/app_color.dart';
+import '../../../configs/app_dimensions.dart';
+import '../../../configs/app_spacing.dart';
+import '../../../data/models/orders/fetch_orders_model.dart';
+import '../../../utils/constants/string_constants.dart';
 
-import 'order_details_screen.dart';
+class DashboardOrderTableList extends StatelessWidget {
+  final List<OrdersData> ordersData;
 
-class OrdersListDataTable extends StatelessWidget {
-  final List ordersData;
-
-  const OrdersListDataTable({Key? key, required this.ordersData})
-      : super(key: key);
+  const DashboardOrderTableList({
+    super.key,
+    required this.ordersData,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: ListView(shrinkWrap: true, children: <Widget>[
+    return ListView(shrinkWrap: true, children: <Widget>[
       DataTable(
           columnSpacing: 0,
-          horizontalMargin: 20,
+          horizontalMargin: 10,
           showCheckboxColumn: true,
           headingRowHeight: 50,
           dataRowMaxHeight: 50,
@@ -34,18 +34,6 @@ class OrdersListDataTable extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w600)),
               ),
             )),
-            DataColumn(
-                label: Text(StringConstants.kOrderedOn,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600))),
-            DataColumn(
-                label: Text(StringConstants.kCustomerContact,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Text(StringConstants.kCustomerName,
                     style: Theme.of(context)
@@ -81,20 +69,14 @@ class OrdersListDataTable extends StatelessWidget {
               (index) => DataRow(cells: [
                     DataCell(Align(
                       alignment: Alignment.center,
-                      child: Text(ordersData[index].orderId.toString(),
+                      child: Text(ordersData[index].orderNumber.toString(),
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
-                    DataCell(
-                      Text(ordersData[index].orderedOn.toString(),
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    ),
-                    DataCell(Text(ordersData[index].customerContact.toString(),
-                        style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(ordersData[index].customerName.toString(),
+                    DataCell(Text(ordersData[index].customerName,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(ordersData[index].modeOfPayment.toString(),
+                    DataCell(Text(ordersData[index].modeOfPayment,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
                     DataCell(Align(
@@ -105,16 +87,18 @@ class OrdersListDataTable extends StatelessWidget {
                     )),
                     DataCell(Container(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 4, horizontal: 8),
+                            vertical: spacingXSmall,
+                            horizontal: spacingXXSmall),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(kCardRadius),
                             color: AppColor.saasifyLighterGreen),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(Icons.circle,
-                                size: 8, color: AppColor.saasifyGreen),
-                            const SizedBox(width: 6),
+                                size: spacingXXSmall,
+                                color: AppColor.saasifyGreen),
+                            const SizedBox(width: spacingXXSmall),
                             Text(
                                 ordersData[index]
                                         .paymentStatus
@@ -125,9 +109,7 @@ class OrdersListDataTable extends StatelessWidget {
                                     ordersData[index]
                                         .paymentStatus
                                         .trim()
-                                        .substring(
-                                          1,
-                                        )
+                                        .substring(1)
                                         .toLowerCase()
                                         .toString(),
                                 style: Theme.of(context)
@@ -137,6 +119,6 @@ class OrdersListDataTable extends StatelessWidget {
                           ],
                         ))),
                   ])))
-    ]));
+    ]);
   }
 }

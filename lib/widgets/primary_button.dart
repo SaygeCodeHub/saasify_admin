@@ -11,6 +11,7 @@ class PrimaryButton extends StatelessWidget {
   final BorderSide? side;
   final String buttonTitle;
   final IconData? icon;
+  final OutlinedBorder? shape;
 
   const PrimaryButton(
       {Key? key,
@@ -20,7 +21,8 @@ class PrimaryButton extends StatelessWidget {
       this.backgroundColor,
       this.side,
       required this.buttonTitle,
-      this.icon})
+      this.icon,
+      this.shape})
       : super(key: key);
 
   @override
@@ -28,8 +30,9 @@ class PrimaryButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(kCircularRadius)),
+          shape: shape ??
+              RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(kCircularRadius)),
           backgroundColor: backgroundColor ?? AppColor.saasifyLightDeepBlue,
           minimumSize: Size(buttonWidth ?? double.maxFinite, 50)),
       child: FittedBox(
