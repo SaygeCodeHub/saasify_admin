@@ -3,9 +3,12 @@ import 'package:saasify/configs/app_theme.dart';
 
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
+import '../../../data/models/orders/fetch_orders_model.dart';
 
 class CustomerInfoWidget extends StatelessWidget {
-  const CustomerInfoWidget({super.key});
+  final OrdersData ordersData;
+
+  const CustomerInfoWidget({super.key, required this.ordersData});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class CustomerInfoWidget extends StatelessWidget {
                           .xTiniest
                           .copyWith(color: AppColor.saasifyGreyBlue)),
                   const SizedBox(width: spacingXXSmall),
-                  Text('Maria Aniston',
+                  Text(ordersData.customerName,
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
@@ -63,7 +66,7 @@ class CustomerInfoWidget extends StatelessWidget {
                           .xTiniest
                           .copyWith(color: AppColor.saasifyGreyBlue)),
                   const SizedBox(width: spacingXXSmall),
-                  Text('+1 (065) 7865567',
+                  Text(ordersData.customerContact.toString(),
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest

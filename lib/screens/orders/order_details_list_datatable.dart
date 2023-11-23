@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
 
+import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
 
 class OrderDetailsListDataTable extends StatelessWidget {
@@ -101,9 +102,18 @@ class OrderDetailsListDataTable extends StatelessWidget {
                     // )),
                     DataCell(Align(
                         alignment: Alignment.centerLeft,
-                        child: Text('Biscuits',
-                            textAlign: TextAlign.left,
-                            style: Theme.of(context).textTheme.xxTiniest))),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                                height: 25,
+                                width: 25,
+                                child: Image.network('assets/cake_img.png')),
+                            const SizedBox(width: spacingXXSmall),
+                            Text('Biscuits',
+                                textAlign: TextAlign.left,
+                                style: Theme.of(context).textTheme.xxTiniest),
+                          ],
+                        ))),
                     DataCell(Align(
                         alignment: Alignment.center,
                         child: Text('190',

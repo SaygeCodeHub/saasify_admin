@@ -57,11 +57,15 @@ class OrderDetailsScreen extends StatelessWidget {
                               const Spacer()
                             ]),
                             const SizedBox(height: spacingStandard),
-                            const OrderDetailsHeaderWidget(),
+                            OrderDetailsHeaderWidget(
+                              ordersData: ordersData[0],
+                            ),
                             const SizedBox(
                               height: spacingMedium,
                             ),
-                            const OrderDetailsPaymentInfo(),
+                            OrderDetailsPaymentInfo(
+                              ordersData: ordersData[0],
+                            ),
                             const SizedBox(
                               height: spacingMedium,
                             ),

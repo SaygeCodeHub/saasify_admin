@@ -3,9 +3,12 @@ import 'package:saasify/configs/app_theme.dart';
 
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
+import '../../../data/models/orders/fetch_orders_model.dart';
 
 class OrderInfoWidget extends StatelessWidget {
-  const OrderInfoWidget({super.key});
+  final OrdersData ordersData;
+
+  const OrderInfoWidget({super.key, required this.ordersData});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +82,7 @@ class OrderInfoWidget extends StatelessWidget {
                           .xTiniest
                           .copyWith(color: AppColor.saasifyGreyBlue)),
                   const SizedBox(width: spacingXXSmall),
-                  Text('Approved',
+                  Text(ordersData.paymentStatus,
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest

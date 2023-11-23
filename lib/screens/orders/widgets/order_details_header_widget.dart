@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:saasify/configs/app_theme.dart';
 
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
+import '../../../data/models/orders/fetch_orders_model.dart';
 
 class OrderDetailsHeaderWidget extends StatelessWidget {
-  const OrderDetailsHeaderWidget({super.key});
+  final OrdersData ordersData;
+
+  const OrderDetailsHeaderWidget({super.key, required this.ordersData});
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +31,15 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Order ID:123456',
+                              Text('Order ID:${ordersData.orderId}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .xTiniest
                                       .copyWith(fontWeight: FontWeight.w600)),
                               const SizedBox(height: spacingXSmall),
-                              Text('Mon,July 22,2023',
+                              Text(
+                                  DateFormat('dd MMM yyyy')
+                                      .format(ordersData.orderDate),
                                   style: Theme.of(context).textTheme.xxTiniest),
                               const SizedBox(height: spacingXXSmall),
                               Container(
@@ -42,17 +48,13 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: AppColor.saasifyLighterGreen),
-                                  child: Text('Approved',
+                                  child: Text(ordersData.paymentStatus,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest
                                           .copyWith(
                                               color: AppColor.saasifyGreen)))
-                            ]),
-                        // const CustomDropdownTwoWidget(
-                        //   listItems: [{
-                        //     'one':'event'
-                        //   }],),
+                            ])
                       ])
                 ])));
   }
