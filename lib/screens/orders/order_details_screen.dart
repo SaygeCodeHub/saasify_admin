@@ -54,7 +54,20 @@ class OrderDetailsScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w700))),
                               context.responsive(const SizedBox(),
                                   desktop: const Spacer()),
-                              const Spacer()
+                              const Spacer(),
+                              const Row(
+                                children: [
+                                  Icon(Icons.share),
+                                  SizedBox(
+                                    width: spacingXMedium,
+                                  ),
+                                  Icon(Icons.download),
+                                  SizedBox(
+                                    width: spacingXMedium,
+                                  ),
+                                  Icon(Icons.print),
+                                ],
+                              )
                             ]),
                             const SizedBox(height: spacingStandard),
                             OrderDetailsHeaderWidget(ordersData: ordersData),
