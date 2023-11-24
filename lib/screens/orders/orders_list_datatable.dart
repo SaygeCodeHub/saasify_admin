@@ -26,14 +26,12 @@ class OrdersListDataTable extends StatelessWidget {
           columns: [
             DataColumn(
                 label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kOrderNo,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600)),
-              ),
-            )),
+                    child: Center(
+                        child: Text(StringConstants.kOrderNo,
+                            style: Theme.of(context)
+                                .textTheme
+                                .xTiniest
+                                .copyWith(fontWeight: FontWeight.w600))))),
             DataColumn(
                 label: Text(StringConstants.kOrderedOn,
                     style: Theme.of(context)
@@ -61,14 +59,12 @@ class OrdersListDataTable extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kProductAmount,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600)),
-              ),
-            )),
+                    child: Center(
+                        child: Text(StringConstants.kProductAmount,
+                            style: Theme.of(context)
+                                .textTheme
+                                .xTiniest
+                                .copyWith(fontWeight: FontWeight.w600))))),
             DataColumn(
                 label: Text(StringConstants.kPaymentStatus,
                     style: Theme.of(context)
@@ -78,75 +74,103 @@ class OrdersListDataTable extends StatelessWidget {
           ],
           rows: List.generate(
               ordersData.length,
-              (index) => DataRow(
-                      onLongPress: () {
-                        Navigator.pushReplacementNamed(
-                            context, OrderDetailsScreen.routeName,
-                            arguments: ordersData);
-                      },
-                      cells: [
-                        DataCell(Align(
-                          alignment: Alignment.center,
-                          child: Text(ordersData[index].orderId.toString(),
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.xxTiniest),
-                        )),
-                        DataCell(
-                          Text(
-                              DateFormat('dd MMM yyyy')
-                                  .format(ordersData[index].orderDate),
-                              style: Theme.of(context).textTheme.xxTiniest),
-                        ),
-                        DataCell(Text(
-                            ordersData[index].customerContact.toString(),
-                            style: Theme.of(context).textTheme.xxTiniest)),
-                        DataCell(Text(ordersData[index].customerName.toString(),
+              (index) => DataRow(cells: [
+                    DataCell(
+                        Align(
+                            alignment: Alignment.center,
+                            child: Text(ordersData[index].orderId.toString(),
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.xxTiniest)),
+                        onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, OrderDetailsScreen.routeName,
+                          arguments: ordersData[index]);
+                    }),
+                    DataCell(
+                        Text(
+                            DateFormat('dd MMM yyyy')
+                                .format(ordersData[index].orderDate),
+                            style: Theme.of(context).textTheme.xxTiniest),
+                        onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, OrderDetailsScreen.routeName,
+                          arguments: ordersData[index]);
+                    }),
+                    DataCell(
+                        Text(ordersData[index].customerContact.toString(),
+                            style: Theme.of(context).textTheme.xxTiniest),
+                        onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, OrderDetailsScreen.routeName,
+                          arguments: ordersData[index]);
+                    }),
+                    DataCell(
+                        Text(ordersData[index].customerName.toString(),
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.xxTiniest)),
-                        DataCell(Text(ordersData[index].paymentType.toString(),
+                            style: Theme.of(context).textTheme.xxTiniest),
+                        onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, OrderDetailsScreen.routeName,
+                          arguments: ordersData[index]);
+                    }),
+                    DataCell(
+                        Text(ordersData[index].paymentType.toString(),
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.xxTiniest)),
-                        DataCell(Align(
-                          alignment: Alignment.center,
-                          child: Text(ordersData[index].totalAmount.toString(),
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.xxTiniest),
-                        )),
-                        DataCell(Container(
+                            style: Theme.of(context).textTheme.xxTiniest),
+                        onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, OrderDetailsScreen.routeName,
+                          arguments: ordersData[index]);
+                    }),
+                    DataCell(
+                        Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                                ordersData[index].totalAmount.toString(),
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.xxTiniest)),
+                        onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, OrderDetailsScreen.routeName,
+                          arguments: ordersData[index]);
+                    }),
+                    DataCell(
+                        Container(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 4, horizontal: 8),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 color: AppColor.saasifyLighterGreen),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(Icons.circle,
-                                    size: 8, color: AppColor.saasifyGreen),
-                                const SizedBox(width: 6),
-                                Text(
-                                    ordersData[index]
-                                            .paymentStatus
-                                            .trim()
-                                            .substring(0, 1)
-                                            .toUpperCase()
-                                            .toString() +
-                                        ordersData[index]
-                                            .paymentStatus
-                                            .trim()
-                                            .substring(
-                                              1,
-                                            )
-                                            .toLowerCase()
-                                            .toString(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .xxTiniest
-                                        .copyWith(
-                                            color: AppColor.saasifyGreen)),
-                              ],
-                            ))),
-                      ])))
+                            child:
+                                Row(mainAxisSize: MainAxisSize.min, children: [
+                              const Icon(Icons.circle,
+                                  size: 8, color: AppColor.saasifyGreen),
+                              const SizedBox(width: 6),
+                              Text(
+                                  ordersData[index]
+                                          .paymentStatus
+                                          .trim()
+                                          .substring(0, 1)
+                                          .toUpperCase()
+                                          .toString() +
+                                      ordersData[index]
+                                          .paymentStatus
+                                          .trim()
+                                          .substring(
+                                            1,
+                                          )
+                                          .toLowerCase()
+                                          .toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .xxTiniest
+                                      .copyWith(color: AppColor.saasifyGreen))
+                            ])), onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, OrderDetailsScreen.routeName,
+                          arguments: ordersData[index]);
+                    })
+                  ])))
     ]));
   }
 }

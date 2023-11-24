@@ -33,7 +33,7 @@ class AppRoutes {
 
       case OrderDetailsScreen.routeName:
         return _createRoute(OrderDetailsScreen(
-          ordersData: settings.arguments as List<OrdersData>,
+          ordersData: settings.arguments as OrdersData,
         ));
 
       case CompanyListScreen.routeName:

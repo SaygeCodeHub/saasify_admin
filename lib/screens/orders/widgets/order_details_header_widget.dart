@@ -50,7 +50,17 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(kGeneralRadius),
                                       color: AppColor.saasifyLighterGreen),
-                                  child: Text(ordersData.paymentStatus,
+                                  child: Text(
+                                      ordersData.paymentStatus
+                                              .trim()
+                                              .substring(0, 1)
+                                              .toUpperCase() +
+                                          ordersData.paymentStatus
+                                              .trim()
+                                              .substring(
+                                                1,
+                                              )
+                                              .toLowerCase(),
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest

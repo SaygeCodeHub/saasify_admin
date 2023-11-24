@@ -12,7 +12,7 @@ import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
-  final List<OrdersData> ordersData;
+  final OrdersData ordersData;
 
   static const String routeName = 'OrderDetailsScreen';
 
@@ -58,18 +58,18 @@ class OrderDetailsScreen extends StatelessWidget {
                             ]),
                             const SizedBox(height: spacingStandard),
                             OrderDetailsHeaderWidget(
-                              ordersData: ordersData[0],
+                              ordersData: ordersData,
                             ),
                             const SizedBox(
                               height: spacingMedium,
                             ),
                             OrderDetailsPaymentInfo(
-                              ordersData: ordersData[0],
+                              ordersData: ordersData,
                             ),
                             const SizedBox(
                               height: spacingMedium,
                             ),
-                            OrderDetailsProductList(ordersData: ordersData[0])
+                            OrderDetailsProductList(ordersData: ordersData)
                           ])))
             ]));
   }
