@@ -5,6 +5,8 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 
+import '../../configs/app_dimensions.dart';
+import '../../configs/app_spacing.dart';
 import 'order_details_screen.dart';
 
 class OrdersListDataTable extends StatelessWidget {
@@ -137,15 +139,18 @@ class OrdersListDataTable extends StatelessWidget {
                     DataCell(
                         Container(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 4, horizontal: 8),
+                                vertical: spacingXSmall,
+                                horizontal: spacingXXSmall),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius:
+                                    BorderRadius.circular(kGeneralRadius),
                                 color: AppColor.saasifyLighterGreen),
                             child:
                                 Row(mainAxisSize: MainAxisSize.min, children: [
                               const Icon(Icons.circle,
-                                  size: 8, color: AppColor.saasifyGreen),
-                              const SizedBox(width: 6),
+                                  size: kPaymentCircleSize,
+                                  color: AppColor.saasifyGreen),
+                              const SizedBox(width: spacingXXSmall),
                               Text(
                                   ordersData[index]
                                           .paymentStatus

@@ -33,9 +33,8 @@ class OrderDetailsProductList extends StatelessWidget {
                               .copyWith(fontWeight: FontWeight.w600)),
                       const SizedBox(height: spacingXXSmall),
                       Expanded(
-                          child: OrderDetailsListDataTable(
-                        ordersData: ordersData,
-                      ))
+                          child:
+                              OrderDetailsListDataTable(ordersData: ordersData))
                     ]))));
   }
 }
