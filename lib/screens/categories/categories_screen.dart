@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/categories/categories_states.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/categories/widgets/categories_grid.dart';
 import 'package:saasify/utils/responsive.dart';
-
-import '../../bloc/product/product_bloc.dart';
-import '../../bloc/product/product_event.dart';
-import '../../bloc/product/product_state.dart';
+import '../../bloc/categories/categories_bloc.dart';
+import '../../bloc/categories/categories_event.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
@@ -24,7 +23,7 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ProductBloc>().add(FetchAllCategories());
+    context.read<CategoriesBloc>().add(FetchAllCategories());
 
     return Scaffold(
         key: _scaffoldKey,
@@ -42,7 +41,7 @@ class CategoriesScreen extends StatelessWidget {
                   flex: 5,
                   child: Padding(
                       padding: const EdgeInsets.all(spacingLarge),
-                      child: BlocConsumer<ProductBloc, ProductStates>(
+                      child: BlocConsumer<CategoriesBloc, CategoriesStates>(
                           listener: (context, state) {
                         if (state is ErrorFetchingCategories) {
                           ProgressBar.dismiss(context);

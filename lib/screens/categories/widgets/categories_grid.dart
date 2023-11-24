@@ -4,7 +4,7 @@ import 'package:saasify/utils/constants/string_constants.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
-import '../../../data/models/products/fetch_all_categories_model.dart';
+import '../../../data/models/categories/fetch_all_categories_model.dart';
 import 'category_toggle_widget.dart';
 
 class CategoriesGrid extends StatelessWidget {
