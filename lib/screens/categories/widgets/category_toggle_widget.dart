@@ -18,13 +18,14 @@ class _CategoryToggleWidgetState extends State<CategoryToggleWidget> {
   Widget build(BuildContext context) {
     return FlutterSwitch(
         activeColor: AppColor.saasifyLightDeepBlue,
+        inactiveColor: AppColor.saasifyPaleBlack,
         width: 70.0,
-        height: 30.0,
+        height: 35.0,
         valueFontSize: 10.0,
-        toggleSize: 30.0,
-        value: widget.isActive,
+        toggleSize: 40.0,
+        value: status,
         borderRadius: 30.0,
-        padding: 8.0,
+        padding: 4.0,
         showOnOff: false,
         onToggle: (val) {
           setState(() {
