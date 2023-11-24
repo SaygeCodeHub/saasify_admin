@@ -87,6 +87,46 @@ class PaymentInfoWidget extends StatelessWidget {
                           .textTheme
                           .xTiniest
                           .copyWith(fontWeight: FontWeight.w600))
+                ]),
+                const SizedBox(height: spacingXSmall),
+                Row(children: [
+                  Text('Payment Method:',
+                      style: Theme.of(context)
+                          .textTheme
+                          .xTiniest
+                          .copyWith(color: AppColor.saasifyGreyBlue)),
+                  const SizedBox(width: spacingXXSmall),
+                  Text(
+                    ordersData.paymentType.toString(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600),
+                  )
+                ]),
+                const SizedBox(height: spacingXSmall),
+                Row(children: [
+                  Text('Status:',
+                      style: Theme.of(context)
+                          .textTheme
+                          .xTiniest
+                          .copyWith(color: AppColor.saasifyGreyBlue)),
+                  const SizedBox(width: spacingXXSmall),
+                  Text(
+                      ordersData.paymentStatus
+                              .trim()
+                              .substring(0, 1)
+                              .toUpperCase() +
+                          ordersData.paymentStatus
+                              .trim()
+                              .substring(
+                                1,
+                              )
+                              .toLowerCase(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .xTiniest
+                          .copyWith(fontWeight: FontWeight.w600))
                 ])
               ])
         ]);

@@ -71,7 +71,7 @@ class OrderDetailsListDataTable extends StatelessWidget {
               ordersData.itemsOrdered.length,
               (index) => DataRow(cells: [
                     DataCell(Align(
-                        alignment: Alignment.center,
+                        alignment: Alignment.centerLeft,
                         child: SizedBox(
                             height: kProductImageHeight,
                             width: kProductImageWidth,
