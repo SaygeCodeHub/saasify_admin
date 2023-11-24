@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/orders/orders_bloc.dart';
+import 'package:saasify/bloc/orders/orders_event.dart';
+import 'package:saasify/bloc/orders/orders_state.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/sidebar.dart';
-import '../../bloc/orders/orders_bloc.dart';
-import '../../bloc/orders/orders_event.dart';
-import '../../bloc/orders/orders_state.dart';
 import '../../widgets/top_bar.dart';
 import 'widgets/dasboard_body.dart';
 import 'widgets/dashboard_header_cards.dart';
@@ -48,9 +48,8 @@ class DashboardsScreen extends StatelessWidget {
                       },
                       builder: (context, state) {
                         if (state is FetchingOrders) {
-                          return const Expanded(
-                              child:
-                                  Center(child: CircularProgressIndicator()));
+                          return const Center(
+                              child: CircularProgressIndicator());
                         } else if (state is FetchedOrders) {
                           return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,8 +72,10 @@ class DashboardsScreen extends StatelessWidget {
                                     desktop: const SizedBox(height: 20)),
                                 DashboardHeaderCards(),
                                 const SizedBox(height: 20),
-                                DashboardBody(
-                                    ordersData: state.fetchOrdersList),
+                                Expanded(
+                                  child: DashboardBody(
+                                      ordersData: state.fetchOrdersList),
+                                ),
                               ]);
                         } else if (state is ErrorFetchingOrders) {
                           return Expanded(

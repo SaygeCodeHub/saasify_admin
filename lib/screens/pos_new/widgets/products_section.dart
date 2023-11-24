@@ -12,9 +12,13 @@ import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 
 class ProductsSection extends StatelessWidget {
-  const ProductsSection({super.key, required this.productsByCategories});
+  const ProductsSection(
+      {super.key,
+      required this.productsByCategories,
+      required this.categoryList});
 
   final List<CategoryWithProductsDatum> productsByCategories;
+  final List<String> categoryList;
 
   @override
   Widget build(BuildContext context) {
@@ -44,49 +48,19 @@ class ProductsSection extends StatelessWidget {
                                   horizontal: 16, vertical: 10),
                               borderRadius: BorderRadius.circular(12),
                               icon: const Icon(Icons.keyboard_arrow_down),
-                              value: productsByCategories[context
-                                          .read<BillingBloc>()
-                                          .selectedCategoryIndex]
-                                      .categoryName
-                                      .trim()
-                                      .substring(0, 1)
-                                      .toUpperCase() +
-                                  productsByCategories[context.read<BillingBloc>().selectedCategoryIndex]
-                                      .categoryName
-                                      .trim()
-                                      .substring(1)
-                                      .toLowerCase(),
+                              value: categoryList[context
+                                  .read<BillingBloc>()
+                                  .selectedCategoryIndex],
                               items: List.generate(
-                                  productsByCategories
-                                      .map((e) =>
-                                          e.categoryName.trim().substring(0, 1).toUpperCase() +
-                                          e.categoryName
-                                              .trim()
-                                              .substring(1)
-                                              .toLowerCase())
-                                      .toList()
-                                      .length,
+                                  categoryList.length,
                                   (index) => DropdownMenuItem(
-                                      value: productsByCategories
-                                          .map((e) => e.categoryName.trim().substring(0, 1).toUpperCase() + e.categoryName.trim().substring(1).toLowerCase())
-                                          .toList()[index],
-                                      child: Text(productsByCategories.map((e) => e.categoryName.trim().substring(0, 1).toUpperCase() + e.categoryName.trim().substring(1).toLowerCase()).toList()[index]))),
+                                      value: categoryList[index],
+                                      child: Text(categoryList[index]))),
                               onChanged: (value) {
                                 context
                                         .read<BillingBloc>()
                                         .selectedCategoryIndex =
-                                    productsByCategories
-                                        .map((e) =>
-                                            e.categoryName
-                                                .trim()
-                                                .substring(0, 1)
-                                                .toUpperCase() +
-                                            e.categoryName
-                                                .trim()
-                                                .substring(1)
-                                                .toLowerCase())
-                                        .toList()
-                                        .indexOf(value!);
+                                    categoryList.indexOf(value!);
                                 context.read<BillingBloc>().add(SelectCategory(
                                     productsByCategories:
                                         productsByCategories));

@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/configs/app_color.dart';
+import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/pos_new/widgets/billing_section.dart';
 import 'package:saasify/screens/pos_new/widgets/unsettled_tabs.dart';
 import 'package:saasify/utils/progress_bar.dart';
@@ -113,30 +115,54 @@ class POSScreen extends StatelessWidget {
                           customerIdList: state.customerIdList,
                           customerData: state.customerData);
                     } else if (state is ProductsLoaded) {
-                      return Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Expanded(
-                                flex: 5,
-                                child: ProductsSection(
-                                    productsByCategories:
-                                        state.productsByCategories)),
-                            context
-                                    .read<BillingBloc>()
-                                    .customer
-                                    .productList
-                                    .isNotEmpty
-                                ? Expanded(
-                                    flex: 2,
-                                    child: BillingSection(
-                                        productsByCategories:
-                                            state.productsByCategories,
-                                        formKey: _formKey))
-                                : const SizedBox.shrink()
-                          ]);
+                      if (state.productsByCategories.isNotEmpty) {
+                        return Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                  flex: 5,
+                                  child: ProductsSection(
+                                      productsByCategories:
+                                          state.productsByCategories,
+                                      categoryList: state.productsByCategories
+                                          .map((e) =>
+                                              e.categoryName
+                                                  .trim()[0]
+                                                  .toUpperCase() +
+                                              e.categoryName
+                                                  .trim()
+                                                  .substring(1)
+                                                  .toLowerCase())
+                                          .toList())),
+                              context
+                                      .read<BillingBloc>()
+                                      .customer
+                                      .productList
+                                      .isNotEmpty
+                                  ? Expanded(
+                                      flex: 2,
+                                      child: BillingSection(
+                                          productsByCategories:
+                                              state.productsByCategories,
+                                          formKey: _formKey))
+                                  : const SizedBox.shrink()
+                            ]);
+                      } else {
+                        return Center(
+                            child: Text(StringConstants.kNoDataAvailable,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .tinier
+                                    .copyWith(
+                                        color: AppColor.saasifyLightGrey)));
+                      }
                     } else if (state is ErrorFetchingProductsByCategory) {
-                      return const Center(
-                          child: Text(StringConstants.kNoDataAvailable));
+                      return Center(
+                          child: Text(StringConstants.kNoDataAvailable,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .tinier
+                                  .copyWith(color: AppColor.saasifyLightGrey)));
                     } else {
                       return const SizedBox.shrink();
                     }
