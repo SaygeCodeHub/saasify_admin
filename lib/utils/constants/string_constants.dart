@@ -39,6 +39,7 @@ class StringConstants {
   static const kPay = 'Pay';
   static const kDiscountCent = 'Discount(%)';
   static const kDiscount = 'Discount';
+  static const kEdit = 'Edit';
   static const kPaymentMethods = 'Choose Payment Type';
   static const kGrandTotal = 'Grand Total';
   static const kTotalAmount = ' Total Amount';
@@ -80,6 +81,7 @@ class StringConstants {
   static const kChooseVariant = 'Choose Variant';
   static const kDashboard = 'Dashboard';
   static const kPOS = 'POS';
+  static const kCategories = 'Categories';
   static const kSearchProduct = 'Search Product';
   static const kAddManually = 'ADD MANUALLY';
   static const kScanBarcode = 'SCAN BARCODE';
