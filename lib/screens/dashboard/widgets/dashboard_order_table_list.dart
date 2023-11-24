@@ -76,7 +76,7 @@ class DashboardOrderTableList extends StatelessWidget {
                     DataCell(Text(ordersData[index].customerName,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(ordersData[index].modeOfPayment,
+                    DataCell(Text(ordersData[index].paymentType,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
                     DataCell(Align(

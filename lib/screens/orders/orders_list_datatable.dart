@@ -8,7 +8,7 @@ import 'package:saasify/utils/constants/string_constants.dart';
 import 'order_details_screen.dart';
 
 class OrdersListDataTable extends StatelessWidget {
-  final List ordersData;
+  final List<OrdersData> ordersData;
 
   const OrdersListDataTable({Key? key, required this.ordersData})
       : super(key: key);
@@ -78,65 +78,75 @@ class OrdersListDataTable extends StatelessWidget {
           ],
           rows: List.generate(
               ordersData.length,
-              (index) => DataRow(cells: [
-                    DataCell(Align(
-                      alignment: Alignment.center,
-                      child: Text(ordersData[index].orderId.toString(),
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    )),
-                    DataCell(
-                      Text(ordersData[index].orderedOn.toString(),
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    ),
-                    DataCell(Text(ordersData[index].customerContact.toString(),
-                        style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(ordersData[index].customerName.toString(),
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(ordersData[index].modeOfPayment.toString(),
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Align(
-                      alignment: Alignment.center,
-                      child: Text(ordersData[index].totalAmount.toString(),
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    )),
-                    DataCell(Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4, horizontal: 8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: AppColor.saasifyLighterGreen),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(Icons.circle,
-                                size: 8, color: AppColor.saasifyGreen),
-                            const SizedBox(width: 6),
-                            Text(
-                                ordersData[index]
-                                        .paymentStatus
-                                        .trim()
-                                        .substring(0, 1)
-                                        .toUpperCase()
-                                        .toString() +
+              (index) => DataRow(
+                      onLongPress: () {
+                        Navigator.pushReplacementNamed(
+                            context, OrderDetailsScreen.routeName,
+                            arguments: ordersData);
+                      },
+                      cells: [
+                        DataCell(Align(
+                          alignment: Alignment.center,
+                          child: Text(ordersData[index].orderId.toString(),
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.xxTiniest),
+                        )),
+                        DataCell(
+                          Text(
+                              DateFormat('dd MMM yyyy')
+                                  .format(ordersData[index].orderDate),
+                              style: Theme.of(context).textTheme.xxTiniest),
+                        ),
+                        DataCell(Text(
+                            ordersData[index].customerContact.toString(),
+                            style: Theme.of(context).textTheme.xxTiniest)),
+                        DataCell(Text(ordersData[index].customerName.toString(),
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.xxTiniest)),
+                        DataCell(Text(ordersData[index].paymentType.toString(),
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.xxTiniest)),
+                        DataCell(Align(
+                          alignment: Alignment.center,
+                          child: Text(ordersData[index].totalAmount.toString(),
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.xxTiniest),
+                        )),
+                        DataCell(Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: AppColor.saasifyLighterGreen),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(Icons.circle,
+                                    size: 8, color: AppColor.saasifyGreen),
+                                const SizedBox(width: 6),
+                                Text(
                                     ordersData[index]
-                                        .paymentStatus
-                                        .trim()
-                                        .substring(
-                                          1,
-                                        )
-                                        .toLowerCase()
-                                        .toString(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .xxTiniest
-                                    .copyWith(color: AppColor.saasifyGreen)),
-                          ],
-                        ))),
-                  ])))
+                                            .paymentStatus
+                                            .trim()
+                                            .substring(0, 1)
+                                            .toUpperCase()
+                                            .toString() +
+                                        ordersData[index]
+                                            .paymentStatus
+                                            .trim()
+                                            .substring(
+                                              1,
+                                            )
+                                            .toLowerCase()
+                                            .toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .xxTiniest
+                                        .copyWith(
+                                            color: AppColor.saasifyGreen)),
+                              ],
+                            ))),
+                      ])))
     ]));
   }
 }

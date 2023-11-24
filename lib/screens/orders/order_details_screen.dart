@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/screens/orders/widgets/order_details_header_widget.dart';
 import 'package:saasify/screens/orders/widgets/order_details_payment_info.dart';
 import 'package:saasify/screens/orders/widgets/order_details_product_list.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_spacing.dart';
-import '../../data/models/orders/fetch_orders_model.dart';
 import '../../utils/constants/string_constants.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';

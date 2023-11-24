@@ -31,48 +31,51 @@ class BillingProductsList extends StatelessWidget {
                       .xxTiniest
                       .copyWith(color: AppColor.saasifyRed))),
         ]),
-        Container(
-            decoration: BoxDecoration(
-                color: AppColor.saasifyWhite,
-                borderRadius: BorderRadius.circular(kCircularRadius)),
-            child: ListView.separated(
-                physics: const BouncingScrollPhysics(),
-                itemCount:
-                    context.read<BillingBloc>().customer.productList.length,
-                shrinkWrap: true,
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: spacingXSmall),
-                itemBuilder: (context, index) {
-                  return Padding(
-                      padding: const EdgeInsets.only(
-                          right: spacingLarge,
-                          top: spacingXLarge,
-                          left: spacingSmall),
-                      child: Row(children: [
-                        SizedBox(
-                          height: kImageHeight,
-                          width: kImageHeight,
-                          child: Image.network(
-                            context
+        Expanded(
+          child: Container(
+              padding: const EdgeInsets.only(bottom: spacingStandard),
+              decoration: BoxDecoration(
+                  color: AppColor.saasifyWhite,
+                  borderRadius: BorderRadius.circular(kCircularRadius)),
+              child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount:
+                      context.read<BillingBloc>().customer.productList.length,
+                  shrinkWrap: true,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: spacingXSmall),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                        padding: const EdgeInsets.only(
+                            right: spacingLarge,
+                            top: spacingXLarge,
+                            left: spacingSmall),
+                        child: Row(children: [
+                          SizedBox(
+                            height: kImageHeight,
+                            width: kImageHeight,
+                            child: Image.network(
+                              context
+                                  .read<BillingBloc>()
+                                  .customer
+                                  .productList[index]
+                                  .product
+                                  .variants[0]
+                                  .images[0],
+                            ),
+                          ),
+                          const SizedBox(width: spacingLarge),
+                          Expanded(
+                              child: BillingProductTileBody(
+                            selectedProduct: context
                                 .read<BillingBloc>()
                                 .customer
-                                .productList[index]
-                                .product
-                                .variants[0]
-                                .images[0],
-                          ),
-                        ),
-                        const SizedBox(width: spacingLarge),
-                        Expanded(
-                            child: BillingProductTileBody(
-                          selectedProduct: context
-                              .read<BillingBloc>()
-                              .customer
-                              .productList[index],
-                          productsByCategories: productsByCategories,
-                        ))
-                      ]));
-                })),
+                                .productList[index],
+                            productsByCategories: productsByCategories,
+                          ))
+                        ]));
+                  })),
+        ),
       ],
     ));
   }
