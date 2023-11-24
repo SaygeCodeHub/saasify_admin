@@ -27,7 +27,7 @@ class CategoriesScreen extends StatelessWidget {
 
     return Scaffold(
         key: _scaffoldKey,
-        drawer: const SideBar(selectedIndex: 6),
+        drawer: const SideBar(selectedIndex: 4),
         body: Flex(
             direction:
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),

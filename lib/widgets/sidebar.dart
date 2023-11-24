@@ -100,34 +100,9 @@ class SideBar extends StatelessWidget {
                 ),
 
                 ListTile(
-                  title: Text(StringConstants.kOrders,
-                      style: Theme.of(context).textTheme.xTiniest.copyWith(
-                          color: (selectedIndex == 4)
-                              ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyDarkGrey,
-                          fontWeight: FontWeight.w600)),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(
-                        context, OrdersScreen.routeName);
-                  },
-                ),
-                ListTile(
-                  title: Text(StringConstants.kInventoryManagement,
-                      style: Theme.of(context).textTheme.xTiniest.copyWith(
-                          color: (selectedIndex == 5)
-                              ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyDarkGrey,
-                          fontWeight: FontWeight.w600)),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(
-                        context, InventoryListScreen.routeName);
-                  },
-                ),
-
-                ListTile(
                   title: Text(StringConstants.kCategories,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
-                          color: (selectedIndex == 6)
+                          color: (selectedIndex == 4)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyDarkGrey,
                           fontWeight: FontWeight.w600)),
@@ -139,6 +114,32 @@ class SideBar extends StatelessWidget {
                     }
                   },
                 ),
+
+                ListTile(
+                  title: Text(StringConstants.kOrders,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          color: (selectedIndex == 5)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyDarkGrey,
+                          fontWeight: FontWeight.w600)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, OrdersScreen.routeName);
+                  },
+                ),
+                ListTile(
+                  title: Text(StringConstants.kInventoryManagement,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          color: (selectedIndex == 6)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyDarkGrey,
+                          fontWeight: FontWeight.w600)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, InventoryListScreen.routeName);
+                  },
+                ),
+
                 // ListTile(
                 //   title: Text('Profile Management',
                 //       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
