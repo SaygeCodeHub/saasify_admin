@@ -72,7 +72,17 @@ class OrderInfoWidget extends StatelessWidget {
                           .xTiniest
                           .copyWith(color: AppColor.saasifyGreyBlue)),
                   const SizedBox(width: spacingXXSmall),
-                  Text(ordersData.paymentStatus,
+                  Text(
+                      ordersData.paymentStatus
+                              .trim()
+                              .substring(0, 1)
+                              .toUpperCase() +
+                          ordersData.paymentStatus
+                              .trim()
+                              .substring(
+                                1,
+                              )
+                              .toLowerCase(),
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest

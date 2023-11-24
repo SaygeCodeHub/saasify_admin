@@ -29,6 +29,14 @@ class OrderDetailsListDataTable extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
+              child: Text(StringConstants.kCategory,
+                  style: Theme.of(context)
+                      .textTheme
+                      .xTiniest
+                      .copyWith(fontWeight: FontWeight.w600)),
+            )),
+            DataColumn(
+                label: Expanded(
                     child: Center(
                         child: Text(StringConstants.kUnitPrice,
                             style: Theme.of(context)
@@ -39,6 +47,25 @@ class OrderDetailsListDataTable extends StatelessWidget {
                 label: Expanded(
                     child: Center(
               child: Text(StringConstants.kQuantity,
+                  style: Theme.of(context)
+                      .textTheme
+                      .xTiniest
+                      .copyWith(fontWeight: FontWeight.w600)),
+            ))),
+            DataColumn(
+                label: Expanded(
+              child: Center(
+                child: Text(StringConstants.kDiscount,
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
+              ),
+            )),
+            DataColumn(
+                label: Expanded(
+                    child: Center(
+              child: Text(StringConstants.kGrandTotal,
                   style: Theme.of(context)
                       .textTheme
                       .xTiniest
@@ -65,6 +92,20 @@ class OrderDetailsListDataTable extends StatelessWidget {
                           ],
                         ))),
                     DataCell(Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                            ordersData.itemsOrdered[index].categoryName
+                                    .trim()
+                                    .substring(0, 1)
+                                    .toUpperCase() +
+                                ordersData.itemsOrdered[index].categoryName
+                                    .trim()
+                                    .substring(
+                                      1,
+                                    )
+                                    .toLowerCase(),
+                            style: Theme.of(context).textTheme.xxTiniest))),
+                    DataCell(Align(
                         alignment: Alignment.center,
                         child: Text(
                             ordersData.itemsOrdered[index].cost.toString(),
@@ -73,6 +114,14 @@ class OrderDetailsListDataTable extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text(
                             ordersData.itemsOrdered[index].count.toString(),
+                            style: Theme.of(context).textTheme.xxTiniest))),
+                    DataCell(Align(
+                        alignment: Alignment.center,
+                        child: Text(ordersData.discountTotal.toString(),
+                            style: Theme.of(context).textTheme.xxTiniest))),
+                    DataCell(Align(
+                        alignment: Alignment.center,
+                        child: Text(ordersData.totalAmount.toString(),
                             style: Theme.of(context).textTheme.xxTiniest)))
                   ])))
     ]);
