@@ -30,23 +30,21 @@ class ProductFormSection1 extends StatelessWidget {
               .xxTiniest
               .copyWith(fontWeight: FontWeight.w700)),
       const SizedBox(height: spacingXMedium),
-      CustomDropdownWidget(
-          validator: (value) {
-            if (value == null || value.trim() == '') {
-              return 'Please Select a Category';
-            }
-            return null;
-          },
-          addOption: true,
-          hintText: 'Add New Category',
-          canEdit: !(isVariant && !isEdit),
-          dataMap: dataMap,
-          mapKey: 'category_name',
-          initialValue: dataMap['category_name'] ??
-                  (categoryList.map((e) => e.categoryName).toList().isNotEmpty)
-              ? categoryList.map((e) => e.categoryName).toList()[0]
-              : 'Add New',
-          listItems:
+          CustomDropdownWidget(
+              validator: (value) {
+                if (value == null || value.trim() == '') {
+                  return 'Please Select a Category';
+                }
+                return null;
+              },
+              addOption: true,
+              hintText: 'Add New Category',
+              canEdit: !(isVariant && !isEdit),
+              dataMap: dataMap,
+              mapKey: 'category_name',
+              initialValue: dataMap['category_name'] ??
+                  categoryList.map((e) => e.categoryName).toList()[0],
+              listItems:
               categoryList.map((e) => e.categoryName).toList() + ['Add New']),
       const SizedBox(height: spacingHuge),
       Wrap(children: [

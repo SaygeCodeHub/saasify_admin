@@ -4,6 +4,7 @@ import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/bloc/product/product_event.dart';
 import 'package:saasify/bloc/upload/upload_bloc.dart';
 import 'package:saasify/bloc/upload/upload_events.dart';
+import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
@@ -108,6 +109,40 @@ class ProductForm extends StatelessWidget {
             )
           ],
         ),
+        const SizedBox(height: spacingStandard),
+        Visibility(
+          visible: isEdit,
+          child: Container(
+              padding: const EdgeInsets.symmetric(
+                  vertical: 4, horizontal: 8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: (dataMap['draft'] ?? false)
+                      ? AppColor.saasifyLighterGrey
+                      : AppColor.saasifyLighterGreen),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.circle,
+                      size: 8,
+                      color: (dataMap['draft'] ?? false)
+                          ? AppColor.saasifyLightGrey
+                          : AppColor.saasifyGreen),
+                  const SizedBox(width: 6),
+                  Text(
+                      (dataMap['draft']??false)
+                          ? 'Draft'
+                          : 'Published',
+                      style: Theme.of(context)
+                          .textTheme
+                          .xxTiniest
+                          .copyWith(
+                          color: (dataMap['draft']??false)
+                              ? AppColor.saasifyLightGrey
+                              : AppColor.saasifyGreen)),
+                ],
+              )),
+        ),
         const SizedBox(height: spacingXHuge),
         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           ProductFormSection1(
@@ -126,33 +161,26 @@ class ProductForm extends StatelessWidget {
         FormImageSection(isEdit: isEdit, dataMap: dataMap),
         const SizedBox(height: spacingMedium),
         Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          SecondaryButton(
-              onPressed: () {
-                dataMap['draft'] = true;
-                if (_formKey.currentState!.validate()) {
-                  if (context.read<UploadBloc>().displayImageList.isNotEmpty) {
-                    if (context.read<UploadBloc>().pickedImageList.isNotEmpty) {
-                      context.read<UploadBloc>().add(UploadImage(
-                          multiplePartFileList:
-                              context.read<UploadBloc>().pickedFiles));
+          Visibility(
+            visible: dataMap['draft'] != false,
+            child: SecondaryButton(
+                onPressed: () {
+                  dataMap['draft'] = true;
+                  if (_formKey.currentState!.validate()) {
+                    if (isEdit) {
+                      context
+                          .read<ProductBloc>()
+                          .add(EditProduct(productDetailsMap: dataMap));
                     } else {
-                      if (isEdit) {
-                        context
-                            .read<ProductBloc>()
-                            .add(EditProduct(productDetailsMap: dataMap));
-                      } else {
-                        context
-                            .read<ProductBloc>()
-                            .add(SaveProduct(productDetailsMap: dataMap));
-                      }
+                      context
+                          .read<ProductBloc>()
+                          .add(SaveProduct(productDetailsMap: dataMap));
                     }
-                  } else {
-                    context.read<UploadBloc>().add(NoImageSelected());
                   }
-                }
-              },
-              buttonWidth: spacingXXXXHuge,
-              buttonTitle: StringConstants.kSave),
+                },
+                buttonWidth: spacingXXXXHuge,
+                buttonTitle: StringConstants.kSave),
+          ),
           const SizedBox(width: spacingLarge),
           PrimaryButton(
               onPressed: () {

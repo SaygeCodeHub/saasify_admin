@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
@@ -11,7 +10,6 @@ import 'package:saasify/data/models/screen_arguments/add_product_screen_argument
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/screens/product/widgets/product_form.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/custom_alert_box.dart';
@@ -74,7 +72,7 @@ class AddProductScreen extends StatelessWidget {
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
                                 primaryButtonTitle: StringConstants.kOk,
-                                checkMarkVisible: false,
+                                errorMarkVisible: true,
                                 primaryOnPressed: () {
                                   Navigator.pop(context);
                                   Navigator.of(context).pushReplacementNamed(
@@ -117,7 +115,6 @@ class AddProductScreen extends StatelessWidget {
                                             }));
                                   },
                                   secondaryOnPressed: () {
-                                    DatabaseUtil.products.clear();
                                     context
                                         .read<ProductBloc>()
                                         .add(FetchProductList());
@@ -150,7 +147,7 @@ class AddProductScreen extends StatelessWidget {
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
                                 primaryButtonTitle: StringConstants.kOk,
-                                checkMarkVisible: false,
+                                errorMarkVisible: true,
                                 primaryOnPressed: () {
                                   Navigator.pop(context);
                                   Navigator.pushReplacementNamed(
@@ -165,13 +162,11 @@ class AddProductScreen extends StatelessWidget {
                                 message: state.message,
                                 primaryButtonTitle: StringConstants.kOk,
                                 checkMarkVisible: false,
+                                errorMarkVisible: true,
                                 primaryOnPressed: () {
                                   Navigator.pop(context);
-                                  context
-                                      .read<ProductBloc>()
-                                      .add(FetchProductList());
-                                  // Navigator.pushReplacementNamed(
-                                  //     context, ProductListScreen.routeName);
+                                  Navigator.pushReplacementNamed(
+                                      context, ProductListScreen.routeName);
                                 }));
                       }
                     },

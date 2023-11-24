@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/pos/billing_bloc.dart';
 import 'package:saasify/bloc/pos/billing_event.dart';
 import 'package:saasify/configs/app_color.dart';
+import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/billing/customer_model.dart';
@@ -38,8 +39,7 @@ class UnsettledTabs extends StatelessWidget {
           GridView.builder(
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1.2, crossAxisCount: 5),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5,childAspectRatio: context.responsive(0.95,desktop: 1.05)),
               itemCount: customerIdList.length + 1,
               itemBuilder: (context, index) {
                 if (customerIdList.length == index) {
@@ -96,12 +96,16 @@ class UnsettledTabs extends StatelessWidget {
                             child: Padding(
                                 padding: const EdgeInsets.all(spacingStandard),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
                                           children: [
+                                            Expanded(flex: 4,
+                                                child: Image.asset(
+                                                'assets/user.png',
+                                                fit: BoxFit.fill)),
+                                            const Spacer(flex:6),
                                             InkWell(
                                                 onTap: () {
                                                   showDialog(
@@ -138,47 +142,34 @@ class UnsettledTabs extends StatelessWidget {
                                                                 },
                                                               ));
                                                 },
-                                                child: const Icon(Icons.close,
-                                                    color:
-                                                        AppColor.saasifyBlack))
+                                                child: Image.asset('close.png',height: kCloseIconSize,width: kCloseIconSize))
                                           ]),
                                       Expanded(
-                                        child: Row(children: [
-                                          Expanded(
-                                            child: Image.asset(
-                                                'assets/user.png',
-                                                fit: BoxFit.fill),
-                                          ),
-                                          const SizedBox(width: spacingXXSmall),
-                                          Expanded(
-                                              flex: 2,
-                                              child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                        '${customerData["${customerIdList[index]}"]!.customerName} - ${index + 1}',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .tiniest
-                                                            .copyWith(
-                                                                color: AppColor
-                                                                    .saasifyBlack)),
-                                                    const SizedBox(
-                                                        height:
-                                                            spacingSmallest),
-                                                    Text(
-                                                        'Total - ₹ ${customerData["${customerIdList[index]}"]!.billDetails.total}',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .tiniest
-                                                            .copyWith(
-                                                                color: AppColor
-                                                                    .saasifyBlack))
-                                                  ]))
-                                        ]),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: spacingSmall,vertical: spacingXXSmall),
+                                          child: Column(
+                                              mainAxisSize:
+                                                  MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                    (customerData["${customerIdList[index]}"]!.customerName != '')?customerData["${customerIdList[index]}"]!.customerName:'Customer',
+                                                    textScaleFactor: context.responsive(0.85,desktop: 1),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .tiniest.copyWith(fontWeight: FontWeight.w500)),
+                                                const SizedBox(
+                                                    height:
+                                                        spacingSmallest),
+                                                Text(
+                                                    'Total - ₹ ${customerData["${customerIdList[index]}"]!.billDetails.total}',
+                                                    textScaleFactor: context.responsive(0.85,tablets: 1),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .xTiniest.copyWith(color: AppColor.saasifyLightDeepBlue))
+                                              ]),
+                                        ),
                                       ),
                                       PrimaryButton(
                                           onPressed: () {},

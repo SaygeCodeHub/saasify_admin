@@ -100,8 +100,8 @@ class ProductFormSection2 extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(height: spacingXMedium),
           CustomDropdownWidget(
-              initialValue: dataMap['unit'] ?? "units",
-              listItems: const ["units", "kg", "l", "gm", "m"],
+              initialValue: dataMap['unit'] ?? "nos",
+              listItems: ["nos", "kg", "l", "gm", "m"] + ((dataMap['unit'] != null && !["nos", "kg", "l", "gm", "m"].contains(dataMap['unit']))?[dataMap['unit']]:[]),
               dataMap: dataMap,
               mapKey: 'unit')
         ]))

@@ -4,6 +4,7 @@ import 'package:saasify/bloc/pos/billing_bloc.dart';
 import 'package:saasify/bloc/pos/billing_event.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
+import 'package:saasify/widgets/custom_alert_box.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../widgets/primary_button.dart';
@@ -22,8 +23,15 @@ class BillingSectionFooter extends StatelessWidget {
                     '') {
                   context.read<BillingBloc>().add(AddOrderToPayLater());
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please Add Contact')));
+                  showDialog(
+                      context: context,
+                      builder: (context) => CustomAlertDialog(
+                          title: StringConstants.kWarning,
+                          message: 'Mobile No haas not been added',
+                          primaryButtonTitle: StringConstants.kOk,
+                          primaryOnPressed: (){
+                            Navigator.pop(context);
+                          }));
                 }
               },
               child: Text(
@@ -41,8 +49,15 @@ class BillingSectionFooter extends StatelessWidget {
                 context: context,
                 builder: (context) => const PaymentDialogue());
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Please Add Contact')));
+            showDialog(
+                context: context,
+                builder: (context) => CustomAlertDialog(
+                    title: StringConstants.kWarning,
+                    message: 'Mobile No haas not been added',
+                    primaryButtonTitle: StringConstants.kOk,
+                    primaryOnPressed: (){
+                      Navigator.pop(context);
+                    }));
           }
         },
         buttonTitle: StringConstants.kSettleBill,

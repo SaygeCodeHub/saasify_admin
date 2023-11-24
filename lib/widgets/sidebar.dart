@@ -6,6 +6,7 @@ import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/data/database/database_util.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
@@ -13,7 +14,6 @@ import 'package:saasify/screens/orders/orders_screen.dart';
 import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-import 'package:saasify/utils/database_util.dart';
 
 class SideBar extends StatelessWidget {
   static String userName = '';

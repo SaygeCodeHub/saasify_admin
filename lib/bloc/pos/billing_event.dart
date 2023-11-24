@@ -65,7 +65,7 @@ class CalculateBill extends BillingEvents {
 class AddOrderToPayLater extends BillingEvents {}
 
 class RemovePendingOrder extends BillingEvents {
-  final int orderID;
+  final String orderID;
 
   RemovePendingOrder({required this.orderID});
 }
