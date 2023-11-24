@@ -63,7 +63,7 @@ class OrderDetailsListDataTable extends StatelessWidget {
             DataColumn(
                 label: Expanded(
               child: Center(
-                child: Text(StringConstants.kDiscount,
+                child: Text(StringConstants.kDiscountCent,
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
@@ -130,16 +130,19 @@ class OrderDetailsListDataTable extends StatelessWidget {
                     DataCell(Align(
                         alignment: Alignment.center,
                         child: Text(
-                            (ordersData.itemsOrdered[index].cost -
-                                    (ordersData.itemsOrdered[index].cost) *
-                                        (ordersData.itemsOrdered[index]
-                                                .discountPercent /
-                                            100))
+                            ordersData.itemsOrdered[index].discountPercent
                                 .toString(),
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,
-                        child: Text(ordersData.totalAmount.toString(),
+                        child: Text(
+                            ((ordersData.itemsOrdered[index].cost *
+                                        ordersData.itemsOrdered[index].count) *
+                                    ((100 -
+                                            ordersData.itemsOrdered[index]
+                                                .discountPercent) /
+                                        100))
+                                .toString(),
                             style: Theme.of(context).textTheme.xxTiniest)))
                   ])))
     ]);

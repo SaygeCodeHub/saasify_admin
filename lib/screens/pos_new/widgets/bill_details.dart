@@ -49,7 +49,7 @@ class BillDetails extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(StringConstants.kDiscount,
+                  Text(StringConstants.kDiscountCent,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AppColor.saasifyDarkestBlack)),

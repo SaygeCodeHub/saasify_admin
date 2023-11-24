@@ -37,6 +37,7 @@ class StringConstants {
   static const kSettleBill = 'Settle Bill';
   static const kPayLater = 'Pay Later';
   static const kPay = 'Pay';
+  static const kDiscountCent = 'Discount(%)';
   static const kDiscount = 'Discount';
   static const kPaymentMethods = 'Choose Payment Type';
   static const kGrandTotal = 'Grand Total';
