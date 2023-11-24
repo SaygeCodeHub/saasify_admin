@@ -3,7 +3,6 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/screens/orders/widgets/order_bill_details.dart';
 import 'package:saasify/screens/orders/widgets/order_details_header_widget.dart';
-import 'package:saasify/screens/orders/widgets/order_details_payment_info.dart';
 import 'package:saasify/screens/orders/widgets/order_details_product_list.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_color.dart';
@@ -55,12 +54,24 @@ class OrderDetailsScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w700))),
                               context.responsive(const SizedBox(),
                                   desktop: const Spacer()),
-                              const Spacer()
+                              const Spacer(),
+                              const Row(
+                                children: [
+                                  Icon(Icons.share),
+                                  SizedBox(
+                                    width: spacingXMedium,
+                                  ),
+                                  Icon(Icons.download),
+                                  SizedBox(
+                                    width: spacingXMedium,
+                                  ),
+                                  Icon(Icons.print),
+                                ],
+                              )
                             ]),
                             const SizedBox(height: spacingStandard),
                             OrderDetailsHeaderWidget(ordersData: ordersData),
                             const SizedBox(height: spacingMedium),
-                            OrderDetailsPaymentInfo(ordersData: ordersData),
                             const SizedBox(height: spacingMedium),
                             OrderDetailsProductList(ordersData: ordersData),
                             const SizedBox(height: spacingMedium),

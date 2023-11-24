@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/screens/orders/widgets/payment_info_widget.dart';
 
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../data/models/orders/fetch_orders_model.dart';
+import 'customer_info_widget.dart';
 
 class OrderDetailsHeaderWidget extends StatelessWidget {
   final OrdersData ordersData;
@@ -26,48 +28,74 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Order ID: ${ordersData.orderId}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .xTiniest
-                                      .copyWith(fontWeight: FontWeight.w600)),
-                              const SizedBox(height: spacingXSmall),
-                              Text(
-                                  DateFormat('dd MMM yyyy')
-                                      .format(ordersData.orderDate),
-                                  style: Theme.of(context).textTheme.xxTiniest),
-                              const SizedBox(height: spacingXXSmall),
-                              Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: spacingXSmall,
-                                      horizontal: spacingXXSmall),
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.circular(kGeneralRadius),
-                                      color: AppColor.saasifyLighterGreen),
-                                  child: Text(
-                                      ordersData.paymentStatus
-                                              .trim()
-                                              .substring(0, 1)
-                                              .toUpperCase() +
-                                          ordersData.paymentStatus
-                                              .trim()
-                                              .substring(
-                                                1,
-                                              )
-                                              .toLowerCase(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiniest
-                                          .copyWith(
-                                              color: AppColor.saasifyGreen)))
-                            ])
-                      ])
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text('Order ID: ${ordersData.orderId}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .xTiniest
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w600)),
+                                      const SizedBox(height: spacingXSmall),
+                                      Text(
+                                          DateFormat('dd MMM yyyy')
+                                              .format(ordersData.orderDate),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .xxTiniest),
+                                      const SizedBox(height: spacingXXSmall),
+                                      Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: spacingXSmall,
+                                              horizontal: spacingXXSmall),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      kGeneralRadius),
+                                              color:
+                                                  AppColor.saasifyLighterGreen),
+                                          child: Text(
+                                              ordersData.paymentStatus
+                                                      .trim()
+                                                      .substring(0, 1)
+                                                      .toUpperCase() +
+                                                  ordersData.paymentStatus
+                                                      .trim()
+                                                      .substring(
+                                                        1,
+                                                      )
+                                                      .toLowerCase(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .xxTiniest
+                                                  .copyWith(
+                                                      color: AppColor
+                                                          .saasifyGreen)))
+                                    ])
+                              ]),
+                          const SizedBox(
+                            height: spacingLarge,
+                          ),
+                          CustomerInfoWidget(
+                            ordersData: ordersData,
+                          )
+                        ],
+                      ),
+                      PaymentInfoWidget(
+                        ordersData: ordersData,
+                      )
+                    ],
+                  )
                 ])));
   }
 }

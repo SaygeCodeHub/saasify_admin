@@ -11,6 +11,7 @@ import 'package:saasify/screens/orders/orders_screen.dart';
 import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/responsive.dart';
+import '../screens/categories/categories_screen.dart';
 import '../screens/onboarding/auhentication_screen.dart';
 import '../screens/orders/order_details_screen.dart';
 import '../screens/product/add_product_screen.dart';
@@ -22,6 +23,10 @@ class AppRoutes {
         return _createRoute(AuthenticationScreen());
       case DashboardsScreen.routeName:
         return _createRoute(DashboardsScreen());
+
+      case CategoriesScreen.routeName:
+        return _createRoute(CategoriesScreen());
+
       case ProductListScreen.routeName:
         return _createRoute(ProductListScreen());
       case InventoryListScreen.routeName:

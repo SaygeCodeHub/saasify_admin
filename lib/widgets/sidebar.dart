@@ -15,6 +15,8 @@ import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 
+import '../screens/categories/categories_screen.dart';
+
 class SideBar extends StatelessWidget {
   static String userName = '';
   static int userContact = 0;
@@ -96,10 +98,27 @@ class SideBar extends StatelessWidget {
                         context, ProductListScreen.routeName);
                   },
                 ),
+
+                ListTile(
+                  title: Text(StringConstants.kCategories,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          color: (selectedIndex == 4)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyDarkGrey,
+                          fontWeight: FontWeight.w600)),
+                  onTap: () async {
+                    await DatabaseUtil.products.clear();
+                    if (context.mounted) {
+                      Navigator.pushReplacementNamed(
+                          context, CategoriesScreen.routeName);
+                    }
+                  },
+                ),
+
                 ListTile(
                   title: Text(StringConstants.kOrders,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
-                          color: (selectedIndex == 4)
+                          color: (selectedIndex == 5)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyDarkGrey,
                           fontWeight: FontWeight.w600)),
@@ -111,7 +130,7 @@ class SideBar extends StatelessWidget {
                 ListTile(
                   title: Text(StringConstants.kInventoryManagement,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
-                          color: (selectedIndex == 5)
+                          color: (selectedIndex == 6)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyDarkGrey,
                           fontWeight: FontWeight.w600)),
@@ -120,6 +139,7 @@ class SideBar extends StatelessWidget {
                         context, InventoryListScreen.routeName);
                   },
                 ),
+
                 // ListTile(
                 //   title: Text('Profile Management',
                 //       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
