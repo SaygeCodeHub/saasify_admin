@@ -35,7 +35,7 @@ class OrdersListDataTable extends StatelessWidget {
                                 .xTiniest
                                 .copyWith(fontWeight: FontWeight.w600))))),
             DataColumn(
-                label: Text(StringConstants.kOrderedOn,
+                label: Text(StringConstants.kOrderedDate,
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest

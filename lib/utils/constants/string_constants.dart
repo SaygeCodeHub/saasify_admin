@@ -11,7 +11,7 @@ class StringConstants {
   static const kWelcome = 'Welcome :)';
   static const kEnterOtp = 'Enter Otp :)';
   static const kOrderNo = 'Order No';
-  static const kOrderedOn = 'Ordered On';
+  static const kOrderedDate = 'Ordered Date';
   static const kUnitPrice = 'Unit Price';
   static const kPaymentStatus = 'Payment Status';
   static const kProductAmount = 'Total Amount';
