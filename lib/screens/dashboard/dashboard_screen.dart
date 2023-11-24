@@ -69,9 +69,10 @@ class DashboardsScreen extends StatelessWidget {
                                   ],
                                 ),
                                 context.responsive(const SizedBox(),
-                                    desktop: const SizedBox(height: 20)),
+                                    desktop:
+                                        const SizedBox(height: spacingLarge)),
                                 DashboardHeaderCards(),
-                                const SizedBox(height: 20),
+                                const SizedBox(height: spacingLarge),
                                 Expanded(
                                   child: DashboardBody(
                                       ordersData: state.fetchOrdersList),

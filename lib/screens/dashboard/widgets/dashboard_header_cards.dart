@@ -35,44 +35,51 @@ class DashboardHeaderCards extends StatelessWidget {
       shrinkWrap: true,
       itemCount: 3,
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-            height: spacingStandard,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(kCircularRadius),
-              boxShadow: const [
-                BoxShadow(
-                  color: AppColor.saasifyLightPaleGrey,
-                  blurRadius: 5.0,
-                )
-              ],
-              color: AppColor.saasifyWhite,
-            ),
-            child: Center(
-              child: ListTile(
-                  titleAlignment: ListTileTitleAlignment.titleHeight,
-                  tileColor: AppColor.saasifyWhite,
-                  leading: Image.asset(cardItems[index]['leading'].toString()),
-                  title: Text(cardItems[index]['title'].toString(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .xTiny
-                          .copyWith(fontWeight: FontWeight.w700)),
-                  subtitle: Text(cardItems[index]['subtitle'].toString(),
-                      style: Theme.of(context).textTheme.xTiniest),
-                  trailing: (cardItems[index]['trailing'] == null)
-                      ? null
-                      : CircularPercentIndicator(
-                          radius: 24.0,
-                          lineWidth: 4.0,
-                          animation: true,
-                          percent: 0.8,
-                          center: Text(cardItems[index]['trailing'].toString()),
-                          circularStrokeCap: CircularStrokeCap.round,
-                          progressColor: AppColor.saasifyLightDeepBlue)),
-            ));
+        return Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: Container(
+              height: spacingStandard,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(kCircularRadius),
+                boxShadow: const [
+                  BoxShadow(
+                    color: AppColor.saasifyLightPaleGrey,
+                    blurRadius: 5.0,
+                  )
+                ],
+                color: AppColor.saasifyWhite,
+              ),
+              child: Center(
+                child: ListTile(
+                    titleAlignment: ListTileTitleAlignment.titleHeight,
+                    tileColor: AppColor.saasifyWhite,
+                    leading:
+                        Image.asset(cardItems[index]['leading'].toString()),
+                    title: Text(cardItems[index]['title'].toString(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .xTiny
+                            .copyWith(fontWeight: FontWeight.w700)),
+                    subtitle: Text(cardItems[index]['subtitle'].toString(),
+                        style: Theme.of(context).textTheme.xTiniest),
+                    trailing: (cardItems[index]['trailing'] == null)
+                        ? null
+                        : CircularPercentIndicator(
+                            radius: spacingXLarge,
+                            lineWidth: spacingXSmall,
+                            animation: true,
+                            percent: kPercent,
+                            center:
+                                Text(cardItems[index]['trailing'].toString()),
+                            circularStrokeCap: CircularStrokeCap.round,
+                            progressColor: AppColor.saasifyLightDeepBlue)),
+              )),
+        );
       },
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, childAspectRatio: 4, crossAxisSpacing: 40),
+          crossAxisCount: 3,
+          childAspectRatio: spacingXSmall,
+          crossAxisSpacing: spacingXXHuge),
     );
   }
 }

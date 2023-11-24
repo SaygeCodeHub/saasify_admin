@@ -1,6 +1,7 @@
 class StringConstants {
   static const kHello = 'Hello :)';
   static const kName = 'Name';
+  static const kNameWithColon = 'Name :';
   static const kWhatsYourName = "What’s your name?";
   static const kWhyDoINeedToAddCompany = "Why do I need to add a new company?";
   static const kContactNumber = 'Contact Number';
@@ -50,6 +51,7 @@ class StringConstants {
   static const kSave = 'Save';
   static const kMeasuringQuantity = 'Measuring Quantity';
   static const kStock = 'Stock';
+  static const kStockWithColon = 'Stock :';
   static const kDelete = 'Delete';
   static const kConfirm = 'Confirm';
   static const kWarning = 'Warning';
@@ -78,6 +80,9 @@ class StringConstants {
   static const kAddInstructions = 'Add Instructions';
   static const kChooseVariant = 'Choose Variant';
   static const kDashboard = 'Dashboard';
+  static const kUpdateStock = 'Update Stock';
+  static const kAddStock = 'Add Stock';
+  static const kDecreaseStock = 'Decrease Stock';
   static const kPOS = 'POS';
   static const kSearchProduct = 'Search Product';
   static const kAddManually = 'ADD MANUALLY';

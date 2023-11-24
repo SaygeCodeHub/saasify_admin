@@ -25,15 +25,11 @@ class DashboardOrderTableList extends StatelessWidget {
           dataRowMaxHeight: 50,
           columns: [
             DataColumn(
-                label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kOrderNo,
+                label: Text(StringConstants.kOrderNo,
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600)),
-              ),
-            )),
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Text(StringConstants.kCustomerName,
                     style: Theme.of(context)
@@ -67,12 +63,9 @@ class DashboardOrderTableList extends StatelessWidget {
           rows: List.generate(
               ordersData.length,
               (index) => DataRow(cells: [
-                    DataCell(Align(
-                      alignment: Alignment.center,
-                      child: Text(ordersData[index].orderNumber.toString(),
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    )),
+                    DataCell(Text(ordersData[index].orderNumber.toString(),
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.xxTiniest)),
                     DataCell(Text(ordersData[index].customerName,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
