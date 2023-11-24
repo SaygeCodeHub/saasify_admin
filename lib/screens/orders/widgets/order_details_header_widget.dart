@@ -31,7 +31,7 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Order ID:${ordersData.orderId}',
+                              Text('Order ID: ${ordersData.orderId}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .xTiniest

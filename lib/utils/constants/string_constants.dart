@@ -40,6 +40,7 @@ class StringConstants {
   static const kDiscount = 'Discount';
   static const kPaymentMethods = 'Choose Payment Type';
   static const kGrandTotal = 'Grand Total';
+  static const kTotalAmount = ' Total Amount';
   static const kSubTotal = 'Sub Total';
   static const kQuantity = 'Quantity';
   static const kPrice = 'Price';

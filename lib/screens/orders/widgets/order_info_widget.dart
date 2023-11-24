@@ -57,7 +57,7 @@ class OrderInfoWidget extends StatelessWidget {
                           .copyWith(color: AppColor.saasifyGreyBlue)),
                   const SizedBox(width: spacingXXSmall),
                   Text(
-                    'Stripe',
+                    ordersData.paymentType.toString(),
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest

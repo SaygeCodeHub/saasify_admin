@@ -37,6 +37,14 @@ class OrderDetailsListDataTable extends StatelessWidget {
             )),
             DataColumn(
                 label: Expanded(
+              child: Text(StringConstants.kBrand,
+                  style: Theme.of(context)
+                      .textTheme
+                      .xTiniest
+                      .copyWith(fontWeight: FontWeight.w600)),
+            )),
+            DataColumn(
+                label: Expanded(
                     child: Center(
                         child: Text(StringConstants.kUnitPrice,
                             style: Theme.of(context)
@@ -65,7 +73,7 @@ class OrderDetailsListDataTable extends StatelessWidget {
             DataColumn(
                 label: Expanded(
                     child: Center(
-              child: Text(StringConstants.kGrandTotal,
+              child: Text(StringConstants.kTotalAmount,
                   style: Theme.of(context)
                       .textTheme
                       .xTiniest
@@ -106,6 +114,10 @@ class OrderDetailsListDataTable extends StatelessWidget {
                                     .toLowerCase(),
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(ordersData.itemsOrdered[index].brandName,
+                            style: Theme.of(context).textTheme.xxTiniest))),
+                    DataCell(Align(
                         alignment: Alignment.center,
                         child: Text(
                             ordersData.itemsOrdered[index].cost.toString(),
@@ -117,7 +129,9 @@ class OrderDetailsListDataTable extends StatelessWidget {
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,
-                        child: Text(ordersData.discountTotal.toString(),
+                        child: Text(
+                            ordersData.itemsOrdered[index].discountPercent
+                                .toString(),
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,
