@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
 
 import '../../configs/app_dimensions.dart';
-import '../../configs/app_spacing.dart';
 import '../../data/models/orders/fetch_orders_model.dart';
 import '../../utils/constants/string_constants.dart';
 
@@ -21,6 +20,7 @@ class OrderDetailsListDataTable extends StatelessWidget {
           headingRowHeight: 50,
           dataRowMaxHeight: 50,
           columns: [
+            const DataColumn(label: Text('')),
             DataColumn(
                 label: Text(StringConstants.kName,
                     style: Theme.of(context)
@@ -29,20 +29,11 @@ class OrderDetailsListDataTable extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
-              child: Text(StringConstants.kCategory,
-                  style: Theme.of(context)
-                      .textTheme
-                      .xTiniest
-                      .copyWith(fontWeight: FontWeight.w600)),
-            )),
-            DataColumn(
-                label: Expanded(
-              child: Text(StringConstants.kBrand,
-                  style: Theme.of(context)
-                      .textTheme
-                      .xTiniest
-                      .copyWith(fontWeight: FontWeight.w600)),
-            )),
+                    child: Text(StringConstants.kCategory,
+                        style: Theme.of(context)
+                            .textTheme
+                            .xTiniest
+                            .copyWith(fontWeight: FontWeight.w600)))),
             DataColumn(
                 label: Expanded(
                     child: Center(
@@ -54,51 +45,44 @@ class OrderDetailsListDataTable extends StatelessWidget {
             DataColumn(
                 label: Expanded(
                     child: Center(
-              child: Text(StringConstants.kQuantity,
-                  style: Theme.of(context)
-                      .textTheme
-                      .xTiniest
-                      .copyWith(fontWeight: FontWeight.w600)),
-            ))),
-            DataColumn(
-                label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kDiscountCent,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600)),
-              ),
-            )),
+                        child: Text(StringConstants.kQuantity,
+                            style: Theme.of(context)
+                                .textTheme
+                                .xTiniest
+                                .copyWith(fontWeight: FontWeight.w600))))),
             DataColumn(
                 label: Expanded(
                     child: Center(
-              child: Text(StringConstants.kDiscountedPrice,
-                  style: Theme.of(context)
-                      .textTheme
-                      .xTiniest
-                      .copyWith(fontWeight: FontWeight.w600)),
-            )))
+                        child: Text(StringConstants.kDiscountCent,
+                            style: Theme.of(context)
+                                .textTheme
+                                .xTiniest
+                                .copyWith(fontWeight: FontWeight.w600))))),
+            DataColumn(
+                label: Expanded(
+                    child: Center(
+                        child: Text(StringConstants.kDiscountedPrice,
+                            style: Theme.of(context)
+                                .textTheme
+                                .xTiniest
+                                .copyWith(fontWeight: FontWeight.w600)))))
           ],
           rows: List.generate(
               ordersData.itemsOrdered.length,
               (index) => DataRow(cells: [
                     DataCell(Align(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                            height: kProductImageHeight,
+                            width: kProductImageWidth,
+                            child: Image.network(ordersData
+                                .itemsOrdered[index].images[0]
+                                .toString())))),
+                    DataCell(Align(
                         alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: [
-                            SizedBox(
-                                height: kProductImageHeight,
-                                width: kProductImageWidth,
-                                child: Image.network(ordersData
-                                    .itemsOrdered[index].images[0]
-                                    .toString())),
-                            const SizedBox(width: spacingXXSmall),
-                            Text(ordersData.itemsOrdered[index].productName,
-                                textAlign: TextAlign.left,
-                                style: Theme.of(context).textTheme.xxTiniest),
-                          ],
-                        ))),
+                        child: Text(ordersData.itemsOrdered[index].productName,
+                            textAlign: TextAlign.left,
+                            style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -112,10 +96,6 @@ class OrderDetailsListDataTable extends StatelessWidget {
                                       1,
                                     )
                                     .toLowerCase(),
-                            style: Theme.of(context).textTheme.xxTiniest))),
-                    DataCell(Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(ordersData.itemsOrdered[index].brandName,
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,

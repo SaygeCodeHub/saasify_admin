@@ -5,7 +5,7 @@ import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../data/models/products/fetch_all_categories_model.dart';
-import 'category.dart';
+import 'category_toggle_widget.dart';
 
 class CategoriesGrid extends StatelessWidget {
   final List<ProductCategory> productCategory;
@@ -51,28 +51,25 @@ class CategoriesGrid extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                                 color: AppColor.saasifyDarkGrey),
                           ),
-                          Row(
-                            children: [
-                              CategoryToggleWidget(
-                                isActive: productCategory[index].isActive,
-                              ),
-                              PopupMenuButton(
-                                itemBuilder: (context) {
-                                  return [
-                                    PopupMenuItem(
-                                        onTap: () {},
-                                        child:
-                                            const Text(StringConstants.kEdit)),
-                                    PopupMenuItem(
-                                        onTap: () {},
-                                        child:
-                                            const Text(StringConstants.kDelete))
-                                  ];
-                                },
-                                child: const Icon(Icons.more_vert),
-                              ),
-                            ],
-                          )
+                          Row(children: [
+                            CategoryToggleWidget(
+                                isActive: productCategory[index].isActive),
+                            const SizedBox(width: spacingXSmall),
+                            PopupMenuButton(
+                              itemBuilder: (context) {
+                                return [
+                                  PopupMenuItem(
+                                      onTap: () {},
+                                      child: const Text(StringConstants.kEdit)),
+                                  PopupMenuItem(
+                                      onTap: () {},
+                                      child:
+                                          const Text(StringConstants.kDelete))
+                                ];
+                              },
+                              child: const Icon(Icons.more_vert),
+                            )
+                          ])
                         ]))));
       },
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
