@@ -57,6 +57,7 @@ class InventoryListScreen extends StatelessWidget {
                                   return CustomAlertDialog(
                                       title: 'Success',
                                       message: state.message,
+                                      checkMarkVisible: true,
                                       primaryButtonTitle: StringConstants.kOk,
                                       primaryOnPressed: () {
                                         Navigator.pop(dialogueCtx);
@@ -74,6 +75,7 @@ class InventoryListScreen extends StatelessWidget {
                                       title:
                                           StringConstants.kSomethingWentWrong,
                                       message: state.message,
+                                      errorMarkVisible: true,
                                       primaryButtonTitle: StringConstants.kOk,
                                       primaryOnPressed: () {
                                         Navigator.pop(dialogueCtx);

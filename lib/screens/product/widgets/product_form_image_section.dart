@@ -98,27 +98,27 @@ class FormImageSection extends StatelessWidget {
                             (context.read<UploadBloc>().displayImageList[index]
                                     is String)
                                 ? Padding(
-                                  padding: const EdgeInsets.all(spacingLarge),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(context
-                                                  .read<UploadBloc>()
-                                                  .displayImageList[index])),
-                                          borderRadius: BorderRadius.circular(
-                                              spacingSmall))),
-                                )
+                                    padding: const EdgeInsets.all(spacingLarge),
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: NetworkImage(context
+                                                    .read<UploadBloc>()
+                                                    .displayImageList[index])),
+                                            borderRadius: BorderRadius.circular(
+                                                spacingSmall))),
+                                  )
                                 : Padding(
-                                  padding: const EdgeInsets.all(spacingLarge),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: MemoryImage(context
-                                                  .read<UploadBloc>()
-                                                  .displayImageList[index])),
-                                          borderRadius: BorderRadius.circular(
-                                              spacingSmall))),
-                                ),
+                                    padding: const EdgeInsets.all(spacingLarge),
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: MemoryImage(context
+                                                    .read<UploadBloc>()
+                                                    .displayImageList[index])),
+                                            borderRadius: BorderRadius.circular(
+                                                spacingSmall))),
+                                  ),
                             Positioned(
                               right: 0,
                               child: InkWell(
@@ -141,7 +141,9 @@ class FormImageSection extends StatelessWidget {
                                         .removeAt(index);
                                     context.read<UploadBloc>().add(LoadImage());
                                   },
-                                  child: Image.asset('close.png',height: kCloseIconSize,width: kCloseIconSize)),
+                                  child: Image.asset('close.png',
+                                      height: kCloseIconSize,
+                                      width: kCloseIconSize)),
                             )
                           ],
                         );
@@ -156,7 +158,8 @@ class FormImageSection extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.circular(spacingSmall)),
                             child: Center(
-                                child: Image.asset('upload.png',height: 50,width: 50)),
+                                child: Image.asset('upload.png',
+                                    height: 50, width: 50)),
                           ));
                     });
               }
@@ -188,7 +191,8 @@ class FormImageSection extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(spacingSmall)),
                                   child: Center(
-                                      child: Image.asset('upload.png',height: 50,width: 50)),
+                                      child: Image.asset('upload.png',
+                                          height: 50, width: 50)),
                                 ));
                           }),
                     ),

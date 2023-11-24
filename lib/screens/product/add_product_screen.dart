@@ -119,7 +119,6 @@ class AddProductScreen extends StatelessWidget {
                                         .read<ProductBloc>()
                                         .add(FetchProductList());
                                     Navigator.pop(context);
-                                    Navigator.pop(context);
                                     Navigator.pushReplacementNamed(
                                         context, ProductListScreen.routeName);
                                     // Navigator.pop(context);
@@ -161,7 +160,6 @@ class AddProductScreen extends StatelessWidget {
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
                                 primaryButtonTitle: StringConstants.kOk,
-                                checkMarkVisible: false,
                                 errorMarkVisible: true,
                                 primaryOnPressed: () {
                                   Navigator.pop(context);

@@ -92,7 +92,7 @@ class ProductFormSection2 extends StatelessWidget {
         Expanded(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(StringConstants.kMeasuringQuantity,
+          Text(StringConstants.kUnit,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context)
                   .textTheme
@@ -101,7 +101,12 @@ class ProductFormSection2 extends StatelessWidget {
           const SizedBox(height: spacingXMedium),
           CustomDropdownWidget(
               initialValue: dataMap['unit'] ?? "nos",
-              listItems: ["nos", "kg", "l", "gm", "m"] + ((dataMap['unit'] != null && !["nos", "kg", "l", "gm", "m"].contains(dataMap['unit']))?[dataMap['unit']]:[]),
+              listItems: ["nos", "kg", "l", "gm", "m"] +
+                  ((dataMap['unit'] != null &&
+                          !["nos", "kg", "l", "gm", "m"]
+                              .contains(dataMap['unit']))
+                      ? [dataMap['unit']]
+                      : []),
               dataMap: dataMap,
               mapKey: 'unit')
         ]))

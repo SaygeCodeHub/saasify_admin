@@ -113,8 +113,7 @@ class ProductForm extends StatelessWidget {
         Visibility(
           visible: isEdit,
           child: Container(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 4, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: (dataMap['draft'] ?? false)
@@ -129,15 +128,9 @@ class ProductForm extends StatelessWidget {
                           ? AppColor.saasifyLightGrey
                           : AppColor.saasifyGreen),
                   const SizedBox(width: 6),
-                  Text(
-                      (dataMap['draft']??false)
-                          ? 'Draft'
-                          : 'Published',
-                      style: Theme.of(context)
-                          .textTheme
-                          .xxTiniest
-                          .copyWith(
-                          color: (dataMap['draft']??false)
+                  Text((dataMap['draft'] ?? false) ? 'Draft' : 'Published',
+                      style: Theme.of(context).textTheme.xxTiniest.copyWith(
+                          color: (dataMap['draft'] ?? false)
                               ? AppColor.saasifyLightGrey
                               : AppColor.saasifyGreen)),
                 ],
@@ -167,14 +160,29 @@ class ProductForm extends StatelessWidget {
                 onPressed: () {
                   dataMap['draft'] = true;
                   if (_formKey.currentState!.validate()) {
-                    if (isEdit) {
-                      context
-                          .read<ProductBloc>()
-                          .add(EditProduct(productDetailsMap: dataMap));
+                    if (context
+                        .read<UploadBloc>()
+                        .displayImageList
+                        .isNotEmpty) {
+                      if (context
+                          .read<UploadBloc>()
+                          .pickedImageList
+                          .isNotEmpty) {
+                        context.read<UploadBloc>().add(UploadImage(
+                            multiplePartFileList:
+                                context.read<UploadBloc>().pickedFiles));
+                      }
                     } else {
-                      context
-                          .read<ProductBloc>()
-                          .add(SaveProduct(productDetailsMap: dataMap));
+                      dataMap['images'] = [];
+                      if (isEdit) {
+                        context
+                            .read<ProductBloc>()
+                            .add(EditProduct(productDetailsMap: dataMap));
+                      } else {
+                        context
+                            .read<ProductBloc>()
+                            .add(SaveProduct(productDetailsMap: dataMap));
+                      }
                     }
                   }
                 },

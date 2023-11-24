@@ -27,7 +27,7 @@ class CustomDropdownWidget extends StatefulWidget {
     this.disabledHint,
     this.addOption = false,
     this.hintText = '',
-  }): super(key: key);
+  }) : super(key: key);
 
   @override
   DropdownScreenState createState() => DropdownScreenState();

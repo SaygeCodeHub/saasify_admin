@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/data/models/categories/delete_categories_model.dart';
 import 'package:saasify/data/models/categories/edit_categories_model.dart';
+import 'package:saasify/data/models/categories/fetch_all_categories_model.dart';
 import '../../data/customer_cache/customer_cache.dart';
-import '../../data/models/categories/delete_categories_model.dart';
-import '../../data/models/categories/fetch_all_categories_model.dart';
 import '../../di/app_module.dart';
 import '../../repositories/categories/categories_repository.dart';
 import 'categories_event.dart';

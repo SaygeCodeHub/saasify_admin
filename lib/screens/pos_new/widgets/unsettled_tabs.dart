@@ -39,7 +39,9 @@ class UnsettledTabs extends StatelessWidget {
           GridView.builder(
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5,childAspectRatio: context.responsive(0.95,desktop: 1.05)),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 5,
+                  childAspectRatio: context.responsive(0.95, desktop: 1.05)),
               itemCount: customerIdList.length + 1,
               itemBuilder: (context, index) {
                 if (customerIdList.length == index) {
@@ -96,78 +98,95 @@ class UnsettledTabs extends StatelessWidget {
                             child: Padding(
                                 padding: const EdgeInsets.all(spacingStandard),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Row(
-                                          children: [
-                                            Expanded(flex: 4,
-                                                child: Image.asset(
+                                      Row(children: [
+                                        Expanded(
+                                            flex: 4,
+                                            child: Image.asset(
                                                 'assets/user.png',
                                                 fit: BoxFit.fill)),
-                                            const Spacer(flex:6),
-                                            InkWell(
-                                                onTap: () {
-                                                  showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (context) =>
-                                                              CustomAlertDialog(
-                                                                title:
-                                                                    StringConstants
-                                                                        .kWarning,
-                                                                message:
-                                                                    'The Given Tab Will be Removed',
-                                                                primaryButtonTitle:
-                                                                    StringConstants
-                                                                        .kConfirm,
-                                                                primaryOnPressed:
-                                                                    () {
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                  context
-                                                                      .read<
-                                                                          BillingBloc>()
-                                                                      .add(RemovePendingOrder(
-                                                                          orderID:
-                                                                              customerIdList[index]));
-                                                                },
-                                                                secondaryButtonTitle:
-                                                                    StringConstants
-                                                                        .kCancel,
-                                                                secondaryOnPressed:
-                                                                    () {
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                },
-                                                              ));
-                                                },
-                                                child: Image.asset('close.png',height: kCloseIconSize,width: kCloseIconSize))
-                                          ]),
+                                        const Spacer(flex: 6),
+                                        InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      CustomAlertDialog(
+                                                        title: StringConstants
+                                                            .kWarning,
+                                                        message:
+                                                            'The Given Tab Will be Removed',
+                                                        primaryButtonTitle:
+                                                            StringConstants
+                                                                .kConfirm,
+                                                        primaryOnPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                          context
+                                                              .read<
+                                                                  BillingBloc>()
+                                                              .add(RemovePendingOrder(
+                                                                  orderID:
+                                                                      customerIdList[
+                                                                          index]));
+                                                        },
+                                                        secondaryButtonTitle:
+                                                            StringConstants
+                                                                .kCancel,
+                                                        secondaryOnPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                      ));
+                                            },
+                                            child: Image.asset('close.png',
+                                                height: kCloseIconSize,
+                                                width: kCloseIconSize))
+                                      ]),
                                       Expanded(
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: spacingSmall,vertical: spacingXXSmall),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: spacingSmall,
+                                              vertical: spacingXXSmall),
                                           child: Column(
-                                              mainAxisSize:
-                                                  MainAxisSize.min,
+                                              mainAxisSize: MainAxisSize.min,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                    (customerData["${customerIdList[index]}"]!.customerName != '')?customerData["${customerIdList[index]}"]!.customerName:'Customer',
-                                                    textScaleFactor: context.responsive(0.85,desktop: 1),
+                                                    (customerData["${customerIdList[index]}"]!
+                                                                .customerName !=
+                                                            '')
+                                                        ? customerData[
+                                                                "${customerIdList[index]}"]!
+                                                            .customerName
+                                                        : 'Customer',
+                                                    textScaleFactor:
+                                                        context.responsive(0.85,
+                                                            desktop: 1),
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .tiniest.copyWith(fontWeight: FontWeight.w500)),
+                                                        .tiniest
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500)),
                                                 const SizedBox(
-                                                    height:
-                                                        spacingSmallest),
+                                                    height: spacingSmallest),
                                                 Text(
                                                     'Total - ₹ ${customerData["${customerIdList[index]}"]!.billDetails.total}',
-                                                    textScaleFactor: context.responsive(0.85,tablets: 1),
+                                                    textScaleFactor:
+                                                        context.responsive(0.85,
+                                                            tablets: 1),
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .xTiniest.copyWith(color: AppColor.saasifyLightDeepBlue))
+                                                        .xTiniest
+                                                        .copyWith(
+                                                            color: AppColor
+                                                                .saasifyLightDeepBlue))
                                               ]),
                                         ),
                                       ),

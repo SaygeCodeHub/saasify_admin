@@ -8,6 +8,7 @@ import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/responsive.dart';
+import 'package:saasify/widgets/custom_alert_box.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 import 'widgets/dasboard_body.dart';
@@ -42,7 +43,23 @@ class DashboardsScreen extends StatelessWidget {
                 child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: spacingLarge, vertical: spacingXMedium),
-                    child: BlocBuilder<OrdersBloc, OrdersStates>(
+                    child: BlocConsumer<OrdersBloc, OrdersStates>(
+                      listener: (context, state) {
+                        if (state is ErrorFetchingOrders) {
+                          showDialog(
+                              context: context,
+                              builder: (dialogueCtx) {
+                                return CustomAlertDialog(
+                                    title: StringConstants.kSomethingWentWrong,
+                                    message: state.message,
+                                    errorMarkVisible: true,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(dialogueCtx);
+                                    });
+                              });
+                        }
+                      },
                       buildWhen: (prev, curr) {
                         return curr is FetchedOrders || curr is FetchingOrders;
                       },

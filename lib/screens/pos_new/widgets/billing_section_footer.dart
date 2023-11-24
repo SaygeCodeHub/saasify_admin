@@ -29,7 +29,7 @@ class BillingSectionFooter extends StatelessWidget {
                           title: StringConstants.kWarning,
                           message: 'Mobile No haas not been added',
                           primaryButtonTitle: StringConstants.kOk,
-                          primaryOnPressed: (){
+                          primaryOnPressed: () {
                             Navigator.pop(context);
                           }));
                 }
@@ -55,7 +55,7 @@ class BillingSectionFooter extends StatelessWidget {
                     title: StringConstants.kWarning,
                     message: 'Mobile No haas not been added',
                     primaryButtonTitle: StringConstants.kOk,
-                    primaryOnPressed: (){
+                    primaryOnPressed: () {
                       Navigator.pop(context);
                     }));
           }

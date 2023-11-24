@@ -11,7 +11,6 @@ import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
 import '../../configs/app_color.dart';
-import '../../utils/progress_bar.dart';
 import '../../widgets/custom_alert_box.dart';
 import 'orders_list_datatable.dart';
 
@@ -45,13 +44,13 @@ class OrdersScreen extends StatelessWidget {
                       child: BlocConsumer<OrdersBloc, OrdersStates>(
                           listener: (context, state) {
                         if (state is ErrorFetchingOrders) {
-                          ProgressBar.dismiss(context);
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
                                 return CustomAlertDialog(
                                     title: StringConstants.kSomethingWentWrong,
                                     message: state.message,
+                                    errorMarkVisible: true,
                                     primaryButtonTitle: StringConstants.kOk,
                                     primaryOnPressed: () {
                                       Navigator.pop(dialogueCtx);

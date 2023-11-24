@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/categories/categories_bloc.dart';
+import 'package:saasify/bloc/categories/categories_event.dart';
 import 'package:saasify/configs/app_color.dart';
 
 class CategoryToggleWidget extends StatefulWidget {
@@ -16,20 +18,15 @@ class _CategoryToggleWidgetState extends State<CategoryToggleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FlutterSwitch(
+    return Switch(
         activeColor: AppColor.saasifyLightDeepBlue,
-        inactiveColor: AppColor.saasifyPaleBlack,
-        width: 70.0,
-        height: 35.0,
-        valueFontSize: 10.0,
-        toggleSize: 40.0,
         value: status,
-        borderRadius: 30.0,
-        padding: 4.0,
-        showOnOff: false,
-        onToggle: (val) {
+        onChanged: (bool value) {
+          context
+              .read<CategoriesBloc>()
+              .add(EditCategories(categoryDetailsMap: {}));
           setState(() {
-            status = val;
+            status = value;
           });
         });
   }

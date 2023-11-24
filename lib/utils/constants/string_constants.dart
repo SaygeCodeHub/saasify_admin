@@ -50,7 +50,7 @@ class StringConstants {
   static const kDiscountPercent = 'Discount Percent';
   static const kPublish = 'Publish';
   static const kSave = 'Save';
-  static const kMeasuringQuantity = 'Measuring Quantity';
+  static const kUnit = 'Unit';
   static const kStock = 'Stock';
   static const kDelete = 'Delete';
   static const kConfirm = 'Confirm';

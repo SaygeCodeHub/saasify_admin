@@ -40,9 +40,9 @@ class OrdersData {
   final String paymentStatus;
   final String paymentType;
   final String customerName;
-  final dynamic discountTotal;
-  final int totalAmount;
-  final int subtotal;
+  final num discountTotal;
+  final num totalAmount;
+  final num subtotal;
   final List<ItemsOrdered> itemsOrdered;
 
   OrdersData({
@@ -67,7 +67,7 @@ class OrdersData {
         paymentStatus: json["payment_status"],
         paymentType: json["payment_type"],
         customerName: json["customer_name"],
-        discountTotal: json["discount_total"],
+        discountTotal: json["discount_total"] ?? 0,
         totalAmount: json["total_amount"],
         subtotal: json["subtotal"],
         itemsOrdered: List<ItemsOrdered>.from(

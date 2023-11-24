@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/categories/categories_bloc.dart';
+import 'package:saasify/bloc/categories/categories_event.dart';
 import 'package:saasify/bloc/categories/categories_states.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/categories/widgets/categories_grid.dart';
 import 'package:saasify/utils/responsive.dart';
-import '../../bloc/categories/categories_bloc.dart';
-import '../../bloc/categories/categories_event.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
-import '../../utils/progress_bar.dart';
 import '../../widgets/custom_alert_box.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
@@ -35,7 +34,7 @@ class CategoriesScreen extends StatelessWidget {
               context.responsive(
                   TopBar(
                       scaffoldKey: _scaffoldKey,
-                      headingText: StringConstants.kOrders),
+                      headingText: StringConstants.kCategories),
                   desktop: const Expanded(child: SideBar(selectedIndex: 4))),
               Expanded(
                   flex: 5,
@@ -44,13 +43,13 @@ class CategoriesScreen extends StatelessWidget {
                       child: BlocConsumer<CategoriesBloc, CategoriesStates>(
                           listener: (context, state) {
                         if (state is ErrorFetchingCategories) {
-                          ProgressBar.dismiss(context);
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
                                 return CustomAlertDialog(
                                     title: StringConstants.kSomethingWentWrong,
                                     message: state.message,
+                                    errorMarkVisible: true,
                                     primaryButtonTitle: StringConstants.kOk,
                                     primaryOnPressed: () {
                                       Navigator.pop(dialogueCtx);

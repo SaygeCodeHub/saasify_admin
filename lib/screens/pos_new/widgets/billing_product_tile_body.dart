@@ -34,18 +34,21 @@ class BillingProductTileBody extends StatelessWidget {
                 maxLines: 2,
                 style: Theme.of(context).textTheme.xTiniest,
               )),
-              Row(mainAxisSize: MainAxisSize.min,
+              Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Visibility(
-                    visible: selectedProduct.product.variants[0].discountPercent != 0,
+                    visible:
+                        selectedProduct.product.variants[0].discountPercent !=
+                            0,
                     child: Text('₹ ${selectedProduct.product.variants[0].cost}',
-                        style: Theme.of(context)
-                            .textTheme
-                            .xxTiniest
-                            .copyWith(color: AppColor.saasifyGrey,decoration: TextDecoration.lineThrough)),
+                        style: Theme.of(context).textTheme.xxTiniest.copyWith(
+                            color: AppColor.saasifyGrey,
+                            decoration: TextDecoration.lineThrough)),
                   ),
                   const SizedBox(width: spacingXXSmall),
-                  Text('₹ ${(selectedProduct.product.variants[0].discountPercent != 0)?selectedProduct.product.variants[0].cost*((100-selectedProduct.product.variants[0].discountPercent)/100):selectedProduct.product.variants[0].cost}',
+                  Text(
+                      '₹ ${(selectedProduct.product.variants[0].discountPercent != 0) ? (selectedProduct.product.variants[0].cost * ((100 - selectedProduct.product.variants[0].discountPercent) / 100)).round() : selectedProduct.product.variants[0].cost}',
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
