@@ -31,11 +31,10 @@ class OrderDetailsProductList extends StatelessWidget {
                               .textTheme
                               .tiniest
                               .copyWith(fontWeight: FontWeight.w600)),
-                      const SizedBox(height: spacingXXSmall),
+                      const SizedBox(height: spacingXSmall),
                       Expanded(
-                          child: OrderDetailsListDataTable(
-                        ordersData: ordersData,
-                      ))
+                          child:
+                              OrderDetailsListDataTable(ordersData: ordersData))
                     ]))));
   }
 }

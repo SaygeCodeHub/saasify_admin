@@ -11,7 +11,7 @@ class StringConstants {
   static const kWelcome = 'Welcome :)';
   static const kEnterOtp = 'Enter Otp :)';
   static const kOrderNo = 'Order No';
-  static const kOrderedOn = 'Ordered On';
+  static const kOrderedDate = 'Ordered Date';
   static const kUnitPrice = 'Unit Price';
   static const kPaymentStatus = 'Payment Status';
   static const kProductAmount = 'Total Amount';
@@ -40,6 +40,8 @@ class StringConstants {
   static const kDiscount = 'Discount';
   static const kPaymentMethods = 'Choose Payment Type';
   static const kGrandTotal = 'Grand Total';
+  static const kTotalAmount = ' Total Amount';
+  static const kDiscountedPrice = 'Discounted Price';
   static const kSubTotal = 'Sub Total';
   static const kQuantity = 'Quantity';
   static const kPrice = 'Price';

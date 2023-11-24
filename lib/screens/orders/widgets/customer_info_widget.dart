@@ -47,20 +47,6 @@ class CustomerInfoWidget extends StatelessWidget {
                 ]),
                 const SizedBox(height: spacingXSmall),
                 Row(children: [
-                  Text('Email:',
-                      style: Theme.of(context)
-                          .textTheme
-                          .xTiniest
-                          .copyWith(color: AppColor.saasifyGreyBlue)),
-                  const SizedBox(width: spacingXXSmall),
-                  Text('mariaaniston@gmail.com',
-                      style: Theme.of(context)
-                          .textTheme
-                          .xTiniest
-                          .copyWith(fontWeight: FontWeight.w600))
-                ]),
-                const SizedBox(height: spacingXSmall),
-                Row(children: [
                   Text('Phone:',
                       style: Theme.of(context)
                           .textTheme

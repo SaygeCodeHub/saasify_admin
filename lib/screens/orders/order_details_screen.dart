@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/orders/fetch_orders_model.dart';
+import 'package:saasify/screens/orders/widgets/order_bill_details.dart';
 import 'package:saasify/screens/orders/widgets/order_details_header_widget.dart';
 import 'package:saasify/screens/orders/widgets/order_details_payment_info.dart';
 import 'package:saasify/screens/orders/widgets/order_details_product_list.dart';
@@ -12,7 +13,7 @@ import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
-  final List<OrdersData> ordersData;
+  final OrdersData ordersData;
 
   static const String routeName = 'OrderDetailsScreen';
 
@@ -57,19 +58,13 @@ class OrderDetailsScreen extends StatelessWidget {
                               const Spacer()
                             ]),
                             const SizedBox(height: spacingStandard),
-                            OrderDetailsHeaderWidget(
-                              ordersData: ordersData[0],
-                            ),
-                            const SizedBox(
-                              height: spacingMedium,
-                            ),
-                            OrderDetailsPaymentInfo(
-                              ordersData: ordersData[0],
-                            ),
-                            const SizedBox(
-                              height: spacingMedium,
-                            ),
-                            OrderDetailsProductList(ordersData: ordersData[0])
+                            OrderDetailsHeaderWidget(ordersData: ordersData),
+                            const SizedBox(height: spacingMedium),
+                            OrderDetailsPaymentInfo(ordersData: ordersData),
+                            const SizedBox(height: spacingMedium),
+                            OrderDetailsProductList(ordersData: ordersData),
+                            const SizedBox(height: spacingMedium),
+                            OrderBillDetails(ordersData: ordersData),
                           ])))
             ]));
   }

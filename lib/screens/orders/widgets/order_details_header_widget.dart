@@ -31,7 +31,7 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Order ID:${ordersData.orderId}',
+                              Text('Order ID: ${ordersData.orderId}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .xTiniest
@@ -50,7 +50,17 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(kGeneralRadius),
                                       color: AppColor.saasifyLighterGreen),
-                                  child: Text(ordersData.paymentStatus,
+                                  child: Text(
+                                      ordersData.paymentStatus
+                                              .trim()
+                                              .substring(0, 1)
+                                              .toUpperCase() +
+                                          ordersData.paymentStatus
+                                              .trim()
+                                              .substring(
+                                                1,
+                                              )
+                                              .toLowerCase(),
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiniest

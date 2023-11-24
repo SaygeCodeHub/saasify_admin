@@ -18,13 +18,10 @@ class OrderInfoWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const CircleAvatar(
-            radius: kAvatarRadius,
-            backgroundColor: AppColor.saasifyLightestPaleGrey,
-            child: Icon(
-              Icons.shopping_cart_outlined,
-              color: AppColor.saasifyBlack,
-            ),
-          ),
+              radius: kAvatarRadius,
+              backgroundColor: AppColor.saasifyLightestPaleGrey,
+              child: Icon(Icons.shopping_cart_outlined,
+                  color: AppColor.saasifyBlack)),
           const SizedBox(width: spacingXMedium),
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,43 +35,35 @@ class OrderInfoWidget extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: spacingXSmall),
-                Row(
-                  children: [
-                    Text(
-                      'Shipping:',
+                Row(children: [
+                  Text('Shipping:',
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
-                          .copyWith(color: AppColor.saasifyGreyBlue),
-                    ),
-                    const SizedBox(width: spacingXXSmall),
-                    Text(
-                      'Next Express',
+                          .copyWith(color: AppColor.saasifyGreyBlue)),
+                  const SizedBox(width: spacingXXSmall),
+                  Text('Next Express',
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
-                          .copyWith(fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
+                          .copyWith(fontWeight: FontWeight.w600))
+                ]),
                 const SizedBox(height: spacingXSmall),
-                Row(
-                  children: [
-                    Text('Payment Method:',
-                        style: Theme.of(context)
-                            .textTheme
-                            .xTiniest
-                            .copyWith(color: AppColor.saasifyGreyBlue)),
-                    const SizedBox(width: spacingXXSmall),
-                    Text(
-                      'Stripe',
+                Row(children: [
+                  Text('Payment Method:',
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
-                          .copyWith(fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
+                          .copyWith(color: AppColor.saasifyGreyBlue)),
+                  const SizedBox(width: spacingXXSmall),
+                  Text(
+                    ordersData.paymentType.toString(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600),
+                  )
+                ]),
                 const SizedBox(height: spacingXSmall),
                 Row(children: [
                   Text('Status:',
@@ -83,7 +72,17 @@ class OrderInfoWidget extends StatelessWidget {
                           .xTiniest
                           .copyWith(color: AppColor.saasifyGreyBlue)),
                   const SizedBox(width: spacingXXSmall),
-                  Text(ordersData.paymentStatus,
+                  Text(
+                      ordersData.paymentStatus
+                              .trim()
+                              .substring(0, 1)
+                              .toUpperCase() +
+                          ordersData.paymentStatus
+                              .trim()
+                              .substring(
+                                1,
+                              )
+                              .toLowerCase(),
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
