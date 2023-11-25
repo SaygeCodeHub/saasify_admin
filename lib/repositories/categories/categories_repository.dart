@@ -10,5 +10,5 @@ abstract class CategoriesRepository {
       String userId, String companyId, int branchId, Map categoriesDetailsMap);
 
   Future<DeleteCategoriesModel> deleteCategories(
-      String userId, String companyId, int branchId, Map variantIdMap);
+      String userId, String companyId, int branchId, Map categoryIdMap);
 }

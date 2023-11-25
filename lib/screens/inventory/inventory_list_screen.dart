@@ -15,6 +15,8 @@ import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
 
+import '../../widgets/share_download_print_widget.dart';
+
 class InventoryListScreen extends StatelessWidget {
   static const String routeName = 'InventoryListScreen';
 
@@ -114,19 +116,7 @@ class InventoryListScreen extends StatelessWidget {
                                         onTextFieldChanged: (value) {}),
                                   ),
                                   const Spacer(),
-                                  const Row(
-                                    children: [
-                                      Icon(Icons.share),
-                                      SizedBox(
-                                        width: spacingXMedium,
-                                      ),
-                                      Icon(Icons.download),
-                                      SizedBox(
-                                        width: spacingXMedium,
-                                      ),
-                                      Icon(Icons.print),
-                                    ],
-                                  )
+                                  const ShareDownloadPrintWidget()
                                 ]),
                                 const SizedBox(height: spacingStandard),
                                 InventoryListDataTable(
