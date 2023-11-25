@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:saasify/bloc/inventory/inventory_bloc.dart';
-import 'package:saasify/bloc/inventory/inventory_event.dart';
 import 'package:saasify/configs/app_color.dart';
-import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/inventory/fetch_inventory_list_model.dart';
+import 'package:saasify/screens/inventory/widgets/inventory_counter.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-import 'package:saasify/widgets/custom_text_field.dart';
-import 'package:saasify/widgets/primary_button.dart';
-import '../../../configs/app_spacing.dart';
 
 class InventoryListDataTable extends StatelessWidget {
   final List<InventoryProduct> productList;
 
-  InventoryListDataTable({Key? key, required this.productList})
+  const InventoryListDataTable({Key? key, required this.productList})
       : super(key: key);
-
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +72,12 @@ class InventoryListDataTable extends StatelessWidget {
                         .xTiniest
                         .copyWith(fontWeight: FontWeight.w600)),
               ),
+            )),
+            const DataColumn(
+                label: Expanded(
+              child: Center(
+                child: Text(''),
+              ),
             ))
           ],
           rows: List.generate(
@@ -116,368 +113,29 @@ class InventoryListDataTable extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
-                    DataCell(Align(
-                        alignment: Alignment.center,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: (productList[index].stock != 0)
-                                    ? () {
-                                        int removedStock = 0;
-                                        showDialog(
-                                            context: context,
-                                            builder: (ctx) => AlertDialog(
-                                                content: SizedBox(
-                                                    width: kDialogueWidth,
-                                                    child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                  StringConstants
-                                                                      .kReduceStock,
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .xTiniest
-                                                                      .copyWith(
-                                                                          fontWeight:
-                                                                              FontWeight.w700)),
-                                                              InkWell(
-                                                                  onTap: () {
-                                                                    Navigator.pop(
-                                                                        context);
-                                                                  },
-                                                                  child:
-                                                                      const Align(
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .topRight,
-                                                                    child: Icon(
-                                                                        Icons
-                                                                            .close,
-                                                                        color: AppColor
-                                                                            .saasifyGrey),
-                                                                  )),
-                                                            ],
-                                                          ),
-                                                          const SizedBox(
-                                                              height:
-                                                                  spacingMedium),
-                                                          Row(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                    StringConstants
-                                                                        .kNameWithColon,
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .xTiniest),
-                                                                const SizedBox(
-                                                                    width:
-                                                                        spacingXMedium),
-                                                                Text(
-                                                                    productList[
-                                                                            index]
-                                                                        .productName,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .left,
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .xTiniest),
-                                                                const SizedBox(
-                                                                    width:
-                                                                        spacingXXXHuge),
-                                                                Text(
-                                                                    StringConstants
-                                                                        .kStockWithColon,
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .xTiniest),
-                                                                const SizedBox(
-                                                                    width:
-                                                                        spacingXMedium),
-                                                                Text(
-                                                                    productList[
-                                                                            index]
-                                                                        .stock
-                                                                        .toString(),
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .xTiniest),
-                                                              ]),
-                                                          const SizedBox(
-                                                              height:
-                                                                  spacingStandard),
-                                                          Row(
-                                                            children: [
-                                                              Expanded(
-                                                                child: Form(
-                                                                  key: _formKey,
-                                                                  child:
-                                                                      CustomTextField(
-                                                                          validator:
-                                                                              (value) {
-                                                                            if (removedStock >
-                                                                                productList[index].stock) {
-                                                                              return 'Please enter a number less than current stock';
-                                                                            }
-                                                                            return null;
-                                                                          },
-                                                                          inputFormatters: [
-                                                                            FilteringTextInputFormatter.digitsOnly
-                                                                          ],
-                                                                          onTextFieldChanged:
-                                                                              (value) {
-                                                                            removedStock =
-                                                                                int.parse(value);
-                                                                          }),
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                  width:
-                                                                      spacingSmall),
-                                                              Expanded(
-                                                                child:
-                                                                    PrimaryButton(
-                                                                        onPressed:
-                                                                            () {
-                                                                          if (_formKey
-                                                                              .currentState!
-                                                                              .validate()) {
-                                                                            context.read<InventoryBloc>().add(UpdateStock(updateStockMap: {
-                                                                                  "stock_id": productList[index].stockId,
-                                                                                  "stock": removedStock,
-                                                                                  "variant_id": productList[index].variantId,
-                                                                                  "increment": false
-                                                                                }));
-                                                                            Navigator.pop(ctx);
-                                                                          }
-                                                                        },
-                                                                        buttonTitle:
-                                                                            'Update'),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ]))));
-                                      }
-                                    : null,
-                                child: Container(
-                                  height: kCounterContainerSize,
-                                  width: kCounterContainerSize,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: AppColor.saasifyLightPaleGrey),
-                                  ),
-                                  child: Center(
-                                      child: (productList[index].stock != 0)
-                                          ? const Icon(
-                                              Icons.remove,
-                                              size: kGeneralRadius,
-                                            )
-                                          : const SizedBox.shrink()),
-                                ),
-                              ),
-                              SizedBox(
-                                height: kCounterContainerSize,
-                                width: kStockContainerSize,
-                                child: Center(
-                                    child: Text(
-                                        productList[index].stock.toString(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .xxTiniest
-                                            .copyWith(
-                                                color: (productList[index]
-                                                            .stock <
-                                                        productList[index]
-                                                            .restockReminder)
-                                                    ? AppColor.saasifyRed
-                                                    : AppColor.saasifyBlack))),
-                              ),
-                              InkWell(
-                                  onTap: () {
-                                    int addedStock = 0;
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                            content: SizedBox(
-                                                width: kDialogueWidth,
-                                                child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                              StringConstants
-                                                                  .kAddStock,
-                                                              style: Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .xTiniest
-                                                                  .copyWith(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700)),
-                                                          InkWell(
-                                                              onTap: () {
-                                                                Navigator.pop(
-                                                                    context);
-                                                              },
-                                                              child:
-                                                                  const Align(
-                                                                alignment:
-                                                                    Alignment
-                                                                        .topRight,
-                                                                child: Icon(
-                                                                    Icons.close,
-                                                                    color: AppColor
-                                                                        .saasifyGrey),
-                                                              )),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                          height:
-                                                              spacingMedium),
-                                                      Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                                StringConstants
-                                                                    .kNameWithColon,
-                                                                style: Theme.of(
-                                                                        context)
-                                                                    .textTheme
-                                                                    .xTiniest),
-                                                            const SizedBox(
-                                                                width:
-                                                                    spacingXMedium),
-                                                            Text(
-                                                                productList[
-                                                                        index]
-                                                                    .productName,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                style: Theme.of(
-                                                                        context)
-                                                                    .textTheme
-                                                                    .xTiniest),
-                                                            const SizedBox(
-                                                                width:
-                                                                    spacingXXXHuge),
-                                                            Text(
-                                                                StringConstants
-                                                                    .kStockWithColon,
-                                                                style: Theme.of(
-                                                                        context)
-                                                                    .textTheme
-                                                                    .xTiniest),
-                                                            const SizedBox(
-                                                                width:
-                                                                    spacingXMedium),
-                                                            Text(
-                                                                productList[
-                                                                        index]
-                                                                    .stock
-                                                                    .toString(),
-                                                                style: Theme.of(
-                                                                        context)
-                                                                    .textTheme
-                                                                    .xTiniest),
-                                                          ]),
-                                                      const SizedBox(
-                                                          height:
-                                                              spacingStandard),
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            child:
-                                                                CustomTextField(
-                                                                    inputFormatters: [
-                                                                  FilteringTextInputFormatter
-                                                                      .digitsOnly
-                                                                ],
-                                                                    onTextFieldChanged:
-                                                                        (value) {
-                                                                      addedStock =
-                                                                          int.parse(
-                                                                              value);
-                                                                    }),
-                                                          ),
-                                                          const SizedBox(
-                                                              width:
-                                                                  spacingSmall),
-                                                          Expanded(
-                                                            child:
-                                                                PrimaryButton(
-                                                                    onPressed:
-                                                                        () {
-                                                                      context
-                                                                          .read<
-                                                                              InventoryBloc>()
-                                                                          .add(
-                                                                              UpdateStock(updateStockMap: {
-                                                                            "stock_id":
-                                                                                productList[index].stockId,
-                                                                            "stock":
-                                                                                addedStock,
-                                                                            "variant_id":
-                                                                                productList[index].variantId,
-                                                                            "increment":
-                                                                                true
-                                                                          }));
-                                                                      Navigator
-                                                                          .pop(
-                                                                              ctx);
-                                                                    },
-                                                                    buttonTitle:
-                                                                        'Update'),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ]))));
-                                  },
-                                  child: Container(
-                                      height: kCounterContainerSize,
-                                      width: kCounterContainerSize,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color:
-                                                AppColor.saasifyLightPaleGrey),
-                                      ),
-                                      child: const Center(
-                                          child: Icon(Icons.add,
-                                              size: kGeneralRadius))))
-                            ])))
+                    DataCell(InventoryCounter(product: productList[index])),
+                    DataCell((productList[index].stock <=
+                            productList[index].restockReminder)
+                        ? Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: AppColor.saasifyLighterRed),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(Icons.circle,
+                                    size: 8, color: AppColor.saasifyRed),
+                                const SizedBox(width: 6),
+                                Text('Low Stock',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .xxTiniest
+                                        .copyWith(color: AppColor.saasifyRed)),
+                              ],
+                            ))
+                        : const SizedBox.shrink())
                   ])))
     ]));
   }

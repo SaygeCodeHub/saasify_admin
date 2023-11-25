@@ -51,9 +51,17 @@ class CategoriesGrid extends StatelessWidget {
                         Row(children: [
                           CategoryToggleWidget(
                               productCategory: productCategory[index]),
-                          const SizedBox(width: spacingXSmall),
-                          CategoriesPopUpMenuWidget(
-                              productCategory: productCategory[index])
+                          SizedBox(
+                              width: (productCategory[index].categoryName !=
+                                      'uncategorized')
+                                  ? spacingXSmall
+                                  : spacingXXLarge),
+                          Visibility(
+                            visible: productCategory[index].categoryName !=
+                                'uncategorized',
+                            child: CategoriesPopUpMenuWidget(
+                                productCategory: productCategory[index]),
+                          )
                         ])
                       ])));
         },

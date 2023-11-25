@@ -61,8 +61,8 @@ class CustomAlertDialog extends StatelessWidget {
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: const Icon(Icons.close,
-                                color: AppColor.saasifyGrey))
+                            child: Image.asset('assets/close.png',
+                                height: kCloseIconSize, width: kCloseIconSize))
                       ]),
                   const SizedBox(height: spacingXLarge),
                   Text(message, style: Theme.of(context).textTheme.xxTiniest),

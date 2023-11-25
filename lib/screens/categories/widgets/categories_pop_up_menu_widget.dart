@@ -68,8 +68,8 @@ class CategoriesPopUpMenuWidget extends StatelessWidget {
                           message: StringConstants.kDeleteCategory,
                           primaryButtonTitle: StringConstants.kConfirm,
                           primaryOnPressed: () {
-                            context.read<CategoriesBloc>().add(DeleteCategories(
-                                categoryId: productCategory.categoryId));
+                            // context.read<CategoriesBloc>().add(DeleteCategories(
+                            //     categoryId: productCategory.categoryId));
                             Navigator.pop(context);
                           },
                           secondaryButtonTitle: StringConstants.kCancel,
