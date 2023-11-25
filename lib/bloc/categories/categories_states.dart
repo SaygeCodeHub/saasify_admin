@@ -45,3 +45,9 @@ class ErrorFetchingCategories extends CategoriesStates {
 
   ErrorFetchingCategories({required this.message});
 }
+
+class SwitchToggleCategories extends CategoriesStates {
+  final bool categoryToggle;
+
+  SwitchToggleCategories({required this.categoryToggle});
+}

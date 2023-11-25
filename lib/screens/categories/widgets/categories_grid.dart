@@ -18,56 +18,59 @@ class CategoriesGrid extends StatelessWidget {
       shrinkWrap: true,
       itemCount: productCategory.length,
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-            height: spacingStandard,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(kCircularRadius),
-              boxShadow: const [
-                BoxShadow(color: AppColor.saasifyLightPaleGrey, blurRadius: 5.0)
-              ],
-              color: AppColor.saasifyWhite,
-            ),
-            child: Padding(
-                padding: const EdgeInsets.all(kCircularRadius),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        productCategory[index]
-                                .categoryName
-                                .trim()
-                                .substring(0, 1)
-                                .toUpperCase() +
+        return Expanded(
+            child: Container(
+                height: spacingStandard,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(kCircularRadius),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: AppColor.saasifyLightPaleGrey, blurRadius: 5.0)
+                  ],
+                  color: AppColor.saasifyWhite,
+                ),
+                child: Padding(
+                    padding: const EdgeInsets.all(kCircularRadius),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
                             productCategory[index]
-                                .categoryName
-                                .trim()
-                                .substring(
-                                  1,
-                                )
-                                .toLowerCase(),
-                        style: Theme.of(context).textTheme.tiniest.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: AppColor.saasifyDarkGrey),
-                      ),
-                      Row(children: [
-                        CategoryToggleWidget(
-                            isActive: productCategory[index].isActive),
-                        const SizedBox(width: spacingXSmall),
-                        PopupMenuButton(
-                          itemBuilder: (context) {
-                            return [
-                              PopupMenuItem(
-                                  onTap: () {},
-                                  child: const Text(StringConstants.kEdit)),
-                              PopupMenuItem(
-                                  onTap: () {},
-                                  child: const Text(StringConstants.kDelete))
-                            ];
-                          },
-                          child: const Icon(Icons.more_vert),
-                        )
-                      ])
-                    ])));
+                                    .categoryName
+                                    .trim()
+                                    .substring(0, 1)
+                                    .toUpperCase() +
+                                productCategory[index]
+                                    .categoryName
+                                    .trim()
+                                    .substring(
+                                      1,
+                                    )
+                                    .toLowerCase(),
+                            style: Theme.of(context).textTheme.tiniest.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppColor.saasifyDarkGrey),
+                          ),
+                          Row(children: [
+                            CategoryToggleWidget(
+                                productCategory: productCategory[index]),
+                            const SizedBox(width: spacingXSmall),
+                            PopupMenuButton(
+                              itemBuilder: (context) {
+                                return [
+                                  PopupMenuItem(
+                                      onTap: () {},
+                                      child: const Text(StringConstants.kEdit)),
+                                  PopupMenuItem(
+                                      onTap: () {},
+                                      child:
+                                          const Text(StringConstants.kDelete))
+                                ];
+                              },
+                              child: const Icon(Icons.more_vert),
+                            )
+                          ])
+                        ]))));
       },
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,

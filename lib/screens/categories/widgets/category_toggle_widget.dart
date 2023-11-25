@@ -4,17 +4,13 @@ import 'package:saasify/bloc/categories/categories_bloc.dart';
 import 'package:saasify/bloc/categories/categories_event.dart';
 import 'package:saasify/configs/app_color.dart';
 
-class CategoryToggleWidget extends StatefulWidget {
-  final bool isActive;
+import '../../../bloc/categories/categories_event.dart';
+import '../../../data/models/categories/fetch_all_categories_model.dart';
 
-  const CategoryToggleWidget({super.key, required this.isActive});
+class CategoryToggleWidget extends StatelessWidget {
+  final ProductCategory productCategory;
 
-  @override
-  State<CategoryToggleWidget> createState() => _CategoryToggleWidgetState();
-}
-
-class _CategoryToggleWidgetState extends State<CategoryToggleWidget> {
-  bool status = true;
+  const CategoryToggleWidget({super.key, required this.productCategory});
 
   @override
   Widget build(BuildContext context) {
