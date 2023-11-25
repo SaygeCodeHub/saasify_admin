@@ -4,7 +4,6 @@ import 'package:saasify/bloc/categories/categories_bloc.dart';
 import 'package:saasify/bloc/categories/categories_event.dart';
 import 'package:saasify/configs/app_color.dart';
 
-import '../../../bloc/categories/categories_event.dart';
 import '../../../data/models/categories/fetch_all_categories_model.dart';
 
 class CategoryToggleWidget extends StatelessWidget {
@@ -14,16 +13,15 @@ class CategoryToggleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map editCategoryMap = productCategory.toJson();
     return Switch(
         activeColor: AppColor.saasifyLightDeepBlue,
-        value: status,
+        value: productCategory.isActive,
         onChanged: (bool value) {
+          editCategoryMap['is_active'] = value;
           context
               .read<CategoriesBloc>()
-              .add(EditCategories(categoryDetailsMap: {}));
-          setState(() {
-            status = value;
-          });
+              .add(EditCategories(categoryDetailsMap: editCategoryMap));
         });
   }
 }
