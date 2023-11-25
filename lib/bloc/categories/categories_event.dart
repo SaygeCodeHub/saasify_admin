@@ -13,3 +13,9 @@ class DeleteCategories extends CategoriesEvents {
 }
 
 class FetchAllCategories extends CategoriesEvents {}
+
+class ToggleCategories extends CategoriesEvents {
+  bool categoryToggle;
+
+  ToggleCategories({required this.categoryToggle});
+}

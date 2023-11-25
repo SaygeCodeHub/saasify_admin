@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/categories/categories_states.dart';
@@ -43,6 +45,14 @@ class CategoriesScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingLarge),
                       child: BlocConsumer<CategoriesBloc, CategoriesStates>(
                           listener: (context, state) {
+                        if (state is EditedCategories) {
+                          context
+                              .read<CategoriesBloc>()
+                              .add(FetchAllCategories());
+                        }
+                        if (state is ErrorEditingCategories) {
+                          log('errorrrrrr');
+                        }
                         if (state is ErrorFetchingCategories) {
                           ProgressBar.dismiss(context);
                           showDialog(
@@ -65,6 +75,7 @@ class CategoriesScreen extends StatelessWidget {
                           return const Center(
                               child: CircularProgressIndicator());
                         } else if (state is FetchedCategories) {
+                          log('here==========>FetchedCategories');
                           return Column(children: [
                             Row(children: [
                               context.responsive(const SizedBox(),

@@ -53,7 +53,7 @@ class CategoriesGrid extends StatelessWidget {
                           ),
                           Row(children: [
                             CategoryToggleWidget(
-                                isActive: productCategory[index].isActive),
+                                productCategory: productCategory[index]),
                             const SizedBox(width: spacingXSmall),
                             PopupMenuButton(
                               itemBuilder: (context) {
