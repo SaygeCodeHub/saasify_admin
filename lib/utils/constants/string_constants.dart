@@ -82,7 +82,7 @@ class StringConstants {
   static const kDashboard = 'Dashboard';
   static const kUpdateStock = 'Update Stock';
   static const kAddStock = 'Add Stock';
-  static const kDecreaseStock = 'Decrease Stock';
+  static const kReduceStock = 'Reduce Stock';
   static const kPOS = 'POS';
   static const kSearchProduct = 'Search Product';
   static const kAddManually = 'ADD MANUALLY';

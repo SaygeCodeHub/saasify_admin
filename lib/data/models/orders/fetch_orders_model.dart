@@ -8,7 +8,7 @@ String fetchOrdersModelToJson(FetchOrdersModel data) =>
 
 class FetchOrdersModel {
   final int status;
-  final List<OrdersData> data;
+  final OrdersData data;
   final String message;
 
   FetchOrdersModel({
@@ -20,19 +20,51 @@ class FetchOrdersModel {
   factory FetchOrdersModel.fromJson(Map<String, dynamic> json) =>
       FetchOrdersModel(
         status: json["status"],
-        data: List<OrdersData>.from(
-            json["data"].map((x) => OrdersData.fromJson(x))),
+        data: OrdersData.fromJson(json["data"]),
         message: json["message"],
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "data": data.toJson(),
         "message": message,
       };
 }
 
 class OrdersData {
+  final int totalOrders;
+  final int unpaidOrders;
+  final int totalEarning;
+  final PaymentTypesUsage paymentTypesUsage;
+  final List<Order> orders;
+
+  OrdersData({
+    required this.totalOrders,
+    required this.unpaidOrders,
+    required this.totalEarning,
+    required this.paymentTypesUsage,
+    required this.orders,
+  });
+
+  factory OrdersData.fromJson(Map<String, dynamic> json) => OrdersData(
+        totalOrders: json["total_orders"],
+        unpaidOrders: json["unpaid_orders"],
+        totalEarning: json["total_earning"],
+        paymentTypesUsage:
+            PaymentTypesUsage.fromJson(json["payment_tyes_usage"]),
+        orders: List<Order>.from(json["orders"].map((x) => Order.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "total_orders": totalOrders,
+        "unpaid_orers": unpaidOrders,
+        "total_earning": totalEarning,
+        "payment_tyes_usage": paymentTypesUsage.toJson(),
+        "orders": List<dynamic>.from(orders.map((x) => x.toJson())),
+      };
+}
+
+class Order {
   final int orderId;
   final String orderNumber;
   final DateTime orderDate;
@@ -45,7 +77,7 @@ class OrdersData {
   final int subtotal;
   final List<ItemsOrdered> itemsOrdered;
 
-  OrdersData({
+  Order({
     required this.orderId,
     required this.orderNumber,
     required this.orderDate,
@@ -59,7 +91,7 @@ class OrdersData {
     required this.itemsOrdered,
   });
 
-  factory OrdersData.fromJson(Map<String, dynamic> json) => OrdersData(
+  factory Order.fromJson(Map<String, dynamic> json) => Order(
         orderId: json["order_id"],
         orderNumber: json["order_number"],
         orderDate: DateTime.parse(json["order_date"]),
@@ -175,5 +207,34 @@ class ItemsOrdered {
         "draft": draft,
         "restock_reminder": restockReminder,
         "count": count,
+      };
+}
+
+class PaymentTypesUsage {
+  final int uip;
+  final int cash;
+  final int bank;
+  final int other;
+
+  PaymentTypesUsage({
+    required this.uip,
+    required this.cash,
+    required this.bank,
+    required this.other,
+  });
+
+  factory PaymentTypesUsage.fromJson(Map<String, dynamic> json) =>
+      PaymentTypesUsage(
+        uip: json["UIP"],
+        cash: json["cash"],
+        bank: json["bank"],
+        other: json["other"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "UIP": uip,
+        "cash": cash,
+        "bank": bank,
+        "other": other,
       };
 }

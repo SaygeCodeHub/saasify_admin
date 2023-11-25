@@ -81,7 +81,7 @@ class OrderDetailsListDataTable extends StatelessWidget {
             )))
           ],
           rows: List.generate(
-              ordersData.itemsOrdered.length,
+              ordersData.orders.length,
               (index) => DataRow(cells: [
                     DataCell(Align(
                         alignment: Alignment.centerLeft,
@@ -91,10 +91,12 @@ class OrderDetailsListDataTable extends StatelessWidget {
                                 height: kProductImageHeight,
                                 width: kProductImageWidth,
                                 child: Image.network(ordersData
-                                    .itemsOrdered[index].images[0]
+                                    .orders[index].itemsOrdered[index].images[0]
                                     .toString())),
                             const SizedBox(width: spacingXXSmall),
-                            Text(ordersData.itemsOrdered[index].productName,
+                            Text(
+                                ordersData.orders[index].itemsOrdered[index]
+                                    .productName,
                                 textAlign: TextAlign.left,
                                 style: Theme.of(context).textTheme.xxTiniest),
                           ],
@@ -102,11 +104,13 @@ class OrderDetailsListDataTable extends StatelessWidget {
                     DataCell(Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                            ordersData.itemsOrdered[index].categoryName
+                            ordersData.orders[index].itemsOrdered[index]
+                                    .categoryName
                                     .trim()
                                     .substring(0, 1)
                                     .toUpperCase() +
-                                ordersData.itemsOrdered[index].categoryName
+                                ordersData.orders[index].itemsOrdered[index]
+                                    .categoryName
                                     .trim()
                                     .substring(
                                       1,
@@ -115,31 +119,39 @@ class OrderDetailsListDataTable extends StatelessWidget {
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(ordersData.itemsOrdered[index].brandName,
+                        child: Text(
+                            ordersData
+                                .orders[index].itemsOrdered[index].brandName,
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,
                         child: Text(
-                            ordersData.itemsOrdered[index].cost.toString(),
+                            ordersData.orders[index].itemsOrdered[index].cost
+                                .toString(),
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,
                         child: Text(
-                            ordersData.itemsOrdered[index].count.toString(),
+                            ordersData.orders[index].itemsOrdered[index].count
+                                .toString(),
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,
                         child: Text(
-                            (ordersData.itemsOrdered[index].cost -
-                                    (ordersData.itemsOrdered[index].cost) *
-                                        (ordersData.itemsOrdered[index]
+                            (ordersData.orders[index].itemsOrdered[index].cost -
+                                    (ordersData.orders[index]
+                                            .itemsOrdered[index].cost) *
+                                        (ordersData
+                                                .orders[index]
+                                                .itemsOrdered[index]
                                                 .discountPercent /
                                             100))
                                 .toString(),
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,
-                        child: Text(ordersData.totalAmount.toString(),
+                        child: Text(
+                            ordersData.orders[index].totalAmount.toString(),
                             style: Theme.of(context).textTheme.xxTiniest)))
                   ])))
     ]);

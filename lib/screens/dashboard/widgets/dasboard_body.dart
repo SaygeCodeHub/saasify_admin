@@ -9,7 +9,7 @@ import '../../../configs/app_spacing.dart';
 class DashboardBody extends StatelessWidget {
   const DashboardBody({super.key, required this.ordersData});
 
-  final List<OrdersData> ordersData;
+  final OrdersData ordersData;
 
   @override
   Widget build(BuildContext context) {

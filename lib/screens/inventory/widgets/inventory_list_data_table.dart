@@ -144,7 +144,7 @@ class InventoryListDataTable extends StatelessWidget {
                                                             children: [
                                                               Text(
                                                                   StringConstants
-                                                                      .kDecreaseStock,
+                                                                      .kReduceStock,
                                                                   style: Theme.of(
                                                                           context)
                                                                       .textTheme

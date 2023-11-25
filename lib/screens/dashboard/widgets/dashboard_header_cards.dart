@@ -10,30 +10,37 @@ class DashboardHeaderCards extends StatelessWidget {
 
   final List cardItems = [
     {
+      // 'leading': null,
       'leading': "assets/card_image_one.PNG",
-      'title': '34',
-      'subtitle': 'Total Order',
+      'title': 'Total Order',
+      'subtitle': '34',
       'trailing': null,
     },
     {
       'leading': "assets/card_image_two.PNG",
-      'title': '12',
-      'subtitle': 'Total Pending Order',
-      'trailing': "33%",
+      // 'leading': null,
+      'title': 'Total Earning',
+      'subtitle': '12',
+      'trailing': null,
     },
     {
       'leading': "assets/card_image_three.PNG",
-      'title': '22',
-      'subtitle': 'Total Dispatched',
+      // 'leading': "null",
+      'title': 'Unpaid Orders',
+      'subtitle': '22',
       'trailing': "67%"
     },
+    {'leading': null, 'title': 'Cash', 'subtitle': '22', 'trailing': null},
+    {'leading': null, 'title': 'UPI', 'subtitle': '55', 'trailing': null},
+    {'leading': null, 'title': 'Bank Card', 'subtitle': '76', 'trailing': null},
+    {'leading': null, 'title': 'Other', 'subtitle': '80', 'trailing': null},
   ];
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      itemCount: 3,
+      itemCount: 7,
       itemBuilder: (BuildContext context, int index) {
         return Padding(
           padding: const EdgeInsets.only(right: 16),
@@ -53,15 +60,16 @@ class DashboardHeaderCards extends StatelessWidget {
                 child: ListTile(
                     titleAlignment: ListTileTitleAlignment.titleHeight,
                     tileColor: AppColor.saasifyWhite,
-                    leading:
-                        Image.asset(cardItems[index]['leading'].toString()),
+                    leading: (cardItems[index]['leading'] == null)
+                        ? null
+                        : Image.asset(cardItems[index]['leading'].toString()),
                     title: Text(cardItems[index]['title'].toString(),
+                        style: Theme.of(context).textTheme.xxTiniest),
+                    subtitle: Text(cardItems[index]['subtitle'].toString(),
                         style: Theme.of(context)
                             .textTheme
                             .xTiny
                             .copyWith(fontWeight: FontWeight.w700)),
-                    subtitle: Text(cardItems[index]['subtitle'].toString(),
-                        style: Theme.of(context).textTheme.xTiniest),
                     trailing: (cardItems[index]['trailing'] == null)
                         ? null
                         : CircularPercentIndicator(
@@ -77,9 +85,9 @@ class DashboardHeaderCards extends StatelessWidget {
         );
       },
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: spacingXSmall,
-          crossAxisSpacing: spacingXXHuge),
+          crossAxisCount: 7,
+          childAspectRatio: 45 / 19,
+          crossAxisSpacing: spacingLarge),
     );
   }
 }
