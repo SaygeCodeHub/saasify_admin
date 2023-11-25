@@ -22,20 +22,20 @@ class OrdersBloc extends Bloc<OrdersEvents, OrdersStates> {
   FutureOr<void> _fetchOrdersList(
       FetchOrdersList event, Emitter<OrdersStates> emit) async {
     emit(FetchingOrders());
-    // try {
-    String userId = await _customerCache.getUserId();
-    String companyId = await _customerCache.getCompanyId();
-    int branchId = await _customerCache.getBranchId();
+    try {
+      String userId = await _customerCache.getUserId();
+      String companyId = await _customerCache.getCompanyId();
+      int branchId = await _customerCache.getBranchId();
 
-    FetchOrdersModel fetchOrdersModel =
-        await _ordersRepository.fetchOrdersList(userId, companyId, branchId);
-    if (fetchOrdersModel.status == 200) {
-      emit(FetchedOrders(fetchOrdersList: fetchOrdersModel.data));
-    } else {
-      emit(ErrorFetchingOrders(message: fetchOrdersModel.message));
+      FetchOrdersModel fetchOrdersModel =
+          await _ordersRepository.fetchOrdersList(userId, companyId, branchId);
+      if (fetchOrdersModel.status == 200) {
+        emit(FetchedOrders(fetchOrdersList: fetchOrdersModel.data));
+      } else {
+        emit(ErrorFetchingOrders(message: fetchOrdersModel.message));
+      }
+    } catch (e) {
+      emit(ErrorFetchingOrders(message: e.toString()));
     }
-    // } catch (e) {
-    //   emit(ErrorFetchingOrders(message: e.toString()));
-    // }
   }
 }

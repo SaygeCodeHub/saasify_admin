@@ -141,7 +141,7 @@ class FormImageSection extends StatelessWidget {
                                         .removeAt(index);
                                     context.read<UploadBloc>().add(LoadImage());
                                   },
-                                  child: Image.asset('close.png',
+                                  child: Image.asset('assets/close.png',
                                       height: kCloseIconSize,
                                       width: kCloseIconSize)),
                             )
@@ -158,7 +158,7 @@ class FormImageSection extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.circular(spacingSmall)),
                             child: Center(
-                                child: Image.asset('upload.png',
+                                child: Image.asset('assets/upload.png',
                                     height: 50, width: 50)),
                           ));
                     });
@@ -191,7 +191,7 @@ class FormImageSection extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(spacingSmall)),
                                   child: Center(
-                                      child: Image.asset('upload.png',
+                                      child: Image.asset('assets/upload.png',
                                           height: 50, width: 50)),
                                 ));
                           }),

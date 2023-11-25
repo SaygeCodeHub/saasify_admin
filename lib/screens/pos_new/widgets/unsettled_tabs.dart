@@ -15,6 +15,7 @@ import 'package:saasify/widgets/primary_button.dart';
 class UnsettledTabs extends StatelessWidget {
   final List customerIdList;
   final Map<String, Customer> customerData;
+
   const UnsettledTabs({
     super.key,
     required this.customerIdList,
@@ -99,53 +100,63 @@ class UnsettledTabs extends StatelessWidget {
                                 padding: const EdgeInsets.all(spacingStandard),
                                 child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.center,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Row(children: [
-                                        Expanded(
-                                            flex: 4,
-                                            child: Image.asset(
-                                                'assets/user.png',
-                                                fit: BoxFit.fill)),
-                                        const Spacer(flex: 6),
-                                        InkWell(
-                                            onTap: () {
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (context) =>
-                                                      CustomAlertDialog(
-                                                        title: StringConstants
-                                                            .kWarning,
-                                                        message:
-                                                            'The Given Tab Will be Removed',
-                                                        primaryButtonTitle:
-                                                            StringConstants
-                                                                .kConfirm,
-                                                        primaryOnPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                          context
-                                                              .read<
-                                                                  BillingBloc>()
-                                                              .add(RemovePendingOrder(
-                                                                  orderID:
-                                                                      customerIdList[
-                                                                          index]));
-                                                        },
-                                                        secondaryButtonTitle:
-                                                            StringConstants
-                                                                .kCancel,
-                                                        secondaryOnPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                      ));
-                                            },
-                                            child: Image.asset('close.png',
-                                                height: kCloseIconSize,
-                                                width: kCloseIconSize))
-                                      ]),
+                                      Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(width: 20),
+                                            const Spacer(flex: 2),
+                                            Expanded(
+                                                flex: 4,
+                                                child: Image.asset(
+                                                    'assets/user.png',
+                                                    fit: BoxFit.fill)),
+                                            const Spacer(flex: 2),
+                                            // const Spacer(flex: 6),
+                                            InkWell(
+                                                onTap: () {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (context) =>
+                                                              CustomAlertDialog(
+                                                                title:
+                                                                    StringConstants
+                                                                        .kWarning,
+                                                                message:
+                                                                    'The Given Tab Will be Removed',
+                                                                primaryButtonTitle:
+                                                                    StringConstants
+                                                                        .kConfirm,
+                                                                primaryOnPressed:
+                                                                    () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                  context
+                                                                      .read<
+                                                                          BillingBloc>()
+                                                                      .add(RemovePendingOrder(
+                                                                          orderID:
+                                                                              customerIdList[index]));
+                                                                },
+                                                                secondaryButtonTitle:
+                                                                    StringConstants
+                                                                        .kCancel,
+                                                                secondaryOnPressed:
+                                                                    () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                              ));
+                                                },
+                                                child: Image.asset(
+                                                    'assets/close.png',
+                                                    height: kCloseIconSize,
+                                                    width: kCloseIconSize))
+                                          ]),
                                       Expanded(
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
