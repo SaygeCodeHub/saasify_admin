@@ -8,6 +8,7 @@ import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
+import '../../widgets/share_download_print_widget.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 
@@ -55,19 +56,7 @@ class OrderDetailsScreen extends StatelessWidget {
                               context.responsive(const SizedBox(),
                                   desktop: const Spacer()),
                               const Spacer(),
-                              const Row(
-                                children: [
-                                  Icon(Icons.share),
-                                  SizedBox(
-                                    width: spacingXMedium,
-                                  ),
-                                  Icon(Icons.download),
-                                  SizedBox(
-                                    width: spacingXMedium,
-                                  ),
-                                  Icon(Icons.print),
-                                ],
-                              )
+                              const ShareDownloadPrintWidget()
                             ]),
                             const SizedBox(height: spacingStandard),
                             OrderDetailsHeaderWidget(ordersData: ordersData),

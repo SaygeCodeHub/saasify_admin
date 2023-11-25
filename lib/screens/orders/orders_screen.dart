@@ -12,6 +12,7 @@ import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
 import '../../configs/app_color.dart';
 import '../../widgets/custom_alert_box.dart';
+import '../../widgets/share_download_print_widget.dart';
 import 'orders_list_datatable.dart';
 
 class OrdersScreen extends StatelessWidget {
@@ -81,19 +82,7 @@ class OrdersScreen extends StatelessWidget {
                                       hintText: StringConstants.kSearchHere,
                                       onTextFieldChanged: (value) {})),
                               const Spacer(),
-                              const Row(
-                                children: [
-                                  Icon(Icons.share),
-                                  SizedBox(
-                                    width: spacingXMedium,
-                                  ),
-                                  Icon(Icons.download),
-                                  SizedBox(
-                                    width: spacingXMedium,
-                                  ),
-                                  Icon(Icons.print),
-                                ],
-                              )
+                              const ShareDownloadPrintWidget()
                             ]),
                             const SizedBox(height: spacingStandard),
                             OrdersListDataTable(
