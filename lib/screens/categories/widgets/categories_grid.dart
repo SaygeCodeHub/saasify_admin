@@ -21,6 +21,7 @@ class CategoriesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map editCategoryMap = {};
     return GridView.builder(
       shrinkWrap: true,
       itemCount: productCategory.length,
@@ -90,8 +91,16 @@ class CategoriesGrid extends StatelessWidget {
                                                               height:
                                                                   spacingXXSmall),
                                                           CustomTextField(
+                                                              initialValue:
+                                                                  productCategory[
+                                                                          index]
+                                                                      .categoryName,
                                                               onTextFieldChanged:
-                                                                  (value) {}),
+                                                                  (value) {
+                                                                editCategoryMap[
+                                                                        'category_name'] =
+                                                                    value;
+                                                              }),
                                                           const SizedBox(
                                                               height:
                                                                   spacingSmall),
@@ -101,7 +110,8 @@ class CategoriesGrid extends StatelessWidget {
                                                                     .read<
                                                                         CategoriesBloc>()
                                                                     .add(EditCategories(
-                                                                        categoryDetailsMap: {}));
+                                                                        categoryDetailsMap:
+                                                                            editCategoryMap));
                                                                 Navigator.pop(
                                                                     ctx);
                                                               },

@@ -59,7 +59,20 @@ class CategoriesScreen extends StatelessWidget {
                               .read<CategoriesBloc>()
                               .add(FetchAllCategories());
                         }
-                        if (state is ErrorEditingCategories) {}
+                        if (state is ErrorEditingCategories) {
+                          showDialog(
+                              context: context,
+                              builder: (dialogueCtx) {
+                                return CustomAlertDialog(
+                                    title: StringConstants.kSomethingWentWrong,
+                                    message: state.message,
+                                    errorMarkVisible: true,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(dialogueCtx);
+                                    });
+                              });
+                        }
                         if (state is ErrorFetchingCategories) {
                           showDialog(
                               context: context,
