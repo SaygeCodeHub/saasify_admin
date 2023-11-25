@@ -121,6 +121,16 @@ class ProductListDataTable extends StatelessWidget {
             )),
             DataColumn(
                 label: Expanded(
+              child: Center(
+                child: Text('',
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)),
+              ),
+            )),
+            DataColumn(
+                label: Expanded(
                     child: Center(
                         child: Text('',
                             style: Theme.of(context)
@@ -230,6 +240,14 @@ class ProductListDataTable extends StatelessWidget {
                                             : AppColor.saasifyGreen)),
                           ],
                         ))),
+                    DataCell(Switch(
+                        value: productList[index].variantActive,
+                        onChanged: (value) {
+                          Map productDetails = productList[index].toJson();
+                          productDetails['variant_active'] = value;
+                          context.read<ProductBloc>().add(
+                              EditProduct(productDetailsMap: productDetails));
+                        })),
                     DataCell(IconButton(
                         onPressed: () {
                           Navigator.pushReplacementNamed(

@@ -303,10 +303,9 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   FutureOr<void> _removeAllProduct(
       RemoveAllProduct event, Emitter<BillingStates> emit) async {
     customer.productList.clear();
-    emit(ProductsLoaded(
-        billDetails: customer.billDetails,
+    add(CalculateBill(
+        discount: 10,
         selectedProducts: customer.productList,
-        selectedCategoryIndex: selectedCategoryIndex,
         productsByCategories: event.productsByCategories));
   }
 }

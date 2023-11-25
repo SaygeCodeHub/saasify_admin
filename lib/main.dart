@@ -5,6 +5,7 @@ import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/bloc/authentication/authentication_states.dart';
 import 'package:saasify/bloc/categories/categories_bloc.dart';
+import 'package:saasify/bloc/customer/customer_bloc.dart';
 import 'package:saasify/bloc/inventory/inventory_bloc.dart';
 import 'package:saasify/bloc/onboarding/onboarding_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
@@ -86,7 +87,8 @@ class MyPosApp extends StatelessWidget {
           BlocProvider(lazy: false, create: (context) => UploadBloc()),
           BlocProvider(lazy: false, create: (context) => InventoryBloc()),
           BlocProvider(lazy: false, create: (context) => CategoriesBloc()),
-          BlocProvider(lazy: false, create: (context) => OrdersBloc())
+          BlocProvider(lazy: false, create: (context) => OrdersBloc()),
+          BlocProvider(lazy: false, create: (context) => CustomerBloc())
         ],
         child: GestureDetector(
             onTap: () {

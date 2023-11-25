@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/customer/customer_bloc.dart';
+import 'package:saasify/bloc/customer/customer_event.dart';
 import 'package:saasify/bloc/pos/billing_bloc.dart';
 import 'package:saasify/bloc/pos/billing_event.dart';
 import 'package:saasify/configs/app_color.dart';
@@ -90,6 +92,10 @@ class UnsettledTabs extends StatelessWidget {
                               customerIdList[index];
                           context.read<BillingBloc>().add(BillingInitialEvent(
                               orderIndex: customerIdList[index]));
+                          context.read<CustomerBloc>().add(GetCustomer(
+                              customerContact:
+                                  customerData[customerIdList[index]]!
+                                      .customerContact));
                         },
                         child: Card(
                             elevation: 4,

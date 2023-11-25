@@ -93,6 +93,30 @@ class ProductListScreen extends StatelessWidget {
                                       },
                                     ));
                           }
+                          if (state is EditingProduct) {
+                            log('inside DeletingProducts');
+                            ProgressBar.show(context);
+                          }
+                          if (state is EditedProduct) {
+                            log('inside DeletedProducts');
+                            ProgressBar.dismiss(context);
+                            context.read<ProductBloc>().add(FetchProductList());
+                          }
+                          if (state is ErrorEditingProduct) {
+                            ProgressBar.dismiss(context);
+                            showDialog(
+                                context: context,
+                                builder: (ctx) => CustomAlertDialog(
+                                      title:
+                                          StringConstants.kSomethingWentWrong,
+                                      message: state.message,
+                                      primaryButtonTitle: StringConstants.kOk,
+                                      checkMarkVisible: false,
+                                      primaryOnPressed: () {
+                                        Navigator.pop(ctx);
+                                      },
+                                    ));
+                          }
                           if (state is ErrorFetchingProduct) {
                             showDialog(
                                 context: context,

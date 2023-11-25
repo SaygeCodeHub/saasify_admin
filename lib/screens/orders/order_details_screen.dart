@@ -25,7 +25,7 @@ class OrderDetailsScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColor.saasifyLightGreyBlue,
         key: _scaffoldKey,
-        drawer: const SideBar(selectedIndex: 4),
+        drawer: const SideBar(selectedIndex: 5),
         body: Flex(
             direction:
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
@@ -35,7 +35,7 @@ class OrderDetailsScreen extends StatelessWidget {
                       scaffoldKey: _scaffoldKey,
                       headingText: StringConstants.kOrders),
                   desktop: const Expanded(
-                    child: SideBar(selectedIndex: 4),
+                    child: SideBar(selectedIndex: 5),
                   )),
               Expanded(
                   flex: 5,

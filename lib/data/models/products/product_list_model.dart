@@ -35,6 +35,7 @@ class FetchProductListModel {
 class ProductWithVariant {
   final int categoryId;
   final String categoryName;
+  final bool categoryActive;
   final int productId;
   final String productName;
   final String? brandName;
@@ -49,9 +50,12 @@ class ProductWithVariant {
   final String unit;
   final int barcode;
   final bool draft;
+  final bool variantActive;
   final int? restockReminder;
 
   ProductWithVariant({
+    required this.categoryActive,
+    required this.variantActive,
     required this.categoryId,
     required this.categoryName,
     required this.productId,
@@ -75,6 +79,7 @@ class ProductWithVariant {
       ProductWithVariant(
         categoryId: json["category_id"],
         categoryName: json["category_name"],
+        categoryActive: json["category_active"],
         productId: json["product_id"],
         productName: json["product_name"],
         brandName: json["brand_name"],
@@ -90,11 +95,13 @@ class ProductWithVariant {
         barcode: json["barcode"],
         draft: json["draft"],
         restockReminder: json["restock_reminder"],
+        variantActive: json["variant_active"],
       );
 
   Map<String, dynamic> toJson() => {
         "category_id": categoryId,
         "category_name": categoryName,
+        "category_active": categoryActive,
         "product_id": productId,
         "product_name": productName,
         "brand_name": brandName,
@@ -110,5 +117,6 @@ class ProductWithVariant {
         "barcode": barcode,
         "draft": draft,
         "restock_reminder": restockReminder,
+        "variant_active": variantActive
       };
 }

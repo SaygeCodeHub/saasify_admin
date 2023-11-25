@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/customer/customer_bloc.dart';
+import 'package:saasify/bloc/customer/customer_event.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/pos_new/widgets/billing_section.dart';
@@ -22,7 +24,6 @@ class POSScreen extends StatelessWidget {
 
   POSScreen({super.key});
 
-  final _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -118,6 +119,11 @@ class POSScreen extends StatelessWidget {
                           customerIdList: state.customerIdList,
                           customerData: state.customerData);
                     } else if (state is ProductsLoaded) {
+                      context.read<CustomerBloc>().add(GetCustomer(
+                          customerContact: context
+                              .read<BillingBloc>()
+                              .customer
+                              .customerContact));
                       if (state.productsByCategories.isNotEmpty) {
                         return Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -146,8 +152,7 @@ class POSScreen extends StatelessWidget {
                                       flex: 2,
                                       child: BillingSection(
                                           productsByCategories:
-                                              state.productsByCategories,
-                                          formKey: _formKey))
+                                              state.productsByCategories))
                                   : const SizedBox.shrink()
                             ]);
                       } else {
