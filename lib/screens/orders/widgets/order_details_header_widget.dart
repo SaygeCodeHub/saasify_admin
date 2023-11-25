@@ -10,9 +10,9 @@ import '../../../data/models/orders/fetch_orders_model.dart';
 import 'customer_info_widget.dart';
 
 class OrderDetailsHeaderWidget extends StatelessWidget {
-  final OrdersData ordersData;
+  final Order orderListDatum;
 
-  const OrderDetailsHeaderWidget({super.key, required this.ordersData});
+  const OrderDetailsHeaderWidget({super.key, required this.orderListDatum});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,8 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text('Order ID: ${ordersData.orderId}',
+                                      Text(
+                                          'Order ID: ${orderListDatum.orderId}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .xTiniest
@@ -49,7 +50,7 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                                       const SizedBox(height: spacingXSmall),
                                       Text(
                                           DateFormat('dd MMM yyyy')
-                                              .format(ordersData.orderDate),
+                                              .format(orderListDatum.orderDate),
                                           style: Theme.of(context)
                                               .textTheme
                                               .xxTiniest),
@@ -65,11 +66,11 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                                               color:
                                                   AppColor.saasifyLighterGreen),
                                           child: Text(
-                                              ordersData.paymentStatus
+                                              orderListDatum.paymentStatus
                                                       .trim()
                                                       .substring(0, 1)
                                                       .toUpperCase() +
-                                                  ordersData.paymentStatus
+                                                  orderListDatum.paymentStatus
                                                       .trim()
                                                       .substring(
                                                         1,
@@ -87,12 +88,12 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                             height: spacingLarge,
                           ),
                           CustomerInfoWidget(
-                            ordersData: ordersData,
+                            orderListDatum: orderListDatum,
                           )
                         ],
                       ),
                       PaymentInfoWidget(
-                        ordersData: ordersData,
+                        orderListDatum: orderListDatum,
                       )
                     ],
                   )

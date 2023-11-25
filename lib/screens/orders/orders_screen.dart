@@ -97,9 +97,9 @@ class OrdersScreen extends StatelessWidget {
                             ]),
                             const SizedBox(height: spacingStandard),
                             OrdersListDataTable(
-                                ordersData: state.fetchOrdersList),
+                                orderListDatum: state.fetchOrdersList),
                             Visibility(
-                                visible: state.fetchOrdersList.isEmpty,
+                                visible: state.fetchOrdersList.orders.isEmpty,
                                 child: Center(
                                     child: Text(
                                         StringConstants.kNoDataAvailable,
@@ -111,7 +111,7 @@ class OrdersScreen extends StatelessWidget {
                                                 color: AppColor
                                                     .saasifyLightGrey)))),
                             Visibility(
-                                visible: state.fetchOrdersList.isEmpty,
+                                visible: state.fetchOrdersList.orders.isEmpty,
                                 child: const Spacer())
                           ]);
                         } else if (state is ErrorFetchingOrders) {

@@ -12,11 +12,11 @@ import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
-  final OrdersData ordersData;
+  final Order orderListDatum;
 
   static const String routeName = 'OrderDetailsScreen';
 
-  OrderDetailsScreen({super.key, required this.ordersData});
+  OrderDetailsScreen({super.key, required this.orderListDatum});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -70,12 +70,14 @@ class OrderDetailsScreen extends StatelessWidget {
                               )
                             ]),
                             const SizedBox(height: spacingStandard),
-                            OrderDetailsHeaderWidget(ordersData: ordersData),
+                            OrderDetailsHeaderWidget(
+                                orderListDatum: orderListDatum),
                             const SizedBox(height: spacingMedium),
                             const SizedBox(height: spacingMedium),
-                            OrderDetailsProductList(ordersData: ordersData),
+                            OrderDetailsProductList(
+                                orderListDatum: orderListDatum),
                             const SizedBox(height: spacingMedium),
-                            OrderBillDetails(ordersData: ordersData),
+                            OrderBillDetails(orderListDatum: orderListDatum),
                           ])))
             ]));
   }

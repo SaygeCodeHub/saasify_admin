@@ -3,7 +3,8 @@ import 'orders_repository.dart';
 
 class OrdersRepositoryImpl implements OrdersRepository {
   @override
-  Future<FetchOrdersModel> fetchOrdersList() async {
+  Future<FetchOrdersModel> fetchOrdersList(
+      String userId, companyId, branchId) async {
     // final response = await ClientServices().get(
     //     '${ApiConstants.baseUrl}$userId/$companyId/$branchId/getAllOrders');
     final response = {
@@ -22,7 +23,7 @@ class OrdersRepositoryImpl implements OrdersRepository {
             "payment_status": "paid",
             "payment_type": "cash",
             "customer_name": "qwertyui",
-            "discount_total": null,
+            "discount_total": 0.0,
             "total_amount": 50.0,
             "subtotal": 50.0,
             "items_ordered": [
@@ -82,7 +83,7 @@ class OrdersRepositoryImpl implements OrdersRepository {
             "payment_status": "paid",
             "payment_type": "cash",
             "customer_name": "qwertyui",
-            "discount_total": null,
+            "discount_total": 50.0,
             "total_amount": 50.0,
             "subtotal": 50.0,
             "items_ordered": [

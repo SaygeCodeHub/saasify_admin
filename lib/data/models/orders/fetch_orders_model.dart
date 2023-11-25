@@ -51,15 +51,15 @@ class OrdersData {
         unpaidOrders: json["unpaid_orders"],
         totalEarning: json["total_earning"],
         paymentTypesUsage:
-            PaymentTypesUsage.fromJson(json["payment_tyes_usage"]),
+            PaymentTypesUsage.fromJson(json["payment_types_usage"]),
         orders: List<Order>.from(json["orders"].map((x) => Order.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "total_orders": totalOrders,
-        "unpaid_orers": unpaidOrders,
+        "unpaid_orders": unpaidOrders,
         "total_earning": totalEarning,
-        "payment_tyes_usage": paymentTypesUsage.toJson(),
+        "payment_types_usage": paymentTypesUsage.toJson(),
         "orders": List<dynamic>.from(orders.map((x) => x.toJson())),
       };
 }
@@ -72,9 +72,9 @@ class Order {
   final String paymentStatus;
   final String paymentType;
   final String customerName;
-  final num discountTotal;
-  final num totalAmount;
-  final num subtotal;
+  final double discountTotal;
+  final double totalAmount;
+  final double subtotal;
   final List<ItemsOrdered> itemsOrdered;
 
   Order({
@@ -130,9 +130,9 @@ class ItemsOrdered {
   final String brandName;
   final int brandId;
   final int variantId;
-  final int cost;
+  final double cost;
   final int quantity;
-  final int discountPercent;
+  final double discountPercent;
   final int stock;
   final int stockId;
   final String productDescription;

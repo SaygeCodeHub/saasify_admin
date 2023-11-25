@@ -8,9 +8,9 @@ import '../../../data/models/orders/fetch_orders_model.dart';
 import '../order_details_list_datatable.dart';
 
 class OrderDetailsProductList extends StatelessWidget {
-  final OrdersData ordersData;
+  final Order orderListDatum;
 
-  const OrderDetailsProductList({super.key, required this.ordersData});
+  const OrderDetailsProductList({super.key, required this.orderListDatum});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +33,8 @@ class OrderDetailsProductList extends StatelessWidget {
                               .copyWith(fontWeight: FontWeight.w600)),
                       const SizedBox(height: spacingXSmall),
                       Expanded(
-                          child:
-                              OrderDetailsListDataTable(ordersData: ordersData))
+                          child: OrderDetailsListDataTable(
+                              orderListDatum: orderListDatum))
                     ]))));
   }
 }
