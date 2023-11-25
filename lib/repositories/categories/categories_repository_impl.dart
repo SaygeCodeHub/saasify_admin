@@ -25,10 +25,10 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
 
   @override
   Future<DeleteCategoriesModel> deleteCategories(
-      String userId, String companyId, int branchId, Map variantIdMap) async {
+      String userId, String companyId, int branchId, Map categoryIdMap) async {
     final response = await ClientServices().delete(
         '${ApiConstants.baseUrl}$userId/$companyId/$branchId/deleteCategory',
-        variantIdMap);
+        categoryIdMap);
     return DeleteCategoriesModel.fromJson(response);
   }
 }

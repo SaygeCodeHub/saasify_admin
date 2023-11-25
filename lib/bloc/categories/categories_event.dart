@@ -7,9 +7,9 @@ class EditCategories extends CategoriesEvents {
 }
 
 class DeleteCategories extends CategoriesEvents {
-  final List<int> variantIds;
+  final int categoryId;
 
-  DeleteCategories({required this.variantIds});
+  DeleteCategories({required this.categoryId});
 }
 
 class FetchAllCategories extends CategoriesEvents {}

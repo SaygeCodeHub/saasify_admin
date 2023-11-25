@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/categories/categories_bloc.dart';
 import 'package:saasify/bloc/categories/categories_event.dart';
 import 'package:saasify/configs/app_color.dart';
-
 import '../../../data/models/categories/fetch_all_categories_model.dart';
 
 class CategoryToggleWidget extends StatelessWidget {

@@ -60,7 +60,7 @@ class CategoriesBloc extends Bloc<CategoriesEvents, CategoriesStates> {
       String companyId = await _customerCache.getCompanyId();
       int branchId = await _customerCache.getBranchId();
 
-      Map idsMap = {"variant_ids": event.variantIds};
+      Map idsMap = {"category_ids": event.categoryId};
 
       DeleteCategoriesModel deleteCategoriesModel = await _categoriesRepository
           .deleteCategories(userId, companyId, branchId, idsMap);

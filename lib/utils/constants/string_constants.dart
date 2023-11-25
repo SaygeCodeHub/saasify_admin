@@ -40,6 +40,7 @@ class StringConstants {
   static const kDiscountCent = 'Discount(%)';
   static const kDiscount = 'Discount';
   static const kEdit = 'Edit';
+  static const kEditCategoryName = 'Edit Category Name';
   static const kPaymentMethods = 'Choose Payment Type';
   static const kGrandTotal = 'Grand Total';
   static const kTotalAmount = ' Total Amount';
@@ -94,6 +95,8 @@ class StringConstants {
   static const kWhatsYourBusinessDomain = "What's your business domain?";
   static const kSomethingWentWrong = "Something went wrong :(";
   static const kNext = 'Next';
+  static const kDeleteCategory =
+      'Are you sure you want to delete the category?';
   static const kVerifyOtp = "Verify Otp";
   static const kCannotBeMinimized =
       "This Application is meant for larger Screen Sizes";
