@@ -31,8 +31,5 @@ class OrdersBloc extends Bloc<OrdersEvents, OrdersStates> {
     } else {
       emit(ErrorFetchingOrders(message: fetchOrdersModel.message));
     }
-    // } catch (e) {
-    //   emit(ErrorFetchingOrders(message: e.toString()));
-    // }
   }
 }

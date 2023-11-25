@@ -13,6 +13,7 @@ class CustomAlertDialog extends StatelessWidget {
       required this.message,
       required this.primaryButtonTitle,
       this.checkMarkVisible = false,
+      this.errorMarkVisible = false,
       this.secondaryOnPressed,
       this.secondaryButtonTitle,
       required this.primaryOnPressed});
@@ -24,6 +25,7 @@ class CustomAlertDialog extends StatelessWidget {
   final void Function()? secondaryOnPressed;
   final void Function()? primaryOnPressed;
   final bool checkMarkVisible;
+  final bool errorMarkVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,10 @@ class CustomAlertDialog extends StatelessWidget {
                               visible: checkMarkVisible,
                               child: const Icon(Icons.check_circle_rounded,
                                   color: AppColor.saasifyGreen)),
+                          Visibility(
+                              visible: errorMarkVisible,
+                              child: const Icon(Icons.warning,
+                                  color: AppColor.saasifyRed)),
                           Visibility(
                               visible: checkMarkVisible,
                               child: const SizedBox(width: spacingXXSmall)),

@@ -6,6 +6,7 @@ import 'package:saasify/bloc/upload/upload_bloc.dart';
 import 'package:saasify/bloc/upload/upload_events.dart';
 import 'package:saasify/bloc/upload/upload_states.dart';
 import 'package:saasify/configs/app_color.dart';
+import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
@@ -96,43 +97,54 @@ class FormImageSection extends StatelessWidget {
                           children: [
                             (context.read<UploadBloc>().displayImageList[index]
                                     is String)
-                                ? Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: NetworkImage(context
+                                ? Padding(
+                                    padding: const EdgeInsets.all(spacingLarge),
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: NetworkImage(context
+                                                    .read<UploadBloc>()
+                                                    .displayImageList[index])),
+                                            borderRadius: BorderRadius.circular(
+                                                spacingSmall))),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.all(spacingLarge),
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: MemoryImage(context
+                                                    .read<UploadBloc>()
+                                                    .displayImageList[index])),
+                                            borderRadius: BorderRadius.circular(
+                                                spacingSmall))),
+                                  ),
+                            Positioned(
+                              right: 0,
+                              child: InkWell(
+                                  onTap: () {
+                                    (context
+                                            .read<UploadBloc>()
+                                            .displayImageList[index] is! String)
+                                        ? context
+                                            .read<UploadBloc>()
+                                            .pickedImageList
+                                            .remove(context
                                                 .read<UploadBloc>()
-                                                .displayImageList[index])),
-                                        borderRadius: BorderRadius.circular(
-                                            spacingSmall)))
-                                : Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: MemoryImage(context
-                                                .read<UploadBloc>()
-                                                .displayImageList[index])),
-                                        borderRadius: BorderRadius.circular(
-                                            spacingSmall))),
-                            IconButton(
-                                onPressed: () {
-                                  (context
-                                          .read<UploadBloc>()
-                                          .displayImageList[index] is! String)
-                                      ? context
-                                          .read<UploadBloc>()
-                                          .pickedImageList
-                                          .remove(context
-                                              .read<UploadBloc>()
-                                              .displayImageList[index])
-                                      : dataMap['images'].remove(context
-                                          .read<UploadBloc>()
-                                          .displayImageList[index]);
-                                  context
-                                      .read<UploadBloc>()
-                                      .displayImageList
-                                      .removeAt(index);
-                                  context.read<UploadBloc>().add(LoadImage());
-                                },
-                                icon: const Icon(Icons.close))
+                                                .displayImageList[index])
+                                        : dataMap['images'].remove(context
+                                            .read<UploadBloc>()
+                                            .displayImageList[index]);
+                                    context
+                                        .read<UploadBloc>()
+                                        .displayImageList
+                                        .removeAt(index);
+                                    context.read<UploadBloc>().add(LoadImage());
+                                  },
+                                  child: Image.asset('assets/close.png',
+                                      height: kCloseIconSize,
+                                      width: kCloseIconSize)),
+                            )
                           ],
                         );
                       }
@@ -145,9 +157,9 @@ class FormImageSection extends StatelessWidget {
                                 color: AppColor.saasifyLighterGrey,
                                 borderRadius:
                                     BorderRadius.circular(spacingSmall)),
-                            child: const Center(
-                                child: Icon(Icons.file_download_outlined,
-                                    size: 50, color: AppColor.saasifyGrey)),
+                            child: Center(
+                                child: Image.asset('assets/upload.png',
+                                    height: 50, width: 50)),
                           ));
                     });
               }
@@ -178,10 +190,9 @@ class FormImageSection extends StatelessWidget {
                                       color: AppColor.saasifyLighterGrey,
                                       borderRadius:
                                           BorderRadius.circular(spacingSmall)),
-                                  child: const Center(
-                                      child: Icon(Icons.file_download_outlined,
-                                          size: 50,
-                                          color: AppColor.saasifyGrey)),
+                                  child: Center(
+                                      child: Image.asset('assets/upload.png',
+                                          height: 50, width: 50)),
                                 ));
                           }),
                     ),

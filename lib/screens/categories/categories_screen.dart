@@ -1,33 +1,34 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:saasify/bloc/orders/orders_bloc.dart';
-import 'package:saasify/bloc/orders/orders_event.dart';
-import 'package:saasify/bloc/orders/orders_state.dart';
-import 'package:saasify/configs/app_spacing.dart';
+import 'package:saasify/bloc/categories/categories_bloc.dart';
+import 'package:saasify/bloc/categories/categories_event.dart';
+import 'package:saasify/bloc/categories/categories_states.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/utils/constants/string_constants.dart';
+import 'package:saasify/screens/categories/widgets/categories_grid.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/custom_text_field.dart';
-import 'package:saasify/widgets/sidebar.dart';
-import 'package:saasify/widgets/top_bar.dart';
 import '../../configs/app_color.dart';
+import '../../configs/app_spacing.dart';
+import '../../utils/constants/string_constants.dart';
 import '../../widgets/custom_alert_box.dart';
-import 'orders_list_datatable.dart';
+import '../../widgets/sidebar.dart';
+import '../../widgets/top_bar.dart';
 
-class OrdersScreen extends StatelessWidget {
-  static const String routeName = 'OrdersScreen';
+class CategoriesScreen extends StatelessWidget {
+  static const String routeName = 'CategoriesScreen';
 
-  OrdersScreen({Key? key}) : super(key: key);
+  CategoriesScreen({super.key});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    context.read<OrdersBloc>().add(FetchOrdersList());
+    context.read<CategoriesBloc>().add(FetchAllCategories());
 
     return Scaffold(
         key: _scaffoldKey,
-        drawer: const SideBar(selectedIndex: 5),
+        drawer: const SideBar(selectedIndex: 4),
         body: Flex(
             direction:
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
@@ -35,15 +36,23 @@ class OrdersScreen extends StatelessWidget {
               context.responsive(
                   TopBar(
                       scaffoldKey: _scaffoldKey,
-                      headingText: StringConstants.kOrders),
-                  desktop: const Expanded(child: SideBar(selectedIndex: 5))),
+                      headingText: StringConstants.kCategories),
+                  desktop: const Expanded(child: SideBar(selectedIndex: 4))),
               Expanded(
                   flex: 5,
                   child: Padding(
                       padding: const EdgeInsets.all(spacingLarge),
-                      child: BlocConsumer<OrdersBloc, OrdersStates>(
+                      child: BlocConsumer<CategoriesBloc, CategoriesStates>(
                           listener: (context, state) {
-                        if (state is ErrorFetchingOrders) {
+                        if (state is EditedCategories) {
+                          context
+                              .read<CategoriesBloc>()
+                              .add(FetchAllCategories());
+                        }
+                        if (state is ErrorEditingCategories) {
+                          log('errorrrrrr');
+                        }
+                        if (state is ErrorFetchingCategories) {
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
@@ -58,16 +67,18 @@ class OrdersScreen extends StatelessWidget {
                               });
                         }
                       }, buildWhen: (prev, curr) {
-                        return curr is FetchedOrders || curr is FetchingOrders;
+                        return curr is FetchedCategories ||
+                            curr is FetchingCategories;
                       }, builder: (context, state) {
-                        if (state is FetchingOrders) {
+                        if (state is FetchingCategories) {
                           return const Center(
                               child: CircularProgressIndicator());
-                        } else if (state is FetchedOrders) {
+                        } else if (state is FetchedCategories) {
+                          log('here==========>FetchedCategories');
                           return Column(children: [
                             Row(children: [
                               context.responsive(const SizedBox(),
-                                  desktop: Text(StringConstants.kOrders,
+                                  desktop: Text(StringConstants.kCategories,
                                       style: Theme.of(context)
                                           .textTheme
                                           .xxTiny
@@ -75,31 +86,12 @@ class OrdersScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w700))),
                               context.responsive(const SizedBox(),
                                   desktop: const Spacer()),
-                              Expanded(
-                                  flex: 5,
-                                  child: CustomTextField(
-                                      hintText: StringConstants.kSearchHere,
-                                      onTextFieldChanged: (value) {})),
-                              const Spacer(),
-                              const Row(
-                                children: [
-                                  Icon(Icons.share),
-                                  SizedBox(
-                                    width: spacingXMedium,
-                                  ),
-                                  Icon(Icons.download),
-                                  SizedBox(
-                                    width: spacingXMedium,
-                                  ),
-                                  Icon(Icons.print),
-                                ],
-                              )
+                              const Spacer()
                             ]),
                             const SizedBox(height: spacingStandard),
-                            OrdersListDataTable(
-                                ordersData: state.fetchOrdersList),
+                            CategoriesGrid(productCategory: state.categoryList),
                             Visibility(
-                                visible: state.fetchOrdersList.isEmpty,
+                                visible: state.categoryList.isEmpty,
                                 child: Center(
                                     child: Text(
                                         StringConstants.kNoDataAvailable,
@@ -111,10 +103,10 @@ class OrdersScreen extends StatelessWidget {
                                                 color: AppColor
                                                     .saasifyLightGrey)))),
                             Visibility(
-                                visible: state.fetchOrdersList.isEmpty,
+                                visible: state.categoryList.isEmpty,
                                 child: const Spacer())
                           ]);
-                        } else if (state is ErrorFetchingOrders) {
+                        } else if (state is ErrorFetchingCategories) {
                           return Expanded(
                               child: Center(
                                   child: Text(StringConstants.kNoDataAvailable,

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/inventory/inventory_bloc.dart';
@@ -31,7 +29,7 @@ class InventoryListScreen extends StatelessWidget {
     context.read<InventoryBloc>().add(FetchInventoryList());
     return Scaffold(
         key: _scaffoldKey,
-        drawer: const SideBar(selectedIndex: 5),
+        drawer: const SideBar(selectedIndex: 6),
         body: Flex(
             direction:
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
@@ -41,7 +39,7 @@ class InventoryListScreen extends StatelessWidget {
                       scaffoldKey: _scaffoldKey,
                       headingText: StringConstants.kInventoryManagement),
                   desktop: const Expanded(
-                    child: SideBar(selectedIndex: 5),
+                    child: SideBar(selectedIndex: 6),
                   )),
               Expanded(
                   flex: 5,
@@ -49,7 +47,6 @@ class InventoryListScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingLarge),
                       child: BlocConsumer<InventoryBloc, InventoryStates>(
                         listener: (context, state) {
-                          log('states===>$state');
                           if (state is UpdatingStock) {
                             ProgressBar.show(context);
                           } else if (state is UpdatedStock) {
@@ -60,6 +57,7 @@ class InventoryListScreen extends StatelessWidget {
                                   return CustomAlertDialog(
                                       title: 'Success',
                                       message: state.message,
+                                      checkMarkVisible: true,
                                       primaryButtonTitle: StringConstants.kOk,
                                       primaryOnPressed: () {
                                         Navigator.pop(dialogueCtx);
@@ -77,6 +75,7 @@ class InventoryListScreen extends StatelessWidget {
                                       title:
                                           StringConstants.kSomethingWentWrong,
                                       message: state.message,
+                                      errorMarkVisible: true,
                                       primaryButtonTitle: StringConstants.kOk,
                                       primaryOnPressed: () {
                                         Navigator.pop(dialogueCtx);
@@ -115,6 +114,19 @@ class InventoryListScreen extends StatelessWidget {
                                         onTextFieldChanged: (value) {}),
                                   ),
                                   const Spacer(),
+                                  const Row(
+                                    children: [
+                                      Icon(Icons.share),
+                                      SizedBox(
+                                        width: spacingXMedium,
+                                      ),
+                                      Icon(Icons.download),
+                                      SizedBox(
+                                        width: spacingXMedium,
+                                      ),
+                                      Icon(Icons.print),
+                                    ],
+                                  )
                                 ]),
                                 const SizedBox(height: spacingStandard),
                                 InventoryListDataTable(

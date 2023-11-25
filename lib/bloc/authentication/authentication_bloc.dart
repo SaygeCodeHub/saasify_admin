@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/data/customer_cache/customer_cache.dart';
+import 'package:saasify/data/database/database_util.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import '../../di/app_module.dart';
@@ -153,6 +154,8 @@ class AuthenticationBloc
   FutureOr<void> _logOut(
       LogOut event, Emitter<AuthenticationStates> emit) async {
     await _customerCache.clearAll();
+    await DatabaseUtil.ordersBox.clear();
+    await DatabaseUtil.products.clear();
     emit(LoggedOut());
   }
 }

@@ -4,11 +4,13 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:saasify/bloc/authentication/authentication_bloc.dart';
 import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/bloc/authentication/authentication_states.dart';
+import 'package:saasify/bloc/categories/categories_bloc.dart';
 import 'package:saasify/bloc/inventory/inventory_bloc.dart';
 import 'package:saasify/bloc/onboarding/onboarding_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/bloc/upload/upload_bloc.dart';
 import 'package:saasify/configs/app_route.dart';
+import 'package:saasify/data/database/database_util.dart';
 import 'package:saasify/data/models/billing/bill_model.dart';
 import 'package:saasify/data/models/billing/customer_model.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
@@ -17,14 +19,13 @@ import 'package:saasify/firebase_options.dart';
 import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
-import 'package:saasify/utils/database_util.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/orders/orders_bloc.dart';
 import 'bloc/pos/billing_bloc.dart';
 import 'configs/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'data/models/hive_keys.dart';
+import 'data/database/hive_keys.dart';
 import 'di/app_module.dart';
 
 void main() async {
@@ -66,8 +67,6 @@ _initApp() async {
   }
   DatabaseUtil.ordersBox = await Hive.openBox(HiveKeys.ordersBox);
   DatabaseUtil.products = await Hive.openBox(HiveKeys.products);
-  DatabaseUtil.completedOrdersBox =
-      await Hive.openBox(HiveKeys.completedOrdersBox);
 }
 
 class MyPosApp extends StatelessWidget {
@@ -86,6 +85,7 @@ class MyPosApp extends StatelessWidget {
           BlocProvider(lazy: false, create: (context) => BillingBloc()),
           BlocProvider(lazy: false, create: (context) => UploadBloc()),
           BlocProvider(lazy: false, create: (context) => InventoryBloc()),
+          BlocProvider(lazy: false, create: (context) => CategoriesBloc()),
           BlocProvider(lazy: false, create: (context) => OrdersBloc())
         ],
         child: GestureDetector(

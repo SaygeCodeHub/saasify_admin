@@ -3,6 +3,8 @@ import 'package:saasify/repositories/authentication/authentication_repository.da
 import 'package:saasify/repositories/authentication/authentication_repository_impl.dart';
 import 'package:saasify/repositories/billing/billing_repository.dart';
 import 'package:saasify/repositories/billing/billing_repository_impl.dart';
+import 'package:saasify/repositories/categories/categories_repository.dart';
+import 'package:saasify/repositories/categories/categories_repository_impl.dart';
 import 'package:saasify/repositories/inventory/inventory_repository.dart';
 import 'package:saasify/repositories/inventory/inventory_repository_impl.dart';
 import 'package:saasify/repositories/products/product_repository.dart';
@@ -32,5 +34,7 @@ configurableDependencies() {
       () => InventoryRepositoryImpl());
   getIt.registerLazySingleton<UploadRepository>(() => UploadRepositoryImpl());
   getIt.registerLazySingleton<BillingRepository>(() => BillingRepositoryImpl());
+  getIt.registerLazySingleton<CategoriesRepository>(
+      () => CategoriesRepositoryImpl());
   getIt.registerLazySingleton<OrdersRepository>(() => OrdersRepositoryImpl());
 }

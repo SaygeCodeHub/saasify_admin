@@ -9,7 +9,7 @@ class CustomDropdownWidget extends StatefulWidget {
   final String? Function(String?)? validator;
   final bool canEdit;
   final String? initialValue;
-  final List listItems;
+  final List<String> listItems;
   final Map dataMap;
   final String mapKey;
   final bool addOption;
@@ -17,7 +17,7 @@ class CustomDropdownWidget extends StatefulWidget {
   final Widget? disabledHint;
 
   const CustomDropdownWidget({
-    super.key,
+    Key? key,
     this.validator,
     this.initialValue,
     this.canEdit = true,
@@ -27,7 +27,7 @@ class CustomDropdownWidget extends StatefulWidget {
     this.disabledHint,
     this.addOption = false,
     this.hintText = '',
-  });
+  }) : super(key: key);
 
   @override
   DropdownScreenState createState() => DropdownScreenState();

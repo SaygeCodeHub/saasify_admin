@@ -67,7 +67,8 @@ class POSScreen extends StatelessWidget {
                           context: context,
                           builder: (context) => CustomAlertDialog(
                               title: StringConstants.kSuccess,
-                              message: state.message,
+                              message: 'Order Placed Successfully',
+                              checkMarkVisible: true,
                               primaryButtonTitle: StringConstants.kOk,
                               primaryOnPressed: () {
                                 Navigator.pop(context);
@@ -83,6 +84,7 @@ class POSScreen extends StatelessWidget {
                           builder: (context) => CustomAlertDialog(
                               title: StringConstants.kSomethingWentWrong,
                               message: state.message,
+                              errorMarkVisible: true,
                               primaryButtonTitle: StringConstants.kOk,
                               primaryOnPressed: () {
                                 Navigator.pop(context);
@@ -95,6 +97,7 @@ class POSScreen extends StatelessWidget {
                             return CustomAlertDialog(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
+                                errorMarkVisible: true,
                                 primaryButtonTitle: StringConstants.kOk,
                                 primaryOnPressed: () {
                                   Navigator.pop(ctx);

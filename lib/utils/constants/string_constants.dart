@@ -38,7 +38,9 @@ class StringConstants {
   static const kSettleBill = 'Settle Bill';
   static const kPayLater = 'Pay Later';
   static const kPay = 'Pay';
+  static const kDiscountCent = 'Discount(%)';
   static const kDiscount = 'Discount';
+  static const kEdit = 'Edit';
   static const kPaymentMethods = 'Choose Payment Type';
   static const kGrandTotal = 'Grand Total';
   static const kTotalAmount = ' Total Amount';
@@ -49,7 +51,7 @@ class StringConstants {
   static const kDiscountPercent = 'Discount Percent';
   static const kPublish = 'Publish';
   static const kSave = 'Save';
-  static const kMeasuringQuantity = 'Measuring Quantity';
+  static const kUnit = 'Unit';
   static const kStock = 'Stock';
   static const kStockWithColon = 'Stock :';
   static const kDelete = 'Delete';
@@ -84,6 +86,7 @@ class StringConstants {
   static const kAddStock = 'Add Stock';
   static const kReduceStock = 'Reduce Stock';
   static const kPOS = 'POS';
+  static const kCategories = 'Categories';
   static const kSearchProduct = 'Search Product';
   static const kAddManually = 'ADD MANUALLY';
   static const kScanBarcode = 'SCAN BARCODE';

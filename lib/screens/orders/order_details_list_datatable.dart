@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
 
 import '../../configs/app_dimensions.dart';
-import '../../configs/app_spacing.dart';
 import '../../data/models/orders/fetch_orders_model.dart';
 import '../../utils/constants/string_constants.dart';
 
@@ -21,6 +20,7 @@ class OrderDetailsListDataTable extends StatelessWidget {
           headingRowHeight: 50,
           dataRowMaxHeight: 50,
           columns: [
+            const DataColumn(label: Text('')),
             DataColumn(
                 label: Text(StringConstants.kName,
                     style: Theme.of(context)
@@ -29,20 +29,11 @@ class OrderDetailsListDataTable extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
-              child: Text(StringConstants.kCategory,
-                  style: Theme.of(context)
-                      .textTheme
-                      .xTiniest
-                      .copyWith(fontWeight: FontWeight.w600)),
-            )),
-            DataColumn(
-                label: Expanded(
-              child: Text(StringConstants.kBrand,
-                  style: Theme.of(context)
-                      .textTheme
-                      .xTiniest
-                      .copyWith(fontWeight: FontWeight.w600)),
-            )),
+                    child: Text(StringConstants.kCategory,
+                        style: Theme.of(context)
+                            .textTheme
+                            .xTiniest
+                            .copyWith(fontWeight: FontWeight.w600)))),
             DataColumn(
                 label: Expanded(
                     child: Center(
@@ -54,31 +45,27 @@ class OrderDetailsListDataTable extends StatelessWidget {
             DataColumn(
                 label: Expanded(
                     child: Center(
-              child: Text(StringConstants.kQuantity,
-                  style: Theme.of(context)
-                      .textTheme
-                      .xTiniest
-                      .copyWith(fontWeight: FontWeight.w600)),
-            ))),
-            DataColumn(
-                label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kDiscount,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600)),
-              ),
-            )),
+                        child: Text(StringConstants.kQuantity,
+                            style: Theme.of(context)
+                                .textTheme
+                                .xTiniest
+                                .copyWith(fontWeight: FontWeight.w600))))),
             DataColumn(
                 label: Expanded(
                     child: Center(
-              child: Text(StringConstants.kDiscountedPrice,
-                  style: Theme.of(context)
-                      .textTheme
-                      .xTiniest
-                      .copyWith(fontWeight: FontWeight.w600)),
-            )))
+                        child: Text(StringConstants.kDiscountCent,
+                            style: Theme.of(context)
+                                .textTheme
+                                .xTiniest
+                                .copyWith(fontWeight: FontWeight.w600))))),
+            DataColumn(
+                label: Expanded(
+                    child: Center(
+                        child: Text(StringConstants.kDiscountedPrice,
+                            style: Theme.of(context)
+                                .textTheme
+                                .xTiniest
+                                .copyWith(fontWeight: FontWeight.w600)))))
           ],
           rows: List.generate(
               ordersData.orders.length,
@@ -116,12 +103,6 @@ class OrderDetailsListDataTable extends StatelessWidget {
                                       1,
                                     )
                                     .toLowerCase(),
-                            style: Theme.of(context).textTheme.xxTiniest))),
-                    DataCell(Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                            ordersData
-                                .orders[index].itemsOrdered[index].brandName,
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,

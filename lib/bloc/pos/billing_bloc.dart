@@ -8,7 +8,7 @@ import 'package:saasify/data/models/billing/selected_product_model.dart';
 import 'package:saasify/data/models/billing/settle_order_model.dart';
 import '../../di/app_module.dart';
 import '../../repositories/billing/billing_repository.dart';
-import '../../utils/database_util.dart';
+import '../../data/database/database_util.dart';
 import 'billing_event.dart';
 import 'billing_state.dart';
 
@@ -41,6 +41,11 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
   FutureOr<void> _loadAllOrders(
       LoadAllOrders event, Emitter<BillingStates> emit) async {
+    customer = Customer(
+        customerName: '',
+        customerContact: '',
+        billDetails: BillModel(itemTotal: 0, total: 0, discount: 0),
+        productList: []);
     Map<String, Customer> customerData = {};
 
     List<String> customerIdList = [];
@@ -198,6 +203,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   FutureOr<void> _calculateBill(
       CalculateBill event, Emitter<BillingStates> emit) async {
     customer.billDetails.itemTotal = 0;
+    customer.billDetails.discount = 0;
+    customer.billDetails.total = 0;
 
     for (var i = 0; i < customer.productList.length; i++) {
       customer.billDetails.itemTotal +=
