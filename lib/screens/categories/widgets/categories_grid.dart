@@ -18,49 +18,44 @@ class CategoriesGrid extends StatelessWidget {
         shrinkWrap: true,
         itemCount: productCategory.length,
         itemBuilder: (BuildContext context, int index) {
-          return Expanded(
-              child: Container(
-                  height: spacingStandard,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(kCircularRadius),
-                      boxShadow: const [
-                        BoxShadow(
-                            color: AppColor.saasifyLightPaleGrey,
-                            blurRadius: 5.0)
-                      ],
-                      color: AppColor.saasifyWhite),
-                  child: Padding(
-                      padding: const EdgeInsets.all(kCircularRadius),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
+          return Container(
+              height: spacingStandard,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(kCircularRadius),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: AppColor.saasifyLightPaleGrey, blurRadius: 5.0)
+                  ],
+                  color: AppColor.saasifyWhite),
+              child: Padding(
+                  padding: const EdgeInsets.all(kCircularRadius),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            productCategory[index]
+                                    .categoryName
+                                    .trim()
+                                    .substring(0, 1)
+                                    .toUpperCase() +
                                 productCategory[index]
-                                        .categoryName
-                                        .trim()
-                                        .substring(0, 1)
-                                        .toUpperCase() +
-                                    productCategory[index]
-                                        .categoryName
-                                        .trim()
-                                        .substring(
-                                          1,
-                                        )
-                                        .toLowerCase(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .tiniest
-                                    .copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColor.saasifyDarkGrey)),
-                            Row(children: [
-                              CategoryToggleWidget(
-                                  productCategory: productCategory[index]),
-                              const SizedBox(width: spacingXSmall),
-                              CategoriesPopUpMenuWidget(
-                                  productCategory: productCategory[index])
-                            ])
-                          ]))));
+                                    .categoryName
+                                    .trim()
+                                    .substring(
+                                      1,
+                                    )
+                                    .toLowerCase(),
+                            style: Theme.of(context).textTheme.tiniest.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppColor.saasifyDarkGrey)),
+                        Row(children: [
+                          CategoryToggleWidget(
+                              productCategory: productCategory[index]),
+                          const SizedBox(width: spacingXSmall),
+                          CategoriesPopUpMenuWidget(
+                              productCategory: productCategory[index])
+                        ])
+                      ])));
         },
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,

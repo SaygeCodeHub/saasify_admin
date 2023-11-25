@@ -10,7 +10,6 @@ import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/custom_alert_box.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../../../widgets/primary_button.dart';
-import '../categories_screen.dart';
 
 class CategoriesPopUpMenuWidget extends StatelessWidget {
   final ProductCategory productCategory;
@@ -72,8 +71,6 @@ class CategoriesPopUpMenuWidget extends StatelessWidget {
                             context.read<CategoriesBloc>().add(DeleteCategories(
                                 categoryId: productCategory.categoryId));
                             Navigator.pop(context);
-                            Navigator.pushReplacementNamed(
-                                context, CategoriesScreen.routeName);
                           },
                           secondaryButtonTitle: StringConstants.kCancel,
                           secondaryOnPressed: () {

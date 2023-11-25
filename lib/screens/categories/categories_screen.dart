@@ -54,6 +54,10 @@ class CategoriesScreen extends StatelessWidget {
                           ProgressBar.show(context);
                         }
 
+                        if (state is ErrorDeletingCategories) {
+                          ProgressBar.dismiss(context);
+                        }
+
                         if (state is EditedCategories) {
                           context
                               .read<CategoriesBloc>()
