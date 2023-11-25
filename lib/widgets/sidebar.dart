@@ -16,6 +16,7 @@ import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 
 import '../screens/categories/categories_screen.dart';
+import '../screens/orders/orders_screen.dart';
 
 class SideBar extends StatelessWidget {
   static String userName = '';
@@ -64,7 +65,7 @@ class SideBar extends StatelessWidget {
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 1)
                               ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyDarkGrey,
+                              : AppColor.saasifyLightBlack,
                           fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.pushReplacementNamed(
@@ -76,7 +77,7 @@ class SideBar extends StatelessWidget {
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 2)
                               ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyDarkGrey,
+                              : AppColor.saasifyLightBlack,
                           fontWeight: FontWeight.w600)),
                   onTap: () async {
                     await DatabaseUtil.products.clear();
@@ -91,7 +92,7 @@ class SideBar extends StatelessWidget {
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 3)
                               ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyDarkGrey,
+                              : AppColor.saasifyLightBlack,
                           fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.pushReplacementNamed(
@@ -104,7 +105,7 @@ class SideBar extends StatelessWidget {
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 4)
                               ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyDarkGrey,
+                              : AppColor.saasifyLightBlack,
                           fontWeight: FontWeight.w600)),
                   onTap: () async {
                     await DatabaseUtil.products.clear();
@@ -120,7 +121,7 @@ class SideBar extends StatelessWidget {
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 5)
                               ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyDarkGrey,
+                              : AppColor.saasifyLightBlack,
                           fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.pushReplacementNamed(
@@ -132,7 +133,7 @@ class SideBar extends StatelessWidget {
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 6)
                               ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyDarkGrey,
+                              : AppColor.saasifyLightBlack,
                           fontWeight: FontWeight.w600)),
                   onTap: () {
                     Navigator.pushReplacementNamed(

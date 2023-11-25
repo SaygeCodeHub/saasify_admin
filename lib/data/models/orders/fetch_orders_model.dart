@@ -32,34 +32,33 @@ class FetchOrdersModel {
 }
 
 class OrdersData {
-  final int totalOrders;
-  final int unpaidOrders;
   final int totalEarning;
-  final PaymentTypesUsage paymentTypesUsage;
+  final int totalOrders;
+  final UnpaidOrder unpaidOrder;
+  final PaymentMethods paymentMethods;
   final List<Order> orders;
 
   OrdersData({
-    required this.totalOrders,
-    required this.unpaidOrders,
     required this.totalEarning,
-    required this.paymentTypesUsage,
+    required this.totalOrders,
+    required this.unpaidOrder,
+    required this.paymentMethods,
     required this.orders,
   });
 
   factory OrdersData.fromJson(Map<String, dynamic> json) => OrdersData(
-        totalOrders: json["total_orders"],
-        unpaidOrders: json["unpaid_orders"],
         totalEarning: json["total_earning"],
-        paymentTypesUsage:
-            PaymentTypesUsage.fromJson(json["payment_types_usage"]),
+        totalOrders: json["total_orders"],
+        unpaidOrder: UnpaidOrder.fromJson(json["unpaid_order"]),
+        paymentMethods: PaymentMethods.fromJson(json["payment_methods"]),
         orders: List<Order>.from(json["orders"].map((x) => Order.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "total_orders": totalOrders,
-        "unpaid_orders": unpaidOrders,
         "total_earning": totalEarning,
-        "payment_types_usage": paymentTypesUsage.toJson(),
+        "total_orders": totalOrders,
+        "unpaid_order": unpaidOrder.toJson(),
+        "payment_methods": paymentMethods.toJson(),
         "orders": List<dynamic>.from(orders.map((x) => x.toJson())),
       };
 }
@@ -72,9 +71,9 @@ class Order {
   final String paymentStatus;
   final String paymentType;
   final String customerName;
-  final double discountTotal;
-  final double totalAmount;
-  final double subtotal;
+  final int discountTotal;
+  final int totalAmount;
+  final int subtotal;
   final List<ItemsOrdered> itemsOrdered;
 
   Order({
@@ -99,7 +98,7 @@ class Order {
         paymentStatus: json["payment_status"],
         paymentType: json["payment_type"],
         customerName: json["customer_name"],
-        discountTotal: json["discount_total"] ?? 0,
+        discountTotal: json["discount_total"],
         totalAmount: json["total_amount"],
         subtotal: json["subtotal"],
         itemsOrdered: List<ItemsOrdered>.from(
@@ -125,16 +124,15 @@ class Order {
 class ItemsOrdered {
   final int categoryId;
   final String categoryName;
-  final int productId;
   final String productName;
   final String brandName;
   final int brandId;
   final int variantId;
-  final double cost;
+  final int cost;
   final int quantity;
-  final double discountPercent;
   final int stock;
   final int stockId;
+  final int discountPercent;
   final String productDescription;
   final List<String> images;
   final String unit;
@@ -146,16 +144,15 @@ class ItemsOrdered {
   ItemsOrdered({
     required this.categoryId,
     required this.categoryName,
-    required this.productId,
     required this.productName,
     required this.brandName,
     required this.brandId,
     required this.variantId,
     required this.cost,
     required this.quantity,
-    required this.discountPercent,
     required this.stock,
     required this.stockId,
+    required this.discountPercent,
     required this.productDescription,
     required this.images,
     required this.unit,
@@ -168,16 +165,15 @@ class ItemsOrdered {
   factory ItemsOrdered.fromJson(Map<String, dynamic> json) => ItemsOrdered(
         categoryId: json["category_id"],
         categoryName: json["category_name"],
-        productId: json["product_id"],
         productName: json["product_name"],
         brandName: json["brand_name"],
         brandId: json["brand_id"],
         variantId: json["variant_id"],
         cost: json["cost"],
         quantity: json["quantity"],
-        discountPercent: json["discount_percent"],
         stock: json["stock"],
         stockId: json["stock_id"],
+        discountPercent: json["discount_percent"],
         productDescription: json["product_description"],
         images: List<String>.from(json["images"].map((x) => x)),
         unit: json["unit"],
@@ -190,16 +186,15 @@ class ItemsOrdered {
   Map<String, dynamic> toJson() => {
         "category_id": categoryId,
         "category_name": categoryName,
-        "product_id": productId,
         "product_name": productName,
         "brand_name": brandName,
         "brand_id": brandId,
         "variant_id": variantId,
         "cost": cost,
         "quantity": quantity,
-        "discount_percent": discountPercent,
         "stock": stock,
         "stock_id": stockId,
+        "discount_percent": discountPercent,
         "product_description": productDescription,
         "images": List<dynamic>.from(images.map((x) => x)),
         "unit": unit,
@@ -210,31 +205,38 @@ class ItemsOrdered {
       };
 }
 
-class PaymentTypesUsage {
-  final int uip;
-  final int cash;
-  final int bank;
-  final int other;
+class PaymentMethods {
+  final UnpaidOrder cash;
 
-  PaymentTypesUsage({
-    required this.uip,
+  PaymentMethods({
     required this.cash,
-    required this.bank,
-    required this.other,
   });
 
-  factory PaymentTypesUsage.fromJson(Map<String, dynamic> json) =>
-      PaymentTypesUsage(
-        uip: json["UIP"],
-        cash: json["cash"],
-        bank: json["bank"],
-        other: json["other"],
+  factory PaymentMethods.fromJson(Map<String, dynamic> json) => PaymentMethods(
+        cash: UnpaidOrder.fromJson(json["cash"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "UIP": uip,
-        "cash": cash,
-        "bank": bank,
-        "other": other,
+        "cash": cash.toJson(),
+      };
+}
+
+class UnpaidOrder {
+  final int count;
+  final int percent;
+
+  UnpaidOrder({
+    required this.count,
+    required this.percent,
+  });
+
+  factory UnpaidOrder.fromJson(Map<String, dynamic> json) => UnpaidOrder(
+        count: json["count"],
+        percent: json["percent"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "count": count,
+        "percent": percent,
       };
 }
