@@ -10,15 +10,9 @@ import 'billing_section_footer.dart';
 import 'billing_section_header.dart';
 
 class BillingSection extends StatelessWidget {
-  const BillingSection(
-      {super.key,
-      required this.productsByCategories,
-      required GlobalKey<FormState> formKey})
-      : _formKey = formKey;
+  const BillingSection({super.key, required this.productsByCategories});
 
   final List<CategoryWithProductsDatum> productsByCategories;
-
-  final GlobalKey<FormState> _formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +20,7 @@ class BillingSection extends StatelessWidget {
         padding: const EdgeInsets.all(spacingMedium),
         decoration: const BoxDecoration(color: AppColor.saasifyLightGreyBlue),
         child: Column(children: [
-          BillingSectionHeader(formKey: _formKey),
+          const BillingSectionHeader(),
           BillingProductsList(productsByCategories: productsByCategories),
           const SizedBox(height: spacingSmall),
           BillDetails(
