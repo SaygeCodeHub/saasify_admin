@@ -6,9 +6,9 @@ import '../../data/models/orders/fetch_orders_model.dart';
 import '../../utils/constants/string_constants.dart';
 
 class OrderDetailsListDataTable extends StatelessWidget {
-  final OrdersData ordersData;
+  final Order orderListDatum;
 
-  const OrderDetailsListDataTable({super.key, required this.ordersData});
+  const OrderDetailsListDataTable({super.key, required this.orderListDatum});
 
   @override
   Widget build(BuildContext context) {
@@ -68,29 +68,30 @@ class OrderDetailsListDataTable extends StatelessWidget {
                                 .copyWith(fontWeight: FontWeight.w600)))))
           ],
           rows: List.generate(
-              ordersData.itemsOrdered.length,
+              orderListDatum.itemsOrdered.length,
               (index) => DataRow(cells: [
                     DataCell(Align(
                         alignment: Alignment.centerLeft,
                         child: SizedBox(
                             height: kProductImageHeight,
                             width: kProductImageWidth,
-                            child: Image.network(ordersData
+                            child: Image.network(orderListDatum
                                 .itemsOrdered[index].images[0]
                                 .toString())))),
                     DataCell(Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(ordersData.itemsOrdered[index].productName,
+                        child: Text(
+                            orderListDatum.itemsOrdered[index].productName,
                             textAlign: TextAlign.left,
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                            ordersData.itemsOrdered[index].categoryName
+                            orderListDatum.itemsOrdered[index].categoryName
                                     .trim()
                                     .substring(0, 1)
                                     .toUpperCase() +
-                                ordersData.itemsOrdered[index].categoryName
+                                orderListDatum.itemsOrdered[index].categoryName
                                     .trim()
                                     .substring(
                                       1,
@@ -100,26 +101,27 @@ class OrderDetailsListDataTable extends StatelessWidget {
                     DataCell(Align(
                         alignment: Alignment.center,
                         child: Text(
-                            ordersData.itemsOrdered[index].cost.toString(),
+                            orderListDatum.itemsOrdered[index].cost.toString(),
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,
                         child: Text(
-                            ordersData.itemsOrdered[index].count.toString(),
+                            orderListDatum.itemsOrdered[index].count.toString(),
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,
                         child: Text(
-                            ordersData.itemsOrdered[index].discountPercent
+                            orderListDatum.itemsOrdered[index].discountPercent
                                 .toString(),
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Align(
                         alignment: Alignment.center,
                         child: Text(
-                            ((ordersData.itemsOrdered[index].cost *
-                                        ordersData.itemsOrdered[index].count) *
+                            ((orderListDatum.itemsOrdered[index].cost *
+                                        orderListDatum
+                                            .itemsOrdered[index].count) *
                                     ((100 -
-                                            ordersData.itemsOrdered[index]
+                                            orderListDatum.itemsOrdered[index]
                                                 .discountPercent) /
                                         100))
                                 .toString(),

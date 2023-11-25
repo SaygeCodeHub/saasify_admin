@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
-import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
 import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
 import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
-import 'package:saasify/screens/orders/orders_screen.dart';
 import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/responsive.dart';
+import '../data/models/orders/fetch_orders_model.dart';
 import '../screens/categories/categories_screen.dart';
 import '../screens/onboarding/auhentication_screen.dart';
 import '../screens/orders/order_details_screen.dart';
+import '../screens/orders/orders_screen.dart';
 import '../screens/product/add_product_screen.dart';
 
 class AppRoutes {
@@ -38,7 +38,7 @@ class AppRoutes {
 
       case OrderDetailsScreen.routeName:
         return _createRoute(OrderDetailsScreen(
-          ordersData: settings.arguments as OrdersData,
+          orderListDatum: settings.arguments as Order,
         ));
 
       case CompanyListScreen.routeName:

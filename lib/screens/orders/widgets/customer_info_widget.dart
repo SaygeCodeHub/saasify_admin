@@ -7,9 +7,9 @@ import '../../../configs/app_spacing.dart';
 import '../../../data/models/orders/fetch_orders_model.dart';
 
 class CustomerInfoWidget extends StatelessWidget {
-  final OrdersData ordersData;
+  final Order orderListDatum;
 
-  const CustomerInfoWidget({super.key, required this.ordersData});
+  const CustomerInfoWidget({super.key, required this.orderListDatum});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class CustomerInfoWidget extends StatelessWidget {
                           .xTiniest
                           .copyWith(color: AppColor.saasifyGreyBlue)),
                   const SizedBox(width: spacingXXSmall),
-                  Text(ordersData.customerName,
+                  Text(orderListDatum.customerName,
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
@@ -53,7 +53,7 @@ class CustomerInfoWidget extends StatelessWidget {
                           .xTiniest
                           .copyWith(color: AppColor.saasifyGreyBlue)),
                   const SizedBox(width: spacingXXSmall),
-                  Text(ordersData.customerContact.toString(),
+                  Text(orderListDatum.customerContact.toString(),
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest

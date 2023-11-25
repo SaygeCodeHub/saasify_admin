@@ -7,7 +7,7 @@ import '../../../data/models/orders/fetch_orders_model.dart';
 import '../../../utils/constants/string_constants.dart';
 
 class DashboardOrderTableList extends StatelessWidget {
-  final List<OrdersData> ordersData;
+  final OrdersData ordersData;
 
   const DashboardOrderTableList({
     super.key,
@@ -25,15 +25,11 @@ class DashboardOrderTableList extends StatelessWidget {
           dataRowMaxHeight: 50,
           columns: [
             DataColumn(
-                label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kOrderNo,
+                label: Text(StringConstants.kOrderNo,
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600)),
-              ),
-            )),
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Text(StringConstants.kCustomerName,
                     style: Theme.of(context)
@@ -65,23 +61,21 @@ class DashboardOrderTableList extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w600)))
           ],
           rows: List.generate(
-              ordersData.length,
+              ordersData.orders.length,
               (index) => DataRow(cells: [
-                    DataCell(Align(
-                      alignment: Alignment.center,
-                      child: Text(ordersData[index].orderNumber.toString(),
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    )),
-                    DataCell(Text(ordersData[index].customerName,
+                    DataCell(Text(ordersData.orders[index].orderNumber,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(ordersData[index].paymentType,
+                    DataCell(Text(ordersData.orders[index].customerName,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.xxTiniest)),
+                    DataCell(Text(ordersData.orders[index].paymentType,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
                     DataCell(Align(
                       alignment: Alignment.center,
-                      child: Text(ordersData[index].totalAmount.toString(),
+                      child: Text(
+                          ordersData.orders[index].totalAmount.toString(),
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
@@ -100,14 +94,12 @@ class DashboardOrderTableList extends StatelessWidget {
                                 color: AppColor.saasifyGreen),
                             const SizedBox(width: spacingXXSmall),
                             Text(
-                                ordersData[index]
-                                        .paymentStatus
+                                ordersData.orders[index].paymentStatus
                                         .trim()
                                         .substring(0, 1)
                                         .toUpperCase()
                                         .toString() +
-                                    ordersData[index]
-                                        .paymentStatus
+                                    ordersData.orders[index].paymentStatus
                                         .trim()
                                         .substring(1)
                                         .toLowerCase()

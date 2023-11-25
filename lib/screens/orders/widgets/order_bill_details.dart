@@ -8,9 +8,9 @@ import '../../../data/models/orders/fetch_orders_model.dart';
 import '../../../utils/constants/string_constants.dart';
 
 class OrderBillDetails extends StatelessWidget {
-  final OrdersData ordersData;
+  final Order orderListDatum;
 
-  const OrderBillDetails({super.key, required this.ordersData});
+  const OrderBillDetails({super.key, required this.orderListDatum});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class OrderBillDetails extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: AppColor.saasifyDarkestBlack)),
                 const SizedBox(height: spacingStandard),
-                Text(ordersData.subtotal.toString(),
+                Text(orderListDatum.subtotal.toString(),
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
@@ -41,7 +41,7 @@ class OrderBillDetails extends StatelessWidget {
                     style: Theme.of(context).textTheme.xTiniest.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColor.saasifyDarkestBlack)),
-                Text(ordersData.discountTotal.toString(),
+                Text(orderListDatum.discountTotal.toString(),
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
@@ -55,7 +55,7 @@ class OrderBillDetails extends StatelessWidget {
                     style: Theme.of(context).textTheme.xTiniest.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColor.saasifyDarkestBlack)),
-                Text(ordersData.totalAmount.toString(),
+                Text(orderListDatum.totalAmount.toString(),
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest

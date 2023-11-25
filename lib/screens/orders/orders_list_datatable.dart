@@ -9,9 +9,9 @@ import '../../configs/app_spacing.dart';
 import 'order_details_screen.dart';
 
 class OrdersListDataTable extends StatelessWidget {
-  final List<OrdersData> ordersData;
+  final OrdersData orderListDatum;
 
-  const OrdersListDataTable({Key? key, required this.ordersData})
+  const OrdersListDataTable({Key? key, required this.orderListDatum})
       : super(key: key);
 
   @override
@@ -74,66 +74,73 @@ class OrdersListDataTable extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w600)))
           ],
           rows: List.generate(
-              ordersData.length,
+              orderListDatum.orders.length,
               (index) => DataRow(cells: [
                     DataCell(
                         Align(
                             alignment: Alignment.center,
-                            child: Text(ordersData[index].orderId.toString(),
+                            child: Text(
+                                orderListDatum.orders[index].orderId.toString(),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.xxTiniest)),
                         onTap: () {
                       Navigator.pushReplacementNamed(
                           context, OrderDetailsScreen.routeName,
-                          arguments: ordersData[index]);
+                          arguments: orderListDatum.orders[index]);
                     }),
                     DataCell(
                         Text(
                             DateFormat('dd MMM yyyy')
-                                .format(ordersData[index].orderDate),
+                                .format(orderListDatum.orders[index].orderDate),
                             style: Theme.of(context).textTheme.xxTiniest),
                         onTap: () {
                       Navigator.pushReplacementNamed(
                           context, OrderDetailsScreen.routeName,
-                          arguments: ordersData[index]);
+                          arguments: orderListDatum.orders[index]);
                     }),
                     DataCell(
-                        Text(ordersData[index].customerContact.toString(),
+                        Text(
+                            orderListDatum.orders[index].customerContact
+                                .toString(),
                             style: Theme.of(context).textTheme.xxTiniest),
                         onTap: () {
                       Navigator.pushReplacementNamed(
                           context, OrderDetailsScreen.routeName,
-                          arguments: ordersData[index]);
+                          arguments: orderListDatum.orders[index]);
                     }),
                     DataCell(
-                        Text(ordersData[index].customerName.toString(),
+                        Text(
+                            orderListDatum.orders[index].customerName
+                                .toString(),
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.xxTiniest),
                         onTap: () {
                       Navigator.pushReplacementNamed(
                           context, OrderDetailsScreen.routeName,
-                          arguments: ordersData[index]);
+                          arguments: orderListDatum.orders[index]);
                     }),
                     DataCell(
-                        Text(ordersData[index].paymentType.toString(),
+                        Text(
+                            orderListDatum.orders[index].paymentType.toString(),
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.xxTiniest),
                         onTap: () {
                       Navigator.pushReplacementNamed(
                           context, OrderDetailsScreen.routeName,
-                          arguments: ordersData[index]);
+                          arguments: orderListDatum.orders[index]);
                     }),
                     DataCell(
                         Align(
                             alignment: Alignment.center,
                             child: Text(
-                                ordersData[index].totalAmount.toString(),
+                                orderListDatum.orders[index].totalAmount
+                                    .toString(),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.xxTiniest)),
                         onTap: () {
                       Navigator.pushReplacementNamed(
                           context, OrderDetailsScreen.routeName,
-                          arguments: ordersData[index]);
+                          arguments: orderListDatum.orders[index]);
                     }),
                     DataCell(
                         Container(
@@ -151,14 +158,12 @@ class OrdersListDataTable extends StatelessWidget {
                                   color: AppColor.saasifyGreen),
                               const SizedBox(width: spacingXXSmall),
                               Text(
-                                  ordersData[index]
-                                          .paymentStatus
+                                  orderListDatum.orders[index].paymentStatus
                                           .trim()
                                           .substring(0, 1)
                                           .toUpperCase()
                                           .toString() +
-                                      ordersData[index]
-                                          .paymentStatus
+                                      orderListDatum.orders[index].paymentStatus
                                           .trim()
                                           .substring(
                                             1,
@@ -172,7 +177,7 @@ class OrdersListDataTable extends StatelessWidget {
                             ])), onTap: () {
                       Navigator.pushReplacementNamed(
                           context, OrderDetailsScreen.routeName,
-                          arguments: ordersData[index]);
+                          arguments: orderListDatum.orders[index]);
                     })
                   ])))
     ]));

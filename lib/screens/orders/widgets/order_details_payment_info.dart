@@ -9,9 +9,9 @@ import 'customer_info_widget.dart';
 import 'order_info_widget.dart';
 
 class OrderDetailsPaymentInfo extends StatelessWidget {
-  final OrdersData ordersData;
+  final Order orderListDatum;
 
-  const OrderDetailsPaymentInfo({super.key, required this.ordersData});
+  const OrderDetailsPaymentInfo({super.key, required this.orderListDatum});
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +27,12 @@ class OrderDetailsPaymentInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(children: [
-                    CustomerInfoWidget(ordersData: ordersData),
+                    CustomerInfoWidget(orderListDatum: orderListDatum),
                     const SizedBox(width: spacingXExcel),
-                    OrderInfoWidget(ordersData: ordersData)
+                    OrderInfoWidget(orderListDatum: orderListDatum)
                   ]),
                   const SizedBox(height: spacingExcel),
-                  PaymentInfoWidget(ordersData: ordersData),
+                  PaymentInfoWidget(orderListDatum: orderListDatum),
                 ])));
   }
 }

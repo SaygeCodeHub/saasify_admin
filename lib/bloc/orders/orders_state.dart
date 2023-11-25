@@ -7,7 +7,7 @@ class OrdersInitial extends OrdersStates {}
 class FetchingOrders extends OrdersStates {}
 
 class FetchedOrders extends OrdersStates {
-  List<OrdersData> fetchOrdersList;
+  OrdersData fetchOrdersList;
 
   FetchedOrders({required this.fetchOrdersList});
 }

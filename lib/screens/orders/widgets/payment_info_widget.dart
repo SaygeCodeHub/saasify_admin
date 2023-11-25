@@ -7,9 +7,9 @@ import '../../../configs/app_spacing.dart';
 import '../../../data/models/orders/fetch_orders_model.dart';
 
 class PaymentInfoWidget extends StatelessWidget {
-  final OrdersData ordersData;
+  final Order orderListDatum;
 
-  const PaymentInfoWidget({super.key, required this.ordersData});
+  const PaymentInfoWidget({super.key, required this.orderListDatum});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class PaymentInfoWidget extends StatelessWidget {
                           .xTiniest
                           .copyWith(color: AppColor.saasifyGreyBlue)),
                   const SizedBox(width: spacingXXSmall),
-                  Text(ordersData.customerContact.toString(),
+                  Text(orderListDatum.customerContact.toString(),
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
@@ -97,7 +97,7 @@ class PaymentInfoWidget extends StatelessWidget {
                           .copyWith(color: AppColor.saasifyGreyBlue)),
                   const SizedBox(width: spacingXXSmall),
                   Text(
-                    ordersData.paymentType.toString(),
+                    orderListDatum.paymentType.toString(),
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
@@ -113,11 +113,11 @@ class PaymentInfoWidget extends StatelessWidget {
                           .copyWith(color: AppColor.saasifyGreyBlue)),
                   const SizedBox(width: spacingXXSmall),
                   Text(
-                      ordersData.paymentStatus
+                      orderListDatum.paymentStatus
                               .trim()
                               .substring(0, 1)
                               .toUpperCase() +
-                          ordersData.paymentStatus
+                          orderListDatum.paymentStatus
                               .trim()
                               .substring(
                                 1,
