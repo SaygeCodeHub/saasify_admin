@@ -158,8 +158,12 @@ class FormImageSection extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.circular(spacingSmall)),
                             child: Center(
-                                child: Image.asset('assets/upload.png',
-                                    height: 50, width: 50)),
+                                child: Image.asset(
+                              'assets/upload.png',
+                              height: 25,
+                              width: 25,
+                              color: AppColor.saasifyPaleBlack,
+                            )),
                           ));
                     });
               }
