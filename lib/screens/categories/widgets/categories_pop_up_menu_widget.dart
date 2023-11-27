@@ -7,7 +7,6 @@ import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../data/models/categories/fetch_all_categories_model.dart';
 import '../../../utils/constants/string_constants.dart';
-import '../../../widgets/custom_alert_box.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../../../widgets/primary_button.dart';
 

@@ -165,51 +165,109 @@ class ProductListDataTable extends StatelessWidget {
                                   ? AppColor.saasifyLightDeepBlue
                                   : AppColor.saasifyLightDeepBlue)),
                     )),
-                    DataCell(Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(productList[index].productName,
-                          textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    )),
                     DataCell(
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(productList[index].barcode.toString(),
-                            style: Theme.of(context).textTheme.xxTiniest),
-                      ),
-                    ),
-                    DataCell(Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(productList[index].categoryName,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    )),
-                    DataCell(Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(productList[index].brandName ?? '',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    )),
-                    DataCell(Align(
-                      alignment: Alignment.center,
-                      child: Text(productList[index].cost.toString(),
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    )),
-                    DataCell(Align(
-                      alignment: Alignment.center,
-                      child: Text(productList[index].stock.toString(),
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.xxTiniest.copyWith(
-                              color: (productList[index].stock != null &&
-                                      productList[index].restockReminder !=
-                                          null)
-                                  ? ((productList[index].stock ?? 0) <
-                                          (productList[index].restockReminder ??
-                                              0))
-                                      ? AppColor.saasifyRed
-                                      : AppColor.saasifyBlack
-                                  : AppColor.saasifyBlack)),
-                    )),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(productList[index].productName,
+                              textAlign: TextAlign.left,
+                              style: Theme.of(context).textTheme.xxTiniest),
+                        ), onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, AddProductScreen.routeName,
+                          arguments: AddProductScreenArguments(
+                              isEdit: false,
+                              isVariant: false,
+                              dataMap: productList[index].toJson(),
+                              isProductDetail: true));
+                    }),
+                    DataCell(
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(productList[index].barcode.toString(),
+                                style: Theme.of(context).textTheme.xxTiniest)),
+                        onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, AddProductScreen.routeName,
+                          arguments: AddProductScreenArguments(
+                              isEdit: false,
+                              isVariant: false,
+                              dataMap: productList[index].toJson(),
+                              isProductDetail: true));
+                    }),
+                    DataCell(
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(productList[index].categoryName,
+                                style: Theme.of(context).textTheme.xxTiniest)),
+                        onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, AddProductScreen.routeName,
+                          arguments: AddProductScreenArguments(
+                              isEdit: false,
+                              isVariant: false,
+                              dataMap: productList[index].toJson(),
+                              isProductDetail: true));
+                    }),
+                    DataCell(
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(productList[index].brandName ?? '',
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.xxTiniest)),
+                        onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, AddProductScreen.routeName,
+                          arguments: AddProductScreenArguments(
+                              isEdit: false,
+                              isVariant: false,
+                              dataMap: productList[index].toJson(),
+                              isProductDetail: true));
+                    }),
+                    DataCell(
+                        Align(
+                            alignment: Alignment.center,
+                            child: Text(productList[index].cost.toString(),
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.xxTiniest)),
+                        onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, AddProductScreen.routeName,
+                          arguments: AddProductScreenArguments(
+                              isEdit: false,
+                              isVariant: false,
+                              dataMap: productList[index].toJson(),
+                              isProductDetail: true));
+                    }),
+                    DataCell(
+                        Align(
+                            alignment: Alignment.center,
+                            child: Text(productList[index].stock.toString(),
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .xxTiniest
+                                    .copyWith(
+                                        color: (productList[index].stock !=
+                                                    null &&
+                                                productList[index]
+                                                        .restockReminder !=
+                                                    null)
+                                            ? ((productList[index].stock ?? 0) <
+                                                    (productList[index]
+                                                            .restockReminder ??
+                                                        0))
+                                                ? AppColor.saasifyRed
+                                                : AppColor.saasifyBlack
+                                            : AppColor.saasifyBlack))),
+                        onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, AddProductScreen.routeName,
+                          arguments: AddProductScreenArguments(
+                              isEdit: false,
+                              isVariant: false,
+                              dataMap: productList[index].toJson(),
+                              isProductDetail: true));
+                    }),
                     DataCell(Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 4, horizontal: 8),
@@ -256,7 +314,8 @@ class ProductListDataTable extends StatelessWidget {
                               arguments: AddProductScreenArguments(
                                   isEdit: true,
                                   isVariant: false,
-                                  dataMap: productList[index].toJson()));
+                                  dataMap: productList[index].toJson(),
+                                  isProductDetail: false));
                         },
                         icon: const Icon(
                           Icons.edit,

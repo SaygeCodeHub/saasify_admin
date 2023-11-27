@@ -41,9 +41,9 @@ class ProductWithVariant {
   final String? brandName;
   final int? brandId;
   final int variantId;
-  final int? cost;
-  final int? quantity;
-  final int? discountPercent;
+  final double? cost;
+  final double? quantity;
+  final double? discountPercent;
   final int? stock;
   final String? productDescription;
   final List<String> images;

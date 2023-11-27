@@ -23,19 +23,21 @@ import 'package:saasify/widgets/primary_button.dart';
 import 'package:saasify/widgets/secondary_button.dart';
 
 class ProductForm extends StatelessWidget {
-  const ProductForm({
-    super.key,
-    required GlobalKey<FormState> formKey,
-    required this.isVariant,
-    required this.isEdit,
-    required this.dataMap,
-    required this.categoryList,
-  }) : _formKey = formKey;
+  const ProductForm(
+      {super.key,
+      required GlobalKey<FormState> formKey,
+      required this.isVariant,
+      required this.isEdit,
+      required this.dataMap,
+      required this.categoryList,
+      required this.isProductDetail})
+      : _formKey = formKey;
 
   final GlobalKey<FormState> _formKey;
   final bool isVariant;
   final bool isEdit;
   final Map dataMap;
+  final bool isProductDetail;
   final List<ProductCategory> categoryList;
 
   @override
@@ -47,10 +49,11 @@ class ProductForm extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                IconButton(
-                    onPressed: () {
+                InkWell(
+                    onTap: () {
                       showDialog(
                           context: context,
                           builder: (context) => CustomAlertDialog(
@@ -68,7 +71,8 @@ class ProductForm extends StatelessWidget {
                                 },
                               ));
                     },
-                    icon: const Icon(Icons.arrow_back_ios_new)),
+                    child: const Icon(Icons.arrow_back_ios_new)),
+                const SizedBox(width: spacingSmall),
                 context.responsive(
                   const SizedBox.shrink(),
                   desktop: Text(
@@ -76,7 +80,9 @@ class ProductForm extends StatelessWidget {
                           ? StringConstants.kAddVariant
                           : (isEdit)
                               ? 'Edit Product'
-                              : StringConstants.kAddProduct,
+                              : (isProductDetail == true)
+                                  ? StringConstants.kProductDetails
+                                  : StringConstants.kAddProduct,
                       style: Theme.of(context)
                           .textTheme
                           .xxTiny
@@ -102,7 +108,8 @@ class ProductForm extends StatelessWidget {
                                 'product_id': dataMap['product_id'],
                                 'product_description':
                                     dataMap['product_description'],
-                              }));
+                              },
+                              isProductDetail: false));
                     },
                     buttonTitle: 'Add Variant'),
               ),
@@ -142,16 +149,24 @@ class ProductForm extends StatelessWidget {
               isVariant: isVariant,
               isEdit: isEdit,
               dataMap: dataMap,
-              categoryList: categoryList),
+              categoryList: categoryList,
+              isProductDetail: isProductDetail),
           const SizedBox(width: spacingXXHuge),
           ProductFormSection2(
-              isVariant: isVariant, isEdit: isEdit, dataMap: dataMap),
+              isVariant: isVariant,
+              isEdit: isEdit,
+              dataMap: dataMap,
+              isProductDetail: isProductDetail),
           const SizedBox(width: spacingXXHuge),
           ProductFormSection3(
-              isVariant: isVariant, isEdit: isEdit, dataMap: dataMap)
+              isVariant: isVariant,
+              isEdit: isEdit,
+              dataMap: dataMap,
+              isProductDetail: isProductDetail)
         ]),
         const SizedBox(height: spacingHuge),
-        FormImageSection(isEdit: isEdit, dataMap: dataMap),
+        FormImageSection(
+            isEdit: isEdit, dataMap: dataMap, isProductDetail: isProductDetail),
         const SizedBox(height: spacingMedium),
         Row(mainAxisAlignment: MainAxisAlignment.end, children: [
           Visibility(
@@ -190,33 +205,41 @@ class ProductForm extends StatelessWidget {
                 buttonTitle: StringConstants.kSave),
           ),
           const SizedBox(width: spacingLarge),
-          PrimaryButton(
-              onPressed: () {
-                dataMap['draft'] = false;
-                if (_formKey.currentState!.validate()) {
-                  if (context.read<UploadBloc>().displayImageList.isNotEmpty) {
-                    if (context.read<UploadBloc>().pickedImageList.isNotEmpty) {
-                      context.read<UploadBloc>().add(UploadImage(
-                          multiplePartFileList:
-                              context.read<UploadBloc>().pickedFiles));
-                    } else {
-                      if (isEdit) {
-                        context
-                            .read<ProductBloc>()
-                            .add(EditProduct(productDetailsMap: dataMap));
+          (isProductDetail == true)
+              ? const SizedBox()
+              : PrimaryButton(
+                  onPressed: () {
+                    dataMap['draft'] = false;
+                    if (_formKey.currentState!.validate()) {
+                      if (context
+                          .read<UploadBloc>()
+                          .displayImageList
+                          .isNotEmpty) {
+                        if (context
+                            .read<UploadBloc>()
+                            .pickedImageList
+                            .isNotEmpty) {
+                          context.read<UploadBloc>().add(UploadImage(
+                              multiplePartFileList:
+                                  context.read<UploadBloc>().pickedFiles));
+                        } else {
+                          if (isEdit) {
+                            context
+                                .read<ProductBloc>()
+                                .add(EditProduct(productDetailsMap: dataMap));
+                          } else {
+                            context
+                                .read<ProductBloc>()
+                                .add(SaveProduct(productDetailsMap: dataMap));
+                          }
+                        }
                       } else {
-                        context
-                            .read<ProductBloc>()
-                            .add(SaveProduct(productDetailsMap: dataMap));
+                        context.read<UploadBloc>().add(NoImageSelected());
                       }
                     }
-                  } else {
-                    context.read<UploadBloc>().add(NoImageSelected());
-                  }
-                }
-              },
-              buttonWidth: spacingXXXXHuge,
-              buttonTitle: StringConstants.kPublish),
+                  },
+                  buttonWidth: spacingXXXXHuge,
+                  buttonTitle: StringConstants.kPublish),
         ]),
         const SizedBox(height: spacingMedium)
       ]),

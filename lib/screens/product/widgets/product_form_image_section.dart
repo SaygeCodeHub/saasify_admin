@@ -19,9 +19,11 @@ class FormImageSection extends StatelessWidget {
     super.key,
     required this.isEdit,
     required this.dataMap,
+    required this.isProductDetail,
   });
 
   final bool isEdit;
+  final bool isProductDetail;
   final Map dataMap;
 
   @override
@@ -37,142 +39,80 @@ class FormImageSection extends StatelessWidget {
                     .xxTiniest
                     .copyWith(fontWeight: FontWeight.w700)),
             const SizedBox(width: spacingXSmall),
-            Text(StringConstants.kMinimumOneImage,
-                style: Theme.of(context).textTheme.xTiniest)
+            (isProductDetail == true)
+                ? const SizedBox()
+                : Text(StringConstants.kMinimumOneImage,
+                    style: Theme.of(context).textTheme.xTiniest)
           ]),
           const SizedBox(height: spacingLarge),
-          BlocConsumer<UploadBloc, UploadStates>(
-            listener: (context, state) {
-              if (state is UploadImageLoading) {
-                ProgressBar.show(context);
-              } else if (state is UploadImageLoaded) {
-                ProgressBar.dismiss(context);
-                if (isEdit) {
-                  dataMap['images'].addAll(state.uploadImageModel.data);
-                  context
-                      .read<ProductBloc>()
-                      .add(EditProduct(productDetailsMap: dataMap));
-                } else {
-                  dataMap['images'] = state.uploadImageModel.data;
-                  context
-                      .read<ProductBloc>()
-                      .add(SaveProduct(productDetailsMap: dataMap));
-                }
-              } else if (state is UploadImageError) {
-                ProgressBar.dismiss(context);
-                showDialog(
-                    context: context,
-                    builder: (context) => Expanded(
-                        child: CustomAlertDialog(
-                            title: StringConstants.kSomethingWentWrong,
-                            message: state.message,
-                            primaryButtonTitle: StringConstants.kOk,
-                            checkMarkVisible: false,
-                            primaryOnPressed: () {
-                              Navigator.pop(context);
-                              Navigator.pushReplacementNamed(
-                                  context, ProductListScreen.routeName);
-                            })));
-              }
-            },
-            buildWhen: (prev, curr) {
-              return curr is ImagePicked ||
-                  curr is NoImage ||
-                  curr is ImageCouldNotPick;
-            },
-            builder: (context, state) {
-              if (state is ImagePicked) {
-                return GridView.builder(
-                    shrinkWrap: true,
-                    itemCount: 6,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 6,
-                            childAspectRatio: 1,
-                            crossAxisSpacing: spacingStandard),
-                    itemBuilder: (context, index) {
-                      if (index <
-                          context.read<UploadBloc>().displayImageList.length) {
-                        return Stack(
-                          children: [
-                            (context.read<UploadBloc>().displayImageList[index]
-                                    is String)
-                                ? Padding(
-                                    padding: const EdgeInsets.all(spacingLarge),
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: NetworkImage(context
-                                                    .read<UploadBloc>()
-                                                    .displayImageList[index])),
-                                            borderRadius: BorderRadius.circular(
-                                                spacingSmall))),
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.all(spacingLarge),
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: MemoryImage(context
-                                                    .read<UploadBloc>()
-                                                    .displayImageList[index])),
-                                            borderRadius: BorderRadius.circular(
-                                                spacingSmall))),
-                                  ),
-                            Positioned(
-                              right: 0,
-                              child: InkWell(
-                                  onTap: () {
-                                    (context
-                                            .read<UploadBloc>()
-                                            .displayImageList[index] is! String)
-                                        ? context
-                                            .read<UploadBloc>()
-                                            .pickedImageList
-                                            .remove(context
-                                                .read<UploadBloc>()
-                                                .displayImageList[index])
-                                        : dataMap['images'].remove(context
-                                            .read<UploadBloc>()
-                                            .displayImageList[index]);
-                                    context
-                                        .read<UploadBloc>()
-                                        .displayImageList
-                                        .removeAt(index);
-                                    context.read<UploadBloc>().add(LoadImage());
-                                  },
-                                  child: Image.asset('assets/close.png',
-                                      height: kCloseIconSize,
-                                      width: kCloseIconSize)),
-                            )
-                          ],
-                        );
-                      }
-                      return InkWell(
-                          onTap: () {
-                            context.read<UploadBloc>().add(PickImage());
-                          },
-                          child: Container(
+          (isProductDetail == true)
+              ? GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: 6,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 6,
+                      childAspectRatio: 1,
+                      crossAxisSpacing: spacingStandard),
+                  itemBuilder: (context, index) {
+                    if (index < dataMap['images'].length) {
+                      return Padding(
+                        padding: const EdgeInsets.all(spacingLarge),
+                        child: Container(
                             decoration: BoxDecoration(
-                                color: AppColor.saasifyLighterGrey,
+                                image: DecorationImage(
+                                    image:
+                                        NetworkImage(dataMap['images'][index])),
                                 borderRadius:
-                                    BorderRadius.circular(spacingSmall)),
-                            child: Center(
-                                child: Image.asset('assets/upload.png',
-                                    height: 50, width: 50)),
-                          ));
-                    });
-              }
-              if (state is NoImage || state is ImageCouldNotPick) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(spacingSmall),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: AppColor.saasifyRed),
-                          borderRadius: BorderRadius.circular(12)),
-                      child: GridView.builder(
+                                    BorderRadius.circular(spacingSmall))),
+                      );
+                    }
+                    return Container(
+                        decoration: BoxDecoration(
+                            color: AppColor.saasifyLighterGrey,
+                            borderRadius: BorderRadius.circular(spacingSmall)));
+                  })
+              : BlocConsumer<UploadBloc, UploadStates>(
+                  listener: (context, state) {
+                    if (state is UploadImageLoading) {
+                      ProgressBar.show(context);
+                    } else if (state is UploadImageLoaded) {
+                      ProgressBar.dismiss(context);
+                      if (isEdit) {
+                        dataMap['images'].addAll(state.uploadImageModel.data);
+                        context
+                            .read<ProductBloc>()
+                            .add(EditProduct(productDetailsMap: dataMap));
+                      } else {
+                        dataMap['images'] = state.uploadImageModel.data;
+                        context
+                            .read<ProductBloc>()
+                            .add(SaveProduct(productDetailsMap: dataMap));
+                      }
+                    } else if (state is UploadImageError) {
+                      ProgressBar.dismiss(context);
+                      showDialog(
+                          context: context,
+                          builder: (context) => Expanded(
+                              child: CustomAlertDialog(
+                                  title: StringConstants.kSomethingWentWrong,
+                                  message: state.message,
+                                  primaryButtonTitle: StringConstants.kOk,
+                                  checkMarkVisible: false,
+                                  primaryOnPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.pushReplacementNamed(
+                                        context, ProductListScreen.routeName);
+                                  })));
+                    }
+                  },
+                  buildWhen: (prev, curr) {
+                    return curr is ImagePicked ||
+                        curr is NoImage ||
+                        curr is ImageCouldNotPick;
+                  },
+                  builder: (context, state) {
+                    if (state is ImagePicked) {
+                      return GridView.builder(
                           shrinkWrap: true,
                           itemCount: 6,
                           gridDelegate:
@@ -181,6 +121,76 @@ class FormImageSection extends StatelessWidget {
                                   childAspectRatio: 1,
                                   crossAxisSpacing: spacingStandard),
                           itemBuilder: (context, index) {
+                            if (index <
+                                context
+                                    .read<UploadBloc>()
+                                    .displayImageList
+                                    .length) {
+                              return Stack(
+                                children: [
+                                  (context
+                                          .read<UploadBloc>()
+                                          .displayImageList[index] is String)
+                                      ? Padding(
+                                          padding: const EdgeInsets.all(
+                                              spacingLarge),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: NetworkImage(context
+                                                              .read<UploadBloc>()
+                                                              .displayImageList[
+                                                          index])),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          spacingSmall))),
+                                        )
+                                      : Padding(
+                                          padding: const EdgeInsets.all(
+                                              spacingLarge),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: MemoryImage(context
+                                                              .read<UploadBloc>()
+                                                              .displayImageList[
+                                                          index])),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          spacingSmall))),
+                                        ),
+                                  Positioned(
+                                    right: 0,
+                                    child: InkWell(
+                                        onTap: () {
+                                          (context
+                                                      .read<UploadBloc>()
+                                                      .displayImageList[index]
+                                                  is! String)
+                                              ? context
+                                                  .read<UploadBloc>()
+                                                  .pickedImageList
+                                                  .remove(context
+                                                      .read<UploadBloc>()
+                                                      .displayImageList[index])
+                                              : dataMap['images'].remove(context
+                                                  .read<UploadBloc>()
+                                                  .displayImageList[index]);
+                                          context
+                                              .read<UploadBloc>()
+                                              .displayImageList
+                                              .removeAt(index);
+                                          context
+                                              .read<UploadBloc>()
+                                              .add(LoadImage());
+                                        },
+                                        child: Image.asset('assets/close.png',
+                                            height: kCloseIconSize,
+                                            width: kCloseIconSize)),
+                                  )
+                                ],
+                              );
+                            }
                             return InkWell(
                                 onTap: () {
                                   context.read<UploadBloc>().add(PickImage());
@@ -194,20 +204,57 @@ class FormImageSection extends StatelessWidget {
                                       child: Image.asset('assets/upload.png',
                                           height: 50, width: 50)),
                                 ));
-                          }),
-                    ),
-                    const SizedBox(height: spacingSmall),
-                    Text('Please upload at least one image',
-                        style: Theme.of(context)
-                            .textTheme
-                            .tiniest
-                            .copyWith(color: AppColor.saasifyRed))
-                  ],
-                );
-              }
-              return const SizedBox.shrink();
-            },
-          )
+                          });
+                    }
+                    if (state is NoImage || state is ImageCouldNotPick) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(spacingSmall),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: AppColor.saasifyRed),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: GridView.builder(
+                                shrinkWrap: true,
+                                itemCount: 6,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 6,
+                                        childAspectRatio: 1,
+                                        crossAxisSpacing: spacingStandard),
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                      onTap: () {
+                                        context
+                                            .read<UploadBloc>()
+                                            .add(PickImage());
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: AppColor.saasifyLighterGrey,
+                                            borderRadius: BorderRadius.circular(
+                                                spacingSmall)),
+                                        child: Center(
+                                            child: Image.asset(
+                                                'assets/upload.png',
+                                                height: 50,
+                                                width: 50)),
+                                      ));
+                                }),
+                          ),
+                          const SizedBox(height: spacingSmall),
+                          Text('Please upload at least one image',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .tiniest
+                                  .copyWith(color: AppColor.saasifyRed))
+                        ],
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  },
+                )
         ]);
   }
 }

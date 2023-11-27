@@ -33,6 +33,7 @@ class StringConstants {
   static const kBrand = 'Brand';
   static const kOrders = 'Orders';
   static const kOrderDetails = 'Order Details';
+  static const kProductDetails = 'Product Details';
   static const kBarcode = 'Barcode';
   static const kProductId = 'ProductId';
   static const kSettleBill = 'Settle Bill';

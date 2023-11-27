@@ -32,7 +32,7 @@ class FetchOrdersModel {
 }
 
 class OrdersData {
-  final int totalEarning;
+  final double totalEarning;
   final int totalOrders;
   final UnpaidOrder unpaidOrder;
   final PaymentMethods paymentMethods;
@@ -71,9 +71,9 @@ class Order {
   final String paymentStatus;
   final String paymentType;
   final String customerName;
-  final int discountTotal;
-  final int totalAmount;
-  final int subtotal;
+  final double discountTotal;
+  final double totalAmount;
+  final double subtotal;
   final List<ItemsOrdered> itemsOrdered;
 
   Order({

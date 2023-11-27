@@ -16,7 +16,6 @@ import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 
 import '../screens/categories/categories_screen.dart';
-import '../screens/orders/orders_screen.dart';
 
 class SideBar extends StatelessWidget {
   static String userName = '';

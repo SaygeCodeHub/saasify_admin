@@ -11,6 +11,7 @@ import '../../utils/constants/string_constants.dart';
 import '../../widgets/share_download_print_widget.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
+import 'orders_screen.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
   final Order orderListDatum;
@@ -45,19 +46,34 @@ class OrderDetailsScreen extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(children: [
-                              context.responsive(const SizedBox(),
-                                  desktop: Text(StringConstants.kOrderDetails,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiny
-                                          .copyWith(
-                                              fontWeight: FontWeight.w700))),
-                              context.responsive(const SizedBox(),
-                                  desktop: const Spacer()),
-                              const Spacer(),
-                              const ShareDownloadPrintWidget()
-                            ]),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.pushReplacementNamed(
+                                            context, OrdersScreen.routeName);
+                                      },
+                                      child: context.responsive(
+                                          const SizedBox(),
+                                          desktop: const Icon(
+                                              Icons.arrow_back_ios_new))),
+                                  const SizedBox(width: spacingSmall),
+                                  context.responsive(const SizedBox(),
+                                      desktop: Text(
+                                          StringConstants.kOrderDetails,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .xxTiny
+                                              .copyWith(
+                                                  fontWeight:
+                                                      FontWeight.w700))),
+                                  context.responsive(const SizedBox(),
+                                      desktop: const Spacer()),
+                                  const Spacer(),
+                                  const ShareDownloadPrintWidget()
+                                ]),
                             const SizedBox(height: spacingStandard),
                             OrderDetailsHeaderWidget(
                                 orderListDatum: orderListDatum),

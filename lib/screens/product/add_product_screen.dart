@@ -24,12 +24,14 @@ class AddProductScreen extends StatelessWidget {
   final bool isEdit;
   final bool isVariant;
   final Map dataMap;
+  final bool isProductDetail;
 
   AddProductScreen(
       {super.key,
       required this.isEdit,
       required this.isVariant,
-      required this.dataMap});
+      required this.dataMap,
+      required this.isProductDetail});
 
   final _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -112,7 +114,8 @@ class AddProductScreen extends StatelessWidget {
                                                   state.data.productId,
                                               'product_description':
                                                   state.data.productDescription,
-                                            }));
+                                            },
+                                            isProductDetail: false));
                                   },
                                   secondaryOnPressed: () {
                                     context
@@ -189,7 +192,8 @@ class AddProductScreen extends StatelessWidget {
                                   isVariant: isVariant,
                                   isEdit: isEdit,
                                   dataMap: dataMap,
-                                  categoryList: state.categoryList),
+                                  categoryList: state.categoryList,
+                                  isProductDetail: isProductDetail),
                             ));
                       } else {
                         return const SizedBox.shrink();

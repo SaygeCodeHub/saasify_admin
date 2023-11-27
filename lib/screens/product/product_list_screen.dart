@@ -146,13 +146,15 @@ class ProductListScreen extends StatelessWidget {
                               children: [
                                 Row(children: [
                                   context.responsive(const SizedBox.shrink(),
-                                      desktop: Text(StringConstants.kProducts,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xxTiny
-                                              .copyWith(
-                                                  fontWeight:
-                                                      FontWeight.w700))),
+                                      desktop: InkWell(
+                                        child: Text(StringConstants.kProducts,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .xxTiny
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w700)),
+                                      )),
                                   context.responsive(const SizedBox.shrink(),
                                       desktop: const Spacer()),
                                   Expanded(
@@ -237,7 +239,9 @@ class ProductListScreen extends StatelessWidget {
                                                                         false,
                                                                     isVariant:
                                                                         false,
-                                                                    dataMap: {}));
+                                                                    dataMap: {},
+                                                                    isProductDetail:
+                                                                        false));
                                                       },
                                                       primaryOnPressed: () {},
                                                     ));

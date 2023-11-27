@@ -53,7 +53,8 @@ class AppRoutes {
         return _createRoute(AddProductScreen(
             isEdit: args.isEdit,
             isVariant: args.isVariant,
-            dataMap: args.dataMap));
+            dataMap: args.dataMap,
+            isProductDetail: args.isProductDetail));
 
       default:
         return _createRoute(AuthenticationScreen());
