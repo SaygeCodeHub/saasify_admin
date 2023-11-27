@@ -5,6 +5,8 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
 
+import '../../../configs/app_color.dart';
+
 class ProductFormSection3 extends StatelessWidget {
   const ProductFormSection3({
     super.key,
@@ -151,7 +153,26 @@ class ProductFormSection3 extends StatelessWidget {
                 dataMap['restock_reminder'] = value;
               })
         ]))
-      ])
+      ]),
+      const SizedBox(height: 70),
+      Row(
+        children: [
+          Text(StringConstants.kWantToDisableGST,
+              style: Theme.of(context)
+                  .textTheme
+                  .xxTiniest
+                  .copyWith(fontWeight: FontWeight.w700)),
+          Switch(
+              activeColor: AppColor.saasifyLightDeepBlue,
+              value: true,
+              onChanged: (value) {
+                // Map productDetails = productList[index].toJson();
+                // productDetails['variant_active'] = value;
+                // context.read<ProductBloc>().add(
+                //     EditProduct(productDetailsMap: productDetails));
+              })
+        ],
+      ),
     ]));
   }
 }

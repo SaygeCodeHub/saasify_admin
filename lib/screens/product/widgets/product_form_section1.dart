@@ -67,7 +67,7 @@ class ProductFormSection1 extends StatelessWidget {
       ]),
       const SizedBox(height: spacingXMedium),
       CustomTextField(
-          maxLines: 3,
+          maxLines: 10,
           validator: (value) {
             if ((value == null || value.trim() == '') &&
                 dataMap['draft'] == false) {

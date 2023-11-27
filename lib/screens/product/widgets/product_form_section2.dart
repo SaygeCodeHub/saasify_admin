@@ -110,7 +110,22 @@ class ProductFormSection2 extends StatelessWidget {
               dataMap: dataMap,
               mapKey: 'unit')
         ]))
-      ])
+      ]),
+      const SizedBox(height: spacingXXLarge),
+      Text(StringConstants.kGST,
+          style: Theme.of(context)
+              .textTheme
+              .xxTiniest
+              .copyWith(fontWeight: FontWeight.w700)),
+      const SizedBox(height: spacingXMedium),
+      CustomDropdownWidget(
+          initialValue: "Select GST",
+          listItems: const ["Select GST", "0%", "5%", "12%", "18%", "28%"],
+          dataMap: dataMap,
+          mapKey: 'unit'),
+      const SizedBox(height: spacingXXSmall),
+      Text('CGST : 2.5 % and SGST : 2.5 %',
+          style: Theme.of(context).textTheme.xxxTiniest),
     ]));
   }
 }
