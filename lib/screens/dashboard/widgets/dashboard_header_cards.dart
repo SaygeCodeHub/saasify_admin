@@ -68,6 +68,17 @@ class DashboardHeaderCards extends StatelessWidget {
       Icons.discount
     ];
 
+    const screenList = <String>[
+      DiscountScreen.routeName,
+      DiscountScreen.routeName,
+      DiscountScreen.routeName,
+      DiscountScreen.routeName,
+      DiscountScreen.routeName,
+      DiscountScreen.routeName,
+      DiscountScreen.routeName,
+      DiscountScreen.routeName,
+    ];
+
     return GridView.builder(
         shrinkWrap: true,
         itemCount: cardItems.length,
@@ -88,7 +99,7 @@ class DashboardHeaderCards extends StatelessWidget {
                       child: ListTile(
                           onTap: () {
                             Navigator.pushReplacementNamed(
-                                context, DiscountScreen.routeName);
+                                context, screenList[index]);
                           },
                           titleAlignment: ListTileTitleAlignment.titleHeight,
                           tileColor: AppColor.saasifyWhite,
