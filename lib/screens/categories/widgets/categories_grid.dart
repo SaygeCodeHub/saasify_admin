@@ -32,22 +32,57 @@ class CategoriesGrid extends StatelessWidget {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                            productCategory[index]
-                                    .categoryName
-                                    .trim()
-                                    .substring(0, 1)
-                                    .toUpperCase() +
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
                                 productCategory[index]
-                                    .categoryName
-                                    .trim()
-                                    .substring(
-                                      1,
-                                    )
-                                    .toLowerCase(),
-                            style: Theme.of(context).textTheme.tiniest.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: AppColor.saasifyDarkGrey)),
+                                        .categoryName
+                                        .trim()
+                                        .substring(0, 1)
+                                        .toUpperCase() +
+                                    productCategory[index]
+                                        .categoryName
+                                        .trim()
+                                        .substring(
+                                          1,
+                                        )
+                                        .toLowerCase(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .tiniest
+                                    .copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColor.saasifyDarkGrey)),
+                            const SizedBox(height: spacingXSmall),
+                            Text(
+                              '12% GST',
+                              style: Theme.of(context).textTheme.xxTiniest,
+                            ),
+                            const SizedBox(height: spacingXXSmall),
+                            Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 8),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    color: AppColor.saasifyLighterGreen),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Icon(Icons.circle,
+                                        size: 8, color: AppColor.saasifyGreen),
+                                    const SizedBox(width: 6),
+                                    Text('GST Enabled',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .xxTiniest
+                                            .copyWith(
+                                                color: AppColor.saasifyGreen)),
+                                  ],
+                                ))
+                          ],
+                        ),
                         Row(children: [
                           CategoryToggleWidget(
                               productCategory: productCategory[index]),

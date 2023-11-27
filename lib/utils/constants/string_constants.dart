@@ -2,6 +2,8 @@ class StringConstants {
   static const kHello = 'Hello :)';
   static const kName = 'Name';
   static const kNameWithColon = 'Name :';
+  static const kCategoryName = 'Category Name';
+  static const kEnterGSTAmount = 'Enter GST Amount (%)';
   static const kWhatsYourName = "What’s your name?";
   static const kWhyDoINeedToAddCompany = "Why do I need to add a new company?";
   static const kContactNumber = 'Contact Number';
@@ -22,6 +24,10 @@ class StringConstants {
   static const kAddCompany = 'Add Company :)';
   static const kCompanies = 'Companies';
   static const kAddProduct = 'Add Product';
+  static const kAddCategory = 'Add Category';
+  static const kWantToDeactivateProduct = 'Want to Deactivate Product?';
+  static const kDoYouWantToDeactivateGST = 'Do you Want to Deactivate GST?';
+  static const kWantToDisableGST = 'Want to Disable GST?';
   static const kAddVariantButton = 'ADD VARIANT';
   static const kAddVariant = 'Add Variant';
   static const kNewProductAdded = 'New product added successfully!';
@@ -49,6 +55,7 @@ class StringConstants {
   static const kDiscountedPrice = 'Discounted Price';
   static const kSubTotal = 'Sub Total';
   static const kQuantity = 'Quantity';
+  static const kGST = 'GST';
   static const kPrice = 'Price';
   static const kDiscountPercent = 'Discount Percent';
   static const kPublish = 'Publish';
@@ -86,6 +93,7 @@ class StringConstants {
   static const kDashboard = 'Dashboard';
   static const kUpdateStock = 'Update Stock';
   static const kAddStock = 'Add Stock';
+  static const kAddNewCategory = 'Add New Category';
   static const kReduceStock = 'Reduce Stock';
   static const kPOS = 'POS';
   static const kCategories = 'Categories';
