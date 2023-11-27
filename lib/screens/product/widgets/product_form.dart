@@ -77,7 +77,9 @@ class ProductForm extends StatelessWidget {
                                     },
                                   ));
                     },
-                    child: const Icon(Icons.arrow_back_ios_new)),
+                    child: const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Icon(Icons.arrow_back_ios_new))),
                 const SizedBox(width: spacingSmall),
                 context.responsive(
                   const SizedBox.shrink(),

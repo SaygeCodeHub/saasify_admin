@@ -25,9 +25,9 @@ class StringConstants {
   static const kCompanies = 'Companies';
   static const kAddProduct = 'Add Product';
   static const kAddCategory = 'Add Category';
-  static const kWantToDeactivateProduct = 'Want to Deactivate Product?';
-  static const kDoYouWantToDeactivateGST = 'Do you Want to Deactivate GST?';
-  static const kWantToDisableGST = 'Want to Disable GST?';
+  static const kWantToDeactivateProduct = 'Want to deactivate product?';
+  static const kDoYouWantToDeactivateGST = 'Do you Want to deactivate GST?';
+  static const kWantToDisableGST = 'Want to disable GST?';
   static const kAddVariantButton = 'ADD VARIANT';
   static const kAddVariant = 'Add Variant';
   static const kNewProductAdded = 'New product added successfully!';

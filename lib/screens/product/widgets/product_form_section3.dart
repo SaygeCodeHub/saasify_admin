@@ -174,15 +174,18 @@ class ProductFormSection3 extends StatelessWidget {
                   .textTheme
                   .xxTiniest
                   .copyWith(fontWeight: FontWeight.w700)),
-          Switch(
-              activeColor: AppColor.saasifyLightDeepBlue,
-              value: true,
-              onChanged: (value) {
-                // Map productDetails = productList[index].toJson();
-                // productDetails['variant_active'] = value;
-                // context.read<ProductBloc>().add(
-                //     EditProduct(productDetailsMap: productDetails));
-              })
+          const SizedBox(width: spacingLarge),
+          (isProductDetail == true)
+              ? const Text("No")
+              : Switch(
+                  activeColor: AppColor.saasifyLightDeepBlue,
+                  value: true,
+                  onChanged: (value) {
+                    // Map productDetails = productList[index].toJson();
+                    // productDetails['variant_active'] = value;
+                    // context.read<ProductBloc>().add(
+                    //     EditProduct(productDetailsMap: productDetails));
+                  })
         ],
       ),
     ]));
