@@ -104,15 +104,13 @@ class OrdersScreen extends StatelessWidget {
                                 child: const Spacer())
                           ]);
                         } else if (state is ErrorFetchingOrders) {
-                          return Expanded(
-                              child: Center(
-                                  child: Text(StringConstants.kNoDataAvailable,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .tinier
-                                          .copyWith(
-                                              color:
-                                                  AppColor.saasifyLightGrey))));
+                          return Center(
+                              child: Text(StringConstants.kNoDataAvailable,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .tinier
+                                      .copyWith(
+                                          color: AppColor.saasifyLightGrey)));
                         } else {
                           return const SizedBox.shrink();
                         }

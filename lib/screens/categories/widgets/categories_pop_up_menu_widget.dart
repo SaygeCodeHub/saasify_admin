@@ -61,21 +61,21 @@ class CategoriesPopUpMenuWidget extends StatelessWidget {
                 child: const Text(StringConstants.kEdit)),
             PopupMenuItem(
                 onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => CustomAlertDialog(
-                          title: StringConstants.kWarning,
-                          message: StringConstants.kDeleteCategory,
-                          primaryButtonTitle: StringConstants.kConfirm,
-                          primaryOnPressed: () {
-                            // context.read<CategoriesBloc>().add(DeleteCategories(
-                            //     categoryId: productCategory.categoryId));
-                            Navigator.pop(context);
-                          },
-                          secondaryButtonTitle: StringConstants.kCancel,
-                          secondaryOnPressed: () {
-                            Navigator.pop(context);
-                          }));
+                  // showDialog(
+                  //     context: context,
+                  //     builder: (context) => CustomAlertDialog(
+                  //         title: StringConstants.kWarning,
+                  //         message: StringConstants.kDeleteCategory,
+                  //         primaryButtonTitle: StringConstants.kConfirm,
+                  //         primaryOnPressed: () {
+                  //           context.read<CategoriesBloc>().add(DeleteCategories(
+                  //               categoryId: productCategory.categoryId));
+                  //           Navigator.pop(context);
+                  //         },
+                  //         secondaryButtonTitle: StringConstants.kCancel,
+                  //         secondaryOnPressed: () {
+                  //           Navigator.pop(context);
+                  //         }));
                 },
                 child: const Text(StringConstants.kDelete))
           ];

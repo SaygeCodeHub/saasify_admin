@@ -241,6 +241,7 @@ class ProductListDataTable extends StatelessWidget {
                           ],
                         ))),
                     DataCell(Switch(
+                        activeColor: AppColor.saasifyLightDeepBlue,
                         value: productList[index].variantActive,
                         onChanged: (value) {
                           Map productDetails = productList[index].toJson();

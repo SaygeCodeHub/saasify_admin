@@ -43,9 +43,17 @@ class ProductFormSection1 extends StatelessWidget {
           dataMap: dataMap,
           mapKey: 'category_name',
           initialValue: dataMap['category_name'] ??
-              categoryList.map((e) => e.categoryName).toList()[0],
-          listItems:
-              categoryList.map((e) => e.categoryName).toList() + ['Add New']),
+              categoryList
+                  .map((e) =>
+                      e.categoryName[0].toUpperCase() +
+                      e.categoryName.substring(1).toLowerCase())
+                  .toList()[0],
+          listItems: categoryList
+                  .map((e) =>
+                      e.categoryName[0].toUpperCase() +
+                      e.categoryName.substring(1).toLowerCase())
+                  .toList() +
+              ['Add New']),
       const SizedBox(height: spacingHuge),
       Wrap(children: [
         Text(StringConstants.kProductDescription,

@@ -265,16 +265,13 @@ class ProductListScreen extends StatelessWidget {
                               ],
                             );
                           } else if (state is ErrorFetchingProduct) {
-                            return Expanded(
-                                child: Center(
-                                    child: Text(
-                                        StringConstants.kNoDataAvailable,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .tinier
-                                            .copyWith(
-                                                color: AppColor
-                                                    .saasifyLightGrey))));
+                            return Center(
+                                child: Text(StringConstants.kNoDataAvailable,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .tinier
+                                        .copyWith(
+                                            color: AppColor.saasifyLightGrey)));
                           } else {
                             return const SizedBox.shrink();
                           }

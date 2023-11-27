@@ -3,7 +3,7 @@ import 'package:image_picker/image_picker.dart';
 
 class ClientServices {
   final Dio dio =
-      Dio(BaseOptions(connectTimeout: const Duration(seconds: 15), headers: {
+      Dio(BaseOptions(connectTimeout: const Duration(seconds: 45), headers: {
     'Content-Type': 'application/json',
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Credentials": "true"
