@@ -82,6 +82,13 @@ extension AppTextTheme on TextTheme {
         fontWeight: FontWeight.w400);
   }
 
+  TextStyle get xTinier {
+    return const TextStyle(
+        fontSize: 20,
+        color: AppColor.saasifyBlack,
+        fontWeight: FontWeight.w400);
+  }
+
   TextStyle get xxxTiny {
     return const TextStyle(
         fontSize: 18,
