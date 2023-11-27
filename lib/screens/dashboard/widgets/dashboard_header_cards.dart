@@ -5,6 +5,7 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../../configs/app_spacing.dart';
+import '../../discount/discount_screen.dart';
 
 class DashboardHeaderCards extends StatelessWidget {
   const DashboardHeaderCards({super.key, required this.ordersData});
@@ -85,6 +86,10 @@ class DashboardHeaderCards extends StatelessWidget {
                       color: AppColor.saasifyWhite),
                   child: Center(
                       child: ListTile(
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                                context, DiscountScreen.routeName);
+                          },
                           titleAlignment: ListTileTitleAlignment.titleHeight,
                           tileColor: AppColor.saasifyWhite,
                           leading: Container(
