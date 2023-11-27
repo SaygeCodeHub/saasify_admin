@@ -36,7 +36,11 @@ class DiscountScreen extends StatelessWidget {
               Expanded(
                   flex: 5,
                   child: Padding(
-                      padding: const EdgeInsets.all(spacingLarge),
+                      padding: const EdgeInsets.only(
+                          right: spacingXHuge,
+                          top: spacingXMedium,
+                          left: spacingXHuge,
+                          bottom: spacingXHuge),
                       child: Column(children: [
                         Row(children: [
                           context.responsive(const SizedBox(),
@@ -174,10 +178,7 @@ class DiscountScreen extends StatelessWidget {
                                                                 .saasifyLightDeepBlue,
                                                             value: true,
                                                             onChanged: (value) {
-                                                              // Map productDetails = productList[index].toJson();
-                                                              // productDetails['variant_active'] = value;
-                                                              // context.read<ProductBloc>().add(
-                                                              //     EditProduct(productDetailsMap: productDetails));
+                                                              // Map
                                                             })
                                                       ]),
                                                       const SizedBox(
@@ -204,14 +205,14 @@ class DiscountScreen extends StatelessWidget {
                                                                     () {},
                                                                 buttonTitle:
                                                                     StringConstants
-                                                                        .kOk))
+                                                                        .kAdd))
                                                       ])
                                                     ]))));
                                   },
                                   buttonTitle: StringConstants.kAddDiscount))
                         ]),
                         const SizedBox(height: spacingStandard),
-                        const EmployeesGrid()
+                        const EmployeesGrid(),
                       ])))
             ]));
   }

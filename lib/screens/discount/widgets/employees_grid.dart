@@ -3,6 +3,7 @@ import 'package:saasify/configs/app_theme.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
+import '../../settings/three_dots_popup.dart';
 
 class EmployeesGrid extends StatelessWidget {
   const EmployeesGrid({super.key});
@@ -49,7 +50,15 @@ class EmployeesGrid extends StatelessWidget {
                                 'Maximum purchase of Rs 8000 ',
                                 style: Theme.of(context).textTheme.xxTiniest,
                               )
-                            ])
+                            ]),
+                        Row(children: [
+                          Switch(
+                              activeColor: AppColor.saasifyLightDeepBlue,
+                              value: true,
+                              onChanged: (value) {}),
+                          const SizedBox(width: 6),
+                          const ThreeDotsPopup()
+                        ]),
                       ])));
         },
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

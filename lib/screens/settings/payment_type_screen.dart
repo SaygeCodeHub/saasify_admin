@@ -40,7 +40,7 @@ class PaymentTypeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        drawer: const SideBar(selectedIndex: 4),
+        drawer: const SideBar(selectedIndex: 1),
         body: Flex(
             direction:
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
@@ -49,11 +49,15 @@ class PaymentTypeScreen extends StatelessWidget {
                   TopBar(
                       scaffoldKey: _scaffoldKey,
                       headingText: StringConstants.kStore),
-                  desktop: const Expanded(child: SideBar(selectedIndex: 4))),
+                  desktop: const Expanded(child: SideBar(selectedIndex: 1))),
               Expanded(
                   flex: 5,
                   child: Padding(
-                      padding: const EdgeInsets.all(spacingXHuge),
+                      padding: const EdgeInsets.only(
+                          right: spacingXHuge,
+                          top: spacingXMedium,
+                          bottom: spacingXHuge,
+                          left: spacingXHuge),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

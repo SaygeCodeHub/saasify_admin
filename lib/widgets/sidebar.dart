@@ -14,11 +14,7 @@ import 'package:saasify/screens/orders/orders_screen.dart';
 import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-
 import '../screens/categories/categories_screen.dart';
-import '../screens/settings/payment_type_screen.dart';
-import '../screens/settings/profile_screen.dart';
-import '../screens/settings/store_grid_screen.dart';
 
 class SideBar extends StatelessWidget {
   static String userName = '';
@@ -117,43 +113,6 @@ class SideBar extends StatelessWidget {
                     }
                   },
                 ),
-                ListTile(
-                  title: Text(StringConstants.kProfile,
-                      style: Theme.of(context).textTheme.xTiniest.copyWith(
-                          color: (selectedIndex == 5)
-                              ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyLightBlack,
-                          fontWeight: FontWeight.w600)),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(
-                        context, ProfileScreen.routeName);
-                  },
-                ),
-                ListTile(
-                  title: Text(StringConstants.kStore,
-                      style: Theme.of(context).textTheme.xTiniest.copyWith(
-                          color: (selectedIndex == 6)
-                              ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyLightBlack,
-                          fontWeight: FontWeight.w600)),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(
-                        context, StoreGridScreen.routeName);
-                  },
-                ),
-                ListTile(
-                  title: Text(StringConstants.kPaymentType,
-                      style: Theme.of(context).textTheme.xTiniest.copyWith(
-                          color: (selectedIndex == 7)
-                              ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyLightBlack,
-                          fontWeight: FontWeight.w600)),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(
-                        context, PaymentTypeScreen.routeName);
-                  },
-                ),
-
                 ListTile(
                   title: Text(StringConstants.kOrders,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
