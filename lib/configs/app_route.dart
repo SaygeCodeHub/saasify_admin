@@ -15,6 +15,9 @@ import '../screens/onboarding/auhentication_screen.dart';
 import '../screens/orders/order_details_screen.dart';
 import '../screens/orders/orders_screen.dart';
 import '../screens/product/add_product_screen.dart';
+import '../screens/settings/payment_type_screen.dart';
+import '../screens/settings/profile_screen.dart';
+import '../screens/settings/store_grid_screen.dart';
 
 class AppRoutes {
   static Route routes(RouteSettings settings) {
@@ -33,6 +36,12 @@ class AppRoutes {
         return _createRoute(InventoryListScreen());
       case OrdersScreen.routeName:
         return _createRoute(OrdersScreen());
+      case StoreGridScreen.routeName:
+        return _createRoute(StoreGridScreen());
+      case ProfileScreen.routeName:
+        return _createRoute(ProfileScreen());
+      case PaymentTypeScreen.routeName:
+        return _createRoute(PaymentTypeScreen());
       case POSScreen.routeName:
         return _createRoute(POSScreen());
 

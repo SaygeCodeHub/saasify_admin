@@ -29,11 +29,6 @@ class DashboardHeaderCards extends StatelessWidget {
         'title': 'Total Earning',
         'subtitle': ordersData.totalEarning,
       },
-      {
-        'leading': "assets/card_image_three.PNG",
-        'title': 'Total Earning',
-        'subtitle': ordersData.totalEarning,
-      },
     ];
     return GridView.builder(
         shrinkWrap: true,
@@ -90,7 +85,7 @@ class DashboardHeaderCards extends StatelessWidget {
                                   ]))))));
         },
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
+            crossAxisCount: 3,
             childAspectRatio: 4,
             crossAxisSpacing: spacingXHuge));
   }
