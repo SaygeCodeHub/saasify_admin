@@ -54,22 +54,28 @@ class ProductForm extends StatelessWidget {
               children: [
                 InkWell(
                     onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => CustomAlertDialog(
-                                title: StringConstants.kWarning,
-                                message: 'Do you want to discard the changes',
-                                primaryButtonTitle: StringConstants.kConfirm,
-                                primaryOnPressed: () {
-                                  Navigator.pop(context);
-                                  Navigator.pushReplacementNamed(
-                                      context, ProductListScreen.routeName);
-                                },
-                                secondaryButtonTitle: StringConstants.kCancel,
-                                secondaryOnPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ));
+                      (isProductDetail == true)
+                          ? Navigator.pushReplacementNamed(
+                              context, ProductListScreen.routeName)
+                          : showDialog(
+                              context: context,
+                              builder: (context) => CustomAlertDialog(
+                                    title: StringConstants.kWarning,
+                                    message:
+                                        'Do you want to discard the changes',
+                                    primaryButtonTitle:
+                                        StringConstants.kConfirm,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.pushReplacementNamed(
+                                          context, ProductListScreen.routeName);
+                                    },
+                                    secondaryButtonTitle:
+                                        StringConstants.kCancel,
+                                    secondaryOnPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ));
                     },
                     child: const Icon(Icons.arrow_back_ios_new)),
                 const SizedBox(width: spacingSmall),

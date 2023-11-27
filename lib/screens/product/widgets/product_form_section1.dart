@@ -74,7 +74,7 @@ class ProductFormSection1 extends StatelessWidget {
       (isProductDetail == true)
           ? Text(dataMap['product_description'])
           : CustomTextField(
-              maxLines: 3,
+              maxLines: 10,
               validator: (value) {
                 if ((value == null || value.trim() == '') &&
                     dataMap['draft'] == false) {
