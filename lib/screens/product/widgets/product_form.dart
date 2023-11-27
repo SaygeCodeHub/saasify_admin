@@ -126,23 +126,20 @@ class ProductForm extends StatelessWidget {
         ),
         const SizedBox(height: spacingStandard),
         Visibility(
-          visible: isEdit,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
+            visible: isEdit,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 8),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: (dataMap['draft'] ?? false)
-                              ? AppColor.saasifyLighterGrey
-                              : AppColor.saasifyLighterGreen),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
+                  Row(children: [
+                    Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 8),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: (dataMap['draft'] ?? false)
+                                ? AppColor.saasifyLighterGrey
+                                : AppColor.saasifyLighterGreen),
+                        child: Row(mainAxisSize: MainAxisSize.min, children: [
                           Icon(Icons.circle,
                               size: 8,
                               color: (dataMap['draft'] ?? false)
@@ -159,28 +156,22 @@ class ProductForm extends StatelessWidget {
                                   .copyWith(
                                       color: (dataMap['draft'] ?? false)
                                           ? AppColor.saasifyLightGrey
-                                          : AppColor.saasifyGreen)),
-                        ],
-                      )),
-                ],
-              ),
-              Row(
-                children: [
-                  const Text(StringConstants.kWantToDeactivateProduct),
-                  Switch(
-                      activeColor: AppColor.saasifyLightDeepBlue,
-                      value: true,
-                      onChanged: (value) {
-                        // Map productDetails = productList[index].toJson();
-                        // productDetails['variant_active'] = value;
-                        // context.read<ProductBloc>().add(
-                        //     EditProduct(productDetailsMap: productDetails));
-                      })
-                ],
-              )
-            ],
-          ),
-        ),
+                                          : AppColor.saasifyGreen))
+                        ]))
+                  ]),
+                  Row(children: [
+                    const Text(StringConstants.kWantToDeactivateProduct),
+                    Switch(
+                        activeColor: AppColor.saasifyLightDeepBlue,
+                        value: true,
+                        onChanged: (value) {
+                          // Map productDetails = productList[index].toJson();
+                          // productDetails['variant_active'] = value;
+                          // context.read<ProductBloc>().add(
+                          //     EditProduct(productDetailsMap: productDetails));
+                        })
+                  ])
+                ])),
         const SizedBox(height: spacingXHuge),
         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           ProductFormSection1(
