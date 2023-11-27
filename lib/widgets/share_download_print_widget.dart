@@ -10,13 +10,12 @@ class ShareDownloadPrintWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Row(children: [
       Icon(Icons.share,
-          color: AppColor.saasifyLightPaleGrey, size: kHeaderIconsSize),
+          color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
       SizedBox(width: spacingLarge),
       Icon(Icons.download,
-          color: AppColor.saasifyLightPaleGrey, size: kHeaderIconsSize),
+          color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
       SizedBox(width: spacingLarge),
-      Icon(Icons.print,
-          color: AppColor.saasifyLightPaleGrey, size: kHeaderIconsSize)
+      Icon(Icons.print, color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize)
     ]);
   }
 }
