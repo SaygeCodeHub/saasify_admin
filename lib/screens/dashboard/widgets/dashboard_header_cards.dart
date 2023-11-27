@@ -5,6 +5,10 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../../configs/app_spacing.dart';
+import '../../discount/discount_screen.dart';
+import '../../settings/payment_type_screen.dart';
+import '../../settings/profile_screen.dart';
+import '../../settings/store_grid_screen.dart';
 
 class DashboardHeaderCards extends StatelessWidget {
   const DashboardHeaderCards({super.key, required this.ordersData});
@@ -67,6 +71,17 @@ class DashboardHeaderCards extends StatelessWidget {
       Icons.discount
     ];
 
+    const screenList = <String>[
+      "",
+      "",
+      "",
+      ProfileScreen.routeName,
+      StoreGridScreen.routeName,
+      PaymentTypeScreen.routeName,
+      "",
+      DiscountScreen.routeName,
+    ];
+
     return GridView.builder(
         shrinkWrap: true,
         itemCount: cardItems.length,
@@ -85,6 +100,12 @@ class DashboardHeaderCards extends StatelessWidget {
                       color: AppColor.saasifyWhite),
                   child: Center(
                       child: ListTile(
+                          onTap: () {
+                            (screenList[index] == '')
+                                ? null
+                                : Navigator.pushReplacementNamed(
+                                    context, screenList[index]);
+                          },
                           titleAlignment: ListTileTitleAlignment.titleHeight,
                           tileColor: AppColor.saasifyWhite,
                           leading: Container(

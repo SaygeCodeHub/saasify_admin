@@ -14,7 +14,6 @@ import 'package:saasify/screens/orders/orders_screen.dart';
 import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-
 import '../screens/categories/categories_screen.dart';
 
 class SideBar extends StatelessWidget {
@@ -114,7 +113,6 @@ class SideBar extends StatelessWidget {
                     }
                   },
                 ),
-
                 ListTile(
                   title: Text(StringConstants.kOrders,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
