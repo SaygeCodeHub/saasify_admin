@@ -32,7 +32,7 @@ class FetchOrdersModel {
 }
 
 class OrdersData {
-  final double totalEarning;
+  final int totalEarning;
   final int totalOrders;
   final UnpaidOrder unpaidOrder;
   final PaymentMethods paymentMethods;
@@ -206,24 +206,36 @@ class ItemsOrdered {
 }
 
 class PaymentMethods {
+  final UnpaidOrder other;
+  final UnpaidOrder upi;
+  final UnpaidOrder bankCard;
   final UnpaidOrder cash;
 
   PaymentMethods({
+    required this.other,
+    required this.upi,
+    required this.bankCard,
     required this.cash,
   });
 
   factory PaymentMethods.fromJson(Map<String, dynamic> json) => PaymentMethods(
+        other: UnpaidOrder.fromJson(json["Other"]),
+        upi: UnpaidOrder.fromJson(json["UPI"]),
+        bankCard: UnpaidOrder.fromJson(json["Bank Card"]),
         cash: UnpaidOrder.fromJson(json["cash"]),
       );
 
   Map<String, dynamic> toJson() => {
+        "Other": other.toJson(),
+        "UPI": upi.toJson(),
+        "Bank Card": bankCard.toJson(),
         "cash": cash.toJson(),
       };
 }
 
 class UnpaidOrder {
   final int count;
-  final int percent;
+  final double percent;
 
   UnpaidOrder({
     required this.count,
@@ -232,7 +244,7 @@ class UnpaidOrder {
 
   factory UnpaidOrder.fromJson(Map<String, dynamic> json) => UnpaidOrder(
         count: json["count"],
-        percent: json["percent"],
+        percent: json["percent"].toDouble(),
       );
 
   Map<String, dynamic> toJson() => {

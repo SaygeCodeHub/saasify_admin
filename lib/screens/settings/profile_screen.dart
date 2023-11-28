@@ -12,6 +12,7 @@ import '../../widgets/custom_text_field.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
+import '../dashboard/dashboard_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const String routeName = 'ProfileScreen';
@@ -48,27 +49,32 @@ class ProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Row(children: [
-                              context.responsive(const SizedBox(),
-                                  desktop: Text(StringConstants.kProfile,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiny
-                                          .copyWith(
-                                              fontWeight: FontWeight.w700))),
-                              context.responsive(const SizedBox(),
-                                  desktop: const Spacer()),
-                              const Spacer(),
-                              SizedBox(
-                                  width: kGeneralActionButtonWidth,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(right: 30),
-                                    child: PrimaryButton(
-                                        onPressed: () {},
-                                        buttonTitle:
-                                            StringConstants.kAddProfile),
-                                  ))
-                            ]),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.pushReplacementNamed(context,
+                                            DashboardsScreen.routeName);
+                                      },
+                                      child: context.responsive(
+                                          const SizedBox(),
+                                          desktop: const Icon(
+                                              Icons.arrow_back_ios_new))),
+                                  const SizedBox(width: spacingSmall),
+                                  context.responsive(const SizedBox(),
+                                      desktop: Text(StringConstants.kProfile,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .xxTiny
+                                              .copyWith(
+                                                  fontWeight:
+                                                      FontWeight.w700))),
+                                  context.responsive(const SizedBox(),
+                                      desktop: const Spacer()),
+                                  const Spacer(),
+                                ]),
                             const SizedBox(height: spacingStandard),
                             Text(StringConstants.kBrandLogo,
                                 style: Theme.of(context)
@@ -77,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
                                     .copyWith(fontWeight: FontWeight.w700)),
                             const SizedBox(height: spacingXMedium),
                             Container(
-                              height: 150,
+                              height: 120,
                               width: 150,
                               decoration: BoxDecoration(
                                   color: AppColor.saasifyLighterGrey,
@@ -92,11 +98,11 @@ class ProfileScreen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const Align(
-                                            alignment: Alignment.topRight,
-                                            child: Icon(Icons.close)),
                                         const SizedBox(height: spacingSmall),
-                                        const Icon(Icons.add_a_photo_outlined),
+                                        Image.asset('assets/upload.png',
+                                            height: 25,
+                                            width: 25,
+                                            color: AppColor.saasifyPaleBlack),
                                         const SizedBox(height: spacingSmall),
                                         Text("Select a file",
                                             style: Theme.of(context)
@@ -156,19 +162,6 @@ class ProfileScreen extends StatelessWidget {
                                                 onTextFieldChanged: (value) {}),
                                             const SizedBox(
                                                 height: spacingStandard),
-                                            Text(StringConstants.kPassword,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .xxTiniest
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w700)),
-                                            const SizedBox(
-                                                height: spacingSmall),
-                                            CustomTextField(
-                                                onTextFieldChanged: (value) {}),
-                                            const SizedBox(
-                                                height: spacingStandard)
                                           ])),
                                       const SizedBox(width: spacingExcel),
                                       Expanded(

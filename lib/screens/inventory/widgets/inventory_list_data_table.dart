@@ -43,26 +43,18 @@ class InventoryListDataTable extends StatelessWidget {
                         .xTiniest
                         .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
-                label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kPrice,
+                label: Text(StringConstants.kPrice,
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600)),
-              ),
-            )),
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
-                label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kDiscountPercent,
+                label: Text(StringConstants.kDiscountPercent,
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600)),
-              ),
-            )),
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
               child: Center(
@@ -101,18 +93,12 @@ class InventoryListDataTable extends StatelessWidget {
                       child: Text(productList[index].categoryName,
                           style: Theme.of(context).textTheme.xxTiniest),
                     )),
-                    DataCell(Align(
-                      alignment: Alignment.center,
-                      child: Text(productList[index].cost.toString(),
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    )),
-                    DataCell(Align(
-                      alignment: Alignment.center,
-                      child: Text(productList[index].discountPercent.toString(),
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.xxTiniest),
-                    )),
+                    DataCell(Text(productList[index].cost.toString(),
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.xxTiniest)),
+                    DataCell(Text(productList[index].discountPercent.toString(),
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.xxTiniest)),
                     DataCell(InventoryCounter(product: productList[index])),
                     DataCell((productList[index].stock <=
                             productList[index].restockReminder)

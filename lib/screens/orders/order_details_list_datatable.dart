@@ -35,37 +35,29 @@ class OrderDetailsListDataTable extends StatelessWidget {
                             .xTiniest
                             .copyWith(fontWeight: FontWeight.w600)))),
             DataColumn(
-                label: Expanded(
-                    child: Center(
-                        child: Text(StringConstants.kUnitPrice,
-                            style: Theme.of(context)
-                                .textTheme
-                                .xTiniest
-                                .copyWith(fontWeight: FontWeight.w600))))),
+                label: Text(StringConstants.kUnitPrice,
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
-                label: Expanded(
-                    child: Center(
-                        child: Text(StringConstants.kQuantity,
-                            style: Theme.of(context)
-                                .textTheme
-                                .xTiniest
-                                .copyWith(fontWeight: FontWeight.w600))))),
+                label: Text(StringConstants.kQuantity,
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
-                label: Expanded(
-                    child: Center(
-                        child: Text(StringConstants.kDiscountCent,
-                            style: Theme.of(context)
-                                .textTheme
-                                .xTiniest
-                                .copyWith(fontWeight: FontWeight.w600))))),
+                label: Text(StringConstants.kDiscountCent,
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
-                label: Expanded(
-                    child: Center(
-                        child: Text(StringConstants.kDiscountedPrice,
-                            style: Theme.of(context)
-                                .textTheme
-                                .xTiniest
-                                .copyWith(fontWeight: FontWeight.w600)))))
+                label: Text(StringConstants.kDiscountedPrice,
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600)))
           ],
           rows: List.generate(
               orderListDatum.itemsOrdered.length,
@@ -98,34 +90,25 @@ class OrderDetailsListDataTable extends StatelessWidget {
                                     )
                                     .toLowerCase(),
                             style: Theme.of(context).textTheme.xxTiniest))),
-                    DataCell(Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                            orderListDatum.itemsOrdered[index].cost.toString(),
-                            style: Theme.of(context).textTheme.xxTiniest))),
-                    DataCell(Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                            orderListDatum.itemsOrdered[index].count.toString(),
-                            style: Theme.of(context).textTheme.xxTiniest))),
-                    DataCell(Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                            orderListDatum.itemsOrdered[index].discountPercent
-                                .toString(),
-                            style: Theme.of(context).textTheme.xxTiniest))),
-                    DataCell(Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                            ((orderListDatum.itemsOrdered[index].cost *
-                                        orderListDatum
-                                            .itemsOrdered[index].count) *
-                                    ((100 -
-                                            orderListDatum.itemsOrdered[index]
-                                                .discountPercent) /
-                                        100))
-                                .toString(),
-                            style: Theme.of(context).textTheme.xxTiniest)))
+                    DataCell(Text(
+                        orderListDatum.itemsOrdered[index].cost.toString(),
+                        style: Theme.of(context).textTheme.xxTiniest)),
+                    DataCell(Text(
+                        orderListDatum.itemsOrdered[index].count.toString(),
+                        style: Theme.of(context).textTheme.xxTiniest)),
+                    DataCell(Text(
+                        orderListDatum.itemsOrdered[index].discountPercent
+                            .toString(),
+                        style: Theme.of(context).textTheme.xxTiniest)),
+                    DataCell(Text(
+                        ((orderListDatum.itemsOrdered[index].cost *
+                                    orderListDatum.itemsOrdered[index].count) *
+                                ((100 -
+                                        orderListDatum.itemsOrdered[index]
+                                            .discountPercent) /
+                                    100))
+                            .toString(),
+                        style: Theme.of(context).textTheme.xxTiniest))
                   ])))
     ]);
   }

@@ -140,7 +140,8 @@ class ProductFormSection2 extends StatelessWidget {
           ? const SizedBox()
           : Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child: Text('CGST : 2.5 % and SGST : 2.5 %',
+              child: Text(
+                  'CGST : ${dataMap['GST'] != null ? dataMap['GST'] / 2 : ''} % and SGST : ${dataMap['GST'] != null ? dataMap['GST'] / 2 : ''} %',
                   style: Theme.of(context).textTheme.xxxTiniest),
             ),
     ]));
