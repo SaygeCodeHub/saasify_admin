@@ -10,10 +10,11 @@ import 'package:saasify/screens/inventory/widgets/inventory_list_data_table.dart
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/alert_dialouge_box.dart';
-import 'package:saasify/widgets/custom_page_header.dart';
+import 'package:saasify/widgets/alert_dialogue_box.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
+
+import '../../widgets/custom_page_header.dart';
 
 class InventoryListScreen extends StatelessWidget {
   static const String routeName = 'InventoryListScreen';
@@ -54,7 +55,7 @@ class InventoryListScreen extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
-                                return CustomAlertDialog(
+                                return AlertDialogueBox(
                                     title: 'Success',
                                     message: state.message,
                                     checkMarkVisible: true,
@@ -71,7 +72,7 @@ class InventoryListScreen extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
-                                return CustomAlertDialog(
+                                return AlertDialogueBox(
                                     title: StringConstants.kSomethingWentWrong,
                                     message: state.message,
                                     errorMarkVisible: true,

@@ -29,3 +29,5 @@ class ProductSelected extends ProductEvents {
 }
 
 class FetchAllCategories extends ProductEvents {}
+
+class GSTCalculation extends ProductEvents {}

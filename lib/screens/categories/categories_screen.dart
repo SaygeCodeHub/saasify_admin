@@ -11,7 +11,7 @@ import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
-import '../../widgets/alert_dialouge_box.dart';
+import '../../widgets/alert_dialogue_box.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 
@@ -68,7 +68,7 @@ class CategoriesScreen extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
-                                return CustomAlertDialog(
+                                return AlertDialogueBox(
                                     title: StringConstants.kSomethingWentWrong,
                                     message: state.message,
                                     errorMarkVisible: true,
@@ -82,7 +82,7 @@ class CategoriesScreen extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
-                                return CustomAlertDialog(
+                                return AlertDialogueBox(
                                     title: StringConstants.kSomethingWentWrong,
                                     message: state.message,
                                     errorMarkVisible: true,

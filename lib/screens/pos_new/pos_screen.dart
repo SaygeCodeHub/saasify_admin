@@ -9,13 +9,13 @@ import 'package:saasify/screens/pos_new/widgets/billing_section.dart';
 import 'package:saasify/screens/pos_new/widgets/unsettled_tabs.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/alert_dialouge_box.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
 import '../../bloc/pos/billing_bloc.dart';
 import '../../bloc/pos/billing_event.dart';
 import '../../bloc/pos/billing_state.dart';
 import '../../utils/constants/string_constants.dart';
+import '../../widgets/alert_dialogue_box.dart';
 import 'widgets/products_section.dart';
 
 class POSScreen extends StatelessWidget {
@@ -65,7 +65,7 @@ class POSScreen extends StatelessWidget {
                       ProgressBar.dismiss(context);
                       showDialog(
                           context: context,
-                          builder: (context) => CustomAlertDialog(
+                          builder: (context) => AlertDialogueBox(
                               title: StringConstants.kSuccess,
                               message: 'Order Placed Successfully',
                               checkMarkVisible: true,
@@ -81,7 +81,7 @@ class POSScreen extends StatelessWidget {
                       ProgressBar.dismiss(context);
                       showDialog(
                           context: context,
-                          builder: (context) => CustomAlertDialog(
+                          builder: (context) => AlertDialogueBox(
                               title: StringConstants.kSomethingWentWrong,
                               message: state.message,
                               errorMarkVisible: true,
@@ -94,7 +94,7 @@ class POSScreen extends StatelessWidget {
                       showDialog(
                           context: context,
                           builder: (ctx) {
-                            return CustomAlertDialog(
+                            return AlertDialogueBox(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
                                 errorMarkVisible: true,

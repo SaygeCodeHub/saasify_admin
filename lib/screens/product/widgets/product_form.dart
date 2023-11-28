@@ -18,7 +18,7 @@ import 'package:saasify/screens/product/widgets/product_form_section2.dart';
 import 'package:saasify/screens/product/widgets/product_form_section3.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/alert_dialouge_box.dart';
+import 'package:saasify/widgets/alert_dialogue_box.dart';
 import 'package:saasify/widgets/primary_button.dart';
 import 'package:saasify/widgets/secondary_button.dart';
 
@@ -59,7 +59,7 @@ class ProductForm extends StatelessWidget {
                               context, ProductListScreen.routeName)
                           : showDialog(
                               context: context,
-                              builder: (context) => CustomAlertDialog(
+                              builder: (context) => AlertDialogueBox(
                                     title: StringConstants.kWarning,
                                     message:
                                         'Do you want to discard the changes',

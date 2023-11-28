@@ -11,7 +11,7 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/billing/customer_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/alert_dialouge_box.dart';
+import 'package:saasify/widgets/alert_dialogue_box.dart';
 import 'package:saasify/widgets/primary_button.dart';
 
 class UnsettledTabs extends StatelessWidget {
@@ -128,7 +128,7 @@ class UnsettledTabs extends StatelessWidget {
                                                       context: context,
                                                       builder:
                                                           (context) =>
-                                                              CustomAlertDialog(
+                                                              AlertDialogueBox(
                                                                 title:
                                                                     StringConstants
                                                                         .kWarning,
