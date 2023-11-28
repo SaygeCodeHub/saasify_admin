@@ -30,7 +30,7 @@ class StoreGridScreen extends StatelessWidget {
               context.responsive(
                   TopBar(
                       scaffoldKey: _scaffoldKey,
-                      headingText: StringConstants.kStore),
+                      headingText: StringConstants.kBranches),
                   desktop: const Expanded(child: SideBar(selectedIndex: 1))),
               Expanded(
                   flex: 5,
@@ -45,7 +45,7 @@ class StoreGridScreen extends StatelessWidget {
                         children: [
                           Row(children: [
                             context.responsive(const SizedBox(),
-                                desktop: Text(StringConstants.kStore,
+                                desktop: Text(StringConstants.kBranches,
                                     style: Theme.of(context)
                                         .textTheme
                                         .xxTiny
@@ -63,7 +63,7 @@ class StoreGridScreen extends StatelessWidget {
                                           builder: (ctx) =>
                                               const AddStorePopup());
                                     },
-                                    buttonTitle: StringConstants.kAddNewStore))
+                                    buttonTitle: StringConstants.kAddNewBranch))
                           ]),
                           const SizedBox(height: spacingStandard),
                           GridView.builder(
