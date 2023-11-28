@@ -9,7 +9,7 @@ import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
 import 'package:saasify/screens/onboarding/otp_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-import 'package:saasify/widgets/custom_alert_box.dart';
+import 'package:saasify/widgets/alert_dialouge_box.dart';
 import '../../configs/app_color.dart';
 
 class AuthenticationScreen extends StatelessWidget {

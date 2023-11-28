@@ -11,7 +11,7 @@ import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
-import '../../widgets/custom_alert_box.dart';
+import '../../widgets/alert_dialouge_box.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 

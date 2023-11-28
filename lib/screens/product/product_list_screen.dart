@@ -19,7 +19,7 @@ import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/primary_button.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
-import '../../widgets/custom_alert_box.dart';
+import '../../widgets/alert_dialouge_box.dart';
 
 class ProductListScreen extends StatelessWidget {
   static const String routeName = 'ProductListScreen';

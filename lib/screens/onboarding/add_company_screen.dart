@@ -7,7 +7,7 @@ import 'package:saasify/utils/constants/string_constants.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
-import '../../widgets/custom_alert_box.dart';
+import '../../widgets/alert_dialouge_box.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../widgets/primary_button.dart';
 

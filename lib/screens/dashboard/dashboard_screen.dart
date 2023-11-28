@@ -8,7 +8,7 @@ import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/custom_alert_box.dart';
+import 'package:saasify/widgets/alert_dialouge_box.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 import 'widgets/dasboard_body.dart';

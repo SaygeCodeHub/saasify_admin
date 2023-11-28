@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/screens/orders/widgets/order_bill_details.dart';
 import 'package:saasify/screens/orders/widgets/order_details_header_widget.dart';
@@ -8,7 +7,7 @@ import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
-import '../../widgets/share_download_print_widget.dart';
+import '../../widgets/custom_page_header.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 import 'orders_screen.dart';
@@ -46,34 +45,15 @@ class OrderDetailsScreen extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  InkWell(
-                                      onTap: () {
-                                        Navigator.pushReplacementNamed(
-                                            context, OrdersScreen.routeName);
-                                      },
-                                      child: context.responsive(
-                                          const SizedBox(),
-                                          desktop: const Icon(
-                                              Icons.arrow_back_ios_new))),
-                                  const SizedBox(width: spacingSmall),
-                                  context.responsive(const SizedBox(),
-                                      desktop: Text(
-                                          StringConstants.kOrderDetails,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xxTiny
-                                              .copyWith(
-                                                  fontWeight:
-                                                      FontWeight.w700))),
-                                  context.responsive(const SizedBox(),
-                                      desktop: const Spacer()),
-                                  const Spacer(),
-                                  const ShareDownloadPrintWidget()
-                                ]),
+                            CustomPageHeader(
+                              titleText: StringConstants.kOrderDetails,
+                              textFieldVisible: false,
+                              backIconVisible: true,
+                              inkWellOnTap: () {
+                                Navigator.pushReplacementNamed(
+                                    context, OrdersScreen.routeName);
+                              },
+                            ),
                             const SizedBox(height: spacingStandard),
                             OrderDetailsHeaderWidget(
                                 orderListDatum: orderListDatum),

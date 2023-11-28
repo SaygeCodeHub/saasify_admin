@@ -11,7 +11,7 @@ import 'package:saasify/screens/product/widgets/product_form.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/custom_alert_box.dart';
+import 'package:saasify/widgets/alert_dialouge_box.dart';
 import 'package:saasify/widgets/top_bar.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';

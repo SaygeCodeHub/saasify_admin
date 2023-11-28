@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/customer/customer_bloc.dart';
@@ -10,7 +9,7 @@ import 'package:saasify/screens/pos_new/widgets/billing_section.dart';
 import 'package:saasify/screens/pos_new/widgets/unsettled_tabs.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/custom_alert_box.dart';
+import 'package:saasify/widgets/alert_dialouge_box.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
 import '../../bloc/pos/billing_bloc.dart';
@@ -156,21 +155,38 @@ class POSScreen extends StatelessWidget {
                                   : const SizedBox.shrink()
                             ]);
                       } else {
-                        return Center(
-                            child: Text(StringConstants.kNoDataAvailable,
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                                child: Image.asset(
+                              "assets/not_found_gif.gif",
+                              height: 50,
+                            )),
+                            Text(StringConstants.kErrorMessage,
                                 style: Theme.of(context)
                                     .textTheme
                                     .tinier
                                     .copyWith(
-                                        color: AppColor.saasifyLightGrey)));
+                                        color: AppColor.saasifyLightGrey)),
+                          ],
+                        );
                       }
                     } else if (state is ErrorFetchingProductsByCategory) {
-                      return Center(
-                          child: Text(StringConstants.kNoDataAvailable,
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                              child: Image.asset(
+                            "assets/not_found_gif.gif",
+                          )),
+                          Text(StringConstants.kErrorMessage,
                               style: Theme.of(context)
                                   .textTheme
                                   .tinier
-                                  .copyWith(color: AppColor.saasifyLightGrey)));
+                                  .copyWith(color: AppColor.saasifyLightGrey)),
+                        ],
+                      );
                     } else {
                       return const SizedBox.shrink();
                     }

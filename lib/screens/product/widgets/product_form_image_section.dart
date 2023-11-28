@@ -12,7 +12,7 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/progress_bar.dart';
-import 'package:saasify/widgets/custom_alert_box.dart';
+import 'package:saasify/widgets/alert_dialouge_box.dart';
 
 class FormImageSection extends StatelessWidget {
   const FormImageSection({
