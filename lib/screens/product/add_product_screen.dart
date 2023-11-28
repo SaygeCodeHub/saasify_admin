@@ -11,7 +11,7 @@ import 'package:saasify/screens/product/widgets/product_form.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/custom_alert_box.dart';
+import 'package:saasify/widgets/alert_dialogue_box.dart';
 import 'package:saasify/widgets/top_bar.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
@@ -68,7 +68,7 @@ class AddProductScreen extends StatelessWidget {
                       if (state is ErrorFetchingCategories) {
                         showDialog(
                             context: context,
-                            builder: (context) => CustomAlertDialog(
+                            builder: (context) => AlertDialogueBox(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
                                 primaryButtonTitle: StringConstants.kOk,
@@ -86,7 +86,7 @@ class AddProductScreen extends StatelessWidget {
                         ProgressBar.dismiss(context);
                         showDialog(
                             context: context,
-                            builder: (context) => CustomAlertDialog(
+                            builder: (context) => AlertDialogueBox(
                                   title: StringConstants.kNewProductAdded,
                                   message:
                                       StringConstants.kContinueAddingVariant,
@@ -129,7 +129,7 @@ class AddProductScreen extends StatelessWidget {
                         ProgressBar.dismiss(context);
                         showDialog(
                             context: context,
-                            builder: (dialogueCtx) => CustomAlertDialog(
+                            builder: (dialogueCtx) => AlertDialogueBox(
                                 title: StringConstants.kNewProductAdded,
                                 message: state.message,
                                 primaryButtonTitle: StringConstants.kOk,
@@ -143,7 +143,7 @@ class AddProductScreen extends StatelessWidget {
                         ProgressBar.dismiss(context);
                         showDialog(
                             context: context,
-                            builder: (context) => CustomAlertDialog(
+                            builder: (context) => AlertDialogueBox(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
                                 primaryButtonTitle: StringConstants.kOk,
@@ -157,7 +157,7 @@ class AddProductScreen extends StatelessWidget {
                         ProgressBar.dismiss(context);
                         showDialog(
                             context: context,
-                            builder: (context) => CustomAlertDialog(
+                            builder: (context) => AlertDialogueBox(
                                 title: StringConstants.kSomethingWentWrong,
                                 message: state.message,
                                 primaryButtonTitle: StringConstants.kOk,

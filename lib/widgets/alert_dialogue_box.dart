@@ -6,8 +6,8 @@ import '../configs/app_color.dart';
 import '../configs/app_dimensions.dart';
 import '../configs/app_spacing.dart';
 
-class CustomAlertDialog extends StatelessWidget {
-  const CustomAlertDialog(
+class AlertDialogueBox extends StatelessWidget {
+  const AlertDialogueBox(
       {super.key,
       required this.title,
       required this.message,
@@ -67,27 +67,23 @@ class CustomAlertDialog extends StatelessWidget {
                   const SizedBox(height: spacingXLarge),
                   Text(message, style: Theme.of(context).textTheme.xxTiniest),
                   const SizedBox(height: spacingXLarge),
-                  Row(
-                    children: [
-                      const Spacer(flex: 2),
-                      Expanded(
+                  Row(children: [
+                    const Spacer(flex: 2),
+                    Expanded(
                         child: (secondaryButtonTitle == null)
                             ? const SizedBox.shrink()
                             : SecondaryButton(
                                 side: const BorderSide(
                                     color: AppColor.saasifyLightWhite),
                                 onPressed: secondaryOnPressed,
-                                buttonTitle: secondaryButtonTitle ?? ''),
-                      ),
-                      const SizedBox(width: spacingStandard),
-                      Expanded(
+                                buttonTitle: secondaryButtonTitle ?? '')),
+                    const SizedBox(width: spacingStandard),
+                    Expanded(
                         child: PrimaryButton(
                             onPressed: primaryOnPressed,
                             buttonWidth: spacingXXXHuge,
-                            buttonTitle: primaryButtonTitle),
-                      ),
-                    ],
-                  )
+                            buttonTitle: primaryButtonTitle))
+                  ])
                 ])));
   }
 }

@@ -11,7 +11,7 @@ import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
 import '../../configs/app_color.dart';
-import '../../widgets/custom_alert_box.dart';
+import '../../widgets/alert_dialogue_box.dart';
 import '../../widgets/share_download_print_widget.dart';
 import 'orders_list_datatable.dart';
 
@@ -48,7 +48,7 @@ class OrdersScreen extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
-                                return CustomAlertDialog(
+                                return AlertDialogueBox(
                                     title: StringConstants.kSomethingWentWrong,
                                     message: state.message,
                                     errorMarkVisible: true,

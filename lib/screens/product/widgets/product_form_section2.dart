@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_dropdown.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
+
+import '../../../bloc/product/product_bloc.dart';
+import '../../../bloc/product/product_event.dart';
 
 class ProductFormSection2 extends StatelessWidget {
   const ProductFormSection2({
@@ -130,11 +134,23 @@ class ProductFormSection2 extends StatelessWidget {
       const SizedBox(height: spacingXMedium),
       (isProductDetail == true)
           ? const Text("5%")
-          : CustomDropdownWidget(
-              initialValue: "Select GST",
-              listItems: const ["Select GST", "0%", "5%", "12%", "18%", "28%"],
-              dataMap: dataMap,
-              mapKey: 'unit'),
+          : InkWell(
+              onTap: () {
+                context.read<ProductBloc>().add(GSTCalculation());
+              },
+              child: CustomDropdownWidget(
+                  initialValue: "Select GST",
+                  listItems: const [
+                    "Select GST",
+                    "0%",
+                    "5%",
+                    "12%",
+                    "18%",
+                    "28%"
+                  ],
+                  dataMap: dataMap,
+                  mapKey: 'unit'),
+            ),
       const SizedBox(height: spacingXXSmall),
       (isProductDetail == true)
           ? const SizedBox()

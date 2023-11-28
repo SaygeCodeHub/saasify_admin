@@ -27,6 +27,12 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
     on<DeleteProducts>(_deleteProducts);
     on<ProductSelected>(_productSelected);
     on<FetchAllCategories>(_fetchAllCategories);
+    on<GSTCalculation>(_gSTCalculation);
+  }
+
+  FutureOr<void> _gSTCalculation(
+      GSTCalculation event, Emitter<ProductStates> emit) async {
+    emit(CalculateGST());
   }
 
   FutureOr<void> _fetchProductList(
