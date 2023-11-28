@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class DashboardCard {
+class DashboardCardData {
   final IconData iconName;
   final String routeName;
   final String title;
+  String subtitle;
 
-  DashboardCard({
+  DashboardCardData({
     required this.title,
+    required this.subtitle,
     required this.routeName,
     required this.iconName,
   });

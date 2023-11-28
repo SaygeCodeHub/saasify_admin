@@ -5,7 +5,7 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../../configs/app_spacing.dart';
-import '../../../utils/dashboard_card_util.dart';
+import '../../../utils/dashboard_card.dart';
 
 class DashboardHeaderCards extends StatelessWidget {
   const DashboardHeaderCards({super.key, required this.ordersData});
@@ -14,20 +14,9 @@ class DashboardHeaderCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List cardItems = [
-      {'subtitle': ordersData.totalOrders},
-      {'subtitle': ordersData.unpaidOrder.count},
-      {'subtitle': ordersData.totalEarning},
-      {'subtitle': 'Manage Profile'},
-      {'subtitle': 'Manage Branches'},
-      {'subtitle': 'Manage Payment Methods'},
-      {'subtitle': 'Manage Employees'},
-      {'subtitle': 'Manage Coupons'}
-    ];
-
     return GridView.builder(
         shrinkWrap: true,
-        itemCount: cardItems.length,
+        itemCount: dashboardCard.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
               padding: const EdgeInsets.only(right: spacingStandard),
@@ -74,7 +63,9 @@ class DashboardHeaderCards extends StatelessWidget {
                                             .responsive(0.63, desktop: 1)),
                                     const SizedBox(height: spacingXSmall),
                                     Text(
-                                        cardItems[index]['subtitle'].toString(),
+                                        dashboardCard[index]
+                                            .subtitle
+                                            .toString(),
                                         textScaleFactor: context
                                             .responsive(0.63, desktop: 1),
                                         style: Theme.of(context)
