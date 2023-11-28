@@ -63,16 +63,19 @@ class CategoriesGrid extends StatelessWidget {
                             const SizedBox(height: spacingXXSmall),
                             Container(
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 4, horizontal: 8),
+                                    vertical: spacingXSmall,
+                                    horizontal: spacingXXSmall),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
+                                    borderRadius:
+                                        BorderRadius.circular(kGeneralRadius),
                                     color: AppColor.saasifyLighterGreen),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     const Icon(Icons.circle,
-                                        size: 8, color: AppColor.saasifyGreen),
-                                    const SizedBox(width: 6),
+                                        size: kPaymentCircleSize,
+                                        color: AppColor.saasifyGreen),
+                                    const SizedBox(width: spacingXSmall),
                                     Text('GST Enabled',
                                         style: Theme.of(context)
                                             .textTheme
