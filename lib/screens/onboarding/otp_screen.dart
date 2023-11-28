@@ -8,7 +8,6 @@ import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/bloc/authentication/authentication_states.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/onboarding/auhentication_screen.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
@@ -54,7 +53,8 @@ class OtpScreen extends StatelessWidget {
                               context.responsive(8, desktop: 12)))),
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   onChanged: (value) {
-                    AuthenticationScreen.authDetails['otp'] = value;
+                    context.read<AuthenticationBloc>().authDetails['otp'] =
+                        value;
                   },
                   isCursorAnimationEnabled: false,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,9 +69,10 @@ class OtpScreen extends StatelessWidget {
                 return PrimaryButton(
                   onPressed: () {
                     context.read<AuthenticationBloc>().add(VerifyOtp(
-                        otpCode: AuthenticationScreen.authDetails['otp'],
-                        verificationId: verificationId,
-                        userName: userName));
+                        otpCode: context
+                            .read<AuthenticationBloc>()
+                            .authDetails['otp'],
+                        verificationId: verificationId));
                   },
                   buttonWidth: double.maxFinite,
                   buttonTitle: StringConstants.kVerifyOtp,

@@ -165,12 +165,12 @@ class ProductForm extends StatelessWidget {
                     const Text(StringConstants.kWantToDeactivateProduct),
                     Switch(
                         activeColor: AppColor.saasifyLightDeepBlue,
-                        value: true,
+                        value: dataMap['variant_active'] ?? true,
                         onChanged: (value) {
-                          // Map productDetails = productList[index].toJson();
-                          // productDetails['variant_active'] = value;
-                          // context.read<ProductBloc>().add(
-                          //     EditProduct(productDetailsMap: productDetails));
+                          dataMap['variant_active'] = value;
+                          context
+                              .read<ProductBloc>()
+                              .add(LoadForm(categoryList: categoryList));
                         })
                   ])
                 ])),
@@ -187,13 +187,15 @@ class ProductForm extends StatelessWidget {
               isVariant: isVariant,
               isEdit: isEdit,
               dataMap: dataMap,
-              isProductDetail: isProductDetail),
+              isProductDetail: isProductDetail,
+              categoryList: categoryList),
           const SizedBox(width: spacingXXHuge),
           ProductFormSection3(
               isVariant: isVariant,
               isEdit: isEdit,
               dataMap: dataMap,
-              isProductDetail: isProductDetail)
+              isProductDetail: isProductDetail,
+              categoryList: categoryList)
         ]),
         const SizedBox(height: spacingHuge),
         FormImageSection(

@@ -27,6 +27,7 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
     on<DeleteProducts>(_deleteProducts);
     on<ProductSelected>(_productSelected);
     on<FetchAllCategories>(_fetchAllCategories);
+    on<LoadForm>(_loadForm);
   }
 
   FutureOr<void> _fetchProductList(
@@ -143,5 +144,9 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
     } catch (e) {
       emit(ErrorFetchingCategories(message: e.toString()));
     }
+  }
+
+  _loadForm(LoadForm event, Emitter<ProductStates> emit) {
+    emit(FetchedCategories(categoryList: event.categoryList));
   }
 }

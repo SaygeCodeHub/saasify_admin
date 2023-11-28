@@ -1,3 +1,4 @@
+import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
 import 'package:saasify/data/models/products/product_list_model.dart';
 
 abstract class ProductEvents {}
@@ -29,3 +30,9 @@ class ProductSelected extends ProductEvents {
 }
 
 class FetchAllCategories extends ProductEvents {}
+
+class LoadForm extends ProductEvents {
+  final List<ProductCategory> categoryList;
+
+  LoadForm({required this.categoryList});
+}

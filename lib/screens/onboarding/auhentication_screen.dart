@@ -14,7 +14,6 @@ import '../../configs/app_color.dart';
 
 class AuthenticationScreen extends StatelessWidget {
   static const routeName = 'SignUpScreen';
-  static Map authDetails = {};
 
   AuthenticationScreen({super.key});
 
@@ -61,7 +60,10 @@ class AuthenticationScreen extends StatelessWidget {
                               checkMarkVisible: false,
                               primaryOnPressed: () {
                                 Navigator.pop(ctx);
-                                authDetails.clear();
+                                context
+                                    .read<AuthenticationBloc>()
+                                    .authDetails
+                                    .clear();
                                 context.read<AuthenticationBloc>().add(
                                     SwitchAuthentication(
                                         isLogin: false, focusField: ''));

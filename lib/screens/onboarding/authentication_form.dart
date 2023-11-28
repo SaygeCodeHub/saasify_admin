@@ -7,7 +7,6 @@ import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/bloc/authentication/authentication_states.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/onboarding/auhentication_screen.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../utils/constants/string_constants.dart';
@@ -25,13 +24,6 @@ class AuthenticationBody extends StatelessWidget {
   });
 
   final _formKey = GlobalKey<FormState>();
-
-  bool _checkIfNullOrEmpty(String? value) {
-    if (value == null || value == '' || value.trim() == '') {
-      return false;
-    }
-    return true;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +64,8 @@ class AuthenticationBody extends StatelessWidget {
                             const SizedBox(height: spacingMedium),
                             CustomTextField(
                                 autofocus: focusField == 'user_name',
-                                initialValue: AuthenticationScreen
+                                initialValue: context
+                                    .read<AuthenticationBloc>()
                                     .authDetails['user_name'],
                                 hintText: StringConstants.kWhatsYourName,
                                 keyboardType: TextInputType.text,
@@ -81,7 +74,8 @@ class AuthenticationBody extends StatelessWidget {
                                       TextFieldChange(
                                           isLogin: isLogin,
                                           focusField: 'user_name'));
-                                  AuthenticationScreen
+                                  context
+                                      .read<AuthenticationBloc>()
                                       .authDetails['user_name'] = value;
                                 }),
                             const SizedBox(height: spacingXXHuge),
@@ -93,8 +87,9 @@ class AuthenticationBody extends StatelessWidget {
                   const SizedBox(height: spacingXMedium),
                   CustomTextField(
                       autofocus: focusField == 'user_contact',
-                      initialValue:
-                          AuthenticationScreen.authDetails['user_contact'],
+                      initialValue: context
+                          .read<AuthenticationBloc>()
+                          .authDetails['user_contact'],
                       hintText: StringConstants.kAddYourContactNumber,
                       validator: (value) {
                         if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)')
@@ -110,8 +105,9 @@ class AuthenticationBody extends StatelessWidget {
                       onTextFieldChanged: (value) {
                         context.read<AuthenticationBloc>().add(TextFieldChange(
                             isLogin: isLogin, focusField: 'user_contact'));
-                        AuthenticationScreen.authDetails['user_contact'] =
-                            value;
+                        context
+                            .read<AuthenticationBloc>()
+                            .authDetails['user_contact'] = value;
                       }),
                   const SizedBox(height: spacingXXHuge),
                   BlocBuilder<AuthenticationBloc, AuthenticationStates>(
@@ -120,20 +116,14 @@ class AuthenticationBody extends StatelessWidget {
                       return const Center(child: CircularProgressIndicator());
                     } else {
                       return PrimaryButton(
-                        onPressed: (((!isLogin)
-                                    ? _checkIfNullOrEmpty(AuthenticationScreen
-                                        .authDetails['user_name'])
-                                    : true) &&
-                                _checkIfNullOrEmpty(AuthenticationScreen
-                                    .authDetails['user_contact']))
+                        onPressed: (context
+                                .read<AuthenticationBloc>()
+                                .loginButtonEnabled)
                             ? () {
                                 if (_formKey.currentState!.validate()) {
-                                  context.read<AuthenticationBloc>().add(GetOtp(
-                                      userName: AuthenticationScreen
-                                              .authDetails['user_name'] ??
-                                          "",
-                                      phoneNo:
-                                          "+91 ${AuthenticationScreen.authDetails['user_contact']}"));
+                                  context
+                                      .read<AuthenticationBloc>()
+                                      .add(GetOtp());
                                 }
                               }
                             : null,

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/product/product_bloc.dart';
+import 'package:saasify/bloc/product/product_event.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_dropdown.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
@@ -13,12 +17,14 @@ class ProductFormSection2 extends StatelessWidget {
     required this.isEdit,
     required this.dataMap,
     required this.isProductDetail,
+    required this.categoryList,
   });
 
   final bool isVariant;
   final bool isEdit;
   final bool isProductDetail;
   final Map dataMap;
+  final List<ProductCategory> categoryList;
 
   @override
   Widget build(BuildContext context) {
@@ -110,6 +116,11 @@ class ProductFormSection2 extends StatelessWidget {
           (isProductDetail == true)
               ? Text(dataMap['unit'] ?? "nos")
               : CustomDropdownWidget(
+                  onChanges: () {
+                    context
+                        .read<ProductBloc>()
+                        .add(LoadForm(categoryList: categoryList));
+                  },
                   initialValue: dataMap['unit'] ?? "nos",
                   listItems: ["nos", "kg", "l", "gm", "m"] +
                       ((dataMap['unit'] != null &&
@@ -131,18 +142,24 @@ class ProductFormSection2 extends StatelessWidget {
       (isProductDetail == true)
           ? const Text("5%")
           : CustomDropdownWidget(
-              initialValue: "Select GST",
-              listItems: const ["Select GST", "0%", "5%", "12%", "18%", "28%"],
+              onChanges: () {
+                context
+                    .read<ProductBloc>()
+                    .add(LoadForm(categoryList: categoryList));
+              },
+              initialValue: dataMap['GST'] ?? '0',
+              listItems: const ['0', '5', '12', '18', '28'],
               dataMap: dataMap,
-              mapKey: 'unit'),
+              mapKey: 'GST'),
       const SizedBox(height: spacingXXSmall),
       (isProductDetail == true)
-          ? Text('CGST : 2.5 % and SGST : 2.5 %',
+          ? Text(
+              'CGST : ${(dataMap['GST'] != null) ? int.parse(dataMap['GST']) / 2 : ''} % and SGST : ${(dataMap['GST'] != null) ? int.parse(dataMap['GST']) / 2 : ''} %',
               style: Theme.of(context).textTheme.xxxTiniest)
           : Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Text(
-                  'CGST : ${dataMap['GST'] != null ? dataMap['GST'] / 2 : ''} % and SGST : ${dataMap['GST'] != null ? dataMap['GST'] / 2 : ''} %',
+                  'CGST : ${(dataMap['GST'] != null) ? int.parse(dataMap['GST']) / 2 : ''} % and SGST : ${(dataMap['GST'] != null) ? int.parse(dataMap['GST']) / 2 : ''} %',
                   style: Theme.of(context).textTheme.xxxTiniest),
             ),
     ]));

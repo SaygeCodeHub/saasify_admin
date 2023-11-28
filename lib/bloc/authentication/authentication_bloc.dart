@@ -14,6 +14,8 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvents, AuthenticationStates> {
   final CustomerCache _customerCache = getIt<CustomerCache>();
   FirebaseAuth auth = FirebaseAuth.instance;
+  Map authDetails = {};
+  bool loginButtonEnabled = false;
 
   final AuthenticationRepository _authenticationRepository =
       getIt<AuthenticationRepository>();
@@ -32,6 +34,13 @@ class AuthenticationBloc
     on<LogOut>(_logOut);
   }
 
+  bool _checkIfNullOrEmpty(String? value) {
+    if (value == null || value == '' || value.trim() == '') {
+      return false;
+    }
+    return true;
+  }
+
   FutureOr<void> _switchLogin(
       SwitchAuthentication event, Emitter<AuthenticationStates> emit) {
     bool isLogin = !event.isLogin;
@@ -41,6 +50,10 @@ class AuthenticationBloc
 
   FutureOr<void> _textFieldChange(
       TextFieldChange event, Emitter<AuthenticationStates> emit) {
+    loginButtonEnabled = ((!event.isLogin)
+            ? _checkIfNullOrEmpty(authDetails['user_name'])
+            : true) &&
+        _checkIfNullOrEmpty(authDetails['user_contact']);
     emit(AuthenticationFormLoaded(
         isLogin: event.isLogin, focusField: event.focusField));
   }
@@ -48,7 +61,8 @@ class AuthenticationBloc
   _otpReceivedOnPhone(
       OtpReceivedOnPhone event, Emitter<AuthenticationStates> emit) async {
     emit(OtpReceived(
-        verificationId: event.verificationId, userName: event.userName));
+        verificationId: event.verificationId,
+        userName: authDetails['user_name'] ?? ""));
   }
 
   FutureOr<void> _getOtp(
@@ -56,15 +70,15 @@ class AuthenticationBloc
     emit(OtpLoading());
     try {
       await _authenticationRepository.verifyPhoneNumber(
-        phoneNumber: event.phoneNo,
+        phoneNumber: "+91 ${authDetails['user_contact']}",
         verificationCompleted: (PhoneAuthCredential credential) async {
-          add(OtpVerified(credential: credential, userName: event.userName));
+          add(OtpVerified(
+              credential: credential,
+              userName: authDetails['user_name'] ?? ""));
         },
         codeSent: (String verificationId, int? resendToken) {
           add(OtpReceivedOnPhone(
-              verificationId: verificationId,
-              token: resendToken,
-              userName: event.userName));
+              verificationId: verificationId, token: resendToken));
         },
         verificationFailed: (FirebaseAuthException e) {
           add(OtpVerificationError(error: e.code));
@@ -84,7 +98,8 @@ class AuthenticationBloc
         verificationId: event.verificationId,
         smsCode: event.otpCode,
       );
-      add(OtpVerified(credential: credential, userName: event.userName));
+      add(OtpVerified(
+          credential: credential, userName: authDetails['user_name'] ?? ""));
     } catch (e) {
       emit(PhoneAuthError(error: e.toString()));
     }
@@ -97,9 +112,7 @@ class AuthenticationBloc
         if (user.user != null) {
           Map userDetailsMap = {
             'user_id': user.user!.uid,
-            'user_name': (event.userName.toString() == "")
-                ? ""
-                : event.userName.toString(),
+            'user_name': authDetails['user_name'] ?? "",
             'user_contact': user.user?.phoneNumber!.replaceAll('+', '')
           };
           AuthenticationModel authenticationModel =

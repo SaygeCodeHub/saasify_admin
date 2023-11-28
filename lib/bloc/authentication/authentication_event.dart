@@ -9,12 +9,7 @@ class TextFieldChange extends AuthenticationEvents {
   TextFieldChange({required this.focusField, required this.isLogin});
 }
 
-class GetOtp extends AuthenticationEvents {
-  final String userName;
-  final String phoneNo;
-
-  GetOtp({required this.phoneNo, required this.userName});
-}
+class GetOtp extends AuthenticationEvents {}
 
 class SwitchAuthentication extends AuthenticationEvents {
   final String focusField;
@@ -26,23 +21,15 @@ class SwitchAuthentication extends AuthenticationEvents {
 class OtpReceivedOnPhone extends AuthenticationEvents {
   final String verificationId;
   final int? token;
-  final String userName;
 
-  OtpReceivedOnPhone(
-      {required this.verificationId,
-      required this.token,
-      required this.userName});
+  OtpReceivedOnPhone({required this.verificationId, required this.token});
 }
 
 class VerifyOtp extends AuthenticationEvents {
   final String otpCode;
   final String verificationId;
-  final String userName;
 
-  VerifyOtp(
-      {required this.otpCode,
-      required this.verificationId,
-      required this.userName});
+  VerifyOtp({required this.otpCode, required this.verificationId});
 }
 
 class OtpVerified extends AuthenticationEvents {

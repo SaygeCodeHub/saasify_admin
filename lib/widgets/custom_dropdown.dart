@@ -15,6 +15,7 @@ class CustomDropdownWidget extends StatefulWidget {
   final bool addOption;
   final String hintText;
   final Widget? disabledHint;
+  final void Function()? onChanges;
 
   const CustomDropdownWidget({
     Key? key,
@@ -27,6 +28,7 @@ class CustomDropdownWidget extends StatefulWidget {
     this.disabledHint,
     this.addOption = false,
     this.hintText = '',
+    this.onChanges,
   }) : super(key: key);
 
   @override
@@ -74,6 +76,9 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
                               selectedValue = value.toString();
                             });
                             widget.dataMap[widget.mapKey] = value;
+                            if (widget.onChanges != null) {
+                              widget.onChanges!();
+                            }
                           }
                         : null))),
         Visibility(
