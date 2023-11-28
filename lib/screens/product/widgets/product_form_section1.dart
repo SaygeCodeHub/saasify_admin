@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_dropdown.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
+
+import '../../../configs/app_dimensions.dart';
 
 class ProductFormSection1 extends StatelessWidget {
   const ProductFormSection1(
@@ -72,7 +75,16 @@ class ProductFormSection1 extends StatelessWidget {
       ]),
       const SizedBox(height: spacingXMedium),
       (isProductDetail == true)
-          ? Text(dataMap['product_description'])
+          ? Container(
+              height: kTextContainerHeight,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(spacingXSmall),
+                  border: Border.all(color: AppColor.saasifyPaleGrey)),
+              child: Padding(
+                padding: const EdgeInsets.all(spacingSmall),
+                child: Text(dataMap['product_description']),
+              ))
           : CustomTextField(
               maxLines: 10,
               validator: (value) {

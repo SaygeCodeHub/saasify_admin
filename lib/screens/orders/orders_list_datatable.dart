@@ -26,13 +26,11 @@ class OrdersListDataTable extends StatelessWidget {
           dataRowMaxHeight: 50,
           columns: [
             DataColumn(
-                label: Expanded(
-                    child: Center(
-                        child: Text(StringConstants.kOrderNo,
-                            style: Theme.of(context)
-                                .textTheme
-                                .xTiniest
-                                .copyWith(fontWeight: FontWeight.w600))))),
+                label: Text(StringConstants.kOrderNo,
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Text(StringConstants.kOrderedDate,
                     style: Theme.of(context)
@@ -59,13 +57,11 @@ class OrdersListDataTable extends StatelessWidget {
                         .xTiniest
                         .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
-                label: Expanded(
-                    child: Center(
-                        child: Text(StringConstants.kProductAmount,
-                            style: Theme.of(context)
-                                .textTheme
-                                .xTiniest
-                                .copyWith(fontWeight: FontWeight.w600))))),
+                label: Text(StringConstants.kProductAmount,
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Text(StringConstants.kPaymentStatus,
                     style: Theme.of(context)
@@ -77,12 +73,9 @@ class OrdersListDataTable extends StatelessWidget {
               orderListDatum.orders.length,
               (index) => DataRow(cells: [
                     DataCell(
-                        Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                                orderListDatum.orders[index].orderId.toString(),
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.xxTiniest)),
+                        Text(orderListDatum.orders[index].orderId.toString(),
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.xxTiniest),
                         onTap: () {
                       Navigator.pushReplacementNamed(
                           context, OrderDetailsScreen.routeName,
@@ -130,13 +123,10 @@ class OrdersListDataTable extends StatelessWidget {
                           arguments: orderListDatum.orders[index]);
                     }),
                     DataCell(
-                        Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                                orderListDatum.orders[index].totalAmount
-                                    .toString(),
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.xxTiniest)),
+                        Text(
+                            orderListDatum.orders[index].totalAmount.toString(),
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.xxTiniest),
                         onTap: () {
                       Navigator.pushReplacementNamed(
                           context, OrderDetailsScreen.routeName,

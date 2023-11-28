@@ -25,7 +25,7 @@ class AddStorePopup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(StringConstants.kAddNewStore,
+                      Text(StringConstants.kAddNewBranch,
                           style: Theme.of(context)
                               .textTheme
                               .xTiniest
@@ -42,7 +42,7 @@ class AddStorePopup extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: spacingMedium),
-                  Text(StringConstants.kStoreName,
+                  Text(StringConstants.kBranchName,
                       style: Theme.of(context).textTheme.xTiniest),
                   const SizedBox(height: spacingXXSmall),
                   CustomTextField(onTextFieldChanged: (value) {}),
@@ -71,7 +71,7 @@ class AddStorePopup extends StatelessWidget {
                   ]),
                   Row(
                     children: [
-                      Text(StringConstants.kDoYouWantToDeactivateStore,
+                      Text(StringConstants.kDoYouWantToDeactivateBranch,
                           style: Theme.of(context).textTheme.xTiniest),
                       Switch(
                           activeColor: AppColor.saasifyLightDeepBlue,

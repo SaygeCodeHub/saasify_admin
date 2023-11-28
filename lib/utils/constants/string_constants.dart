@@ -36,7 +36,8 @@ class StringConstants {
   static const kDoYouWantToDeactivateGST = 'Do you Want to deactivate GST?';
   static const kDoYouWantToDeactivateDiscount =
       'Do you Want to deactivate Discount?';
-  static const kDoYouWantToDeactivateStore = 'Do you Want to deactivate Store?';
+  static const kDoYouWantToDeactivateBranch =
+      'Do you Want to deactivate Branch?';
   static const kWantToDisableGST = 'Want to disable GST?';
   static const kAddVariantButton = 'ADD VARIANT';
   static const kAddVariant = 'Add Variant';
@@ -113,7 +114,7 @@ class StringConstants {
   static const kAddStock = 'Add Stock';
   static const kAddNewCategory = 'Add New Category';
   static const kAddNewPaymentMethod = 'Add New Payment Method';
-  static const kAddNewStore = 'Add New Store';
+  static const kAddNewBranch = 'Add New Branch';
   static const kReduceStock = 'Reduce Stock';
   static const kPOS = 'POS';
   static const kCategories = 'Categories';
@@ -121,7 +122,7 @@ class StringConstants {
   static const kStore = 'Store';
   static const kCurrency = 'Currency';
   static const kLocation = 'Location';
-  static const kStoreName = 'Store Name';
+  static const kBranchName = 'Branch Name';
   static const kDiscounts = 'Discounts';
   static const kSearchProduct = 'Search Product';
   static const kAddManually = 'ADD MANUALLY';

@@ -40,8 +40,8 @@ class DashboardHeaderCards extends StatelessWidget {
       },
       {
         'leading': "assets/card_image_three.PNG",
-        'title': 'Stores',
-        'subtitle': 'Manage Stores'
+        'title': 'Branches',
+        'subtitle': 'Manage Branches'
       },
       {
         'leading': "assets/card_image_three.PNG",

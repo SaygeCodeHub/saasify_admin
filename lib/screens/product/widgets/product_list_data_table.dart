@@ -89,26 +89,18 @@ class ProductListDataTable extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.w600)),
             )),
             DataColumn(
-                label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kPrice,
+                label: Text(StringConstants.kPrice,
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600)),
-              ),
-            )),
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
-                label: Expanded(
-              child: Center(
-                child: Text(StringConstants.kStock,
+                label: Text(StringConstants.kStock,
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600)),
-              ),
-            )),
+                        .copyWith(fontWeight: FontWeight.w600))),
             DataColumn(
                 label: Expanded(
               child: Center(
@@ -224,11 +216,9 @@ class ProductListDataTable extends StatelessWidget {
                               isProductDetail: true));
                     }),
                     DataCell(
-                        Align(
-                            alignment: Alignment.center,
-                            child: Text(productList[index].cost.toString(),
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.xxTiniest)),
+                        Text(productList[index].cost.toString(),
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.xxTiniest),
                         onTap: () {
                       Navigator.pushReplacementNamed(
                           context, AddProductScreen.routeName,
@@ -239,27 +229,23 @@ class ProductListDataTable extends StatelessWidget {
                               isProductDetail: true));
                     }),
                     DataCell(
-                        Align(
-                            alignment: Alignment.center,
-                            child: Text(productList[index].stock.toString(),
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .xxTiniest
-                                    .copyWith(
-                                        color: (productList[index].stock !=
-                                                    null &&
-                                                productList[index]
-                                                        .restockReminder !=
-                                                    null)
-                                            ? ((productList[index].stock ?? 0) <
-                                                    (productList[index]
-                                                            .restockReminder ??
-                                                        0))
-                                                ? AppColor.saasifyRed
-                                                : AppColor.saasifyBlack
-                                            : AppColor.saasifyBlack))),
-                        onTap: () {
+                        Text(productList[index].stock.toString(),
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .xxTiniest
+                                .copyWith(
+                                    color: (productList[index].stock != null &&
+                                            productList[index]
+                                                    .restockReminder !=
+                                                null)
+                                        ? ((productList[index].stock ?? 0) <
+                                                (productList[index]
+                                                        .restockReminder ??
+                                                    0))
+                                            ? AppColor.saasifyRed
+                                            : AppColor.saasifyBlack
+                                        : AppColor.saasifyBlack)), onTap: () {
                       Navigator.pushReplacementNamed(
                           context, AddProductScreen.routeName,
                           arguments: AddProductScreenArguments(

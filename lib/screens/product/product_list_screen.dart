@@ -54,13 +54,11 @@ class ProductListScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingLarge),
                       child: BlocConsumer<ProductBloc, ProductStates>(
                         listener: (context, state) {
-                          log('states===>$state');
                           if (state is DeletingProducts) {
                             log('inside DeletingProducts');
                             ProgressBar.show(context);
                           }
                           if (state is DeletedProducts) {
-                            log('inside DeletedProducts');
                             ProgressBar.dismiss(context);
                             showDialog(
                                 context: context,
@@ -94,11 +92,9 @@ class ProductListScreen extends StatelessWidget {
                                     ));
                           }
                           if (state is EditingProduct) {
-                            log('inside DeletingProducts');
                             ProgressBar.show(context);
                           }
                           if (state is EditedProduct) {
-                            log('inside DeletedProducts');
                             ProgressBar.dismiss(context);
                             context.read<ProductBloc>().add(FetchProductList());
                           }

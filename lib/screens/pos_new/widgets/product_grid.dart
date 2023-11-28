@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/pos/billing_bloc.dart';
+import 'package:saasify/bloc/pos/billing_event.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import 'package:saasify/screens/pos_new/widgets/variant_dialogue.dart';
-import '../../../bloc/pos/billing_bloc.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
 
@@ -35,11 +36,27 @@ class ProductGrid extends StatelessWidget {
               padding: const EdgeInsets.all(spacingXSmall),
               child: InkWell(
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => VariantDialogue(
-                            productsByCategories: productsByCategories,
-                            productIndex: index));
+                    if (productsByCategories[context
+                                .read<BillingBloc>()
+                                .selectedCategoryIndex]
+                            .products[index]
+                            .variants
+                            .length >
+                        1) {
+                      showDialog(
+                          context: context,
+                          builder: (context) => VariantDialogue(
+                              productsByCategories: productsByCategories,
+                              productIndex: index));
+                    } else {
+                      context.read<BillingBloc>().add(SelectProduct(
+                          variantIndex: 0,
+                          productsByCategories: productsByCategories,
+                          product: productsByCategories[context
+                                  .read<BillingBloc>()
+                                  .selectedCategoryIndex]
+                              .products[index]));
+                    }
                   },
                   child: Container(
                       height: spacingXXXXHuge,
@@ -72,12 +89,7 @@ class ProductGrid extends StatelessWidget {
                                 maxLines: 2)),
                         const SizedBox(height: spacingXSmall),
                         Text(
-                            productsByCategories[context
-                                    .read<BillingBloc>()
-                                    .selectedCategoryIndex]
-                                .products[index]
-                                .brandName
-                                .toString(),
+                            '₹ ${productsByCategories[context.read<BillingBloc>().selectedCategoryIndex].products[index].variants[0].cost}',
                             style: Theme.of(context)
                                 .textTheme
                                 .xxTiniest
