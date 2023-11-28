@@ -8,7 +8,7 @@ import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/custom_alert_box.dart';
+import 'package:saasify/widgets/alert_dialogue_box.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 import 'widgets/dasboard_body.dart';
@@ -28,28 +28,26 @@ class DashboardsScreen extends StatelessWidget {
         key: _scaffoldKey,
         drawer: const SideBar(selectedIndex: 1),
         body: Flex(
-          direction:
-              context.responsive(Axis.vertical, desktop: Axis.horizontal),
-          children: [
-            context.responsive(
-                TopBar(
-                    scaffoldKey: _scaffoldKey,
-                    headingText: StringConstants.kDashboard),
-                desktop: const Expanded(
-                  child: SideBar(selectedIndex: 1),
-                )),
-            Expanded(
-                flex: 5,
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: spacingLarge, vertical: spacingXMedium),
-                    child: BlocConsumer<OrdersBloc, OrdersStates>(
-                      listener: (context, state) {
+            direction:
+                context.responsive(Axis.vertical, desktop: Axis.horizontal),
+            children: [
+              context.responsive(
+                  TopBar(
+                      scaffoldKey: _scaffoldKey,
+                      headingText: StringConstants.kDashboard),
+                  desktop: const Expanded(child: SideBar(selectedIndex: 1))),
+              Expanded(
+                  flex: 5,
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: spacingLarge, vertical: spacingXMedium),
+                      child: BlocConsumer<OrdersBloc, OrdersStates>(
+                          listener: (context, state) {
                         if (state is ErrorFetchingOrders) {
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
-                                return CustomAlertDialog(
+                                return AlertDialogueBox(
                                     title: StringConstants.kSomethingWentWrong,
                                     message: state.message,
                                     errorMarkVisible: true,
@@ -59,11 +57,9 @@ class DashboardsScreen extends StatelessWidget {
                                     });
                               });
                         }
-                      },
-                      buildWhen: (prev, curr) {
+                      }, buildWhen: (prev, curr) {
                         return curr is FetchedOrders || curr is FetchingOrders;
-                      },
-                      builder: (context, state) {
+                      }, builder: (context, state) {
                         if (state is FetchingOrders) {
                           return const Center(
                               child: CircularProgressIndicator());
@@ -71,20 +67,16 @@ class DashboardsScreen extends StatelessWidget {
                           return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: [
-                                    context.responsive(const SizedBox(),
-                                        desktop: Text(
-                                            StringConstants.kDashboard,
-                                            maxLines: 2,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .xxTiny
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w700))),
-                                  ],
-                                ),
+                                Row(children: [
+                                  context.responsive(const SizedBox(),
+                                      desktop: Text(StringConstants.kDashboard,
+                                          maxLines: 2,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .xxTiny
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w700)))
+                                ]),
                                 context.responsive(const SizedBox(),
                                     desktop:
                                         const SizedBox(height: spacingLarge)),
@@ -92,9 +84,8 @@ class DashboardsScreen extends StatelessWidget {
                                     ordersData: state.fetchOrdersList),
                                 const SizedBox(height: spacingLarge),
                                 Expanded(
-                                  child: DashboardBody(
-                                      ordersData: state.fetchOrdersList),
-                                ),
+                                    child: DashboardBody(
+                                        ordersData: state.fetchOrdersList))
                               ]);
                         } else if (state is ErrorFetchingOrders) {
                           return Center(
@@ -107,9 +98,7 @@ class DashboardsScreen extends StatelessWidget {
                         } else {
                           return const SizedBox.shrink();
                         }
-                      },
-                    )))
-          ],
-        ));
+                      })))
+            ]));
   }
 }

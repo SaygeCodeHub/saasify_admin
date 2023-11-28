@@ -10,12 +10,11 @@ import 'package:saasify/screens/inventory/widgets/inventory_list_data_table.dart
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/custom_alert_box.dart';
-import 'package:saasify/widgets/custom_text_field.dart';
+import 'package:saasify/widgets/alert_dialogue_box.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
 
-import '../../widgets/share_download_print_widget.dart';
+import '../../widgets/custom_page_header.dart';
 
 class InventoryListScreen extends StatelessWidget {
   static const String routeName = 'InventoryListScreen';
@@ -56,7 +55,7 @@ class InventoryListScreen extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
-                                return CustomAlertDialog(
+                                return AlertDialogueBox(
                                     title: 'Success',
                                     message: state.message,
                                     checkMarkVisible: true,
@@ -73,7 +72,7 @@ class InventoryListScreen extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
-                                return CustomAlertDialog(
+                                return AlertDialogueBox(
                                     title: StringConstants.kSomethingWentWrong,
                                     message: state.message,
                                     errorMarkVisible: true,
@@ -92,26 +91,9 @@ class InventoryListScreen extends StatelessWidget {
                               child: CircularProgressIndicator());
                         } else if (state is FetchedInventoryList) {
                           return Column(children: [
-                            Row(children: [
-                              context.responsive(const SizedBox(),
-                                  desktop: Text(
-                                      StringConstants.kInventoryManagement,
-                                      maxLines: 2,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiny
-                                          .copyWith(
-                                              fontWeight: FontWeight.w700))),
-                              context.responsive(const SizedBox(),
-                                  desktop: const Spacer()),
-                              Expanded(
-                                  flex: 5,
-                                  child: CustomTextField(
-                                      hintText: StringConstants.kSearchHere,
-                                      onTextFieldChanged: (value) {})),
-                              const Spacer(),
-                              const ShareDownloadPrintWidget()
-                            ]),
+                            const CustomPageHeader(
+                                titleText: StringConstants.kInventoryManagement,
+                                textFieldVisible: true),
                             const SizedBox(height: spacingStandard),
                             InventoryListDataTable(
                                 productList: state.productList),

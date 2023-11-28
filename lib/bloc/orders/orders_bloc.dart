@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/utils/dashboard_card.dart';
 import '../../data/customer_cache/customer_cache.dart';
 import '../../data/models/orders/fetch_orders_model.dart';
 import '../../di/app_module.dart';
@@ -27,6 +28,11 @@ class OrdersBloc extends Bloc<OrdersEvents, OrdersStates> {
 
     FetchOrdersModel fetchOrdersModel =
         await _ordersRepository.fetchOrdersList(userId, companyId, branchId);
+
+    dashboardCard[0].subtitle = fetchOrdersModel.data.totalOrders.toString();
+    dashboardCard[1].subtitle =
+        fetchOrdersModel.data.unpaidOrder.count.toString();
+    dashboardCard[2].subtitle = fetchOrdersModel.data.totalEarning.toString();
     if (fetchOrdersModel.status == 200) {
       emit(FetchedOrders(fetchOrdersList: fetchOrdersModel.data));
     } else {

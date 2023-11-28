@@ -127,11 +127,19 @@ class ProductsSection extends StatelessWidget {
               ? ProductGrid(productsByCategories: productsByCategories)
               : Expanded(
                   child: Center(
-                      child: Text(StringConstants.kNoDataAvailable,
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "assets/not_found_gif.gif",
+                      ),
+                      Text(StringConstants.kErrorMessage,
                           style: Theme.of(context)
                               .textTheme
                               .tinier
-                              .copyWith(color: AppColor.saasifyLightGrey))))
+                              .copyWith(color: AppColor.saasifyLightGrey)),
+                    ],
+                  ),
+                ))
         ]));
   }
 }

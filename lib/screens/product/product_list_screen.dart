@@ -18,7 +18,7 @@ import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/primary_button.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
-import '../../widgets/custom_alert_box.dart';
+import '../../widgets/alert_dialogue_box.dart';
 
 class ProductListScreen extends StatelessWidget {
   static const String routeName = 'ProductListScreen';
@@ -53,15 +53,18 @@ class ProductListScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingLarge),
                       child: BlocConsumer<ProductBloc, ProductStates>(
                         listener: (context, state) {
+                          if (state is GSTCalculation) {
+                            context.read<ProductBloc>().add(FetchProductList());
+                          }
+
                           if (state is DeletingProducts) {
-                            log('inside DeletingProducts');
                             ProgressBar.show(context);
                           }
                           if (state is DeletedProducts) {
                             ProgressBar.dismiss(context);
                             showDialog(
                                 context: context,
-                                builder: (ctx) => CustomAlertDialog(
+                                builder: (ctx) => AlertDialogueBox(
                                       title: StringConstants.kSuccess,
                                       message: state.message,
                                       primaryButtonTitle: StringConstants.kOk,
@@ -79,7 +82,7 @@ class ProductListScreen extends StatelessWidget {
                             ProgressBar.dismiss(context);
                             showDialog(
                                 context: context,
-                                builder: (ctx) => CustomAlertDialog(
+                                builder: (ctx) => AlertDialogueBox(
                                       title:
                                           StringConstants.kSomethingWentWrong,
                                       message: state.message,
@@ -101,7 +104,7 @@ class ProductListScreen extends StatelessWidget {
                             ProgressBar.dismiss(context);
                             showDialog(
                                 context: context,
-                                builder: (ctx) => CustomAlertDialog(
+                                builder: (ctx) => AlertDialogueBox(
                                       title:
                                           StringConstants.kSomethingWentWrong,
                                       message: state.message,
@@ -115,7 +118,7 @@ class ProductListScreen extends StatelessWidget {
                           if (state is ErrorFetchingProduct) {
                             showDialog(
                                 context: context,
-                                builder: (ctx) => CustomAlertDialog(
+                                builder: (ctx) => AlertDialogueBox(
                                       title:
                                           StringConstants.kSomethingWentWrong,
                                       message: state.message,
@@ -170,7 +173,7 @@ class ProductListScreen extends StatelessWidget {
                                               showDialog(
                                                   context: context,
                                                   builder: (context) =>
-                                                      CustomAlertDialog(
+                                                      AlertDialogueBox(
                                                         title: StringConstants
                                                             .kWarning,
                                                         message: StringConstants
@@ -210,7 +213,7 @@ class ProductListScreen extends StatelessWidget {
                                             showDialog(
                                                 context: context,
                                                 builder: (context) =>
-                                                    CustomAlertDialog(
+                                                    AlertDialogueBox(
                                                       title: StringConstants
                                                           .kAddNewProduct,
                                                       message: StringConstants

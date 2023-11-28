@@ -132,6 +132,8 @@ class StringConstants {
   static const kScanBarcode = 'SCAN BARCODE';
   static const kInformation = 'Information';
   static const kAddNewProduct = 'Add new product';
+  static const kErrorMessage =
+      "You don't have any active product added in POS Please add a Product to start the billing Section :)";
   static const kScanTheBarcode =
       'Scan the barcode to add the product or continue adding manually';
   static const kBusinessDomain = 'Business Domain';

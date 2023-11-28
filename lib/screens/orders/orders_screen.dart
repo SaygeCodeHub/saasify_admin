@@ -7,12 +7,11 @@ import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/custom_text_field.dart';
+import 'package:saasify/widgets/custom_page_header.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
 import '../../configs/app_color.dart';
-import '../../widgets/custom_alert_box.dart';
-import '../../widgets/share_download_print_widget.dart';
+import '../../widgets/alert_dialogue_box.dart';
 import 'orders_list_datatable.dart';
 
 class OrdersScreen extends StatelessWidget {
@@ -48,7 +47,7 @@ class OrdersScreen extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
-                                return CustomAlertDialog(
+                                return AlertDialogueBox(
                                     title: StringConstants.kSomethingWentWrong,
                                     message: state.message,
                                     errorMarkVisible: true,
@@ -66,24 +65,9 @@ class OrdersScreen extends StatelessWidget {
                               child: CircularProgressIndicator());
                         } else if (state is FetchedOrders) {
                           return Column(children: [
-                            Row(children: [
-                              context.responsive(const SizedBox(),
-                                  desktop: Text(StringConstants.kOrders,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiny
-                                          .copyWith(
-                                              fontWeight: FontWeight.w700))),
-                              context.responsive(const SizedBox(),
-                                  desktop: const Spacer()),
-                              Expanded(
-                                  flex: 5,
-                                  child: CustomTextField(
-                                      hintText: StringConstants.kSearchHere,
-                                      onTextFieldChanged: (value) {})),
-                              const Spacer(),
-                              const ShareDownloadPrintWidget()
-                            ]),
+                            const CustomPageHeader(
+                                titleText: StringConstants.kOrders,
+                                textFieldVisible: true),
                             const SizedBox(height: spacingStandard),
                             OrdersListDataTable(
                                 orderListDatum: state.fetchOrdersList),

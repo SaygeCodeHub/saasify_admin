@@ -76,3 +76,5 @@ class ErrorFetchingCategories extends ProductStates {
 
   ErrorFetchingCategories({required this.message});
 }
+
+class CalculateGST extends ProductStates {}
