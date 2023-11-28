@@ -155,38 +155,25 @@ class POSScreen extends StatelessWidget {
                                   : const SizedBox.shrink()
                             ]);
                       } else {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                                child: Image.asset(
-                              "assets/not_found_gif.gif",
-                              height: 50,
-                            )),
-                            Text(StringConstants.kErrorMessage,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .tinier
-                                    .copyWith(
-                                        color: AppColor.saasifyLightGrey)),
-                          ],
-                        );
+                        return Expanded(
+                            child: Center(
+                                child: Text(StringConstants.kNoDataAvailable,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .tinier
+                                        .copyWith(
+                                            color:
+                                                AppColor.saasifyLightGrey))));
                       }
                     } else if (state is ErrorFetchingProductsByCategory) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                              child: Image.asset(
-                            "assets/not_found_gif.gif",
-                          )),
-                          Text(StringConstants.kErrorMessage,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .tinier
-                                  .copyWith(color: AppColor.saasifyLightGrey)),
-                        ],
-                      );
+                      return Expanded(
+                          child: Center(
+                              child: Text(StringConstants.kNoDataAvailable,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .tinier
+                                      .copyWith(
+                                          color: AppColor.saasifyLightGrey))));
                     } else {
                       return const SizedBox.shrink();
                     }

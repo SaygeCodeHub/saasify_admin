@@ -118,6 +118,7 @@ class StringConstants {
   static const kSelectFile = 'Select a file';
   static const kAddStock = 'Add Stock';
   static const kAddNewCategory = 'Add New Category';
+  static const kEditCategory = 'Edit Category';
   static const kAddNewPaymentMethod = 'Add New Payment Method';
   static const kAddNewBranch = 'Add New Branch';
   static const kReduceStock = 'Reduce Stock';

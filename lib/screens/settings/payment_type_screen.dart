@@ -9,6 +9,7 @@ import '../../utils/constants/string_constants.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
+import '../dashboard/dashboard_screen.dart';
 
 class PaymentTypeScreen extends StatelessWidget {
   static const String routeName = 'PaymentTypeScreen';
@@ -61,6 +62,15 @@ class PaymentTypeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(children: [
+                            InkWell(
+                                onTap: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, DashboardsScreen.routeName);
+                                },
+                                child: context.responsive(const SizedBox(),
+                                    desktop:
+                                        const Icon(Icons.arrow_back_ios_new))),
+                            const SizedBox(width: spacingSmall),
                             context.responsive(const SizedBox(),
                                 desktop: Text(StringConstants.kPaymentType,
                                     style: Theme.of(context)

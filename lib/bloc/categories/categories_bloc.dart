@@ -14,8 +14,6 @@ class CategoriesBloc extends Bloc<CategoriesEvents, CategoriesStates> {
   final CategoriesRepository _categoriesRepository =
       getIt<CategoriesRepository>();
 
-  bool isActive = false;
-
   CategoriesStates get initialState => CategoriesInitial();
 
   CategoriesBloc() : super(CategoriesInitial()) {

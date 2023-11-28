@@ -45,8 +45,10 @@ class ProductsSection extends StatelessWidget {
                           child: DropdownButton(
                               isDense: true,
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 10),
-                              borderRadius: BorderRadius.circular(12),
+                                  horizontal: spacingStandard,
+                                  vertical: spacingSmall),
+                              borderRadius:
+                                  BorderRadius.circular(spacingXMedium),
                               icon: const Icon(Icons.keyboard_arrow_down),
                               value: categoryList[context
                                   .read<BillingBloc>()
@@ -126,20 +128,14 @@ class ProductsSection extends StatelessWidget {
                   .isNotEmpty)
               ? ProductGrid(productsByCategories: productsByCategories)
               : Expanded(
-                  child: Center(
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "assets/not_found_gif.gif",
-                      ),
-                      Text(StringConstants.kErrorMessage,
-                          style: Theme.of(context)
-                              .textTheme
-                              .tinier
-                              .copyWith(color: AppColor.saasifyLightGrey)),
-                    ],
-                  ),
-                ))
+                  child: Expanded(
+                      child: Center(
+                          child: Text(StringConstants.kNoDataAvailable,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .tinier
+                                  .copyWith(
+                                      color: AppColor.saasifyLightGrey)))))
         ]));
   }
 }
