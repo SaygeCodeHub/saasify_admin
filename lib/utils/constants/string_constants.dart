@@ -3,7 +3,7 @@ class StringConstants {
   static const kName = 'Name';
   static const kNameWithColon = 'Name :';
   static const kCategoryName = 'Category Name';
-  static const kDiscountCoupon = 'Discount Coupon';
+  static const kEnterCoupon = 'Enter Coupon';
   static const kEnterGSTAmount = 'Enter GST Amount (%)';
   static const kEnterDiscountPercent = 'Enter Discount Percent (%)';
   static const kMinimumPurchaseValue = 'Minimum Purchase value';
@@ -30,12 +30,12 @@ class StringConstants {
   static const kCompanies = 'Companies';
   static const kAddProduct = 'Add Product';
   static const kAddCategory = 'Add Category';
-  static const kAddDiscount = 'Add Discount';
+  static const kAddCoupon = 'Add Coupon';
   static const kAddProfile = 'Add Profile';
   static const kWantToDeactivateProduct = 'Want to deactivate product?';
   static const kDoYouWantToDeactivateGST = 'Do you Want to deactivate GST?';
-  static const kDoYouWantToDeactivateDiscount =
-      'Do you Want to deactivate Discount?';
+  static const kDoYouWantToDeactivateCoupon =
+      'Do you Want to deactivate Coupon?';
   static const kDoYouWantToDeactivateBranch =
       'Do you Want to deactivate Branch?';
   static const kWantToDisableGST = 'Want to disable GST?';
@@ -123,7 +123,7 @@ class StringConstants {
   static const kCurrency = 'Currency';
   static const kLocation = 'Location';
   static const kBranchName = 'Branch Name';
-  static const kDiscounts = 'Discounts';
+  static const kCoupons = 'Coupons';
   static const kSearchProduct = 'Search Product';
   static const kAddManually = 'ADD MANUALLY';
   static const kScanBarcode = 'SCAN BARCODE';

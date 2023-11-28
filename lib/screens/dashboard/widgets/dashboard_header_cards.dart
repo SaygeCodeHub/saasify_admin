@@ -55,8 +55,8 @@ class DashboardHeaderCards extends StatelessWidget {
       },
       {
         'leading': "assets/card_image_three.PNG",
-        'title': 'Discounts',
-        'subtitle': 'Manage Discounts'
+        'title': 'Coupons',
+        'subtitle': 'Manage Coupons'
       }
     ];
 
