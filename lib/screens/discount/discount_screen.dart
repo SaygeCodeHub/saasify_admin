@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/screens/discount/widgets/add_coupon_pop_up.dart';
 import 'package:saasify/screens/discount/widgets/employees_grid.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/secondary_button.dart';
-import '../../configs/app_color.dart';
-import '../../configs/app_dimensions.dart';
+
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
-import '../../widgets/custom_text_field.dart';
-import '../../widgets/primary_button.dart';
+
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 
@@ -52,164 +50,7 @@ class DiscountScreen extends StatelessWidget {
                           context.responsive(const SizedBox(),
                               desktop: const Spacer()),
                           const Spacer(),
-                          SizedBox(
-                              width: kGeneralActionButtonWidth,
-                              child: PrimaryButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                            content: SizedBox(
-                                                width: kDialogueWidth,
-                                                child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                              StringConstants
-                                                                  .kAddCoupon,
-                                                              style: Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .xTiniest
-                                                                  .copyWith(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700)),
-                                                          InkWell(
-                                                              onTap: () {
-                                                                Navigator.pop(
-                                                                    context);
-                                                              },
-                                                              child:
-                                                                  const Align(
-                                                                alignment:
-                                                                    Alignment
-                                                                        .topRight,
-                                                                child: Icon(
-                                                                    Icons.close,
-                                                                    color: AppColor
-                                                                        .saasifyGrey),
-                                                              )),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                          height:
-                                                              spacingMedium),
-                                                      Text(
-                                                          StringConstants
-                                                              .kEnterCoupon,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .xTiniest),
-                                                      const SizedBox(
-                                                          height:
-                                                              spacingXXSmall),
-                                                      CustomTextField(
-                                                          onTextFieldChanged:
-                                                              (value) {}),
-                                                      const SizedBox(
-                                                          height: spacingSmall),
-                                                      Text(
-                                                          StringConstants
-                                                              .kEnterDiscountPercent,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .xTiniest),
-                                                      const SizedBox(
-                                                          height:
-                                                              spacingXXSmall),
-                                                      CustomTextField(
-                                                          onTextFieldChanged:
-                                                              (value) {}),
-                                                      const SizedBox(
-                                                          height: spacingSmall),
-                                                      Text(
-                                                          StringConstants
-                                                              .kMinimumPurchaseValue,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .xTiniest),
-                                                      const SizedBox(
-                                                          height:
-                                                              spacingXXSmall),
-                                                      CustomTextField(
-                                                          onTextFieldChanged:
-                                                              (value) {}),
-                                                      const SizedBox(
-                                                          height: spacingSmall),
-                                                      Text(
-                                                          StringConstants
-                                                              .kMaximumPurchaseValue,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .xTiniest),
-                                                      const SizedBox(
-                                                          height:
-                                                              spacingXXSmall),
-                                                      CustomTextField(
-                                                          onTextFieldChanged:
-                                                              (value) {}),
-                                                      Row(children: [
-                                                        Text(
-                                                            StringConstants
-                                                                .kDoYouWantToDeactivateCoupon,
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .xTiniest),
-                                                        Switch(
-                                                            activeColor: AppColor
-                                                                .saasifyLightDeepBlue,
-                                                            value: true,
-                                                            onChanged: (value) {
-                                                              // Map
-                                                            })
-                                                      ]),
-                                                      const SizedBox(
-                                                          height:
-                                                              spacingXMedium),
-                                                      Row(children: [
-                                                        Expanded(
-                                                            child:
-                                                                SecondaryButton(
-                                                                    onPressed:
-                                                                        () {
-                                                                      Navigator.pop(
-                                                                          context);
-                                                                    },
-                                                                    buttonTitle:
-                                                                        StringConstants
-                                                                            .kCancel)),
-                                                        const SizedBox(
-                                                            width:
-                                                                spacingXXSmall),
-                                                        Expanded(
-                                                            child: PrimaryButton(
-                                                                onPressed:
-                                                                    () {},
-                                                                buttonTitle:
-                                                                    StringConstants
-                                                                        .kAdd))
-                                                      ])
-                                                    ]))));
-                                  },
-                                  buttonTitle: StringConstants.kAddCoupon))
+                          const AddCouponPopUp()
                         ]),
                         const SizedBox(height: spacingStandard),
                         const EmployeesGrid(),
