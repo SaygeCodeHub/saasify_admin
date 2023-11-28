@@ -90,46 +90,46 @@ class StoreGridScreen extends StatelessWidget {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text("Name",
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(StringConstants.kName,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .tiniest
+                                                            .copyWith(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: AppColor
+                                                                    .saasifyDarkGrey)),
+                                                    const SizedBox(
+                                                        height: spacingXSmall),
+                                                    Text(
+                                                      StringConstants.kCurrency,
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .tiniest
-                                                          .copyWith(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: AppColor
-                                                                  .saasifyDarkGrey)),
-                                                  const SizedBox(
-                                                      height: spacingXSmall),
-                                                  Text(
-                                                    'Currency',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .xxTiniest,
-                                                  ),
-                                                  const SizedBox(
-                                                      height: spacingXXSmall),
-                                                  Text(
-                                                    'Location',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .xxTiniest,
-                                                  ),
-                                                ],
-                                              ),
+                                                          .xxTiniest,
+                                                    ),
+                                                    const SizedBox(
+                                                        height: spacingXXSmall),
+                                                    Text(
+                                                        StringConstants
+                                                            .kLocation,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .xxTiniest)
+                                                  ]),
                                               Row(children: [
                                                 Switch(
                                                     activeColor: AppColor
                                                         .saasifyLightDeepBlue,
                                                     value: true,
                                                     onChanged: (value) {}),
-                                                const SizedBox(width: 6),
+                                                const SizedBox(
+                                                    width: spacingXSmall),
                                                 const ThreeDotsPopup()
                                               ]),
                                             ])));
@@ -138,8 +138,8 @@ class StoreGridScreen extends StatelessWidget {
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 3,
                                       childAspectRatio: 4,
-                                      crossAxisSpacing: 20,
-                                      mainAxisSpacing: 20))
+                                      crossAxisSpacing: spacingLarge,
+                                      mainAxisSpacing: spacingLarge))
                         ],
                       )))
             ]));

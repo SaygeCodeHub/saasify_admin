@@ -57,12 +57,7 @@ class AddProfilePopup extends StatelessWidget {
                       Switch(
                           activeColor: AppColor.saasifyLightDeepBlue,
                           value: true,
-                          onChanged: (value) {
-                            // Map productDetails = productList[index].toJson();
-                            // productDetails['variant_active'] = value;
-                            // context.read<ProductBloc>().add(
-                            //     EditProduct(productDetailsMap: productDetails));
-                          })
+                          onChanged: (value) {})
                     ],
                   ),
                   const SizedBox(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
-
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
@@ -57,25 +56,21 @@ class AddNewPaymentTypePopup extends StatelessWidget {
                   const SizedBox(
                     height: spacingXMedium,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
+                  Row(children: [
+                    Expanded(
                         child: SecondaryButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            buttonTitle: StringConstants.kCancel),
-                      ),
-                      const SizedBox(
-                        width: spacingXXSmall,
-                      ),
-                      Expanded(
+                            buttonTitle: StringConstants.kCancel)),
+                    const SizedBox(
+                      width: spacingXXSmall,
+                    ),
+                    Expanded(
                         child: PrimaryButton(
                             onPressed: () {},
-                            buttonTitle: StringConstants.kAdd),
-                      )
-                    ],
-                  )
+                            buttonTitle: StringConstants.kAdd))
+                  ])
                 ])));
   }
 }

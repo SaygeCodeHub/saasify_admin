@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/categories/categories_bloc.dart';
 import 'package:saasify/bloc/categories/categories_event.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/screens/settings/widgets/profile_right_side_column.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
-import '../../widgets/custom_text_field.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
@@ -83,8 +83,8 @@ class ProfileScreen extends StatelessWidget {
                                     .copyWith(fontWeight: FontWeight.w700)),
                             const SizedBox(height: spacingXMedium),
                             Container(
-                              height: 120,
-                              width: 150,
+                              height: kDashContainerHeight,
+                              width: kImageContainerWidth,
                               decoration: BoxDecoration(
                                   color: AppColor.saasifyLighterGrey,
                                   borderRadius:
@@ -100,126 +100,29 @@ class ProfileScreen extends StatelessWidget {
                                       children: [
                                         const SizedBox(height: spacingSmall),
                                         Image.asset('assets/upload.png',
-                                            height: 25,
-                                            width: 25,
+                                            height: spacingXLarge,
+                                            width: spacingXLarge,
                                             color: AppColor.saasifyPaleBlack),
                                         const SizedBox(height: spacingSmall),
-                                        Text("Select a file",
+                                        Text(StringConstants.kSelectFile,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .xxTiniest),
                                       ])),
                             ),
                             const SizedBox(height: spacingStandard),
-                            Padding(
-                                padding: const EdgeInsets.only(right: 30),
-                                child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                            Text(StringConstants.kBrandName,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .xxTiniest
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w700)),
-                                            const SizedBox(
-                                                height: spacingSmall),
-                                            CustomTextField(
-                                                onTextFieldChanged: (value) {}),
-                                            const SizedBox(
-                                                height: spacingStandard),
-                                            Text(StringConstants.kFirstName,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .xxTiniest
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w700)),
-                                            const SizedBox(
-                                                height: spacingSmall),
-                                            CustomTextField(
-                                                onTextFieldChanged: (value) {}),
-                                            const SizedBox(
-                                                height: spacingStandard),
-                                            Text(StringConstants.kAddress,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .xxTiniest
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w700)),
-                                            const SizedBox(
-                                                height: spacingSmall),
-                                            CustomTextField(
-                                                onTextFieldChanged: (value) {}),
-                                            const SizedBox(
-                                                height: spacingStandard),
-                                          ])),
-                                      const SizedBox(width: spacingExcel),
-                                      Expanded(
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                            Text(StringConstants.kEmailAddress,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .xxTiniest
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w700)),
-                                            const SizedBox(
-                                                height: spacingSmall),
-                                            CustomTextField(
-                                                onTextFieldChanged: (value) {}),
-                                            const SizedBox(
-                                                height: spacingStandard),
-                                            Text(StringConstants.kLastName,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .xxTiniest
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w700)),
-                                            const SizedBox(
-                                                height: spacingSmall),
-                                            CustomTextField(
-                                                onTextFieldChanged: (value) {}),
-                                            const SizedBox(
-                                                height: spacingStandard),
-                                            Text(StringConstants.kMobileNo,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .xxTiniest
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w700)),
-                                            const SizedBox(
-                                                height: spacingSmall),
-                                            CustomTextField(
-                                                onTextFieldChanged: (value) {}),
-                                            const SizedBox(
-                                                height: spacingStandard),
-                                          ]))
-                                    ])),
+                            const Padding(
+                                padding: EdgeInsets.only(right: spacingXXLarge),
+                                child: ProfileScreenForm()),
                             Align(
                                 alignment: Alignment.centerRight,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(right: 30),
+                                  padding: const EdgeInsets.only(
+                                      right: spacingXXLarge),
                                   child: PrimaryButton(
                                     onPressed: () {},
-                                    buttonTitle: "Update",
-                                    buttonWidth: 200,
+                                    buttonTitle: StringConstants.kUpdate,
+                                    buttonWidth: spacingXXXXHuge,
                                   ),
                                 ))
                           ])))

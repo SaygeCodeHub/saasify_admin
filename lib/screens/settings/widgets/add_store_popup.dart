@@ -76,12 +76,7 @@ class AddStorePopup extends StatelessWidget {
                       Switch(
                           activeColor: AppColor.saasifyLightDeepBlue,
                           value: true,
-                          onChanged: (value) {
-                            // Map productDetails = productList[index].toJson();
-                            // productDetails['variant_active'] = value;
-                            // context.read<ProductBloc>().add(
-                            //     EditProduct(productDetailsMap: productDetails));
-                          })
+                          onChanged: (value) {})
                     ],
                   ),
                   const SizedBox(
@@ -100,10 +95,9 @@ class AddStorePopup extends StatelessWidget {
                         width: spacingXXSmall,
                       ),
                       Expanded(
-                        child: PrimaryButton(
-                            onPressed: () {},
-                            buttonTitle: StringConstants.kAdd),
-                      )
+                          child: PrimaryButton(
+                              onPressed: () {},
+                              buttonTitle: StringConstants.kAdd))
                     ],
                   )
                 ])));

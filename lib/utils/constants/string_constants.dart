@@ -1,6 +1,8 @@
 class StringConstants {
   static const kHello = 'Hello :)';
   static const kName = 'Name';
+  static const kCurrency = 'Currency';
+  static const kLocation = 'Location';
   static const kNameWithColon = 'Name :';
   static const kCategoryName = 'Category Name';
   static const kEnterCoupon = 'Enter Coupon';
@@ -18,6 +20,7 @@ class StringConstants {
   static const kWelcome = 'Welcome :)';
   static const kEnterOtp = 'Enter Otp :)';
   static const kOrderNo = 'Order No';
+  static const kPaymentTypeEnabled = 'Payment Type Enabled';
   static const kOrderedDate = 'Ordered Date';
   static const kUnitPrice = 'Unit Price';
   static const kPaymentStatus = 'Payment Status';
@@ -111,6 +114,8 @@ class StringConstants {
   static const kChooseVariant = 'Choose Variant';
   static const kDashboard = 'Dashboard';
   static const kUpdateStock = 'Update Stock';
+  static const kUpdate = 'Update';
+  static const kSelectFile = 'Select a file';
   static const kAddStock = 'Add Stock';
   static const kAddNewCategory = 'Add New Category';
   static const kAddNewPaymentMethod = 'Add New Payment Method';
@@ -120,8 +125,6 @@ class StringConstants {
   static const kCategories = 'Categories';
   static const kProfile = 'Profile';
   static const kStore = 'Store';
-  static const kCurrency = 'Currency';
-  static const kLocation = 'Location';
   static const kBranchName = 'Branch Name';
   static const kCoupons = 'Coupons';
   static const kSearchProduct = 'Search Product';
