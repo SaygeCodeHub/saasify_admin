@@ -71,7 +71,7 @@ class AddStorePopup extends StatelessWidget {
                   ]),
                   Row(
                     children: [
-                      Text(StringConstants.kDoYouWantToDeactivateStore,
+                      Text(StringConstants.kDoYouWantToDeactivateBranch,
                           style: Theme.of(context).textTheme.xTiniest),
                       Switch(
                           activeColor: AppColor.saasifyLightDeepBlue,

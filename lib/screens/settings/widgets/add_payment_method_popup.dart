@@ -46,7 +46,7 @@ class AddNewPaymentTypePopup extends StatelessWidget {
                   const SizedBox(height: spacingSmall),
                   Row(
                     children: [
-                      Text(StringConstants.kDoYouWantToDeactivateStore,
+                      Text(StringConstants.kDoYouWantToDeactivateBranch,
                           style: Theme.of(context).textTheme.xTiniest),
                       Switch(
                           activeColor: AppColor.saasifyLightDeepBlue,

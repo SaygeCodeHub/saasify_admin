@@ -36,7 +36,8 @@ class StringConstants {
   static const kDoYouWantToDeactivateGST = 'Do you Want to deactivate GST?';
   static const kDoYouWantToDeactivateDiscount =
       'Do you Want to deactivate Discount?';
-  static const kDoYouWantToDeactivateStore = 'Do you Want to deactivate Store?';
+  static const kDoYouWantToDeactivateBranch =
+      'Do you Want to deactivate Branch?';
   static const kWantToDisableGST = 'Want to disable GST?';
   static const kAddVariantButton = 'ADD VARIANT';
   static const kAddVariant = 'Add Variant';
