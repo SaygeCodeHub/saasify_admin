@@ -5,8 +5,8 @@ import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import '../../settings/three_dots_popup.dart';
 
-class EmployeesGrid extends StatelessWidget {
-  const EmployeesGrid({super.key});
+class CouponsGrid extends StatelessWidget {
+  const CouponsGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
