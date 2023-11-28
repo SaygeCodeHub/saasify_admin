@@ -58,26 +58,22 @@ class CustomPageHeader extends StatelessWidget {
         visible: buttonVisible,
         child: PrimaryButton(onPressed: onPressed, buttonTitle: buttonTitle),
       ),
-      Row(
-        children: [
-          const Spacer(),
-          IconButton(
-              icon: const Icon(Icons.share,
-                  color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
-              onPressed: () {}),
-          const SizedBox(width: spacingLarge),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.download,
-                color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
-          ),
-          const SizedBox(width: spacingLarge),
-          IconButton(
-              icon: const Icon(Icons.print,
-                  color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
-              onPressed: () {})
-        ],
-      )
+      const Spacer(),
+      IconButton(
+          icon: const Icon(Icons.share,
+              color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
+          onPressed: () {}),
+      const SizedBox(width: spacingLarge),
+      IconButton(
+        onPressed: () {},
+        icon: const Icon(Icons.download,
+            color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
+      ),
+      const SizedBox(width: spacingLarge),
+      IconButton(
+          icon: const Icon(Icons.print,
+              color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
+          onPressed: () {})
     ]);
   }
 }

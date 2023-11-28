@@ -64,29 +64,36 @@ class OrdersScreen extends StatelessWidget {
                           return const Center(
                               child: CircularProgressIndicator());
                         } else if (state is FetchedOrders) {
-                          return Column(children: [
-                            const CustomPageHeader(
-                                titleText: StringConstants.kOrders,
-                                textFieldVisible: true),
-                            const SizedBox(height: spacingStandard),
-                            OrdersListDataTable(
-                                orderListDatum: state.fetchOrdersList),
-                            Visibility(
-                                visible: state.fetchOrdersList.orders.isEmpty,
-                                child: Center(
-                                    child: Text(
-                                        StringConstants.kNoDataAvailable,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .tinier
-                                            .copyWith(
-                                                fontWeight: FontWeight.w500,
-                                                color: AppColor
-                                                    .saasifyLightGrey)))),
-                            Visibility(
-                                visible: state.fetchOrdersList.orders.isEmpty,
-                                child: const Spacer())
-                          ]);
+                          return Expanded(
+                            child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const CustomPageHeader(
+                                      titleText: StringConstants.kOrders,
+                                      textFieldVisible: true),
+                                  const SizedBox(height: spacingStandard),
+                                  OrdersListDataTable(
+                                      orderListDatum: state.fetchOrdersList),
+                                  Visibility(
+                                      visible:
+                                          state.fetchOrdersList.orders.isEmpty,
+                                      child: Center(
+                                          child: Text(
+                                              StringConstants.kNoDataAvailable,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .tinier
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: AppColor
+                                                          .saasifyLightGrey)))),
+                                  Visibility(
+                                      visible:
+                                          state.fetchOrdersList.orders.isEmpty,
+                                      child: const Spacer())
+                                ]),
+                          );
                         } else if (state is ErrorFetchingOrders) {
                           return Center(
                               child: Text(StringConstants.kNoDataAvailable,
