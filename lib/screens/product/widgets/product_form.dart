@@ -99,7 +99,7 @@ class ProductForm extends StatelessWidget {
               ],
             ),
             Visibility(
-              visible: isEdit,
+              visible: isEdit || isProductDetail,
               child: SizedBox(
                 width: kGeneralActionButtonWidth,
                 child: PrimaryButton(
@@ -119,7 +119,9 @@ class ProductForm extends StatelessWidget {
                               },
                               isProductDetail: false));
                     },
-                    buttonTitle: 'Add Variant'),
+                    buttonTitle: (isProductDetail == true)
+                        ? 'Edit Product Details'
+                        : 'Add Variant'),
               ),
             )
           ],
