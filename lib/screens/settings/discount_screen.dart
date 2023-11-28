@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/discount/widgets/add_coupon_pop_up.dart';
-import 'package:saasify/screens/discount/widgets/coupons_grid.dart';
+import 'package:saasify/screens/settings/widgets/add_coupon_pop_up.dart';
+import 'package:saasify/screens/settings/widgets/coupons_grid.dart';
 import 'package:saasify/utils/responsive.dart';
-
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
-
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
+import '../dashboard/dashboard_screen.dart';
 
 class DiscountScreen extends StatelessWidget {
   static const String routeName = 'DiscountScreen';
@@ -41,6 +40,15 @@ class DiscountScreen extends StatelessWidget {
                           bottom: spacingXHuge),
                       child: Column(children: [
                         Row(children: [
+                          InkWell(
+                              onTap: () {
+                                Navigator.pushReplacementNamed(
+                                    context, DashboardsScreen.routeName);
+                              },
+                              child: context.responsive(const SizedBox(),
+                                  desktop:
+                                      const Icon(Icons.arrow_back_ios_new))),
+                          const SizedBox(width: spacingSmall),
                           context.responsive(const SizedBox(),
                               desktop: Text(StringConstants.kCoupons,
                                   style: Theme.of(context)

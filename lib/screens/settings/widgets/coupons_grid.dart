@@ -3,7 +3,7 @@ import 'package:saasify/configs/app_theme.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
-import '../../settings/three_dots_popup.dart';
+import '../three_dots_popup.dart';
 
 class CouponsGrid extends StatelessWidget {
   const CouponsGrid({super.key});
