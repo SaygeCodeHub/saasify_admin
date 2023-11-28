@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/discount/widgets/add_coupon_pop_up.dart';
-import 'package:saasify/screens/discount/widgets/employees_grid.dart';
+import 'package:saasify/screens/discount/widgets/coupons_grid.dart';
 import 'package:saasify/utils/responsive.dart';
 
 import '../../configs/app_spacing.dart';
@@ -53,7 +53,7 @@ class DiscountScreen extends StatelessWidget {
                           const AddCouponPopUp()
                         ]),
                         const SizedBox(height: spacingStandard),
-                        const EmployeesGrid(),
+                        const CouponsGrid(),
                       ])))
             ]));
   }
