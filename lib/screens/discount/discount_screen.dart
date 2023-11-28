@@ -31,7 +31,7 @@ class DiscountScreen extends StatelessWidget {
               context.responsive(
                   TopBar(
                       scaffoldKey: _scaffoldKey,
-                      headingText: StringConstants.kDiscounts),
+                      headingText: StringConstants.kCoupons),
                   desktop: const Expanded(child: SideBar(selectedIndex: 1))),
               Expanded(
                   flex: 5,
@@ -44,7 +44,7 @@ class DiscountScreen extends StatelessWidget {
                       child: Column(children: [
                         Row(children: [
                           context.responsive(const SizedBox(),
-                              desktop: Text(StringConstants.kDiscounts,
+                              desktop: Text(StringConstants.kCoupons,
                                   style: Theme.of(context)
                                       .textTheme
                                       .xxTiny
@@ -78,7 +78,7 @@ class DiscountScreen extends StatelessWidget {
                                                         children: [
                                                           Text(
                                                               StringConstants
-                                                                  .kAddDiscount,
+                                                                  .kAddCoupon,
                                                               style: Theme.of(
                                                                       context)
                                                                   .textTheme
@@ -109,7 +109,7 @@ class DiscountScreen extends StatelessWidget {
                                                               spacingMedium),
                                                       Text(
                                                           StringConstants
-                                                              .kDiscountCoupon,
+                                                              .kEnterCoupon,
                                                           style:
                                                               Theme.of(context)
                                                                   .textTheme
@@ -168,7 +168,7 @@ class DiscountScreen extends StatelessWidget {
                                                       Row(children: [
                                                         Text(
                                                             StringConstants
-                                                                .kDoYouWantToDeactivateDiscount,
+                                                                .kDoYouWantToDeactivateCoupon,
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
@@ -209,7 +209,7 @@ class DiscountScreen extends StatelessWidget {
                                                       ])
                                                     ]))));
                                   },
-                                  buttonTitle: StringConstants.kAddDiscount))
+                                  buttonTitle: StringConstants.kAddCoupon))
                         ]),
                         const SizedBox(height: spacingStandard),
                         const EmployeesGrid(),
