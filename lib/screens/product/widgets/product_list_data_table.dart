@@ -118,7 +118,8 @@ class ProductListDataTable extends StatelessWidget {
                       isProductDetail: true));
             }),
             DataCell(
-                Text(productList[index].cost.toString(),
+                Text(
+                    '${productList[index].currency} ${productList[index].cost}',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.xxTiniest), onTap: () {
               Navigator.pushReplacementNamed(

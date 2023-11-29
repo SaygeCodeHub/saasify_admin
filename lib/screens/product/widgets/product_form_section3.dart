@@ -82,7 +82,7 @@ class ProductFormSection3 extends StatelessWidget {
                       border: Border.all(color: AppColor.saasifyPaleGrey)),
                   child: Padding(
                       padding: const EdgeInsets.all(spacingSmall),
-                      child: Text(dataMap['cost'].toString())))
+                      child: Text('${dataMap['currency']} ${dataMap['cost']}')))
               : CustomTextField(
                   validator: (value) {
                     if ((value == null || value.trim() == '') &&

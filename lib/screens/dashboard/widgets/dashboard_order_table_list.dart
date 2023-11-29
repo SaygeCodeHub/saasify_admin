@@ -69,7 +69,7 @@ class DashboardOrderTableList extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
                     DataCell(Text(
-                        ordersData.orders[index].totalAmount.toString(),
+                        '${ordersData.orders[index].currency} ${ordersData.orders[index].totalAmount.toString()}',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.xxTiniest)),
                     DataCell(Container(
