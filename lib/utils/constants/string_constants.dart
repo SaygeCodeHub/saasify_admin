@@ -68,6 +68,7 @@ class StringConstants {
   static const kPayLater = 'Pay Later';
   static const kPay = 'Pay';
   static const kDiscountCent = 'Discount(%)';
+  static const kAdditionalDiscount = 'Additional Discount';
   static const kDiscount = 'Discount';
   static const kEdit = 'Edit';
   static const kEditCategoryName = 'Edit Category Name';

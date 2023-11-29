@@ -54,15 +54,18 @@ class RemoveAllProduct extends BillingEvents {
 class CalculateBill extends BillingEvents {
   final List<SelectedProductModel> selectedProducts;
   final List<CategoryWithProductsDatum> productsByCategories;
-  final double discount;
 
   CalculateBill(
-      {required this.discount,
-      required this.selectedProducts,
-      required this.productsByCategories});
+      {required this.selectedProducts, required this.productsByCategories});
 }
 
 class AddOrderToPayLater extends BillingEvents {}
+
+class AddDiscount extends BillingEvents {
+  final List<CategoryWithProductsDatum> productsByCategories;
+
+  AddDiscount({required this.productsByCategories});
+}
 
 class RemovePendingOrder extends BillingEvents {
   final String orderID;

@@ -3,15 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/bloc/product/product_event.dart';
+import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_dropdown.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
-
 import '../../../configs/app_color.dart';
-import '../../../configs/app_dimensions.dart';
 
 class ProductFormSection2 extends StatelessWidget {
   const ProductFormSection2({
@@ -183,27 +182,31 @@ class ProductFormSection2 extends StatelessWidget {
                   border: Border.all(color: AppColor.saasifyPaleGrey)),
               child: Padding(
                 padding: const EdgeInsets.all(spacingSmall),
-                child: Text(dataMap['GST'] ?? '0'.toString()),
+                child: Text(dataMap['GST'] ?? '0'),
               ))
           : CustomDropdownWidget(
               onChanges: () {
+                dataMap['CGST'] = int.parse(dataMap['GST']) / 2;
+                dataMap['SGST'] = int.parse(dataMap['GST']) / 2;
                 context
                     .read<ProductBloc>()
                     .add(LoadForm(categoryList: categoryList));
               },
-              initialValue: dataMap['GST'] ?? '0',
+              initialValue: (dataMap['CGST'] != null)
+                  ? (dataMap['CGST'] + dataMap['SGST']).toInt().toString()
+                  : '0',
               listItems: const ['0', '5', '12', '18', '28'],
               dataMap: dataMap,
               mapKey: 'GST'),
       const SizedBox(height: spacingXXSmall),
       (isProductDetail == true)
           ? Text(
-              'CGST : ${(dataMap['GST'] != null) ? int.parse(dataMap['GST']) / 2 : ''} % and SGST : ${(dataMap['GST'] != null) ? int.parse(dataMap['GST']) / 2 : ''} %',
+              'CGST : ${(dataMap['CGST'] != null) ? dataMap['CGST'] : '0'} % and SGST : ${(dataMap['GST'] != null) ? dataMap['SGST'] : '0'} %',
               style: Theme.of(context).textTheme.xxxTiniest)
           : Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Text(
-                  'CGST : ${(dataMap['GST'] != null) ? int.parse(dataMap['GST']) / 2 : ''} % and SGST : ${(dataMap['GST'] != null) ? int.parse(dataMap['GST']) / 2 : ''} %',
+                  'CGST : ${(dataMap['CGST'] != null) ? dataMap['CGST'] : '0'} % and SGST : ${(dataMap['GST'] != null) ? dataMap['SGST'] : '0'} %',
                   style: Theme.of(context).textTheme.xxxTiniest),
             ),
     ]));

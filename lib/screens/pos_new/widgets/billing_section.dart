@@ -24,7 +24,8 @@ class BillingSection extends StatelessWidget {
           BillingProductsList(productsByCategories: productsByCategories),
           const SizedBox(height: spacingSmall),
           BillDetails(
-              billDetails: context.read<BillingBloc>().customer.billDetails),
+              billDetails: context.read<BillingBloc>().customer.billDetails,
+              productsByCategories: productsByCategories),
           const SizedBox(height: spacingMedium),
           const BillingSectionFooter()
         ]));

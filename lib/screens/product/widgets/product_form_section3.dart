@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/bloc/product/product_event.dart';
+import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
@@ -11,7 +12,6 @@ import 'package:saasify/widgets/custom_text_field.dart';
 import 'package:saasify/widgets/toggle_switch.dart';
 
 import '../../../configs/app_color.dart';
-import '../../../configs/app_dimensions.dart';
 
 class ProductFormSection3 extends StatelessWidget {
   const ProductFormSection3({
