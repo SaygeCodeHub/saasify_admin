@@ -134,7 +134,7 @@ class VariantDialogue extends StatelessWidget {
                                               ])),
                                           const SizedBox(height: spacingXSmall),
                                           Text(
-                                              '₹ ${productsByCategories[context.read<BillingBloc>().selectedCategoryIndex].products[productIndex].variants[index].cost.toString()}',
+                                              '${productsByCategories[context.read<BillingBloc>().selectedCategoryIndex].products[productIndex].variants[index].currency} ${productsByCategories[context.read<BillingBloc>().selectedCategoryIndex].products[productIndex].variants[index].cost.toString()}',
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.center,

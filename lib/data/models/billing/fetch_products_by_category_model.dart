@@ -134,8 +134,11 @@ class Variant {
   final int restockReminder;
   @HiveField(10)
   final bool draft;
+  @HiveField(11)
+  final String currency;
 
   Variant({
+    required this.currency,
     required this.variantId,
     required this.cost,
     required this.quantity,
@@ -161,6 +164,7 @@ class Variant {
         barcode: json["barcode"],
         restockReminder: json["restock_reminder"],
         draft: json["draft"],
+        currency: json["currency"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -175,5 +179,6 @@ class Variant {
         "barcode": barcode,
         "restock_reminder": restockReminder,
         "draft": draft,
+        "currency": currency
       };
 }

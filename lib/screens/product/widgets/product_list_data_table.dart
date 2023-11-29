@@ -11,7 +11,7 @@ import 'package:saasify/screens/product/add_product_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_table.dart';
-import 'package:saasify/widgets/toggle_switch.dart';
+import 'package:saasify/widgets/toggle_switch_widget.dart';
 
 class ProductListDataTable extends StatelessWidget {
   final List<ProductWithVariant> productList;

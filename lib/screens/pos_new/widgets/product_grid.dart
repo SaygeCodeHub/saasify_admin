@@ -89,7 +89,7 @@ class ProductGrid extends StatelessWidget {
                                 maxLines: 2)),
                         const SizedBox(height: spacingXSmall),
                         Text(
-                            '₹ ${productsByCategories[context.read<BillingBloc>().selectedCategoryIndex].products[index].variants[0].cost}',
+                            '${productsByCategories[context.read<BillingBloc>().selectedCategoryIndex].products[index].variants[0].currency} ${productsByCategories[context.read<BillingBloc>().selectedCategoryIndex].products[index].variants[0].cost}',
                             style: Theme.of(context)
                                 .textTheme
                                 .xxTiniest

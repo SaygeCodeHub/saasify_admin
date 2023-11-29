@@ -16,13 +16,15 @@ import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 
 class BillDetails extends StatelessWidget {
+  final String currency;
   final BillModel billDetails;
   final List<CategoryWithProductsDatum> productsByCategories;
 
   const BillDetails(
       {super.key,
       required this.billDetails,
-      required this.productsByCategories});
+      required this.productsByCategories,
+      required this.currency});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class BillDetails extends StatelessWidget {
                   const SizedBox(
                     height: spacingStandard,
                   ),
-                  Text('₹ ${billDetails.itemTotal.toStringAsFixed(2)}',
+                  Text('$currency ${billDetails.itemTotal.toStringAsFixed(2)}',
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
@@ -65,7 +67,7 @@ class BillDetails extends StatelessWidget {
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AppColor.saasifyDarkestBlack)),
-                  Text('₹ ${billDetails.discount.toStringAsFixed(2)}',
+                  Text('$currency ${billDetails.discount.toStringAsFixed(2)}',
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
@@ -84,7 +86,7 @@ class BillDetails extends StatelessWidget {
                           style: Theme.of(context).textTheme.xTiniest.copyWith(
                               fontWeight: FontWeight.w600,
                               color: AppColor.saasifyDarkestBlack)),
-                      SizedBox(width: spacingSmall),
+                      const SizedBox(width: spacingSmall),
                       IconButton(
                           style: IconButton.styleFrom(padding: EdgeInsets.zero),
                           onPressed: () {
@@ -160,11 +162,11 @@ class BillDetails extends StatelessWidget {
                                               ])));
                                 });
                           },
-                          icon: Icon(Icons.edit_outlined, size: 14))
+                          icon: const Icon(Icons.edit_outlined, size: 14))
                     ],
                   ),
                   Text(
-                      '₹ ${(context.read<BillingBloc>().customer.billDetails.total * (context.read<BillingBloc>().customer.billDetails.additionalDiscount / 100)).toStringAsFixed(2)}',
+                      '$currency ${(context.read<BillingBloc>().customer.billDetails.total * (context.read<BillingBloc>().customer.billDetails.additionalDiscount / 100)).toStringAsFixed(2)}',
                       style: Theme.of(context)
                           .textTheme
                           .xTiniest
@@ -186,7 +188,7 @@ class BillDetails extends StatelessWidget {
                     style: Theme.of(context).textTheme.xTiniest.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColor.saasifyDarkestBlack)),
-                Text('₹ ${billDetails.total.toStringAsFixed(2)}',
+                Text('$currency ${billDetails.total.toStringAsFixed(2)}',
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest

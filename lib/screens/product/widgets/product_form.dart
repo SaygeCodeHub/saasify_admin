@@ -21,7 +21,7 @@ import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/alert_dialogue_box.dart';
 import 'package:saasify/widgets/primary_button.dart';
 import 'package:saasify/widgets/secondary_button.dart';
-import 'package:saasify/widgets/toggle_switch.dart';
+import 'package:saasify/widgets/toggle_switch_widget.dart';
 
 class ProductForm extends StatelessWidget {
   const ProductForm(

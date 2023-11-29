@@ -182,7 +182,8 @@ class ProductFormSection2 extends StatelessWidget {
                   border: Border.all(color: AppColor.saasifyPaleGrey)),
               child: Padding(
                 padding: const EdgeInsets.all(spacingSmall),
-                child: Text(dataMap['GST'] ?? '0'),
+                child: Text(
+                    '${(dataMap['CGST'] + dataMap['SGST']).toInt().toString()} %'),
               ))
           : CustomDropdownWidget(
               onChanges: () {
@@ -201,12 +202,12 @@ class ProductFormSection2 extends StatelessWidget {
       const SizedBox(height: spacingXXSmall),
       (isProductDetail == true)
           ? Text(
-              'CGST : ${(dataMap['CGST'] != null) ? dataMap['CGST'] : '0'} % and SGST : ${(dataMap['GST'] != null) ? dataMap['SGST'] : '0'} %',
+              'CGST : ${(dataMap['CGST'] != null) ? dataMap['CGST'] : '0'} % and SGST : ${(dataMap['SGST'] != null) ? dataMap['SGST'] : '0'} %',
               style: Theme.of(context).textTheme.xxxTiniest)
           : Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Text(
-                  'CGST : ${(dataMap['CGST'] != null) ? dataMap['CGST'] : '0'} % and SGST : ${(dataMap['GST'] != null) ? dataMap['SGST'] : '0'} %',
+                  'CGST : ${(dataMap['CGST'] != null) ? dataMap['CGST'] : '0'} % and SGST : ${(dataMap['SGST'] != null) ? dataMap['SGST'] : '0'} %',
                   style: Theme.of(context).textTheme.xxxTiniest),
             ),
     ]));

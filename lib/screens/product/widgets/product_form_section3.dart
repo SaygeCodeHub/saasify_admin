@@ -9,7 +9,7 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
-import 'package:saasify/widgets/toggle_switch.dart';
+import 'package:saasify/widgets/toggle_switch_widget.dart';
 
 import '../../../configs/app_color.dart';
 

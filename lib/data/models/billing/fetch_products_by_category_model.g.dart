@@ -107,6 +107,7 @@ class VariantAdapter extends TypeAdapter<Variant> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Variant(
+      currency: fields[11] as String,
       variantId: fields[0] as int,
       cost: fields[1] as int,
       quantity: fields[2] as int,
@@ -124,7 +125,7 @@ class VariantAdapter extends TypeAdapter<Variant> {
   @override
   void write(BinaryWriter writer, Variant obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.variantId)
       ..writeByte(1)
@@ -146,7 +147,9 @@ class VariantAdapter extends TypeAdapter<Variant> {
       ..writeByte(9)
       ..write(obj.restockReminder)
       ..writeByte(10)
-      ..write(obj.draft);
+      ..write(obj.draft)
+      ..writeByte(11)
+      ..write(obj.currency);
   }
 
   @override
