@@ -19,7 +19,7 @@ import '../../widgets/custom_page_header.dart';
 class InventoryListScreen extends StatelessWidget {
   static const String routeName = 'InventoryListScreen';
 
-  static List<bool> selectedCheckboxes = List.generate(10, (index) => false);
+  static List selectedIds = [];
 
   InventoryListScreen({Key? key}) : super(key: key);
 
@@ -92,6 +92,7 @@ class InventoryListScreen extends StatelessWidget {
                         } else if (state is FetchedInventoryList) {
                           return Column(children: [
                             const CustomPageHeader(
+                                utilityVisible: true,
                                 titleText: StringConstants.kInventoryManagement,
                                 textFieldVisible: true),
                             const SizedBox(height: spacingStandard),
