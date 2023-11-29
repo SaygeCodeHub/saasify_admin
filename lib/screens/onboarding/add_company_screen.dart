@@ -34,8 +34,8 @@ class CompanyForm extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SvgPicture.asset("assets/SaaSify.svg",
-                              height: kGeneralButtonHeight, width: kLogoWidth),
-                          const SizedBox(height: spacingXXHuge),
+                              width: kLogoWidth),
+                          const SizedBox(height: spacingXXXHuge),
                           Text(StringConstants.kAddCompany,
                               style: Theme.of(context)
                                   .textTheme
