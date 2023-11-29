@@ -34,6 +34,8 @@ class FetchProductListModel {
 
 class ProductWithVariant {
   final int categoryId;
+  final dynamic currency;
+
   final String categoryName;
   final bool categoryActive;
   final int productId;
@@ -54,6 +56,7 @@ class ProductWithVariant {
   final int? restockReminder;
 
   ProductWithVariant({
+    required this.currency,
     required this.categoryActive,
     required this.variantActive,
     required this.categoryId,
@@ -78,6 +81,7 @@ class ProductWithVariant {
   factory ProductWithVariant.fromJson(Map<String, dynamic> json) =>
       ProductWithVariant(
         categoryId: json["category_id"],
+        currency: json["currency"],
         categoryName: json["category_name"],
         categoryActive: json["category_active"],
         productId: json["product_id"],
@@ -103,6 +107,7 @@ class ProductWithVariant {
         "category_name": categoryName,
         "category_active": categoryActive,
         "product_id": productId,
+        "currency": currency,
         "product_name": productName,
         "brand_name": brandName,
         "brand_id": brandId,

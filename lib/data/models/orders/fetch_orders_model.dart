@@ -126,6 +126,7 @@ class ItemsOrdered {
   final String categoryName;
   final String productName;
   final String brandName;
+  final dynamic currency;
   final int brandId;
   final int variantId;
   final int cost;
@@ -143,6 +144,7 @@ class ItemsOrdered {
 
   ItemsOrdered({
     required this.categoryId,
+    required this.currency,
     required this.categoryName,
     required this.productName,
     required this.brandName,
@@ -165,6 +167,7 @@ class ItemsOrdered {
   factory ItemsOrdered.fromJson(Map<String, dynamic> json) => ItemsOrdered(
         categoryId: json["category_id"],
         categoryName: json["category_name"],
+        currency: json["currency"],
         productName: json["product_name"],
         brandName: json["brand_name"],
         brandId: json["brand_id"],
@@ -185,6 +188,7 @@ class ItemsOrdered {
 
   Map<String, dynamic> toJson() => {
         "category_id": categoryId,
+        "currency": currency,
         "category_name": categoryName,
         "product_name": productName,
         "brand_name": brandName,
