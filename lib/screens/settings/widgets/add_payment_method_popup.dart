@@ -7,6 +7,7 @@ import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/secondary_button.dart';
+import '../../../widgets/toggle_switch_widget.dart';
 
 class AddNewPaymentTypePopup extends StatelessWidget {
   const AddNewPaymentTypePopup({super.key});
@@ -47,10 +48,7 @@ class AddNewPaymentTypePopup extends StatelessWidget {
                     children: [
                       Text(StringConstants.kDoYouWantToDeactivateBranch,
                           style: Theme.of(context).textTheme.xTiniest),
-                      Switch(
-                          activeColor: AppColor.saasifyLightDeepBlue,
-                          value: true,
-                          onChanged: (value) {})
+                      ToggleSwitchWidget(value: true, onChanged: (value) {}),
                     ],
                   ),
                   const SizedBox(

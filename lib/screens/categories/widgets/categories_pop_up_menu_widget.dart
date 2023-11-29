@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/widgets/toggle_switch_widget.dart';
 import '../../../bloc/categories/categories_bloc.dart';
 import '../../../bloc/categories/categories_event.dart';
 import '../../../configs/app_color.dart';
@@ -87,11 +88,8 @@ class CategoriesPopUpMenuWidget extends StatelessWidget {
                                           style: Theme.of(context)
                                               .textTheme
                                               .xTiniest),
-                                      Switch(
-                                          activeColor:
-                                              AppColor.saasifyLightDeepBlue,
-                                          value: true,
-                                          onChanged: (value) {})
+                                      ToggleSwitchWidget(
+                                          value: true, onChanged: (value) {})
                                     ]),
                                     const SizedBox(height: spacingXMedium),
                                     Row(children: [

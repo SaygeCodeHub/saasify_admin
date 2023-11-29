@@ -8,6 +8,7 @@ import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/secondary_button.dart';
+import '../../../widgets/toggle_switch_widget.dart';
 
 class AddCategoryPopUp extends StatelessWidget {
   const AddCategoryPopUp({super.key});
@@ -65,11 +66,8 @@ class AddCategoryPopUp extends StatelessWidget {
                                       StringConstants.kDoYouWantToDeactivateGST,
                                       style:
                                           Theme.of(context).textTheme.xTiniest),
-                                  Switch(
-                                      activeColor:
-                                          AppColor.saasifyLightDeepBlue,
-                                      value: true,
-                                      onChanged: (value) {})
+                                  ToggleSwitchWidget(
+                                      value: true, onChanged: (value) {})
                                 ]),
                                 const SizedBox(height: spacingXMedium),
                                 Row(children: [

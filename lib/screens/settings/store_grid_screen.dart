@@ -9,6 +9,7 @@ import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/sidebar.dart';
+import '../../widgets/toggle_switch_widget.dart';
 import '../../widgets/top_bar.dart';
 import '../dashboard/dashboard_screen.dart';
 
@@ -133,9 +134,7 @@ class StoreGridScreen extends StatelessWidget {
                                                             .xxTiniest)
                                                   ]),
                                               Row(children: [
-                                                Switch(
-                                                    activeColor: AppColor
-                                                        .saasifyLightDeepBlue,
+                                                ToggleSwitchWidget(
                                                     value: true,
                                                     onChanged: (value) {}),
                                                 const SizedBox(
