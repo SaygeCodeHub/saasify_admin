@@ -95,7 +95,8 @@ class OrdersListDataTable extends StatelessWidget {
                   arguments: orderListDatum.orders[index]);
             }),
             DataCell(
-                Text(orderListDatum.orders[index].totalAmount.toString(),
+                Text(
+                    '${orderListDatum.orders[index].currency} ${orderListDatum.orders[index].totalAmount.toString()}',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.xxTiniest), onTap: () {
               Navigator.pushReplacementNamed(

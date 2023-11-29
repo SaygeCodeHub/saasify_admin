@@ -73,8 +73,9 @@ class Order {
   final String customerName;
   final double discountTotal;
   final double totalAmount;
-  final double subtotal;
+  final int subtotal;
   final List<ItemsOrdered> itemsOrdered;
+  final String currency;
 
   Order({
     required this.orderId,
@@ -88,6 +89,7 @@ class Order {
     required this.totalAmount,
     required this.subtotal,
     required this.itemsOrdered,
+    required this.currency,
   });
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
@@ -98,11 +100,12 @@ class Order {
         paymentStatus: json["payment_status"],
         paymentType: json["payment_type"],
         customerName: json["customer_name"],
-        discountTotal: json["discount_total"],
-        totalAmount: json["total_amount"],
+        discountTotal: json["discount_total"].toDouble(),
+        totalAmount: json["total_amount"].toDouble(),
         subtotal: json["subtotal"],
         itemsOrdered: List<ItemsOrdered>.from(
             json["items_ordered"].map((x) => ItemsOrdered.fromJson(x))),
+        currency: json["currency"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -118,6 +121,7 @@ class Order {
         "subtotal": subtotal,
         "items_ordered":
             List<dynamic>.from(itemsOrdered.map((x) => x.toJson())),
+        "currency": currency,
       };
 }
 
@@ -126,7 +130,6 @@ class ItemsOrdered {
   final String categoryName;
   final String productName;
   final String brandName;
-  final dynamic currency;
   final int brandId;
   final int variantId;
   final int cost;
@@ -144,7 +147,6 @@ class ItemsOrdered {
 
   ItemsOrdered({
     required this.categoryId,
-    required this.currency,
     required this.categoryName,
     required this.productName,
     required this.brandName,
@@ -167,7 +169,6 @@ class ItemsOrdered {
   factory ItemsOrdered.fromJson(Map<String, dynamic> json) => ItemsOrdered(
         categoryId: json["category_id"],
         categoryName: json["category_name"],
-        currency: json["currency"],
         productName: json["product_name"],
         brandName: json["brand_name"],
         brandId: json["brand_id"],
@@ -188,7 +189,6 @@ class ItemsOrdered {
 
   Map<String, dynamic> toJson() => {
         "category_id": categoryId,
-        "currency": currency,
         "category_name": categoryName,
         "product_name": productName,
         "brand_name": brandName,

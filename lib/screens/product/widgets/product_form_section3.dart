@@ -82,7 +82,7 @@ class ProductFormSection3 extends StatelessWidget {
                       border: Border.all(color: AppColor.saasifyPaleGrey)),
                   child: Padding(
                       padding: const EdgeInsets.all(spacingSmall),
-                      child: Text(dataMap['cost'].toString())))
+                      child: Text('${dataMap['currency']} ${dataMap['cost']}')))
               : CustomTextField(
                   validator: (value) {
                     if ((value == null || value.trim() == '') &&
@@ -224,7 +224,7 @@ class ProductFormSection3 extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(width: spacingLarge),
           (isProductDetail == true)
-              ? const Text("No")
+              ? Text((dataMap['enableGST'] == true) ? 'Yes' : 'No')
               : ToggleSwitchWidget(
                   activeColor: AppColor.saasifyLightDeepBlue,
                   value: dataMap['enableGST'] ?? true,

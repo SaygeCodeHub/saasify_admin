@@ -73,7 +73,8 @@ class InventoryListDataTable extends StatelessWidget {
               child: Text(productList[index].categoryName,
                   style: Theme.of(context).textTheme.xxTiniest),
             )),
-            DataCell(Text(productList[index].cost.toString(),
+            DataCell(Text(
+                '${productList[index].currency} ${productList[index].cost}',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.xxTiniest)),
             DataCell(Text(productList[index].discountPercent.toString(),
