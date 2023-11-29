@@ -9,9 +9,9 @@ import 'branches_repository.dart';
 class BranchesRepositoryImpl implements BranchesRepository {
   @override
   Future<FetchAllBranchesModel> fetchAllBranches(
-      String userId, String companyId, int branchId) async {
-    final response = await ClientServices().get(
-        '${ApiConstants.baseUrl}$userId/$companyId/$branchId/getAllCategories');
+      String userId, String companyId) async {
+    final response = await ClientServices()
+        .get('${ApiConstants.baseUrl}$userId/$companyId/getAllBranches');
     return FetchAllBranchesModel.fromJson(response);
   }
 

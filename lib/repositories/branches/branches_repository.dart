@@ -5,7 +5,7 @@ import '../../data/models/branches/save_branch_model.dart';
 
 abstract class BranchesRepository {
   Future<FetchAllBranchesModel> fetchAllBranches(
-      String userId, String companyId, int branchId);
+      String userId, String companyId);
 
   Future<SaveBranchesModel> saveBranches(
       String userId, String companyId, int branchId, Map branchDetailsMap);

@@ -1,3 +1,5 @@
+import '../../data/models/branches/fetch_all_branches_model.dart';
+
 abstract class BranchesStates {}
 
 class BranchesInitial extends BranchesStates {}
@@ -33,9 +35,9 @@ class ErrorDeletingBranches extends BranchesStates {
 class FetchingBranches extends BranchesStates {}
 
 class FetchedBranches extends BranchesStates {
-  // final List<ProductCategory> categoryList;
+  final List<BranchesData> branchList;
 
-  // FetchedBranches({required this.categoryList});
+  FetchedBranches({required this.branchList});
 }
 
 class ErrorFetchingBranches extends BranchesStates {

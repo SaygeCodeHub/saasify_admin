@@ -8,64 +8,53 @@ String fetchAllBranchesModelToJson(FetchAllBranchesModel data) =>
 
 class FetchAllBranchesModel {
   final int status;
-  final FetchBranchesData data;
   final String message;
+  final List<BranchesData> data;
 
   FetchAllBranchesModel({
     required this.status,
-    required this.data,
     required this.message,
+    required this.data,
   });
 
   factory FetchAllBranchesModel.fromJson(Map<String, dynamic> json) =>
       FetchAllBranchesModel(
         status: json["status"],
-        data: FetchBranchesData.fromJson(json["data"]),
         message: json["message"],
+        data: List<BranchesData>.from(
+            json["data"].map((x) => BranchesData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
-        "data": data.toJson(),
         "message": message,
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
 }
 
-class FetchBranchesData {
-  final List<Branch> branches;
-
-  FetchBranchesData({
-    required this.branches,
-  });
-
-  factory FetchBranchesData.fromJson(Map<String, dynamic> json) =>
-      FetchBranchesData(
-        branches:
-            List<Branch>.from(json["branches"].map((x) => Branch.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "branches": List<dynamic>.from(branches.map((x) => x.toJson())),
-      };
-}
-
-class Branch {
+class BranchesData {
   final int branchId;
   final String branchName;
   final int branchContact;
+  final String branchCurrency;
+  final bool branchActive;
   final String branchAddress;
 
-  Branch({
+  BranchesData({
     required this.branchId,
     required this.branchName,
     required this.branchContact,
+    required this.branchCurrency,
+    required this.branchActive,
     required this.branchAddress,
   });
 
-  factory Branch.fromJson(Map<String, dynamic> json) => Branch(
+  factory BranchesData.fromJson(Map<String, dynamic> json) => BranchesData(
         branchId: json["branch_id"],
         branchName: json["branch_name"],
         branchContact: json["branch_contact"],
+        branchCurrency: json["branch_currency"],
+        branchActive: json["branch_active"],
         branchAddress: json["branch_address"],
       );
 
@@ -73,6 +62,8 @@ class Branch {
         "branch_id": branchId,
         "branch_name": branchName,
         "branch_contact": branchContact,
+        "branch_currency": branchCurrency,
+        "branch_active": branchActive,
         "branch_address": branchAddress,
       };
 }

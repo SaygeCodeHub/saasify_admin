@@ -94,12 +94,11 @@ class BranchesBloc extends Bloc<BranchesEvents, BranchesStates> {
     try {
       String userId = await _customerCache.getUserId();
       String companyId = await _customerCache.getCompanyId();
-      int branchId = await _customerCache.getBranchId();
 
-      FetchAllBranchesModel fetchAllBranchesModel = await _branchesRepository
-          .fetchAllBranches(userId, companyId, branchId);
+      FetchAllBranchesModel fetchAllBranchesModel =
+          await _branchesRepository.fetchAllBranches(userId, companyId);
       if (fetchAllBranchesModel.status == 200) {
-        emit(FetchedBranches());
+        emit(FetchedBranches(branchList: fetchAllBranchesModel.data));
       } else {
         emit(ErrorFetchingBranches(message: fetchAllBranchesModel.message));
       }

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/branches/branches_states.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/settings/three_dots_popup.dart';
 import 'package:saasify/screens/settings/widgets/add_store_popup.dart';
+import 'package:saasify/screens/settings/widgets/branches_grid.dart';
 import 'package:saasify/utils/responsive.dart';
+import '../../bloc/branches/branches_bloc.dart';
+import '../../bloc/branches/branches_event.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
+import '../../widgets/alert_dialogue_box.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/sidebar.dart';
-import '../../widgets/toggle_switch_widget.dart';
 import '../../widgets/top_bar.dart';
 import '../dashboard/dashboard_screen.dart';
 
@@ -22,6 +26,8 @@ class StoreGridScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<BranchesBloc>().add(FetchAllBranches());
+
     return Scaffold(
         key: _scaffoldKey,
         drawer: const SideBar(selectedIndex: 1),
@@ -42,115 +48,84 @@ class StoreGridScreen extends StatelessWidget {
                           top: spacingXMedium,
                           left: spacingXHuge,
                           bottom: spacingXHuge),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(children: [
-                            InkWell(
-                                onTap: () {
-                                  Navigator.pushReplacementNamed(
-                                      context, DashboardsScreen.routeName);
-                                },
-                                child: context.responsive(const SizedBox(),
-                                    desktop:
-                                        const Icon(Icons.arrow_back_ios_new))),
-                            const SizedBox(width: spacingSmall),
-                            context.responsive(const SizedBox(),
-                                desktop: Text(StringConstants.kBranches,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .xxTiny
-                                        .copyWith(
-                                            fontWeight: FontWeight.w700))),
-                            context.responsive(const SizedBox(),
-                                desktop: const Spacer()),
-                            const Spacer(),
-                            SizedBox(
-                                width: kGeneralActionButtonWidth,
-                                child: PrimaryButton(
-                                    onPressed: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (ctx) =>
-                                              const AddStorePopup());
-                                    },
-                                    buttonTitle: StringConstants.kAddNewBranch))
-                          ]),
-                          const SizedBox(height: spacingStandard),
-                          GridView.builder(
-                              shrinkWrap: true,
-                              itemCount: 5,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                    height: spacingStandard,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            kCircularRadius),
-                                        boxShadow: const [
-                                          BoxShadow(
+                      child: BlocConsumer<BranchesBloc, BranchesStates>(
+                          listener: (context, state) {
+                        if (state is ErrorFetchingBranches) {
+                          showDialog(
+                              context: context,
+                              builder: (dialogueCtx) {
+                                return AlertDialogueBox(
+                                    title: StringConstants.kSomethingWentWrong,
+                                    message: state.message,
+                                    errorMarkVisible: true,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(dialogueCtx);
+                                    });
+                              });
+                        }
+                      }, buildWhen: (prev, curr) {
+                        return curr is FetchedBranches ||
+                            curr is FetchingBranches;
+                      }, builder: (context, state) {
+                        if (state is FetchingBranches) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else if (state is FetchedBranches) {
+                          return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(children: [
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.pushReplacementNamed(context,
+                                            DashboardsScreen.routeName);
+                                      },
+                                      child: context.responsive(
+                                          const SizedBox(),
+                                          desktop: const Icon(
+                                              Icons.arrow_back_ios_new))),
+                                  const SizedBox(width: spacingSmall),
+                                  context.responsive(const SizedBox(),
+                                      desktop: Text(StringConstants.kBranches,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .xxTiny
+                                              .copyWith(
+                                                  fontWeight:
+                                                      FontWeight.w700))),
+                                  context.responsive(const SizedBox(),
+                                      desktop: const Spacer()),
+                                  const Spacer(),
+                                  SizedBox(
+                                      width: kGeneralActionButtonWidth,
+                                      child: PrimaryButton(
+                                          onPressed: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (ctx) =>
+                                                    const AddStorePopup());
+                                          },
+                                          buttonTitle:
+                                              StringConstants.kAddNewBranch))
+                                ]),
+                                const SizedBox(height: spacingStandard),
+                                BranchesGrid(branchesData: state.branchList)
+                              ]);
+                        } else if (state is ErrorFetchingBranches) {
+                          return Expanded(
+                              child: Center(
+                                  child: Text(StringConstants.kNoDataAvailable,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .tinier
+                                          .copyWith(
                                               color:
-                                                  AppColor.saasifyLightPaleGrey,
-                                              blurRadius: 5.0)
-                                        ],
-                                        color: AppColor.saasifyWhite),
-                                    child: Padding(
-                                        padding: const EdgeInsets.all(
-                                            kCircularRadius),
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(StringConstants.kName,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .tiniest
-                                                            .copyWith(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: AppColor
-                                                                    .saasifyDarkGrey)),
-                                                    const SizedBox(
-                                                        height: spacingXSmall),
-                                                    Text(
-                                                      StringConstants.kCurrency,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .xxTiniest,
-                                                    ),
-                                                    const SizedBox(
-                                                        height: spacingXXSmall),
-                                                    Text(
-                                                        StringConstants
-                                                            .kLocation,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .xxTiniest)
-                                                  ]),
-                                              Row(children: [
-                                                ToggleSwitchWidget(
-                                                    value: true,
-                                                    onChanged: (value) {}),
-                                                const SizedBox(
-                                                    width: spacingXSmall),
-                                                const ThreeDotsPopup()
-                                              ]),
-                                            ])));
-                              },
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      childAspectRatio: 4,
-                                      crossAxisSpacing: spacingLarge,
-                                      mainAxisSpacing: spacingLarge))
-                        ],
-                      )))
+                                                  AppColor.saasifyLightGrey))));
+                        } else {
+                          return const SizedBox.shrink();
+                        }
+                      })))
             ]));
   }
 }

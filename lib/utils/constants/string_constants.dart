@@ -1,8 +1,8 @@
 class StringConstants {
   static const kHello = 'Hello :)';
   static const kName = 'Name';
-  static const kCurrency = 'Currency';
-  static const kLocation = 'Location';
+  static const kCurrency = 'Currency: ';
+  static const kLocation = 'Location: ';
   static const kNameWithColon = 'Name :';
   static const kCategoryName = 'Category Name';
   static const kEnterCoupon = 'Enter Coupon';
