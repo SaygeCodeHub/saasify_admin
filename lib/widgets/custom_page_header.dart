@@ -66,7 +66,7 @@ class CustomPageHeader extends StatelessWidget {
                 visible: deleteIconVisible,
                 child: IconButton(
                     onPressed: deleteOnPressed,
-                    icon: const Icon(Icons.delete_outline,
+                    icon: const Icon(Icons.delete,
                         color: AppColor.saasifyRed, size: kHeaderIconsSize))),
             const SizedBox(width: spacingLarge),
             IconButton(

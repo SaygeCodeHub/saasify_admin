@@ -8,6 +8,7 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/products/fetch_all_categories_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
+import 'package:saasify/widgets/toggle_switch.dart';
 
 import '../../../configs/app_color.dart';
 
@@ -183,7 +184,7 @@ class ProductFormSection3 extends StatelessWidget {
           const SizedBox(width: spacingLarge),
           (isProductDetail == true)
               ? const Text("No")
-              : Switch(
+              : ToggleSwitchWidget(
                   activeColor: AppColor.saasifyLightDeepBlue,
                   value: dataMap['enableGST'] ?? true,
                   onChanged: (value) {

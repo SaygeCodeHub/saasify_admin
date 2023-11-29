@@ -17,8 +17,9 @@ class BillModelAdapter extends TypeAdapter<BillModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return BillModel(
+      additionalDiscount: fields[3] as double,
       itemTotal: fields[0] as double,
-      total: fields[3] as double,
+      total: fields[4] as double,
       discount: fields[2] as double,
     );
   }
@@ -26,12 +27,14 @@ class BillModelAdapter extends TypeAdapter<BillModel> {
   @override
   void write(BinaryWriter writer, BillModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.itemTotal)
       ..writeByte(2)
       ..write(obj.discount)
       ..writeByte(3)
+      ..write(obj.additionalDiscount)
+      ..writeByte(4)
       ..write(obj.total);
   }
 

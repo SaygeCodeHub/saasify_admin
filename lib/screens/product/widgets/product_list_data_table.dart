@@ -11,6 +11,7 @@ import 'package:saasify/screens/product/add_product_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_table.dart';
+import 'package:saasify/widgets/toggle_switch.dart';
 
 class ProductListDataTable extends StatelessWidget {
   final List<ProductWithVariant> productList;
@@ -170,7 +171,7 @@ class ProductListDataTable extends StatelessWidget {
                                 : AppColor.saasifyGreen)),
                   ],
                 ))),
-            DataCell(Switch(
+            DataCell(ToggleSwitchWidget(
                 activeColor: AppColor.saasifyLightDeepBlue,
                 value: productList[index].variantActive,
                 onChanged: (value) {
@@ -196,124 +197,5 @@ class ProductListDataTable extends StatelessWidget {
                 )))
           ];
         });
-
-    //     ListView(shrinkWrap: true, children: <Widget>[
-    //   DataTable(
-    //       columnSpacing: 0,
-    //       horizontalMargin: 0,
-    //       showCheckboxColumn: true,
-    //       headingRowHeight: 50,
-    //       dataRowMaxHeight: 50,
-    //       columns: [
-    //         DataColumn(
-    //             label: Expanded(
-    //                 child: Center(
-    //                     child: Visibility(
-    //                         visible: productList.isNotEmpty,
-    //                         child: InkWell(
-    //                             onTap: ,
-    //                             child: Icon(
-    //                                 (ProductListScreen.selectedIds.isEmpty)
-    //                                     ? Icons.check_box_outline_blank
-    //                                     : (ProductListScreen
-    //                                                 .selectedIds.length <
-    //                                             productList.length)
-    //                                         ? Icons
-    //                                             .indeterminate_check_box_outlined
-    //                                         : Icons.check_box,
-    //                                 color: (ProductListScreen
-    //                                         .selectedIds.isNotEmpty)
-    //                                     ? AppColor.saasifyLightDeepBlue
-    //                                     : AppColor.saasifyLightDeepBlue)))))),
-    //         DataColumn(
-    //             label: Text(StringConstants.kName,
-    //                 style: Theme.of(context)
-    //                     .textTheme
-    //                     .xTiniest
-    //                     .copyWith(fontWeight: FontWeight.w600))),
-    //         DataColumn(
-    //             label: Expanded(
-    //           child: Text(StringConstants.kBarcode,
-    //               style: Theme.of(context)
-    //                   .textTheme
-    //                   .xTiniest
-    //                   .copyWith(fontWeight: FontWeight.w600)),
-    //         )),
-    //         DataColumn(
-    //             label: Text(StringConstants.kCategory,
-    //                 style: Theme.of(context)
-    //                     .textTheme
-    //                     .xTiniest
-    //                     .copyWith(fontWeight: FontWeight.w600))),
-    //         DataColumn(
-    //             label: Expanded(
-    //           child: Text(StringConstants.kBrand,
-    //               style: Theme.of(context)
-    //                   .textTheme
-    //                   .xTiniest
-    //                   .copyWith(fontWeight: FontWeight.w600)),
-    //         )),
-    //         DataColumn(
-    //             label: Text(StringConstants.kPrice,
-    //                 textAlign: TextAlign.center,
-    //                 style: Theme.of(context)
-    //                     .textTheme
-    //                     .xTiniest
-    //                     .copyWith(fontWeight: FontWeight.w600))),
-    //         DataColumn(
-    //             label: Text(StringConstants.kStock,
-    //                 style: Theme.of(context)
-    //                     .textTheme
-    //                     .xTiniest
-    //                     .copyWith(fontWeight: FontWeight.w600))),
-    //         DataColumn(
-    //             label: Expanded(
-    //           child: Center(
-    //             child: Text('',
-    //                 style: Theme.of(context)
-    //                     .textTheme
-    //                     .xTiniest
-    //                     .copyWith(fontWeight: FontWeight.w600)),
-    //           ),
-    //         )),
-    //         DataColumn(
-    //             label: Expanded(
-    //           child: Center(
-    //             child: Text('',
-    //                 style: Theme.of(context)
-    //                     .textTheme
-    //                     .xTiniest
-    //                     .copyWith(fontWeight: FontWeight.w600)),
-    //           ),
-    //         )),
-    //         DataColumn(
-    //             label: Expanded(
-    //                 child: Center(
-    //                     child: Text('',
-    //                         style: Theme.of(context)
-    //                             .textTheme
-    //                             .xTiniest
-    //                             .copyWith(fontWeight: FontWeight.w600)))))
-    //       ],
-    //       rows: List.generate(
-    //           productList.length,
-    //           (index) => DataRow(cells: [
-    //                 DataCell(Align(
-    //                   alignment: Alignment.center,
-    //                   child: InkWell(
-    //                       onTap: ,
-    //                       child: Icon(
-    //                           (ProductListScreen.selectedIds
-    //                                   .contains(productList[index].variantId))
-    //                               ? Icons.check_box
-    //                               : Icons.check_box_outline_blank_rounded,
-    //                           color: (ProductListScreen.selectedIds
-    //                                   .contains(productList[index].variantId))
-    //                               ? AppColor.saasifyLightDeepBlue
-    //                               : AppColor.saasifyLightDeepBlue)),
-    //                 )),
-
-    //               ]))),
-    // ]));
   }
 }
