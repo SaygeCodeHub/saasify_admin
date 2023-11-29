@@ -3,6 +3,7 @@ import 'package:saasify/configs/app_theme.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
+import '../../../widgets/toggle_switch.dart';
 import '../three_dots_popup.dart';
 
 class CouponsGrid extends StatelessWidget {
@@ -52,11 +53,9 @@ class CouponsGrid extends StatelessWidget {
                               )
                             ]),
                         Row(children: [
-                          Switch(
-                              activeColor: AppColor.saasifyLightDeepBlue,
-                              value: true,
-                              onChanged: (value) {}),
-                          const SizedBox(width: 6),
+                          ToggleSwitchWidget(
+                              value: true, onChanged: (value) {}),
+                          const SizedBox(width: spacingXSmall),
                           const ThreeDotsPopup()
                         ]),
                       ])));
