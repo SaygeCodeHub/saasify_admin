@@ -11,8 +11,6 @@ class ThreeDotsPopup extends StatelessWidget {
           return [
             PopupMenuItem(
                 onTap: () {}, child: const Text(StringConstants.kEdit)),
-            PopupMenuItem(
-                onTap: () {}, child: const Text(StringConstants.kDelete))
           ];
         },
         child: const Icon(Icons.more_vert));
