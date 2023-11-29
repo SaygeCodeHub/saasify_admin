@@ -10,6 +10,7 @@ import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
 
 import '../../../configs/app_color.dart';
+import '../../../configs/app_dimensions.dart';
 
 class ProductFormSection3 extends StatelessWidget {
   const ProductFormSection3({
@@ -38,7 +39,15 @@ class ProductFormSection3 extends StatelessWidget {
               .copyWith(fontWeight: FontWeight.w700)),
       const SizedBox(height: spacingXMedium),
       (isProductDetail == true)
-          ? Text(dataMap['brand_name'])
+          ? Container(
+              height: kTextFieldHeight,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(spacingXSmall),
+                  border: Border.all(color: AppColor.saasifyPaleGrey)),
+              child: Padding(
+                  padding: const EdgeInsets.all(spacingSmall),
+                  child: Text(dataMap['brand_name'])))
           : CustomTextField(
               validator: (value) {
                 if ((value == null || value.trim() == '') &&
@@ -64,7 +73,15 @@ class ProductFormSection3 extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(height: spacingXMedium),
           (isProductDetail == true)
-              ? Text(dataMap['cost'].toString())
+              ? Container(
+                  height: kTextFieldHeight,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(spacingXSmall),
+                      border: Border.all(color: AppColor.saasifyPaleGrey)),
+                  child: Padding(
+                      padding: const EdgeInsets.all(spacingSmall),
+                      child: Text(dataMap['cost'].toString())))
               : CustomTextField(
                   validator: (value) {
                     if ((value == null || value.trim() == '') &&
@@ -94,7 +111,15 @@ class ProductFormSection3 extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(height: spacingXMedium),
           (isProductDetail == true)
-              ? Text(dataMap['discount_percent'].toString())
+              ? Container(
+                  height: kTextFieldHeight,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(spacingXSmall),
+                      border: Border.all(color: AppColor.saasifyPaleGrey)),
+                  child: Padding(
+                      padding: const EdgeInsets.all(spacingSmall),
+                      child: Text(dataMap['discount_percent'].toString())))
               : CustomTextField(
                   validator: (value) {
                     if ((value == null || value.trim() == '') &&
@@ -124,7 +149,15 @@ class ProductFormSection3 extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(height: spacingXMedium),
           (isProductDetail == true)
-              ? Text(dataMap['stock'].toString())
+              ? Container(
+                  height: kTextFieldHeight,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(spacingXSmall),
+                      border: Border.all(color: AppColor.saasifyPaleGrey)),
+                  child: Padding(
+                      padding: const EdgeInsets.all(spacingSmall),
+                      child: Text(dataMap['stock'].toString())))
               : CustomTextField(
                   validator: (value) {
                     if ((value == null || value.trim() == '') &&
@@ -154,7 +187,15 @@ class ProductFormSection3 extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(height: spacingXMedium),
           (isProductDetail == true)
-              ? Text(dataMap['restock_reminder'].toString())
+              ? Container(
+                  height: kTextFieldHeight,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(spacingXSmall),
+                      border: Border.all(color: AppColor.saasifyPaleGrey)),
+                  child: Padding(
+                      padding: const EdgeInsets.all(spacingSmall),
+                      child: Text(dataMap['restock_reminder'].toString())))
               : CustomTextField(
                   validator: (value) {
                     if ((value == null || value.trim() == '') &&
@@ -182,7 +223,7 @@ class ProductFormSection3 extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(width: spacingLarge),
           (isProductDetail == true)
-              ? const Text("No")
+              ? Text((dataMap['enableGST'] == true) ? 'Yes' : 'No')
               : Switch(
                   activeColor: AppColor.saasifyLightDeepBlue,
                   value: dataMap['enableGST'] ?? true,

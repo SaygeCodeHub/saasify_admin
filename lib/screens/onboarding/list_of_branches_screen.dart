@@ -43,9 +43,8 @@ class BranchesListScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SvgPicture.asset("assets/SaaSify.svg",
-                                  height: kGeneralButtonHeight,
                                   width: kLogoWidth),
-                              const SizedBox(height: spacingXXHuge),
+                              const SizedBox(height: spacingXXXHuge),
                               Text(StringConstants.kBranches,
                                   style: Theme.of(context)
                                       .textTheme
@@ -60,12 +59,11 @@ class BranchesListScreen extends StatelessWidget {
                                       .copyWith(fontWeight: FontWeight.w500),
                                   keyboardType: TextInputType.text,
                                   onTextFieldChanged: (value) {}),
-                              const SizedBox(height: spacingXXHuge),
+                              const SizedBox(height: spacingHuge),
                               BranchList(
                                   selectedBranchIndex:
                                       state.selectedBranchIndex,
                                   branchList: selectedCompany.branches),
-                              const SizedBox(height: spacingXXHuge),
                               PrimaryButton(
                                   onPressed: (state.selectedBranchIndex != -1)
                                       ? () {

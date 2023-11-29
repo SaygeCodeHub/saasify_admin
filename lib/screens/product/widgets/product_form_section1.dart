@@ -35,7 +35,15 @@ class ProductFormSection1 extends StatelessWidget {
               .copyWith(fontWeight: FontWeight.w700)),
       const SizedBox(height: spacingXMedium),
       (isProductDetail == true)
-          ? Text(dataMap['category_name'])
+          ? Container(
+              height: kTextFieldHeight,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(spacingXSmall),
+                  border: Border.all(color: AppColor.saasifyPaleGrey)),
+              child: Padding(
+                  padding: const EdgeInsets.all(spacingSmall),
+                  child: Text(dataMap['category_name'])))
           : CustomDropdownWidget(
               validator: (value) {
                 if (value == null || value.trim() == '') {
@@ -60,7 +68,9 @@ class ProductFormSection1 extends StatelessWidget {
                           e.categoryName.substring(1).toLowerCase())
                       .toList() +
                   ['Add New']),
-      const SizedBox(height: spacingHuge),
+      (isProductDetail == true)
+          ? const SizedBox(height: spacingLarge)
+          : const SizedBox(height: spacingHuge),
       Wrap(children: [
         Text(StringConstants.kProductDescription,
             style: Theme.of(context)

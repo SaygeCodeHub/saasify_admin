@@ -53,7 +53,7 @@ class BranchList extends StatelessWidget {
                               style: Theme.of(context)
                                   .textTheme
                                   .tiniest
-                                  .copyWith(color: AppColor.saasifyWhite)),
+                                  .copyWith(color: AppColor.saasifyWhite))
                         ],
                       ))),
             );
