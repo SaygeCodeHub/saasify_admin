@@ -10,6 +10,9 @@ import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_dropdown.dart';
 import 'package:saasify/widgets/custom_text_field.dart';
 
+import '../../../configs/app_color.dart';
+import '../../../configs/app_dimensions.dart';
+
 class ProductFormSection2 extends StatelessWidget {
   const ProductFormSection2({
     super.key,
@@ -37,7 +40,15 @@ class ProductFormSection2 extends StatelessWidget {
               .copyWith(fontWeight: FontWeight.w700)),
       const SizedBox(height: spacingXMedium),
       (isProductDetail == true)
-          ? Text(dataMap['product_name'])
+          ? Container(
+              height: kTextFieldHeight,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(spacingXSmall),
+                  border: Border.all(color: AppColor.saasifyPaleGrey)),
+              child: Padding(
+                  padding: const EdgeInsets.all(spacingSmall),
+                  child: Text(dataMap['product_name'])))
           : CustomTextField(
               validator: (value) {
                 if (value == null || value.trim() == '') {
@@ -58,7 +69,15 @@ class ProductFormSection2 extends StatelessWidget {
               .copyWith(fontWeight: FontWeight.w700)),
       const SizedBox(height: spacingXMedium),
       (isProductDetail == true)
-          ? Text(dataMap['barcode'].toString())
+          ? Container(
+              height: kTextFieldHeight,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(spacingXSmall),
+                  border: Border.all(color: AppColor.saasifyPaleGrey)),
+              child: Padding(
+                  padding: const EdgeInsets.all(spacingSmall),
+                  child: Text(dataMap['barcode'].toString())))
           : CustomTextField(
               validator: (value) {
                 if (value == null || value.trim() == '') {
@@ -85,7 +104,15 @@ class ProductFormSection2 extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(height: spacingXMedium),
           (isProductDetail == true)
-              ? Text(dataMap['quantity'].toString())
+              ? Container(
+                  height: kTextFieldHeight,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(spacingXSmall),
+                      border: Border.all(color: AppColor.saasifyPaleGrey)),
+                  child: Padding(
+                      padding: const EdgeInsets.all(spacingSmall),
+                      child: Text(dataMap['quantity'].toString())))
               : CustomTextField(
                   validator: (value) {
                     if ((value == null || value.trim() == '') &&
@@ -114,7 +141,15 @@ class ProductFormSection2 extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(height: spacingXMedium),
           (isProductDetail == true)
-              ? Text(dataMap['unit'] ?? "nos")
+              ? Container(
+                  height: kTextFieldHeight,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(spacingXSmall),
+                      border: Border.all(color: AppColor.saasifyPaleGrey)),
+                  child: Padding(
+                      padding: const EdgeInsets.all(spacingSmall),
+                      child: Text(dataMap['unit'] ?? "nos")))
               : CustomDropdownWidget(
                   onChanges: () {
                     context
@@ -140,7 +175,16 @@ class ProductFormSection2 extends StatelessWidget {
               .copyWith(fontWeight: FontWeight.w700)),
       const SizedBox(height: spacingXMedium),
       (isProductDetail == true)
-          ? const Text("5%")
+          ? Container(
+              height: kTextFieldHeight,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(spacingXSmall),
+                  border: Border.all(color: AppColor.saasifyPaleGrey)),
+              child: Padding(
+                padding: const EdgeInsets.all(spacingSmall),
+                child: Text(dataMap['GST'] ?? '0'.toString()),
+              ))
           : CustomDropdownWidget(
               onChanges: () {
                 context

@@ -55,20 +55,25 @@ class FormImageSection extends StatelessWidget {
                       crossAxisSpacing: spacingStandard),
                   itemBuilder: (context, index) {
                     if (index < dataMap['images'].length) {
-                      return Padding(
-                        padding: const EdgeInsets.all(spacingLarge),
+                      return Container(
+                        padding: const EdgeInsets.all(spacingSmall),
+                        decoration: BoxDecoration(
+                            border:
+                                Border.all(color: AppColor.saasifyPaleGrey)),
                         child: Container(
+                            height: kContainerHeight,
+                            width: double.maxFinite,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                                     image:
                                         NetworkImage(dataMap['images'][index])),
                                 borderRadius:
-                                    BorderRadius.circular(spacingSmall))),
+                                    BorderRadius.circular(spacingXSmall))),
                       );
                     }
                     return Container(
                         decoration: BoxDecoration(
-                            color: AppColor.saasifyLighterGrey,
+                            color: AppColor.saasifyWhite,
                             borderRadius: BorderRadius.circular(spacingSmall)));
                   })
               : BlocConsumer<UploadBloc, UploadStates>(

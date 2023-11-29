@@ -42,7 +42,6 @@ class CompanyListScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SvgPicture.asset("assets/SaaSify.svg",
-                                  height: kGeneralButtonHeight,
                                   width: kLogoWidth),
                               const SizedBox(height: spacingXXHuge),
                               Text(StringConstants.kCompanies,
