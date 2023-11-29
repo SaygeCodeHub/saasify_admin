@@ -17,6 +17,7 @@ class InventoryBloc extends Bloc<InventoryEvents, InventoryStates> {
 
   InventoryBloc() : super(InventoryInitial()) {
     on<FetchInventoryList>(_fetchInventoryList);
+    on<SelectInventoryItem>(_selectInventoryItem);
     on<UpdateStock>(_updateStock);
   }
 
@@ -61,5 +62,10 @@ class InventoryBloc extends Bloc<InventoryEvents, InventoryStates> {
     } catch (e) {
       emit(ErrorUpdatingStock(message: e.toString()));
     }
+  }
+
+  _selectInventoryItem(
+      SelectInventoryItem event, Emitter<InventoryStates> emit) {
+    emit(FetchedInventoryList(productList: event.productList));
   }
 }

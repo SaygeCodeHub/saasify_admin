@@ -36,14 +36,13 @@ class CustomDataTable extends StatelessWidget {
                       label: Expanded(
                           child: Center(
                               child: Visibility(
-                                  visible: columnList.isNotEmpty,
+                                  visible: dataCount > 0,
                                   child: InkWell(
                                       onTap: onHeaderCheckboxChange,
                                       child: Icon(
                                           (selectedIds.isEmpty)
                                               ? Icons.check_box_outline_blank
-                                              : (selectedIds.length <
-                                                      columnList.length)
+                                              : (selectedIds.length < dataCount)
                                                   ? Icons
                                                       .indeterminate_check_box_outlined
                                                   : Icons.check_box,

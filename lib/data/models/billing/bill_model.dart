@@ -9,8 +9,13 @@ class BillModel {
   @HiveField(2)
   double discount;
   @HiveField(3)
+  double additionalDiscount;
+  @HiveField(4)
   double total;
 
   BillModel(
-      {required this.itemTotal, required this.total, required this.discount});
+      {required this.additionalDiscount,
+      required this.itemTotal,
+      required this.total,
+      required this.discount});
 }

@@ -21,6 +21,7 @@ import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/alert_dialogue_box.dart';
 import 'package:saasify/widgets/primary_button.dart';
 import 'package:saasify/widgets/secondary_button.dart';
+import 'package:saasify/widgets/toggle_switch.dart';
 
 class ProductForm extends StatelessWidget {
   const ProductForm(
@@ -163,7 +164,7 @@ class ProductForm extends StatelessWidget {
                   ]),
                   Row(children: [
                     const Text(StringConstants.kWantToDeactivateProduct),
-                    Switch(
+                    ToggleSwitchWidget(
                         activeColor: AppColor.saasifyLightDeepBlue,
                         value: dataMap['variant_active'] ?? true,
                         onChanged: (value) {

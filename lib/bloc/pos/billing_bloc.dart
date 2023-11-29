@@ -21,7 +21,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   Customer customer = Customer(
       customerName: '',
       customerContact: '',
-      billDetails: BillModel(itemTotal: 0, total: 0, discount: 0),
+      billDetails:
+          BillModel(itemTotal: 0, total: 0, discount: 0, additionalDiscount: 0),
       productList: []);
 
   BillingBloc() : super(BillingInitial()) {
@@ -44,7 +45,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     customer = Customer(
         customerName: '',
         customerContact: '',
-        billDetails: BillModel(itemTotal: 0, total: 0, discount: 0),
+        billDetails: BillModel(
+            itemTotal: 0, total: 0, discount: 0, additionalDiscount: 0),
         productList: []);
     Map<String, Customer> customerData = {};
 
@@ -83,7 +85,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       orderId = DateTime.now().millisecondsSinceEpoch.toString();
       selectedCategoryIndex = 0;
       customer.productList = [];
-      customer.billDetails = BillModel(itemTotal: 0, total: 0, discount: 0);
+      customer.billDetails =
+          BillModel(itemTotal: 0, total: 0, discount: 0, additionalDiscount: 0);
     }
 
     add(FetchProductsByCategory());
@@ -247,7 +250,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     customer = Customer(
         customerName: '',
         customerContact: '',
-        billDetails: BillModel(itemTotal: 0, total: 0, discount: 0),
+        billDetails: BillModel(
+            itemTotal: 0, total: 0, discount: 0, additionalDiscount: 0),
         productList: []);
     add(LoadAllOrders());
   }

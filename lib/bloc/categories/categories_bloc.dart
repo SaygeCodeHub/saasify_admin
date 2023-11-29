@@ -20,12 +20,6 @@ class CategoriesBloc extends Bloc<CategoriesEvents, CategoriesStates> {
     on<EditCategories>(_editCategory);
     on<DeleteCategories>(_deleteCategory);
     on<FetchAllCategories>(_fetchAllCategories);
-    on<ToggleCategories>(_switchToggleCategories);
-  }
-
-  FutureOr<void> _switchToggleCategories(
-      ToggleCategories event, Emitter<CategoriesStates> emit) async {
-    emit(SwitchToggleCategories(categoryToggle: event.categoryToggle));
   }
 
   FutureOr<void> _editCategory(

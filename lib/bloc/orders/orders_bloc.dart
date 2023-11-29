@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/utils/dashboard_card.dart';
 import '../../data/customer_cache/customer_cache.dart';
-import '../../data/models/orders/fetch_orders_model.dart';
 import '../../di/app_module.dart';
 import '../../repositories/orders/orders_repository.dart';
 import 'orders_event.dart';
@@ -16,6 +16,7 @@ class OrdersBloc extends Bloc<OrdersEvents, OrdersStates> {
 
   OrdersBloc() : super(OrdersInitial()) {
     on<FetchOrdersList>(_fetchOrdersList);
+    on<SelectOrder>(_selectOrder);
   }
 
   FutureOr<void> _fetchOrdersList(
@@ -38,5 +39,9 @@ class OrdersBloc extends Bloc<OrdersEvents, OrdersStates> {
     } else {
       emit(ErrorFetchingOrders(message: fetchOrdersModel.message));
     }
+  }
+
+  _selectOrder(SelectOrder event, Emitter<OrdersStates> emit) {
+    emit(FetchedOrders(fetchOrdersList: event.orders));
   }
 }

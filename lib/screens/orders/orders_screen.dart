@@ -19,6 +19,8 @@ class OrdersScreen extends StatelessWidget {
 
   OrdersScreen({Key? key}) : super(key: key);
 
+  static List selectedIds = [];
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -66,6 +68,7 @@ class OrdersScreen extends StatelessWidget {
                         } else if (state is FetchedOrders) {
                           return Column(children: [
                             const CustomPageHeader(
+                                utilityVisible: true,
                                 titleText: StringConstants.kOrders,
                                 textFieldVisible: true),
                             const SizedBox(height: spacingStandard),
