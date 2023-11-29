@@ -48,6 +48,7 @@ class OrderDetailsScreen extends StatelessWidget {
                             CustomPageHeader(
                               titleText: StringConstants.kOrderDetails,
                               textFieldVisible: false,
+                              utilityVisible: true,
                               backIconVisible: true,
                               inkWellOnTap: () {
                                 Navigator.pushReplacementNamed(

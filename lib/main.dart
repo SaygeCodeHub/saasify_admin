@@ -32,7 +32,7 @@ import 'di/app_module.dart';
 void main() async {
   await _initFirebase();
   await _initDependencies();
-  await _initApp();
+  await _initHive();
   runApp(const MyPosApp());
 }
 
@@ -46,7 +46,7 @@ _initDependencies() async {
   await getIt.isReady<SharedPreferences>();
 }
 
-_initApp() async {
+_initHive() async {
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(0)) {
     Hive.registerAdapter(SelectedProductModelAdapter());
@@ -78,17 +78,17 @@ class MyPosApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              lazy: false,
+              lazy: true,
               create: (context) =>
                   AuthenticationBloc()..add(CheckIfLoggedIn())),
-          BlocProvider(lazy: false, create: (context) => OnboardingBloc()),
-          BlocProvider(lazy: false, create: (context) => ProductBloc()),
-          BlocProvider(lazy: false, create: (context) => BillingBloc()),
-          BlocProvider(lazy: false, create: (context) => UploadBloc()),
-          BlocProvider(lazy: false, create: (context) => InventoryBloc()),
-          BlocProvider(lazy: false, create: (context) => CategoriesBloc()),
-          BlocProvider(lazy: false, create: (context) => OrdersBloc()),
-          BlocProvider(lazy: false, create: (context) => CustomerBloc())
+          BlocProvider(lazy: true, create: (context) => OnboardingBloc()),
+          BlocProvider(lazy: true, create: (context) => ProductBloc()),
+          BlocProvider(lazy: true, create: (context) => BillingBloc()),
+          BlocProvider(lazy: true, create: (context) => UploadBloc()),
+          BlocProvider(lazy: true, create: (context) => InventoryBloc()),
+          BlocProvider(lazy: true, create: (context) => CategoriesBloc()),
+          BlocProvider(lazy: true, create: (context) => OrdersBloc()),
+          BlocProvider(lazy: true, create: (context) => CustomerBloc())
         ],
         child: GestureDetector(
             onTap: () {

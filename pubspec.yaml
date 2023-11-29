@@ -49,6 +49,7 @@ dependencies:
   percent_indicator: ^4.2.3
   table_calendar: ^3.0.9
   flutter_switch: ^0.3.2
+  data_table_2: ^2.5.9
 
 
 dev_dependencies:

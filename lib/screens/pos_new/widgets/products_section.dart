@@ -128,14 +128,12 @@ class ProductsSection extends StatelessWidget {
                   .isNotEmpty)
               ? ProductGrid(productsByCategories: productsByCategories)
               : Expanded(
-                  child: Expanded(
-                      child: Center(
-                          child: Text(StringConstants.kNoDataAvailable,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .tinier
-                                  .copyWith(
-                                      color: AppColor.saasifyLightGrey)))))
+                  child: Center(
+                      child: Text(StringConstants.kNoDataAvailable,
+                          style: Theme.of(context)
+                              .textTheme
+                              .tinier
+                              .copyWith(color: AppColor.saasifyLightGrey))))
         ]));
   }
 }

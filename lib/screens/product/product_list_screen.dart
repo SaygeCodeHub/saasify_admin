@@ -5,7 +5,6 @@ import 'package:saasify/bloc/product/product_bloc.dart';
 import 'package:saasify/bloc/product/product_event.dart';
 import 'package:saasify/bloc/product/product_state.dart';
 import 'package:saasify/configs/app_color.dart';
-import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
@@ -14,8 +13,7 @@ import 'package:saasify/screens/product/widgets/product_list_data_table.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
-import 'package:saasify/widgets/custom_text_field.dart';
-import 'package:saasify/widgets/primary_button.dart';
+import 'package:saasify/widgets/custom_page_header.dart';
 import 'package:saasify/widgets/sidebar.dart';
 import 'package:saasify/widgets/top_bar.dart';
 import '../../widgets/alert_dialogue_box.dart';
@@ -53,10 +51,6 @@ class ProductListScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingLarge),
                       child: BlocConsumer<ProductBloc, ProductStates>(
                         listener: (context, state) {
-                          if (state is GSTCalculation) {
-                            context.read<ProductBloc>().add(FetchProductList());
-                          }
-
                           if (state is DeletingProducts) {
                             ProgressBar.show(context);
                           }
@@ -142,111 +136,67 @@ class ProductListScreen extends StatelessWidget {
                           } else if (state is FetchedProduct) {
                             return Column(
                               children: [
-                                Row(children: [
-                                  context.responsive(const SizedBox.shrink(),
-                                      desktop: InkWell(
-                                        child: Text(StringConstants.kProducts,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .xxTiny
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w700)),
-                                      )),
-                                  context.responsive(const SizedBox.shrink(),
-                                      desktop: const Spacer()),
-                                  Expanded(
-                                    flex: 5,
-                                    child: CustomTextField(
-                                        hintText: StringConstants.kSearchHere,
-                                        onTextFieldChanged: (value) {}),
-                                  ),
-                                  const Spacer(),
-                                  Visibility(
-                                    visible: selectedIds.isNotEmpty,
-                                    child: SizedBox(
-                                        width: kGeneralActionButtonWidth,
-                                        child: PrimaryButton(
-                                            backgroundColor:
-                                                AppColor.saasifyRed,
-                                            onPressed: () {
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (context) =>
-                                                      AlertDialogueBox(
-                                                        title: StringConstants
-                                                            .kWarning,
-                                                        message: StringConstants
-                                                            .kTheSelectedProducts,
-                                                        primaryButtonTitle:
-                                                            StringConstants
-                                                                .kConfirm,
-                                                        secondaryButtonTitle:
-                                                            StringConstants
-                                                                .kCancel,
-                                                        checkMarkVisible: false,
-                                                        secondaryOnPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        primaryOnPressed: () {
-                                                          log('confirm button pressed');
-                                                          Navigator.pop(
-                                                              context);
-                                                          context
-                                                              .read<
-                                                                  ProductBloc>()
-                                                              .add(DeleteProducts(
-                                                                  variantIds:
-                                                                      selectedIds));
-                                                        },
-                                                      ));
-                                            },
-                                            buttonTitle:
-                                                StringConstants.kDelete)),
-                                  ),
-                                  const SizedBox(width: spacingStandard),
-                                  SizedBox(
-                                      width: kGeneralActionButtonWidth,
-                                      child: PrimaryButton(
-                                          onPressed: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) =>
-                                                    AlertDialogueBox(
-                                                      title: StringConstants
-                                                          .kAddNewProduct,
-                                                      message: StringConstants
-                                                          .kScanTheBarcode,
-                                                      primaryButtonTitle:
-                                                          StringConstants
-                                                              .kScanBarcode,
-                                                      secondaryButtonTitle:
-                                                          StringConstants
-                                                              .kAddManually,
-                                                      checkMarkVisible: false,
-                                                      secondaryOnPressed: () {
-                                                        Navigator.pop(context);
-                                                        Navigator.pushReplacementNamed(
-                                                            context,
-                                                            AddProductScreen
-                                                                .routeName,
-                                                            arguments:
-                                                                AddProductScreenArguments(
-                                                                    isEdit:
-                                                                        false,
-                                                                    isVariant:
-                                                                        false,
-                                                                    dataMap: {},
-                                                                    isProductDetail:
-                                                                        false));
-                                                      },
-                                                      primaryOnPressed: () {},
-                                                    ));
-                                          },
-                                          buttonTitle:
-                                              StringConstants.kAddProduct))
-                                ]),
+                                CustomPageHeader(
+                                  titleText: StringConstants.kProducts,
+                                  buttonVisible: true,
+                                  buttonTitle: StringConstants.kAddProduct,
+                                  utilityVisible: true,
+                                  deleteIconVisible: selectedIds.isNotEmpty,
+                                  deleteOnPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialogueBox(
+                                              title: StringConstants.kWarning,
+                                              message: StringConstants
+                                                  .kTheSelectedProducts,
+                                              primaryButtonTitle:
+                                                  StringConstants.kConfirm,
+                                              secondaryButtonTitle:
+                                                  StringConstants.kCancel,
+                                              checkMarkVisible: false,
+                                              secondaryOnPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              primaryOnPressed: () {
+                                                log('confirm button pressed');
+                                                Navigator.pop(context);
+                                                context.read<ProductBloc>().add(
+                                                    DeleteProducts(
+                                                        variantIds:
+                                                            selectedIds));
+                                              },
+                                            ));
+                                  },
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialogueBox(
+                                              title: StringConstants
+                                                  .kAddNewProduct,
+                                              message: StringConstants
+                                                  .kScanTheBarcode,
+                                              primaryButtonTitle:
+                                                  StringConstants.kScanBarcode,
+                                              secondaryButtonTitle:
+                                                  StringConstants.kAddManually,
+                                              checkMarkVisible: false,
+                                              secondaryOnPressed: () {
+                                                Navigator.pop(context);
+                                                Navigator.pushReplacementNamed(
+                                                    context,
+                                                    AddProductScreen.routeName,
+                                                    arguments:
+                                                        AddProductScreenArguments(
+                                                            isEdit: false,
+                                                            isVariant: false,
+                                                            dataMap: {},
+                                                            isProductDetail:
+                                                                false));
+                                              },
+                                              primaryOnPressed: () {},
+                                            ));
+                                  },
+                                ),
                                 const SizedBox(height: spacingStandard),
                                 ProductListDataTable(
                                     productList: state.productList),
