@@ -9,7 +9,7 @@ import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/sidebar.dart';
-import '../../widgets/toggle_switch.dart';
+import '../../widgets/toggle_switch_widget.dart';
 import '../../widgets/top_bar.dart';
 import '../dashboard/dashboard_screen.dart';
 

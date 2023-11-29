@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/widgets/toggle_switch.dart';
+import 'package:saasify/widgets/toggle_switch_widget.dart';
 import '../../../bloc/categories/categories_bloc.dart';
 import '../../../bloc/categories/categories_event.dart';
 import '../../../configs/app_color.dart';

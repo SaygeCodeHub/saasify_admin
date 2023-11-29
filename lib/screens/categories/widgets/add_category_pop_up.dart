@@ -8,7 +8,7 @@ import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/secondary_button.dart';
-import '../../../widgets/toggle_switch.dart';
+import '../../../widgets/toggle_switch_widget.dart';
 
 class AddCategoryPopUp extends StatelessWidget {
   const AddCategoryPopUp({super.key});
