@@ -32,7 +32,7 @@ class FetchOrdersModel {
 }
 
 class OrdersData {
-  final int totalEarning;
+  final double totalEarning;
   final int totalOrders;
   final UnpaidOrder unpaidOrder;
   final PaymentMethods paymentMethods;
