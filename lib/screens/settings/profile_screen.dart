@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/profile/profile_bloc.dart';
 import 'package:saasify/bloc/profile/profile_states.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/settings/widgets/profile_right_side_column.dart';
+import 'package:saasify/screens/settings/widgets/profile_form.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../bloc/profile/profile_event.dart';
 import '../../configs/app_color.dart';
@@ -112,19 +112,25 @@ class ProfileScreen extends StatelessWidget {
                                           children: [
                                             const SizedBox(
                                                 height: spacingSmall),
-                                            Image.network(
-                                                state.profileData.storeLogo
-                                                    .toString(),
-                                                height: spacingXLarge,
-                                                width: spacingXLarge,
-                                                color:
-                                                    AppColor.saasifyPaleBlack),
-                                            const SizedBox(
-                                                height: spacingSmall),
-                                            Text(StringConstants.kSelectFile,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .xxTiniest),
+                                            (state.profileData.storeLogo
+                                                    .toString()
+                                                    .isNotEmpty)
+                                                ? Image.network(
+                                                    state.profileData.storeLogo
+                                                        .toString(),
+                                                    height: spacingXLarge,
+                                                    width: spacingXLarge,
+                                                    color: AppColor
+                                                        .saasifyPaleBlack,
+                                                    errorBuilder: (context,
+                                                        error, stackTrace) {
+                                                      return const Text(
+                                                          'Image is not available');
+                                                    },
+                                                  )
+                                                : Image.asset(
+                                                    "assets/error_image.png",
+                                                    height: kButtonHeight),
                                           ])),
                                 ),
                                 const SizedBox(height: spacingStandard),

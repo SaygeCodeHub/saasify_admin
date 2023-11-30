@@ -82,49 +82,45 @@ class ProductForm extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Icon(Icons.arrow_back_ios_new))),
                 const SizedBox(width: spacingSmall),
-                context.responsive(
-                  const SizedBox.shrink(),
-                  desktop: Text(
-                      (isVariant == true)
-                          ? StringConstants.kAddVariant
-                          : (isEdit)
-                              ? 'Edit Product'
-                              : (isProductDetail == true)
-                                  ? StringConstants.kProductDetails
-                                  : StringConstants.kAddProduct,
-                      style: Theme.of(context)
-                          .textTheme
-                          .xxTiny
-                          .copyWith(fontWeight: FontWeight.w700)),
-                )
+                context.responsive(const SizedBox.shrink(),
+                    desktop: Text(
+                        (isVariant == true)
+                            ? StringConstants.kAddVariant
+                            : (isEdit)
+                                ? 'Edit Product'
+                                : (isProductDetail == true)
+                                    ? StringConstants.kProductDetails
+                                    : StringConstants.kAddProduct,
+                        style: Theme.of(context)
+                            .textTheme
+                            .xxTiny
+                            .copyWith(fontWeight: FontWeight.w700)))
               ],
             ),
             Visibility(
-              visible: isEdit || isProductDetail,
-              child: SizedBox(
-                width: kGeneralActionButtonWidth,
-                child: PrimaryButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, AddProductScreen.routeName,
-                          arguments: AddProductScreenArguments(
-                              isEdit: false,
-                              isVariant: true,
-                              dataMap: {
-                                'product_name': dataMap['product_name'],
-                                'category_name': dataMap['category_name'],
-                                'brand_name': dataMap['brand_name'],
-                                'product_id': dataMap['product_id'],
-                                'product_description':
-                                    dataMap['product_description'],
-                              },
-                              isProductDetail: false));
-                    },
-                    buttonTitle: (isProductDetail == true)
-                        ? 'Edit Product Details'
-                        : 'Add Variant'),
-              ),
-            )
+                visible: isEdit || isProductDetail,
+                child: SizedBox(
+                    width: kGeneralActionButtonWidth,
+                    child: PrimaryButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, AddProductScreen.routeName,
+                              arguments: AddProductScreenArguments(
+                                  isEdit: false,
+                                  isVariant: true,
+                                  dataMap: {
+                                    'product_name': dataMap['product_name'],
+                                    'category_name': dataMap['category_name'],
+                                    'brand_name': dataMap['brand_name'],
+                                    'product_id': dataMap['product_id'],
+                                    'product_description':
+                                        dataMap['product_description'],
+                                  },
+                                  isProductDetail: false));
+                        },
+                        buttonTitle: (isProductDetail == true)
+                            ? 'Edit Product Details'
+                            : 'Add Variant')))
           ],
         ),
         const SizedBox(height: spacingStandard),

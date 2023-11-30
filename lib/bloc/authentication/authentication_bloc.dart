@@ -125,10 +125,9 @@ class AuthenticationBloc
             _customerCache.setBranchId(
                 authenticationModel.data.companies[0].branches[0].branchId);
             _customerCache
-                .setUserContact(authenticationModel.data.user.userContact ?? 0);
+                .setUserContact(authenticationModel.data.user.userContact);
             _customerCache.setUserName(authenticationModel.data.user.userName);
-            SideBar.userContact =
-                authenticationModel.data.user.userContact ?? 0;
+            SideBar.userContact = authenticationModel.data.user.userContact;
             SideBar.userName = authenticationModel.data.user.userName;
             emit(PhoneOtpVerified(userData: authenticationModel.data));
           } else if (authenticationModel.status == 404) {

@@ -11,6 +11,7 @@ import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../data/models/orders/fetch_orders_model.dart';
 import '../screens/categories/categories_screen.dart';
+import '../screens/settings/employee_list.dart';
 import '../screens/settings/discount_screen.dart';
 import '../screens/onboarding/auhentication_screen.dart';
 import '../screens/orders/order_details_screen.dart';
@@ -19,6 +20,7 @@ import '../screens/product/add_product_screen.dart';
 import '../screens/settings/payment_type_screen.dart';
 import '../screens/settings/profile_screen.dart';
 import '../screens/settings/store_grid_screen.dart';
+import '../screens/settings/add_employee_screen.dart';
 
 class AppRoutes {
   static Route routes(RouteSettings settings) {
@@ -43,6 +45,10 @@ class AppRoutes {
         return _createRoute(ProfileScreen());
       case PaymentTypeScreen.routeName:
         return _createRoute(PaymentTypeScreen());
+      case EmployeeListScreen.routeName:
+        return _createRoute(EmployeeListScreen());
+      case AddEmployeeScreen.routeName:
+        return _createRoute(AddEmployeeScreen());
       case POSScreen.routeName:
         return _createRoute(POSScreen());
 
