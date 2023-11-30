@@ -29,7 +29,7 @@ class DashboardHeaderCards extends StatelessWidget {
                             color: AppColor.saasifyLightPaleGrey,
                             blurRadius: 5.0)
                       ],
-                      color: AppColor.saasifyWhite),
+                      color: dashboardCard[index].color),
                   child: Center(
                       child: ListTile(
                           onTap: () {
