@@ -26,7 +26,7 @@ class SideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        backgroundColor: AppColor.saasifyLightDeepBlue,
+        backgroundColor: AppColor.saasifyWhite,
         surfaceTintColor: AppColor.saasifyTransparent,
         elevation: 4,
         child: Column(children: [
@@ -41,7 +41,7 @@ class SideBar extends StatelessWidget {
                     children: [
                       Text(userName,
                           style: Theme.of(context).textTheme.xTiniest.copyWith(
-                              color: AppColor.saasifyWhite,
+                              color: AppColor.saasifyLighterBlack,
                               fontWeight: FontWeight.w600)),
                       const SizedBox(height: spacingXXSmall),
                       Text(userContact.toString(),
@@ -49,7 +49,7 @@ class SideBar extends StatelessWidget {
                               .textTheme
                               .xxxTiniest
                               .copyWith(
-                                  color: AppColor.saasifyWhite,
+                                  color: AppColor.saasifyLighterBlack,
                                   fontWeight: FontWeight.w300))
                     ])
               ])),
@@ -59,91 +59,116 @@ class SideBar extends StatelessWidget {
               padding: const EdgeInsets.only(left: spacingLarge),
               child: Column(children: [
                 ListTile(
-                    title: Text(StringConstants.kDashboard,
-                        style: Theme.of(context).textTheme.xTiniest.copyWith(
-                            color: (selectedIndex == 1)
-                                ? AppColor.saasifyBlack
-                                : AppColor.saasifyWhite,
-                            fontWeight: FontWeight.w600)),
-                    onTap: () {
+                  title: Text(StringConstants.kDashboard,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          color: (selectedIndex == 1)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyLightBlack,
+                          fontWeight: FontWeight.w600)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, DashboardsScreen.routeName);
+                  },
+                ),
+                ListTile(
+                  title: Text(StringConstants.kPOS,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          color: (selectedIndex == 2)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyLightBlack,
+                          fontWeight: FontWeight.w600)),
+                  onTap: () async {
+                    await DatabaseUtil.products.clear();
+                    if (context.mounted) {
                       Navigator.pushReplacementNamed(
-                          context, DashboardsScreen.routeName);
-                    }),
+                          context, POSScreen.routeName);
+                    }
+                  },
+                ),
                 ListTile(
-                    title: Text(StringConstants.kPOS,
-                        style: Theme.of(context).textTheme.xTiniest.copyWith(
-                            color: (selectedIndex == 2)
-                                ? AppColor.saasifyBlack
-                                : AppColor.saasifyWhite,
-                            fontWeight: FontWeight.w600)),
-                    onTap: () async {
-                      await DatabaseUtil.products.clear();
-                      if (context.mounted) {
-                        Navigator.pushReplacementNamed(
-                            context, POSScreen.routeName);
-                      }
-                    }),
+                  title: Text(StringConstants.kProducts,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          color: (selectedIndex == 3)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyLightBlack,
+                          fontWeight: FontWeight.w600)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, ProductListScreen.routeName);
+                  },
+                ),
+
                 ListTile(
-                    title: Text(StringConstants.kProducts,
-                        style: Theme.of(context).textTheme.xTiniest.copyWith(
-                            color: (selectedIndex == 3)
-                                ? AppColor.saasifyBlack
-                                : AppColor.saasifyWhite,
-                            fontWeight: FontWeight.w600)),
-                    onTap: () {
+                  title: Text(StringConstants.kCategories,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          color: (selectedIndex == 4)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyLightBlack,
+                          fontWeight: FontWeight.w600)),
+                  onTap: () async {
+                    await DatabaseUtil.products.clear();
+                    if (context.mounted) {
                       Navigator.pushReplacementNamed(
-                          context, ProductListScreen.routeName);
-                    }),
+                          context, CategoriesScreen.routeName);
+                    }
+                  },
+                ),
                 ListTile(
-                    title: Text(StringConstants.kCategories,
-                        style: Theme.of(context).textTheme.xTiniest.copyWith(
-                            color: (selectedIndex == 4)
-                                ? AppColor.saasifyBlack
-                                : AppColor.saasifyWhite,
-                            fontWeight: FontWeight.w600)),
-                    onTap: () async {
-                      await DatabaseUtil.products.clear();
-                      if (context.mounted) {
-                        Navigator.pushReplacementNamed(
-                            context, CategoriesScreen.routeName);
-                      }
-                    }),
+                  title: Text(StringConstants.kOrders,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          color: (selectedIndex == 5)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyLightBlack,
+                          fontWeight: FontWeight.w600)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, OrdersScreen.routeName);
+                  },
+                ),
                 ListTile(
-                    title: Text(StringConstants.kOrders,
-                        style: Theme.of(context).textTheme.xTiniest.copyWith(
-                            color: (selectedIndex == 5)
-                                ? AppColor.saasifyBlack
-                                : AppColor.saasifyWhite,
-                            fontWeight: FontWeight.w600)),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, OrdersScreen.routeName);
-                    }),
-                ListTile(
-                    title: Text(StringConstants.kInventoryManagement,
-                        style: Theme.of(context).textTheme.xTiniest.copyWith(
-                            color: (selectedIndex == 6)
-                                ? AppColor.saasifyBlack
-                                : AppColor.saasifyWhite,
-                            fontWeight: FontWeight.w600)),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, InventoryListScreen.routeName);
-                    })
+                  title: Text(StringConstants.kInventoryManagement,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          color: (selectedIndex == 6)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyLightBlack,
+                          fontWeight: FontWeight.w600)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, InventoryListScreen.routeName);
+                  },
+                ),
+
+                // ListTile(
+                //   title: Text('Profile Management',
+                //       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
+                //           color: (selectedIndex == 6)
+                //               ? AppColor.saasifyLightDeepBlue
+                //               : AppColor.saasifyBlack)),
+                //   onTap: () {},
+                // ),
+                // ListTile(
+                //   title: Text('Insights',
+                //       style: Theme.of(context).textTheme.xxxTiniest.copyWith(
+                //           color: (selectedIndex == 7)
+                //               ? AppColor.saasifyLightDeepBlue
+                //               : AppColor.saasifyBlack)),
+                //   onTap: () {},
+                // )
               ])),
           const Divider(),
           Padding(
               padding: const EdgeInsets.only(left: spacingLarge),
               child: ListTile(
-                  title: Text(StringConstants.kLogout,
-                      style: Theme.of(context).textTheme.xTiniest.copyWith(
-                          color: AppColor.saasifyRed,
-                          fontWeight: FontWeight.w600)),
-                  onTap: () {
-                    context.read<AuthenticationBloc>().add(LogOut());
-                    Navigator.pushNamedAndRemoveUntil(context,
-                        AuthenticationScreen.routeName, (route) => false);
-                  }))
+                title: Text(StringConstants.kLogout,
+                    style: Theme.of(context).textTheme.xTiniest.copyWith(
+                        color: AppColor.saasifyRed,
+                        fontWeight: FontWeight.w600)),
+                onTap: () {
+                  context.read<AuthenticationBloc>().add(LogOut());
+                  Navigator.pushNamedAndRemoveUntil(context,
+                      AuthenticationScreen.routeName, (route) => false);
+                },
+              ))
         ]));
   }
 }
