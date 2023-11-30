@@ -35,6 +35,7 @@ class StringConstants {
   static const kAddCategory = 'Add Category';
   static const kAddCoupon = 'Add Coupon';
   static const kAddProfile = 'Add Profile';
+  static const kEmployees = 'Employees';
   static const kWantToDeactivateProduct = 'Want to deactivate product?';
   static const kDoYouWantToDeactivateGST = 'Do you Want to deactivate GST?';
   static const kDoYouWantToDeactivateCoupon =
@@ -53,10 +54,12 @@ class StringConstants {
   static const kBrand = 'Brand';
   static const kOwnerName = 'Owner Name';
   static const kLastName = 'Last Name';
+  static const kFirstName = 'First Name';
   static const kEmailAddress = 'Email Address';
   static const kAddress = 'Address';
   static const kPassword = 'Password';
   static const kMobileNo = 'Mobile No';
+  static const kType = 'Type';
   static const kBranchName = 'Branch Name';
   static const kBrandLogo = 'Brand Logo';
   static const kOrders = 'Orders';
@@ -126,6 +129,7 @@ class StringConstants {
   static const kPOS = 'POS';
   static const kCategories = 'Categories';
   static const kProfile = 'Profile';
+  static const kAddEmployee = 'Add Employee';
   static const kStore = 'Store';
 
   // static const kBranchName = 'Branch Name';

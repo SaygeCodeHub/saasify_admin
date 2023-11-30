@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/profile/profile_bloc.dart';
 import 'package:saasify/bloc/profile/profile_states.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/settings/widgets/profile_right_side_column.dart';
+import 'package:saasify/screens/settings/widgets/profile_form.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../bloc/profile/profile_event.dart';
 import '../../configs/app_color.dart';

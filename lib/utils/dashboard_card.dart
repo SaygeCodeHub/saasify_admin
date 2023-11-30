@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saasify/screens/settings/employee_list.dart';
 import '../data/models/dashboard/dashboard_card.dart';
 import '../screens/settings/discount_screen.dart';
 import '../screens/settings/payment_type_screen.dart';
@@ -39,7 +40,7 @@ List<DashboardCardData> dashboardCard = [
       subtitle: 'Manage Payment Methods'),
   DashboardCardData(
       iconName: Icons.people,
-      routeName: '',
+      routeName: EmployeeListScreen.routeName,
       title: 'Employees',
       subtitle: 'Manage Employees'),
   DashboardCardData(

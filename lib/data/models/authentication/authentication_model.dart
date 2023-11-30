@@ -105,12 +105,16 @@ class Branch {
   final int branchId;
   final String branchName;
   final int branchContact;
+  final String branchCurrency;
+  final bool branchActive;
   final String branchAddress;
 
   Branch({
     required this.branchId,
     required this.branchName,
     required this.branchContact,
+    required this.branchCurrency,
+    required this.branchActive,
     required this.branchAddress,
   });
 
@@ -118,6 +122,8 @@ class Branch {
         branchId: json["branch_id"],
         branchName: json["branch_name"],
         branchContact: json["branch_contact"],
+        branchCurrency: json["branch_currency"],
+        branchActive: json["branch_active"],
         branchAddress: json["branch_address"],
       );
 
@@ -125,6 +131,8 @@ class Branch {
         "branch_id": branchId,
         "branch_name": branchName,
         "branch_contact": branchContact,
+        "branch_currency": branchCurrency,
+        "branch_active": branchActive,
         "branch_address": branchAddress,
       };
 }
@@ -132,7 +140,7 @@ class Branch {
 class User {
   final String userName;
   final String userId;
-  final int? userContact;
+  final int userContact;
 
   User({
     required this.userName,
