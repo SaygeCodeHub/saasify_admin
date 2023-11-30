@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/product/product_bloc.dart';
@@ -158,7 +157,6 @@ class ProductListScreen extends StatelessWidget {
                                                 Navigator.pop(context);
                                               },
                                               primaryOnPressed: () {
-                                                log('confirm button pressed');
                                                 Navigator.pop(context);
                                                 context.read<ProductBloc>().add(
                                                     DeleteProducts(

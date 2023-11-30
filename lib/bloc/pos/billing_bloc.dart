@@ -214,11 +214,11 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
               customer.productList[i].count;
     }
 
-    customer.billDetails.discount = customer.billDetails.total *
+    customer.billDetails.discount = customer.billDetails.itemTotal *
         (customer.billDetails.additionalDiscount / 100);
 
     customer.billDetails.total =
-        customer.billDetails.itemTotal - customer.billDetails.discount;
+        (customer.billDetails.itemTotal - customer.billDetails.discount);
 
     DatabaseUtil.ordersBox.put(orderId, customer);
 
@@ -276,7 +276,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
         "payment_type": event.paymentMethod,
         "customer_name": customer.customerName,
         "discount_total": customer.billDetails.discount,
-        "total_amount": customer.billDetails.total,
+        "total_amount": customer.billDetails.total.round(),
         "subtotal": customer.billDetails.itemTotal
       };
 

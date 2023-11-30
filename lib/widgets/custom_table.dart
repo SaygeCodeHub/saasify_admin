@@ -1,3 +1,4 @@
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_theme.dart';
@@ -25,42 +26,38 @@ class CustomDataTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: Column(children: [
-      ListView(shrinkWrap: true, children: [
-        DataTable(
+        child: DataTable2(
+            smRatio: 0.5,
             columnSpacing: 0,
-            horizontalMargin: 20,
+            horizontalMargin: 0,
             headingRowHeight: 50,
             columns: [
-                  DataColumn(
-                      label: Expanded(
-                          child: Center(
-                              child: Visibility(
-                                  visible: dataCount > 0,
-                                  child: InkWell(
-                                      onTap: onHeaderCheckboxChange,
-                                      child: Icon(
-                                          (selectedIds.isEmpty)
-                                              ? Icons.check_box_outline_blank
-                                              : (selectedIds.length < dataCount)
-                                                  ? Icons
-                                                      .indeterminate_check_box_outlined
-                                                  : Icons.check_box,
-                                          color: (selectedIds.isNotEmpty)
-                                              ? AppColor.saasifyLightDeepBlue
-                                              : AppColor
-                                                  .saasifyLightDeepBlue))))))
+                  DataColumn2(
+                      size: ColumnSize.S,
+                      label: Center(
+                          child: Visibility(
+                              visible: dataCount > 0,
+                              child: InkWell(
+                                  onTap: onHeaderCheckboxChange,
+                                  child: Icon(
+                                      (selectedIds.isEmpty)
+                                          ? Icons.check_box_outline_blank
+                                          : (selectedIds.length < dataCount)
+                                              ? Icons
+                                                  .indeterminate_check_box_outlined
+                                              : Icons.check_box,
+                                      color: (selectedIds.isNotEmpty)
+                                          ? AppColor.saasifyLightDeepBlue
+                                          : AppColor.saasifyLightDeepBlue)))))
                 ] +
                 List.generate(
                     columnList.length,
-                    (index) => DataColumn(
-                            label: Expanded(
-                          child: Text(columnList[index],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .xTiniest
-                                  .copyWith(fontWeight: FontWeight.w600)),
-                        ))),
+                    (index) => DataColumn2(
+                        label: Text(columnList[index],
+                            style: Theme.of(context)
+                                .textTheme
+                                .xTiniest
+                                .copyWith(fontWeight: FontWeight.w600)))),
             rows: List.generate(
                 dataCount,
                 (index) => DataRow(
@@ -81,8 +78,6 @@ class CustomDataTable extends StatelessWidget {
                                             : AppColor.saasifyLightDeepBlue)),
                           ))
                         ] +
-                        generateData(index)))),
-      ])
-    ]));
+                        generateData(index)))));
   }
 }

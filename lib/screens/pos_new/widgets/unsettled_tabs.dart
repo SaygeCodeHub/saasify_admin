@@ -194,7 +194,7 @@ class UnsettledTabs extends StatelessWidget {
                                                 const SizedBox(
                                                     height: spacingSmallest),
                                                 Text(
-                                                    'Total - ₹ ${customerData["${customerIdList[index]}"]!.billDetails.total}',
+                                                    'Total - ₹ ${customerData["${customerIdList[index]}"]!.billDetails.total.round().toStringAsFixed(2)}',
                                                     textScaleFactor:
                                                         context.responsive(0.85,
                                                             tablets: 1),

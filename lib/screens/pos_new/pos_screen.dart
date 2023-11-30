@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/customer/customer_bloc.dart';
@@ -113,7 +112,6 @@ class POSScreen extends StatelessWidget {
                     if (state is FetchingProductsByCategory) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is LoadDataBaseOrders) {
-                      log(state.customerIdList.toString());
                       return UnsettledTabs(
                           customerIdList: state.customerIdList,
                           customerData: state.customerData);
