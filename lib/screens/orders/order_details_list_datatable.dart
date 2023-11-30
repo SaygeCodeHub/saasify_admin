@@ -45,18 +45,6 @@ class OrderDetailsListDataTable extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600))),
-            DataColumn(
-                label: Text(StringConstants.kDiscountCent,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xTiniest
-                        .copyWith(fontWeight: FontWeight.w600))),
-            DataColumn(
-                label: Text(StringConstants.kDiscountedPrice,
-                    style: Theme.of(context)
-                        .textTheme
-                        .xTiniest
                         .copyWith(fontWeight: FontWeight.w600)))
           ],
           rows: List.generate(
@@ -91,23 +79,10 @@ class OrderDetailsListDataTable extends StatelessWidget {
                                     .toLowerCase(),
                             style: Theme.of(context).textTheme.xxTiniest))),
                     DataCell(Text(
-                        orderListDatum.itemsOrdered[index].cost.toString(),
+                        '${orderListDatum.currency}  ${orderListDatum.itemsOrdered[index].cost.toString()}',
                         style: Theme.of(context).textTheme.xxTiniest)),
                     DataCell(Text(
                         orderListDatum.itemsOrdered[index].count.toString(),
-                        style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(
-                        orderListDatum.itemsOrdered[index].discountPercent
-                            .toString(),
-                        style: Theme.of(context).textTheme.xxTiniest)),
-                    DataCell(Text(
-                        ((orderListDatum.itemsOrdered[index].cost *
-                                    orderListDatum.itemsOrdered[index].count) *
-                                ((100 -
-                                        orderListDatum.itemsOrdered[index]
-                                            .discountPercent) /
-                                    100))
-                            .toString(),
                         style: Theme.of(context).textTheme.xxTiniest))
                   ])))
     ]);

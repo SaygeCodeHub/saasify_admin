@@ -29,7 +29,8 @@ class OrderBillDetails extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: AppColor.saasifyDarkestBlack)),
                 const SizedBox(height: spacingStandard),
-                Text(orderListDatum.subtotal.toString(),
+                Text(
+                    '${orderListDatum.currency}  ${orderListDatum.subtotal.toStringAsFixed(2)}',
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
@@ -41,7 +42,23 @@ class OrderBillDetails extends StatelessWidget {
                     style: Theme.of(context).textTheme.xTiniest.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColor.saasifyDarkestBlack)),
-                Text(orderListDatum.discountTotal.toString(),
+                Text(
+                    '${orderListDatum.currency}  ${orderListDatum.discountTotal.toStringAsFixed(2)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(color: AppColor.saasifyGreyBlue))
+              ]),
+              const SizedBox(height: spacingSmall),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Text(StringConstants.kGST,
+                    style: Theme.of(context).textTheme.xTiniest.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AppColor.saasifyDarkestBlack)),
+                const SizedBox(
+                  height: spacingStandard,
+                ),
+                Text('${orderListDatum.currency} 0.00',
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
@@ -55,7 +72,8 @@ class OrderBillDetails extends StatelessWidget {
                     style: Theme.of(context).textTheme.xTiniest.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColor.saasifyDarkestBlack)),
-                Text(orderListDatum.totalAmount.toString(),
+                Text(
+                    '${orderListDatum.currency} ${orderListDatum.totalAmount.toStringAsFixed(2)}',
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest
