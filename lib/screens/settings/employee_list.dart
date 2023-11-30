@@ -30,9 +30,9 @@ class EmployeeListScreen extends StatelessWidget {
               context.responsive(
                   TopBar(
                       scaffoldKey: _scaffoldKey,
-                      headingText: StringConstants.kProducts),
+                      headingText: StringConstants.kDashboard),
                   desktop: const Expanded(
-                    child: SideBar(selectedIndex: 3),
+                    child: SideBar(selectedIndex: 1),
                   )),
               Expanded(
                   flex: 5,
