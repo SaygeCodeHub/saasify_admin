@@ -112,19 +112,25 @@ class ProfileScreen extends StatelessWidget {
                                           children: [
                                             const SizedBox(
                                                 height: spacingSmall),
-                                            Image.network(
-                                                state.profileData.storeLogo
-                                                    .toString(),
-                                                height: spacingXLarge,
-                                                width: spacingXLarge,
-                                                color:
-                                                    AppColor.saasifyPaleBlack),
-                                            const SizedBox(
-                                                height: spacingSmall),
-                                            Text(StringConstants.kSelectFile,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .xxTiniest),
+                                            (state.profileData.storeLogo
+                                                    .toString()
+                                                    .isNotEmpty)
+                                                ? Image.network(
+                                                    state.profileData.storeLogo
+                                                        .toString(),
+                                                    height: spacingXLarge,
+                                                    width: spacingXLarge,
+                                                    color: AppColor
+                                                        .saasifyPaleBlack,
+                                                    errorBuilder: (context,
+                                                        error, stackTrace) {
+                                                      return const Text(
+                                                          'Image is not available');
+                                                    },
+                                                  )
+                                                : Image.asset(
+                                                    "assets/error_image.png",
+                                                    height: kButtonHeight),
                                           ])),
                                 ),
                                 const SizedBox(height: spacingStandard),
