@@ -186,6 +186,7 @@ class ProductFormSection2 extends StatelessWidget {
                     '${(dataMap['CGST'] + dataMap['SGST']).toInt().toString()} %'),
               ))
           : CustomDropdownWidget(
+              canEdit: !(dataMap['enableGST'] ?? true),
               onChanges: () {
                 dataMap['CGST'] = int.parse(dataMap['GST']) / 2;
                 dataMap['SGST'] = int.parse(dataMap['GST']) / 2;

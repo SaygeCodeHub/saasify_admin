@@ -137,7 +137,6 @@ class SideBar extends StatelessWidget {
                         context, InventoryListScreen.routeName);
                   },
                 ),
-
                 // ListTile(
                 //   title: Text('Profile Management',
                 //       style: Theme.of(context).textTheme.xxxTiniest.copyWith(

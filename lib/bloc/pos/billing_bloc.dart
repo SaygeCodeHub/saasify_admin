@@ -214,7 +214,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
               customer.productList[i].count;
     }
 
-    customer.billDetails.discount = customer.billDetails.total *
+    customer.billDetails.discount = customer.billDetails.itemTotal *
         (customer.billDetails.additionalDiscount / 100);
 
     customer.billDetails.total =

@@ -62,8 +62,9 @@ class BillDetails extends StatelessWidget {
                           color: AppColor.saasifyDarkestBlack)),
                   const SizedBox(width: spacingXSmall),
                   SizedBox(
-                    width: 50,
+                    width: 28,
                     child: TextFormField(
+                        cursorHeight: 15,
                         decoration: const InputDecoration(
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(
@@ -76,6 +77,12 @@ class BillDetails extends StatelessWidget {
                               borderSide:
                                   BorderSide(color: AppColor.saasifyBlack)),
                         ),
+                        initialValue: context
+                            .read<BillingBloc>()
+                            .customer
+                            .billDetails
+                            .additionalDiscount
+                            .toString(),
                         onFieldSubmitted: (value) {
                           context
                               .read<BillingBloc>()
@@ -91,7 +98,13 @@ class BillDetails extends StatelessWidget {
                           LengthLimitingTextInputFormatter(2)
                         ],
                         onChanged: (value) {}),
-                  )
+                  ),
+                  const SizedBox(width: spacingXXSmall),
+                  Text('%',
+                      style: Theme.of(context)
+                          .textTheme
+                          .xTiniest
+                          .copyWith(color: AppColor.saasifyGreyBlue))
                 ]),
                 Text('$currency ${billDetails.discount.toStringAsFixed(2)}',
                     style: Theme.of(context)
@@ -100,7 +113,24 @@ class BillDetails extends StatelessWidget {
                         .copyWith(color: AppColor.saasifyGreyBlue))
               ]),
               const SizedBox(
-                height: spacingStandard,
+                height: spacingSmall,
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Text(StringConstants.kGST,
+                    style: Theme.of(context).textTheme.xTiniest.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AppColor.saasifyDarkestBlack)),
+                const SizedBox(
+                  height: spacingStandard,
+                ),
+                Text('$currency 0.00',
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(color: AppColor.saasifyGreyBlue))
+              ]),
+              const SizedBox(
+                height: spacingXXSmall,
               ),
               const Divider(
                 color: AppColor.saasifyPaleWhite,
@@ -114,7 +144,8 @@ class BillDetails extends StatelessWidget {
                     style: Theme.of(context).textTheme.xTiniest.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColor.saasifyDarkestBlack)),
-                Text('$currency ${billDetails.total.toStringAsFixed(2)}',
+                Text(
+                    '$currency ${billDetails.total.round().toStringAsFixed(2)}',
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest

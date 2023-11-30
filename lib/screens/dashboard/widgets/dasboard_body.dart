@@ -13,7 +13,7 @@ class DashboardBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Expanded(flex: 2, child: DashboardOrderTableList(ordersData: ordersData)),
-      const SizedBox(width: kDropdownHeight),
+      const SizedBox(width: spacingLarge),
       Expanded(
           child: SingleChildScrollView(
               child: Column(children: [

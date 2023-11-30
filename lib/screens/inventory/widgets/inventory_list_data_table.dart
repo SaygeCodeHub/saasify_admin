@@ -95,7 +95,10 @@ class InventoryListDataTable extends StatelessWidget {
                         const Icon(Icons.circle,
                             size: 8, color: AppColor.saasifyRed),
                         const SizedBox(width: 6),
-                        Text('Low Stock',
+                        Text(
+                            (productList[index].stock > 0)
+                                ? 'Low Stock'
+                                : 'Out of Stock',
                             style: Theme.of(context)
                                 .textTheme
                                 .xxTiniest

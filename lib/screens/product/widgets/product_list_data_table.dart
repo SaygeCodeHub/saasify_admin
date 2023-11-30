@@ -174,14 +174,17 @@ class ProductListDataTable extends StatelessWidget {
                 ))),
             DataCell(ToggleSwitchWidget(
                 activeColor: AppColor.saasifyLightDeepBlue,
-                value: productList[index].variantActive,
-                onChanged: (value) {
-                  Map productDetails = productList[index].toJson();
-                  productDetails['variant_active'] = value;
-                  context
-                      .read<ProductBloc>()
-                      .add(EditProduct(productDetailsMap: productDetails));
-                })),
+                value: (productList[index].draft)
+                    ? false
+                    : productList[index].variantActive,
+                onChanged: (productList[index].draft)
+                    ? null
+                    : (value) {
+                        Map productDetails = productList[index].toJson();
+                        productDetails['variant_active'] = value;
+                        context.read<ProductBloc>().add(
+                            EditProduct(productDetailsMap: productDetails));
+                      })),
             DataCell(IconButton(
                 onPressed: () {
                   Navigator.pushReplacementNamed(
