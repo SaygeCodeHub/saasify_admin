@@ -30,4 +30,8 @@ class AppColor {
   static const Color saasifyPaleBlack = Color(0xFF8C8FA4);
   static const Color saasifyLightPaleGrey = Color(0xFFbdbdbe);
   static const Color saasifyLightestPaleGrey = Color(0xFFf4f4f4);
+  static const Color saasifyDarkBlue = Color(0xFF3a57a7);
+  static const Color saasifyLightestGrey = Color(0xFFd8dcf5);
+  static const Color saasifyPalestGrey = Color(0xFFdedede);
+  static const Color saasifyPalestWhite = Color(0xFFececec);
 }
