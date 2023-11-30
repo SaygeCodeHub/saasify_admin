@@ -91,7 +91,6 @@ class MyPosApp extends StatelessWidget {
           BlocProvider(lazy: true, create: (context) => CategoriesBloc()),
           BlocProvider(lazy: true, create: (context) => OrdersBloc()),
           BlocProvider(lazy: true, create: (context) => BranchesBloc()),
-          BlocProvider(lazy: true, create: (context) => CustomerBloc())
           BlocProvider(lazy: true, create: (context) => CustomerBloc()),
           BlocProvider(lazy: true, create: (context) => ProfileBloc()),
         ],

@@ -7,9 +7,6 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/billing/bill_model.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
-import 'package:saasify/widgets/custom_text_field.dart';
-import 'package:saasify/widgets/primary_button.dart';
-import 'package:saasify/widgets/secondary_button.dart';
 
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
@@ -40,139 +37,68 @@ class BillDetails extends StatelessWidget {
                 bottom: spacingStandard),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(StringConstants.kSubTotal,
-                      style: Theme.of(context).textTheme.xTiniest.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: AppColor.saasifyDarkestBlack)),
-                  const SizedBox(
-                    height: spacingStandard,
-                  ),
-                  Text('$currency ${billDetails.itemTotal.toStringAsFixed(2)}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .xTiniest
-                          .copyWith(color: AppColor.saasifyGreyBlue)),
-                ],
-              ),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Text(StringConstants.kSubTotal,
+                    style: Theme.of(context).textTheme.xTiniest.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AppColor.saasifyDarkestBlack)),
+                const SizedBox(
+                  height: spacingStandard,
+                ),
+                Text('$currency ${billDetails.itemTotal.toStringAsFixed(2)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(color: AppColor.saasifyGreyBlue))
+              ]),
               const SizedBox(
                 height: spacingSmall,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Row(children: [
                   Text(StringConstants.kDiscount,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AppColor.saasifyDarkestBlack)),
-                  Text('$currency ${billDetails.discount.toStringAsFixed(2)}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .xTiniest
-                          .copyWith(color: AppColor.saasifyGreyBlue)),
-                ],
-              ),
-              const SizedBox(
-                height: spacingSmall,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Text(StringConstants.kAdditionalDiscount,
-                          style: Theme.of(context).textTheme.xTiniest.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: AppColor.saasifyDarkestBlack)),
-                      const SizedBox(width: spacingSmall),
-                      IconButton(
-                          style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                      content: SizedBox(
-                                          width: kDialogueWidth,
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Text(
-                                                    StringConstants
-                                                        .kEnterDiscountPercent,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .xTiniest),
-                                                const SizedBox(
-                                                    height: spacingXXSmall),
-                                                CustomTextField(
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
-                                                    ],
-                                                    onTextFieldChanged:
-                                                        (value) {
-                                                      context
-                                                              .read<BillingBloc>()
-                                                              .customer
-                                                              .billDetails
-                                                              .additionalDiscount =
-                                                          double.parse(value);
-                                                    }),
-                                                const SizedBox(
-                                                    height: spacingXMedium),
-                                                Row(children: [
-                                                  Expanded(
-                                                      child: SecondaryButton(
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          buttonTitle:
-                                                              StringConstants
-                                                                  .kCancel)),
-                                                  const SizedBox(
-                                                      width: spacingXXSmall),
-                                                  Expanded(
-                                                      child: PrimaryButton(
-                                                          onPressed: () {
-                                                            context
-                                                                .read<
-                                                                    BillingBloc>()
-                                                                .customer
-                                                                .billDetails
-                                                                .additionalDiscount;
-                                                            context
-                                                                .read<
-                                                                    BillingBloc>()
-                                                                .add(AddDiscount(
-                                                                    productsByCategories:
-                                                                        productsByCategories));
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          buttonTitle:
-                                                              StringConstants
-                                                                  .kOk))
-                                                ])
-                                              ])));
-                                });
-                          },
-                          icon: const Icon(Icons.edit_outlined, size: 14))
-                    ],
-                  ),
-                  Text(
-                      '$currency ${(context.read<BillingBloc>().customer.billDetails.total * (context.read<BillingBloc>().customer.billDetails.additionalDiscount / 100)).toStringAsFixed(2)}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .xTiniest
-                          .copyWith(color: AppColor.saasifyGreyBlue)),
-                ],
-              ),
+                  const SizedBox(width: spacingXSmall),
+                  SizedBox(
+                    width: 50,
+                    child: TextFormField(
+                        decoration: const InputDecoration(
+                          isDense: true,
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: spacingXSmall,
+                              horizontal: spacingXSmall),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.saasifyBlack)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.saasifyBlack)),
+                        ),
+                        onFieldSubmitted: (value) {
+                          context
+                              .read<BillingBloc>()
+                              .customer
+                              .billDetails
+                              .additionalDiscount = double.parse(value);
+                          context.read<BillingBloc>().add(AddDiscount(
+                              productsByCategories: productsByCategories));
+                        },
+                        style: Theme.of(context).textTheme.xTiniest,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(2)
+                        ],
+                        onChanged: (value) {}),
+                  )
+                ]),
+                Text('$currency ${billDetails.discount.toStringAsFixed(2)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .xTiniest
+                        .copyWith(color: AppColor.saasifyGreyBlue))
+              ]),
               const SizedBox(
                 height: spacingStandard,
               ),

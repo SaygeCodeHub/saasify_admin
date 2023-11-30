@@ -207,26 +207,18 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     customer.billDetails.itemTotal = 0;
     customer.billDetails.discount = 0;
     customer.billDetails.total = 0;
-    double addDiscount = 0;
 
     for (var i = 0; i < customer.productList.length; i++) {
       customer.billDetails.itemTotal +=
           customer.productList[i].product.variants[0].cost *
               customer.productList[i].count;
-
-      customer.billDetails.discount +=
-          customer.productList[i].product.variants[0].cost *
-              customer.productList[i].product.variants[0].discountPercent /
-              100 *
-              customer.productList[i].count;
     }
 
-    addDiscount = customer.billDetails.total *
+    customer.billDetails.discount = customer.billDetails.total *
         (customer.billDetails.additionalDiscount / 100);
 
-    customer.billDetails.total = customer.billDetails.itemTotal -
-        customer.billDetails.discount -
-        addDiscount;
+    customer.billDetails.total =
+        customer.billDetails.itemTotal - customer.billDetails.discount;
 
     DatabaseUtil.ordersBox.put(orderId, customer);
 
