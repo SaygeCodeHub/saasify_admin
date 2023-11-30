@@ -9,15 +9,16 @@ import 'package:saasify/repositories/inventory/inventory_repository.dart';
 import 'package:saasify/repositories/inventory/inventory_repository_impl.dart';
 import 'package:saasify/repositories/products/product_repository.dart';
 import 'package:saasify/repositories/products/product_repository_impl.dart';
+import 'package:saasify/repositories/profile/profile_repository.dart';
 import 'package:saasify/repositories/upload/upload_repository.dart';
 import 'package:saasify/repositories/upload/upload_repository_impl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../data/customer_cache/customer_cache.dart';
 import '../repositories/branches/branches_repository.dart';
 import '../repositories/branches/branches_repository_impl.dart';
 import '../repositories/orders/orders_repository.dart';
 import '../repositories/orders/orders_repository_impl.dart';
+import '../repositories/profile/profile_repository_impl.dart';
 import '../services/client_services.dart';
 
 final getIt = GetIt.instance;
@@ -41,4 +42,5 @@ configurableDependencies() {
   getIt.registerLazySingleton<CategoriesRepository>(
       () => CategoriesRepositoryImpl());
   getIt.registerLazySingleton<OrdersRepository>(() => OrdersRepositoryImpl());
+  getIt.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImpl());
 }

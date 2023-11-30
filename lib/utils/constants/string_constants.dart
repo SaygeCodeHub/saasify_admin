@@ -51,13 +51,13 @@ class StringConstants {
   static const kUnsettledTabs = 'Unsettled Tabs';
   static const kInventoryManagement = 'Inventory Management';
   static const kBrand = 'Brand';
-  static const kFirstName = 'First Name';
+  static const kOwnerName = 'Owner Name';
   static const kLastName = 'Last Name';
   static const kEmailAddress = 'Email Address';
   static const kAddress = 'Address';
   static const kPassword = 'Password';
   static const kMobileNo = 'Mobile No';
-  static const kBrandName = 'Brand Name';
+  static const kBranchName = 'Branch Name';
   static const kBrandLogo = 'Brand Logo';
   static const kOrders = 'Orders';
   static const kOrderDetails = 'Order Details';
@@ -127,7 +127,8 @@ class StringConstants {
   static const kCategories = 'Categories';
   static const kProfile = 'Profile';
   static const kStore = 'Store';
-  static const kBranchName = 'Branch Name';
+
+  // static const kBranchName = 'Branch Name';
   static const kCoupons = 'Coupons';
   static const kSearchProduct = 'Search Product';
   static const kAddManually = 'ADD MANUALLY';

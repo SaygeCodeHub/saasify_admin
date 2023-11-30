@@ -73,7 +73,7 @@ class Order {
   final String customerName;
   final double discountTotal;
   final double totalAmount;
-  final int subtotal;
+  final double subtotal;
   final List<ItemsOrdered> itemsOrdered;
   final String currency;
 
@@ -132,11 +132,11 @@ class ItemsOrdered {
   final String brandName;
   final int brandId;
   final int variantId;
-  final int cost;
+  final double cost;
   final int quantity;
   final int stock;
   final int stockId;
-  final int discountPercent;
+  final double discountPercent;
   final String productDescription;
   final List<String> images;
   final String unit;
