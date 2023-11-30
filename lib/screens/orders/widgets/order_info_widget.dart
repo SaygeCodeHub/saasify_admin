@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
-import '../../../data/models/orders/fetch_orders_model.dart';
 
 class OrderInfoWidget extends StatelessWidget {
   final Order orderListDatum;

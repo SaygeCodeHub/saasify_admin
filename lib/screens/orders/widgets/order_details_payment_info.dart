@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/screens/orders/widgets/payment_info_widget.dart';
 
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
-import '../../../data/models/orders/fetch_orders_model.dart';
 import 'customer_info_widget.dart';
 import 'order_info_widget.dart';
 
