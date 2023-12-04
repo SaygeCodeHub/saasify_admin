@@ -66,29 +66,22 @@ class BillDetails extends StatelessWidget {
                     child: TextFormField(
                         cursorHeight: 15,
                         decoration: const InputDecoration(
-                          isDense: true,
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: spacingXSmall,
-                              horizontal: spacingXSmall),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColor.saasifyBlack)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColor.saasifyBlack)),
-                        ),
+                            isDense: true,
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: spacingXSmall,
+                                horizontal: spacingXSmall)),
                         initialValue: context
                             .read<BillingBloc>()
                             .customer
                             .billDetails
-                            .additionalDiscount
+                            .discountPercent
                             .toString(),
                         onFieldSubmitted: (value) {
                           context
                               .read<BillingBloc>()
                               .customer
                               .billDetails
-                              .additionalDiscount = double.parse(value);
+                              .discountPercent = double.parse(value);
                           context.read<BillingBloc>().add(AddDiscount(
                               productsByCategories: productsByCategories));
                         },
@@ -116,14 +109,51 @@ class BillDetails extends StatelessWidget {
                 height: spacingSmall,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text(StringConstants.kGST,
-                    style: Theme.of(context).textTheme.xTiniest.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: AppColor.saasifyDarkestBlack)),
-                const SizedBox(
-                  height: spacingStandard,
-                ),
-                Text('$currency 0.00',
+                Row(children: [
+                  Text(StringConstants.kGST,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: AppColor.saasifyDarkestBlack)),
+                  const SizedBox(width: spacingXSmall),
+                  SizedBox(
+                    width: 28,
+                    child: TextFormField(
+                        cursorHeight: 15,
+                        decoration: const InputDecoration(
+                            isDense: true,
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: spacingXSmall,
+                                horizontal: spacingXSmall)),
+                        initialValue: context
+                            .read<BillingBloc>()
+                            .customer
+                            .billDetails
+                            .gstPercent
+                            .toString(),
+                        onFieldSubmitted: (value) {
+                          context
+                              .read<BillingBloc>()
+                              .customer
+                              .billDetails
+                              .gstPercent = double.parse(value);
+                          context.read<BillingBloc>().add(AddDiscount(
+                              productsByCategories: productsByCategories));
+                        },
+                        style: Theme.of(context).textTheme.xTiniest,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(2)
+                        ],
+                        onChanged: (value) {}),
+                  ),
+                  const SizedBox(width: spacingXXSmall),
+                  Text('%',
+                      style: Theme.of(context)
+                          .textTheme
+                          .xTiniest
+                          .copyWith(color: AppColor.saasifyGreyBlue))
+                ]),
+                Text('$currency ${billDetails.gst.toStringAsFixed(2)}',
                     style: Theme.of(context)
                         .textTheme
                         .xTiniest

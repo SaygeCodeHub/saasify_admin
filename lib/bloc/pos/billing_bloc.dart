@@ -21,8 +21,13 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
   Customer customer = Customer(
       customerName: '',
       customerContact: '',
-      billDetails:
-          BillModel(itemTotal: 0, total: 0, discount: 0, additionalDiscount: 0),
+      billDetails: BillModel(
+          itemTotal: 0,
+          total: 0,
+          discount: 0,
+          discountPercent: 0,
+          gst: 0,
+          gstPercent: 0),
       productList: []);
 
   BillingBloc() : super(BillingInitial()) {
@@ -47,7 +52,12 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
         customerName: '',
         customerContact: '',
         billDetails: BillModel(
-            itemTotal: 0, total: 0, discount: 0, additionalDiscount: 0),
+            itemTotal: 0,
+            total: 0,
+            discount: 0,
+            discountPercent: 0,
+            gst: 0,
+            gstPercent: 0),
         productList: []);
     Map<String, Customer> customerData = {};
 
@@ -86,8 +96,13 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       orderId = DateTime.now().millisecondsSinceEpoch.toString();
       selectedCategoryIndex = 0;
       customer.productList = [];
-      customer.billDetails =
-          BillModel(itemTotal: 0, total: 0, discount: 0, additionalDiscount: 0);
+      customer.billDetails = BillModel(
+          itemTotal: 0,
+          total: 0,
+          discount: 0,
+          discountPercent: 0,
+          gst: 0,
+          gstPercent: 0);
     }
 
     add(FetchProductsByCategory());
@@ -215,10 +230,14 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     }
 
     customer.billDetails.discount = customer.billDetails.itemTotal *
-        (customer.billDetails.additionalDiscount / 100);
+        (customer.billDetails.discountPercent / 100);
 
-    customer.billDetails.total =
-        (customer.billDetails.itemTotal - customer.billDetails.discount);
+    customer.billDetails.gst = customer.billDetails.itemTotal *
+        (customer.billDetails.gstPercent / 100);
+
+    customer.billDetails.total = (customer.billDetails.itemTotal -
+        customer.billDetails.discount +
+        customer.billDetails.gst);
 
     DatabaseUtil.ordersBox.put(orderId, customer);
 
@@ -247,7 +266,12 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
         customerName: '',
         customerContact: '',
         billDetails: BillModel(
-            itemTotal: 0, total: 0, discount: 0, additionalDiscount: 0),
+            itemTotal: 0,
+            total: 0,
+            discount: 0,
+            discountPercent: 0,
+            gst: 0,
+            gstPercent: 0),
         productList: []);
     add(LoadAllOrders());
   }

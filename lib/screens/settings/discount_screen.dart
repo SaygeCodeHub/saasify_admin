@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/settings/widgets/add_coupon_pop_up.dart';
 import 'package:saasify/screens/settings/widgets/coupons_grid.dart';
 import 'package:saasify/utils/responsive.dart';
+import 'package:saasify/widgets/custom_page_header.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
 import '../../widgets/sidebar.dart';
@@ -39,27 +39,22 @@ class DiscountScreen extends StatelessWidget {
                           left: spacingXHuge,
                           bottom: spacingXHuge),
                       child: Column(children: [
-                        Row(children: [
-                          InkWell(
-                              onTap: () {
-                                Navigator.pushReplacementNamed(
-                                    context, DashboardsScreen.routeName);
-                              },
-                              child: context.responsive(const SizedBox(),
-                                  desktop:
-                                      const Icon(Icons.arrow_back_ios_new))),
-                          const SizedBox(width: spacingSmall),
-                          context.responsive(const SizedBox(),
-                              desktop: Text(StringConstants.kCoupons,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .xxTiny
-                                      .copyWith(fontWeight: FontWeight.w700))),
-                          context.responsive(const SizedBox(),
-                              desktop: const Spacer()),
-                          const Spacer(),
-                          const AddCouponPopUp()
-                        ]),
+                        CustomPageHeader(
+                          titleText: StringConstants.kCoupons,
+                          onBack: () {
+                            Navigator.pushReplacementNamed(
+                                context, DashboardsScreen.routeName);
+                          },
+                          backIconVisible: true,
+                          buttonTitle: StringConstants.kAddCoupon,
+                          buttonVisible: true,
+                          textFieldVisible: false,
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (ctx) => const AddCouponPopUp());
+                          },
+                        ),
                         const SizedBox(height: spacingStandard),
                         const CouponsGrid(),
                       ])))

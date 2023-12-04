@@ -16,7 +16,7 @@ class CustomPageHeader extends StatelessWidget {
       this.buttonVisible = false,
       this.onPressed,
       this.buttonTitle = '',
-      this.inkWellOnTap,
+      this.onBack,
       this.backIconVisible = false,
       this.deleteIconVisible = false,
       this.deleteOnPressed,
@@ -31,7 +31,7 @@ class CustomPageHeader extends StatelessWidget {
   final bool utilityVisible;
   final void Function()? onPressed;
   final void Function()? deleteOnPressed;
-  final void Function()? inkWellOnTap;
+  final void Function()? onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class CustomPageHeader extends StatelessWidget {
       Visibility(
           visible: backIconVisible,
           child: InkWell(
-              onTap: inkWellOnTap,
+              onTap: onBack,
               child: context.responsive(const SizedBox(),
                   desktop: const Icon(Icons.arrow_back_ios_new)))),
       const SizedBox(width: spacingSmall),

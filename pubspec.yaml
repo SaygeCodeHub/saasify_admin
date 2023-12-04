@@ -50,6 +50,7 @@ dependencies:
   table_calendar: ^3.0.9
   flutter_switch: ^0.3.2
   data_table_2: ^2.5.9
+  fl_chart: ^0.64.0
 
 
 dev_dependencies:

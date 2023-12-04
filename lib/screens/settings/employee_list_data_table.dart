@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/employee/employee_bloc.dart';
+import 'package:saasify/bloc/employee/employee_event.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/product/product_list_screen.dart';
+import 'package:saasify/screens/settings/employee_list.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_table.dart';
 
@@ -19,10 +22,23 @@ class EmployeeListDataTable extends StatelessWidget {
         StringConstants.kType,
         '',
       ],
-      selectedIds: ProductListScreen.selectedIds,
+      selectedIds: EmployeeListScreen.selectedIds,
       dataCount: 4,
-      dataIds: List.generate(4, (index) => 10),
-      onHeaderCheckboxChange: () {},
+      dataIds: List.generate(4, (index) => index),
+      onHeaderCheckboxChange: () {
+        if (EmployeeListScreen.selectedIds.length < 4) {
+          EmployeeListScreen.selectedIds = [0, 1, 2, 3];
+        } else {
+          EmployeeListScreen.selectedIds.clear();
+        }
+        context.read<EmployeeBloc>().add(GetEmployees());
+      },
+      onRowCheckboxChange: (int index) {
+        (EmployeeListScreen.selectedIds.contains(index))
+            ? EmployeeListScreen.selectedIds.remove(index)
+            : EmployeeListScreen.selectedIds.add(index);
+        context.read<EmployeeBloc>().add(GetEmployees());
+      },
       generateData: (index) {
         return [
           DataCell(Align(
@@ -64,7 +80,6 @@ class EmployeeListDataTable extends StatelessWidget {
               )))
         ];
       },
-      onRowCheckboxChange: (int index) {},
     );
   }
 }

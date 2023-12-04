@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/branches/branches_bloc.dart';
+import 'package:saasify/bloc/branches/branches_event.dart';
 import 'package:saasify/bloc/branches/branches_states.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/settings/widgets/add_store_popup.dart';
 import 'package:saasify/screens/settings/widgets/branches_grid.dart';
 import 'package:saasify/utils/responsive.dart';
-import '../../bloc/branches/branches_bloc.dart';
-import '../../bloc/branches/branches_event.dart';
+import 'package:saasify/widgets/custom_page_header.dart';
 import '../../configs/app_color.dart';
-import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
 import '../../widgets/alert_dialogue_box.dart';
-import '../../widgets/primary_button.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 import '../dashboard/dashboard_screen.dart';
@@ -27,7 +26,6 @@ class StoreGridScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<BranchesBloc>().add(FetchAllBranches());
-
     return Scaffold(
         key: _scaffoldKey,
         drawer: const SideBar(selectedIndex: 1),
@@ -75,40 +73,23 @@ class StoreGridScreen extends StatelessWidget {
                           return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(children: [
-                                  InkWell(
-                                      onTap: () {
-                                        Navigator.pushReplacementNamed(context,
-                                            DashboardsScreen.routeName);
-                                      },
-                                      child: context.responsive(
-                                          const SizedBox(),
-                                          desktop: const Icon(
-                                              Icons.arrow_back_ios_new))),
-                                  const SizedBox(width: spacingSmall),
-                                  context.responsive(const SizedBox(),
-                                      desktop: Text(StringConstants.kBranches,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xxTiny
-                                              .copyWith(
-                                                  fontWeight:
-                                                      FontWeight.w700))),
-                                  context.responsive(const SizedBox(),
-                                      desktop: const Spacer()),
-                                  const Spacer(),
-                                  SizedBox(
-                                      width: kGeneralActionButtonWidth,
-                                      child: PrimaryButton(
-                                          onPressed: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (ctx) =>
-                                                    const AddStorePopup());
-                                          },
-                                          buttonTitle:
-                                              StringConstants.kAddNewBranch))
-                                ]),
+                                CustomPageHeader(
+                                  titleText: StringConstants.kBranches,
+                                  onBack: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, DashboardsScreen.routeName);
+                                  },
+                                  backIconVisible: true,
+                                  buttonTitle: StringConstants.kAddNewBranch,
+                                  buttonVisible: true,
+                                  textFieldVisible: false,
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (ctx) =>
+                                            const AddStorePopup());
+                                  },
+                                ),
                                 const SizedBox(height: spacingStandard),
                                 BranchesGrid(branchesData: state.branchList)
                               ]);

@@ -50,7 +50,7 @@ class OrderDetailsScreen extends StatelessWidget {
                               textFieldVisible: false,
                               utilityVisible: true,
                               backIconVisible: true,
-                              inkWellOnTap: () {
+                              onBack: () {
                                 Navigator.pushReplacementNamed(
                                     context, OrdersScreen.routeName);
                               },

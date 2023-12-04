@@ -9,12 +9,18 @@ class BillModel {
   @HiveField(2)
   double discount;
   @HiveField(3)
-  double additionalDiscount;
+  double discountPercent;
   @HiveField(4)
   double total;
+  @HiveField(1)
+  double gst;
+  @HiveField(5)
+  double gstPercent;
 
   BillModel(
-      {required this.additionalDiscount,
+      {required this.gst,
+      required this.gstPercent,
+      required this.discountPercent,
       required this.itemTotal,
       required this.total,
       required this.discount});

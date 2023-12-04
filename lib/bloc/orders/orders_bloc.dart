@@ -33,7 +33,10 @@ class OrdersBloc extends Bloc<OrdersEvents, OrdersStates> {
     dashboardCard[0].subtitle = fetchOrdersModel.data.totalOrders.toString();
     dashboardCard[1].subtitle =
         fetchOrdersModel.data.unpaidOrder.count.toString();
-    dashboardCard[2].subtitle = '₹ ${fetchOrdersModel.data.totalEarning}';
+    dashboardCard[2].subtitle = (fetchOrdersModel.data.totalOrders -
+            fetchOrdersModel.data.unpaidOrder.count)
+        .toString();
+    dashboardCard[3].subtitle = '₹ ${fetchOrdersModel.data.totalEarning}';
     if (fetchOrdersModel.status == 200) {
       emit(FetchedOrders(fetchOrdersList: fetchOrdersModel.data));
     } else {

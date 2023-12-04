@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/profile/profile_bloc.dart';
+import 'package:saasify/bloc/profile/profile_event.dart';
 import 'package:saasify/bloc/profile/profile_states.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/settings/widgets/profile_form.dart';
 import 'package:saasify/utils/responsive.dart';
-import '../../bloc/profile/profile_event.dart';
+import 'package:saasify/widgets/custom_page_header.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
@@ -25,7 +26,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<ProfileBloc>().add(FetchProfileDetails());
-
     return Scaffold(
         key: _scaffoldKey,
         drawer: const SideBar(selectedIndex: 1),
@@ -59,34 +59,14 @@ class ProfileScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      InkWell(
-                                          onTap: () {
-                                            Navigator.pushReplacementNamed(
-                                                context,
-                                                DashboardsScreen.routeName);
-                                          },
-                                          child: context.responsive(
-                                              const SizedBox(),
-                                              desktop: const Icon(
-                                                  Icons.arrow_back_ios_new))),
-                                      const SizedBox(width: spacingSmall),
-                                      context.responsive(const SizedBox(),
-                                          desktop: Text(
-                                              StringConstants.kProfile,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .xxTiny
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w700))),
-                                      context.responsive(const SizedBox(),
-                                          desktop: const Spacer()),
-                                      const Spacer(),
-                                    ]),
+                                CustomPageHeader(
+                                    textFieldVisible: false,
+                                    onBack: () {
+                                      Navigator.pushReplacementNamed(
+                                          context, DashboardsScreen.routeName);
+                                    },
+                                    backIconVisible: true,
+                                    titleText: StringConstants.kProfile),
                                 const SizedBox(height: spacingStandard),
                                 Text(StringConstants.kBrandLogo,
                                     style: Theme.of(context)

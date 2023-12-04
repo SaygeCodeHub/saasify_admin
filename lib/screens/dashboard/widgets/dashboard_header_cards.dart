@@ -16,7 +16,7 @@ class DashboardHeaderCards extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
         shrinkWrap: true,
-        itemCount: dashboardCard.length,
+        itemCount: 4,
         itemBuilder: (BuildContext context, int index) {
           return Container(
               height: spacingStandard,
@@ -29,12 +29,6 @@ class DashboardHeaderCards extends StatelessWidget {
                   color: AppColor.saasifyWhite),
               child: Center(
                   child: ListTile(
-                      onTap: () {
-                        (dashboardCard[index].routeName == '')
-                            ? null
-                            : Navigator.pushReplacementNamed(
-                                context, dashboardCard[index].routeName);
-                      },
                       titleAlignment: ListTileTitleAlignment.titleHeight,
                       tileColor: AppColor.saasifyWhite,
                       leading: Container(
@@ -42,29 +36,69 @@ class DashboardHeaderCards extends StatelessWidget {
                           width: 40,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
-                              color: AppColor.saasifyPaleGrey),
-                          child: Icon(dashboardCard[index].iconName)),
+                              color: dashboardCard[index].iconColor),
+                          child: Icon(dashboardCard[index].iconName,
+                              color: dashboardCard[index].containerColor)),
                       title: Padding(
                           padding: const EdgeInsets.only(
                               left: spacingXSmall, top: spacingStandard),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(dashboardCard[index].title.toString(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .tinier
-                                        .copyWith(fontWeight: FontWeight.w600),
-                                    textScaleFactor:
-                                        context.responsive(0.63, desktop: 1)),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(dashboardCard[index].title.toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .xxTiniest
+                                            .copyWith(
+                                                fontWeight: FontWeight.w500),
+                                        textScaleFactor: context
+                                            .responsive(0.63, desktop: 1)),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: spacingXSmall,
+                                          vertical: spacingSmallest),
+                                      decoration: BoxDecoration(
+                                          color: dashboardCard[index].iconColor,
+                                          borderRadius: BorderRadius.circular(
+                                              kGeneralRadius)),
+                                      child: Text("+9%",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .xTiniest
+                                              .copyWith(
+                                                  color: dashboardCard[index]
+                                                      .containerColor)),
+                                    )
+                                  ],
+                                ),
                                 const SizedBox(height: spacingXSmall),
-                                Text(dashboardCard[index].subtitle.toString(),
-                                    textScaleFactor:
-                                        context.responsive(0.63, desktop: 1),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .xxTiniest
-                                        .copyWith(fontWeight: FontWeight.w500))
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                        dashboardCard[index]
+                                            .subtitle
+                                            .toString(),
+                                        textScaleFactor: context
+                                            .responsive(0.63, desktop: 1),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .tinier
+                                            .copyWith(
+                                                fontWeight: FontWeight.w600)),
+                                    Text("From last Week",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .xxxTiniest
+                                            .copyWith(
+                                                color: AppColor.saasifyGrey))
+                                  ],
+                                )
                               ])))));
         },
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

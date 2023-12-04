@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/employee/employee_bloc.dart';
+import 'package:saasify/bloc/employee/employee_event.dart';
+import 'package:saasify/bloc/employee/employee_state.dart';
+import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/settings/add_employee_screen.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_spacing.dart';
@@ -19,6 +24,7 @@ class EmployeeListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<EmployeeBloc>().add(GetEmployees());
     return Scaffold(
         key: _scaffoldKey,
         drawer: const SideBar(selectedIndex: 1),
@@ -38,22 +44,33 @@ class EmployeeListScreen extends StatelessWidget {
                   flex: 5,
                   child: Padding(
                       padding: const EdgeInsets.all(spacingLarge),
-                      child: Column(
-                        children: [
-                          CustomPageHeader(
-                            titleText: StringConstants.kEmployees,
-                            buttonVisible: true,
-                            buttonTitle: StringConstants.kAddEmployee,
-                            utilityVisible: true,
-                            deleteIconVisible: selectedIds.isNotEmpty,
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, AddEmployeeScreen.routeName);
-                            },
-                          ),
-                          const SizedBox(height: spacingStandard),
-                          const EmployeeListDataTable(),
-                        ],
+                      child: BlocBuilder<EmployeeBloc, EmployeeStates>(
+                        builder: (context, state) {
+                          if (state is EmployeesLoaded) {
+                            return Column(
+                              children: [
+                                CustomPageHeader(
+                                  backIconVisible: true,
+                                  titleText: StringConstants.kEmployees,
+                                  buttonVisible: true,
+                                  buttonTitle: StringConstants.kAddEmployee,
+                                  utilityVisible: true,
+                                  onPressed: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, AddEmployeeScreen.routeName);
+                                  },
+                                  onBack: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, DashboardsScreen.routeName);
+                                  },
+                                ),
+                                const SizedBox(height: spacingStandard),
+                                EmployeeListDataTable(),
+                              ],
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        },
                       )))
             ]));
   }
