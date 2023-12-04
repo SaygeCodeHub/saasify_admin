@@ -9,6 +9,7 @@ import 'package:saasify/data/models/authentication/authentication_model.dart';
 import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/widgets/company_list_gridview.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
+import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/primary_button.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
@@ -80,11 +81,13 @@ class CompanyListScreen extends StatelessWidget {
                       return const SizedBox.shrink();
                     },
                   )))),
-      Expanded(
-          flex: 6,
-          child: Container(
-            color: AppColor.saasifyLightDeepBlue,
-          ))
+      context.responsive(const SizedBox(),
+          mobile: const SizedBox(),
+          desktop: Expanded(
+              flex: 6,
+              child: Container(
+                color: AppColor.saasifyLightDeepBlue,
+              ))),
     ]));
   }
 }

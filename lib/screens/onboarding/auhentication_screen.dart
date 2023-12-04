@@ -9,6 +9,7 @@ import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
 import 'package:saasify/screens/onboarding/otp_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
+import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/alert_dialogue_box.dart';
 import '../../configs/app_color.dart';
 
@@ -85,9 +86,14 @@ class AuthenticationScreen extends StatelessWidget {
                     }
                     return const SizedBox();
                   })),
-              Expanded(
-                  flex: 6,
-                  child: Container(color: AppColor.saasifyLightDeepBlue))
+              context.responsive(const SizedBox(),
+                  mobile: const SizedBox(),
+                  tablets: Expanded(
+                      flex: 6,
+                      child: Container(color: AppColor.saasifyLightDeepBlue)),
+                  desktop: Expanded(
+                      flex: 6,
+                      child: Container(color: AppColor.saasifyLightDeepBlue))),
             ])));
   }
 }

@@ -105,13 +105,39 @@ class MyPosApp extends StatelessWidget {
                 onGenerateRoute: AppRoutes.routes,
                 theme: appTheme,
                 home: BlocListener<AuthenticationBloc, AuthenticationStates>(
-                    listener: (context, state) {
-                      if (state is IsLoggedIn) {
-                        Navigator.pushReplacementNamed(
-                            context, DashboardsScreen.routeName);
-                      }
-                    },
-                    child: context.responsive(const CannotBeMinimizeScreen(),
-                        tablets: AuthenticationScreen())))));
+                  listener: (context, state) {
+                    if (state is IsLoggedIn) {
+                      Navigator.pushReplacementNamed(
+                          context, DashboardsScreen.routeName);
+                    }
+                  },
+                  child: context.responsive(const CannotBeMinimizeScreen(),
+                      desktop: AuthenticationScreen(),
+                      tablets: AuthenticationScreen(),
+                      mobile: AuthenticationScreen()), // Adj
+                  // LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                  // if (MobileResponsive.desktop(context)) {
+                  //   return mobile:();
+                  // } else if (ResponsiveLayout.isTablet(context)) {
+                  //   return TabletScreen();
+                  // } else {
+                  //   return isPhone();
+                  // }
+                  //   if(constraints.maxWidth > 1200)
+                  //   {
+                  //   return UltraWideLayout();
+                  //   } else if (constraints.maxWidth > 600)
+                  //   {
+                  //   return WideLayout();
+                  //   }else{
+                  //   return NarrowLayout();
+                  //   }
+                  // },
+
+                  // )
+
+                  // context.responsive(const CannotBeMinimizeScreen(),
+                  //     tablets: AuthenticationScreen())
+                ))));
   }
 }

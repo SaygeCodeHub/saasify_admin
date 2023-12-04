@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
+import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../configs/app_spacing.dart';
@@ -100,11 +101,13 @@ class CompanyForm extends StatelessWidget {
                             buttonTitle: StringConstants.kNext,
                           )
                         ])))),
-        Expanded(
-            flex: 6,
-            child: Container(
-              color: AppColor.saasifyLightDeepBlue,
-            ))
+        context.responsive(const SizedBox(),
+            mobile: const SizedBox(),
+            desktop: Expanded(
+                flex: 6,
+                child: Container(
+                  color: AppColor.saasifyLightDeepBlue,
+                ))),
       ]),
     );
   }

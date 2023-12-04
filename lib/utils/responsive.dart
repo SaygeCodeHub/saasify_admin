@@ -6,6 +6,8 @@ extension Responsive on BuildContext {
     T? tablets,
     T? desktop,
     T? widescreen,
+    T? mobile,
+    T? iPhone12,
   }) {
     double wd = MediaQuery.sizeOf(this).width;
     return wd >= 2000
@@ -14,6 +16,10 @@ extension Responsive on BuildContext {
             ? (desktop ?? tablets ?? defaultVal)
             : wd >= 1000
                 ? (tablets ?? defaultVal)
-                : defaultVal;
+                : wd >= 400
+                    ? (mobile ?? defaultVal)
+                    : wd >= 200
+                        ? (iPhone12 ?? defaultVal)
+                        : defaultVal;
   }
 }
