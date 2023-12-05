@@ -32,10 +32,11 @@ class DashboardHeaderCards extends StatelessWidget {
                       titleAlignment: ListTileTitleAlignment.titleHeight,
                       tileColor: AppColor.saasifyWhite,
                       leading: Container(
-                          height: 40,
-                          width: 40,
+                          height: kDashboardIconContainerSize,
+                          width: kDashboardIconContainerSize,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius:
+                                  BorderRadius.circular(kGeneralRadius),
                               color: dashboardCard[index].iconColor),
                           child: Icon(dashboardCard[index].iconName,
                               color: dashboardCard[index].containerColor)),

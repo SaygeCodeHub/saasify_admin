@@ -30,3 +30,4 @@ const double kPaymentCircleSize = 8;
 const double kCloseIconSize = 20;
 const double kHeaderIconsSize = 22;
 const double kTextContainerHeight = 280;
+const double kDashboardIconContainerSize = 40;
