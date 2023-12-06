@@ -31,7 +31,7 @@ List<DashboardCardData> dashboardCard = [
       title: 'Total Earning',
       subtitle: '',
       iconColor: AppColor.saasifyPastelPurple,
-      containerColor: AppColor.saasifypurple),
+      containerColor: AppColor.saasifypurple)
 ];
 
 List<DashboardListOptions> dashboardOptionList = [

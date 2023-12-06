@@ -16,19 +16,18 @@ class _DashboardCalendarState extends State<DashboardCalendar> {
   @override
   Widget build(BuildContext context) {
     return TableCalendar(
-      onDaySelected: (selectedDate, event) {
-        setState(() {
-          _focusDay = selectedDate;
-        });
-      },
-      selectedDayPredicate: (selectedDate) {
-        return selectedDate == _focusDay;
-      },
-      focusedDay: _focusDay,
-      firstDay: DateTime(1900),
-      lastDay: DateTime(2100),
-      calendarFormat: CalendarFormat.week,
-      availableCalendarFormats: const {CalendarFormat.week: 'Week'},
-    );
+        onDaySelected: (selectedDate, event) {
+          setState(() {
+            _focusDay = selectedDate;
+          });
+        },
+        selectedDayPredicate: (selectedDate) {
+          return selectedDate == _focusDay;
+        },
+        focusedDay: _focusDay,
+        firstDay: DateTime(1900),
+        lastDay: DateTime(2100),
+        calendarFormat: CalendarFormat.week,
+        availableCalendarFormats: const {CalendarFormat.week: 'Week'});
   }
 }

@@ -153,15 +153,13 @@ class POSScreen extends StatelessWidget {
                                   : const SizedBox.shrink()
                             ]);
                       } else {
-                        return Expanded(
-                            child: Center(
-                                child: Text(StringConstants.kNoDataAvailable,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .tinier
-                                        .copyWith(
-                                            color:
-                                                AppColor.saasifyLightGrey))));
+                        return Center(
+                            child: Text("No Active Products Found",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .tinier
+                                    .copyWith(
+                                        color: AppColor.saasifyLightGrey)));
                       }
                     } else if (state is ErrorFetchingProductsByCategory) {
                       return Expanded(

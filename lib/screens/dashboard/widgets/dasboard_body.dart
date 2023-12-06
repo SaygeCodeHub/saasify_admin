@@ -69,69 +69,73 @@ class DashboardBody extends StatelessWidget {
             )),
         const SizedBox(height: spacingStandard),
         Expanded(
-          child: Card(
-            elevation: 2,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(kCircularRadius)),
-            child: Padding(
-              padding: const EdgeInsets.all(spacingSmall),
-              child: ListView.builder(
-                  itemCount: dashboardOptionList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    index = index;
-                    return ListTile(
-                        onTap: () {
-                          (dashboardOptionList[index].routeName == '')
-                              ? null
-                              : Navigator.pushReplacementNamed(context,
-                                  dashboardOptionList[index].routeName);
-                        },
-                        titleAlignment: ListTileTitleAlignment.titleHeight,
-                        tileColor: AppColor.saasifyWhite,
-                        leading: Container(
-                            height: kDashboardIconContainerSize,
-                            width: kDashboardIconContainerSize,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: dashboardOptionList[index].iconColor),
-                            child: Icon(dashboardOptionList[index].iconName,
-                                color:
-                                    dashboardOptionList[index].containerColor)),
-                        title: Padding(
-                            padding: const EdgeInsets.only(
-                                left: spacingXSmall, top: spacingStandard),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                      dashboardOptionList[index]
-                                          .title
-                                          .toString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .tinier
-                                          .copyWith(
-                                              fontWeight: FontWeight.w600),
-                                      textScaleFactor:
-                                          context.responsive(0.63, desktop: 1)),
-                                  const SizedBox(height: spacingXSmall),
-                                  Text(
-                                      dashboardOptionList[index]
-                                          .subtitle
-                                          .toString(),
-                                      textScaleFactor:
-                                          context.responsive(0.63, desktop: 1),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiniest
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500))
-                                ])));
-                  }),
-            ),
-          ),
-        )
+            child: Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(kCircularRadius)),
+                child: Padding(
+                    padding: const EdgeInsets.all(spacingSmall),
+                    child: ListView.builder(
+                        itemCount: dashboardOptionList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          index = index;
+                          return ListTile(
+                              onTap: () {
+                                (dashboardOptionList[index].routeName == '')
+                                    ? null
+                                    : Navigator.pushReplacementNamed(context,
+                                        dashboardOptionList[index].routeName);
+                              },
+                              titleAlignment:
+                                  ListTileTitleAlignment.titleHeight,
+                              tileColor: AppColor.saasifyWhite,
+                              leading: Container(
+                                  height: kDashboardIconContainerSize,
+                                  width: kDashboardIconContainerSize,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color:
+                                          dashboardOptionList[index].iconColor),
+                                  child: Icon(
+                                      dashboardOptionList[index].iconName,
+                                      color: dashboardOptionList[index]
+                                          .containerColor)),
+                              title: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: spacingXSmall,
+                                      top: spacingStandard),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            dashboardOptionList[index]
+                                                .title
+                                                .toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .tinier
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                            textScaleFactor: context
+                                                .responsive(0.63, desktop: 1)),
+                                        const SizedBox(height: spacingXSmall),
+                                        Text(
+                                            dashboardOptionList[index]
+                                                .subtitle
+                                                .toString(),
+                                            textScaleFactor: context
+                                                .responsive(0.63, desktop: 1),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .xxTiniest
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w500))
+                                      ])));
+                        }))))
       ]))
     ]);
   }

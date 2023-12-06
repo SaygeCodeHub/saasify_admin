@@ -68,10 +68,10 @@ class BillingProductTileBody extends StatelessWidget {
                         child: Icon(Icons.remove, size: kGeneralRadius)))),
             SizedBox(
               height: kCounterContainerSize,
-              width: kCounterContainerSize,
+              width: kStockContainerSize,
               child: Center(
                   child: Text(selectedProduct.count.toString(),
-                      style: Theme.of(context).textTheme.tiniest)),
+                      style: Theme.of(context).textTheme.xTiniest)),
             ),
             InkWell(
                 onTap: () {

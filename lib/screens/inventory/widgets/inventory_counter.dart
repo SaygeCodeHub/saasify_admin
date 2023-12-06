@@ -26,7 +26,7 @@ class InventoryCounter extends StatelessWidget {
             child: Center(
                 child: Text(product.stock.toString(),
                     style: Theme.of(context).textTheme.xxTiniest.copyWith(
-                        color: (product.stock < product.restockReminder)
+                        color: (product.stock <= product.restockReminder)
                             ? AppColor.saasifyRed
                             : AppColor.saasifyBlack))),
           ),

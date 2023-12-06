@@ -47,59 +47,60 @@ class DashboardHeaderCards extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(dashboardCard[index].title.toString(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .xxTiniest
-                                            .copyWith(
-                                                fontWeight: FontWeight.w500),
-                                        textScaleFactor: context
-                                            .responsive(0.63, desktop: 1)),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: spacingXSmall,
-                                          vertical: spacingSmallest),
-                                      decoration: BoxDecoration(
-                                          color: dashboardCard[index].iconColor,
-                                          borderRadius: BorderRadius.circular(
-                                              kGeneralRadius)),
-                                      child: Text("+9%",
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                          dashboardCard[index].title.toString(),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .xTiniest
+                                              .xxTiniest
                                               .copyWith(
-                                                  color: dashboardCard[index]
-                                                      .containerColor)),
-                                    )
-                                  ],
-                                ),
+                                                  fontWeight: FontWeight.w500),
+                                          textScaleFactor: context
+                                              .responsive(0.63, desktop: 1)),
+                                      Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: spacingXSmall,
+                                              vertical: spacingSmallest),
+                                          decoration: BoxDecoration(
+                                              color: dashboardCard[index]
+                                                  .iconColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      kGeneralRadius)),
+                                          child: Text("+9%",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .xTiniest
+                                                  .copyWith(
+                                                      color:
+                                                          dashboardCard[index]
+                                                              .containerColor)))
+                                    ]),
                                 const SizedBox(height: spacingXSmall),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                        dashboardCard[index]
-                                            .subtitle
-                                            .toString(),
-                                        textScaleFactor: context
-                                            .responsive(0.63, desktop: 1),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .tinier
-                                            .copyWith(
-                                                fontWeight: FontWeight.w600)),
-                                    Text("From last Week",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .xxxTiniest
-                                            .copyWith(
-                                                color: AppColor.saasifyGrey))
-                                  ],
-                                )
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                          dashboardCard[index]
+                                              .subtitle
+                                              .toString(),
+                                          textScaleFactor: context
+                                              .responsive(0.63, desktop: 1),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .tinier
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w600)),
+                                      Text("From last Week",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .xxxTiniest
+                                              .copyWith(
+                                                  color: AppColor.saasifyGrey))
+                                    ])
                               ])))));
         },
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
