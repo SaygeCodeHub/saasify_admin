@@ -7,6 +7,7 @@ import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/bloc/authentication/authentication_states.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
+import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_color.dart';
 import '../../configs/app_dimensions.dart';
 import '../../utils/constants/string_constants.dart';
@@ -30,10 +31,15 @@ class AuthenticationBody extends StatelessWidget {
     return Form(
         key: _formKey,
         child: Padding(
-            padding: const EdgeInsets.only(
-                left: spacingXXXHuge,
-                right: spacingXXXHuge,
-                top: spacingXXXHuge),
+            padding: context.responsive(
+                const EdgeInsets.only(
+                    left: spacingXXXHuge,
+                    right: spacingXXXHuge,
+                    top: spacingXXXHuge),
+                mobile: const EdgeInsets.only(
+                    left: spacingExcel,
+                    right: spacingExcel,
+                    top: spacingXXXHuge)),
             child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -34,7 +34,10 @@ class CompanyListScreen extends StatelessWidget {
           child: Form(
               key: formKey,
               child: Padding(
-                  padding: const EdgeInsets.all(spacingXXXHuge),
+                  padding: context.responsive(
+                      const EdgeInsets.all(spacingXXXHuge),
+                      mobile: const EdgeInsets.symmetric(
+                          horizontal: spacingExcel, vertical: spacingXXXHuge)),
                   child: BlocBuilder<OnboardingBloc, OnboardingStates>(
                     builder: (context, state) {
                       if (state is CompaniesLoaded) {
@@ -64,7 +67,6 @@ class CompanyListScreen extends StatelessWidget {
                                   companyList: companyList,
                                   selectedCompanyIndex:
                                       state.selectedCompanyIndex),
-                              const SizedBox(height: spacingXXHuge),
                               PrimaryButton(
                                   onPressed: (state.selectedCompanyIndex != -1)
                                       ? () {

@@ -35,7 +35,10 @@ class BranchesListScreen extends StatelessWidget {
           child: Form(
               key: formKey,
               child: Padding(
-                  padding: const EdgeInsets.all(spacingXXXHuge),
+                  padding: context.responsive(
+                      const EdgeInsets.all(spacingXXXHuge),
+                      mobile: const EdgeInsets.symmetric(
+                          horizontal: spacingExcel, vertical: spacingXXXHuge)),
                   child: BlocBuilder<OnboardingBloc, OnboardingStates>(
                     builder: (context, state) {
                       if (state is BranchesLoaded) {

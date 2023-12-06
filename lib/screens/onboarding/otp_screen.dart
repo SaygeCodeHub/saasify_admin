@@ -24,8 +24,11 @@ class OtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-          left: spacingXXXHuge, right: spacingXXXHuge, top: spacingXXXHuge),
+      padding: context.responsive(
+          const EdgeInsets.only(
+              left: spacingXXXHuge, right: spacingXXXHuge, top: spacingXXXHuge),
+          mobile: const EdgeInsets.only(
+              left: spacingExcel, right: spacingExcel, top: spacingXXXHuge)),
       child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
