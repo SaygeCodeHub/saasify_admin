@@ -48,6 +48,23 @@ class StoreGridScreen extends StatelessWidget {
                           bottom: spacingXHuge),
                       child: BlocConsumer<BranchesBloc, BranchesStates>(
                           listener: (context, state) {
+                        if (state is EditedBranches) {
+                          context.read<BranchesBloc>().add(FetchAllBranches());
+                        }
+                        if (state is ErrorEditingBranches) {
+                          showDialog(
+                              context: context,
+                              builder: (dialogueCtx) {
+                                return AlertDialogueBox(
+                                    title: StringConstants.kSomethingWentWrong,
+                                    message: state.message,
+                                    errorMarkVisible: true,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(dialogueCtx);
+                                    });
+                              });
+                        }
                         if (state is ErrorFetchingBranches) {
                           showDialog(
                               context: context,

@@ -125,6 +125,7 @@ class StringConstants {
   static const kEditCategory = 'Edit Category';
   static const kAddNewPaymentMethod = 'Add New Payment Method';
   static const kAddNewBranch = 'Add New Branch';
+  static const kEditBranch = 'Edit Branch';
   static const kReduceStock = 'Reduce Stock';
   static const kPOS = 'POS';
   static const kCategories = 'Categories';

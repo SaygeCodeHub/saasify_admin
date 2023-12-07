@@ -8,7 +8,7 @@ String editBranchesModelToJson(EditBranchesModel data) =>
 
 class EditBranchesModel {
   final int status;
-  final EditBranchesData data;
+  final Data data;
   final String message;
 
   EditBranchesModel({
@@ -20,7 +20,7 @@ class EditBranchesModel {
   factory EditBranchesModel.fromJson(Map<String, dynamic> json) =>
       EditBranchesModel(
         status: json["status"],
-        data: EditBranchesData.fromJson(json["data"]),
+        data: Data.fromJson(json["data"]),
         message: json["message"],
       );
 
@@ -31,11 +31,10 @@ class EditBranchesModel {
       };
 }
 
-class EditBranchesData {
-  EditBranchesData();
+class Data {
+  Data();
 
-  factory EditBranchesData.fromJson(Map<String, dynamic> json) =>
-      EditBranchesData();
+  factory Data.fromJson(Map<String, dynamic> json) => Data();
 
   Map<String, dynamic> toJson() => {};
 }

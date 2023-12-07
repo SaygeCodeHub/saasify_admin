@@ -26,10 +26,10 @@ class BranchesRepositoryImpl implements BranchesRepository {
 
   @override
   Future<EditBranchesModel> editBranches(String userId, String companyId,
-      int branchId, Map productDetailsMap) async {
+      int branchId, Map branchDetailsMap) async {
     final response = await ClientServices().put(
-        '${ApiConstants.baseUrl}$userId/$companyId/$branchId/editProduct',
-        productDetailsMap);
+        '${ApiConstants.baseUrl}$userId/$companyId/editBranch',
+        branchDetailsMap);
     return EditBranchesModel.fromJson(response);
   }
 
