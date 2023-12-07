@@ -35,14 +35,12 @@ class OrdersData {
   final double totalEarning;
   final int totalOrders;
   final UnpaidOrder unpaidOrder;
-  final PaymentMethods paymentMethods;
   final List<Order> orders;
 
   OrdersData({
     required this.totalEarning,
     required this.totalOrders,
     required this.unpaidOrder,
-    required this.paymentMethods,
     required this.orders,
   });
 
@@ -50,7 +48,6 @@ class OrdersData {
         totalEarning: json["total_earning"],
         totalOrders: json["total_orders"],
         unpaidOrder: UnpaidOrder.fromJson(json["unpaid_order"]),
-        paymentMethods: PaymentMethods.fromJson(json["payment_methods"]),
         orders: List<Order>.from(json["orders"].map((x) => Order.fromJson(x))),
       );
 
@@ -58,7 +55,6 @@ class OrdersData {
         "total_earning": totalEarning,
         "total_orders": totalOrders,
         "unpaid_order": unpaidOrder.toJson(),
-        "payment_methods": paymentMethods.toJson(),
         "orders": List<dynamic>.from(orders.map((x) => x.toJson())),
       };
 }

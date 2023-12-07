@@ -24,4 +24,21 @@ class BillModel {
       required this.itemTotal,
       required this.total,
       required this.discount});
+
+  factory BillModel.fromJson(Map<String, dynamic> json) => BillModel(
+      gst: json["gst"],
+      gstPercent: json["gst_percent"],
+      discountPercent: json["discount_percent"],
+      itemTotal: json["item_total"],
+      total: json["total"],
+      discount: json["discount"]);
+
+  Map<String, dynamic> toJson() => {
+        "gst": gst,
+        "gst_percent": gstPercent,
+        "discount_percent": discount,
+        "item_total": itemTotal,
+        "total": total,
+        "discount": discount
+      };
 }
