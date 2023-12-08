@@ -26,22 +26,22 @@ class BranchesBloc extends Bloc<BranchesEvents, BranchesStates> {
   FutureOr<void> _editBranches(
       EditBranches event, Emitter<BranchesStates> emit) async {
     emit(EditingBranches());
-    // try {
-    String userId = await _customerCache.getUserId();
-    String companyId = await _customerCache.getCompanyId();
-    int branchId = await _customerCache.getBranchId();
+    try {
+      String userId = await _customerCache.getUserId();
+      String companyId = await _customerCache.getCompanyId();
+      int branchId = await _customerCache.getBranchId();
 
-    EditBranchesModel editBranchesModel = await _branchesRepository
-        .editBranches(userId, companyId, branchId, event.branchDetailsMap);
+      EditBranchesModel editBranchesModel = await _branchesRepository
+          .editBranches(userId, companyId, branchId, event.branchDetailsMap);
 
-    if (editBranchesModel.status == 200) {
-      emit(EditedBranches(message: editBranchesModel.message));
-    } else {
-      emit(ErrorEditingBranches(message: editBranchesModel.message));
+      if (editBranchesModel.status == 200) {
+        emit(EditedBranches(message: editBranchesModel.message));
+      } else {
+        emit(ErrorEditingBranches(message: editBranchesModel.message));
+      }
+    } catch (e) {
+      emit(ErrorEditingBranches(message: e.toString()));
     }
-    // } catch (e) {
-    //   emit(ErrorEditingBranches(message: e.toString()));
-    // }
   }
 
   FutureOr<void> _deleteBranches(

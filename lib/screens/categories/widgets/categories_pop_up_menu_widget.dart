@@ -74,14 +74,6 @@ class CategoriesPopUpMenuWidget extends StatelessWidget {
                                               value;
                                         }),
                                     const SizedBox(height: spacingSmall),
-                                    Text(StringConstants.kEnterGSTAmount,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .xTiniest),
-                                    const SizedBox(height: spacingXXSmall),
-                                    CustomTextField(
-                                        initialValue: "12%",
-                                        onTextFieldChanged: (value) {}),
                                     Row(children: [
                                       Text(
                                           StringConstants

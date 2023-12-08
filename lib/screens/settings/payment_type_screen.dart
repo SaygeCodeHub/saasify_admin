@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/screens/settings/widgets/add_payment_method_popup.dart';
 import 'package:saasify/screens/settings/widgets/payment_type_gridview.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/custom_page_header.dart';
+import '../../bloc/payment/payments_bloc.dart';
+import '../../bloc/payment/payments_states.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
+import '../../utils/progress_bar.dart';
+import '../../widgets/alert_dialogue_box.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
 import '../dashboard/dashboard_screen.dart';
@@ -56,29 +61,70 @@ class PaymentTypeScreen extends StatelessWidget {
                           top: spacingXMedium,
                           bottom: spacingXHuge,
                           left: spacingXHuge),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomPageHeader(
-                            titleText: StringConstants.kPaymentType,
-                            onBack: () {
-                              Navigator.pushReplacementNamed(
-                                  context, DashboardsScreen.routeName);
-                            },
-                            backIconVisible: true,
-                            buttonTitle: StringConstants.kAddNewPaymentMethod,
-                            buttonVisible: true,
-                            textFieldVisible: false,
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) =>
-                                      const AddNewPaymentTypePopup());
-                            },
-                          ),
-                          const SizedBox(height: spacingStandard),
-                          PaymentTypeGridView(paymentType: paymentType)
-                        ],
+                      child: BlocConsumer<PaymentBloc, PaymentStates>(
+                        listener: (context, state) {
+                          if (state is SavingPayment) {
+                            ProgressBar.show(context);
+                          } else if (state is SavedPayment) {
+                            ProgressBar.dismiss(context);
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialogueBox(
+                                      title: StringConstants
+                                          .kNewPaymentMethodAdded,
+                                      message:
+                                          StringConstants.kPaymentAddedMessage,
+                                      primaryButtonTitle: StringConstants.kOk,
+                                      checkMarkVisible: true,
+                                      primaryOnPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.pushReplacementNamed(context,
+                                            PaymentTypeScreen.routeName);
+                                      },
+                                    ));
+                          } else if (state is ErrorSavingPayment) {
+                            ProgressBar.dismiss(context);
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialogueBox(
+                                    title: StringConstants.kSomethingWentWrong,
+                                    message: state.message,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    errorMarkVisible: true,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.pushReplacementNamed(
+                                          context, PaymentTypeScreen.routeName);
+                                    }));
+                          }
+                        },
+                        builder: (context, state) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomPageHeader(
+                                titleText: StringConstants.kPaymentType,
+                                onBack: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, DashboardsScreen.routeName);
+                                },
+                                backIconVisible: true,
+                                buttonTitle:
+                                    StringConstants.kAddNewPaymentMethod,
+                                buttonVisible: true,
+                                textFieldVisible: false,
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (ctx) =>
+                                          const AddNewPaymentTypePopup());
+                                },
+                              ),
+                              const SizedBox(height: spacingStandard),
+                              PaymentTypeGridView(paymentType: paymentType)
+                            ],
+                          );
+                        },
                       )))
             ]));
   }

@@ -46,6 +46,7 @@ class StringConstants {
   static const kAddVariantButton = 'ADD VARIANT';
   static const kAddVariant = 'Add Variant';
   static const kNewProductAdded = 'New product added successfully!';
+  static const kNewPaymentMethodAdded = 'New payment added successfully!';
   static const kCategory = 'Category';
   static const kNewTab = 'New Tab';
   static const kProducts = 'Products';
@@ -101,6 +102,7 @@ class StringConstants {
   static const kUploadImages = 'Upload Images';
   static const kMinimumOneImage = '(Minimum 1 image mandatory)';
   static const kProductDescription = 'Product Description';
+  static const kPaymentAddedMessage = 'New Payment Added Successfully';
   static const kMaxLines = '(Max lines 200 characters)';
   static const kContinueAddingVariant =
       'Continue adding variant of this product?';
