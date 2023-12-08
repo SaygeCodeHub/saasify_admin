@@ -51,6 +51,9 @@ dependencies:
   flutter_switch: ^0.3.2
   data_table_2: ^2.5.9
   fl_chart: ^0.64.0
+  pdf: ^3.10.7
+  open_file: ^3.3.2
+  path_provider: ^2.1.1
 
 
 dev_dependencies:
