@@ -51,8 +51,6 @@ class SavingBranch extends BranchesStates {}
 class SavedBranch extends BranchesStates {
   final String message;
 
-  // final ProductData data;
-
   SavedBranch({required this.message});
 }
 

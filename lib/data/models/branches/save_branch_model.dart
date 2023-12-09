@@ -8,26 +8,26 @@ String saveBranchesModelToJson(SaveBranchesModel data) =>
 
 class SaveBranchesModel {
   final int status;
-  final BranchesData data;
   final String message;
+  final BranchesData data;
 
   SaveBranchesModel({
     required this.status,
-    required this.data,
     required this.message,
+    required this.data,
   });
 
   factory SaveBranchesModel.fromJson(Map<String, dynamic> json) =>
       SaveBranchesModel(
         status: json["status"],
-        data: BranchesData.fromJson(json["data"]),
         message: json["message"],
+        data: BranchesData.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
-        "data": data.toJson(),
         "message": message,
+        "data": data.toJson(),
       };
 }
 

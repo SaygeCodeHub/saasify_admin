@@ -65,7 +65,7 @@ class EmployeeListScreen extends StatelessWidget {
                                   },
                                 ),
                                 const SizedBox(height: spacingStandard),
-                                EmployeeListDataTable(),
+                                const EmployeeListDataTable(),
                               ],
                             );
                           }

@@ -48,6 +48,10 @@ class StoreGridScreen extends StatelessWidget {
                           bottom: spacingXHuge),
                       child: BlocConsumer<BranchesBloc, BranchesStates>(
                           listener: (context, state) {
+                        if (state is SavedBranch) {
+                          context.read<BranchesBloc>().add(FetchAllBranches());
+                        }
+
                         if (state is ErrorFetchingBranches) {
                           showDialog(
                               context: context,
@@ -86,8 +90,7 @@ class StoreGridScreen extends StatelessWidget {
                                   onPressed: () {
                                     showDialog(
                                         context: context,
-                                        builder: (ctx) =>
-                                            const AddStorePopup());
+                                        builder: (ctx) => AddStorePopup());
                                   },
                                 ),
                                 const SizedBox(height: spacingStandard),

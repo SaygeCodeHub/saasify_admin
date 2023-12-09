@@ -16,11 +16,11 @@ class BranchesRepositoryImpl implements BranchesRepository {
   }
 
   @override
-  Future<SaveBranchesModel> saveBranches(String userId, String companyId,
-      int branchId, Map productDetailsMap) async {
+  Future<SaveBranchesModel> saveBranches(
+      String userId, String companyId, Map branchDetailsMap) async {
     final response = await ClientServices().post(
-        '${ApiConstants.baseUrl}$userId/$companyId/$branchId/addProduct',
-        productDetailsMap);
+        '${ApiConstants.baseUrl}$userId/$companyId/addBranch',
+        branchDetailsMap);
     return SaveBranchesModel.fromJson(response);
   }
 
