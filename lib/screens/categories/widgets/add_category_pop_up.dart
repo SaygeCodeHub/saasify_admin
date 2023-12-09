@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/configs/app_theme.dart';
 
+import '../../../bloc/categories/categories_bloc.dart';
+import '../../../bloc/categories/categories_event.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
@@ -99,7 +102,12 @@ class AddCategoryPopUp extends StatelessWidget {
                                             onPressed: () {
                                               if (_formKey.currentState!
                                                   .validate()) {
-                                                // context.read<CategoriesBloc>().add(event)
+                                                context
+                                                    .read<CategoriesBloc>()
+                                                    .add(SaveCategories(
+                                                        categoriesDetailsMap:
+                                                            addCategoryMap));
+                                                Navigator.pop(context);
                                               }
                                             },
                                             buttonTitle: StringConstants.kOk))

@@ -44,6 +44,12 @@ class CategoriesScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingLarge),
                       child: BlocConsumer<CategoriesBloc, CategoriesStates>(
                           listener: (context, state) {
+                        if (state is SavedCategories) {
+                          context
+                              .read<CategoriesBloc>()
+                              .add(FetchAllCategories());
+                        }
+
                         if (state is DeletingCategories) {
                           ProgressBar.show(context);
                         }

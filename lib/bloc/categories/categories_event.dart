@@ -13,3 +13,9 @@ class DeleteCategories extends CategoriesEvents {
 }
 
 class FetchAllCategories extends CategoriesEvents {}
+
+class SaveCategories extends CategoriesEvents {
+  final Map categoriesDetailsMap;
+
+  SaveCategories({required this.categoriesDetailsMap});
+}
