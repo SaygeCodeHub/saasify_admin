@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/branches/branches_bloc.dart';
+import 'package:saasify/bloc/branches/branches_event.dart';
 import 'package:saasify/configs/app_theme.dart';
 
 import '../../../configs/app_color.dart';
@@ -7,7 +10,7 @@ import '../../../configs/app_spacing.dart';
 import '../../../data/models/branches/fetch_all_branches_model.dart';
 import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/toggle_switch_widget.dart';
-import '../three_dots_popup.dart';
+import '../edit_branch_popup.dart';
 
 class BranchesGrid extends StatelessWidget {
   final List<BranchesData> branchesData;
@@ -67,9 +70,15 @@ class BranchesGrid extends StatelessWidget {
                         Row(children: [
                           ToggleSwitchWidget(
                               value: branchesData[index].branchActive,
-                              onChanged: (bool value) {}),
+                              onChanged: (bool value) {
+                                Map editBranchesMap =
+                                    branchesData[index].toJson();
+                                editBranchesMap['branch_active'] = value;
+                                context.read<BranchesBloc>().add(EditBranches(
+                                    branchDetailsMap: editBranchesMap));
+                              }),
                           const SizedBox(width: spacingXSmall),
-                          const ThreeDotsPopup()
+                          EditBranchPopup(branchesData: branchesData[index])
                         ])
                       ])));
         },

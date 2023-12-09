@@ -56,11 +56,6 @@ class AddCategoryPopUp extends StatelessWidget {
                                 const SizedBox(height: spacingXXSmall),
                                 CustomTextField(onTextFieldChanged: (value) {}),
                                 const SizedBox(height: spacingSmall),
-                                Text(StringConstants.kEnterGSTAmount,
-                                    style:
-                                        Theme.of(context).textTheme.xTiniest),
-                                const SizedBox(height: spacingXXSmall),
-                                CustomTextField(onTextFieldChanged: (value) {}),
                                 Row(children: [
                                   Text(
                                       StringConstants.kDoYouWantToDeactivateGST,

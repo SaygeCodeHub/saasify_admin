@@ -32,7 +32,7 @@ class BranchesBloc extends Bloc<BranchesEvents, BranchesStates> {
       int branchId = await _customerCache.getBranchId();
 
       EditBranchesModel editBranchesModel = await _branchesRepository
-          .editBranches(userId, companyId, branchId, {});
+          .editBranches(userId, companyId, branchId, event.branchDetailsMap);
 
       if (editBranchesModel.status == 200) {
         emit(EditedBranches(message: editBranchesModel.message));

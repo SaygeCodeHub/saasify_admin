@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/payment/payments_event.dart';
 import 'package:saasify/configs/app_theme.dart';
+import '../../../bloc/payment/payments_bloc.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
@@ -11,6 +14,7 @@ import '../../../widgets/toggle_switch_widget.dart';
 
 class AddNewPaymentTypePopup extends StatelessWidget {
   const AddNewPaymentTypePopup({super.key});
+  static Map savePaymentDetailsMap = {};
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +46,19 @@ class AddNewPaymentTypePopup extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: spacingMedium),
-                  CustomTextField(onTextFieldChanged: (value) {}),
+                  CustomTextField(onTextFieldChanged: (value) {
+                    savePaymentDetailsMap['payment_name'] = value;
+                  }),
                   const SizedBox(height: spacingSmall),
                   Row(
                     children: [
                       Text(StringConstants.kDoYouWantToDeactivateBranch,
                           style: Theme.of(context).textTheme.xTiniest),
-                      ToggleSwitchWidget(value: true, onChanged: (value) {}),
+                      ToggleSwitchWidget(
+                          value: true,
+                          onChanged: (value) {
+                            savePaymentDetailsMap['is_active'] = value;
+                          }),
                     ],
                   ),
                   const SizedBox(
@@ -66,7 +76,10 @@ class AddNewPaymentTypePopup extends StatelessWidget {
                     ),
                     Expanded(
                         child: PrimaryButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.read<PaymentBloc>().add(SavePayment(
+                                  paymentDetailsMap: savePaymentDetailsMap));
+                            },
                             buttonTitle: StringConstants.kAdd))
                   ])
                 ])));

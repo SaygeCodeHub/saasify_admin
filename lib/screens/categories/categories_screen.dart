@@ -44,19 +44,40 @@ class CategoriesScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingLarge),
                       child: BlocConsumer<CategoriesBloc, CategoriesStates>(
                           listener: (context, state) {
-                        if (state is DeletedCategories) {
-                          ProgressBar.dismiss(context);
-                          context
-                              .read<CategoriesBloc>()
-                              .add(FetchAllCategories());
-                        }
-
                         if (state is DeletingCategories) {
                           ProgressBar.show(context);
+                        }
+                        if (state is DeletedCategories) {
+                          ProgressBar.dismiss(context);
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialogueBox(
+                                    title: StringConstants.kSuccess,
+                                    message: state.message,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    checkMarkVisible: false,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(ctx);
+                                      context
+                                          .read<CategoriesBloc>()
+                                          .add(FetchAllCategories());
+                                    },
+                                  ));
                         }
 
                         if (state is ErrorDeletingCategories) {
                           ProgressBar.dismiss(context);
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialogueBox(
+                                    title: StringConstants.kSomethingWentWrong,
+                                    message: state.message,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    checkMarkVisible: false,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(ctx);
+                                    },
+                                  ));
                         }
 
                         if (state is EditedCategories) {

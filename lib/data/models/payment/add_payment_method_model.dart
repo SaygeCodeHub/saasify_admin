@@ -1,24 +1,24 @@
 import 'dart:convert';
 
-EditBranchesModel editBranchesModelFromJson(String str) =>
-    EditBranchesModel.fromJson(json.decode(str));
+addPaymentMethodModelFromJson(String str) =>
+    SavePaymentMethodModel.fromJson(json.decode(str));
 
-String editBranchesModelToJson(EditBranchesModel data) =>
+String addPaymentMethodModelToJson(SavePaymentMethodModel data) =>
     json.encode(data.toJson());
 
-class EditBranchesModel {
+class SavePaymentMethodModel {
   final int status;
   final Data data;
   final String message;
 
-  EditBranchesModel({
+  SavePaymentMethodModel({
     required this.status,
     required this.data,
     required this.message,
   });
 
-  factory EditBranchesModel.fromJson(Map<String, dynamic> json) =>
-      EditBranchesModel(
+  factory SavePaymentMethodModel.fromJson(Map<String, dynamic> json) =>
+      SavePaymentMethodModel(
         status: json["status"],
         data: Data.fromJson(json["data"]),
         message: json["message"],
