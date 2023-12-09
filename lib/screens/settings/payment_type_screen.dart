@@ -44,6 +44,7 @@ class PaymentTypeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<PaymentBloc>().add(FetchAllPayment());
     return Scaffold(
         key: _scaffoldKey,
         drawer: const SideBar(selectedIndex: 1),
