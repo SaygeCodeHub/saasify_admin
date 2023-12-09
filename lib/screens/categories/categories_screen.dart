@@ -45,9 +45,20 @@ class CategoriesScreen extends StatelessWidget {
                       child: BlocConsumer<CategoriesBloc, CategoriesStates>(
                           listener: (context, state) {
                         if (state is SavedCategories) {
-                          context
-                              .read<CategoriesBloc>()
-                              .add(FetchAllCategories());
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialogueBox(
+                                    title: StringConstants.kSuccess,
+                                    message: state.message,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    checkMarkVisible: false,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(ctx);
+                                      context
+                                          .read<CategoriesBloc>()
+                                          .add(FetchAllCategories());
+                                    },
+                                  ));
                         }
 
                         if (state is DeletingCategories) {
@@ -105,6 +116,21 @@ class CategoriesScreen extends StatelessWidget {
                                     });
                               });
                         }
+                        if (state is ErrorSavingCategories) {
+                          showDialog(
+                              context: context,
+                              builder: (dialogueCtx) {
+                                return AlertDialogueBox(
+                                    title: StringConstants.kSomethingWentWrong,
+                                    message: state.message,
+                                    errorMarkVisible: true,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(dialogueCtx);
+                                    });
+                              });
+                        }
+
                         if (state is ErrorFetchingCategories) {
                           showDialog(
                               context: context,
