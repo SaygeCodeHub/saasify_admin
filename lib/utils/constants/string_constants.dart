@@ -7,6 +7,7 @@ class StringConstants {
   static const kCategoryName = 'Category Name';
   static const kEnterCoupon = 'Enter Coupon';
   static const kEnterGSTAmount = 'Enter GST Amount (%)';
+  static const kPleaseEnterTheCategoryName = 'Please Enter the Category Name';
   static const kEnterDiscountPercent = 'Enter Discount Percent (%)';
   static const kMinimumPurchaseValue = 'Minimum Purchase value';
   static const kMaximumPurchaseValue = 'Maximum Purchase value';

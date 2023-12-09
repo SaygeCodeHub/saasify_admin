@@ -133,7 +133,7 @@ class CategoriesScreen extends StatelessWidget {
                               context.responsive(const SizedBox(),
                                   desktop: const Spacer()),
                               const Spacer(),
-                              const AddCategoryPopUp()
+                              AddCategoryPopUp()
                             ]),
                             const SizedBox(height: spacingStandard),
                             CategoriesGrid(productCategory: state.categoryList),

@@ -11,7 +11,10 @@ import '../../../widgets/secondary_button.dart';
 import '../../../widgets/toggle_switch_widget.dart';
 
 class AddCategoryPopUp extends StatelessWidget {
-  const AddCategoryPopUp({super.key});
+  AddCategoryPopUp({super.key});
+
+  static Map addCategoryMap = {};
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,62 +27,85 @@ class AddCategoryPopUp extends StatelessWidget {
                   builder: (ctx) => AlertDialog(
                       content: SizedBox(
                           width: kDialogueWidth,
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(StringConstants.kAddNewCategory,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xTiniest
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w700)),
-                                      InkWell(
-                                          onTap: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Align(
-                                              alignment: Alignment.topRight,
-                                              child: Icon(Icons.close,
-                                                  color: AppColor.saasifyGrey)))
-                                    ]),
-                                const SizedBox(height: spacingMedium),
-                                Text(StringConstants.kCategoryName,
-                                    style:
-                                        Theme.of(context).textTheme.xTiniest),
-                                const SizedBox(height: spacingXXSmall),
-                                CustomTextField(onTextFieldChanged: (value) {}),
-                                const SizedBox(height: spacingSmall),
-                                Row(children: [
-                                  Text(
-                                      StringConstants.kDoYouWantToDeactivateGST,
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(StringConstants.kAddNewCategory,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .xTiniest
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w700)),
+                                        InkWell(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Align(
+                                                alignment: Alignment.topRight,
+                                                child: Icon(Icons.close,
+                                                    color:
+                                                        AppColor.saasifyGrey)))
+                                      ]),
+                                  const SizedBox(height: spacingMedium),
+                                  Text(StringConstants.kCategoryName,
                                       style:
                                           Theme.of(context).textTheme.xTiniest),
-                                  ToggleSwitchWidget(
-                                      value: true, onChanged: (value) {})
+                                  const SizedBox(height: spacingXXSmall),
+                                  CustomTextField(validator: (value) {
+                                    if (value == null || value.trim() == '') {
+                                      return StringConstants
+                                          .kPleaseEnterTheCategoryName;
+                                    }
+                                    return null;
+                                  }, onTextFieldChanged: (value) {
+                                    addCategoryMap['category_name'] = value;
+                                  }),
+                                  const SizedBox(height: spacingSmall),
+                                  Row(children: [
+                                    Text(
+                                        StringConstants
+                                            .kDoYouWantToDeactivateGST,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .xTiniest),
+                                    ToggleSwitchWidget(
+                                        value: true,
+                                        onChanged: (value) {
+                                          addCategoryMap['is_active'] = value;
+                                        })
+                                  ]),
+                                  const SizedBox(height: spacingXMedium),
+                                  Row(children: [
+                                    Expanded(
+                                        child: SecondaryButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            buttonTitle:
+                                                StringConstants.kCancel)),
+                                    const SizedBox(width: spacingXXSmall),
+                                    Expanded(
+                                        child: PrimaryButton(
+                                            onPressed: () {
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                // context.read<CategoriesBloc>().add(event)
+                                              }
+                                            },
+                                            buttonTitle: StringConstants.kOk))
+                                  ])
                                 ]),
-                                const SizedBox(height: spacingXMedium),
-                                Row(children: [
-                                  Expanded(
-                                      child: SecondaryButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          buttonTitle:
-                                              StringConstants.kCancel)),
-                                  const SizedBox(width: spacingXXSmall),
-                                  Expanded(
-                                      child: PrimaryButton(
-                                          onPressed: () {},
-                                          buttonTitle: StringConstants.kOk))
-                                ])
-                              ]))));
+                          ))));
             },
             buttonTitle: StringConstants.kAddCategory));
   }
