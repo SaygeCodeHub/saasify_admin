@@ -1,17 +1,17 @@
-import 'package:saasify/data/models/categories/delete_categories_model.dart';
-import 'package:saasify/data/models/categories/edit_categories_model.dart';
-import 'package:saasify/data/models/categories/fetch_all_categories_model.dart';
 import '../../data/models/payment/add_payment_method_model.dart';
+import '../../data/models/payment/delete_payment_method_model.dart';
+import '../../data/models/payment/edit_payment_method_model.dart';
+import '../../data/models/payment/fetch_all_payment_method.dart';
 
 abstract class PaymentRepository {
-  Future<FetchAllCategoriesModel> fetchAllCategories(
+  Future<FetchAllPaymentModel> fetchAllPayments(
       String userId, String companyId, int branchId);
 
-  Future<EditCategoriesModel> editCategories(
-      String userId, String companyId, int branchId, Map categoriesDetailsMap);
+  Future<EditPaymentMethodModel> editPayment(
+      String userId, String companyId, int branchId, Map paymentDetailsMap);
 
-  Future<DeleteCategoriesModel> deleteCategories(
-      String userId, String companyId, int branchId, Map categoryIdMap);
+  Future<DeletePaymentMethodModel> deletePayment(
+      String userId, String companyId, int branchId, Map paymentIdMap);
 
   Future<SavePaymentMethodModel> savePayment(
       String userId, String companyId, int branchId, Map paymentDetailsMap);
