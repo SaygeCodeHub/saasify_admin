@@ -154,7 +154,7 @@ class ProductListDataTable extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: (productList[index].draft)
-                        ? AppColor.saasifyLighterGrey
+                        ? AppColor.saasifyLightWhiteGrey
                         : AppColor.saasifyLighterGreen),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,

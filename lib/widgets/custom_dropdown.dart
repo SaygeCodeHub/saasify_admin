@@ -54,7 +54,7 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
         Container(
             width: double.maxFinite,
             decoration: BoxDecoration(
-              color: AppColor.saasifyLighterGrey,
+              color: AppColor.saasifyLightWhiteGrey,
               border: Border.all(color: AppColor.saasifyWhite),
               borderRadius: BorderRadius.circular(spacingMedium),
             ),

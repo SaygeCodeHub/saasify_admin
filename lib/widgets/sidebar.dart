@@ -15,6 +15,7 @@ import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import '../screens/categories/categories_screen.dart';
+import '../screens/purchase_order/purchase_order_screen.dart';
 
 class SideBar extends StatelessWidget {
   static String userName = '';
@@ -126,9 +127,21 @@ class SideBar extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(StringConstants.kInventoryManagement,
+                  title: Text(StringConstants.kPurchaseOrder,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 6)
+                              ? AppColor.saasifyLightDeepBlue
+                              : AppColor.saasifyLightBlack,
+                          fontWeight: FontWeight.w600)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, PurchaseOrder.routeName);
+                  },
+                ),
+                ListTile(
+                  title: Text(StringConstants.kInventoryManagement,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          color: (selectedIndex == 7)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyLightBlack,
                           fontWeight: FontWeight.w600)),

@@ -20,6 +20,10 @@ class StringConstants {
   static const kWelcome = 'Welcome :)';
   static const kEnterOtp = 'Enter Otp :)';
   static const kOrderNo = 'Order No';
+  static const kItemDescription = 'Item Description';
+  static const kQty = 'Qty';
+  static const kRate = 'Rate';
+  static const kAmount = 'Amount';
   static const kPaymentTypeEnabled = 'Payment Type Enabled';
   static const kOrderedDate = 'Ordered Date';
   static const kUnitPrice = 'Unit Price';
@@ -51,6 +55,8 @@ class StringConstants {
   static const kProducts = 'Products';
   static const kUnsettledTabs = 'Unsettled Tabs';
   static const kInventoryManagement = 'Inventory Management';
+  static const kPurchaseOrder = 'PURCHASE ORDER';
+  static const kPurchaseOrderSmall = 'Purchase Order';
   static const kBrand = 'Brand';
   static const kOwnerName = 'Owner Name';
   static const kLastName = 'Last Name';
@@ -138,6 +144,17 @@ class StringConstants {
   static const kAddManually = 'ADD MANUALLY';
   static const kScanBarcode = 'SCAN BARCODE';
   static const kInformation = 'Information';
+  static const kYourCompany = 'Your Company';
+  static const kYourVendorsCompany = 'Your Vendor\'s Company';
+  static const kYourName = 'Your Name';
+  static const kVendorAddress = 'Vendor Address:';
+  static const kCompanyAddress = 'Company\'s Address';
+  static const kCity = 'City,State Zip';
+  static const kCountry = 'Country';
+  static const kPO = 'PO#';
+  static const kOrderDate = 'Order Date';
+  static const kDeliveryDate = 'Delivery Date';
+  static const kPO12 = 'PO-12';
   static const kAddNewProduct = 'Add new product';
   static const kErrorMessage =
       "You don't have any active product added in POS Please add a Product to start the billing Section :)";

@@ -202,7 +202,7 @@ class FormImageSection extends StatelessWidget {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      color: AppColor.saasifyLighterGrey,
+                                      color: AppColor.saasifyLightWhiteGrey,
                                       borderRadius:
                                           BorderRadius.circular(spacingSmall)),
                                   child: Center(
@@ -239,7 +239,8 @@ class FormImageSection extends StatelessWidget {
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
-                                            color: AppColor.saasifyLighterGrey,
+                                            color:
+                                                AppColor.saasifyLightWhiteGrey,
                                             borderRadius: BorderRadius.circular(
                                                 spacingSmall)),
                                         child: Center(

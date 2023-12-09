@@ -48,7 +48,7 @@ class OtpScreen extends StatelessWidget {
                   defaultPinTheme: PinTheme(
                       decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
-                          color: AppColor.saasifyLighterGrey,
+                          color: AppColor.saasifyLightWhiteGrey,
                           borderRadius: BorderRadius.circular(
                               context.responsive(8, desktop: 12)))),
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
