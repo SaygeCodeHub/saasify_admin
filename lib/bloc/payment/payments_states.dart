@@ -1,4 +1,4 @@
-import 'package:saasify/data/models/categories/fetch_all_categories_model.dart';
+import '../../data/models/payment/fetch_all_payment_method.dart';
 
 abstract class PaymentStates {}
 
@@ -35,9 +35,9 @@ class ErrorDeletingPayment extends PaymentStates {
 class FetchingPayment extends PaymentStates {}
 
 class FetchedPayment extends PaymentStates {
-  final List<ProductCategory> categoryList;
+  final List<PaymentData> paymentData;
 
-  FetchedPayment({required this.categoryList});
+  FetchedPayment({required this.paymentData});
 }
 
 class ErrorFetchingPayment extends PaymentStates {

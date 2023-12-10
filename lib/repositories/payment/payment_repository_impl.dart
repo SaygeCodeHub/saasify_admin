@@ -1,37 +1,48 @@
 import 'package:saasify/data/models/payment/add_payment_method_model.dart';
 import 'package:saasify/repositories/payment/payment_repository.dart';
-
-import '../../data/models/categories/delete_categories_model.dart';
-import '../../data/models/categories/edit_categories_model.dart';
-import '../../data/models/categories/fetch_all_categories_model.dart';
-import '../../services/client_services.dart';
-import '../../utils/constants/api_constants.dart';
+import '../../data/models/payment/delete_payment_method_model.dart';
+import '../../data/models/payment/edit_payment_method_model.dart';
+import '../../data/models/payment/fetch_all_payment_method.dart';
 
 class PaymentRepositoryImpl implements PaymentRepository {
   @override
-  Future<FetchAllCategoriesModel> fetchAllCategories(
+  Future<FetchAllPaymentModel> fetchAllPayments(
       String userId, String companyId, int branchId) async {
-    final response = await ClientServices().get(
-        '${ApiConstants.baseUrl}$userId/$companyId/$branchId/getAllCategories');
-    return FetchAllCategoriesModel.fromJson(response);
+    final response = {
+      "status": 200,
+      "data": [
+        {"payment_id": 1, "payment_name": "UPI", "is_active": true}
+      ],
+      "message": "Success"
+    };
+    // final response =
+    // await ClientServices().get(
+    //     '${ApiConstants.baseUrl}$userId/$companyId/$branchId/getAllPaymentMethods');
+    return FetchAllPaymentModel.fromJson(response);
   }
 
   @override
-  Future<EditCategoriesModel> editCategories(String userId, String companyId,
-      int branchId, Map categoriesDetailsMap) async {
-    final response = await ClientServices().put(
-        '${ApiConstants.baseUrl}$userId/$companyId/$branchId/editCategory',
-        categoriesDetailsMap);
-    return EditCategoriesModel.fromJson(response);
+  Future<EditPaymentMethodModel> editPayment(String userId, String companyId,
+      int branchId, Map paymentDetailsMap) async {
+    final response = {"status": 200, "data": {}, "message": "Successfully"};
+    // final response = await ClientServices().put(
+    //     '${ApiConstants.baseUrl}$userId/$companyId/$branchId/editCategory',
+    //     categoriesDetailsMap);
+    return EditPaymentMethodModel.fromJson(response);
   }
 
   @override
-  Future<DeleteCategoriesModel> deleteCategories(
-      String userId, String companyId, int branchId, Map categoryIdMap) async {
-    final response = await ClientServices().delete(
-        '${ApiConstants.baseUrl}$userId/$companyId/$branchId/deleteCategory',
-        categoryIdMap);
-    return DeleteCategoriesModel.fromJson(response);
+  Future<DeletePaymentMethodModel> deletePayment(
+      String userId, String companyId, int branchId, Map paymentIdMap) async {
+    final response = {
+      "status": 200,
+      "data": {},
+      "message": "Payment Method deleted successfully"
+    };
+    // final response = await ClientServices().delete(
+    //     '${ApiConstants.baseUrl}$userId/$companyId/$branchId/deleteCategory',
+    //     categoryIdMap);
+    return DeletePaymentMethodModel.fromJson(response);
   }
 
   @override

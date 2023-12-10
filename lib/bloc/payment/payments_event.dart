@@ -7,9 +7,9 @@ class EditPayment extends PaymentEvents {
 }
 
 class DeletePayment extends PaymentEvents {
-  final int categoryId;
+  final int paymentId;
 
-  DeletePayment({required this.categoryId});
+  DeletePayment({required this.paymentId});
 }
 
 class FetchAllPayment extends PaymentEvents {}
