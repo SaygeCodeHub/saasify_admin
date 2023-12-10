@@ -44,6 +44,23 @@ class CategoriesScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingLarge),
                       child: BlocConsumer<CategoriesBloc, CategoriesStates>(
                           listener: (context, state) {
+                        if (state is SavedCategories) {
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialogueBox(
+                                    title: StringConstants.kSuccess,
+                                    message: state.message,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    checkMarkVisible: false,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(ctx);
+                                      context
+                                          .read<CategoriesBloc>()
+                                          .add(FetchAllCategories());
+                                    },
+                                  ));
+                        }
+
                         if (state is DeletingCategories) {
                           ProgressBar.show(context);
                         }
@@ -99,6 +116,21 @@ class CategoriesScreen extends StatelessWidget {
                                     });
                               });
                         }
+                        if (state is ErrorSavingCategories) {
+                          showDialog(
+                              context: context,
+                              builder: (dialogueCtx) {
+                                return AlertDialogueBox(
+                                    title: StringConstants.kSomethingWentWrong,
+                                    message: state.message,
+                                    errorMarkVisible: true,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(dialogueCtx);
+                                    });
+                              });
+                        }
+
                         if (state is ErrorFetchingCategories) {
                           showDialog(
                               context: context,
@@ -133,7 +165,7 @@ class CategoriesScreen extends StatelessWidget {
                               context.responsive(const SizedBox(),
                                   desktop: const Spacer()),
                               const Spacer(),
-                              const AddCategoryPopUp()
+                              AddCategoryPopUp()
                             ]),
                             const SizedBox(height: spacingStandard),
                             CategoriesGrid(productCategory: state.categoryList),

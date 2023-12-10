@@ -1,6 +1,7 @@
 import '../../data/models/categories/delete_categories_model.dart';
 import '../../data/models/categories/edit_categories_model.dart';
 import '../../data/models/categories/fetch_all_categories_model.dart';
+import '../../data/models/categories/save_categories_model.dart';
 import '../../services/client_services.dart';
 import '../../utils/constants/api_constants.dart';
 import 'categories_repository.dart';
@@ -21,6 +22,15 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
         '${ApiConstants.baseUrl}$userId/$companyId/$branchId/editCategory',
         categoriesDetailsMap);
     return EditCategoriesModel.fromJson(response);
+  }
+
+  @override
+  Future<SaveCategoriesModel> saveCategories(String userId, String companyId,
+      int branchId, Map categoryDetailsMap) async {
+    final response = await ClientServices().post(
+        '${ApiConstants.baseUrl}$userId/$companyId/$branchId/addCategory',
+        categoryDetailsMap);
+    return SaveCategoriesModel.fromJson(response);
   }
 
   @override

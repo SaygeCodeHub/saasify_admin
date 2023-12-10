@@ -4,6 +4,7 @@ import 'package:saasify/data/models/categories/delete_categories_model.dart';
 import 'package:saasify/data/models/categories/edit_categories_model.dart';
 import 'package:saasify/data/models/categories/fetch_all_categories_model.dart';
 import '../../data/customer_cache/customer_cache.dart';
+import '../../data/models/categories/save_categories_model.dart';
 import '../../di/app_module.dart';
 import '../../repositories/categories/categories_repository.dart';
 import 'categories_event.dart';
@@ -20,6 +21,7 @@ class CategoriesBloc extends Bloc<CategoriesEvents, CategoriesStates> {
     on<EditCategories>(_editCategory);
     on<DeleteCategories>(_deleteCategory);
     on<FetchAllCategories>(_fetchAllCategories);
+    on<SaveCategories>(_saveCategories);
   }
 
   FutureOr<void> _editCategory(
@@ -85,6 +87,28 @@ class CategoriesBloc extends Bloc<CategoriesEvents, CategoriesStates> {
       }
     } catch (e) {
       emit(ErrorFetchingCategories(message: e.toString()));
+    }
+  }
+
+  FutureOr<void> _saveCategories(
+      SaveCategories event, Emitter<CategoriesStates> emit) async {
+    emit(SavingCategories());
+    try {
+      String userId = await _customerCache.getUserId();
+      String companyId = await _customerCache.getCompanyId();
+      int branchId = await _customerCache.getBranchId();
+
+      SaveCategoriesModel saveCategoriesModel =
+          await _categoriesRepository.saveCategories(
+              userId, companyId, branchId, event.categoriesDetailsMap);
+
+      if (saveCategoriesModel.status == 200) {
+        emit(SavedCategories(message: saveCategoriesModel.message));
+      } else {
+        emit(ErrorSavingCategories(message: saveCategoriesModel.message));
+      }
+    } catch (e) {
+      emit(ErrorSavingCategories(message: e.toString()));
     }
   }
 }

@@ -51,3 +51,17 @@ class SwitchToggleCategories extends CategoriesStates {
 
   SwitchToggleCategories({required this.categoryToggle});
 }
+
+class SavingCategories extends CategoriesStates {}
+
+class SavedCategories extends CategoriesStates {
+  final String message;
+
+  SavedCategories({required this.message});
+}
+
+class ErrorSavingCategories extends CategoriesStates {
+  final String message;
+
+  ErrorSavingCategories({required this.message});
+}
