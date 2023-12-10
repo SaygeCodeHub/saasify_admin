@@ -102,6 +102,7 @@ class CategoriesBloc extends Bloc<CategoriesEvents, CategoriesStates> {
           await _categoriesRepository.saveCategories(
               userId, companyId, branchId, event.categoriesDetailsMap);
 
+
       if (saveCategoriesModel.status == 200) {
         emit(SavedCategories(message: saveCategoriesModel.message));
       } else {

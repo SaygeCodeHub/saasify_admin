@@ -11,7 +11,6 @@ import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/secondary_button.dart';
-import '../../../widgets/toggle_switch_widget.dart';
 
 class AddCategoryPopUp extends StatelessWidget {
   AddCategoryPopUp({super.key});
@@ -73,20 +72,6 @@ class AddCategoryPopUp extends StatelessWidget {
                                   }, onTextFieldChanged: (value) {
                                     addCategoryMap['category_name'] = value;
                                   }),
-                                  const SizedBox(height: spacingSmall),
-                                  Row(children: [
-                                    Text(
-                                        StringConstants
-                                            .kDoYouWantToDeactivateGST,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .xTiniest),
-                                    ToggleSwitchWidget(
-                                        value: true,
-                                        onChanged: (value) {
-                                          addCategoryMap['is_active'] = value;
-                                        })
-                                  ]),
                                   const SizedBox(height: spacingXMedium),
                                   Row(children: [
                                     Expanded(
@@ -100,6 +85,7 @@ class AddCategoryPopUp extends StatelessWidget {
                                     Expanded(
                                         child: PrimaryButton(
                                             onPressed: () {
+                                              addCategoryMap["is_active"] = true;
                                               if (_formKey.currentState!
                                                   .validate()) {
                                                 context

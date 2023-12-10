@@ -76,7 +76,7 @@ class BranchesBloc extends Bloc<BranchesEvents, BranchesStates> {
       int branchId = await _customerCache.getBranchId();
 
       SaveBranchesModel saveBranchesModel = await _branchesRepository
-          .saveBranches(userId, companyId, branchId, {});
+          .saveBranches(userId, companyId, branchId, event.branchDetailsMap);
 
       if (saveBranchesModel.status == 200) {
         emit(SavedBranch(message: saveBranchesModel.message));

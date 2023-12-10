@@ -49,6 +49,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
   FutureOr<void> _loadAllOrders(
       LoadAllOrders event, Emitter<BillingStates> emit) async {
+    selectedCategoryIndex = 0;
     customer = Customer(
         customerName: '',
         customerContact: '',
@@ -230,7 +231,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
         customer.billDetails.discount +
         customer.billDetails.gst);
 
-    DatabaseUtil.ordersBox.put(orderId, customer);
+    _billingRepository.saveTab(customer.toJson(), orderId);
 
     emit(ProductsLoaded(
         selectedCategoryIndex: selectedCategoryIndex,
