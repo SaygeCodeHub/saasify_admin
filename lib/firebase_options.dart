@@ -54,11 +54,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCemWXzz3Xtt2rfxA8vhlsTAAu7CQBuxW8',
-    appId: '1:842866510779:web:d897563ccaf045163c529e',
+    appId: '1:842866510779:web:952612f626ad726a3c529e',
     messagingSenderId: '842866510779',
     projectId: 'saasify-5ddd8',
     authDomain: 'saasify-5ddd8.firebaseapp.com',
+    databaseURL: 'https://saasify-5ddd8-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'saasify-5ddd8.appspot.com',
-    measurementId: 'G-QBL5PBGR9L',
+    measurementId: 'G-4LLTBNFLEG',
   );
 }

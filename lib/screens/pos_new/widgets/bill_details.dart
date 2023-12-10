@@ -62,26 +62,25 @@ class BillDetails extends StatelessWidget {
                           color: AppColor.saasifyDarkestBlack)),
                   const SizedBox(width: spacingXSmall),
                   SizedBox(
-                    width: 28,
+                    width: 35,
                     child: TextFormField(
-                        cursorHeight: 15,
                         decoration: const InputDecoration(
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(
-                                vertical: spacingXSmall,
-                                horizontal: spacingXSmall)),
+                                vertical: spacingXXSmall,
+                                horizontal: spacingXXSmall)),
                         initialValue: context
                             .read<BillingBloc>()
                             .customer
                             .billDetails
                             .discountPercent
                             .toString(),
-                        onFieldSubmitted: (value) {
+                        onChanged: (value) {
                           context
                               .read<BillingBloc>()
                               .customer
                               .billDetails
-                              .discountPercent = double.parse(value);
+                              .discountPercent = double.parse((value == '')?'0':value);
                           context.read<BillingBloc>().add(AddDiscount(
                               productsByCategories: productsByCategories));
                         },
@@ -89,8 +88,7 @@ class BillDetails extends StatelessWidget {
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(2)
-                        ],
-                        onChanged: (value) {}),
+                        ]),
                   ),
                   const SizedBox(width: spacingXXSmall),
                   Text('%',
@@ -116,26 +114,25 @@ class BillDetails extends StatelessWidget {
                           color: AppColor.saasifyDarkestBlack)),
                   const SizedBox(width: spacingXSmall),
                   SizedBox(
-                    width: 28,
+                    width: 35,
                     child: TextFormField(
-                        cursorHeight: 15,
                         decoration: const InputDecoration(
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(
-                                vertical: spacingXSmall,
-                                horizontal: spacingXSmall)),
+                                vertical: spacingXXSmall,
+                                horizontal: spacingXXSmall)),
                         initialValue: context
                             .read<BillingBloc>()
                             .customer
                             .billDetails
                             .gstPercent
                             .toString(),
-                        onFieldSubmitted: (value) {
+                        onChanged: (value) {
                           context
                               .read<BillingBloc>()
                               .customer
                               .billDetails
-                              .gstPercent = double.parse(value);
+                              .gstPercent = double.parse((value == '')?'0':value);
                           context.read<BillingBloc>().add(AddDiscount(
                               productsByCategories: productsByCategories));
                         },
@@ -143,8 +140,7 @@ class BillDetails extends StatelessWidget {
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(2)
-                        ],
-                        onChanged: (value) {}),
+                        ]),
                   ),
                   const SizedBox(width: spacingXXSmall),
                   Text('%',

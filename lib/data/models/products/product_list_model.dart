@@ -53,8 +53,8 @@ class ProductWithVariant {
   final int barcode;
   final bool draft;
   final int? restockReminder;
-  final int sgst;
-  final int cgst;
+  final double sgst;
+  final double cgst;
   final String currency;
 
   ProductWithVariant({
