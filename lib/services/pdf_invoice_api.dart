@@ -59,7 +59,8 @@ class PdfInvoiceApi {
         ],
       );
 
-  static Widget buildCustomerAddress(InvoiceCustomer invoiceCustomer) => Column(
+  static Widget buildCustomerAddress(InvoiceCustomerModel invoiceCustomer) =>
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(invoiceCustomer.name,

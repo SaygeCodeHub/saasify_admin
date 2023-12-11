@@ -5,7 +5,7 @@ import 'invoice_customer.dart';
 class Invoice {
   final InvoiceInfo info;
   final Supplier supplier;
-  final InvoiceCustomer invoiceCustomer;
+  final InvoiceCustomerModel invoiceCustomer;
   final List<InvoiceItem> items;
 
   const Invoice({
