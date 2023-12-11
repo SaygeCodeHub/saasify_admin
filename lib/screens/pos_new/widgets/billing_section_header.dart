@@ -10,18 +10,21 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 
 import '../../../configs/app_spacing.dart';
+import '../../../data/models/billing/fetch_products_by_category_model.dart';
 
 class BillingSectionHeader extends StatelessWidget {
-  const BillingSectionHeader({super.key});
+  final List<CategoryWithProductsDatum> productsByCategories;
+
+  const BillingSectionHeader({super.key, required this.productsByCategories});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ContactTile(isContact: true),
-          SizedBox(height: spacingSmall),
-          Divider(color: AppColor.saasifyPaleGrey, thickness: 1)
+          ContactTile(isContact: true, productsByCategories: productsByCategories),
+          const SizedBox(height: spacingSmall),
+          const Divider(color: AppColor.saasifyPaleGrey, thickness: 1)
         ]);
   }
 }
@@ -29,12 +32,14 @@ class BillingSectionHeader extends StatelessWidget {
 class ContactTile extends StatelessWidget {
   final bool isContact;
   static bool addedContact = false;
-  const ContactTile({super.key, required this.isContact});
+  final List<CategoryWithProductsDatum> productsByCategories;
+  const ContactTile({super.key, required this.isContact, required this.productsByCategories});
 
   static GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CustomerBloc, CustomerStates>(builder: (context, state) {
+    return BlocBuilder<CustomerBloc, CustomerStates>(
+        builder: (context, state) {
       if (state is CustomerFetched) {
         context.read<BillingBloc>().customer.customerName = state.name;
         return Column(children: [
@@ -58,7 +63,7 @@ class ContactTile extends StatelessWidget {
                 onTap: () {
                   context
                       .read<CustomerBloc>()
-                      .add(GetCustomer(customerContact: ''));
+                      .add(GetCustomer(customerContact: '', action: ''));
                   context.read<BillingBloc>().customer.customerName = '';
                 },
                 child: const Icon(Icons.mode_edit_outline_outlined,
@@ -117,7 +122,7 @@ class ContactTile extends StatelessWidget {
               if (formKey.currentState!.validate()) {
                 context.read<CustomerBloc>().add(GetCustomer(
                     customerContact:
-                        context.read<BillingBloc>().customer.customerContact));
+                        context.read<BillingBloc>().customer.customerContact, action: 'gotCustomer'));
               }
             },
             icon: const Icon(Icons.search))

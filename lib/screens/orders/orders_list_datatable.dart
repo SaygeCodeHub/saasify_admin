@@ -106,33 +106,73 @@ class OrdersListDataTable extends StatelessWidget {
             DataCell(
                 Container(
                     padding: const EdgeInsets.symmetric(
-                        vertical: spacingXSmall, horizontal: spacingXXSmall),
+                        vertical: spacingXSmall,
+                        horizontal: spacingXXSmall),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(kGeneralRadius),
-                        color: AppColor.saasifyLighterGreen),
-                    child: Row(mainAxisSize: MainAxisSize.min, children: [
-                      const Icon(Icons.circle,
-                          size: kPaymentCircleSize,
-                          color: AppColor.saasifyGreen),
-                      const SizedBox(width: spacingXXSmall),
-                      Text(
-                          orderListDatum.orders[index].paymentStatus
+                        borderRadius:
+                        BorderRadius.circular(kCardRadius),
+                        color: (orderListDatum.orders[index].paymentStatus
+                            .trim()
+                            .substring(0, 1)
+                            .toUpperCase()
+                            .toString() +
+                            orderListDatum
+                                .orders[index].paymentStatus
+                                .trim()
+                                .substring(1)
+                                .toLowerCase()
+                                .toString() == 'Paid')
+                            ? AppColor.saasifyLighterGreen
+                            : AppColor.saasifyLighterRed),
+                    child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.circle,
+                              size: spacingXXSmall,
+                              color: (orderListDatum.orders[index].paymentStatus
                                   .trim()
                                   .substring(0, 1)
                                   .toUpperCase()
                                   .toString() +
+                                  orderListDatum
+                                      .orders[index].paymentStatus
+                                      .trim()
+                                      .substring(1)
+                                      .toLowerCase()
+                                      .toString() == 'Paid')
+                                  ? AppColor.saasifyGreen
+                                  : AppColor.saasifyRed),
+                          const SizedBox(width: spacingXXSmall),
+                          Text(
                               orderListDatum.orders[index].paymentStatus
                                   .trim()
-                                  .substring(
-                                    1,
-                                  )
-                                  .toLowerCase()
-                                  .toString(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .xxTiniest
-                              .copyWith(color: AppColor.saasifyGreen))
-                    ])), onTap: () {
+                                  .substring(0, 1)
+                                  .toUpperCase()
+                                  .toString() +
+                                  orderListDatum
+                                      .orders[index].paymentStatus
+                                      .trim()
+                                      .substring(1)
+                                      .toLowerCase()
+                                      .toString(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .xxTiniest
+                                  .copyWith(
+                                  color: (orderListDatum.orders[index].paymentStatus
+                                      .trim()
+                                      .substring(0, 1)
+                                      .toUpperCase()
+                                      .toString() +
+                                      orderListDatum
+                                          .orders[index].paymentStatus
+                                          .trim()
+                                          .substring(1)
+                                          .toLowerCase()
+                                          .toString() == 'Paid')
+                                      ? AppColor.saasifyGreen
+                                      : AppColor.saasifyRed))
+                        ])), onTap: () {
               Navigator.pushReplacementNamed(
                   context, OrderDetailsScreen.routeName,
                   arguments: orderListDatum.orders[index]);

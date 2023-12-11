@@ -120,7 +120,7 @@ class POSScreen extends StatelessWidget {
                           customerContact: context
                               .read<BillingBloc>()
                               .customer
-                              .customerContact));
+                              .customerContact, action: ''));
                       if (state.productsByCategories.isNotEmpty) {
                         return Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -163,6 +163,7 @@ class POSScreen extends StatelessWidget {
                       }
                     } else if (state is ErrorFetchingProductsByCategory) {
                       return Expanded(
+                        flex: 5,
                           child: Center(
                               child: Text(StringConstants.kNoDataAvailable,
                                   style: Theme.of(context)

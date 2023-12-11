@@ -44,7 +44,22 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     on<AddOrderToPayLater>(_addOrderToPayLater);
     on<SettleOrder>(_settleOrder);
     on<AddDiscount>(_addDiscount);
+    on<SaveOrder>(_saveOrder);
     on<RemovePendingOrder>(_removePendingOrder);
+  }
+
+  FutureOr<void> _saveOrder(SaveOrder event, Emitter<BillingStates> emit ) async{
+    try {
+      await _billingRepository.saveTab(customer.toJson(), orderId);
+
+      emit(ProductsLoaded(
+          billDetails: customer.billDetails,
+          selectedProducts: customer.productList,
+          selectedCategoryIndex: selectedCategoryIndex,
+          productsByCategories: event.productsByCategories));
+    } on Exception catch (e) {
+      e;
+    }
   }
 
   FutureOr<void> _loadAllOrders(
@@ -231,7 +246,9 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
         customer.billDetails.discount +
         customer.billDetails.gst);
 
-    _billingRepository.saveTab(customer.toJson(), orderId);
+    if (customer.customerName != ''){
+      await _billingRepository.saveTab(customer.toJson(), orderId);
+    }
 
     emit(ProductsLoaded(
         selectedCategoryIndex: selectedCategoryIndex,
@@ -289,7 +306,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
       Map<String, dynamic> orderMap = {
         "items_ordered": productList,
         "customer_contact": int.parse(customer.customerContact),
-        "payment_status": "paid",
+        "payment_status": event.status,
         "payment_type": event.paymentMethod,
         "customer_name": customer.customerName,
         "discount_total": customer.billDetails.discount,
@@ -301,7 +318,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
           userId, companyId, branchId, orderMap);
 
       if (settleOrderModel.status == 200) {
-        _billingRepository.removeTab(orderId);
+        await _billingRepository.removeTab(orderId);
         emit(OrderSettled(message: settleOrderModel.message));
       } else {
         emit(ErrorSettlingOrder(message: settleOrderModel.message));
@@ -313,7 +330,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
   FutureOr<void> _removePendingOrder(
       RemovePendingOrder event, Emitter<BillingStates> emit) async {
-    _billingRepository.removeTab(event.orderID);
+
+    await _billingRepository.removeTab(event.orderID);
 
     add(LoadAllOrders());
   }

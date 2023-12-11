@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saasify/bloc/payment/payments_bloc.dart';
+import 'package:saasify/bloc/payment/payments_event.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/settings/widgets/three_dots_edit_delete.dart';
+import 'package:saasify/data/models/payment/fetch_all_payment_method.dart';
+import 'package:saasify/widgets/alert_dialogue_box.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/toggle_switch_widget.dart';
+import 'add_payment_method_popup.dart';
 
 class PaymentTypeGridView extends StatelessWidget {
   const PaymentTypeGridView({
@@ -13,13 +18,13 @@ class PaymentTypeGridView extends StatelessWidget {
     required this.paymentType,
   });
 
-  final List paymentType;
+  final List<PaymentData> paymentType;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
         shrinkWrap: true,
-        itemCount: 5,
+        itemCount: paymentType.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
               height: spacingStandard,
@@ -39,7 +44,7 @@ class PaymentTypeGridView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(paymentType[index]['leading'],
+                              Text(paymentType[index].paymentName,
                                   style: Theme.of(context)
                                       .textTheme
                                       .tiniest
@@ -52,29 +57,72 @@ class PaymentTypeGridView extends StatelessWidget {
                                       vertical: 4, horizontal: 8),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
-                                      color: AppColor.saasifyLighterGreen),
+                                      color: (paymentType[index].isActive)
+                                          ? AppColor.saasifyLighterGreen
+                                          : AppColor.saasifyLighterRed),
                                   child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        const Icon(Icons.circle,
+                                        Icon(Icons.circle,
                                             size: 8,
-                                            color: AppColor.saasifyGreen),
+                                            color: (paymentType[index].isActive)
+                                                ? AppColor.saasifyGreen
+                                                : AppColor.saasifyRed),
                                         const SizedBox(width: spacingXSmall),
                                         Text(
-                                            StringConstants.kPaymentTypeEnabled,
+                                            (paymentType[index].isActive)
+                                                ? StringConstants
+                                                    .kPaymentTypeEnabled
+                                                : StringConstants
+                                                    .kPaymentTypeDisabled,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .xxTiniest
                                                 .copyWith(
                                                     color:
-                                                        AppColor.saasifyGreen))
+                                                    (paymentType[index].isActive)
+                                                        ? AppColor.saasifyGreen
+                                                        : AppColor.saasifyRed))
                                       ]))
                             ]),
                         Row(children: [
                           ToggleSwitchWidget(
-                              value: true, onChanged: (value) {}),
+                              value: paymentType[index].isActive,
+                              onChanged: (value) {
+                                Map paymentTypeDetailsMap = paymentType[index].toJson();
+                                paymentTypeDetailsMap["is_active"] = value;
+                                context.read<PaymentBloc>().add(EditPayment(paymentDetailsMap: paymentTypeDetailsMap));
+                              }),
                           const SizedBox(width: spacingXSmall),
-                          const ThreeDotsPopup()
+                          PopupMenuButton(
+                              itemBuilder: (context) {
+                                return [
+                                  PopupMenuItem(
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (ctx) =>
+                                                AddNewPaymentTypePopup(savePaymentDetailsMap: paymentType[index].toJson(), isEdit: true));
+                                      },
+                                      child: const Text(StringConstants.kEdit)),
+                                  PopupMenuItem(
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (ctx) =>
+                                            AlertDialogueBox(
+                                                title: StringConstants.kWarning,
+                                                message: "Do you want to Delete payment method - ${paymentType[index].paymentName}",
+                                                primaryButtonTitle: StringConstants.kConfirm,
+                                                primaryOnPressed: (){
+                                                  Navigator.pop(context);
+                                                  context.read<PaymentBloc>().add(DeletePayment(paymentId: paymentType[index].paymentId));
+                                                }));
+                                      },
+                                      child: const Text(StringConstants.kDelete)),
+                                ];
+                              },
+                              child: const Icon(Icons.more_vert))
                         ]),
                       ])));
         },

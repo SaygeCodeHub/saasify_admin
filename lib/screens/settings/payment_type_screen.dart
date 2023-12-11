@@ -24,24 +24,6 @@ class PaymentTypeScreen extends StatelessWidget {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final List paymentType = [
-    {
-      'leading': "Cash",
-    },
-    {
-      'leading': "Net Banking",
-    },
-    {
-      'leading': "Card",
-    },
-    {
-      'leading': "UPI",
-    },
-    {
-      'leading': "GPay",
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     context.read<PaymentBloc>().add(FetchAllPayment());
@@ -177,14 +159,15 @@ class PaymentTypeScreen extends StatelessWidget {
                                 buttonVisible: true,
                                 textFieldVisible: false,
                                 onPressed: () {
+                                  Map map = {};
                                   showDialog(
                                       context: context,
                                       builder: (ctx) =>
-                                          const AddNewPaymentTypePopup());
+                                          AddNewPaymentTypePopup(isEdit: false, savePaymentDetailsMap: map));
                                 },
                               ),
                               const SizedBox(height: spacingStandard),
-                              PaymentTypeGridView(paymentType: paymentType)
+                              PaymentTypeGridView(paymentType: state.paymentData)
                             ],
                           );
                         } else if (state is ErrorFetchingPayment) {
@@ -201,33 +184,6 @@ class PaymentTypeScreen extends StatelessWidget {
                           return const SizedBox.shrink();
                         }
                       }
-                          // builder: (context, state) {
-                          //   return Column(
-                          //     crossAxisAlignment: CrossAxisAlignment.start,
-                          //     children: [
-                          //       CustomPageHeader(
-                          //         titleText: StringConstants.kPaymentType,
-                          //         onBack: () {
-                          //           Navigator.pushReplacementNamed(
-                          //               context, DashboardsScreen.routeName);
-                          //         },
-                          //         backIconVisible: true,
-                          //         buttonTitle:
-                          //             StringConstants.kAddNewPaymentMethod,
-                          //         buttonVisible: true,
-                          //         textFieldVisible: false,
-                          //         onPressed: () {
-                          //           showDialog(
-                          //               context: context,
-                          //               builder: (ctx) =>
-                          //                   const AddNewPaymentTypePopup());
-                          //         },
-                          //       ),
-                          //       const SizedBox(height: spacingStandard),
-                          //       PaymentTypeGridView(paymentType: paymentType)
-                          //     ],
-                          //   );
-                          // },
                           )))
             ]));
   }

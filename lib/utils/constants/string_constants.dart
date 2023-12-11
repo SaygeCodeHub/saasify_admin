@@ -22,6 +22,7 @@ class StringConstants {
   static const kEnterOtp = 'Enter Otp :)';
   static const kOrderNo = 'Order No';
   static const kPaymentTypeEnabled = 'Payment Type Enabled';
+  static const kPaymentTypeDisabled = 'Payment Type Disabled';
   static const kOrderedDate = 'Ordered Date';
   static const kUnitPrice = 'Unit Price';
   static const kPaymentStatus = 'Payment Status';
@@ -43,6 +44,8 @@ class StringConstants {
       'Do you Want to deactivate Coupon?';
   static const kDoYouWantToDeactivateBranch =
       'Do you Want to deactivate Branch?';
+  static const kIsActive =
+      'Is Active ?';
   static const kWantToDisableGST = 'Want to disable GST?';
   static const kAddVariantButton = 'ADD VARIANT';
   static const kAddVariant = 'Add Variant';
@@ -126,7 +129,7 @@ class StringConstants {
   static const kAddStock = 'Add Stock';
   static const kAddNewCategory = 'Add New Category';
   static const kEditCategory = 'Edit Category';
-  static const kAddNewPaymentMethod = 'Add New Payment Method';
+  static const kAddNewPaymentMethod = 'Add Payment Method';
   static const kAddNewBranch = 'Add New Branch';
   static const kEditBranch = 'Edit Branch';
   static const kReduceStock = 'Reduce Stock';

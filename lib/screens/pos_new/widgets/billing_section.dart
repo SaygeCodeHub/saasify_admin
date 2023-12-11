@@ -20,7 +20,7 @@ class BillingSection extends StatelessWidget {
         padding: const EdgeInsets.all(spacingMedium),
         decoration: const BoxDecoration(color: AppColor.saasifyLightGreyBlue),
         child: Column(children: [
-          const BillingSectionHeader(),
+          BillingSectionHeader(productsByCategories: productsByCategories),
           BillingProductsList(productsByCategories: productsByCategories),
           const SizedBox(height: spacingSmall),
           BillDetails(
@@ -34,7 +34,7 @@ class BillingSection extends StatelessWidget {
                   .variants[0]
                   .currency),
           const SizedBox(height: spacingMedium),
-          const BillingSectionFooter()
+          BillingSectionFooter(productsByCategories: productsByCategories)
         ]));
   }
 }

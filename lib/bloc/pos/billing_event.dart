@@ -78,6 +78,13 @@ class RemovePendingOrder extends BillingEvents {
 
 class SettleOrder extends BillingEvents {
   final String paymentMethod;
+  final String status;
 
-  SettleOrder({required this.paymentMethod});
+  SettleOrder({required this.status, required this.paymentMethod});
+}
+
+class SaveOrder extends BillingEvents {
+  final List<CategoryWithProductsDatum> productsByCategories;
+
+  SaveOrder({required this.productsByCategories});
 }

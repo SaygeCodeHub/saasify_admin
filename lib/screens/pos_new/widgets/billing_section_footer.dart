@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/customer/customer_bloc.dart';
@@ -7,18 +9,39 @@ import 'package:saasify/bloc/pos/billing_event.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/pos_new/widgets/billing_section_header.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
+import '../../../bloc/customer/customer_state.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
+import '../../../data/models/billing/fetch_products_by_category_model.dart';
 import '../../../widgets/primary_button.dart';
 import 'payment_dialogue.dart';
 
 class BillingSectionFooter extends StatelessWidget {
-  const BillingSectionFooter({super.key});
+  final List<CategoryWithProductsDatum> productsByCategories;
+  const BillingSectionFooter({super.key, required this.productsByCategories});
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Center(
+      BlocListener<CustomerBloc, CustomerStates>(
+  listener: (context, state) {
+    if (state is CustomerFetched){
+      log("stateEmitted");
+      switch (state.action){
+        case 'addToPayLater':
+          context.read<BillingBloc>().add(AddOrderToPayLater());
+        case 'settleBill':
+          log("settleBill");
+          context.read<BillingBloc>().add(SaveOrder(productsByCategories: productsByCategories));
+          showDialog(
+              context: context,
+              builder: (context) => const PaymentDialogue());
+        case 'gotCustomer':
+          context.read<BillingBloc>().add(SaveOrder(productsByCategories: productsByCategories));
+      }
+    }
+  },
+  child: Center(
           child: InkWell(
               onTap: () {
                 if (context.read<BillingBloc>().customer.customerName != '') {
@@ -29,18 +52,8 @@ class BillingSectionFooter extends StatelessWidget {
                         customerContact: context
                             .read<BillingBloc>()
                             .customer
-                            .customerContact));
-                    context.read<BillingBloc>().add(AddOrderToPayLater());
+                            .customerContact, action: 'addToPayLater'));
                   }
-                  // showDialog(
-                  //     context: context,
-                  //     builder: (context) => CustomAlertDialog(
-                  //         title: StringConstants.kWarning,
-                  //         message: 'Mobile No haas not been added',
-                  //         primaryButtonTitle: StringConstants.kOk,
-                  //         primaryOnPressed: () {
-                  //           Navigator.pop(context);
-                  //         }));
                 }
               },
               child: Text(
@@ -50,6 +63,7 @@ class BillingSectionFooter extends StatelessWidget {
                       decoration: TextDecoration.underline,
                     ),
               ))),
+),
       const SizedBox(height: spacingMedium),
       PrimaryButton(
         onPressed: () {
@@ -61,20 +75,8 @@ class BillingSectionFooter extends StatelessWidget {
             if (ContactTile.formKey.currentState!.validate()) {
               context.read<CustomerBloc>().add(GetCustomer(
                   customerContact:
-                      context.read<BillingBloc>().customer.customerContact));
-              showDialog(
-                  context: context,
-                  builder: (context) => const PaymentDialogue());
+                      context.read<BillingBloc>().customer.customerContact, action: 'settleBill'));
             }
-            // showDialog(
-            //     context: context,
-            //     builder: (context) => CustomAlertDialog(
-            //         title: StringConstants.kWarning,
-            //         message: 'Mobile No haas not been added',
-            //         primaryButtonTitle: StringConstants.kOk,
-            //         primaryOnPressed: () {
-            //           Navigator.pop(context);
-            //         }));
           }
         },
         buttonTitle: StringConstants.kSettleBill,

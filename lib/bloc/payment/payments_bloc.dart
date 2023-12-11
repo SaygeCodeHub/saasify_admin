@@ -26,7 +26,7 @@ class PaymentBloc extends Bloc<PaymentEvents, PaymentStates> {
   FutureOr<void> _savePayment(
       SavePayment event, Emitter<PaymentStates> emit) async {
     emit(SavingPayment());
-    // try {
+    try {
     String userId = await _customerCache.getUserId();
     String companyId = await _customerCache.getCompanyId();
     int branchId = await _customerCache.getBranchId();
@@ -39,15 +39,15 @@ class PaymentBloc extends Bloc<PaymentEvents, PaymentStates> {
     } else {
       emit(ErrorSavingPayment(message: saveBranchesModel.message));
     }
-    // } catch (e) {
-    //   emit(ErrorSavingPayment(message: e.toString()));
-    // }
+    } catch (e) {
+      emit(ErrorSavingPayment(message: e.toString()));
+    }
   }
 
   FutureOr<void> _editPayment(
       EditPayment event, Emitter<PaymentStates> emit) async {
     emit(EditingPayment());
-    // try {
+    try {
     String userId = await _customerCache.getUserId();
     String companyId = await _customerCache.getCompanyId();
     int branchId = await _customerCache.getBranchId();
@@ -60,15 +60,15 @@ class PaymentBloc extends Bloc<PaymentEvents, PaymentStates> {
     } else {
       emit(ErrorEditingPayment(message: editPaymentMethodModel.message));
     }
-    // } catch (e) {
-    //   emit(ErrorEditingPayment(message: e.toString()));
-    // }
+    } catch (e) {
+      emit(ErrorEditingPayment(message: e.toString()));
+    }
   }
 
   FutureOr<void> _deletePayment(
       DeletePayment event, Emitter<PaymentStates> emit) async {
     emit(DeletingPayment());
-    // try {
+    try {
     String userId = await _customerCache.getUserId();
     String companyId = await _customerCache.getCompanyId();
     int branchId = await _customerCache.getBranchId();
@@ -83,15 +83,15 @@ class PaymentBloc extends Bloc<PaymentEvents, PaymentStates> {
     } else {
       emit(ErrorDeletingPayment(message: deletePaymentMethodModel.message));
     }
-    // } catch (e) {
-    //   e.toString();
-    // }
+    } catch (e) {
+      e.toString();
+    }
   }
 
   FutureOr<void> _fetchAllPayment(
       FetchAllPayment event, Emitter<PaymentStates> emit) async {
     emit(FetchingPayment());
-    // try {
+    try {
     String userId = await _customerCache.getUserId();
     String companyId = await _customerCache.getCompanyId();
     int branchId = await _customerCache.getBranchId();
@@ -103,8 +103,8 @@ class PaymentBloc extends Bloc<PaymentEvents, PaymentStates> {
     } else {
       emit(ErrorFetchingPayment(message: fetchAllPaymentModel.message));
     }
-    // } catch (e) {
-    //   emit(ErrorFetchingPayment(message: e.toString()));
-    // }
+    } catch (e) {
+      emit(ErrorFetchingPayment(message: e.toString()));
+    }
   }
 }

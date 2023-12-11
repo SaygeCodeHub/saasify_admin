@@ -95,7 +95,7 @@ class UnsettledTabs extends StatelessWidget {
                           customerData: customerData[customerIdList[index]]!));
                       context.read<CustomerBloc>().add(GetCustomer(
                           customerContact: customerData[customerIdList[index]]!
-                              .customerContact));
+                              .customerContact, action: ''));
                     },
                     child: Card(
                         elevation: 4,
