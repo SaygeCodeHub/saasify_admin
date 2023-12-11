@@ -10,8 +10,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
   @override
   Future<FetchAllPaymentModel> fetchAllPayments(
       String userId, String companyId, int branchId) async {
-    final response =
-    await ClientServices().get(
+    final response = await ClientServices().get(
         '${ApiConstants.baseUrl}$userId/$companyId/$branchId/getAllPaymentMethods');
     return FetchAllPaymentModel.fromJson(response);
   }

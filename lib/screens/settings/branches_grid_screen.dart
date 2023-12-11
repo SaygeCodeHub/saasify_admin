@@ -6,6 +6,7 @@ import 'package:saasify/bloc/branches/branches_states.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/settings/widgets/add_store_popup.dart';
 import 'package:saasify/screens/settings/widgets/branches_grid.dart';
+import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/widgets/custom_page_header.dart';
 import '../../configs/app_color.dart';
@@ -48,14 +49,65 @@ class StoreGridScreen extends StatelessWidget {
                           bottom: spacingXHuge),
                       child: BlocConsumer<BranchesBloc, BranchesStates>(
                           listener: (context, state) {
-                        if (state is SavedBranch) {
-                          context.read<BranchesBloc>().add(FetchAllBranches());
+                        if (state is EditingBranches) {
+                          ProgressBar.show(context);
                         }
-
+                        if (state is SavingBranch) {
+                          ProgressBar.show(context);
+                        }
+                        if (state is SavedBranch) {
+                          ProgressBar.dismiss(context);
+                          showDialog(
+                              context: context,
+                              builder: (dialogueCtx) {
+                                return AlertDialogueBox(
+                                    title: StringConstants.kSuccess,
+                                    message: state.message,
+                                    checkMarkVisible: true,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(dialogueCtx);
+                                      context
+                                          .read<BranchesBloc>()
+                                          .add(FetchAllBranches());
+                                    });
+                              });
+                        }
                         if (state is EditedBranches) {
-                          context.read<BranchesBloc>().add(FetchAllBranches());
+                          ProgressBar.dismiss(context);
+                          showDialog(
+                              context: context,
+                              builder: (dialogueCtx) {
+                                return AlertDialogueBox(
+                                    title: StringConstants.kSuccess,
+                                    message: state.message,
+                                    checkMarkVisible: true,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(dialogueCtx);
+                                      context
+                                          .read<BranchesBloc>()
+                                          .add(FetchAllBranches());
+                                    });
+                              });
                         }
                         if (state is ErrorEditingBranches) {
+                          ProgressBar.dismiss(context);
+                          showDialog(
+                              context: context,
+                              builder: (dialogueCtx) {
+                                return AlertDialogueBox(
+                                    title: StringConstants.kSomethingWentWrong,
+                                    message: state.message,
+                                    errorMarkVisible: true,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(dialogueCtx);
+                                    });
+                              });
+                        }
+                        if (state is ErrorSavingBranch) {
+                          ProgressBar.dismiss(context);
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {
@@ -70,6 +122,7 @@ class StoreGridScreen extends StatelessWidget {
                               });
                         }
                         if (state is ErrorFetchingBranches) {
+                          ProgressBar.dismiss(context);
                           showDialog(
                               context: context,
                               builder: (dialogueCtx) {

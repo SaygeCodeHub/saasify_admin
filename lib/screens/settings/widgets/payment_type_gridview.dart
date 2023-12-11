@@ -79,8 +79,8 @@ class PaymentTypeGridView extends StatelessWidget {
                                                 .textTheme
                                                 .xxTiniest
                                                 .copyWith(
-                                                    color:
-                                                    (paymentType[index].isActive)
+                                                    color: (paymentType[index]
+                                                            .isActive)
                                                         ? AppColor.saasifyGreen
                                                         : AppColor.saasifyRed))
                                       ]))
@@ -89,9 +89,11 @@ class PaymentTypeGridView extends StatelessWidget {
                           ToggleSwitchWidget(
                               value: paymentType[index].isActive,
                               onChanged: (value) {
-                                Map paymentTypeDetailsMap = paymentType[index].toJson();
+                                Map paymentTypeDetailsMap =
+                                    paymentType[index].toJson();
                                 paymentTypeDetailsMap["is_active"] = value;
-                                context.read<PaymentBloc>().add(EditPayment(paymentDetailsMap: paymentTypeDetailsMap));
+                                context.read<PaymentBloc>().add(EditPayment(
+                                    paymentDetailsMap: paymentTypeDetailsMap));
                               }),
                           const SizedBox(width: spacingXSmall),
                           PopupMenuButton(
@@ -102,24 +104,35 @@ class PaymentTypeGridView extends StatelessWidget {
                                         showDialog(
                                             context: context,
                                             builder: (ctx) =>
-                                                AddNewPaymentTypePopup(savePaymentDetailsMap: paymentType[index].toJson(), isEdit: true));
+                                                AddNewPaymentTypePopup(
+                                                    savePaymentDetailsMap:
+                                                        paymentType[index]
+                                                            .toJson(),
+                                                    isEdit: true));
                                       },
                                       child: const Text(StringConstants.kEdit)),
                                   PopupMenuItem(
                                       onTap: () {
                                         showDialog(
                                             context: context,
-                                            builder: (ctx) =>
-                                            AlertDialogueBox(
+                                            builder: (ctx) => AlertDialogueBox(
                                                 title: StringConstants.kWarning,
-                                                message: "Do you want to Delete payment method - ${paymentType[index].paymentName}",
-                                                primaryButtonTitle: StringConstants.kConfirm,
-                                                primaryOnPressed: (){
+                                                message:
+                                                    "Do you want to Delete payment method - ${paymentType[index].paymentName}",
+                                                primaryButtonTitle:
+                                                    StringConstants.kConfirm,
+                                                primaryOnPressed: () {
                                                   Navigator.pop(context);
-                                                  context.read<PaymentBloc>().add(DeletePayment(paymentId: paymentType[index].paymentId));
+                                                  context
+                                                      .read<PaymentBloc>()
+                                                      .add(DeletePayment(
+                                                          paymentId:
+                                                              paymentType[index]
+                                                                  .paymentId));
                                                 }));
                                       },
-                                      child: const Text(StringConstants.kDelete)),
+                                      child:
+                                          const Text(StringConstants.kDelete)),
                                 ];
                               },
                               child: const Icon(Icons.more_vert))

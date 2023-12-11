@@ -162,12 +162,14 @@ class PaymentTypeScreen extends StatelessWidget {
                                   Map map = {};
                                   showDialog(
                                       context: context,
-                                      builder: (ctx) =>
-                                          AddNewPaymentTypePopup(isEdit: false, savePaymentDetailsMap: map));
+                                      builder: (ctx) => AddNewPaymentTypePopup(
+                                          isEdit: false,
+                                          savePaymentDetailsMap: map));
                                 },
                               ),
                               const SizedBox(height: spacingStandard),
-                              PaymentTypeGridView(paymentType: state.paymentData)
+                              PaymentTypeGridView(
+                                  paymentType: state.paymentData)
                             ],
                           );
                         } else if (state is ErrorFetchingPayment) {
@@ -183,8 +185,7 @@ class PaymentTypeScreen extends StatelessWidget {
                         } else {
                           return const SizedBox.shrink();
                         }
-                      }
-                          )))
+                      })))
             ]));
   }
 }

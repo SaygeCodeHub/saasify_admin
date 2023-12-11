@@ -24,46 +24,51 @@ class BillingSectionFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       BlocListener<CustomerBloc, CustomerStates>(
-  listener: (context, state) {
-    if (state is CustomerFetched){
-      log("stateEmitted");
-      switch (state.action){
-        case 'addToPayLater':
-          context.read<BillingBloc>().add(AddOrderToPayLater());
-        case 'settleBill':
-          log("settleBill");
-          context.read<BillingBloc>().add(SaveOrder(productsByCategories: productsByCategories));
-          showDialog(
-              context: context,
-              builder: (context) => const PaymentDialogue());
-        case 'gotCustomer':
-          context.read<BillingBloc>().add(SaveOrder(productsByCategories: productsByCategories));
-      }
-    }
-  },
-  child: Center(
-          child: InkWell(
-              onTap: () {
-                if (context.read<BillingBloc>().customer.customerName != '') {
-                  context.read<BillingBloc>().add(AddOrderToPayLater());
-                } else {
-                  if (ContactTile.formKey.currentState!.validate()) {
-                    context.read<CustomerBloc>().add(GetCustomer(
-                        customerContact: context
-                            .read<BillingBloc>()
-                            .customer
-                            .customerContact, action: 'addToPayLater'));
+        listener: (context, state) {
+          if (state is CustomerFetched) {
+            log("stateEmitted");
+            switch (state.action) {
+              case 'addToPayLater':
+                context.read<BillingBloc>().add(AddOrderToPayLater());
+              case 'settleBill':
+                log("settleBill");
+                context
+                    .read<BillingBloc>()
+                    .add(SaveOrder(productsByCategories: productsByCategories));
+                showDialog(
+                    context: context,
+                    builder: (context) => const PaymentDialogue());
+              case 'gotCustomer':
+                context
+                    .read<BillingBloc>()
+                    .add(SaveOrder(productsByCategories: productsByCategories));
+            }
+          }
+        },
+        child: Center(
+            child: InkWell(
+                onTap: () {
+                  if (context.read<BillingBloc>().customer.customerName != '') {
+                    context.read<BillingBloc>().add(AddOrderToPayLater());
+                  } else {
+                    if (ContactTile.formKey.currentState!.validate()) {
+                      context.read<CustomerBloc>().add(GetCustomer(
+                          customerContact: context
+                              .read<BillingBloc>()
+                              .customer
+                              .customerContact,
+                          action: 'addToPayLater'));
+                    }
                   }
-                }
-              },
-              child: Text(
-                StringConstants.kPayLater,
-                style: Theme.of(context).textTheme.tiniest.copyWith(
-                      color: AppColor.saasifyGreyBlue,
-                      decoration: TextDecoration.underline,
-                    ),
-              ))),
-),
+                },
+                child: Text(
+                  StringConstants.kPayLater,
+                  style: Theme.of(context).textTheme.tiniest.copyWith(
+                        color: AppColor.saasifyGreyBlue,
+                        decoration: TextDecoration.underline,
+                      ),
+                ))),
+      ),
       const SizedBox(height: spacingMedium),
       PrimaryButton(
         onPressed: () {
@@ -75,7 +80,8 @@ class BillingSectionFooter extends StatelessWidget {
             if (ContactTile.formKey.currentState!.validate()) {
               context.read<CustomerBloc>().add(GetCustomer(
                   customerContact:
-                      context.read<BillingBloc>().customer.customerContact, action: 'settleBill'));
+                      context.read<BillingBloc>().customer.customerContact,
+                  action: 'settleBill'));
             }
           }
         },

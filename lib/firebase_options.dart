@@ -58,7 +58,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '842866510779',
     projectId: 'saasify-5ddd8',
     authDomain: 'saasify-5ddd8.firebaseapp.com',
-    databaseURL: 'https://saasify-5ddd8-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://saasify-5ddd8-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'saasify-5ddd8.appspot.com',
     measurementId: 'G-4LLTBNFLEG',
   );

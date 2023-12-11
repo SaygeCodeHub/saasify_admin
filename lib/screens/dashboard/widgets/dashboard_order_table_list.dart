@@ -84,16 +84,17 @@ class DashboardOrderTableList extends StatelessWidget {
                                   borderRadius:
                                       BorderRadius.circular(kCardRadius),
                                   color: (ordersData.orders[index].paymentStatus
-                                      .trim()
-                                      .substring(0, 1)
-                                      .toUpperCase()
-                                      .toString() +
-                                      ordersData
-                                          .orders[index].paymentStatus
-                                          .trim()
-                                          .substring(1)
-                                          .toLowerCase()
-                                          .toString() == 'Paid')
+                                                  .trim()
+                                                  .substring(0, 1)
+                                                  .toUpperCase()
+                                                  .toString() +
+                                              ordersData
+                                                  .orders[index].paymentStatus
+                                                  .trim()
+                                                  .substring(1)
+                                                  .toLowerCase()
+                                                  .toString() ==
+                                          'Paid')
                                       ? AppColor.saasifyLighterGreen
                                       : AppColor.saasifyLighterRed),
                               child: Row(
@@ -101,17 +102,19 @@ class DashboardOrderTableList extends StatelessWidget {
                                   children: [
                                     Icon(Icons.circle,
                                         size: spacingXXSmall,
-                                        color: (ordersData.orders[index].paymentStatus
-                                            .trim()
-                                            .substring(0, 1)
-                                            .toUpperCase()
-                                            .toString() +
-                                            ordersData
-                                                .orders[index].paymentStatus
-                                                .trim()
-                                                .substring(1)
-                                                .toLowerCase()
-                                                .toString() == 'Paid')
+                                        color: (ordersData.orders[index]
+                                                        .paymentStatus
+                                                        .trim()
+                                                        .substring(0, 1)
+                                                        .toUpperCase()
+                                                        .toString() +
+                                                    ordersData.orders[index]
+                                                        .paymentStatus
+                                                        .trim()
+                                                        .substring(1)
+                                                        .toLowerCase()
+                                                        .toString() ==
+                                                'Paid')
                                             ? AppColor.saasifyGreen
                                             : AppColor.saasifyRed),
                                     const SizedBox(width: spacingXXSmall),
@@ -131,17 +134,20 @@ class DashboardOrderTableList extends StatelessWidget {
                                             .textTheme
                                             .xxTiniest
                                             .copyWith(
-                                                color: (ordersData.orders[index].paymentStatus
-                                                    .trim()
-                                                    .substring(0, 1)
-                                                    .toUpperCase()
-                                                    .toString() +
-                                                    ordersData
-                                                        .orders[index].paymentStatus
-                                                        .trim()
-                                                        .substring(1)
-                                                        .toLowerCase()
-                                                        .toString() == 'Paid')
+                                                color: (ordersData.orders[index]
+                                                                .paymentStatus
+                                                                .trim()
+                                                                .substring(0, 1)
+                                                                .toUpperCase()
+                                                                .toString() +
+                                                            ordersData
+                                                                .orders[index]
+                                                                .paymentStatus
+                                                                .trim()
+                                                                .substring(1)
+                                                                .toLowerCase()
+                                                                .toString() ==
+                                                        'Paid')
                                                     ? AppColor.saasifyGreen
                                                     : AppColor.saasifyRed))
                                   ])))

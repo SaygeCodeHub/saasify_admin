@@ -85,7 +85,8 @@ class AddCategoryPopUp extends StatelessWidget {
                                     Expanded(
                                         child: PrimaryButton(
                                             onPressed: () {
-                                              addCategoryMap["is_active"] = true;
+                                              addCategoryMap["is_active"] =
+                                                  true;
                                               if (_formKey.currentState!
                                                   .validate()) {
                                                 context

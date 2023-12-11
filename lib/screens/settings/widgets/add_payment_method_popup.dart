@@ -13,7 +13,8 @@ import '../../../widgets/secondary_button.dart';
 import '../../../widgets/toggle_switch_widget.dart';
 
 class AddNewPaymentTypePopup extends StatefulWidget {
-  const AddNewPaymentTypePopup({super.key, required this.savePaymentDetailsMap, required this.isEdit});
+  const AddNewPaymentTypePopup(
+      {super.key, required this.savePaymentDetailsMap, required this.isEdit});
   final Map savePaymentDetailsMap;
   final bool isEdit;
 
@@ -22,15 +23,15 @@ class AddNewPaymentTypePopup extends StatefulWidget {
 }
 
 class _AddNewPaymentTypePopupState extends State<AddNewPaymentTypePopup> {
-
   @override
   void initState() {
-    widget.savePaymentDetailsMap['is_active'] = widget.savePaymentDetailsMap['is_active'] ?? true;
+    widget.savePaymentDetailsMap['is_active'] =
+        widget.savePaymentDetailsMap['is_active'] ?? true;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-
     return AlertDialog(
         content: SizedBox(
             width: kDialogueWidth,
@@ -60,10 +61,11 @@ class _AddNewPaymentTypePopupState extends State<AddNewPaymentTypePopup> {
                   ),
                   const SizedBox(height: spacingMedium),
                   CustomTextField(
-                      initialValue: widget.savePaymentDetailsMap["payment_name"],
+                      initialValue:
+                          widget.savePaymentDetailsMap["payment_name"],
                       onTextFieldChanged: (value) {
-                    widget.savePaymentDetailsMap['payment_name'] = value;
-                  }),
+                        widget.savePaymentDetailsMap['payment_name'] = value;
+                      }),
                   const SizedBox(height: spacingSmall),
                   Row(
                     children: [
@@ -73,9 +75,7 @@ class _AddNewPaymentTypePopupState extends State<AddNewPaymentTypePopup> {
                           value: widget.savePaymentDetailsMap['is_active'],
                           onChanged: (value) {
                             widget.savePaymentDetailsMap['is_active'] = value;
-                            setState(() {
-
-                            });
+                            setState(() {});
                           }),
                     ],
                   ),
@@ -97,14 +97,16 @@ class _AddNewPaymentTypePopupState extends State<AddNewPaymentTypePopup> {
                             onPressed: () {
                               Navigator.pop(context);
                               (widget.isEdit)
-                                  ?context.read<PaymentBloc>().add(EditPayment(
-                                  paymentDetailsMap: widget.savePaymentDetailsMap))
-                                  :context.read<PaymentBloc>().add(SavePayment(
-                                  paymentDetailsMap: widget.savePaymentDetailsMap));
+                                  ? context.read<PaymentBloc>().add(EditPayment(
+                                      paymentDetailsMap:
+                                          widget.savePaymentDetailsMap))
+                                  : context.read<PaymentBloc>().add(SavePayment(
+                                      paymentDetailsMap:
+                                          widget.savePaymentDetailsMap));
                             },
                             buttonTitle: (widget.isEdit)
-                                ?StringConstants.kEdit
-                                :StringConstants.kAdd))
+                                ? StringConstants.kEdit
+                                : StringConstants.kAdd))
                   ])
                 ])));
   }

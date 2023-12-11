@@ -19,13 +19,11 @@ class BillingSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ContactTile(isContact: true, productsByCategories: productsByCategories),
-          const SizedBox(height: spacingSmall),
-          const Divider(color: AppColor.saasifyPaleGrey, thickness: 1)
-        ]);
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      ContactTile(isContact: true, productsByCategories: productsByCategories),
+      const SizedBox(height: spacingSmall),
+      const Divider(color: AppColor.saasifyPaleGrey, thickness: 1)
+    ]);
   }
 }
 
@@ -33,13 +31,13 @@ class ContactTile extends StatelessWidget {
   final bool isContact;
   static bool addedContact = false;
   final List<CategoryWithProductsDatum> productsByCategories;
-  const ContactTile({super.key, required this.isContact, required this.productsByCategories});
+  const ContactTile(
+      {super.key, required this.isContact, required this.productsByCategories});
 
   static GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CustomerBloc, CustomerStates>(
-        builder: (context, state) {
+    return BlocBuilder<CustomerBloc, CustomerStates>(builder: (context, state) {
       if (state is CustomerFetched) {
         context.read<BillingBloc>().customer.customerName = state.name;
         return Column(children: [
@@ -122,7 +120,8 @@ class ContactTile extends StatelessWidget {
               if (formKey.currentState!.validate()) {
                 context.read<CustomerBloc>().add(GetCustomer(
                     customerContact:
-                        context.read<BillingBloc>().customer.customerContact, action: 'gotCustomer'));
+                        context.read<BillingBloc>().customer.customerContact,
+                    action: 'gotCustomer'));
               }
             },
             icon: const Icon(Icons.search))

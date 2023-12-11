@@ -7,5 +7,6 @@ class CustomerFetched extends CustomerStates {
   final String contact;
   final String action;
 
-  CustomerFetched({required this.action, required this.name, required this.contact});
+  CustomerFetched(
+      {required this.action, required this.name, required this.contact});
 }

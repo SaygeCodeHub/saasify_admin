@@ -77,10 +77,11 @@ class BillDetails extends StatelessWidget {
                             .toString(),
                         onChanged: (value) {
                           context
-                              .read<BillingBloc>()
-                              .customer
-                              .billDetails
-                              .discountPercent = double.parse((value == '')?'0':value);
+                                  .read<BillingBloc>()
+                                  .customer
+                                  .billDetails
+                                  .discountPercent =
+                              double.parse((value == '') ? '0' : value);
                           context.read<BillingBloc>().add(AddDiscount(
                               productsByCategories: productsByCategories));
                         },
@@ -129,10 +130,11 @@ class BillDetails extends StatelessWidget {
                             .toString(),
                         onChanged: (value) {
                           context
-                              .read<BillingBloc>()
-                              .customer
-                              .billDetails
-                              .gstPercent = double.parse((value == '')?'0':value);
+                                  .read<BillingBloc>()
+                                  .customer
+                                  .billDetails
+                                  .gstPercent =
+                              double.parse((value == '') ? '0' : value);
                           context.read<BillingBloc>().add(AddDiscount(
                               productsByCategories: productsByCategories));
                         },

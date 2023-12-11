@@ -27,18 +27,18 @@ class PaymentBloc extends Bloc<PaymentEvents, PaymentStates> {
       SavePayment event, Emitter<PaymentStates> emit) async {
     emit(SavingPayment());
     try {
-    String userId = await _customerCache.getUserId();
-    String companyId = await _customerCache.getCompanyId();
-    int branchId = await _customerCache.getBranchId();
+      String userId = await _customerCache.getUserId();
+      String companyId = await _customerCache.getCompanyId();
+      int branchId = await _customerCache.getBranchId();
 
-    SavePaymentMethodModel saveBranchesModel = await _paymentRepository
-        .savePayment(userId, companyId, branchId, event.paymentDetailsMap);
+      SavePaymentMethodModel saveBranchesModel = await _paymentRepository
+          .savePayment(userId, companyId, branchId, event.paymentDetailsMap);
 
-    if (saveBranchesModel.status == 200) {
-      emit(SavedPayment(message: saveBranchesModel.message));
-    } else {
-      emit(ErrorSavingPayment(message: saveBranchesModel.message));
-    }
+      if (saveBranchesModel.status == 200) {
+        emit(SavedPayment(message: saveBranchesModel.message));
+      } else {
+        emit(ErrorSavingPayment(message: saveBranchesModel.message));
+      }
     } catch (e) {
       emit(ErrorSavingPayment(message: e.toString()));
     }
@@ -48,18 +48,18 @@ class PaymentBloc extends Bloc<PaymentEvents, PaymentStates> {
       EditPayment event, Emitter<PaymentStates> emit) async {
     emit(EditingPayment());
     try {
-    String userId = await _customerCache.getUserId();
-    String companyId = await _customerCache.getCompanyId();
-    int branchId = await _customerCache.getBranchId();
+      String userId = await _customerCache.getUserId();
+      String companyId = await _customerCache.getCompanyId();
+      int branchId = await _customerCache.getBranchId();
 
-    EditPaymentMethodModel editPaymentMethodModel = await _paymentRepository
-        .editPayment(userId, companyId, branchId, event.paymentDetailsMap);
+      EditPaymentMethodModel editPaymentMethodModel = await _paymentRepository
+          .editPayment(userId, companyId, branchId, event.paymentDetailsMap);
 
-    if (editPaymentMethodModel.status == 200) {
-      emit(EditedPayment(message: editPaymentMethodModel.message));
-    } else {
-      emit(ErrorEditingPayment(message: editPaymentMethodModel.message));
-    }
+      if (editPaymentMethodModel.status == 200) {
+        emit(EditedPayment(message: editPaymentMethodModel.message));
+      } else {
+        emit(ErrorEditingPayment(message: editPaymentMethodModel.message));
+      }
     } catch (e) {
       emit(ErrorEditingPayment(message: e.toString()));
     }
@@ -69,20 +69,21 @@ class PaymentBloc extends Bloc<PaymentEvents, PaymentStates> {
       DeletePayment event, Emitter<PaymentStates> emit) async {
     emit(DeletingPayment());
     try {
-    String userId = await _customerCache.getUserId();
-    String companyId = await _customerCache.getCompanyId();
-    int branchId = await _customerCache.getBranchId();
+      String userId = await _customerCache.getUserId();
+      String companyId = await _customerCache.getCompanyId();
+      int branchId = await _customerCache.getBranchId();
 
-    Map idsMap = {"payment_id": event.paymentId};
+      Map idsMap = {"payment_id": event.paymentId};
 
-    DeletePaymentMethodModel deletePaymentMethodModel = await _paymentRepository
-        .deletePayment(userId, companyId, branchId, idsMap);
+      DeletePaymentMethodModel deletePaymentMethodModel =
+          await _paymentRepository.deletePayment(
+              userId, companyId, branchId, idsMap);
 
-    if (deletePaymentMethodModel.status == 200) {
-      emit(DeletedPayment(message: deletePaymentMethodModel.message));
-    } else {
-      emit(ErrorDeletingPayment(message: deletePaymentMethodModel.message));
-    }
+      if (deletePaymentMethodModel.status == 200) {
+        emit(DeletedPayment(message: deletePaymentMethodModel.message));
+      } else {
+        emit(ErrorDeletingPayment(message: deletePaymentMethodModel.message));
+      }
     } catch (e) {
       e.toString();
     }
@@ -92,17 +93,17 @@ class PaymentBloc extends Bloc<PaymentEvents, PaymentStates> {
       FetchAllPayment event, Emitter<PaymentStates> emit) async {
     emit(FetchingPayment());
     try {
-    String userId = await _customerCache.getUserId();
-    String companyId = await _customerCache.getCompanyId();
-    int branchId = await _customerCache.getBranchId();
+      String userId = await _customerCache.getUserId();
+      String companyId = await _customerCache.getCompanyId();
+      int branchId = await _customerCache.getBranchId();
 
-    FetchAllPaymentModel fetchAllPaymentModel =
-        await _paymentRepository.fetchAllPayments(userId, companyId, branchId);
-    if (fetchAllPaymentModel.status == 200) {
-      emit(FetchedPayment(paymentData: fetchAllPaymentModel.data));
-    } else {
-      emit(ErrorFetchingPayment(message: fetchAllPaymentModel.message));
-    }
+      FetchAllPaymentModel fetchAllPaymentModel = await _paymentRepository
+          .fetchAllPayments(userId, companyId, branchId);
+      if (fetchAllPaymentModel.status == 200) {
+        emit(FetchedPayment(paymentData: fetchAllPaymentModel.data));
+      } else {
+        emit(ErrorFetchingPayment(message: fetchAllPaymentModel.message));
+      }
     } catch (e) {
       emit(ErrorFetchingPayment(message: e.toString()));
     }

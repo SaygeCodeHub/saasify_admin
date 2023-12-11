@@ -13,7 +13,10 @@ class CustomerBloc extends Bloc<CustomerEvent, CustomerStates> {
     if (event.customerContact == '') {
       emit(CustomerInitial());
     } else {
-      emit(CustomerFetched(name: 'Customer', contact: event.customerContact, action: event.action));
+      emit(CustomerFetched(
+          name: 'Customer',
+          contact: event.customerContact,
+          action: event.action));
     }
   }
 }

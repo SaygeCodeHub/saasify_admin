@@ -5,7 +5,7 @@ import '../data/models/dashboard/dashboard_card.dart';
 import '../screens/settings/discount_screen.dart';
 import '../screens/settings/payment_type_screen.dart';
 import '../screens/settings/profile_screen.dart';
-import '../screens/settings/store_grid_screen.dart';
+import '../screens/settings/branches_grid_screen.dart';
 
 List<DashboardCardData> dashboardCard = [
   DashboardCardData(

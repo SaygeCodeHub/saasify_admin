@@ -19,7 +19,7 @@ import '../screens/orders/orders_screen.dart';
 import '../screens/product/add_product_screen.dart';
 import '../screens/settings/payment_type_screen.dart';
 import '../screens/settings/profile_screen.dart';
-import '../screens/settings/store_grid_screen.dart';
+import '../screens/settings/branches_grid_screen.dart';
 import '../screens/settings/add_employee_screen.dart';
 
 class AppRoutes {

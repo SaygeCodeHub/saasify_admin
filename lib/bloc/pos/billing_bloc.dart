@@ -48,7 +48,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
     on<RemovePendingOrder>(_removePendingOrder);
   }
 
-  FutureOr<void> _saveOrder(SaveOrder event, Emitter<BillingStates> emit ) async{
+  FutureOr<void> _saveOrder(
+      SaveOrder event, Emitter<BillingStates> emit) async {
     try {
       await _billingRepository.saveTab(customer.toJson(), orderId);
 
@@ -246,7 +247,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
         customer.billDetails.discount +
         customer.billDetails.gst);
 
-    if (customer.customerName != ''){
+    if (customer.customerName != '') {
       await _billingRepository.saveTab(customer.toJson(), orderId);
     }
 
@@ -330,7 +331,6 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
   FutureOr<void> _removePendingOrder(
       RemovePendingOrder event, Emitter<BillingStates> emit) async {
-
     await _billingRepository.removeTab(event.orderID);
 
     add(LoadAllOrders());
