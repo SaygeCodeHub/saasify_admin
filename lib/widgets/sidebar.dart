@@ -127,7 +127,7 @@ class SideBar extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(StringConstants.kPurchaseOrder,
+                  title: Text(StringConstants.kPurchaseOrderSmall,
                       style: Theme.of(context).textTheme.xTiniest.copyWith(
                           color: (selectedIndex == 6)
                               ? AppColor.saasifyLightDeepBlue

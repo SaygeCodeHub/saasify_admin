@@ -107,6 +107,8 @@ class PurchaseOrderTextField extends StatelessWidget {
   final String? hintText;
   final TextStyle? hintStyle;
   final dynamic initialValue;
+  final double? width;
+  final bool readOnly;
   final void Function(String)? onTextFieldChanged;
   final TextEditingController controller = TextEditingController();
 
@@ -116,6 +118,8 @@ class PurchaseOrderTextField extends StatelessWidget {
     this.hintStyle,
     this.initialValue,
     required this.onTextFieldChanged,
+    this.width,
+    this.readOnly = false,
   });
 
   @override
@@ -123,13 +127,14 @@ class PurchaseOrderTextField extends StatelessWidget {
     initialValue == null ? null : controller.text = initialValue.toString();
 
     return Container(
-      width: 250,
+      width: (width == null) ? 200 : width,
       color: AppColor.saasifyWhite,
       child: TextFormField(
         key: _formKey,
         focusNode: _focusNode,
         controller: controller,
         onChanged: onTextFieldChanged,
+        readOnly: readOnly,
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(spacingStandard),
             hintText: hintText,
