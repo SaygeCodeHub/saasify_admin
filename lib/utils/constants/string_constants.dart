@@ -3,6 +3,12 @@ class StringConstants {
   static const kName = 'Name';
   static const kCurrency = 'Currency: ';
   static const kLocation = 'Location: ';
+  static const kContact = 'Contact: ';
+  static const kPleaseEnterTheBranchName = 'Please Enter the Branch Name ';
+  static const kPleaseEnterTheBranchCurrency =
+      'Please Enter the Branch Currency ';
+  static const kPleaseEnterTheBranchAddress =
+      'Please Enter the Branch Address ';
   static const kNameWithColon = 'Name :';
   static const kCategoryName = 'Category Name';
   static const kEnterCoupon = 'Enter Coupon';

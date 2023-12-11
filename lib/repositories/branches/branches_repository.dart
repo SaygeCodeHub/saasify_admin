@@ -8,7 +8,7 @@ abstract class BranchesRepository {
       String userId, String companyId);
 
   Future<SaveBranchesModel> saveBranches(
-      String userId, String companyId, int branchId, Map branchDetailsMap);
+      String userId, String companyId, Map branchDetailsMap);
 
   Future<EditBranchesModel> editBranches(
       String userId, String companyId, int branchId, Map branchDetailsMap);
