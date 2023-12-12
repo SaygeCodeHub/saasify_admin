@@ -18,41 +18,4 @@ class InvoiceCustomerModel {
   });
 }
 
-final List<InvoiceCustomerModel> invoiceCustomersList = [
-  InvoiceCustomerModel(
-    orderedDate: '12-12-23',
-    orderNo: '1',
-    customerContact: '1234333223',
-    customerName: 'customer',
-    paymentType: 'cash',
-    totalAmount: '150',
-    paymentStatus: 'paid',
-  ),
-  InvoiceCustomerModel(
-    orderedDate: '12-12-23',
-    orderNo: '1',
-    customerContact: '1234333223',
-    customerName: 'customer',
-    paymentType: 'cash',
-    totalAmount: '150',
-    paymentStatus: 'paid',
-  ),
-  InvoiceCustomerModel(
-    orderedDate: '12-12-23',
-    orderNo: '1',
-    customerContact: '1234333223',
-    customerName: 'customer',
-    paymentType: 'cash',
-    totalAmount: '150',
-    paymentStatus: 'paid',
-  ),
-  InvoiceCustomerModel(
-    orderedDate: '12-12-23',
-    orderNo: '1',
-    customerContact: '1234333223',
-    customerName: 'customer',
-    paymentType: 'cash',
-    totalAmount: '150',
-    paymentStatus: 'paid',
-  ),
-];
+List<InvoiceCustomerModel> invoiceCustomersList = [];

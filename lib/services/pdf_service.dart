@@ -1,69 +1,92 @@
 import 'dart:convert';
 import 'dart:html';
-import 'dart:ui';
-
-import 'package:syncfusion_flutter_pdf/pdf.dart';
-
-import '../data/models/pdf/invoice_customer.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 class PdfService {
-  Future<void> printCustomersPdf(List<InvoiceCustomerModel> data) async {
-    //Create a new PDF document
-    PdfDocument document = PdfDocument();
-    PdfGrid grid = PdfGrid();
+  Future<void> printCustomersPdf() async {
+    final pdf = pw.Document();
 
-    //Define number of columns in table
-    grid.columns.add(count: 7);
-    //Add header to the grid
-    grid.headers.add(1);
-    //Add the rows to the grid
-    PdfGridRow header = grid.headers[0];
-    header.cells[0].value = "orderedDate";
-    header.cells[1].value = "orderNo";
-    header.cells[2].value = "customerContact";
-    header.cells[3].value = "customerName";
-    header.cells[4].value = "paymentType";
-    header.cells[5].value = "totalAmount";
-    header.cells[6].value = "paymentStatus";
-    //Add header style
-    header.style = PdfGridCellStyle(
-      backgroundBrush: PdfBrushes.lightGray,
-      textBrush: PdfBrushes.black,
-      font: PdfStandardFont(PdfFontFamily.timesRoman, 12),
-    );
+    pdf.addPage(pw.Page(
+        pageFormat: PdfPageFormat.roll80,
+        build: (pw.Context context) {
+          return pw.Column(
+            children: [
+              pw.Text("ChanduRam's"),
+              pw.Text("NN Bakers & Provisions"),
+              pw.Text("Mangalam Arcade,Near Venus Book,"),
+              pw.Text("Dharampeth,Nagpur-440011"),
+              pw.Text("90214-98825/27,98224-66254"),
+              pw.Text("FSSAI LICENSE NO 12479625892 "),
+              pw.Text("GST NO: DF12479625892 "),
+              pw.Divider(),
+              pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text("Memo No:231235/107", style: pw.TextStyle()),
+                    pw.Text("12-12-2023 19:40")
+                  ]),
+              pw.Divider(),
+              pw.Text("CASH MEMO "),
+              pw.Divider(),
+              pw.Table(
+                  columnWidths: {
+                    0: pw.FlexColumnWidth(1),
+                    1: pw.FlexColumnWidth(3),
+                    2: pw.FlexColumnWidth(1),
+                    3: pw.FlexColumnWidth(1),
+                    4: pw.FlexColumnWidth(2),
+                    5: pw.FlexColumnWidth(1),
+                  },
+                  children: [
+                        pw.TableRow(children: [
+                          pw.Text("Sr no."),
+                          pw.Text("Description"),
+                          pw.Text("Qty"),
+                          pw.Text("MRP"),
+                          pw.Text("Rate"),
+                          pw.Text("Amt."),
+                        ])
+                      ] +
+                      List.generate(
+                          8,
+                          (index) => pw.TableRow(children: [
+                                pw.Text('${index+1}'),
+                                pw.Text('Good'),
+                                pw.Text('50g'),
+                                pw.Text('100.0'),
+                                pw.Text('80.00'),
+                                pw.Text('80.00'),
+                              ]))),
+              pw.Divider(),
+              pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text("Total"),
+                    pw.Text("21"),
+                    pw.Text("₹ 1599.00"),
+                  ]),
+              pw.Divider(),
+              pw.Row(mainAxisAlignment: pw.MainAxisAlignment.end, children: [
+                pw.Text("Net Saving: 82.00"),
+              ]),
+              pw.Row(mainAxisAlignment: pw.MainAxisAlignment.end, children: [
+                pw.Text("Sub Total: 1681.00"),
+              ]),
+              pw.Divider(),
+              pw.Row(mainAxisAlignment: pw.MainAxisAlignment.end, children: [
+                pw.Text("₹ 1681.00"),
+              ]),
+            ],
+          ); // Center
+        })); // Page
 
-    //Add rows to grid
-    for (final customer in data) {
-      PdfGridRow row = grid.rows.add();
-      row.cells[0].value = customer.orderedDate;
-      row.cells[1].value = customer.orderNo;
-      row.cells[2].value = customer.customerContact;
-      row.cells[3].value = customer.customerName;
-      row.cells[4].value = customer.paymentType;
-      row.cells[5].value = customer.totalAmount;
-      row.cells[6].value = customer.paymentStatus;
-    }
-    //Add rows style
-    grid.style = PdfGridStyle(
-      cellPadding: PdfPaddings(left: 10, right: 3, top: 4, bottom: 5),
-      backgroundBrush: PdfBrushes.white,
-      textBrush: PdfBrushes.black,
-      font: PdfStandardFont(PdfFontFamily.timesRoman, 12),
-    );
-
-    //Draw the grid
-    grid.draw(
-        page: document.pages.add(), bounds: const Rect.fromLTWH(0, 0, 0, 0));
-    List<int> bytes = await document.save();
-
-    //Download document
+    var savedFile = await pdf.save();
+    List<int> fileInts = List.from(savedFile);
     AnchorElement(
         href:
-            "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}")
-      ..setAttribute("download", "invoice.pdf")
+            "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
+      ..setAttribute("download", "${DateTime.now().millisecondsSinceEpoch}.pdf")
       ..click();
-
-    //Dispose the document
-    document.dispose();
   }
 }

@@ -154,7 +154,7 @@ class CustomPageHeader extends StatelessWidget {
 //                 final pdfFile = await PdfInvoiceApi.generate(invoice);
 //
 //                 PdfApi.openFile(pdfFile);
-                PdfService().printCustomersPdf(invoiceCustomersList);
+                PdfService().printCustomersPdf();
               },
               icon: const Icon(Icons.download,
                   color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
