@@ -133,7 +133,7 @@ class PdfService {
     AnchorElement(
         href:
             "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
-      ..setAttribute("download", "${DateTime.now().millisecondsSinceEpoch}.pdf")
+      ..setAttribute("download", "invoice.pdf")
       ..click();
   }
 
@@ -226,7 +226,7 @@ class PdfService {
     AnchorElement(
         href:
             "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
-      ..setAttribute("download", "${DateTime.now().millisecondsSinceEpoch}.pdf")
+      ..setAttribute("download", "orders.pdf")
       ..click();
   }
 }
