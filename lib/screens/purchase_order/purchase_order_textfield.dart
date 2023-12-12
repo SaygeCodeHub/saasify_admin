@@ -109,8 +109,12 @@ class PurchaseOrderTextField extends StatelessWidget {
   final dynamic initialValue;
   final double? width;
   final bool readOnly;
+  final Color? color;
+  final Color? fillColor;
+  final BorderSide? borderSide;
   final void Function(String)? onTextFieldChanged;
   final TextEditingController controller = TextEditingController();
+  final void Function()? onTapFunction;
 
   PurchaseOrderTextField({
     super.key,
@@ -120,6 +124,10 @@ class PurchaseOrderTextField extends StatelessWidget {
     required this.onTextFieldChanged,
     this.width,
     this.readOnly = false,
+    this.onTapFunction,
+    this.fillColor,
+    this.color,
+    this.borderSide,
   });
 
   @override
@@ -128,7 +136,7 @@ class PurchaseOrderTextField extends StatelessWidget {
 
     return Container(
       width: (width == null) ? 200 : width,
-      color: AppColor.saasifyWhite,
+      color: (color == null) ? AppColor.saasifyWhite : color,
       child: TextFormField(
         key: _formKey,
         focusNode: _focusNode,
@@ -136,16 +144,21 @@ class PurchaseOrderTextField extends StatelessWidget {
         onChanged: onTextFieldChanged,
         readOnly: readOnly,
         decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(spacingStandard),
+            contentPadding: const EdgeInsets.all(spacingSmall),
             hintText: hintText,
             hintStyle: hintStyle,
-            fillColor: AppColor.saasifyWhite,
+            fillColor: (fillColor == null) ? AppColor.saasifyWhite : fillColor,
             enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent)),
-            focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: AppColor.saasifyDarkerGrey))),
+            focusedBorder: OutlineInputBorder(
+              borderSide: (borderSide == null)
+                  ? const BorderSide(color: AppColor.saasifyDarkerGrey)
+                  : borderSide!,
+            )),
         onTap: () {
-          FocusScope.of(context).requestFocus(_focusNode);
+          (onTapFunction == null)
+              ? FocusScope.of(context).requestFocus(_focusNode)
+              : onTapFunction;
         },
       ),
     );
