@@ -1,20 +1,3 @@
-// import 'package:saasify/data/models/pdf/supplier.dart';
-// import 'invoice_customer.dart';
-//
-// class Invoice {
-//   // final InvoiceInfo info;
-//   final Supplier supplier;
-//   final InvoiceCustomerModel invoiceCustomer;
-//   final List<InvoiceItem> items;
-//
-//   const Invoice({
-//     // required this.info,
-//     required this.supplier,
-//     required this.invoiceCustomer,
-//     required this.items,
-//   });
-// }
-//
 class InvoiceInfo {
   final String description;
   final String qty;
@@ -40,5 +23,3 @@ class InvoiceBillDetails {
     required this.itemTotal,
   });
 }
-
-// List<InvoiceInfo> invoiceInfo = [];
