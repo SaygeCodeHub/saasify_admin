@@ -11,4 +11,11 @@ class SelectedProductModel {
   final Product product;
 
   SelectedProductModel({required this.count, required this.product});
+
+  factory SelectedProductModel.fromJson(Map<String, dynamic> json) =>
+      SelectedProductModel(
+          count: json["count"], product: Product.fromJson(json["product"]));
+
+  Map<String, dynamic> toJson() =>
+      {"count": count, "product": product.toJson()};
 }

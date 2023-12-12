@@ -1,6 +1,8 @@
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import 'package:saasify/data/models/billing/selected_product_model.dart';
 
+import '../../data/models/billing/customer_model.dart';
+
 abstract class BillingEvents {}
 
 class FetchProductsByCategory extends BillingEvents {}
@@ -8,9 +10,10 @@ class FetchProductsByCategory extends BillingEvents {}
 class LoadAllOrders extends BillingEvents {}
 
 class BillingInitialEvent extends BillingEvents {
+  Customer customerData;
   String orderIndex;
 
-  BillingInitialEvent({required this.orderIndex});
+  BillingInitialEvent({required this.customerData, required this.orderIndex});
 }
 
 class FetchCoupons extends BillingEvents {}

@@ -52,9 +52,12 @@ class UnsettledTabs extends StatelessWidget {
                 if (customerIdList.length == index) {
                   return InkWell(
                       onTap: () {
-                        context
-                            .read<BillingBloc>()
-                            .add(BillingInitialEvent(orderIndex: '-1'));
+                        context.read<BillingBloc>().add(BillingInitialEvent(
+                            orderIndex: DateTime.now()
+                                .millisecondsSinceEpoch
+                                .toString(),
+                            customerData:
+                                context.read<BillingBloc>().customer));
                       },
                       child: Card(
                           elevation: 4,
@@ -88,7 +91,8 @@ class UnsettledTabs extends StatelessWidget {
                       context.read<BillingBloc>().orderId =
                           customerIdList[index];
                       context.read<BillingBloc>().add(BillingInitialEvent(
-                          orderIndex: customerIdList[index]));
+                          orderIndex: customerIdList[index],
+                          customerData: customerData[customerIdList[index]]!));
                       context.read<CustomerBloc>().add(GetCustomer(
                           customerContact: customerData[customerIdList[index]]!
                               .customerContact));

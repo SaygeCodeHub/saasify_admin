@@ -7,6 +7,7 @@ import 'package:saasify/repositories/categories/categories_repository.dart';
 import 'package:saasify/repositories/categories/categories_repository_impl.dart';
 import 'package:saasify/repositories/inventory/inventory_repository.dart';
 import 'package:saasify/repositories/inventory/inventory_repository_impl.dart';
+import 'package:saasify/repositories/payment/payment_repository.dart';
 import 'package:saasify/repositories/products/product_repository.dart';
 import 'package:saasify/repositories/products/product_repository_impl.dart';
 import 'package:saasify/repositories/profile/profile_repository.dart';
@@ -18,6 +19,7 @@ import '../repositories/branches/branches_repository.dart';
 import '../repositories/branches/branches_repository_impl.dart';
 import '../repositories/orders/orders_repository.dart';
 import '../repositories/orders/orders_repository_impl.dart';
+import '../repositories/payment/payment_repository_impl.dart';
 import '../repositories/profile/profile_repository_impl.dart';
 import '../services/client_services.dart';
 
@@ -43,4 +45,5 @@ configurableDependencies() {
       () => CategoriesRepositoryImpl());
   getIt.registerLazySingleton<OrdersRepository>(() => OrdersRepositoryImpl());
   getIt.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImpl());
+  getIt.registerLazySingleton<PaymentRepository>(() => PaymentRepositoryImpl());
 }

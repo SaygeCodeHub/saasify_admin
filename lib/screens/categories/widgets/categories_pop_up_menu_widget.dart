@@ -9,6 +9,7 @@ import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../data/models/categories/fetch_all_categories_model.dart';
 import '../../../utils/constants/string_constants.dart';
+import '../../../widgets/alert_dialogue_box.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/secondary_button.dart';
@@ -73,14 +74,6 @@ class CategoriesPopUpMenuWidget extends StatelessWidget {
                                               value;
                                         }),
                                     const SizedBox(height: spacingSmall),
-                                    Text(StringConstants.kEnterGSTAmount,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .xTiniest),
-                                    const SizedBox(height: spacingXXSmall),
-                                    CustomTextField(
-                                        initialValue: "12%",
-                                        onTextFieldChanged: (value) {}),
                                     Row(children: [
                                       Text(
                                           StringConstants
@@ -119,21 +112,21 @@ class CategoriesPopUpMenuWidget extends StatelessWidget {
                 child: const Text(StringConstants.kEdit)),
             PopupMenuItem(
                 onTap: () {
-                  // showDialog(
-                  //     context: context,
-                  //     builder: (context) => CustomAlertDialog(
-                  //         title: StringConstants.kWarning,
-                  //         message: StringConstants.kDeleteCategory,
-                  //         primaryButtonTitle: StringConstants.kConfirm,
-                  //         primaryOnPressed: () {
-                  //           context.read<CategoriesBloc>().add(DeleteCategories(
-                  //               categoryId: productCategory.categoryId));
-                  //           Navigator.pop(context);
-                  //         },
-                  //         secondaryButtonTitle: StringConstants.kCancel,
-                  //         secondaryOnPressed: () {
-                  //           Navigator.pop(context);
-                  //         }));
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialogueBox(
+                          title: StringConstants.kWarning,
+                          message: StringConstants.kDeleteCategory,
+                          primaryButtonTitle: StringConstants.kConfirm,
+                          primaryOnPressed: () {
+                            context.read<CategoriesBloc>().add(DeleteCategories(
+                                categoryId: productCategory.categoryId));
+                            Navigator.pop(context);
+                          },
+                          secondaryButtonTitle: StringConstants.kCancel,
+                          secondaryOnPressed: () {
+                            Navigator.pop(context);
+                          }));
                 },
                 child: const Text(StringConstants.kDelete))
           ];

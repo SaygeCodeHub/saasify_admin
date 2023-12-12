@@ -20,4 +20,18 @@ class Customer {
       required this.customerContact,
       required this.billDetails,
       required this.productList});
+
+  factory Customer.fromJson(Map<String, dynamic> json) => Customer(
+      customerName: json["customer_name"],
+      customerContact: json["customer_contact"],
+      billDetails: BillModel.fromJson(json["bill_details"]),
+      productList: List<SelectedProductModel>.from(
+          json["product_list"].map((e) => SelectedProductModel.fromJson(e))));
+
+  Map<String, dynamic> toJson() => {
+        "customer_name": customerName,
+        "customer_contact": customerContact,
+        "bill_details": billDetails.toJson(),
+        "product_list": List.from(productList.map((e) => e.toJson()))
+      };
 }

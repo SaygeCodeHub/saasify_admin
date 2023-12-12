@@ -28,7 +28,7 @@ class CustomDataTable extends StatelessWidget {
     return Expanded(
         child: DataTable2(
             smRatio: 0.5,
-            columnSpacing: 0,
+            columnSpacing: 15,
             horizontalMargin: 0,
             headingRowHeight: 50,
             columns: [

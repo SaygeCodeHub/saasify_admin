@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/data/customer_cache/customer_cache.dart';
 import 'package:saasify/data/models/billing/bill_model.dart';
@@ -60,18 +61,30 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
             gstPercent: 0),
         productList: []);
     Map<String, Customer> customerData = {};
-
+    //
     List<String> customerIdList = [];
+    //
+    // customerIdList = DatabaseUtil.ordersBox.keys.toList().cast<String>();
 
-    customerIdList = DatabaseUtil.ordersBox.keys.toList().cast<String>();
+    // for (var id in customerIdList) {
+    //   customerData[id] = DatabaseUtil.ordersBox.get(id);
+    // }
+
+    List<QueryDocumentSnapshot> tabsData =
+        await _billingRepository.getAllTabs();
+
+    customerIdList = tabsData.map((e) => e.id).toList();
 
     for (var id in customerIdList) {
-      customerData[id] = DatabaseUtil.ordersBox.get(id);
+      customerData[id] = Customer.fromJson(
+          tabsData[tabsData.indexWhere((element) => element.id == id)].data()
+              as Map<String, dynamic>);
     }
 
-    if (DatabaseUtil.ordersBox.isEmpty) {
+    if (customerIdList.isEmpty) {
       add(BillingInitialEvent(
-          orderIndex: DateTime.now().millisecondsSinceEpoch.toString()));
+          orderIndex: DateTime.now().millisecondsSinceEpoch.toString(),
+          customerData: customer));
     } else {
       emit(LoadDataBaseOrders(
           customerIdList: customerIdList, customerData: customerData));
@@ -80,30 +93,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
   FutureOr<void> _billingInitialEvent(
       BillingInitialEvent event, Emitter<BillingStates> emit) async {
-    if (DatabaseUtil.ordersBox.isNotEmpty && event.orderIndex != '-1') {
-      orderId = event.orderIndex;
-      customer.productList = DatabaseUtil.ordersBox
-          .get(event.orderIndex)
-          .productList
-          .cast<SelectedProductModel>();
-      customer.billDetails =
-          DatabaseUtil.ordersBox.get(event.orderIndex).billDetails;
-      customer.customerContact =
-          DatabaseUtil.ordersBox.get(event.orderIndex).customerContact;
-      customer.customerName =
-          DatabaseUtil.ordersBox.get(event.orderIndex).customerName;
-    } else {
-      orderId = DateTime.now().millisecondsSinceEpoch.toString();
-      selectedCategoryIndex = 0;
-      customer.productList = [];
-      customer.billDetails = BillModel(
-          itemTotal: 0,
-          total: 0,
-          discount: 0,
-          discountPercent: 0,
-          gst: 0,
-          gstPercent: 0);
-    }
+    orderId = event.orderIndex;
+    customer = event.customerData;
 
     add(FetchProductsByCategory());
   }
@@ -261,7 +252,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
   FutureOr<void> _addOrderToPayLater(
       AddOrderToPayLater event, Emitter<BillingStates> emit) async {
-    DatabaseUtil.ordersBox.put(orderId, customer);
+    await _billingRepository.saveTab(customer.toJson(), orderId);
+
     customer = Customer(
         customerName: '',
         customerContact: '',
@@ -308,7 +300,7 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
           userId, companyId, branchId, orderMap);
 
       if (settleOrderModel.status == 200) {
-        DatabaseUtil.ordersBox.delete(orderId);
+        _billingRepository.removeTab(orderId);
         emit(OrderSettled(message: settleOrderModel.message));
       } else {
         emit(ErrorSettlingOrder(message: settleOrderModel.message));
@@ -320,7 +312,8 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
 
   FutureOr<void> _removePendingOrder(
       RemovePendingOrder event, Emitter<BillingStates> emit) async {
-    DatabaseUtil.ordersBox.delete(event.orderID);
+    _billingRepository.removeTab(event.orderID);
+
     add(LoadAllOrders());
   }
 
