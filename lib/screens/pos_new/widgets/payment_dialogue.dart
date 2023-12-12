@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/pos/billing_bloc.dart';
-import 'package:saasify/bloc/pos/billing_event.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
+import '../../../data/models/pdf/invoice.dart';
+import '../../../services/pdf_service.dart';
 
 class PaymentDialogue extends StatelessWidget {
   const PaymentDialogue({super.key});
@@ -44,8 +45,44 @@ class PaymentDialogue extends StatelessWidget {
                             padding: const EdgeInsets.all(spacingXMedium),
                             child: InkWell(
                                 onTap: () {
-                                  context.read<BillingBloc>().add(SettleOrder(
-                                      paymentMethod: payments[index]));
+                                  List<InvoiceInfo> productData = [];
+                                  for (var item in context
+                                      .read<BillingBloc>()
+                                      .customer
+                                      .productList) {
+                                    productData.add(InvoiceInfo(
+                                        description: item.product.productName,
+                                        qty: item.count.toString(),
+                                        mRP: item.product.variants[0].cost
+                                            .toString(),
+                                        rate: item.product.variants[0].cost
+                                            .toString(),
+                                        amount: item.product.variants[0].cost
+                                            .toString()));
+
+                                    // billDetails.add(InvoiceBillDetails(
+                                    //     subTotal: context
+                                    //         .read<BillingBloc>()
+                                    //         .customer
+                                    //         .billDetails
+                                    //         .total
+                                    //         .toString()));
+                                  }
+
+                                  // if(payments[index] != 'Other'){
+                                  // context
+                                  //     .read<BillingBloc>()
+                                  //     .customer
+                                  //     .billDetails
+                                  //   .productList[0]
+                                  //       .product
+                                  //       .variants[0]
+                                  //       .context
+                                  //       .read<BillingBloc>()
+                                  //       .add(SettleOrder(
+                                  //           paymentMethod: payments[index]));}
+
+                                  PdfService().printPOSInvoicePdf(productData);
                                   Navigator.pop(context);
                                 },
                                 child: Container(

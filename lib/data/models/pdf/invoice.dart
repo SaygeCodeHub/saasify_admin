@@ -1,47 +1,44 @@
-import 'package:saasify/data/models/pdf/supplier.dart';
-
-import 'invoice_customer.dart';
-
-class Invoice {
-  final InvoiceInfo info;
-  final Supplier supplier;
-  final InvoiceCustomerModel invoiceCustomer;
-  final List<InvoiceItem> items;
-
-  const Invoice({
-    required this.info,
-    required this.supplier,
-    required this.invoiceCustomer,
-    required this.items,
-  });
-}
-
+// import 'package:saasify/data/models/pdf/supplier.dart';
+// import 'invoice_customer.dart';
+//
+// class Invoice {
+//   // final InvoiceInfo info;
+//   final Supplier supplier;
+//   final InvoiceCustomerModel invoiceCustomer;
+//   final List<InvoiceItem> items;
+//
+//   const Invoice({
+//     // required this.info,
+//     required this.supplier,
+//     required this.invoiceCustomer,
+//     required this.items,
+//   });
+// }
+//
 class InvoiceInfo {
   final String description;
-  final String number;
-  final DateTime date;
-  final DateTime dueDate;
+  final String qty;
+  final String mRP;
+  final String rate;
+  final String amount;
 
   const InvoiceInfo({
     required this.description,
-    required this.number,
-    required this.date,
-    required this.dueDate,
+    required this.qty,
+    required this.mRP,
+    required this.rate,
+    required this.amount,
   });
 }
 
-class InvoiceItem {
-  final String description;
-  final DateTime date;
-  final int quantity;
-  final double vat;
-  final double unitPrice;
+class InvoiceBillDetails {
+  final String subTotal;
+  final String itemTotal;
 
-  const InvoiceItem({
-    required this.description,
-    required this.date,
-    required this.quantity,
-    required this.vat,
-    required this.unitPrice,
+  const InvoiceBillDetails({
+    required this.subTotal,
+    required this.itemTotal,
   });
 }
+
+// List<InvoiceInfo> invoiceInfo = [];
