@@ -13,16 +13,18 @@ class PdfService {
     PdfGrid grid = PdfGrid();
 
     //Define number of columns in table
-    grid.columns.add(count: 5);
+    grid.columns.add(count: 7);
     //Add header to the grid
     grid.headers.add(1);
     //Add the rows to the grid
     PdfGridRow header = grid.headers[0];
-    header.cells[0].value = "Id";
-    header.cells[1].value = "Name";
-    header.cells[2].value = "Email";
-    header.cells[3].value = "Address";
-    header.cells[4].value = "Birthday";
+    header.cells[0].value = "orderedDate";
+    header.cells[1].value = "orderNo";
+    header.cells[2].value = "customerContact";
+    header.cells[3].value = "customerName";
+    header.cells[4].value = "paymentType";
+    header.cells[5].value = "totalAmount";
+    header.cells[6].value = "paymentStatus";
     //Add header style
     header.style = PdfGridCellStyle(
       backgroundBrush: PdfBrushes.lightGray,
@@ -33,11 +35,13 @@ class PdfService {
     //Add rows to grid
     for (final customer in data) {
       PdfGridRow row = grid.rows.add();
-      row.cells[0].value = customer.id;
-      row.cells[1].value = customer.name;
-      row.cells[2].value = customer.email;
-      row.cells[3].value = customer.address;
-      row.cells[4].value = customer.birthday;
+      row.cells[0].value = customer.orderedDate;
+      row.cells[1].value = customer.orderNo;
+      row.cells[2].value = customer.customerContact;
+      row.cells[3].value = customer.customerName;
+      row.cells[4].value = customer.paymentType;
+      row.cells[5].value = customer.totalAmount;
+      row.cells[6].value = customer.paymentStatus;
     }
     //Add rows style
     grid.style = PdfGridStyle(
