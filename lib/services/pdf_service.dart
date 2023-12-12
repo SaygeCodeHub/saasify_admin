@@ -138,7 +138,7 @@ class PdfService {
   }
 
   Future<void> printOrdersPdf(
-    List<InvoiceCustomerModel> invoiceInfo,
+    List<InvoiceCustomerModel> orderInfo,
   ) async {
     final pdf = pw.Document();
 
@@ -178,46 +178,46 @@ class PdfService {
                       pw.TableRow(children: [
                         pw.Text("Ordered Date",
                             style: pw.TextStyle(
-                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
                         pw.Text("Order No",
                             style: pw.TextStyle(
-                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
                         pw.Text("Customer contact",
                             style: pw.TextStyle(
-                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
                         pw.Text("Customer Name",
                             style: pw.TextStyle(
-                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
                         pw.Text("Payment Type",
                             style: pw.TextStyle(
-                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
                         pw.Text("Total Amount",
                             style: pw.TextStyle(
-                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
                         pw.Text("Payment Status",
                             style: pw.TextStyle(
-                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
                       ])
                     ] +
-                    List.generate(invoiceInfo.length, (index) {
+                    List.generate(orderInfo.length, (index) {
                       return pw.TableRow(children: [
-                        pw.Text(invoiceInfo[index].orderedDate,
+                        pw.Text(orderInfo[index].orderedDate,
                             style: const pw.TextStyle(fontSize: 10)),
-                        pw.Text(invoiceInfo[index].orderNo,
+                        pw.Text(orderInfo[index].orderNo,
                             style: const pw.TextStyle(fontSize: 10)),
-                        pw.Text(invoiceInfo[index].customerContact,
+                        pw.Text(orderInfo[index].customerContact,
                             style: const pw.TextStyle(fontSize: 10)),
-                        pw.Text(invoiceInfo[index].customerName,
+                        pw.Text(orderInfo[index].customerName,
                             style: pw.TextStyle(
                                 fontSize: 10, fontWeight: pw.FontWeight.bold)),
-                        pw.Text(invoiceInfo[index].paymentType,
+                        pw.Text(orderInfo[index].paymentType,
                             style: const pw.TextStyle(fontSize: 10)),
-                        pw.Text(invoiceInfo[index].totalAmount,
+                        pw.Text(orderInfo[index].totalAmount,
                             style: const pw.TextStyle(fontSize: 10)),
-                        pw.Text(invoiceInfo[index].paymentStatus,
-                            style: const pw.TextStyle(fontSize: 10)),
+                        pw.Text(orderInfo[index].paymentStatus,
+                            style: const pw.TextStyle(fontSize: 10))
                       ]);
-                    })),
+                    }))
           ]); // Center
         })); // Page
 
