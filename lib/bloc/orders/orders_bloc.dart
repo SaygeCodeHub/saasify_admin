@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/utils/dashboard_card.dart';
 import '../../data/customer_cache/customer_cache.dart';
+import '../../data/models/pdf/invoice_customer.dart';
 import '../../di/app_module.dart';
 import '../../repositories/orders/orders_repository.dart';
 import 'orders_event.dart';
@@ -30,14 +31,26 @@ class OrdersBloc extends Bloc<OrdersEvents, OrdersStates> {
     FetchOrdersModel fetchOrdersModel =
         await _ordersRepository.fetchOrdersList(userId, companyId, branchId);
 
-    dashboardCard[0].subtitle = fetchOrdersModel.data.totalOrders.toString();
-    dashboardCard[1].subtitle =
-        fetchOrdersModel.data.unpaidOrder.count.toString();
-    dashboardCard[2].subtitle = (fetchOrdersModel.data.totalOrders -
-            fetchOrdersModel.data.unpaidOrder.count)
-        .toString();
-    dashboardCard[3].subtitle = '₹ ${fetchOrdersModel.data.totalEarning}';
     if (fetchOrdersModel.status == 200) {
+      dashboardCard[0].subtitle = fetchOrdersModel.data.totalOrders.toString();
+      dashboardCard[1].subtitle =
+          fetchOrdersModel.data.unpaidOrder.count.toString();
+      dashboardCard[2].subtitle = (fetchOrdersModel.data.totalOrders -
+              fetchOrdersModel.data.unpaidOrder.count)
+          .toString();
+      dashboardCard[3].subtitle = '₹ ${fetchOrdersModel.data.totalEarning}';
+
+      for (var item in fetchOrdersModel.data.orders) {
+        invoiceCustomersList.add(InvoiceCustomerModel(
+            orderedDate: item.orderDate.toString(),
+            orderNo: item.orderNumber.toString(),
+            customerContact: item.customerContact.toString(),
+            customerName: item.customerName.toString(),
+            paymentType: item.paymentType.toString(),
+            totalAmount: item.totalAmount.toString(),
+            paymentStatus: item.paymentStatus.toString()));
+      }
+
       emit(FetchedOrders(fetchOrdersList: fetchOrdersModel.data));
     } else {
       emit(ErrorFetchingOrders(message: fetchOrdersModel.message));

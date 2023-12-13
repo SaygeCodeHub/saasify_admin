@@ -5,6 +5,9 @@ import 'package:saasify/widgets/primary_button.dart';
 import '../configs/app_color.dart';
 import '../configs/app_dimensions.dart';
 import '../configs/app_spacing.dart';
+import '../data/models/pdf/invoice_customer.dart';
+
+import '../services/pdf_service.dart';
 import '../utils/constants/string_constants.dart';
 import 'custom_text_field.dart';
 
@@ -75,7 +78,9 @@ class CustomPageHeader extends StatelessWidget {
                 onPressed: () {}),
             const SizedBox(width: spacingLarge),
             IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                PdfService().printOrdersPdf(invoiceCustomersList);
+              },
               icon: const Icon(Icons.download,
                   color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
             ),

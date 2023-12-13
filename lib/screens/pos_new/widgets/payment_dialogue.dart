@@ -3,13 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/payment/payments_bloc.dart';
 import 'package:saasify/bloc/payment/payments_event.dart';
 import 'package:saasify/bloc/pos/billing_bloc.dart';
-import 'package:saasify/bloc/pos/billing_event.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import '../../../bloc/payment/payments_states.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
+import '../../../data/models/pdf/invoice.dart';
+import '../../../services/pdf_service.dart';
 
 class PaymentDialogue extends StatelessWidget {
   const PaymentDialogue({super.key});
@@ -59,6 +60,23 @@ class PaymentDialogue extends StatelessWidget {
                                             .paymentName,
                                         status: 'Paid'));
                                     Navigator.pop(context);
+
+    List<InvoiceInfo> productData = [];
+    for (var item in context
+        .read<BillingBloc>()
+        .customer
+        .productList) {
+    productData.add(InvoiceInfo(
+    description: item.product.productName,
+    qty: item.count.toString(),
+    mRP: item.product.variants[0].cost
+        .toString(),
+    rate: item.product.variants[0].cost
+        .toString(),
+    amount: item.product.variants[0].cost
+        .toString()));
+    PdfService().printPOSInvoicePdf(productData);
+    Navigator.pop(context);
                                   },
                                   child: Container(
                                       decoration: BoxDecoration(
