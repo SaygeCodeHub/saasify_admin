@@ -74,7 +74,7 @@ class CustomPageHeader extends StatelessWidget {
             const SizedBox(width: spacingLarge),
             IconButton(
                 icon: const Icon(Icons.share,
-                    color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
+                    color: AppColor.saasifyBlack, size: kHeaderIconsSize),
                 onPressed: () {}),
             const SizedBox(width: spacingLarge),
             IconButton(
@@ -82,12 +82,12 @@ class CustomPageHeader extends StatelessWidget {
                 PdfService().printOrdersPdf(invoiceCustomersList);
               },
               icon: const Icon(Icons.download,
-                  color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
+                  color: AppColor.saasifyBlack, size: kHeaderIconsSize),
             ),
             const SizedBox(width: spacingLarge),
             IconButton(
                 icon: const Icon(Icons.print,
-                    color: AppColor.saasifyGreyBlue, size: kHeaderIconsSize),
+                    color: AppColor.saasifyBlack, size: kHeaderIconsSize),
                 onPressed: () {})
           ])),
       Visibility(

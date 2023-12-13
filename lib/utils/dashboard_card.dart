@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_color.dart';
-import 'package:saasify/screens/settings/employee_list.dart';
 import '../data/models/dashboard/dashboard_card.dart';
-import '../screens/settings/discount_screen.dart';
 import '../screens/settings/payment_type_screen.dart';
-import '../screens/settings/profile_screen.dart';
 import '../screens/settings/branches_grid_screen.dart';
 
 List<DashboardCardData> dashboardCard = [
@@ -35,13 +32,13 @@ List<DashboardCardData> dashboardCard = [
 ];
 
 List<DashboardListOptions> dashboardOptionList = [
-  DashboardListOptions(
-      iconName: Icons.person_outlined,
-      routeName: ProfileScreen.routeName,
-      title: 'Profile',
-      subtitle: 'Manage Profile',
-      iconColor: AppColor.saasifyPastelOrange,
-      containerColor: AppColor.saasifyOrange),
+  // DashboardListOptions(
+  //     iconName: Icons.person_outlined,
+  //     routeName: ProfileScreen.routeName,
+  //     title: 'Profile',
+  //     subtitle: 'Manage Profile',
+  //     iconColor: AppColor.saasifyPastelOrange,
+  //     containerColor: AppColor.saasifyOrange),
   DashboardListOptions(
       iconName: Icons.store,
       routeName: StoreGridScreen.routeName,
@@ -56,18 +53,18 @@ List<DashboardListOptions> dashboardOptionList = [
       subtitle: 'Manage Payment Methods',
       iconColor: AppColor.saasifyPastelGreen,
       containerColor: AppColor.saasifyGreen),
-  DashboardListOptions(
-      iconName: Icons.people,
-      routeName: EmployeeListScreen.routeName,
-      title: 'Employees',
-      subtitle: 'Manage Employees',
-      iconColor: AppColor.saasifyPastelPurple,
-      containerColor: AppColor.saasifypurple),
-  DashboardListOptions(
-      iconName: Icons.discount,
-      routeName: DiscountScreen.routeName,
-      title: 'Coupons',
-      subtitle: 'Manage Coupons',
-      iconColor: AppColor.saasifyPastelOrange,
-      containerColor: AppColor.saasifyOrange)
+  // DashboardListOptions(
+  //     iconName: Icons.people,
+  //     routeName: EmployeeListScreen.routeName,
+  //     title: 'Employees',
+  //     subtitle: 'Manage Employees',
+  //     iconColor: AppColor.saasifyPastelPurple,
+  //     containerColor: AppColor.saasifypurple),
+  // DashboardListOptions(
+  //     iconName: Icons.discount,
+  //     routeName: DiscountScreen.routeName,
+  //     title: 'Coupons',
+  //     subtitle: 'Manage Coupons',
+  //     iconColor: AppColor.saasifyPastelOrange,
+  //     containerColor: AppColor.saasifyOrange)
 ];

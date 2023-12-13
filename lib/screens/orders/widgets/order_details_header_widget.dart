@@ -62,26 +62,80 @@ class OrderDetailsHeaderWidget extends StatelessWidget {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                      kGeneralRadius),
-                                              color:
-                                                  AppColor.saasifyLighterGreen),
-                                          child: Text(
-                                              orderListDatum.paymentStatus
-                                                      .trim()
-                                                      .substring(0, 1)
-                                                      .toUpperCase() +
-                                                  orderListDatum.paymentStatus
-                                                      .trim()
-                                                      .substring(
-                                                        1,
-                                                      )
-                                                      .toLowerCase(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .xxTiniest
-                                                  .copyWith(
-                                                      color: AppColor
-                                                          .saasifyGreen)))
+                                                      kCardRadius),
+                                              color: (orderListDatum
+                                                              .paymentStatus
+                                                              .trim()
+                                                              .substring(0, 1)
+                                                              .toUpperCase()
+                                                              .toString() +
+                                                          orderListDatum
+                                                              .paymentStatus
+                                                              .trim()
+                                                              .substring(1)
+                                                              .toLowerCase()
+                                                              .toString() ==
+                                                      'Paid')
+                                                  ? AppColor.saasifyLighterGreen
+                                                  : AppColor.saasifyLighterRed),
+                                          child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(Icons.circle,
+                                                    size: spacingXXSmall,
+                                                    color: (orderListDatum
+                                                                    .paymentStatus
+                                                                    .trim()
+                                                                    .substring(
+                                                                        0, 1)
+                                                                    .toUpperCase()
+                                                                    .toString() +
+                                                                orderListDatum
+                                                                    .paymentStatus
+                                                                    .trim()
+                                                                    .substring(
+                                                                        1)
+                                                                    .toLowerCase()
+                                                                    .toString() ==
+                                                            'Paid')
+                                                        ? AppColor.saasifyGreen
+                                                        : AppColor.saasifyRed),
+                                                const SizedBox(
+                                                    width: spacingXXSmall),
+                                                Text(
+                                                    orderListDatum.paymentStatus
+                                                            .trim()
+                                                            .substring(0, 1)
+                                                            .toUpperCase()
+                                                            .toString() +
+                                                        orderListDatum
+                                                            .paymentStatus
+                                                            .trim()
+                                                            .substring(1)
+                                                            .toLowerCase()
+                                                            .toString(),
+                                                    style: Theme.of(context).textTheme.xxTiniest.copyWith(
+                                                        color: (orderListDatum
+                                                                        .paymentStatus
+                                                                        .trim()
+                                                                        .substring(
+                                                                            0,
+                                                                            1)
+                                                                        .toUpperCase()
+                                                                        .toString() +
+                                                                    orderListDatum
+                                                                        .paymentStatus
+                                                                        .trim()
+                                                                        .substring(
+                                                                            1)
+                                                                        .toLowerCase()
+                                                                        .toString() ==
+                                                                'Paid')
+                                                            ? AppColor
+                                                                .saasifyGreen
+                                                            : AppColor
+                                                                .saasifyRed))
+                                              ]))
                                     ])
                               ]),
                           const SizedBox(

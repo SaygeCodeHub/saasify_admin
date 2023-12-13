@@ -49,9 +49,6 @@ class StoreGridScreen extends StatelessWidget {
                           bottom: spacingXHuge),
                       child: BlocConsumer<BranchesBloc, BranchesStates>(
                           listener: (context, state) {
-                        if (state is EditingBranches) {
-                          ProgressBar.show(context);
-                        }
                         if (state is SavingBranch) {
                           ProgressBar.show(context);
                         }
@@ -74,22 +71,7 @@ class StoreGridScreen extends StatelessWidget {
                               });
                         }
                         if (state is EditedBranches) {
-                          ProgressBar.dismiss(context);
-                          showDialog(
-                              context: context,
-                              builder: (dialogueCtx) {
-                                return AlertDialogueBox(
-                                    title: StringConstants.kSuccess,
-                                    message: state.message,
-                                    checkMarkVisible: true,
-                                    primaryButtonTitle: StringConstants.kOk,
-                                    primaryOnPressed: () {
-                                      Navigator.pop(dialogueCtx);
-                                      context
-                                          .read<BranchesBloc>()
-                                          .add(FetchAllBranches());
-                                    });
-                              });
+                          context.read<BranchesBloc>().add(FetchAllBranches());
                         }
                         if (state is ErrorEditingBranches) {
                           ProgressBar.dismiss(context);

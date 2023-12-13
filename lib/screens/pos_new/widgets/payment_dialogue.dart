@@ -7,6 +7,7 @@ import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import '../../../bloc/payment/payments_states.dart';
+import '../../../bloc/pos/billing_event.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../data/models/pdf/invoice.dart';
@@ -45,38 +46,50 @@ class PaymentDialogue extends StatelessWidget {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2, childAspectRatio: 1.2),
                         itemCount: state.paymentData
-                            .where((element) => element.isActive)
-                            .length,
+                                .where((element) => element.isActive)
+                                .length +
+                            1,
                         itemBuilder: (context, index) {
                           return Padding(
                               padding: const EdgeInsets.all(spacingXMedium),
                               child: InkWell(
                                   onTap: () {
-                                    context.read<BillingBloc>().add(SettleOrder(
-                                        paymentMethod: state.paymentData
+                                    if (index <
+                                        state.paymentData
                                             .where(
                                                 (element) => element.isActive)
-                                            .toList()[index]
-                                            .paymentName,
-                                        status: 'Paid'));
-                                    Navigator.pop(context);
-
-    List<InvoiceInfo> productData = [];
-    for (var item in context
-        .read<BillingBloc>()
-        .customer
-        .productList) {
-    productData.add(InvoiceInfo(
-    description: item.product.productName,
-    qty: item.count.toString(),
-    mRP: item.product.variants[0].cost
-        .toString(),
-    rate: item.product.variants[0].cost
-        .toString(),
-    amount: item.product.variants[0].cost
-        .toString()));
-    PdfService().printPOSInvoicePdf(productData);
-    Navigator.pop(context);
+                                            .length) {
+                                      context.read<BillingBloc>().add(
+                                          SettleOrder(
+                                              paymentMethod: state.paymentData
+                                                  .where((element) =>
+                                                      element.isActive)
+                                                  .toList()[index]
+                                                  .paymentName,
+                                              status: 'Paid'));
+                                      Navigator.pop(context);
+                                    } else {
+                                      List<InvoiceInfo> productData = [];
+                                      for (var item in context
+                                          .read<BillingBloc>()
+                                          .customer
+                                          .productList) {
+                                        productData.add(InvoiceInfo(
+                                            description:
+                                                item.product.productName,
+                                            qty: item.count.toString(),
+                                            mRP: item.product.variants[0].cost
+                                                .toString(),
+                                            rate: item.product.variants[0].cost
+                                                .toString(),
+                                            amount: item
+                                                .product.variants[0].cost
+                                                .toString()));
+                                        PdfService()
+                                            .printPOSInvoicePdf(productData);
+                                        Navigator.pop(context);
+                                      }
+                                    }
                                   },
                                   child: Container(
                                       decoration: BoxDecoration(
@@ -85,11 +98,17 @@ class PaymentDialogue extends StatelessWidget {
                                               spacingXMedium)),
                                       child: Center(
                                           child: Text(
-                                              state.paymentData
-                                                  .where((element) =>
-                                                      element.isActive)
-                                                  .toList()[index]
-                                                  .paymentName,
+                                              (index <
+                                                      state.paymentData
+                                                          .where((element) =>
+                                                              element.isActive)
+                                                          .length)
+                                                  ? state.paymentData
+                                                      .where((element) =>
+                                                          element.isActive)
+                                                      .toList()[index]
+                                                      .paymentName
+                                                  : 'Other',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .tinier)))));

@@ -51,7 +51,7 @@ class CategoriesScreen extends StatelessWidget {
                                     title: StringConstants.kSuccess,
                                     message: state.message,
                                     primaryButtonTitle: StringConstants.kOk,
-                                    checkMarkVisible: false,
+                                    checkMarkVisible: true,
                                     primaryOnPressed: () {
                                       Navigator.pop(ctx);
                                       context
@@ -72,7 +72,7 @@ class CategoriesScreen extends StatelessWidget {
                                     title: StringConstants.kSuccess,
                                     message: state.message,
                                     primaryButtonTitle: StringConstants.kOk,
-                                    checkMarkVisible: false,
+                                    checkMarkVisible: true,
                                     primaryOnPressed: () {
                                       Navigator.pop(ctx);
                                       context
@@ -90,7 +90,7 @@ class CategoriesScreen extends StatelessWidget {
                                     title: StringConstants.kSomethingWentWrong,
                                     message: state.message,
                                     primaryButtonTitle: StringConstants.kOk,
-                                    checkMarkVisible: false,
+                                    errorMarkVisible: true,
                                     primaryOnPressed: () {
                                       Navigator.pop(ctx);
                                     },
