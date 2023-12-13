@@ -144,7 +144,7 @@ class ProductFormSection2 extends StatelessWidget {
                   height: kTextFieldHeight,
                   width: double.maxFinite,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(spacingXSmall),
+                      borderRadius: BorderRadius.circular(kCircularRadius),
                       border: Border.all(color: AppColor.saasifyPaleGrey)),
                   child: Padding(
                       padding: const EdgeInsets.all(spacingSmall),
@@ -178,7 +178,7 @@ class ProductFormSection2 extends StatelessWidget {
               height: kTextFieldHeight,
               width: double.maxFinite,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(spacingXSmall),
+                  borderRadius: BorderRadius.circular(kCircularRadius),
                   border: Border.all(color: AppColor.saasifyPaleGrey)),
               child: Padding(
                 padding: const EdgeInsets.all(spacingSmall),

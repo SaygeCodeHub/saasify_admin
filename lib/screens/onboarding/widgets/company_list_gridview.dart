@@ -41,7 +41,7 @@ class CompanyList extends StatelessWidget {
                       padding: EdgeInsets.all(context.responsive(spacingSmall,
                           tablets: spacingXXSmall, desktop: spacingSmall)),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(kCardRadius),
+                          borderRadius: BorderRadius.circular(kCircularRadius),
                           color: (selectedCompanyIndex == index)
                               ? AppColor.saasifyLightDeepBlue
                               : AppColor.saasifyCementGrey),

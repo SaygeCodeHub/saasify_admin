@@ -58,8 +58,7 @@ class FormImageSection extends StatelessWidget {
                       return Container(
                         padding: const EdgeInsets.all(spacingSmall),
                         decoration: BoxDecoration(
-                            border:
-                                Border.all(color: AppColor.saasifyPaleGrey)),
+                            border: Border.all(color: AppColor.saasifyGrey)),
                         child: Container(
                             height: kContainerHeight,
                             width: double.maxFinite,
@@ -68,13 +67,14 @@ class FormImageSection extends StatelessWidget {
                                     image:
                                         NetworkImage(dataMap['images'][index])),
                                 borderRadius:
-                                    BorderRadius.circular(spacingXSmall))),
+                                    BorderRadius.circular(kCircularRadius))),
                       );
                     }
                     return Container(
                         decoration: BoxDecoration(
                             color: AppColor.saasifyWhite,
-                            borderRadius: BorderRadius.circular(spacingSmall)));
+                            borderRadius:
+                                BorderRadius.circular(kCircularRadius)));
                   })
               : BlocConsumer<UploadBloc, UploadStates>(
                   listener: (context, state) {
@@ -202,9 +202,11 @@ class FormImageSection extends StatelessWidget {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      color: AppColor.saasifyLightWhiteGrey,
-                                      borderRadius:
-                                          BorderRadius.circular(spacingSmall)),
+                                      color: AppColor.saasifyLighterWhite,
+                                      border: Border.all(
+                                          color: AppColor.saasifyGrey),
+                                      borderRadius: BorderRadius.circular(
+                                          kCircularRadius)),
                                   child: Center(
                                       child: Image.asset('assets/upload.png',
                                           height: 25,
@@ -242,7 +244,7 @@ class FormImageSection extends StatelessWidget {
                                             color:
                                                 AppColor.saasifyLightWhiteGrey,
                                             borderRadius: BorderRadius.circular(
-                                                spacingSmall)),
+                                                kCircularRadius)),
                                         child: Center(
                                             child: Image.asset(
                                                 'assets/upload.png',

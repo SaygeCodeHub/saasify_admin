@@ -1,5 +1,5 @@
 const double kCardRadius = 12;
-const double kCircularRadius = 15;
+const double kCircularRadius = 5;
 const double kVerticalPadding = 6;
 const double kGeneralButtonHeight = 50;
 const double kButtonHeight = 75;
@@ -31,3 +31,4 @@ const double kCloseIconSize = 20;
 const double kHeaderIconsSize = 22;
 const double kTextContainerHeight = 280;
 const double kDashboardIconContainerSize = 40;
+const double kSideBarLeadingIconsSize = 20;

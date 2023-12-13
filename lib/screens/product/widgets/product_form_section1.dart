@@ -39,8 +39,9 @@ class ProductFormSection1 extends StatelessWidget {
               height: kTextFieldHeight,
               width: double.maxFinite,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(spacingXSmall),
-                  border: Border.all(color: AppColor.saasifyPaleGrey)),
+                  color: AppColor.saasifyLighterWhite,
+                  borderRadius: BorderRadius.circular(kCircularRadius),
+                  border: Border.all(color: AppColor.saasifyBlack)),
               child: Padding(
                   padding: const EdgeInsets.all(spacingSmall),
                   child: Text(dataMap['category_name'])))
@@ -89,7 +90,7 @@ class ProductFormSection1 extends StatelessWidget {
               height: kTextContainerHeight,
               width: double.maxFinite,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(spacingXSmall),
+                  borderRadius: BorderRadius.circular(kCircularRadius),
                   border: Border.all(color: AppColor.saasifyPaleGrey)),
               child: Padding(
                 padding: const EdgeInsets.all(spacingSmall),

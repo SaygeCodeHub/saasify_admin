@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saasify/configs/app_dimensions.dart';
 
 import 'package:saasify/widgets/custom_text_field.dart';
 import '../configs/app_color.dart';
@@ -54,9 +55,9 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
         Container(
             width: double.maxFinite,
             decoration: BoxDecoration(
-              color: AppColor.saasifyLightWhiteGrey,
-              border: Border.all(color: AppColor.saasifyWhite),
-              borderRadius: BorderRadius.circular(spacingMedium),
+              color: AppColor.saasifyLighterWhite,
+              border: Border.all(color: AppColor.saasifyGrey),
+              borderRadius: BorderRadius.circular(kCircularRadius),
             ),
             child: DropdownButtonHideUnderline(
                 child: DropdownButton(

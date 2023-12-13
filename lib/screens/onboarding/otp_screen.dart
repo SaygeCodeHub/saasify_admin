@@ -47,10 +47,11 @@ class OtpScreen extends StatelessWidget {
               child: Pinput(
                   defaultPinTheme: PinTheme(
                       decoration: BoxDecoration(
+                          border: Border.all(color: AppColor.saasifyGrey),
                           shape: BoxShape.rectangle,
                           color: AppColor.saasifyLightWhiteGrey,
                           borderRadius: BorderRadius.circular(
-                              context.responsive(8, desktop: 12)))),
+                              context.responsive(4, desktop: 5)))),
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   onChanged: (value) {
                     context.read<AuthenticationBloc>().authDetails['otp'] =

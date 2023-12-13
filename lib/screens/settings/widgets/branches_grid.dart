@@ -37,36 +37,41 @@ class BranchesGrid extends StatelessWidget {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(branchesData[index].branchName,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .tiniest
-                                      .copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColor.saasifyDarkerGrey)),
-                              const SizedBox(height: spacingXSmall),
-                              Row(children: [
-                                Text(StringConstants.kCurrency,
-                                    style:
-                                        Theme.of(context).textTheme.xxTiniest),
-                                Text(branchesData[index].branchCurrency,
-                                    style:
-                                        Theme.of(context).textTheme.xxTiniest)
+                        Padding(
+                          padding: const EdgeInsets.only(left: spacingXXSmall),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(branchesData[index].branchName,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .tiniest
+                                        .copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            color: AppColor.saasifyDarkerGrey)),
+                                const SizedBox(height: spacingXSmall),
+                                Row(children: [
+                                  Text(StringConstants.kCurrency,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .xxTiniest),
+                                  Text(branchesData[index].branchCurrency,
+                                      style:
+                                          Theme.of(context).textTheme.xxTiniest)
+                                ]),
+                                const SizedBox(height: spacingXXSmall),
+                                Row(children: [
+                                  Text(StringConstants.kLocation,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .xxTiniest),
+                                  Text(branchesData[index].branchAddress,
+                                      style:
+                                          Theme.of(context).textTheme.xxTiniest)
+                                ])
                               ]),
-                              const SizedBox(height: spacingXXSmall),
-                              Row(children: [
-                                Text(StringConstants.kLocation,
-                                    style:
-                                        Theme.of(context).textTheme.xxTiniest),
-                                Text(branchesData[index].branchAddress,
-                                    style:
-                                        Theme.of(context).textTheme.xxTiniest)
-                              ])
-                            ]),
+                        ),
                         Row(children: [
                           ToggleSwitchWidget(
                               value: branchesData[index].branchActive,
