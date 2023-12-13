@@ -49,7 +49,7 @@ class PurchaseOrderTable extends StatelessWidget {
                       onTextFieldChanged: (value) {}),
                   const SizedBox(width: 24),
                   PurchaseOrderTextField(
-                      width: 150,
+                      width: 200,
                       color: AppColor.saasifyDarkGrey,
                       fillColor: AppColor.saasifyDarkGrey,
                       borderSide:
@@ -61,7 +61,7 @@ class PurchaseOrderTable extends StatelessWidget {
                       onTextFieldChanged: (value) {}),
                   const SizedBox(width: 24),
                   PurchaseOrderTextField(
-                      width: 150,
+                      width: 100,
                       color: AppColor.saasifyDarkGrey,
                       fillColor: AppColor.saasifyDarkGrey,
                       borderSide:
@@ -79,42 +79,41 @@ class PurchaseOrderTable extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: state.purchaseOrderList.length,
                     itemBuilder: (BuildContext context, index) {
-                      return Row(
-                        children: [
-                          PurchaseOrderTextField(
-                              width: 250,
-                              hintText: 'Enter Item Name/Description',
-                              hintStyle: Theme.of(context).textTheme.xTiniest,
-                              onTextFieldChanged: (value) {}),
-                          const SizedBox(width: 24),
-                          PurchaseOrderTextField(
-                              width: 150,
-                              initialValue: state
-                                  .purchaseOrderList[index].quantity
-                                  .toString(),
-                              hintStyle: Theme.of(context).textTheme.xTiniest,
-                              onTextFieldChanged: (value) {
-                                context
-                                    .read<PurchaseOrderBloc>()
-                                    .purchaseOrderList[index]
-                                    .quantity = int.parse(value);
-                              }),
-                          const SizedBox(width: 24),
-                          PurchaseOrderTextField(
-                              width: 150,
-                              initialValue: state.purchaseOrderList[index].rate
-                                  .toString(),
-                              hintStyle: Theme.of(context).textTheme.xTiniest,
-                              onTextFieldChanged: (value) {
-                                context
-                                    .read<PurchaseOrderBloc>()
-                                    .purchaseOrderList[index]
-                                    .rate = double.parse(value);
-                              }),
-                          const SizedBox(width: 24),
-                          PurchaseOrderTextField(
-                            readOnly: true,
+                      return Row(children: [
+                        PurchaseOrderTextField(
+                            width: 250,
+                            hintText: 'Enter Item Name/Description',
+                            hintStyle: Theme.of(context).textTheme.xTiniest,
+                            onTextFieldChanged: (value) {}),
+                        const SizedBox(width: 24),
+                        PurchaseOrderTextField(
                             width: 150,
+                            initialValue: state
+                                .purchaseOrderList[index].quantity
+                                .toString(),
+                            hintStyle: Theme.of(context).textTheme.xTiniest,
+                            onTextFieldChanged: (value) {
+                              context
+                                  .read<PurchaseOrderBloc>()
+                                  .purchaseOrderList[index]
+                                  .quantity = int.parse(value);
+                            }),
+                        const SizedBox(width: 24),
+                        PurchaseOrderTextField(
+                            width: 200,
+                            initialValue:
+                                state.purchaseOrderList[index].rate.toString(),
+                            hintStyle: Theme.of(context).textTheme.xTiniest,
+                            onTextFieldChanged: (value) {
+                              context
+                                  .read<PurchaseOrderBloc>()
+                                  .purchaseOrderList[index]
+                                  .rate = double.parse(value);
+                            }),
+                        const SizedBox(width: 24),
+                        PurchaseOrderTextField(
+                            readOnly: true,
+                            width: 100,
                             initialValue:
                                 (state.purchaseOrderList[index].quantity *
                                         state.purchaseOrderList[index].rate)
@@ -129,10 +128,8 @@ class PurchaseOrderTable extends StatelessWidget {
                               context
                                   .read<PurchaseOrderBloc>()
                                   .add(LoadPurchaseOrder());
-                            },
-                          ),
-                        ],
-                      );
+                            })
+                      ]);
                     },
                     separatorBuilder: (context, index) => const Divider())),
             const SizedBox(height: 10),
@@ -162,7 +159,7 @@ class PurchaseOrderTable extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               PurchaseOrderTextField(
-                                width: 220,
+                                width: 265,
                                 hintText: "Sub Total",
                                 hintStyle: Theme.of(context).textTheme.xTiniest,
                                 onTextFieldChanged: (value) {},
@@ -186,6 +183,7 @@ class PurchaseOrderTable extends StatelessWidget {
                         Row(children: [
                           const Text("GST"),
                           PurchaseOrderTextField(
+                            width: 240,
                             initialValue:
                                 context.read<PurchaseOrderBloc>().calculate.gst,
                             hintStyle: Theme.of(context).textTheme.xTiniest,
@@ -213,7 +211,7 @@ class PurchaseOrderTable extends StatelessWidget {
                         Container(
                             color: AppColor.saasifyGrey,
                             height: 40,
-                            width: 300,
+                            width: 310,
                             child: Padding(
                                 padding: const EdgeInsets.all(spacingSmall),
                                 child: Row(

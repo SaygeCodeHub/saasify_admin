@@ -50,7 +50,7 @@ class OtpScreen extends StatelessWidget {
                           shape: BoxShape.rectangle,
                           color: AppColor.saasifyLightWhiteGrey,
                           borderRadius: BorderRadius.circular(
-                              context.responsive(8, desktop: 12)))),
+                              context.responsive(4, desktop: 5)))),
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   onChanged: (value) {
                     context.read<AuthenticationBloc>().authDetails['otp'] =

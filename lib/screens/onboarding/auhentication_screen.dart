@@ -88,14 +88,21 @@ class AuthenticationScreen extends StatelessWidget {
               Expanded(
                   flex: 6,
                   child: Container(
-                      decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topRight,
-                              colors: [
-                        AppColor.saasifyLightDeepBlue,
-                        AppColor.saasifyWhite
-                      ]))))
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [
+                            AppColor.saasifyLightDeepBlue,
+                            AppColor.saasifyWhite,
+                          ]),
+                    ),
+                    child: Positioned(
+                        left: 50,
+                        top: 50,
+                        bottom: 20,
+                        child: Image.asset("assets/desktop.png")),
+                  ))
             ])));
   }
 }
