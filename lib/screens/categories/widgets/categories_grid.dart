@@ -35,22 +35,28 @@ class CategoriesGrid extends StatelessWidget {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                            productCategory[index]
-                                    .categoryName
-                                    .trim()
-                                    .substring(0, 1)
-                                    .toUpperCase() +
-                                productCategory[index]
-                                    .categoryName
-                                    .trim()
-                                    .substring(
-                                      1,
-                                    )
-                                    .toLowerCase(),
-                            style: Theme.of(context).textTheme.tiniest.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: AppColor.saasifyDarkGrey)),
+                        Padding(
+                          padding: const EdgeInsets.only(left: spacingXXSmall),
+                          child: Text(
+                              productCategory[index]
+                                      .categoryName
+                                      .trim()
+                                      .substring(0, 1)
+                                      .toUpperCase() +
+                                  productCategory[index]
+                                      .categoryName
+                                      .trim()
+                                      .substring(
+                                        1,
+                                      )
+                                      .toLowerCase(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .tiniest
+                                  .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColor.saasifyDarkGrey)),
+                        ),
                         Row(children: [
                           ToggleSwitchWidget(
                               value: productCategory[index].isActive,

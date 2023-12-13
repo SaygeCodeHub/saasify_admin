@@ -40,51 +40,16 @@ class PaymentTypeGridView extends StatelessWidget {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(paymentType[index].paymentName,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .tiniest
-                                      .copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColor.saasifyDarkerGrey)),
-                              const SizedBox(height: spacingXMedium),
-                              Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 4, horizontal: 8),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: (paymentType[index].isActive)
-                                          ? AppColor.saasifyLighterGreen
-                                          : AppColor.saasifyLighterRed),
-                                  child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(Icons.circle,
-                                            size: 8,
-                                            color: (paymentType[index].isActive)
-                                                ? AppColor.saasifyGreen
-                                                : AppColor.saasifyRed),
-                                        const SizedBox(width: spacingXSmall),
-                                        Text(
-                                            (paymentType[index].isActive)
-                                                ? StringConstants
-                                                    .kPaymentTypeEnabled
-                                                : StringConstants
-                                                    .kPaymentTypeDisabled,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .xxTiniest
-                                                .copyWith(
-                                                    color: (paymentType[index]
-                                                            .isActive)
-                                                        ? AppColor.saasifyGreen
-                                                        : AppColor.saasifyRed))
-                                      ]))
-                            ]),
+                        Padding(
+                          padding: const EdgeInsets.only(left: spacingXXSmall),
+                          child: Text(paymentType[index].paymentName,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .tiniest
+                                  .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColor.saasifyDarkerGrey)),
+                        ),
                         Row(children: [
                           ToggleSwitchWidget(
                               value: paymentType[index].isActive,
