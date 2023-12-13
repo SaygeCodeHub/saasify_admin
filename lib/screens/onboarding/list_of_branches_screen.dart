@@ -89,8 +89,13 @@ class BranchesListScreen extends StatelessWidget {
       Expanded(
           flex: 6,
           child: Container(
-            color: AppColor.saasifyLightDeepBlue,
-          ))
+              decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [AppColor.saasifyLightDeepBlue, AppColor.saasifyWhite],
+            ),
+          )))
     ]));
   }
 }
