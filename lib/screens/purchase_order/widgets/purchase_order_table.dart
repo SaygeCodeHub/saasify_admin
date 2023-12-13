@@ -89,21 +89,37 @@ class PurchaseOrderTable extends StatelessWidget {
                           const SizedBox(width: 24),
                           PurchaseOrderTextField(
                               width: 150,
-                              hintText: '5',
+                              hintText:
+                                  state.calculateModel.quantity.toString(),
                               hintStyle: Theme.of(context).textTheme.xTiniest,
-                              onTextFieldChanged: (value) {}),
+                              onTextFieldChanged: (value) {
+                                context
+                                    .read<PurchaseOrderBloc>()
+                                    .calculate
+                                    .quantity = int.parse(value);
+                              }),
                           const SizedBox(width: 24),
                           PurchaseOrderTextField(
                               width: 150,
-                              hintText: '20',
+                              hintText: state.calculateModel.rate.toString(),
                               hintStyle: Theme.of(context).textTheme.xTiniest,
-                              onTextFieldChanged: (value) {}),
+                              onTextFieldChanged: (value) {
+                                context
+                                    .read<PurchaseOrderBloc>()
+                                    .calculate
+                                    .rate = double.parse(value);
+                              }),
                           const SizedBox(width: 24),
                           PurchaseOrderTextField(
                               width: 150,
-                              hintText: '250',
+                              hintText: state.calculateModel.amount.toString(),
                               hintStyle: Theme.of(context).textTheme.xTiniest,
-                              onTextFieldChanged: (value) {}),
+                              onTextFieldChanged: (value) {
+                                context
+                                    .read<PurchaseOrderBloc>()
+                                    .calculate
+                                    .amount = double.parse(value);
+                              }),
                         ],
                       );
                     },
@@ -133,33 +149,42 @@ class PurchaseOrderTable extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               PurchaseOrderTextField(
+                                width: 220,
                                 hintText: "Sub Total",
                                 hintStyle: Theme.of(context).textTheme.xTiniest,
                                 onTextFieldChanged: (value) {},
                               ),
                               const SizedBox(width: spacingLarge),
-                              Text("200.00",
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                    state.calculateModel.subTotal.toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .xTiniest
+                                        .copyWith(fontWeight: FontWeight.w600)),
+                              )
+                            ]),
+                        const SizedBox(height: 16),
+                        Row(children: [
+                          const Text("GST"),
+                          PurchaseOrderTextField(
+                            hintText: state.calculateModel.gst.toString(),
+                            hintStyle: Theme.of(context).textTheme.xTiniest,
+                            onTextFieldChanged: (value) {
+                              context.read<PurchaseOrderBloc>().calculate.gst =
+                                  double.parse(value);
+                            },
+                          ),
+                          const SizedBox(width: spacingLarge),
+                          Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(state.calculateModel.total.toString(),
                                   style: Theme.of(context)
                                       .textTheme
                                       .xTiniest
-                                      .copyWith(fontWeight: FontWeight.w600))
-                            ]),
-                        const SizedBox(height: 16),
-                        Row(
-                          children: [
-                            PurchaseOrderTextField(
-                              hintText: "GST(10%)",
-                              hintStyle: Theme.of(context).textTheme.xTiniest,
-                              onTextFieldChanged: (value) {},
-                            ),
-                            const SizedBox(width: spacingLarge),
-                            Text("20.00",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .xTiniest
-                                    .copyWith(fontWeight: FontWeight.w600))
-                          ],
-                        ),
+                                      .copyWith(fontWeight: FontWeight.w600)))
+                        ]),
                         const SizedBox(height: 16),
                         Container(
                             color: AppColor.saasifyGrey,
@@ -175,12 +200,16 @@ class PurchaseOrderTable extends StatelessWidget {
                                           style: Theme.of(context)
                                               .textTheme
                                               .xTiniest),
-                                      Text("220.00",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .xTiniest
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w600))
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Text("0.00",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .xTiniest
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w600)),
+                                      )
                                     ])))
                       ])
                 ]))

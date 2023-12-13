@@ -88,7 +88,7 @@ class PurchaseOrderDateSection extends StatelessWidget {
                           onTextFieldChanged: (value) {}),
                       PurchaseOrderTextField(
                           width: 150,
-                          hintText: ' Dec 08, 2023',
+                          hintText: 'Dec 08, 2023',
                           hintStyle: Theme.of(context)
                               .textTheme
                               .xTiniest
