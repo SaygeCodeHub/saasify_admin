@@ -5,7 +5,7 @@ abstract class PurchaseOrderState {}
 class PurchaseOrderInitial extends PurchaseOrderState {}
 
 class PurchaseOrderLoaded extends PurchaseOrderState {
-  final CalculateModel calculateModel;
+  final List<PurchaseOrderModel> purchaseOrderList;
 
-  PurchaseOrderLoaded({required this.calculateModel});
+  PurchaseOrderLoaded({required this.purchaseOrderList});
 }

@@ -59,6 +59,7 @@ class CustomPageHeader extends StatelessWidget {
           child: Visibility(
               visible: textFieldVisible,
               child: CustomTextField(
+                  prefixIcon: const Icon(Icons.search),
                   hintText: StringConstants.kSearchHere,
                   onTextFieldChanged: (value) {}))),
       const Spacer(),

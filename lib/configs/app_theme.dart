@@ -21,7 +21,7 @@ ColorScheme colorScheme = const ColorScheme.light(
 InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(kCircularRadius),
-      borderSide: const BorderSide(color: AppColor.saasifyWhite),
+      borderSide: const BorderSide(color: AppColor.saasifyGrey),
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(kCircularRadius),
@@ -30,17 +30,17 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     filled: true,
     isDense: true,
     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-    fillColor: AppColor.saasifyLightWhiteGrey,
+    fillColor: AppColor.saasifyLighterWhite,
     focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(kCircularRadius),
-        borderSide: const BorderSide(color: AppColor.saasifyLightGrey)),
+        borderSide: const BorderSide(color: AppColor.saasifyGrey)),
     border: const OutlineInputBorder(),
     errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(kCircularRadius),
         borderSide: const BorderSide(color: AppColor.saasifyRed)),
     focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(kCircularRadius),
-        borderSide: const BorderSide(color: AppColor.saasifyWhite)),
+        borderSide: const BorderSide(color: AppColor.saasifyGrey)),
     hintStyle: const TextStyle(
         fontSize: 13,
         color: AppColor.saasifyLightGrey,
