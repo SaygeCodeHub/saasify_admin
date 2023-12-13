@@ -6,8 +6,8 @@ import 'package:saasify/screens/dashboard/widgets/dashboard_order_table_list.dar
 import 'package:saasify/utils/dashboard_card.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../../configs/app_spacing.dart';
-import 'dashboardCalendar.dart';
-import 'dashboardChart.dart';
+import 'dashboardcalendar.dart';
+import 'dashboardchart.dart';
 
 class DashboardBody extends StatelessWidget {
   const DashboardBody({super.key, required this.ordersData});

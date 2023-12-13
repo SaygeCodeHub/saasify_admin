@@ -8,6 +8,8 @@ class CustomDataTable extends StatelessWidget {
   final List selectedIds;
   final int dataCount;
   final List dataIds;
+  final bool checkboxVisible;
+  final bool showRowCheckBox;
   final List<DataCell> Function(int index) generateData;
   final void Function()? onHeaderCheckboxChange;
   final void Function(int index) onRowCheckboxChange;
@@ -20,7 +22,9 @@ class CustomDataTable extends StatelessWidget {
       required this.dataCount,
       required this.dataIds,
       required this.onRowCheckboxChange,
-      required this.generateData})
+      required this.generateData,
+      this.checkboxVisible = true,
+      this.showRowCheckBox = true})
       : super(key: key);
 
   @override
@@ -39,16 +43,19 @@ class CustomDataTable extends StatelessWidget {
                               visible: dataCount > 0,
                               child: InkWell(
                                   onTap: onHeaderCheckboxChange,
-                                  child: Icon(
-                                      (selectedIds.isEmpty)
-                                          ? Icons.check_box_outline_blank
-                                          : (selectedIds.length < dataCount)
-                                              ? Icons
-                                                  .indeterminate_check_box_outlined
-                                              : Icons.check_box,
-                                      color: (selectedIds.isNotEmpty)
-                                          ? AppColor.saasifyLightDeepBlue
-                                          : AppColor.saasifyLightDeepBlue)))))
+                                  child: Visibility(
+                                    visible: checkboxVisible,
+                                    child: Icon(
+                                        (selectedIds.isEmpty)
+                                            ? Icons.check_box_outline_blank
+                                            : (selectedIds.length < dataCount)
+                                                ? Icons
+                                                    .indeterminate_check_box_outlined
+                                                : Icons.check_box,
+                                        color: (selectedIds.isNotEmpty)
+                                            ? AppColor.saasifyLightDeepBlue
+                                            : AppColor.saasifyLightDeepBlue),
+                                  )))))
                 ] +
                 List.generate(
                     columnList.length,
@@ -68,14 +75,18 @@ class CustomDataTable extends StatelessWidget {
                                 onTap: () {
                                   onRowCheckboxChange(index);
                                 },
-                                child: Icon(
-                                    (selectedIds.contains(dataIds[index]))
-                                        ? Icons.check_box
-                                        : Icons.check_box_outline_blank_rounded,
-                                    color:
-                                        (selectedIds.contains(dataIds[index]))
-                                            ? AppColor.saasifyLightDeepBlue
-                                            : AppColor.saasifyLightDeepBlue)),
+                                child: Visibility(
+                                  visible: showRowCheckBox,
+                                  child: Icon(
+                                      (selectedIds.contains(dataIds[index]))
+                                          ? Icons.check_box
+                                          : Icons
+                                              .check_box_outline_blank_rounded,
+                                      color:
+                                          (selectedIds.contains(dataIds[index]))
+                                              ? AppColor.saasifyLightDeepBlue
+                                              : AppColor.saasifyLightDeepBlue),
+                                )),
                           ))
                         ] +
                         generateData(index)))));

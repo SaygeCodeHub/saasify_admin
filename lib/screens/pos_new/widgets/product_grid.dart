@@ -63,7 +63,7 @@ class ProductGrid extends StatelessWidget {
                       padding: const EdgeInsets.all(spacingXXSmall),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(spacingXMedium),
-                        color: AppColor.saasifyLighterGrey,
+                        color: AppColor.saasifyLightWhiteGrey,
                       ),
                       child: Column(children: [
                         Expanded(

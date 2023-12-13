@@ -236,7 +236,6 @@ class BillingBloc extends Bloc<BillingEvents, BillingStates> {
           customer.productList[i].product.variants[0].cost *
               customer.productList[i].count;
     }
-
     customer.billDetails.discount = customer.billDetails.itemTotal *
         (customer.billDetails.discountPercent / 100);
 

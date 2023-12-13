@@ -30,7 +30,7 @@ class InventoryListScreen extends StatelessWidget {
     context.read<InventoryBloc>().add(FetchInventoryList());
     return Scaffold(
         key: _scaffoldKey,
-        drawer: const SideBar(selectedIndex: 6),
+        drawer: const SideBar(selectedIndex: 7),
         body: Flex(
             direction:
                 context.responsive(Axis.vertical, desktop: Axis.horizontal),
@@ -40,7 +40,7 @@ class InventoryListScreen extends StatelessWidget {
                       scaffoldKey: _scaffoldKey,
                       headingText: StringConstants.kInventoryManagement),
                   desktop: const Expanded(
-                    child: SideBar(selectedIndex: 6),
+                    child: SideBar(selectedIndex: 7),
                   )),
               Expanded(
                   flex: 5,

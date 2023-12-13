@@ -136,7 +136,7 @@ class ProductForm extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             color: (dataMap['draft'] ?? false)
-                                ? AppColor.saasifyLighterGrey
+                                ? AppColor.saasifyLightWhiteGrey
                                 : AppColor.saasifyLighterGreen),
                         child: Row(mainAxisSize: MainAxisSize.min, children: [
                           Icon(Icons.circle,

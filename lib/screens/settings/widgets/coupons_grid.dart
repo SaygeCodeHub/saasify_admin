@@ -39,7 +39,7 @@ class CouponsGrid extends StatelessWidget {
                                       .tiniest
                                       .copyWith(
                                           fontWeight: FontWeight.w600,
-                                          color: AppColor.saasifyDarkGrey)),
+                                          color: AppColor.saasifyDarkerGrey)),
                               const SizedBox(height: spacingXSmall),
                               Text('12% OFF',
                                   style: Theme.of(context).textTheme.xxTiniest),

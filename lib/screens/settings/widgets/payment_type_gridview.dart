@@ -50,7 +50,7 @@ class PaymentTypeGridView extends StatelessWidget {
                                       .tiniest
                                       .copyWith(
                                           fontWeight: FontWeight.w600,
-                                          color: AppColor.saasifyDarkGrey)),
+                                          color: AppColor.saasifyDarkerGrey)),
                               const SizedBox(height: spacingXMedium),
                               Container(
                                   padding: const EdgeInsets.symmetric(

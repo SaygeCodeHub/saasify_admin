@@ -47,7 +47,7 @@ class BranchesGrid extends StatelessWidget {
                                       .tiniest
                                       .copyWith(
                                           fontWeight: FontWeight.w600,
-                                          color: AppColor.saasifyDarkGrey)),
+                                          color: AppColor.saasifyDarkerGrey)),
                               const SizedBox(height: spacingXSmall),
                               Row(children: [
                                 Text(StringConstants.kCurrency,

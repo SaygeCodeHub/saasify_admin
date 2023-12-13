@@ -30,7 +30,7 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     filled: true,
     isDense: true,
     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-    fillColor: AppColor.saasifyLighterGrey,
+    fillColor: AppColor.saasifyLightWhiteGrey,
     focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(kCircularRadius),
         borderSide: const BorderSide(color: AppColor.saasifyLightGrey)),

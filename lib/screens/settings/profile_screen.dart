@@ -78,7 +78,7 @@ class ProfileScreen extends StatelessWidget {
                                   height: kDashContainerHeight,
                                   width: kImageContainerWidth,
                                   decoration: BoxDecoration(
-                                      color: AppColor.saasifyLighterGrey,
+                                      color: AppColor.saasifyLightWhiteGrey,
                                       borderRadius: BorderRadius.circular(
                                           kCircularRadius)),
                                   child: Padding(
