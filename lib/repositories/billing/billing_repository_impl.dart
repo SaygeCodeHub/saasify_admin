@@ -3,10 +3,13 @@ import 'package:saasify/data/models/billing/fetch_products_by_category_model.dar
 import 'package:saasify/data/models/billing/settle_order_model.dart';
 import 'package:saasify/services/client_services.dart';
 import 'package:saasify/utils/constants/api_constants.dart';
+import '../../data/customer_cache/customer_cache.dart';
+import '../../di/app_module.dart';
 import 'billing_repository.dart';
 
 class BillingRepositoryImpl implements BillingRepository {
   final db = FirebaseFirestore.instance;
+  final CustomerCache _customerCache = getIt<CustomerCache>();
 
   @override
   Future<FetchProductsByCategoryModel> fetchProductsByCategory(
@@ -29,15 +32,25 @@ class BillingRepositoryImpl implements BillingRepository {
   Future<List<QueryDocumentSnapshot>> getAllTabs() async {
     final db = FirebaseFirestore.instance;
 
-    final response = await db.collection("unsettled_tabs").get();
+    String userId = await _customerCache.getUserId();
+    String companyId = await _customerCache.getCompanyId();
+    int branchId = await _customerCache.getBranchId();
+
+    final response = await db
+        .collection("$userId-$companyId-$branchId-unsettled_tabs")
+        .get();
 
     return response.docs;
   }
 
   @override
   Future<void> saveTab(Map<String, dynamic> customer, String id) async {
+    String userId = await _customerCache.getUserId();
+    String companyId = await _customerCache.getCompanyId();
+    int branchId = await _customerCache.getBranchId();
+
     db
-        .collection("unsettled_tabs")
+        .collection("$userId-$companyId-$branchId-unsettled_tabs")
         .doc(id)
         .set(customer)
         .whenComplete(() => () {
@@ -50,8 +63,12 @@ class BillingRepositoryImpl implements BillingRepository {
 
   @override
   Future<void> removeTab(String id) async {
+    String userId = await _customerCache.getUserId();
+    String companyId = await _customerCache.getCompanyId();
+    int branchId = await _customerCache.getBranchId();
+
     db
-        .collection("unsettled_tabs")
+        .collection("$userId-$companyId-$branchId-unsettled_tabs")
         .doc(id)
         .delete()
         .whenComplete(() => () {
