@@ -87,7 +87,15 @@ class AuthenticationScreen extends StatelessWidget {
                   })),
               Expanded(
                   flex: 6,
-                  child: Container(color: AppColor.saasifyLightDeepBlue))
+                  child: Container(
+                      decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight,
+                              colors: [
+                        AppColor.saasifyLightDeepBlue,
+                        AppColor.saasifyWhite
+                      ]))))
             ])));
   }
 }

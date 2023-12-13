@@ -14,6 +14,7 @@ class AppColor {
   static const Color saasifyGrey = Color(0xFFD2D3D9);
   static const Color saasifyCementGrey = Color(0xFFA2C0FF);
   static const Color saasifyWhite = Color(0xFFffffff);
+  static const Color saasifySkyBlue = Color(0xFFe6edfe);
   static const Color saasifyRed = Color(0xCCDC0000);
   static const Color saasifyLightRed = Color(0xFFFAA0A0);
   static const Color saasifyLighterRed = Color(0xFFFFCCCB);
