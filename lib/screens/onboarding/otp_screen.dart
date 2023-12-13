@@ -47,6 +47,7 @@ class OtpScreen extends StatelessWidget {
               child: Pinput(
                   defaultPinTheme: PinTheme(
                       decoration: BoxDecoration(
+                          border: Border.all(color: AppColor.saasifyGrey),
                           shape: BoxShape.rectangle,
                           color: AppColor.saasifyLightWhiteGrey,
                           borderRadius: BorderRadius.circular(

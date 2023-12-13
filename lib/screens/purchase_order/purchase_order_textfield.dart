@@ -103,7 +103,6 @@ import '../../configs/app_spacing.dart';
 
 class PurchaseOrderTextField extends StatelessWidget {
   final GlobalKey<FormFieldState<String>> _formKey = GlobalKey();
-  final FocusNode _focusNode = FocusNode();
   final String? hintText;
   final TextStyle? hintStyle;
   final dynamic initialValue;
@@ -115,6 +114,7 @@ class PurchaseOrderTextField extends StatelessWidget {
   final void Function(String)? onTextFieldChanged;
   final TextEditingController controller = TextEditingController();
   final void Function()? onTapFunction;
+  final void Function(String value)? onEditingComplete;
 
   PurchaseOrderTextField({
     super.key,
@@ -128,6 +128,7 @@ class PurchaseOrderTextField extends StatelessWidget {
     this.fillColor,
     this.color,
     this.borderSide,
+    this.onEditingComplete,
   });
 
   @override
@@ -138,29 +139,24 @@ class PurchaseOrderTextField extends StatelessWidget {
       width: (width == null) ? 200 : width,
       color: (color == null) ? AppColor.saasifyWhite : color,
       child: TextFormField(
-        key: _formKey,
-        focusNode: _focusNode,
-        controller: controller,
-        onChanged: onTextFieldChanged,
-        readOnly: readOnly,
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(spacingSmall),
-            hintText: hintText,
-            hintStyle: hintStyle,
-            fillColor: (fillColor == null) ? AppColor.saasifyWhite : fillColor,
-            enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.transparent)),
-            focusedBorder: OutlineInputBorder(
-              borderSide: (borderSide == null)
-                  ? const BorderSide(color: AppColor.saasifyDarkerGrey)
-                  : borderSide!,
-            )),
-        onTap: () {
-          (onTapFunction == null)
-              ? FocusScope.of(context).requestFocus(_focusNode)
-              : onTapFunction;
-        },
-      ),
+          key: _formKey,
+          onFieldSubmitted: onEditingComplete,
+          controller: controller,
+          onChanged: onTextFieldChanged,
+          readOnly: readOnly,
+          decoration: InputDecoration(
+              contentPadding: const EdgeInsets.all(spacingSmall),
+              hintText: hintText,
+              hintStyle: hintStyle,
+              fillColor:
+                  (fillColor == null) ? AppColor.saasifyWhite : fillColor,
+              enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent)),
+              focusedBorder: OutlineInputBorder(
+                borderSide: (borderSide == null)
+                    ? const BorderSide(color: AppColor.saasifyDarkerGrey)
+                    : borderSide!,
+              ))),
     );
   }
 }

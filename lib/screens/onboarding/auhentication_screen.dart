@@ -97,11 +97,6 @@ class AuthenticationScreen extends StatelessWidget {
                             AppColor.saasifyWhite,
                           ]),
                     ),
-                    child: Positioned(
-                        left: 50,
-                        top: 50,
-                        bottom: 20,
-                        child: Image.asset("assets/desktop.png")),
                   ))
             ])));
   }
