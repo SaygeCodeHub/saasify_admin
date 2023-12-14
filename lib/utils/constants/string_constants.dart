@@ -163,7 +163,7 @@ class StringConstants {
   static const kCompanyAddress = 'Company\'s Address';
   static const kCity = 'City,State Zip';
   static const kCountry = 'Country';
-  static const kPO = 'PO#';
+  static const kInvoiceNo = 'Invoice No';
   static const kOrderDate = 'Order Date';
   static const kDeliveryDate = 'Delivery Date';
   static const kPO12 = 'PO-12';

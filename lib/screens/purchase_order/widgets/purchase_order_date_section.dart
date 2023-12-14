@@ -59,7 +59,7 @@ class PurchaseOrderDateSection extends StatelessWidget {
                     children: [
                       PurchaseOrderTextField(
                           width: 150,
-                          hintText: StringConstants.kPO,
+                          hintText: StringConstants.kInvoiceNo,
                           hintStyle: Theme.of(context)
                               .textTheme
                               .xTiniest
