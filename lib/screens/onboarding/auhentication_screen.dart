@@ -99,7 +99,7 @@ class AuthenticationScreen extends StatelessWidget {
                     ),
                     child: Positioned(
                         left: 50,
-                        top: 50,
+                        top: 200,
                         bottom: 20,
                         child: Image.asset("assets/desktop.png")),
                   ))
