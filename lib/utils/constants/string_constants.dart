@@ -65,8 +65,8 @@ class StringConstants {
   static const kProducts = 'Products';
   static const kUnsettledTabs = 'Unsettled Tabs';
   static const kInventoryManagement = 'Inventory Management';
-  static const kPurchaseOrder = 'PURCHASE ORDER';
-  static const kPurchaseOrderSmall = 'Purchase Order';
+  static const kPurchaseOrder = 'INVOICE';
+  static const kPurchaseOrderSmall = 'Invoice Generator';
   static const kBrand = 'Brand';
   static const kOwnerName = 'Owner Name';
   static const kLastName = 'Last Name';

@@ -43,7 +43,7 @@ class PurchaseOrder extends StatelessWidget {
                     child: Column(
                       children: [
                         const CustomPageHeader(
-                            titleText: "Purchase Order",
+                            titleText: StringConstants.kPurchaseOrderSmall,
                             buttonVisible: false,
                             buttonTitle: StringConstants.kAddProduct,
                             utilityVisible: true,
