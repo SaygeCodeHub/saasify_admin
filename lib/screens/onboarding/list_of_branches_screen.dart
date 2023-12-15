@@ -67,6 +67,7 @@ class BranchesListScreen extends StatelessWidget {
                             BranchList(
                                 selectedBranchIndex: state.selectedBranchIndex,
                                 branchList: selectedCompany.branches),
+                            const SizedBox(height: spacingLarge),
                             PrimaryButton(
                                 onPressed: (state.selectedBranchIndex != -1)
                                     ? () {
