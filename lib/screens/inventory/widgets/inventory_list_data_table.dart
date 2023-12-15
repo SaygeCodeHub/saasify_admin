@@ -59,7 +59,12 @@ class InventoryListDataTable extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(productList[index].productName,
                   textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.xxTiniest),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .xxTiniest
+                      .copyWith(fontWeight: FontWeight.w600)),
             )),
             DataCell(
               Align(

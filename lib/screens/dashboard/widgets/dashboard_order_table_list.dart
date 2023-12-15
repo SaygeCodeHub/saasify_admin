@@ -65,7 +65,10 @@ class DashboardOrderTableList extends StatelessWidget {
                     (index) => DataRow(cells: [
                           DataCell(Text(ordersData.orders[index].orderNumber,
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.xxTiniest)),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .xxTiniest
+                                  .copyWith(fontWeight: FontWeight.w600))),
                           DataCell(Text(ordersData.orders[index].customerName,
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.xxTiniest)),
