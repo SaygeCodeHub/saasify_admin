@@ -111,7 +111,9 @@ class ProductListDataTable extends StatelessWidget {
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Text(productList[index].brandName ?? '',
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.xxTiniest)),
                 onTap: () {
               Navigator.pushReplacementNamed(
