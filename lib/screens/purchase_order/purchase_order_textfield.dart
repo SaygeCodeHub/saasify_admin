@@ -104,6 +104,7 @@ import '../../configs/app_spacing.dart';
 class PurchaseOrderTextField extends StatelessWidget {
   final GlobalKey<FormFieldState<String>> _formKey = GlobalKey();
   final String? hintText;
+  final TextStyle? style;
   final TextStyle? hintStyle;
   final dynamic initialValue;
   final double? width;
@@ -129,6 +130,7 @@ class PurchaseOrderTextField extends StatelessWidget {
     this.color,
     this.borderSide,
     this.onEditingComplete,
+    this.style,
   });
 
   @override
@@ -139,6 +141,7 @@ class PurchaseOrderTextField extends StatelessWidget {
       width: (width == null) ? 200 : width,
       color: (color == null) ? AppColor.saasifyWhite : color,
       child: TextFormField(
+          style: style,
           key: _formKey,
           onFieldSubmitted: onEditingComplete,
           controller: controller,

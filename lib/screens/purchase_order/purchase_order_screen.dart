@@ -75,6 +75,16 @@ class PurchaseOrder extends StatelessWidget {
                                                     Column(
                                                       children: [
                                                         PurchaseOrderTextField(
+                                                          style: Theme.of(
+                                                                  context)
+                                                              .textTheme
+                                                              .tiniest
+                                                              .copyWith(
+                                                                  color: AppColor
+                                                                      .saasifyDarkGrey,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
                                                           hintText:
                                                               StringConstants
                                                                   .kYourCompany,
