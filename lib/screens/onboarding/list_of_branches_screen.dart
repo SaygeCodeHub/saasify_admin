@@ -40,66 +40,64 @@ class BranchesListScreen extends StatelessWidget {
                       top: spacingXXXHuge,
                       bottom: spacingXXXHuge),
                   child: BlocBuilder<OnboardingBloc, OnboardingStates>(
-                    builder: (context, state) {
-                      if (state is BranchesLoaded) {
-                        return Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SvgPicture.asset("assets/SaaSify.svg",
-                                  width: kLogoWidth),
-                              const SizedBox(height: spacingXXXHuge),
-                              Text(StringConstants.kBranches,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .xxTiny
-                                      .copyWith(fontWeight: FontWeight.w700)),
-                              const SizedBox(height: spacingMedium),
-                              CustomTextField(
-                                  hintText: StringConstants.kSearchBranches,
-                                  hintStyle: Theme.of(context)
-                                      .textTheme
-                                      .xTiniest
-                                      .copyWith(fontWeight: FontWeight.w500),
-                                  keyboardType: TextInputType.text,
-                                  onTextFieldChanged: (value) {}),
-                              const SizedBox(height: spacingHuge),
-                              BranchList(
-                                  selectedBranchIndex:
-                                      state.selectedBranchIndex,
-                                  branchList: selectedCompany.branches),
-                              PrimaryButton(
-                                  onPressed: (state.selectedBranchIndex != -1)
-                                      ? () {
-                                          context.read<OnboardingBloc>().add(
-                                              SetCompanyAndBranchIds(
-                                                  companyId:
-                                                      selectedCompany.companyId,
-                                                  branchId: selectedCompany
-                                                      .branches[state
-                                                          .selectedBranchIndex]
-                                                      .branchId));
-                                          Navigator.pushReplacementNamed(
-                                              context,
-                                              DashboardsScreen.routeName);
-                                        }
-                                      : null,
-                                  buttonTitle: 'Next')
-                            ]);
-                      }
-                      return const SizedBox.shrink();
-                    },
-                  )))),
+                      builder: (context, state) {
+                    if (state is BranchesLoaded) {
+                      return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset("assets/SaaSify.svg",
+                                width: kLogoWidth),
+                            const SizedBox(height: spacingXXXHuge),
+                            Text(StringConstants.kBranches,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .xxTiny
+                                    .copyWith(fontWeight: FontWeight.w700)),
+                            const SizedBox(height: spacingMedium),
+                            CustomTextField(
+                                hintText: StringConstants.kSearchBranches,
+                                hintStyle: Theme.of(context)
+                                    .textTheme
+                                    .xTiniest
+                                    .copyWith(fontWeight: FontWeight.w500),
+                                keyboardType: TextInputType.text,
+                                onTextFieldChanged: (value) {}),
+                            const SizedBox(height: spacingHuge),
+                            BranchList(
+                                selectedBranchIndex: state.selectedBranchIndex,
+                                branchList: selectedCompany.branches),
+                            PrimaryButton(
+                                onPressed: (state.selectedBranchIndex != -1)
+                                    ? () {
+                                        context.read<OnboardingBloc>().add(
+                                            SetCompanyAndBranchIds(
+                                                companyId:
+                                                    selectedCompany.companyId,
+                                                branchId: selectedCompany
+                                                    .branches[state
+                                                        .selectedBranchIndex]
+                                                    .branchId));
+                                        Navigator.pushReplacementNamed(context,
+                                            DashboardsScreen.routeName);
+                                      }
+                                    : null,
+                                buttonTitle: 'Next')
+                          ]);
+                    }
+                    return const SizedBox.shrink();
+                  })))),
       Expanded(
           flex: 5,
           child: Container(
               decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [AppColor.saasifyLightDeepBlue, AppColor.saasifyWhite],
-            ),
-          )))
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                AppColor.saasifyLightDeepBlue,
+                AppColor.saasifyWhite
+              ]))))
     ]));
   }
 }

@@ -19,45 +19,53 @@ class BranchList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
-          itemCount: branchList.length,
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () {
-                context
-                    .read<OnboardingBloc>()
-                    .add(SelectBranch(branchIndex: index));
-              },
-              child: Padding(
-                  padding: EdgeInsets.all(context.responsive(spacingSmall,
-                      tablets: spacingXXSmall, desktop: spacingSmall)),
-                  child: Container(
-                      height: 50,
+        child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1,
+                crossAxisSpacing: spacingLarge,
+                mainAxisSpacing: spacingLarge),
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            itemCount: branchList.length,
+            itemBuilder: (context, index) {
+              return InkWell(
+                  onTap: () {
+                    context
+                        .read<OnboardingBloc>()
+                        .add(SelectBranch(branchIndex: index));
+                  },
+                  child: Padding(
                       padding: EdgeInsets.all(context.responsive(spacingSmall,
                           tablets: spacingXXSmall, desktop: spacingSmall)),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(kCircularRadius),
-                          color: (selectedBranchIndex == index)
-                              ? AppColor.saasifyLightDeepBlue
-                              : AppColor.saasifyCementGrey),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(branchList[index].branchName,
-                              maxLines: 1,
-                              textScaleFactor:
-                                  context.responsive(0.8, desktop: 1),
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .tiniest
-                                  .copyWith(color: AppColor.saasifyWhite))
-                        ],
-                      ))),
-            );
-          }),
-    );
+                      child: Container(
+                          height: 20,
+                          padding: EdgeInsets.all(context.responsive(
+                              spacingSmall,
+                              tablets: spacingXXSmall,
+                              desktop: spacingSmall)),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 2,
+                                  color: (selectedBranchIndex == index)
+                                      ? AppColor.saasifyLightDeepBlue
+                                      : AppColor.saasifyPaleGrey),
+                              borderRadius:
+                                  BorderRadius.circular(kCircularRadius)),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(branchList[index].branchName,
+                                    maxLines: 1,
+                                    textScaleFactor:
+                                        context.responsive(0.8, desktop: 1),
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .tinier
+                                        .copyWith(fontWeight: FontWeight.w500))
+                              ]))));
+            }));
   }
 }
