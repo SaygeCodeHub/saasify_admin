@@ -3,6 +3,7 @@ import 'app_color.dart';
 import 'app_dimensions.dart';
 
 ThemeData appTheme = ThemeData(
+  useMaterial3: false,
   colorScheme: colorScheme,
   fontFamily: 'Inter',
   splashColor: AppColor.saasifyTransparent,
