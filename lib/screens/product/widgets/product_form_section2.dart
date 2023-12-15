@@ -43,6 +43,7 @@ class ProductFormSection2 extends StatelessWidget {
               height: kTextFieldHeight,
               width: double.maxFinite,
               decoration: BoxDecoration(
+                  color: AppColor.saasifyLighterWhite,
                   borderRadius: BorderRadius.circular(spacingXSmall),
                   border: Border.all(color: AppColor.saasifyPaleGrey)),
               child: Padding(
@@ -72,6 +73,7 @@ class ProductFormSection2 extends StatelessWidget {
               height: kTextFieldHeight,
               width: double.maxFinite,
               decoration: BoxDecoration(
+                  color: AppColor.saasifyLighterWhite,
                   borderRadius: BorderRadius.circular(spacingXSmall),
                   border: Border.all(color: AppColor.saasifyPaleGrey)),
               child: Padding(
@@ -107,6 +109,7 @@ class ProductFormSection2 extends StatelessWidget {
                   height: kTextFieldHeight,
                   width: double.maxFinite,
                   decoration: BoxDecoration(
+                      color: AppColor.saasifyLighterWhite,
                       borderRadius: BorderRadius.circular(spacingXSmall),
                       border: Border.all(color: AppColor.saasifyPaleGrey)),
                   child: Padding(
@@ -144,6 +147,7 @@ class ProductFormSection2 extends StatelessWidget {
                   height: kTextFieldHeight,
                   width: double.maxFinite,
                   decoration: BoxDecoration(
+                      color: AppColor.saasifyLighterWhite,
                       borderRadius: BorderRadius.circular(kCircularRadius),
                       border: Border.all(color: AppColor.saasifyPaleGrey)),
                   child: Padding(
@@ -178,8 +182,9 @@ class ProductFormSection2 extends StatelessWidget {
               height: kTextFieldHeight,
               width: double.maxFinite,
               decoration: BoxDecoration(
+                  color: AppColor.saasifyLighterWhite,
                   borderRadius: BorderRadius.circular(kCircularRadius),
-                  border: Border.all(color: AppColor.saasifyPaleGrey)),
+                  border: Border.all(color: AppColor.saasifyGrey)),
               child: Padding(
                 padding: const EdgeInsets.all(spacingSmall),
                 child: Text(

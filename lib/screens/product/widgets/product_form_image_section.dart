@@ -56,8 +56,9 @@ class FormImageSection extends StatelessWidget {
                   itemBuilder: (context, index) {
                     if (index < dataMap['images'].length) {
                       return Container(
-                        padding: const EdgeInsets.all(spacingSmall),
+                        padding: const EdgeInsets.all(kCircularRadius),
                         decoration: BoxDecoration(
+                            color: AppColor.saasifyLighterWhite,
                             border: Border.all(color: AppColor.saasifyGrey)),
                         child: Container(
                             height: kContainerHeight,
