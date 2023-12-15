@@ -44,8 +44,9 @@ class ProductFormSection3 extends StatelessWidget {
               height: kTextFieldHeight,
               width: double.maxFinite,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(spacingXSmall),
-                  border: Border.all(color: AppColor.saasifyPaleGrey)),
+                  color: AppColor.saasifyLighterWhite,
+                  borderRadius: BorderRadius.circular(kCircularRadius),
+                  border: Border.all(color: AppColor.saasifyGrey)),
               child: Padding(
                   padding: const EdgeInsets.all(spacingSmall),
                   child: Text(dataMap['brand_name'])))
@@ -78,8 +79,9 @@ class ProductFormSection3 extends StatelessWidget {
                   height: kTextFieldHeight,
                   width: double.maxFinite,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(spacingXSmall),
-                      border: Border.all(color: AppColor.saasifyPaleGrey)),
+                      color: AppColor.saasifyLighterWhite,
+                      borderRadius: BorderRadius.circular(kCircularRadius),
+                      border: Border.all(color: AppColor.saasifyGrey)),
                   child: Padding(
                       padding: const EdgeInsets.all(spacingSmall),
                       child: Text('${dataMap['currency']} ${dataMap['cost']}')))
@@ -116,8 +118,9 @@ class ProductFormSection3 extends StatelessWidget {
                   height: kTextFieldHeight,
                   width: double.maxFinite,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(spacingXSmall),
-                      border: Border.all(color: AppColor.saasifyPaleGrey)),
+                      color: AppColor.saasifyLighterWhite,
+                      borderRadius: BorderRadius.circular(kCircularRadius),
+                      border: Border.all(color: AppColor.saasifyGrey)),
                   child: Padding(
                       padding: const EdgeInsets.all(spacingSmall),
                       child: Text(dataMap['discount_percent'].toString())))
@@ -154,8 +157,9 @@ class ProductFormSection3 extends StatelessWidget {
                   height: kTextFieldHeight,
                   width: double.maxFinite,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(spacingXSmall),
-                      border: Border.all(color: AppColor.saasifyPaleGrey)),
+                      color: AppColor.saasifyLighterWhite,
+                      borderRadius: BorderRadius.circular(kCircularRadius),
+                      border: Border.all(color: AppColor.saasifyGrey)),
                   child: Padding(
                       padding: const EdgeInsets.all(spacingSmall),
                       child: Text(dataMap['stock'].toString())))
@@ -192,8 +196,9 @@ class ProductFormSection3 extends StatelessWidget {
                   height: kTextFieldHeight,
                   width: double.maxFinite,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(spacingXSmall),
-                      border: Border.all(color: AppColor.saasifyPaleGrey)),
+                      color: AppColor.saasifyLighterWhite,
+                      borderRadius: BorderRadius.circular(kCircularRadius),
+                      border: Border.all(color: AppColor.saasifyGrey)),
                   child: Padding(
                       padding: const EdgeInsets.all(spacingSmall),
                       child: Text(dataMap['restock_reminder'].toString())))

@@ -103,20 +103,29 @@ class ProductForm extends StatelessWidget {
                     width: kGeneralActionButtonWidth,
                     child: PrimaryButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, AddProductScreen.routeName,
-                              arguments: AddProductScreenArguments(
-                                  isEdit: false,
-                                  isVariant: true,
-                                  dataMap: {
-                                    'product_name': dataMap['product_name'],
-                                    'category_name': dataMap['category_name'],
-                                    'brand_name': dataMap['brand_name'],
-                                    'product_id': dataMap['product_id'],
-                                    'product_description':
-                                        dataMap['product_description'],
-                                  },
-                                  isProductDetail: false));
+                          (isProductDetail == true)
+                              ? Navigator.pushReplacementNamed(
+                                  context, AddProductScreen.routeName,
+                                  arguments: AddProductScreenArguments(
+                                      isEdit: true,
+                                      isVariant: false,
+                                      dataMap: dataMap,
+                                      isProductDetail: false))
+                              : Navigator.pushReplacementNamed(
+                                  context, AddProductScreen.routeName,
+                                  arguments: AddProductScreenArguments(
+                                      isEdit: false,
+                                      isVariant: true,
+                                      dataMap: {
+                                        'product_name': dataMap['product_name'],
+                                        'category_name':
+                                            dataMap['category_name'],
+                                        'brand_name': dataMap['brand_name'],
+                                        'product_id': dataMap['product_id'],
+                                        'product_description':
+                                            dataMap['product_description'],
+                                      },
+                                      isProductDetail: false));
                         },
                         buttonTitle: (isProductDetail == true)
                             ? 'Edit Product Details'
@@ -134,7 +143,8 @@ class ProductForm extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 4, horizontal: 8),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius:
+                                BorderRadius.circular(kCircularRadius),
                             color: (dataMap['draft'] ?? false)
                                 ? AppColor.saasifyLightWhiteGrey
                                 : AppColor.saasifyLighterGreen),
