@@ -25,13 +25,13 @@ class OtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-          left: spacingXXXHuge, right: spacingXXXHuge, top: spacingXXXHuge),
+          right: spacingXXXXXHuge, left: spacingXXXXXHuge),
       child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SvgPicture.asset("assets/SaaSify.svg", width: kLogoWidth),
-            const SizedBox(height: spacingXXXHuge),
+            const SizedBox(height: spacingExcel),
             Text(StringConstants.kEnterOtp,
                 style: Theme.of(context).textTheme.xxTiny.copyWith(
                     fontWeight: FontWeight.w700,

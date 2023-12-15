@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:html';
 
+import 'package:flutter/cupertino.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -200,6 +201,7 @@ class PdfService {
                       ])
                     ] +
                     List.generate(orderInfo.length, (index) {
+                      debugPrint('$orderInfo.length');
                       return pw.TableRow(children: [
                         pw.Text(orderInfo[index].orderedDate,
                             style: const pw.TextStyle(fontSize: 10)),

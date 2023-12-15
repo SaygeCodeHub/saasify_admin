@@ -30,11 +30,15 @@ class BranchesListScreen extends StatelessWidget {
     return Scaffold(
         body: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Expanded(
-          flex: 4,
+          flex: 5,
           child: Form(
               key: formKey,
               child: Padding(
-                  padding: const EdgeInsets.all(spacingXXXHuge),
+                  padding: const EdgeInsets.only(
+                      right: spacingXXXXXHuge,
+                      left: spacingXXXXXHuge,
+                      top: spacingXXXHuge,
+                      bottom: spacingXXXHuge),
                   child: BlocBuilder<OnboardingBloc, OnboardingStates>(
                     builder: (context, state) {
                       if (state is BranchesLoaded) {
@@ -87,7 +91,7 @@ class BranchesListScreen extends StatelessWidget {
                     },
                   )))),
       Expanded(
-          flex: 6,
+          flex: 5,
           child: Container(
               decoration: const BoxDecoration(
             gradient: LinearGradient(

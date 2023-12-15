@@ -30,7 +30,7 @@ class AuthenticationScreen extends StatelessWidget {
             backgroundColor: AppColor.saasifyWhite,
             body: Row(children: [
               Expanded(
-                  flex: 4,
+                  flex: 5,
                   child: BlocConsumer<AuthenticationBloc, AuthenticationStates>(
                       listener: (context, state) {
                     if (state is PhoneOtpVerified) {
@@ -86,7 +86,7 @@ class AuthenticationScreen extends StatelessWidget {
                     return const SizedBox();
                   })),
               Expanded(
-                  flex: 6,
+                  flex: 5,
                   child: Container(
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(

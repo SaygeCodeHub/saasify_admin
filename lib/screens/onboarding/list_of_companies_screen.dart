@@ -29,11 +29,15 @@ class CompanyListScreen extends StatelessWidget {
     return Scaffold(
         body: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Expanded(
-          flex: 4,
+          flex: 5,
           child: Form(
               key: formKey,
               child: Padding(
-                  padding: const EdgeInsets.all(spacingXXXHuge),
+                  padding: const EdgeInsets.only(
+                      right: spacingXXXXXHuge,
+                      left: spacingXXXXXHuge,
+                      top: spacingXXXHuge,
+                      bottom: spacingXXXHuge),
                   child: BlocBuilder<OnboardingBloc, OnboardingStates>(
                     builder: (context, state) {
                       if (state is CompaniesLoaded) {
@@ -63,7 +67,7 @@ class CompanyListScreen extends StatelessWidget {
                                   companyList: companyList,
                                   selectedCompanyIndex:
                                       state.selectedCompanyIndex),
-                              const SizedBox(height: spacingXXHuge),
+                              // const SizedBox(height: spacingXXHuge),
                               PrimaryButton(
                                   onPressed: (state.selectedCompanyIndex != -1)
                                       ? () {
@@ -81,7 +85,7 @@ class CompanyListScreen extends StatelessWidget {
                     },
                   )))),
       Expanded(
-          flex: 6,
+          flex: 5,
           child: Container(
               decoration: const BoxDecoration(
             gradient: LinearGradient(
