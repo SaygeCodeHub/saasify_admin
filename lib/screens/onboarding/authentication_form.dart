@@ -121,7 +121,7 @@ class AuthenticationBody extends StatelessWidget {
                                 if (_formKey.currentState!.validate()) {
                                   context
                                       .read<AuthenticationBloc>()
-                                      .add(GetOtp());
+                                      .add(OtpVerified());
                                 }
                               }
                             : null,

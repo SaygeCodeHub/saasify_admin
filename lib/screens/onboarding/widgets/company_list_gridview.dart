@@ -38,43 +38,38 @@ class CompanyList extends StatelessWidget {
                         .read<OnboardingBloc>()
                         .add(SelectCompany(companyIndex: index));
                   },
-                  child: Padding(
-                      padding: EdgeInsets.all(context.responsive(spacingSmall,
-                          tablets: spacingXXSmall, desktop: spacingSmall)),
-                      child: Container(
-                          height: 50,
-                          padding: EdgeInsets.all(context.responsive(
-                              spacingSmall,
-                              tablets: spacingXXSmall,
-                              desktop: spacingSmall)),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 2,
-                                color: (selectedCompanyIndex == index)
-                                    ? AppColor.saasifyLightDeepBlue
-                                    : AppColor.saasifyPaleGrey),
-                            borderRadius:
-                                BorderRadius.circular(kCircularRadius),
-                          ),
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/error_image.png',
-                                  height: 70,
-                                  width: 70,
-                                ),
-                                const SizedBox(height: spacingXXSmall),
-                                Text(companyList[index].companyName,
-                                    maxLines: 1,
-                                    textScaleFactor:
-                                        context.responsive(0.8, desktop: 1),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .tinier
-                                        .copyWith(fontWeight: FontWeight.w500))
-                              ]))));
+                  child: Container(
+                      height: 50,
+                      padding: EdgeInsets.all(context.responsive(
+                          spacingSmall,
+                          tablets: spacingXXSmall,
+                          desktop: spacingSmall)),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 2,
+                              color: (selectedCompanyIndex == index)
+                                  ? AppColor.saasifyLightDeepBlue
+                                  : AppColor.saasifyPaleGrey),
+                          borderRadius:
+                              BorderRadius.circular(kCircularRadius)),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                                child: Image.network(
+                                    companyList[index].companyLogo,
+                                    fit: BoxFit.cover)),
+                            const SizedBox(height: spacingXXSmall),
+                            Text(companyList[index].companyName,
+                                maxLines: 1,
+                                textScaleFactor:
+                                    context.responsive(0.8, desktop: 1),
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .tinier
+                                    .copyWith(fontWeight: FontWeight.w500))
+                          ])));
             }));
   }
 }

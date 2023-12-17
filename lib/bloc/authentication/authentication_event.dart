@@ -33,10 +33,12 @@ class VerifyOtp extends AuthenticationEvents {
 }
 
 class OtpVerified extends AuthenticationEvents {
-  final AuthCredential credential;
-  final String userName;
+  // final AuthCredential credential;
+  // final String userName;
 
-  OtpVerified({required this.credential, required this.userName});
+  OtpVerified(
+      // {required this.credential, required this.userName}
+      );
 }
 
 class OtpVerificationError extends AuthenticationEvents {

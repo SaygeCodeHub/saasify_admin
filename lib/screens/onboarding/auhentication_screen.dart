@@ -24,8 +24,8 @@ class AuthenticationScreen extends StatelessWidget {
     context
         .read<AuthenticationBloc>()
         .add(SwitchAuthentication(isLogin: false, focusField: ''));
-    return WillPopScope(
-        onWillPop: () async => false,
+    return PopScope(
+        canPop: false,
         child: Scaffold(
             backgroundColor: AppColor.saasifyWhite,
             body: Row(children: [
@@ -94,9 +94,9 @@ class AuthenticationScreen extends StatelessWidget {
                           end: Alignment.topRight,
                           colors: [
                             AppColor.saasifyLightDeepBlue,
-                            AppColor.saasifyWhite,
-                          ]),
-                    ),
+                            AppColor.saasifyWhite
+                          ])
+                    )
                   ))
             ])));
   }

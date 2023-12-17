@@ -35,37 +35,32 @@ class BranchList extends StatelessWidget {
                         .read<OnboardingBloc>()
                         .add(SelectBranch(branchIndex: index));
                   },
-                  child: Padding(
-                      padding: EdgeInsets.all(context.responsive(spacingSmall,
-                          tablets: spacingXXSmall, desktop: spacingSmall)),
-                      child: Container(
-                          height: 20,
-                          padding: EdgeInsets.all(context.responsive(
-                              spacingSmall,
-                              tablets: spacingXXSmall,
-                              desktop: spacingSmall)),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2,
-                                  color: (selectedBranchIndex == index)
-                                      ? AppColor.saasifyLightDeepBlue
-                                      : AppColor.saasifyPaleGrey),
-                              borderRadius:
-                                  BorderRadius.circular(kCircularRadius)),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(branchList[index].branchName,
-                                    maxLines: 1,
-                                    textScaleFactor:
-                                        context.responsive(0.8, desktop: 1),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .tinier
-                                        .copyWith(fontWeight: FontWeight.w500))
-                              ]))));
+                  child: Container(
+                      height: 50,
+                      padding: EdgeInsets.all(context.responsive(
+                          spacingSmall,
+                          tablets: spacingXXSmall,
+                          desktop: spacingSmall)),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 2,
+                              color: (selectedBranchIndex == index)
+                                  ? AppColor.saasifyLightDeepBlue
+                                  : AppColor.saasifyPaleGrey),
+                          borderRadius:
+                              BorderRadius.circular(kCircularRadius)),
+                      child: Center(
+                        child: Text(branchList[index].branchName,
+                            maxLines: 1,
+                            textScaleFactor:
+                                context.responsive(0.8, desktop: 1),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .tinier
+                                .copyWith(fontWeight: FontWeight.w500))
+                      )));
             }));
   }
 }

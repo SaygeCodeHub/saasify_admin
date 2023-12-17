@@ -18,6 +18,7 @@ class PaymentDialogue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<InvoiceInfo> productData = [];
     context.read<PaymentBloc>().add(FetchAllPayment());
     return AlertDialog(
         shape: RoundedRectangleBorder(
@@ -38,86 +39,80 @@ class PaymentDialogue extends StatelessWidget {
               ]),
               const SizedBox(height: spacingStandard),
               Expanded(child: BlocBuilder<PaymentBloc, PaymentStates>(
-                builder: (context, state) {
-                  if (state is FetchedPayment) {
-                    return GridView.builder(
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2, childAspectRatio: 1.2),
-                        itemCount: state.paymentData
-                                .where((element) => element.isActive)
-                                .length +
-                            1,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                              padding: const EdgeInsets.all(spacingXMedium),
-                              child: InkWell(
-                                  onTap: () {
-                                    if (index <
-                                        state.paymentData
+                  builder: (context, state) {
+                if (state is FetchedPayment) {
+                  return GridView.builder(
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2, childAspectRatio: 1.2),
+                      itemCount: state.paymentData
+                              .where((element) => element.isActive)
+                              .length +
+                          1,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                            padding: const EdgeInsets.all(spacingXMedium),
+                            child: InkWell(
+                                onTap: () {
+                                  if (index <
+                                      state.paymentData
+                                          .where((element) => element.isActive)
+                                          .length) {
+                                    context.read<BillingBloc>().add(SettleOrder(
+                                        paymentMethod: state.paymentData
                                             .where(
                                                 (element) => element.isActive)
-                                            .length) {
-                                      context.read<BillingBloc>().add(
-                                          SettleOrder(
-                                              paymentMethod: state.paymentData
-                                                  .where((element) =>
-                                                      element.isActive)
-                                                  .toList()[index]
-                                                  .paymentName,
-                                              status: 'Paid'));
-                                      Navigator.pop(context);
-                                    } else {
-                                      List<InvoiceInfo> productData = [];
-                                      for (var item in context
-                                          .read<BillingBloc>()
-                                          .customer
-                                          .productList) {
-                                        productData.add(InvoiceInfo(
-                                            description:
-                                                item.product.productName,
-                                            qty: item.count.toString(),
-                                            mRP: item.product.variants[0].cost
-                                                .toString(),
-                                            rate: item.product.variants[0].cost
-                                                .toString(),
-                                            amount: item
-                                                .product.variants[0].cost
-                                                .toString()));
-                                        PdfService()
-                                            .printPOSInvoicePdf(productData);
-                                        Navigator.pop(context);
-                                      }
+                                            .toList()[index]
+                                            .paymentName,
+                                        status: 'Paid'));
+                                    Navigator.pop(context);
+                                  } else {
+                                    for (var item in context
+                                        .read<BillingBloc>()
+                                        .customer
+                                        .productList) {
+                                      productData.add(InvoiceInfo(
+                                          description: item.product.productName,
+                                          qty: item.count.toString(),
+                                          mRP: item.product.variants[0].cost
+                                              .toString(),
+                                          rate: item.product.variants[0].cost
+                                              .toString(),
+                                          amount: item.product.variants[0].cost
+                                              .toString()));
                                     }
-                                  },
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          color: AppColor.saasifyCementGrey,
-                                          borderRadius: BorderRadius.circular(
-                                              spacingXMedium)),
-                                      child: Center(
-                                          child: Text(
-                                              (index <
-                                                      state.paymentData
-                                                          .where((element) =>
-                                                              element.isActive)
-                                                          .length)
-                                                  ? state.paymentData
-                                                      .where((element) =>
-                                                          element.isActive)
-                                                      .toList()[index]
-                                                      .paymentName
-                                                  : 'Other',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .tinier)))));
-                        });
-                  } else {
-                    return const SizedBox();
-                  }
-                },
-              )),
+                                    PdfService()
+                                        .printPOSInvoicePdf(productData);
+                                    Navigator.pop(context);
+                                  }
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        color: AppColor.saasifyCementGrey,
+                                        borderRadius: BorderRadius.circular(
+                                            spacingXMedium)),
+                                    child: Center(
+                                        child: Text(
+                                            (index <
+                                                    state.paymentData
+                                                        .where((element) =>
+                                                            element.isActive)
+                                                        .length)
+                                                ? state.paymentData
+                                                    .where((element) =>
+                                                        element.isActive)
+                                                    .toList()[index]
+                                                    .paymentName
+                                                : 'Other',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .tinier)))));
+                      });
+                } else {
+                  return const SizedBox();
+                }
+              })),
               Center(
                   child: InkWell(
                       onTap: () {
@@ -125,13 +120,10 @@ class PaymentDialogue extends StatelessWidget {
                         context.read<BillingBloc>().add(
                             SettleOrder(paymentMethod: "-", status: 'Unpaid'));
                       },
-                      child: Text(
-                        "Move to Pending",
-                        style: Theme.of(context).textTheme.tiniest.copyWith(
+                      child: Text("Move to Pending",
+                          style: Theme.of(context).textTheme.tiniest.copyWith(
                               color: AppColor.saasifyGreyBlue,
-                              decoration: TextDecoration.underline,
-                            ),
-                      )))
+                              decoration: TextDecoration.underline))))
             ])));
   }
 }

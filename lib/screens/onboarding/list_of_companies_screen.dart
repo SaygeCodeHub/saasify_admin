@@ -39,61 +39,60 @@ class CompanyListScreen extends StatelessWidget {
                       top: spacingXXXHuge,
                       bottom: spacingXXXHuge),
                   child: BlocBuilder<OnboardingBloc, OnboardingStates>(
-                    builder: (context, state) {
-                      if (state is CompaniesLoaded) {
-                        return Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SvgPicture.asset("assets/SaaSify.svg",
-                                  width: kLogoWidth),
-                              const SizedBox(height: spacingXXHuge),
-                              Text(StringConstants.kCompanies,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .xxTiny
-                                      .copyWith(fontWeight: FontWeight.w700)),
-                              const SizedBox(height: spacingMedium),
-                              CustomTextField(
-                                  hintText: StringConstants.kSearchCompanies,
-                                  hintStyle: Theme.of(context)
-                                      .textTheme
-                                      .xTiniest
-                                      .copyWith(fontWeight: FontWeight.w500),
-                                  keyboardType: TextInputType.text,
-                                  onTextFieldChanged: (value) {}),
-                              const SizedBox(height: spacingXXHuge),
-                              CompanyList(
-                                  companyList: companyList,
-                                  selectedCompanyIndex:
-                                      state.selectedCompanyIndex),
-                              // const SizedBox(height: spacingXXHuge),
-                              PrimaryButton(
-                                  onPressed: (state.selectedCompanyIndex != -1)
-                                      ? () {
-                                          Navigator.pushReplacementNamed(
-                                              context,
-                                              BranchesListScreen.routeName,
-                                              arguments: companyList[
-                                                  state.selectedCompanyIndex]);
-                                        }
-                                      : null,
-                                  buttonTitle: 'Next')
-                            ]);
-                      }
-                      return const SizedBox.shrink();
-                    },
-                  )))),
+                      builder: (context, state) {
+                    if (state is CompaniesLoaded) {
+                      return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset("assets/SaaSify.svg",
+                                width: kLogoWidth),
+                            const SizedBox(height: spacingXXHuge),
+                            Text(StringConstants.kCompanies,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .xxTiny
+                                    .copyWith(fontWeight: FontWeight.w700)),
+                            const SizedBox(height: spacingMedium),
+                            CustomTextField(
+                                hintText: StringConstants.kSearchCompanies,
+                                hintStyle: Theme.of(context)
+                                    .textTheme
+                                    .xTiniest
+                                    .copyWith(fontWeight: FontWeight.w500),
+                                keyboardType: TextInputType.text,
+                                onTextFieldChanged: (value) {}),
+                            const SizedBox(height: spacingMedium),
+                            CompanyList(
+                                companyList: companyList,
+                                selectedCompanyIndex:
+                                    state.selectedCompanyIndex),
+                            const SizedBox(height: spacingXXHuge),
+                            PrimaryButton(
+                                onPressed: (state.selectedCompanyIndex != -1)
+                                    ? () {
+                                        Navigator.pushReplacementNamed(context,
+                                            BranchesListScreen.routeName,
+                                            arguments: companyList[
+                                                state.selectedCompanyIndex]);
+                                      }
+                                    : null,
+                                buttonTitle: 'Next')
+                          ]);
+                    }
+                    return const SizedBox.shrink();
+                  })))),
       Expanded(
           flex: 5,
           child: Container(
               decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [AppColor.saasifyLightDeepBlue, AppColor.saasifyWhite],
-            ),
-          )))
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                AppColor.saasifyLightDeepBlue,
+                AppColor.saasifyWhite
+              ]))))
     ]));
   }
 }
