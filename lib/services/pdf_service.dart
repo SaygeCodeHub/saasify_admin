@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:core';
-import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:pdf/pdf.dart';
@@ -131,11 +130,11 @@ class PdfService {
 
     var savedFile = await pdf.save();
     List<int> fileInts = List.from(savedFile);
-    AnchorElement(
-        href:
-            "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
-      ..setAttribute("download", "invoice.pdf")
-      ..click();
+    // AnchorElement(
+    //     href:
+    //         "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
+    //   ..setAttribute("download", "invoice.pdf")
+    //   ..click();
   }
 
   Future<void> printOrdersPdf(
@@ -225,10 +224,10 @@ class PdfService {
 
     var savedFile = await pdf.save();
     List<int> fileInts = List.from(savedFile);
-    AnchorElement(
-        href:
-            "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
-      ..setAttribute("download", "orders.pdf")
-      ..click();
+    // AnchorElement(
+    //     href:
+    //         "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
+    //   ..setAttribute("download", "orders.pdf")
+    //   ..click();
   }
 }

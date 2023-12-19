@@ -13,8 +13,7 @@ import 'package:saasify/widgets/custom_table.dart';
 class InventoryListDataTable extends StatelessWidget {
   final List<InventoryProduct> productList;
 
-  const InventoryListDataTable({Key? key, required this.productList})
-      : super(key: key);
+  const InventoryListDataTable({super.key, required this.productList});
 
   @override
   Widget build(BuildContext context) {

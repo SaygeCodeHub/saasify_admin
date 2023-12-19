@@ -20,7 +20,7 @@ class CustomDropdownWidget extends StatefulWidget {
   final void Function()? onChanges;
 
   const CustomDropdownWidget({
-    Key? key,
+    super.key,
     this.validator,
     this.initialValue,
     this.canEdit = true,
@@ -31,7 +31,7 @@ class CustomDropdownWidget extends StatefulWidget {
     this.addOption = false,
     this.hintText = '',
     this.onChanges,
-  }) : super(key: key);
+  });
 
   @override
   DropdownScreenState createState() => DropdownScreenState();

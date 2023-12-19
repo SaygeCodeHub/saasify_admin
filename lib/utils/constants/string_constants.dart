@@ -73,7 +73,6 @@ class StringConstants {
   static const kFirstName = 'First Name';
   static const kEmailAddress = 'Email Address';
   static const kAddress = 'Address';
-  static const kPassword = 'Password';
   static const kMobileNo = 'Mobile No';
   static const kType = 'Type';
   static const kBranchName = 'Branch Name';
@@ -183,4 +182,10 @@ class StringConstants {
   static const kVerifyOtp = "Verify Otp";
   static const kCannotBeMinimized =
       "This Application is meant for larger Screen Sizes";
+
+  ////////////
+
+  static const kLoginId = 'Login ID';
+  static const kPassword = 'Password';
+  static const kVerify = "Verify";
 }

@@ -7,8 +7,8 @@ class TopBar extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final String headingText;
 
-  const TopBar({Key? key, required this.scaffoldKey, required this.headingText})
-      : super(key: key);
+  const TopBar(
+      {super.key, required this.scaffoldKey, required this.headingText});
 
   @override
   Widget build(BuildContext context) {

@@ -21,10 +21,9 @@ import 'package:saasify/data/models/billing/customer_model.dart';
 import 'package:saasify/data/models/billing/fetch_products_by_category_model.dart';
 import 'package:saasify/data/models/billing/selected_product_model.dart';
 import 'package:saasify/firebase_options.dart';
-import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/onboarding/auhentication_screen.dart';
-import 'package:saasify/utils/responsive.dart';
+import 'package:saasify/utils/globals.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/orders/orders_bloc.dart';
 import 'bloc/payment/payments_bloc.dart';
@@ -35,8 +34,8 @@ import 'data/database/hive_keys.dart';
 import 'di/app_module.dart';
 
 void main() async {
-  await _initFirebase();
   await _initDependencies();
+  await _initFirebase();
   await _initHive();
   runApp(const MyPosApp());
 }
@@ -118,7 +117,6 @@ class MyPosApp extends StatelessWidget {
                             context, DashboardsScreen.routeName);
                       }
                     },
-                    child: context.responsive(const CannotBeMinimizeScreen(),
-                        tablets: AuthenticationScreen())))));
+                    child: AuthenticationScreen()))));
   }
 }

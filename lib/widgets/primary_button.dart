@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
 import '../configs/app_color.dart';
+import '../configs/app_colors.dart';
 import '../configs/app_dimensions.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -14,7 +15,7 @@ class PrimaryButton extends StatelessWidget {
   final OutlinedBorder? shape;
 
   const PrimaryButton(
-      {Key? key,
+      {super.key,
       required this.onPressed,
       this.buttonWidth,
       this.style,
@@ -22,8 +23,7 @@ class PrimaryButton extends StatelessWidget {
       this.side,
       required this.buttonTitle,
       this.icon,
-      this.shape})
-      : super(key: key);
+      this.shape});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class PrimaryButton extends StatelessWidget {
           shape: shape ??
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(kCircularRadius)),
-          backgroundColor: backgroundColor ?? AppColor.saasifyLightDeepBlue,
+          backgroundColor: backgroundColor ?? AppColors.orange,
           minimumSize: Size(buttonWidth ?? double.maxFinite, 50)),
       child: FittedBox(
           child: Text(buttonTitle,

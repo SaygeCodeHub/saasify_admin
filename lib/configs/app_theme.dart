@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_color.dart';
+import 'app_colors.dart';
 import 'app_dimensions.dart';
 
 ThemeData appTheme = ThemeData(
@@ -31,7 +32,7 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     filled: true,
     isDense: true,
     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-    fillColor: AppColor.saasifyLighterWhite,
+    fillColor: AppColors.lightGrey,
     focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(kCircularRadius),
         borderSide: const BorderSide(color: AppColor.saasifyGrey)),

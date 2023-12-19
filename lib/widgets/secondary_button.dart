@@ -13,15 +13,14 @@ class SecondaryButton extends StatelessWidget {
   final IconData? icon;
 
   const SecondaryButton(
-      {Key? key,
+      {super.key,
       required this.onPressed,
       this.buttonWidth,
       this.style,
       this.backgroundColor,
       this.side,
       required this.buttonTitle,
-      this.icon})
-      : super(key: key);
+      this.icon});
 
   @override
   Widget build(BuildContext context) {

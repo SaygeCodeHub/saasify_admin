@@ -26,7 +26,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? hintStyle;
 
   CustomTextField(
-      {Key? key,
+      {super.key,
       this.maxLines,
       this.textInputAction,
       this.maxLength,
@@ -46,8 +46,7 @@ class CustomTextField extends StatelessWidget {
       this.hintStyle,
       this.suffixIcon,
       this.autofocus = false,
-      this.enabled})
-      : super(key: key);
+      this.enabled});
 
   @override
   Widget build(BuildContext context) {

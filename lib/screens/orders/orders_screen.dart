@@ -17,7 +17,7 @@ import 'orders_list_datatable.dart';
 class OrdersScreen extends StatelessWidget {
   static const String routeName = 'OrdersScreen';
 
-  OrdersScreen({Key? key}) : super(key: key);
+  OrdersScreen({super.key});
 
   static List selectedIds = [];
 

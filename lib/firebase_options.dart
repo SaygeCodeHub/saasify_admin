@@ -21,20 +21,11 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -53,14 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCemWXzz3Xtt2rfxA8vhlsTAAu7CQBuxW8',
-    appId: '1:842866510779:web:952612f626ad726a3c529e',
-    messagingSenderId: '842866510779',
-    projectId: 'saasify-5ddd8',
-    authDomain: 'saasify-5ddd8.firebaseapp.com',
-    databaseURL:
-        'https://saasify-5ddd8-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'saasify-5ddd8.appspot.com',
-    measurementId: 'G-4LLTBNFLEG',
+    apiKey: 'AIzaSyCA3cMXO9gZ3BOnEJ2vhbj0h88Qprtcx5U',
+    appId: '1:229181566236:web:425582f7fbb6e369d85ed9',
+    messagingSenderId: '229181566236',
+    projectId: 'saasify-de974',
+    authDomain: 'saasify-de974.firebaseapp.com',
+    storageBucket: 'saasify-de974.appspot.com',
+    measurementId: 'G-E3KFR14ZEX',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyA60L2rPsek82Up0JBvXk8sBJNnHaYx3R8',
+    appId: '1:229181566236:android:251087f923f72a42d85ed9',
+    messagingSenderId: '229181566236',
+    projectId: 'saasify-de974',
+    storageBucket: 'saasify-de974.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDhU7aSe5a8KJ0IHV1Nvmq6zWDM96NYze0',
+    appId: '1:229181566236:ios:7358bef77938b9c8d85ed9',
+    messagingSenderId: '229181566236',
+    projectId: 'saasify-de974',
+    storageBucket: 'saasify-de974.appspot.com',
+    iosBundleId: 'com.example.saasify',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDhU7aSe5a8KJ0IHV1Nvmq6zWDM96NYze0',
+    appId: '1:229181566236:ios:ec2452acf89aff49d85ed9',
+    messagingSenderId: '229181566236',
+    projectId: 'saasify-de974',
+    storageBucket: 'saasify-de974.appspot.com',
+    iosBundleId: 'com.example.saasify.RunnerTests',
   );
 }

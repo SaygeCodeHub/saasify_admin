@@ -21,7 +21,7 @@ class InventoryListScreen extends StatelessWidget {
 
   static List selectedIds = [];
 
-  InventoryListScreen({Key? key}) : super(key: key);
+  InventoryListScreen({super.key});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 

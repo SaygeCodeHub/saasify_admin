@@ -40,18 +40,15 @@ class CompanyList extends StatelessWidget {
                   },
                   child: Container(
                       height: 50,
-                      padding: EdgeInsets.all(context.responsive(
-                          spacingSmall,
-                          tablets: spacingXXSmall,
-                          desktop: spacingSmall)),
+                      padding: EdgeInsets.all(context.responsive(spacingSmall,
+                          tablets: spacingXXSmall, desktop: spacingSmall)),
                       decoration: BoxDecoration(
                           border: Border.all(
                               width: 2,
                               color: (selectedCompanyIndex == index)
                                   ? AppColor.saasifyLightDeepBlue
                                   : AppColor.saasifyPaleGrey),
-                          borderRadius:
-                              BorderRadius.circular(kCircularRadius)),
+                          borderRadius: BorderRadius.circular(kCircularRadius)),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

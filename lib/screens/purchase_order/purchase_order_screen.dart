@@ -16,7 +16,7 @@ import '../../widgets/custom_page_header.dart';
 class PurchaseOrder extends StatelessWidget {
   static const String routeName = 'PurchaseOrder';
 
-  PurchaseOrder({Key? key}) : super(key: key);
+  PurchaseOrder({super.key});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 

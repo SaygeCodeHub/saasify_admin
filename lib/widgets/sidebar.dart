@@ -23,7 +23,7 @@ class SideBar extends StatelessWidget {
   static int userContact = 0;
   final int selectedIndex;
 
-  const SideBar({Key? key, required this.selectedIndex}) : super(key: key);
+  const SideBar({super.key, required this.selectedIndex});
 
   @override
   Widget build(BuildContext context) {

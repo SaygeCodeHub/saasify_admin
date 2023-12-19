@@ -22,7 +22,7 @@ class ProductListScreen extends StatelessWidget {
 
   static List<int> selectedIds = [];
 
-  ProductListScreen({Key? key}) : super(key: key);
+  ProductListScreen({super.key});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 

@@ -15,7 +15,7 @@ class CustomDataTable extends StatelessWidget {
   final void Function(int index) onRowCheckboxChange;
 
   const CustomDataTable(
-      {Key? key,
+      {super.key,
       required this.columnList,
       required this.selectedIds,
       this.onHeaderCheckboxChange,
@@ -24,8 +24,7 @@ class CustomDataTable extends StatelessWidget {
       required this.onRowCheckboxChange,
       required this.generateData,
       this.checkboxVisible = true,
-      this.showRowCheckBox = true})
-      : super(key: key);
+      this.showRowCheckBox = true});
 
   @override
   Widget build(BuildContext context) {

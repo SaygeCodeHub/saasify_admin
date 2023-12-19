@@ -9,7 +9,7 @@ import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_table.dart';
 
 class EmployeeListDataTable extends StatelessWidget {
-  const EmployeeListDataTable({Key? key}) : super(key: key);
+  const EmployeeListDataTable({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -17,7 +17,7 @@ import 'widgets/dashboard_header_cards.dart';
 class DashboardsScreen extends StatelessWidget {
   static const String routeName = 'DashboardsScreen';
 
-  DashboardsScreen({Key? key}) : super(key: key);
+  DashboardsScreen({super.key});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 

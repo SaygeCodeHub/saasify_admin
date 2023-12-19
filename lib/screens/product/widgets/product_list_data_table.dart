@@ -16,8 +16,7 @@ import 'package:saasify/widgets/toggle_switch_widget.dart';
 class ProductListDataTable extends StatelessWidget {
   final List<ProductWithVariant> productList;
 
-  const ProductListDataTable({Key? key, required this.productList})
-      : super(key: key);
+  const ProductListDataTable({super.key, required this.productList});
 
   @override
   Widget build(BuildContext context) {

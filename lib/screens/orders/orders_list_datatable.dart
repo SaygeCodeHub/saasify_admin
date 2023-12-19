@@ -16,8 +16,7 @@ import 'order_details_screen.dart';
 class OrdersListDataTable extends StatelessWidget {
   final OrdersData orderListDatum;
 
-  const OrdersListDataTable({Key? key, required this.orderListDatum})
-      : super(key: key);
+  const OrdersListDataTable({super.key, required this.orderListDatum});
 
   @override
   Widget build(BuildContext context) {

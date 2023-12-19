@@ -110,33 +110,33 @@ class AuthenticationBloc
     try {
       // await auth.signInWithCredential(event.credential).then((user) async {
       //   if (user.user != null) {
-          Map userDetailsMap = {
-            'user_id': "OvcqwTKNuHSL5ILAOZ6Y3OGcmrj2",
-            'user_name':"",
-            'user_contact': 918888881800
-          };
-          AuthenticationModel authenticationModel =
-              await _authenticationRepository.authenticateUser(userDetailsMap);
-          if (authenticationModel.status == 200) {
-            _customerCache.setIsLoggedIn(true);
-            _customerCache.setUserId("OvcqwTKNuHSL5ILAOZ6Y3OGcmrj2");
-            _customerCache
-                .setCompanyId(authenticationModel.data.companies[0].companyId);
-            _customerCache.setBranchId(
-                authenticationModel.data.companies[0].branches[0].branchId);
-            _customerCache
-                .setUserContact(authenticationModel.data.user.userContact);
-            _customerCache.setUserName(authenticationModel.data.user.userName);
-            SideBar.userContact = authenticationModel.data.user.userContact;
-            SideBar.userName = authenticationModel.data.user.userName;
-            emit(PhoneOtpVerified(userData: authenticationModel.data));
-          } else if (authenticationModel.status == 404) {
-            emit(PhoneAuthError(error: authenticationModel.message.toString()));
-            emit(AuthenticationFormLoaded(isLogin: true, focusField: ''));
-          } else {
-            emit(PhoneAuthError(error: authenticationModel.message));
-          }
-        // }
+      Map userDetailsMap = {
+        'user_id': "OvcqwTKNuHSL5ILAOZ6Y3OGcmrj2",
+        'user_name': "",
+        'user_contact': 918888881800
+      };
+      AuthenticationModel authenticationModel =
+          await _authenticationRepository.authenticateUser(userDetailsMap);
+      if (authenticationModel.status == 200) {
+        _customerCache.setIsLoggedIn(true);
+        _customerCache.setUserId("OvcqwTKNuHSL5ILAOZ6Y3OGcmrj2");
+        _customerCache
+            .setCompanyId(authenticationModel.data.companies[0].companyId);
+        _customerCache.setBranchId(
+            authenticationModel.data.companies[0].branches[0].branchId);
+        _customerCache
+            .setUserContact(authenticationModel.data.user.userContact);
+        _customerCache.setUserName(authenticationModel.data.user.userName);
+        SideBar.userContact = authenticationModel.data.user.userContact;
+        SideBar.userName = authenticationModel.data.user.userName;
+        emit(PhoneOtpVerified(userData: authenticationModel.data));
+      } else if (authenticationModel.status == 404) {
+        emit(PhoneAuthError(error: authenticationModel.message.toString()));
+        emit(AuthenticationFormLoaded(isLogin: true, focusField: ''));
+      } else {
+        emit(PhoneAuthError(error: authenticationModel.message));
+      }
+      // }
       // });
     } on FirebaseAuthException catch (e) {
       emit(PhoneAuthError(error: e.code));
