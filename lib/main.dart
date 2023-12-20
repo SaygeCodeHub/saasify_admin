@@ -22,7 +22,7 @@ import 'package:saasify/data/models/billing/fetch_products_by_category_model.dar
 import 'package:saasify/data/models/billing/selected_product_model.dart';
 import 'package:saasify/firebase_options.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
-import 'package:saasify/screens/onboarding/auhentication_screen.dart';
+import 'package:saasify/screens/authentication/auhentication_screen.dart';
 import 'package:saasify/utils/globals.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/orders/orders_bloc.dart';
@@ -79,6 +79,7 @@ class MyPosApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    isMobile = MediaQuery.of(context).size.width < 600;
     return MultiBlocProvider(
         providers: [
           BlocProvider(

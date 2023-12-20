@@ -14,7 +14,7 @@ import '../screens/categories/categories_screen.dart';
 import '../screens/purchase_order/purchase_order_screen.dart';
 import '../screens/settings/employee_list.dart';
 import '../screens/settings/discount_screen.dart';
-import '../screens/onboarding/auhentication_screen.dart';
+import '../screens/authentication/auhentication_screen.dart';
 import '../screens/orders/order_details_screen.dart';
 import '../screens/orders/orders_screen.dart';
 import '../screens/product/add_product_screen.dart';

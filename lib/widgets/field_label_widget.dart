@@ -19,7 +19,8 @@ class LabelAndFieldWidget extends StatelessWidget {
   final TextInputType? keyboardType;
   final EdgeInsetsGeometry? contentPadding;
 
-  LabelAndFieldWidget({
+  const LabelAndFieldWidget({
+    super.key,
     this.label,
     this.hintText,
     this.onTextFieldChanged,
@@ -38,11 +39,10 @@ class LabelAndFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _controller =
-        controller ?? TextEditingController();
+    final TextEditingController controller = TextEditingController();
 
-    if (initialValue != null && _controller.text.isEmpty) {
-      _controller.text = initialValue.toString();
+    if (initialValue != null && controller.text.isEmpty) {
+      controller.text = initialValue.toString();
     }
 
     return Column(
@@ -71,14 +71,13 @@ class LabelAndFieldWidget extends StatelessWidget {
             return null;
           },
           readOnly: readOnly ?? false,
-          controller: _controller,
+          controller: controller,
           onChanged: onTextFieldChanged,
           enabled: enabled ?? true,
-          autofocus: autofocus ?? true,
+          autofocus: autofocus ?? false,
           keyboardType: keyboardType,
           textAlign: TextAlign.start,
         ),
-        SizedBox(height: MediaQuery.sizeOf(context).width * 0.025),
       ],
     );
   }
