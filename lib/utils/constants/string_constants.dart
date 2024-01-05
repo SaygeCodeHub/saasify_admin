@@ -25,7 +25,7 @@ class StringConstants {
   static const kAddYourContactNumber = "What's your contact number?";
   static const kPleaseAddAValidContact = 'Please enter a valid contact';
   static const kWelcome = 'Welcome :)';
-  static const kEnterOtp = 'Enter Otp :)';
+  static const kEnterOtp = 'Enter Otp';
   static const kOrderNo = 'Order No';
   static const kItemDescription = 'Item Description';
   static const kQty = 'Qty';
