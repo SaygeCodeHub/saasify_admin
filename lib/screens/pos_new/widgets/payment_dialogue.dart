@@ -108,7 +108,7 @@ class PaymentDialogue extends StatelessWidget {
                                                           element.isActive)
                                                       .toList()[index]
                                                       .paymentName
-                                                  : 'Other',
+                                                  : 'Print',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .tinier)))));

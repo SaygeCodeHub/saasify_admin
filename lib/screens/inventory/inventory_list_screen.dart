@@ -96,23 +96,25 @@ class InventoryListScreen extends StatelessWidget {
                                 titleText: StringConstants.kInventoryManagement,
                                 textFieldVisible: true),
                             const SizedBox(height: spacingStandard),
-                            InventoryListDataTable(
-                                productList: state.productList),
+                            Visibility(
+                              visible: state.productList.isNotEmpty,
+                              child: InventoryListDataTable(
+                                  productList: state.productList),
+                            ),
                             Visibility(
                                 visible: state.productList.isEmpty,
-                                child: Center(
-                                    child: Text(
-                                        StringConstants.kNoDataAvailable,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .tinier
-                                            .copyWith(
-                                                fontWeight: FontWeight.w500,
-                                                color: AppColor
-                                                    .saasifyLightGrey)))),
-                            Visibility(
-                                visible: state.productList.isEmpty,
-                                child: const Spacer())
+                                child: Expanded(
+                                  child: Center(
+                                      child: Text(
+                                          StringConstants.kNoDataAvailable,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .tinier
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: AppColor
+                                                      .saasifyLightGrey))),
+                                ))
                           ]);
                         } else if (state is ErrorFetchingInventoryList) {
                           return Expanded(

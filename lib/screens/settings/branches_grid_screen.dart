@@ -136,14 +136,8 @@ class StoreGridScreen extends StatelessWidget {
                                         context, DashboardsScreen.routeName);
                                   },
                                   backIconVisible: true,
-                                  buttonTitle: StringConstants.kAddNewBranch,
-                                  buttonVisible: true,
-                                  textFieldVisible: false,
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AddStorePopup());
-                                  },
+                                  buttonVisible: false,
+                                  textFieldVisible: false
                                 ),
                                 const SizedBox(height: spacingStandard),
                                 BranchesGrid(branchesData: state.branchList)

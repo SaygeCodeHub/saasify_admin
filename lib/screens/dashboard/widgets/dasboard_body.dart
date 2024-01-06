@@ -42,10 +42,10 @@ class DashboardBody extends StatelessWidget {
                                           .copyWith(
                                               fontWeight: FontWeight.w600))),
                               const SizedBox(height: spacingStandard),
-                              const Expanded(child: DashboardChart()),
+                              const Expanded(child: DashboardChart())
                             ])))),
             const SizedBox(height: spacingStandard),
-            Expanded(child: DashboardOrderTableList(ordersData: ordersData))
+            Expanded(child: (ordersData.orders.isEmpty)?const SizedBox():DashboardOrderTableList(ordersData: ordersData))
           ])),
       const SizedBox(width: spacingLarge),
       Expanded(

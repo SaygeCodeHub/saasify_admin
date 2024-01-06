@@ -191,27 +191,29 @@ class ProductListScreen extends StatelessWidget {
                                                             isProductDetail:
                                                                 false));
                                               },
-                                              primaryOnPressed: () {},
+                                              primaryOnPressed: () {}
                                             ));
-                                  },
+                                  }
                                 ),
                                 const SizedBox(height: spacingStandard),
-                                ProductListDataTable(
-                                    productList: state.productList),
+                                Visibility(
+                                  visible: state.productList.isNotEmpty,
+                                  child: ProductListDataTable(
+                                      productList: state.productList)
+                                ),
                                 Visibility(
                                     visible: state.productList.isEmpty,
-                                    child: Center(
-                                        child: Text(
-                                            StringConstants.kNoDataAvailable,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .tinier
-                                                .copyWith(
-                                                    color: AppColor
-                                                        .saasifyLightGrey)))),
-                                Visibility(
-                                    visible: state.productList.isEmpty,
-                                    child: const Spacer())
+                                    child: Expanded(
+                                      child: Center(
+                                          child: Text(
+                                              StringConstants.kNoDataAvailable,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .tinier
+                                                  .copyWith(
+                                                      color: AppColor
+                                                          .saasifyLightGrey)))
+                                    ))
                               ],
                             );
                           } else if (state is ErrorFetchingProduct) {
