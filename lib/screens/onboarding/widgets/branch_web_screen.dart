@@ -54,8 +54,10 @@ class BranchWebScreen extends StatelessWidget {
                                   .copyWith(fontWeight: FontWeight.w700)),
                           const SizedBox(height: spacingLarge),
                           BranchList(
-                              selectedBranchIndex: state.selectedBranchIndex,
-                              branchList: selectedCompany.branches),
+                            selectedBranchIndex: state.selectedBranchIndex,
+                            branchList: selectedCompany.branches,
+                            isMobile: false,
+                          ),
                           PrimaryButton(
                               onPressed: (state.selectedBranchIndex != -1)
                                   ? () {

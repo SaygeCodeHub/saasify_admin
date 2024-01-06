@@ -38,10 +38,12 @@ class BranchMobileScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20),
+                      SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.12),
                       SvgPicture.asset("assets/saasify_logo.svg",
                           width: 50, height: 50),
-                      const SizedBox(height: 10),
+                      SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.075),
                       Text(StringConstants.kBranches,
                           style: Theme.of(context)
                               .textTheme
@@ -49,8 +51,10 @@ class BranchMobileScreen extends StatelessWidget {
                               .copyWith(fontWeight: FontWeight.w700)),
                       const SizedBox(height: spacingXXSmall),
                       BranchList(
-                          selectedBranchIndex: state.selectedBranchIndex,
-                          branchList: selectedCompany.branches),
+                        selectedBranchIndex: state.selectedBranchIndex,
+                        branchList: selectedCompany.branches,
+                        isMobile: true,
+                      ),
                       PrimaryButton(
                           onPressed: (state.selectedBranchIndex != -1)
                               ? () {

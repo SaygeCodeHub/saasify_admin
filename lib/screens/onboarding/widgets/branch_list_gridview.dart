@@ -13,24 +13,28 @@ import '../../../configs/app_spacing.dart';
 class BranchList extends StatelessWidget {
   final int selectedBranchIndex;
   final List<Branch> branchList;
+  final bool isMobile;
 
   const BranchList(
-      {super.key, required this.branchList, required this.selectedBranchIndex});
+      {super.key,
+      required this.branchList,
+      required this.selectedBranchIndex,
+      required this.isMobile});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                childAspectRatio: 1,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: (isMobile == true) ? 2 : 1,
+                childAspectRatio: (isMobile == true) ? 2.2 : 1.9,
                 crossAxisSpacing: spacingLarge,
                 mainAxisSpacing: spacingLarge),
             scrollDirection:
-                context.responsive(Axis.horizontal, mobile: Axis.vertical),
+                (isMobile == true) ? Axis.vertical : Axis.horizontal,
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
-            itemCount: branchList.length,
+            itemCount: 5,
             itemBuilder: (context, index) {
               return InkWell(
                   onTap: () {
@@ -50,10 +54,8 @@ class BranchList extends StatelessWidget {
                                   : AppColor.saasifyPaleGrey),
                           borderRadius: BorderRadius.circular(kCircularRadius)),
                       child: Center(
-                          child: Text(branchList[index].branchName,
+                          child: Text("Clothing",
                               maxLines: 1,
-                              // textScaleFactor:
-                              //     context.responsive(0.8, desktop: 1),
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,
                               style: Theme.of(context)
