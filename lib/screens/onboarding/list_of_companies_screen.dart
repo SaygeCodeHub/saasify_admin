@@ -64,6 +64,7 @@ class CompanyListScreen extends StatelessWidget {
                                 onTextFieldChanged: (value) {}),
                             const SizedBox(height: spacingMedium),
                             CompaniesGridView(
+                                isFromMobile: false,
                                 companyList: companyList,
                                 selectedCompanyIndex:
                                     state.selectedCompanyIndex),

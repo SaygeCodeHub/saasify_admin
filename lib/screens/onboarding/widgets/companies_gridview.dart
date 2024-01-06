@@ -11,20 +11,22 @@ import '../../../configs/app_spacing.dart';
 
 class CompaniesGridView extends StatelessWidget {
   final int selectedCompanyIndex;
+  final bool isFromMobile;
   final List<Company> companyList;
 
   const CompaniesGridView({
     super.key,
     required this.companyList,
     required this.selectedCompanyIndex,
+    required this.isFromMobile,
   });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: (isFromMobile == true) ? 2 : 4,
                 childAspectRatio: 1,
                 crossAxisSpacing: spacingLarge,
                 mainAxisSpacing: spacingLarge),

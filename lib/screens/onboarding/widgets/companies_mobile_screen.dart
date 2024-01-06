@@ -9,7 +9,7 @@ import '../../../data/models/authentication/authentication_model.dart';
 import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/primary_button.dart';
 import '../list_of_branches_screen.dart';
-import 'companies_grid_view_mobile.dart';
+import 'companies_gridview.dart';
 
 class CompaniesMobileScreen extends StatelessWidget {
   final List<Company> companyList;
@@ -39,9 +39,10 @@ class CompaniesMobileScreen extends StatelessWidget {
                             .tiniest
                             .copyWith(fontWeight: FontWeight.w700)),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.035),
-                    CompaniesGridViewMobile(
+                    CompaniesGridView(
                         companyList: companyList,
-                        selectedCompanyIndex: state.selectedCompanyIndex),
+                        selectedCompanyIndex: state.selectedCompanyIndex,
+                        isFromMobile: true),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.075),
                     PrimaryButton(
                         onPressed: (state.selectedCompanyIndex != -1)

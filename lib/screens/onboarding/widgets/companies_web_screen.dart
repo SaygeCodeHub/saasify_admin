@@ -47,7 +47,8 @@ class CompaniesWebScreen extends StatelessWidget {
                             CompaniesGridView(
                                 companyList: companyList,
                                 selectedCompanyIndex:
-                                    state.selectedCompanyIndex),
+                                    state.selectedCompanyIndex,
+                                isFromMobile: false),
                             const SizedBox(height: spacingLarge),
                             PrimaryButton(
                                 onPressed: (state.selectedCompanyIndex != -1)
