@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
 import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
-import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
 import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
 import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
-import 'package:saasify/utils/responsive.dart';
 import '../data/models/orders/fetch_orders_model.dart';
 import '../screens/categories/categories_screen.dart';
 import '../screens/onboarding/companies_screen.dart';
@@ -91,8 +89,22 @@ class AppRoutes {
 
   static Route<dynamic> _createRoute(Widget view) {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) =>
-          context.responsive(const CannotBeMinimizeScreen(), tablets: view),
-    );
+        pageBuilder: (context, animation, secondaryAnimation) => view,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+          return SlideTransition(
+              position: animation.drive(tween), child: child);
+        });
+
+    //   PageRouteBuilder(
+    //   pageBuilder: (context, animation, secondaryAnimation) =>
+    //       context.responsive(const CannotBeMinimizeScreen(), tablets: view),
+    // );
   }
 }

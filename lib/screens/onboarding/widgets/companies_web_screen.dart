@@ -26,7 +26,7 @@ class CompaniesWebScreen extends StatelessWidget {
           child: Align(
               alignment: Alignment.center,
               child: SizedBox(
-                  width: MediaQuery.sizeOf(context).width * 0.30,
+                  width: MediaQuery.sizeOf(context).width * 0.90,
                   child: BlocBuilder<OnboardingBloc, OnboardingStates>(
                       builder: (context, state) {
                     if (state is CompaniesLoaded) {

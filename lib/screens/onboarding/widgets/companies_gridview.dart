@@ -5,7 +5,6 @@ import 'package:saasify/bloc/onboarding/onboarding_event.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
-import 'package:saasify/utils/responsive.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_colors.dart';
 import '../../../configs/app_spacing.dart';
@@ -24,9 +23,8 @@ class CompaniesGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: GridView.builder(
-            // scrollDirection: Axis.horizontal,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 4,
                 childAspectRatio: 1,
                 crossAxisSpacing: spacingLarge,
                 mainAxisSpacing: spacingLarge),
@@ -42,8 +40,7 @@ class CompaniesGridView extends StatelessWidget {
                   },
                   child: Container(
                       height: 50,
-                      padding: EdgeInsets.all(context.responsive(spacingSmall,
-                          tablets: spacingXXSmall, desktop: spacingSmall)),
+                      padding: const EdgeInsets.all(spacingSmall),
                       decoration: BoxDecoration(
                           color: AppColors.lightGrey,
                           border: Border.all(
@@ -62,8 +59,6 @@ class CompaniesGridView extends StatelessWidget {
                             const SizedBox(height: spacingXXSmall),
                             Text(companyList[index].companyName,
                                 maxLines: 1,
-                                textScaleFactor:
-                                    context.responsive(0.8, desktop: 1),
                                 overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context)
                                     .textTheme

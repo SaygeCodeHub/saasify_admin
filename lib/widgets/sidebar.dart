@@ -358,6 +358,102 @@ class SideBar extends StatelessWidget {
                                   }
                                 ]
                               }),
+                              Company.fromJson({
+                                "company_id": "1702472309",
+                                "company_domain": "",
+                                "company_email": "",
+                                "company_name": "Clothing",
+                                "services": "",
+                                "company_logo":
+                                    "https://storage.googleapis.com/saasify-5ddd8.appspot.com/uploaded_images/erica-zhou-IHpUgFDn7zU-unsplash.jpg",
+                                "onboarding_date":
+                                    "2023-12-13T12:58:29.188697+00:00",
+                                "is_owner": true,
+                                "role": [0],
+                                "branches": [
+                                  {
+                                    "branch_id": 1,
+                                    "branch_name": "Clothing",
+                                    "branch_contact": 8888881800,
+                                    "branch_currency": "₹",
+                                    "branch_active": true,
+                                    "branch_address": "Nagpur",
+                                    "role": [0]
+                                  }
+                                ]
+                              }),
+                              Company.fromJson({
+                                "company_id": "1702472309",
+                                "company_domain": "",
+                                "company_email": "",
+                                "company_name": "Clothing",
+                                "services": "",
+                                "company_logo":
+                                    "https://storage.googleapis.com/saasify-5ddd8.appspot.com/uploaded_images/erica-zhou-IHpUgFDn7zU-unsplash.jpg",
+                                "onboarding_date":
+                                    "2023-12-13T12:58:29.188697+00:00",
+                                "is_owner": true,
+                                "role": [0],
+                                "branches": [
+                                  {
+                                    "branch_id": 1,
+                                    "branch_name": "Clothing",
+                                    "branch_contact": 8888881800,
+                                    "branch_currency": "₹",
+                                    "branch_active": true,
+                                    "branch_address": "Nagpur",
+                                    "role": [0]
+                                  }
+                                ]
+                              }),
+                              Company.fromJson({
+                                "company_id": "1702472309",
+                                "company_domain": "",
+                                "company_email": "",
+                                "company_name": "Clothing",
+                                "services": "",
+                                "company_logo":
+                                    "https://storage.googleapis.com/saasify-5ddd8.appspot.com/uploaded_images/erica-zhou-IHpUgFDn7zU-unsplash.jpg",
+                                "onboarding_date":
+                                    "2023-12-13T12:58:29.188697+00:00",
+                                "is_owner": true,
+                                "role": [0],
+                                "branches": [
+                                  {
+                                    "branch_id": 1,
+                                    "branch_name": "Clothing",
+                                    "branch_contact": 8888881800,
+                                    "branch_currency": "₹",
+                                    "branch_active": true,
+                                    "branch_address": "Nagpur",
+                                    "role": [0]
+                                  }
+                                ]
+                              }),
+                              Company.fromJson({
+                                "company_id": "1702472309",
+                                "company_domain": "",
+                                "company_email": "",
+                                "company_name": "Clothing",
+                                "services": "",
+                                "company_logo":
+                                    "https://storage.googleapis.com/saasify-5ddd8.appspot.com/uploaded_images/erica-zhou-IHpUgFDn7zU-unsplash.jpg",
+                                "onboarding_date":
+                                    "2023-12-13T12:58:29.188697+00:00",
+                                "is_owner": true,
+                                "role": [0],
+                                "branches": [
+                                  {
+                                    "branch_id": 1,
+                                    "branch_name": "Clothing",
+                                    "branch_contact": 8888881800,
+                                    "branch_currency": "₹",
+                                    "branch_active": true,
+                                    "branch_address": "Nagpur",
+                                    "role": [0]
+                                  }
+                                ]
+                              }),
                             ]);
                       }),
                 ),
