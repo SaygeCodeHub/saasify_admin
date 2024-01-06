@@ -20,13 +20,11 @@ class CompaniesScreen extends StatelessWidget {
 
     return PopScope(
         canPop: false,
-        child: Scaffold(
-          body: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-            return (constraints.maxWidth < 600)
-                ? CompaniesMobileScreen(companyList: companyList)
-                : CompaniesWebScreen(companyList: companyList);
-          }),
-        ));
+        child: Scaffold(body: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          return (constraints.maxWidth < 600)
+              ? CompaniesMobileScreen(companyList: companyList)
+              : CompaniesWebScreen(companyList: companyList);
+        })));
   }
 }

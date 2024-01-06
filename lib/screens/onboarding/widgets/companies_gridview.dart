@@ -41,7 +41,7 @@ class CompaniesGridView extends StatelessWidget {
                         .add(SelectCompany(companyIndex: index));
                   },
                   child: Container(
-                      height: 50,
+                      height: kCompaniesGridContainerHeight,
                       padding: const EdgeInsets.all(spacingSmall),
                       decoration: BoxDecoration(
                           color: AppColors.lightGrey,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:saasify/bloc/onboarding/onboarding_state.dart';
+import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
 import '../../../bloc/onboarding/onboarding_bloc.dart';
 import '../../../configs/spacing.dart';
@@ -31,7 +32,7 @@ class CompaniesMobileScreen extends StatelessWidget {
                   children: [
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.12),
                     SvgPicture.asset("assets/saasify_logo.svg",
-                        width: 50, height: 50),
+                        width: kSassifyLogoSize, height: kSassifyLogoSize),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.075),
                     Text(StringConstants.kSelectCompany,
                         style: Theme.of(context)

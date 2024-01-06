@@ -32,3 +32,5 @@ const double kHeaderIconsSize = 22;
 const double kTextContainerHeight = 280;
 const double kDashboardIconContainerSize = 40;
 const double kSideBarLeadingIconsSize = 20;
+const double kSassifyLogoSize = 50;
+const double kCompaniesGridContainerHeight = 50;

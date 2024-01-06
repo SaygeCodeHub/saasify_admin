@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:saasify/configs/app_theme.dart';
 import '../../../bloc/onboarding/onboarding_bloc.dart';
 import '../../../bloc/onboarding/onboarding_state.dart';
+import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../configs/spacing.dart';
 import '../../../data/models/authentication/authentication_model.dart';
@@ -35,7 +36,8 @@ class CompaniesWebScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset("assets/saasify_logo.svg",
-                                width: 50, height: 50),
+                                width: kSassifyLogoSize,
+                                height: kSassifyLogoSize),
                             const SizedBox(
                                 height: spacingBetweenTextFieldAndButton),
                             Text(StringConstants.kSelectCompany,
@@ -59,7 +61,7 @@ class CompaniesWebScreen extends StatelessWidget {
                                                 state.selectedCompanyIndex]);
                                       }
                                     : null,
-                                buttonTitle: 'Next')
+                                buttonTitle: StringConstants.kNext)
                           ]);
                     } else {
                       return const SizedBox.shrink();
