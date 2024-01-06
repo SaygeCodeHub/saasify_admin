@@ -24,6 +24,7 @@ class CompaniesGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: GridView.builder(
+            // scrollDirection: Axis.horizontal,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 1,

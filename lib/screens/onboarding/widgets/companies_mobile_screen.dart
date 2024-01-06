@@ -1,41 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:saasify/screens/authentication/widgets/verify_button.dart';
+import 'package:saasify/bloc/onboarding/onboarding_state.dart';
+import 'package:saasify/configs/app_theme.dart';
+import '../../../bloc/onboarding/onboarding_bloc.dart';
+import '../../../configs/app_spacing.dart';
 import '../../../configs/spacing.dart';
+import '../../../data/models/authentication/authentication_model.dart';
 import '../../../utils/constants/string_constants.dart';
-import '../../../widgets/field_label_widget.dart';
+import '../../../widgets/primary_button.dart';
+import '../list_of_branches_screen.dart';
+import 'companies_gridview.dart';
 
 class CompaniesMobileScreen extends StatelessWidget {
-  const CompaniesMobileScreen({super.key});
+  final List<Company> companyList;
+
+  const CompaniesMobileScreen({super.key, required this.companyList});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        SvgPicture.asset("assets/gradient.svg", fit: BoxFit.fill),
-        SingleChildScrollView(
+    return Stack(fit: StackFit.expand, children: [
+      SvgPicture.asset("assets/gradient.svg", fit: BoxFit.fill),
+      SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(mobileBodyPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.12),
-                SvgPicture.asset("assets/saasify_logo.svg",
-                    width: 50, height: 50),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.075),
-                const LabelAndFieldWidget(label: StringConstants.kLoginId),
-                const SizedBox(height: spacingBetweenTextFields),
-                const LabelAndFieldWidget(
-                    label: StringConstants.kPassword, obscureText: true),
-                const SizedBox(height: spacingBetweenTextFieldAndButton),
-                AuthVerifyButton()
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
+              padding: const EdgeInsets.all(mobileBodyPadding),
+              child: BlocBuilder<OnboardingBloc, OnboardingStates>(
+                  builder: (context, state) {
+                if (state is CompaniesLoaded) {
+                  return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 0.12),
+                        SvgPicture.asset("assets/saasify_logo.svg",
+                            width: 50, height: 50),
+                        SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 0.075),
+                        Text(StringConstants.kSelectCompany,
+                            style: Theme.of(context)
+                                .textTheme
+                                .tiniest
+                                .copyWith(fontWeight: FontWeight.w700)),
+                        const SizedBox(height: spacingLarge),
+                        CompaniesGridView(
+                            companyList: companyList,
+                            selectedCompanyIndex: state.selectedCompanyIndex),
+                        const SizedBox(height: spacingLarge),
+                        PrimaryButton(
+                            onPressed: (state.selectedCompanyIndex != -1)
+                                ? () {
+                                    Navigator.pushReplacementNamed(
+                                        context, BranchesListScreen.routeName,
+                                        arguments: companyList[
+                                            state.selectedCompanyIndex]);
+                                  }
+                                : null,
+                            buttonTitle: 'Next')
+                      ]);
+                } else {
+                  return const SizedBox.shrink();
+                }
+              })))
+    ]);
   }
 }

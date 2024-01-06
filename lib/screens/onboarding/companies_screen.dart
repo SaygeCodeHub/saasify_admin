@@ -24,7 +24,9 @@ class CompaniesScreen extends StatelessWidget {
           body: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
             return (constraints.maxWidth < 600)
-                ? const CompaniesMobileScreen()
+                ? CompaniesMobileScreen(
+                    companyList: companyList,
+                  )
                 : CompaniesWebScreen(companyList: companyList);
           }),
         ));
