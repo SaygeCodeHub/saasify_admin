@@ -4,7 +4,6 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/orders/fetch_orders_model.dart';
 import 'package:saasify/screens/dashboard/widgets/dashboard_order_table_list.dart';
 import 'package:saasify/utils/dashboard_card.dart';
-import 'package:saasify/utils/responsive.dart';
 import '../../../configs/app_spacing.dart';
 import 'dashboardcalendar.dart';
 import 'dashboardchart.dart';
@@ -111,25 +110,26 @@ class DashboardBody extends StatelessWidget {
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                           Text(
-                                              dashboardOptionList[index]
-                                                  .title
-                                                  .toString(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .tinier
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                              textScaleFactor:
-                                                  context.responsive(0.63,
-                                                      desktop: 1)),
+                                            dashboardOptionList[index]
+                                                .title
+                                                .toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .tinier
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                            // textScaleFactor:
+                                            // context.responsive(0.63,
+                                            // desktop: 1)
+                                          ),
                                           const SizedBox(height: spacingXSmall),
                                           Text(
                                               dashboardOptionList[index]
                                                   .subtitle
                                                   .toString(),
-                                              textScaleFactor: context
-                                                  .responsive(0.63, desktop: 1),
+                                              // textScaleFactor: context
+                                              //     .responsive(0.63, desktop: 1),
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .xxTiniest
