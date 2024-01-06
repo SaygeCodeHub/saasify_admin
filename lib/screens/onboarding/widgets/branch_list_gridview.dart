@@ -7,6 +7,7 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/utils/responsive.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
 import '../../../configs/app_color.dart';
+import '../../../configs/app_colors.dart';
 import '../../../configs/app_spacing.dart';
 
 class BranchList extends StatelessWidget {
@@ -21,10 +22,12 @@ class BranchList extends StatelessWidget {
     return Expanded(
         child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 1,
                 childAspectRatio: 1,
                 crossAxisSpacing: spacingLarge,
                 mainAxisSpacing: spacingLarge),
+            scrollDirection:
+                context.responsive(Axis.horizontal, mobile: Axis.vertical),
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
             itemCount: branchList.length,
@@ -43,14 +46,14 @@ class BranchList extends StatelessWidget {
                           border: Border.all(
                               width: 2,
                               color: (selectedBranchIndex == index)
-                                  ? AppColor.saasifyLightDeepBlue
+                                  ? AppColors.orange
                                   : AppColor.saasifyPaleGrey),
                           borderRadius: BorderRadius.circular(kCircularRadius)),
                       child: Center(
                           child: Text(branchList[index].branchName,
                               maxLines: 1,
-                              textScaleFactor:
-                                  context.responsive(0.8, desktop: 1),
+                              // textScaleFactor:
+                              //     context.responsive(0.8, desktop: 1),
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,
                               style: Theme.of(context)

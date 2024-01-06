@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
 import 'package:saasify/data/models/screen_arguments/add_product_screen_arguments.dart';
-import 'package:saasify/screens/common/cannot_be_minimized_screen.dart';
 import 'package:saasify/screens/inventory/inventory_list_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_branches_screen.dart';
 import 'package:saasify/screens/onboarding/list_of_companies_screen.dart';
@@ -92,7 +91,7 @@ class AppRoutes {
   static Route<dynamic> _createRoute(Widget view) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
-          context.responsive(const CannotBeMinimizeScreen(), tablets: view),
+          context.responsive(view),
     );
   }
 }

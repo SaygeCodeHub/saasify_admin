@@ -22,7 +22,9 @@ class BranchesListScreen extends StatelessWidget {
         builder: (BuildContext context, BoxConstraints constraints) {
       return (constraints.maxWidth < 600)
           ? BranchMobileScreen(
-              formKey: formKey, selectedCompany: selectedCompany)
+              selectedCompany: selectedCompany,
+              formKey: formKey,
+            )
           : BranchWebScreen(formKey: formKey, selectedCompany: selectedCompany);
     }));
   }
