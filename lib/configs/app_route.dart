@@ -11,6 +11,7 @@ import 'package:saasify/screens/product/product_list_screen.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../data/models/orders/fetch_orders_model.dart';
 import '../screens/categories/categories_screen.dart';
+import '../screens/onboarding/companies_screen.dart';
 import '../screens/purchase_order/purchase_order_screen.dart';
 import '../screens/settings/employee_list.dart';
 import '../screens/settings/discount_screen.dart';
@@ -28,6 +29,11 @@ class AppRoutes {
     switch (settings.name) {
       case AuthenticationScreen.routeName:
         return _createRoute(AuthenticationScreen());
+
+      case CompaniesScreen.routeName:
+        return _createRoute(
+            CompaniesScreen(companyList: settings.arguments as List<Company>));
+
       case DashboardsScreen.routeName:
         return _createRoute(DashboardsScreen());
 

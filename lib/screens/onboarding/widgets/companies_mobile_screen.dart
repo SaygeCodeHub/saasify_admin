@@ -5,8 +5,8 @@ import '../../../configs/spacing.dart';
 import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/field_label_widget.dart';
 
-class AuthMobileScreen extends StatelessWidget {
-  const AuthMobileScreen({super.key});
+class CompaniesMobileScreen extends StatelessWidget {
+  const CompaniesMobileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

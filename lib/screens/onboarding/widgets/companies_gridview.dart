@@ -7,13 +7,14 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../../configs/app_color.dart';
+import '../../../configs/app_colors.dart';
 import '../../../configs/app_spacing.dart';
 
-class CompanyList extends StatelessWidget {
+class CompaniesGridView extends StatelessWidget {
   final int selectedCompanyIndex;
   final List<Company> companyList;
 
-  const CompanyList({
+  const CompaniesGridView({
     super.key,
     required this.companyList,
     required this.selectedCompanyIndex,
@@ -43,10 +44,11 @@ class CompanyList extends StatelessWidget {
                       padding: EdgeInsets.all(context.responsive(spacingSmall,
                           tablets: spacingXXSmall, desktop: spacingSmall)),
                       decoration: BoxDecoration(
+                          color: AppColors.lightGrey,
                           border: Border.all(
                               width: 2,
                               color: (selectedCompanyIndex == index)
-                                  ? AppColor.saasifyLightDeepBlue
+                                  ? AppColors.orange
                                   : AppColor.saasifyPaleGrey),
                           borderRadius: BorderRadius.circular(kCircularRadius)),
                       child: Column(
@@ -64,8 +66,8 @@ class CompanyList extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .tinier
-                                    .copyWith(fontWeight: FontWeight.w500))
+                                    .xTiniest
+                                    .copyWith(fontWeight: FontWeight.w600))
                           ])));
             }));
   }
