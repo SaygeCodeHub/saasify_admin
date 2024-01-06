@@ -4,7 +4,6 @@ import 'package:saasify/bloc/branches/branches_bloc.dart';
 import 'package:saasify/bloc/branches/branches_event.dart';
 import 'package:saasify/bloc/branches/branches_states.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/settings/widgets/add_store_popup.dart';
 import 'package:saasify/screens/settings/widgets/branches_grid.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
@@ -130,15 +129,14 @@ class StoreGridScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomPageHeader(
-                                  titleText: StringConstants.kBranches,
-                                  onBack: () {
-                                    Navigator.pushReplacementNamed(
-                                        context, DashboardsScreen.routeName);
-                                  },
-                                  backIconVisible: true,
-                                  buttonVisible: false,
-                                  textFieldVisible: false
-                                ),
+                                    titleText: StringConstants.kBranches,
+                                    onBack: () {
+                                      Navigator.pushReplacementNamed(
+                                          context, DashboardsScreen.routeName);
+                                    },
+                                    backIconVisible: true,
+                                    buttonVisible: false,
+                                    textFieldVisible: false),
                                 const SizedBox(height: spacingStandard),
                                 BranchesGrid(branchesData: state.branchList)
                               ]);

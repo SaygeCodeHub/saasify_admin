@@ -72,9 +72,9 @@ class AuthenticationBloc
       await _authenticationRepository.verifyPhoneNumber(
         phoneNumber: "+91 ${authDetails['user_contact']}",
         verificationCompleted: (PhoneAuthCredential credential) async {
-          // add(OtpVerified(
-          //     credential: credential,
-          //     userName: authDetails['user_name'] ?? ""));
+          add(OtpVerified(
+              credential: credential,
+              userName: authDetails['user_name'] ?? ""));
         },
         codeSent: (String verificationId, int? resendToken) {
           add(OtpReceivedOnPhone(
@@ -94,12 +94,12 @@ class AuthenticationBloc
       VerifyOtp event, Emitter<AuthenticationStates> emit) async {
     try {
       emit(OtpLoading());
-      // PhoneAuthCredential credential = PhoneAuthProvider.credential(
-      //   verificationId: event.verificationId,
-      //   smsCode: event.otpCode,
-      // );
-      // add(OtpVerified(
-      //     credential: credential, userName: authDetails['user_name'] ?? ""));
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: event.verificationId,
+        smsCode: event.otpCode,
+      );
+      add(OtpVerified(
+          credential: credential, userName: authDetails['user_name'] ?? ""));
     } catch (e) {
       emit(PhoneAuthError(error: e.toString()));
     }
@@ -108,18 +108,18 @@ class AuthenticationBloc
   FutureOr<void> _loginWithCredential(
       OtpVerified event, Emitter<AuthenticationStates> emit) async {
     try {
-      // await auth.signInWithCredential(event.credential).then((user) async {
-      //   if (user.user != null) {
+      await auth.signInWithCredential(event.credential).then((user) async {
+        if (user.user != null) {
           Map userDetailsMap = {
-            'user_id': "OvcqwTKNuHSL5ILAOZ6Y3OGcmrj2",
-            'user_name':"",
-            'user_contact': 918888881800
+            'user_id': user.user!.uid,
+            'user_name': authDetails['user_name'] ?? "",
+            'user_contact': user.user?.phoneNumber!.replaceAll('+', '')
           };
           AuthenticationModel authenticationModel =
               await _authenticationRepository.authenticateUser(userDetailsMap);
           if (authenticationModel.status == 200) {
             _customerCache.setIsLoggedIn(true);
-            _customerCache.setUserId("OvcqwTKNuHSL5ILAOZ6Y3OGcmrj2");
+            _customerCache.setUserId(user.user!.uid);
             _customerCache
                 .setCompanyId(authenticationModel.data.companies[0].companyId);
             _customerCache.setBranchId(
@@ -136,8 +136,8 @@ class AuthenticationBloc
           } else {
             emit(PhoneAuthError(error: authenticationModel.message));
           }
-        // }
-      // });
+        }
+      });
     } on FirebaseAuthException catch (e) {
       emit(PhoneAuthError(error: e.code));
     } catch (e) {

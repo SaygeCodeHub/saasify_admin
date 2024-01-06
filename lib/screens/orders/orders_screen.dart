@@ -73,24 +73,23 @@ class OrdersScreen extends StatelessWidget {
                                 textFieldVisible: true),
                             const SizedBox(height: spacingStandard),
                             Visibility(
-                              visible: state.fetchOrdersList.orders.isNotEmpty,
-                              child: OrdersListDataTable(
-                                  orderListDatum: state.fetchOrdersList)
-                            ),
+                                visible:
+                                    state.fetchOrdersList.orders.isNotEmpty,
+                                child: OrdersListDataTable(
+                                    orderListDatum: state.fetchOrdersList)),
                             Visibility(
                                 visible: state.fetchOrdersList.orders.isEmpty,
                                 child: Expanded(
-                                  child: Center(
-                                      child: Text(
-                                          StringConstants.kNoDataAvailable,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .tinier
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: AppColor
-                                                      .saasifyLightGrey)))
-                                ))
+                                    child: Center(
+                                        child: Text(
+                                            StringConstants.kNoDataAvailable,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .tinier
+                                                .copyWith(
+                                                    fontWeight: FontWeight.w500,
+                                                    color: AppColor
+                                                        .saasifyLightGrey)))))
                           ]);
                         } else if (state is ErrorFetchingOrders) {
                           return Center(

@@ -45,7 +45,10 @@ class DashboardBody extends StatelessWidget {
                               const Expanded(child: DashboardChart())
                             ])))),
             const SizedBox(height: spacingStandard),
-            Expanded(child: (ordersData.orders.isEmpty)?const SizedBox():DashboardOrderTableList(ordersData: ordersData))
+            Expanded(
+                child: (ordersData.orders.isEmpty)
+                    ? const SizedBox()
+                    : DashboardOrderTableList(ordersData: ordersData))
           ])),
       const SizedBox(width: spacingLarge),
       Expanded(
@@ -120,16 +123,17 @@ class DashboardBody extends StatelessWidget {
                                                   .copyWith(
                                                       fontWeight:
                                                           FontWeight.w600),
-                                              textScaleFactor:
+                                              textScaler: TextScaler.linear(
                                                   context.responsive(0.63,
-                                                      desktop: 1)),
+                                                      desktop: 1))),
                                           const SizedBox(height: spacingXSmall),
                                           Text(
                                               dashboardOptionList[index]
                                                   .subtitle
                                                   .toString(),
-                                              textScaleFactor: context
-                                                  .responsive(0.63, desktop: 1),
+                                              textScaler: TextScaler.linear(
+                                                  context.responsive(0.63,
+                                                      desktop: 1)),
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .xxTiniest

@@ -37,30 +37,26 @@ class BranchList extends StatelessWidget {
                   },
                   child: Container(
                       height: 50,
-                      padding: EdgeInsets.all(context.responsive(
-                          spacingSmall,
-                          tablets: spacingXXSmall,
-                          desktop: spacingSmall)),
+                      padding: EdgeInsets.all(context.responsive(spacingSmall,
+                          tablets: spacingXXSmall, desktop: spacingSmall)),
                       decoration: BoxDecoration(
                           border: Border.all(
                               width: 2,
                               color: (selectedBranchIndex == index)
                                   ? AppColor.saasifyLightDeepBlue
                                   : AppColor.saasifyPaleGrey),
-                          borderRadius:
-                              BorderRadius.circular(kCircularRadius)),
+                          borderRadius: BorderRadius.circular(kCircularRadius)),
                       child: Center(
-                        child: Text(branchList[index].branchName,
-                            maxLines: 1,
-                            textScaleFactor:
-                                context.responsive(0.8, desktop: 1),
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .tinier
-                                .copyWith(fontWeight: FontWeight.w500))
-                      )));
+                          child: Text(branchList[index].branchName,
+                              maxLines: 1,
+                              textScaler: TextScaler.linear(
+                                  context.responsive(0.8, desktop: 1)),
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .tinier
+                                  .copyWith(fontWeight: FontWeight.w500)))));
             }));
   }
 }

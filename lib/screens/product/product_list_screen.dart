@@ -136,84 +136,88 @@ class ProductListScreen extends StatelessWidget {
                             return Column(
                               children: [
                                 CustomPageHeader(
-                                  titleText: StringConstants.kProducts,
-                                  buttonVisible: true,
-                                  buttonTitle: StringConstants.kAddProduct,
-                                  utilityVisible: true,
-                                  deleteIconVisible: selectedIds.isNotEmpty,
-                                  deleteOnPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialogueBox(
-                                              title: StringConstants.kWarning,
-                                              message: StringConstants
-                                                  .kTheSelectedProducts,
-                                              primaryButtonTitle:
-                                                  StringConstants.kConfirm,
-                                              secondaryButtonTitle:
-                                                  StringConstants.kCancel,
-                                              checkMarkVisible: false,
-                                              secondaryOnPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              primaryOnPressed: () {
-                                                Navigator.pop(context);
-                                                context.read<ProductBloc>().add(
-                                                    DeleteProducts(
-                                                        variantIds:
-                                                            selectedIds));
-                                              },
-                                            ));
-                                  },
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialogueBox(
-                                              title: StringConstants
-                                                  .kAddNewProduct,
-                                              message: StringConstants
-                                                  .kScanTheBarcode,
-                                              primaryButtonTitle:
-                                                  StringConstants.kScanBarcode,
-                                              secondaryButtonTitle:
-                                                  StringConstants.kAddManually,
-                                              checkMarkVisible: false,
-                                              secondaryOnPressed: () {
-                                                Navigator.pop(context);
-                                                Navigator.pushReplacementNamed(
-                                                    context,
-                                                    AddProductScreen.routeName,
-                                                    arguments:
-                                                        AddProductScreenArguments(
-                                                            isEdit: false,
-                                                            isVariant: false,
-                                                            dataMap: {},
-                                                            isProductDetail:
-                                                                false));
-                                              },
-                                              primaryOnPressed: () {}
-                                            ));
-                                  }
-                                ),
+                                    titleText: StringConstants.kProducts,
+                                    buttonVisible: true,
+                                    buttonTitle: StringConstants.kAddProduct,
+                                    utilityVisible: true,
+                                    deleteIconVisible: selectedIds.isNotEmpty,
+                                    deleteOnPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              AlertDialogueBox(
+                                                title: StringConstants.kWarning,
+                                                message: StringConstants
+                                                    .kTheSelectedProducts,
+                                                primaryButtonTitle:
+                                                    StringConstants.kConfirm,
+                                                secondaryButtonTitle:
+                                                    StringConstants.kCancel,
+                                                checkMarkVisible: false,
+                                                secondaryOnPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                primaryOnPressed: () {
+                                                  Navigator.pop(context);
+                                                  context
+                                                      .read<ProductBloc>()
+                                                      .add(DeleteProducts(
+                                                          variantIds:
+                                                              selectedIds));
+                                                },
+                                              ));
+                                    },
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              AlertDialogueBox(
+                                                  title: StringConstants
+                                                      .kAddNewProduct,
+                                                  message: StringConstants
+                                                      .kScanTheBarcode,
+                                                  primaryButtonTitle:
+                                                      StringConstants
+                                                          .kScanBarcode,
+                                                  secondaryButtonTitle:
+                                                      StringConstants
+                                                          .kAddManually,
+                                                  checkMarkVisible: false,
+                                                  secondaryOnPressed: () {
+                                                    Navigator.pop(context);
+                                                    Navigator.pushReplacementNamed(
+                                                        context,
+                                                        AddProductScreen
+                                                            .routeName,
+                                                        arguments:
+                                                            AddProductScreenArguments(
+                                                                isEdit: false,
+                                                                isVariant:
+                                                                    false,
+                                                                dataMap: {},
+                                                                isProductDetail:
+                                                                    false));
+                                                  },
+                                                  primaryOnPressed: () {}));
+                                    }),
                                 const SizedBox(height: spacingStandard),
                                 Visibility(
-                                  visible: state.productList.isNotEmpty,
-                                  child: ProductListDataTable(
-                                      productList: state.productList)
-                                ),
+                                    visible: state.productList.isNotEmpty,
+                                    child: ProductListDataTable(
+                                        productList: state.productList)),
                                 Visibility(
                                     visible: state.productList.isEmpty,
                                     child: Expanded(
-                                      child: Center(
-                                          child: Text(
-                                              StringConstants.kNoDataAvailable,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .tinier
-                                                  .copyWith(
-                                                      color: AppColor
-                                                          .saasifyLightGrey)))
-                                    ))
+                                        child: Center(
+                                            child: Text(
+                                                StringConstants
+                                                    .kNoDataAvailable,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .tinier
+                                                    .copyWith(
+                                                        color: AppColor
+                                                            .saasifyLightGrey)))))
                               ],
                             );
                           } else if (state is ErrorFetchingProduct) {
