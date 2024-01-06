@@ -43,6 +43,7 @@ class StringConstants {
   static const kModeOfPayment = 'Payment Type';
   static const kAddCompany = 'Add Company :)';
   static const kCompanies = 'Companies';
+  static const kSelectCompany = 'Select Company';
   static const kAddProduct = 'Add Product';
   static const kAddCategory = 'Add Category';
   static const kAddCoupon = 'Add Coupon';
