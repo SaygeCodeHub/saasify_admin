@@ -39,7 +39,7 @@ class DashboardsScreen extends StatelessWidget {
               Expanded(
                   flex: 5,
                   child: Container(
-                    color: AppColor.saasifyLightestPaleGrey,
+                    // color: AppColor.saasifyLightestPaleGrey,
                     child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: spacingLarge, vertical: spacingXMedium),
