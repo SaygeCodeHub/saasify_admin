@@ -32,7 +32,7 @@ class AuthWebScreen extends StatelessWidget {
                     const LabelAndFieldWidget(
                         label: StringConstants.kPassword, obscureText: true),
                     const SizedBox(height: spacingBetweenTextFieldAndButton),
-                    const AuthVerifyButton()
+                    AuthVerifyButton()
                   ],
                 ),
               )),
