@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/primary_button.dart';
 
