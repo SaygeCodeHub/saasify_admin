@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:saasify/screens/authentication/commonMethods/textfield_methods.dart';
 import 'package:saasify/screens/authentication/widgets/verify_button.dart';
 import '../../../configs/spacing.dart';
 import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/field_label_widget.dart';
+import '../../../widgets/saasifyLogo.dart';
 
 class AuthWebScreen extends StatelessWidget {
   const AuthWebScreen({super.key});
@@ -24,13 +26,20 @@ class AuthWebScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset("assets/saasify_logo.svg",
-                        width: 50, height: 50),
+                    const SaasifyLogo(),
                     const SizedBox(height: spacingBetweenTextFieldAndButton),
-                    const LabelAndFieldWidget(label: StringConstants.kLoginId),
+                    LabelAndFieldWidget(
+                        label: StringConstants.kLoginId,
+                        onTextFieldChanged: (value) {
+                          onEmailChanged(value, context);
+                        }),
                     const SizedBox(height: spacingBetweenTextFields),
-                    const LabelAndFieldWidget(
-                        label: StringConstants.kPassword, obscureText: true),
+                    LabelAndFieldWidget(
+                        label: StringConstants.kPassword,
+                        onTextFieldChanged: (value) {
+                          onPasswordChanged(value, context);
+                        },
+                        obscureText: true),
                     const SizedBox(height: spacingBetweenTextFieldAndButton),
                     const AuthVerifyButton()
                   ],

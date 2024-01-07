@@ -5,6 +5,9 @@ import 'package:saasify/bloc/authentication/authentication_event.dart';
 import 'package:saasify/screens/authentication/widgets/auth_mobile_screen.dart';
 import 'package:saasify/screens/authentication/widgets/auth_web_screen.dart';
 
+import '../../bloc/onboarding/onboarding_bloc.dart';
+import '../../bloc/onboarding/onboarding_state.dart';
+
 class AuthenticationScreen extends StatelessWidget {
   static const routeName = 'AuthenticationScreen';
 
@@ -20,12 +23,15 @@ class AuthenticationScreen extends StatelessWidget {
     return PopScope(
         canPop: false,
         child: Scaffold(
-          body: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-            return (constraints.maxWidth < 600)
-                ? const AuthMobileScreen()
-                : const AuthWebScreen();
-          }),
+          body: BlocListener<OnboardingBloc, OnboardingStates>(
+            listener: (context, state) {},
+            child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+              return (constraints.maxWidth < 600)
+                  ? const AuthMobileScreen()
+                  : const AuthWebScreen();
+            }),
+          ),
         ));
   }
 }
