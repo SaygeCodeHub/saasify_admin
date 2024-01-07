@@ -38,74 +38,67 @@ class DashboardsScreen extends StatelessWidget {
                   desktop: const Expanded(child: SideBar(selectedIndex: 1))),
               Expanded(
                   flex: 5,
-                  child: Container(
-                    // color: AppColor.saasifyLightestPaleGrey,
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: spacingLarge, vertical: spacingXMedium),
-                        child: BlocConsumer<OrdersBloc, OrdersStates>(
-                            listener: (context, state) {
-                          if (state is ErrorFetchingOrders) {
-                            showDialog(
-                                context: context,
-                                builder: (dialogueCtx) {
-                                  return AlertDialogueBox(
-                                      title:
-                                          StringConstants.kSomethingWentWrong,
-                                      message: state.message,
-                                      errorMarkVisible: true,
-                                      primaryButtonTitle: StringConstants.kOk,
-                                      primaryOnPressed: () {
-                                        Navigator.pop(dialogueCtx);
-                                      });
-                                });
-                          }
-                        }, buildWhen: (prev, curr) {
-                          return curr is FetchedOrders ||
-                              curr is FetchingOrders;
-                        }, builder: (context, state) {
-                          if (state is FetchingOrders) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          } else if (state is FetchedOrders) {
-                            return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(children: [
-                                    context.responsive(const SizedBox(),
-                                        desktop: Text(
-                                            StringConstants.kDashboard,
-                                            maxLines: 2,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .xxTiny
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w700)))
-                                  ]),
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: spacingLarge, vertical: spacingXMedium),
+                      child: BlocConsumer<OrdersBloc, OrdersStates>(
+                          listener: (context, state) {
+                        if (state is ErrorFetchingOrders) {
+                          showDialog(
+                              context: context,
+                              builder: (dialogueCtx) {
+                                return AlertDialogueBox(
+                                    title: StringConstants.kSomethingWentWrong,
+                                    message: state.message,
+                                    errorMarkVisible: true,
+                                    primaryButtonTitle: StringConstants.kOk,
+                                    primaryOnPressed: () {
+                                      Navigator.pop(dialogueCtx);
+                                    });
+                              });
+                        }
+                      }, buildWhen: (prev, curr) {
+                        return curr is FetchedOrders || curr is FetchingOrders;
+                      }, builder: (context, state) {
+                        if (state is FetchingOrders) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else if (state is FetchedOrders) {
+                          return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(children: [
                                   context.responsive(const SizedBox(),
-                                      desktop:
-                                          const SizedBox(height: spacingLarge)),
-                                  DashboardHeaderCards(
-                                      ordersData: state.fetchOrdersList),
-                                  const SizedBox(height: spacingLarge),
-                                  Expanded(
-                                      child: DashboardBody(
-                                          ordersData: state.fetchOrdersList))
-                                ]);
-                          } else if (state is ErrorFetchingOrders) {
-                            return Center(
-                                child: Text(StringConstants.kNoDataAvailable,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .tinier
-                                        .copyWith(
-                                            color: AppColor.saasifyLightGrey)));
-                          } else {
-                            return const SizedBox.shrink();
-                          }
-                        })),
-                  ))
+                                      desktop: Text(StringConstants.kDashboard,
+                                          maxLines: 2,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .xxTiny
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w700)))
+                                ]),
+                                context.responsive(const SizedBox(),
+                                    desktop:
+                                        const SizedBox(height: spacingLarge)),
+                                DashboardHeaderCards(
+                                    ordersData: state.fetchOrdersList),
+                                const SizedBox(height: spacingLarge),
+                                Expanded(
+                                    child: DashboardBody(
+                                        ordersData: state.fetchOrdersList))
+                              ]);
+                        } else if (state is ErrorFetchingOrders) {
+                          return Center(
+                              child: Text(StringConstants.kNoDataAvailable,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .tinier
+                                      .copyWith(
+                                          color: AppColor.saasifyLightGrey)));
+                        } else {
+                          return const SizedBox.shrink();
+                        }
+                      })))
             ]));
   }
 }
