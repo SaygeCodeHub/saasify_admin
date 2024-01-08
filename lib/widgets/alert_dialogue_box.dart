@@ -3,6 +3,7 @@ import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/widgets/primary_button.dart';
 import 'package:saasify/widgets/secondary_button.dart';
 import '../configs/app_color.dart';
+import '../configs/app_colors.dart';
 import '../configs/app_dimensions.dart';
 import '../configs/app_spacing.dart';
 
@@ -68,16 +69,15 @@ class AlertDialogueBox extends StatelessWidget {
                   Text(message, style: Theme.of(context).textTheme.xxTiniest),
                   const SizedBox(height: spacingXLarge),
                   Row(children: [
-                    const Spacer(flex: 2),
+                    const Spacer(flex: 1),
                     Expanded(
                         child: (secondaryButtonTitle == null)
                             ? const SizedBox.shrink()
                             : SecondaryButton(
-                                side: const BorderSide(
-                                    color: AppColor.saasifyLightWhite),
+                                side: const BorderSide(color: AppColors.orange),
                                 onPressed: secondaryOnPressed,
                                 buttonTitle: secondaryButtonTitle ?? '')),
-                    const SizedBox(width: spacingStandard),
+                    const SizedBox(width: spacingMedium),
                     Expanded(
                         child: PrimaryButton(
                             onPressed: primaryOnPressed,
