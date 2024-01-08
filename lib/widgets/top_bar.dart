@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:saasify/configs/app_color.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
+
+import '../configs/app_colors.dart';
 
 class TopBar extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -13,7 +14,7 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: AppColor.saasifyLightDeepBlue,
+        color: AppColors.primaryAccent,
         child: Row(children: [
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -23,11 +24,13 @@ class TopBar extends StatelessWidget {
                   scaffoldKey.currentState!.openDrawer();
                 },
                 iconSize: 30,
-                icon: const Icon(Icons.menu, color: AppColor.saasifyWhite)),
+                icon: const Icon(Icons.menu)),
           ),
           Text(headingText,
-              style: Theme.of(context).textTheme.xxTiny.copyWith(
-                  fontWeight: FontWeight.w500, color: AppColor.saasifyWhite)),
+              style: Theme.of(context)
+                  .textTheme
+                  .xxTiny
+                  .copyWith(fontWeight: FontWeight.w400)),
         ]));
   }
 }
