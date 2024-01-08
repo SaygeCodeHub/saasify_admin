@@ -5,67 +5,67 @@ import 'package:saasify/bloc/onboarding/onboarding_event.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/data/models/authentication/authentication_model.dart';
-import 'package:saasify/utils/responsive.dart';
 import '../../../configs/app_color.dart';
+import '../../../configs/app_colors.dart';
 import '../../../configs/app_spacing.dart';
 
-class CompanyList extends StatelessWidget {
-  final int selectedCompanyIndex;
-  final List<Company> companyList;
+class BranchesGridView extends StatelessWidget {
+  final int selectedBranchIndex;
+  final List<Branch> branchList;
 
-  const CompanyList({
+  final bool isFromMobile;
+
+  const BranchesGridView({
     super.key,
-    required this.companyList,
-    required this.selectedCompanyIndex,
+    required this.branchList,
+    required this.selectedBranchIndex,
+    required this.isFromMobile,
   });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: (isFromMobile == true) ? 2 : 4,
                 childAspectRatio: 1,
                 crossAxisSpacing: spacingLarge,
                 mainAxisSpacing: spacingLarge),
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
-            itemCount: companyList.length,
+            itemCount: branchList.length,
             itemBuilder: (context, index) {
               return InkWell(
                   onTap: () {
                     context
                         .read<OnboardingBloc>()
-                        .add(SelectCompany(companyIndex: index));
+                        .add(SelectBranch(branchIndex: index));
                   },
                   child: Container(
-                      height: 50,
-                      padding: EdgeInsets.all(context.responsive(spacingSmall,
-                          tablets: spacingXXSmall, desktop: spacingSmall)),
+                      height: kCompaniesGridContainerHeight,
+                      padding: const EdgeInsets.all(spacingSmall),
                       decoration: BoxDecoration(
+                          color: AppColors.lightGrey,
                           border: Border.all(
                               width: 2,
-                              color: (selectedCompanyIndex == index)
-                                  ? AppColor.saasifyLightDeepBlue
+                              color: (selectedBranchIndex == index)
+                                  ? AppColors.orange
                                   : AppColor.saasifyPaleGrey),
                           borderRadius: BorderRadius.circular(kCircularRadius)),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
-                                child: Image.network(
-                                    companyList[index].companyLogo,
+                                child: Image.asset('assets/store.png',
                                     fit: BoxFit.cover)),
                             const SizedBox(height: spacingXXSmall),
-                            Text(companyList[index].companyName,
+                            Text(branchList[index].branchName,
                                 maxLines: 1,
-                                textScaleFactor:
-                                    context.responsive(0.8, desktop: 1),
                                 overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .tinier
-                                    .copyWith(fontWeight: FontWeight.w500))
+                                    .xTiniest
+                                    .copyWith(fontWeight: FontWeight.w600))
                           ])));
             }));
   }
