@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:saasify/screens/onboarding/companies_screen.dart';
+import 'package:saasify/screens/companies/companies_screen.dart';
 
 import '../../../data/customer_cache/customer_cache.dart';
 import '../../../data/models/authentication/authentication_model.dart';
@@ -47,7 +47,70 @@ class AuthVerifyButton extends StatelessWidget {
                       "branch_active": true,
                       "branch_address": "Nagpur",
                       "role": [0]
-                    }
+                    },
+                    {
+                      "branch_id": 1,
+                      "branch_name": "Clothing",
+                      "branch_contact": 8888881800,
+                      "branch_currency": "₹",
+                      "branch_active": true,
+                      "branch_address": "Nagpur",
+                      "role": [0]
+                    },
+                    {
+                      "branch_id": 1,
+                      "branch_name": "Clothing",
+                      "branch_contact": 8888881800,
+                      "branch_currency": "₹",
+                      "branch_active": true,
+                      "branch_address": "Nagpur",
+                      "role": [0]
+                    },
+                    {
+                      "branch_id": 1,
+                      "branch_name": "Clothing",
+                      "branch_contact": 8888881800,
+                      "branch_currency": "₹",
+                      "branch_active": true,
+                      "branch_address": "Nagpur",
+                      "role": [0]
+                    },
+                    {
+                      "branch_id": 1,
+                      "branch_name": "Clothing",
+                      "branch_contact": 8888881800,
+                      "branch_currency": "₹",
+                      "branch_active": true,
+                      "branch_address": "Nagpur",
+                      "role": [0]
+                    },
+                    {
+                      "branch_id": 1,
+                      "branch_name": "Clothing",
+                      "branch_contact": 8888881800,
+                      "branch_currency": "₹",
+                      "branch_active": true,
+                      "branch_address": "Nagpur",
+                      "role": [0]
+                    },
+                    {
+                      "branch_id": 1,
+                      "branch_name": "Clothing",
+                      "branch_contact": 8888881800,
+                      "branch_currency": "₹",
+                      "branch_active": true,
+                      "branch_address": "Nagpur",
+                      "role": [0]
+                    },
+                    {
+                      "branch_id": 1,
+                      "branch_name": "Clothing",
+                      "branch_contact": 8888881800,
+                      "branch_currency": "₹",
+                      "branch_active": true,
+                      "branch_address": "Nagpur",
+                      "role": [0]
+                    },
                   ]
                 }),
                 Company.fromJson({

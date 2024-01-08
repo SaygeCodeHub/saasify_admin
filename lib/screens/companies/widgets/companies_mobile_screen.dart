@@ -9,7 +9,7 @@ import '../../../configs/spacing.dart';
 import '../../../data/models/authentication/authentication_model.dart';
 import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/primary_button.dart';
-import '../list_of_branches_screen.dart';
+import '../../branches/branches_screen.dart';
 import 'companies_gridview.dart';
 
 class CompaniesMobileScreen extends StatelessWidget {
@@ -49,7 +49,7 @@ class CompaniesMobileScreen extends StatelessWidget {
                         onPressed: (state.selectedCompanyIndex != -1)
                             ? () {
                                 Navigator.pushReplacementNamed(
-                                    context, BranchesListScreen.routeName,
+                                    context, BranchesScreen.routeName,
                                     arguments: companyList[
                                         state.selectedCompanyIndex]);
                               }

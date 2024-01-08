@@ -9,7 +9,8 @@ import 'package:saasify/screens/pos_new/pos_screen.dart';
 import 'package:saasify/screens/product/product_list_screen.dart';
 import '../data/models/orders/fetch_orders_model.dart';
 import '../screens/categories/categories_screen.dart';
-import '../screens/onboarding/companies_screen.dart';
+import '../screens/branches/branches_screen.dart';
+import '../screens/companies/companies_screen.dart';
 import '../screens/purchase_order/purchase_order_screen.dart';
 import '../screens/settings/employee_list.dart';
 import '../screens/settings/discount_screen.dart';
@@ -73,6 +74,11 @@ class AppRoutes {
       case BranchesListScreen.routeName:
         return _createRoute(
             BranchesListScreen(selectedCompany: settings.arguments as Company));
+
+      case BranchesScreen.routeName:
+        return _createRoute(
+            BranchesScreen(selectedCompany: settings.arguments as Company));
+
       case AddProductScreen.routeName:
         AddProductScreenArguments args =
             settings.arguments as AddProductScreenArguments;

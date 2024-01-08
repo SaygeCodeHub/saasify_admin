@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:saasify/screens/onboarding/widgets/companies_mobile_screen.dart';
-import 'package:saasify/screens/onboarding/widgets/companies_web_screen.dart';
+import 'package:saasify/screens/companies/widgets/companies_mobile_screen.dart';
+import 'package:saasify/screens/companies/widgets/companies_web_screen.dart';
 import '../../bloc/onboarding/onboarding_bloc.dart';
 import '../../bloc/onboarding/onboarding_event.dart';
 import '../../data/models/authentication/authentication_model.dart';
