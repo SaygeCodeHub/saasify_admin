@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saasify/bloc/customer/customer_bloc.dart';
@@ -26,12 +24,10 @@ class BillingSectionFooter extends StatelessWidget {
       BlocListener<CustomerBloc, CustomerStates>(
         listener: (context, state) {
           if (state is CustomerFetched) {
-            log("stateEmitted");
             switch (state.action) {
               case 'addToPayLater':
                 context.read<BillingBloc>().add(AddOrderToPayLater());
               case 'settleBill':
-                log("settleBill");
                 context
                     .read<BillingBloc>()
                     .add(SaveOrder(productsByCategories: productsByCategories));

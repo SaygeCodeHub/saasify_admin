@@ -4,12 +4,29 @@ abstract class AuthenticationStates {}
 
 class AuthenticationInitial extends AuthenticationStates {}
 
-class AuthenticationFormLoaded extends AuthenticationStates {
-  final String focusField;
-  final bool isLogin;
+class AuthenticationFormLoaded extends AuthenticationStates {}
 
-  AuthenticationFormLoaded({required this.focusField, required this.isLogin});
+class TextFieldChanged extends AuthenticationStates {}
+
+class AuthenticationLoading extends AuthenticationStates {}
+
+class AuthenticationError extends AuthenticationStates {
+  final String error;
+
+  AuthenticationError({required this.error});
 }
+
+class AuthenticationSuccess extends AuthenticationStates {
+  final AuthenticationModel authenticationModel;
+
+  AuthenticationSuccess({required this.authenticationModel});
+}
+
+class IsLoggedIn extends AuthenticationStates {}
+
+class LoggedOut extends AuthenticationStates {}
+
+// OTP Logic
 
 class OtpLoading extends AuthenticationStates {}
 
@@ -31,7 +48,3 @@ class PhoneAuthError extends AuthenticationStates {
 
   PhoneAuthError({required this.error});
 }
-
-class IsLoggedIn extends AuthenticationStates {}
-
-class LoggedOut extends AuthenticationStates {}

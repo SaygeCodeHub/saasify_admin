@@ -9,5 +9,7 @@ abstract class AuthenticationRepository {
       required Function(String, int?) codeSent,
       required Function(String) codeAutoRetrievalTimeout});
 
+  Future<UserCredential> signIn(String email, String password);
+
   Future<AuthenticationModel> authenticateUser(Map userDetailsMap);
 }

@@ -1,13 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 abstract class AuthenticationEvents {}
 
-class TextFieldChange extends AuthenticationEvents {
-  final String focusField;
-  final bool isLogin;
+class TextFieldChange extends AuthenticationEvents {}
 
-  TextFieldChange({required this.focusField, required this.isLogin});
-}
+class CheckIfLoggedIn extends AuthenticationEvents {}
 
-class GetOtp extends AuthenticationEvents {}
+class LogOut extends AuthenticationEvents {}
 
 class SwitchAuthentication extends AuthenticationEvents {
   final String focusField;
@@ -15,6 +14,12 @@ class SwitchAuthentication extends AuthenticationEvents {
 
   SwitchAuthentication({required this.focusField, required this.isLogin});
 }
+
+class SignIn extends AuthenticationEvents {}
+
+// OTP Logic
+
+class GetOtp extends AuthenticationEvents {}
 
 class OtpReceivedOnPhone extends AuthenticationEvents {
   final String verificationId;
@@ -31,12 +36,10 @@ class VerifyOtp extends AuthenticationEvents {
 }
 
 class OtpVerified extends AuthenticationEvents {
-  // final AuthCredential credential;
-  // final String userName;
+  final AuthCredential credential;
+  final String userName;
 
-  OtpVerified(
-      // {required this.credential, required this.userName}
-      );
+  OtpVerified({required this.credential, required this.userName});
 }
 
 class OtpVerificationError extends AuthenticationEvents {
@@ -44,7 +47,3 @@ class OtpVerificationError extends AuthenticationEvents {
 
   OtpVerificationError({required this.error});
 }
-
-class CheckIfLoggedIn extends AuthenticationEvents {}
-
-class LogOut extends AuthenticationEvents {}
