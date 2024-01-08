@@ -4,14 +4,14 @@ import 'package:saasify/bloc/employee/employee_bloc.dart';
 import 'package:saasify/bloc/employee/employee_event.dart';
 import 'package:saasify/bloc/employee/employee_state.dart';
 import 'package:saasify/screens/dashboard/dashboard_screen.dart';
-import 'package:saasify/screens/settings/add_employee_screen.dart';
+import 'package:saasify/screens/employee/widgets/add_employee_screen.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_spacing.dart';
 import '../../utils/constants/string_constants.dart';
 import '../../widgets/custom_page_header.dart';
 import '../../widgets/sidebar.dart';
 import '../../widgets/top_bar.dart';
-import 'employee_list_data_table.dart';
+import 'widgets/employee_list_data_table.dart';
 
 class EmployeeListScreen extends StatelessWidget {
   static const String routeName = 'EmployeeListScreen';

@@ -4,7 +4,7 @@ import 'package:saasify/bloc/employee/employee_bloc.dart';
 import 'package:saasify/bloc/employee/employee_event.dart';
 import 'package:saasify/configs/app_spacing.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/settings/employee_list.dart';
+import 'package:saasify/screens/employee/employee_list.dart';
 import 'package:saasify/utils/constants/string_constants.dart';
 import 'package:saasify/widgets/custom_table.dart';
 

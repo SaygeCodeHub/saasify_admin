@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
 import '../../../configs/app_color.dart';
-import '../../../configs/app_spacing.dart';
+import '../../../configs/app_dimensions.dart';
 import '../../../data/models/categories/fetch_all_categories_model.dart';
 import '../../../utils/constants/string_constants.dart';
 import 'add_category_pop_up.dart';
@@ -18,16 +18,15 @@ class CategoryMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: AddCategoryPopUp(),
+      bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(kCircularRadius),
+              boxShadow: const [
+                BoxShadow(color: AppColor.saasifyLightPaleGrey, blurRadius: 5.0)
+              ],
+              color: AppColor.saasifyWhite),
+          child: AddCategoryPopUp()),
       body: Column(children: [
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text(StringConstants.kCategories,
-              style: Theme.of(context)
-                  .textTheme
-                  .xTinier
-                  .copyWith(fontWeight: FontWeight.w700)),
-        ]),
-        const SizedBox(height: spacingStandard),
         CategoryListview(productCategory: categoryList),
         Visibility(
             visible: categoryList.isEmpty,

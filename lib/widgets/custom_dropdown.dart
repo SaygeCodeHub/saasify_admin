@@ -60,29 +60,32 @@ class DropdownScreenState extends State<CustomDropdownWidget> {
               borderRadius: BorderRadius.circular(kCircularRadius),
             ),
             child: DropdownButtonHideUnderline(
-                child: DropdownButton(
-                    isDense: true,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 10),
-                    borderRadius: BorderRadius.circular(12),
-                    value: selectedValue,
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: List.generate(
-                        widget.listItems.length,
-                        (index) => DropdownMenuItem(
-                            value: widget.listItems[index],
-                            child: Text(widget.listItems[index]))),
-                    onChanged: (widget.canEdit)
-                        ? (value) {
-                            setState(() {
-                              selectedValue = value.toString();
-                            });
-                            widget.dataMap[widget.mapKey] = value;
-                            if (widget.onChanges != null) {
-                              widget.onChanges!();
-                            }
+                child: Expanded(
+              child: DropdownButton(
+                  isDense: true,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: spacingMedium, vertical: spacingSmall),
+                  borderRadius: BorderRadius.circular(kCardRadius),
+                  value: selectedValue,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+                  items: List.generate(
+                      widget.listItems.length,
+                      (index) => DropdownMenuItem(
+                          value: widget.listItems[index],
+                          child:
+                              FittedBox(child: Text(widget.listItems[index])))),
+                  onChanged: (widget.canEdit)
+                      ? (value) {
+                          setState(() {
+                            selectedValue = value.toString();
+                          });
+                          widget.dataMap[widget.mapKey] = value;
+                          if (widget.onChanges != null) {
+                            widget.onChanges!();
                           }
-                        : null))),
+                        }
+                      : null),
+            ))),
         Visibility(
             visible: widget.addOption,
             child: const SizedBox(height: spacingSmall)),

@@ -12,16 +12,16 @@ import '../screens/categories/categories_screen.dart';
 import '../screens/branches/branches_screen.dart';
 import '../screens/companies/companies_screen.dart';
 import '../screens/purchase_order/purchase_order_screen.dart';
-import '../screens/settings/employee_list.dart';
+import '../screens/employee/employee_list.dart';
 import '../screens/settings/discount_screen.dart';
 import '../screens/authentication/auhentication_screen.dart';
 import '../screens/orders/order_details_screen.dart';
 import '../screens/orders/orders_screen.dart';
 import '../screens/product/add_product_screen.dart';
 import '../screens/settings/payment_type_screen.dart';
-import '../screens/settings/profile_screen.dart';
+import '../screens/profile/profile_screen.dart';
 import '../screens/settings/branches_grid_screen.dart';
-import '../screens/settings/add_employee_screen.dart';
+import '../screens/employee/widgets/add_employee_screen.dart';
 
 class AppRoutes {
   static Route routes(RouteSettings settings) {

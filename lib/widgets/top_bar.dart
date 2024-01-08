@@ -29,8 +29,8 @@ class TopBar extends StatelessWidget {
           Text(headingText,
               style: Theme.of(context)
                   .textTheme
-                  .xxTiny
-                  .copyWith(fontWeight: FontWeight.w500)),
+                  .xTiny
+                  .copyWith(fontWeight: FontWeight.w700)),
         ]));
   }
 }

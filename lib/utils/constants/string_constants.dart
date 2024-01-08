@@ -150,6 +150,7 @@ class StringConstants {
   static const kProfile = 'Profile';
   static const kAddEmployee = 'Add Employee';
   static const kStore = 'Store';
+  static const kImageIsNotAvailable = 'Image is not available';
 
   // static const kBranchName = 'Branch Name';
   static const kCoupons = 'Coupons';

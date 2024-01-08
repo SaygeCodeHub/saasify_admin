@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_color.dart';
 import '../data/models/dashboard/dashboard_card.dart';
 import '../screens/settings/discount_screen.dart';
-import '../screens/settings/employee_list.dart';
+import '../screens/employee/employee_list.dart';
 import '../screens/settings/payment_type_screen.dart';
 import '../screens/settings/branches_grid_screen.dart';
-import '../screens/settings/profile_screen.dart';
+import '../screens/profile/profile_screen.dart';
 
 List<DashboardCardData> dashboardCard = [
   DashboardCardData(
