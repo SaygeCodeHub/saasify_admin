@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:saasify/configs/app_theme.dart';
 import 'package:saasify/screens/profile/widgets/profile_form.dart';
 import '../../../configs/app_color.dart';
 import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../data/models/profile/fetch_profile_details_model.dart';
 import '../../../utils/constants/string_constants.dart';
-import '../../../widgets/custom_page_header.dart';
 import '../../../widgets/primary_button.dart';
 import '../../dashboard/dashboard_screen.dart';
 

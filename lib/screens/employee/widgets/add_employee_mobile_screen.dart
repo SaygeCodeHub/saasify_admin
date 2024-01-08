@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/utils/responsive.dart';
-import '../../../configs/app_color.dart';
-import '../../../configs/app_dimensions.dart';
 import '../../../configs/app_spacing.dart';
 import '../../../utils/constants/string_constants.dart';
 import '../../../widgets/custom_dropdown.dart';
