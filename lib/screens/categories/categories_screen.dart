@@ -4,8 +4,8 @@ import 'package:saasify/bloc/categories/categories_bloc.dart';
 import 'package:saasify/bloc/categories/categories_event.dart';
 import 'package:saasify/bloc/categories/categories_states.dart';
 import 'package:saasify/configs/app_theme.dart';
-import 'package:saasify/screens/categories/widgets/add_category_pop_up.dart';
-import 'package:saasify/screens/categories/widgets/categories_grid.dart';
+import 'package:saasify/screens/categories/widgets/category_mobile_screen.dart';
+import 'package:saasify/screens/categories/widgets/category_web_screen.dart';
 import 'package:saasify/utils/progress_bar.dart';
 import 'package:saasify/utils/responsive.dart';
 import '../../configs/app_color.dart';
@@ -153,38 +153,14 @@ class CategoriesScreen extends StatelessWidget {
                           return const Center(
                               child: CircularProgressIndicator());
                         } else if (state is FetchedCategories) {
-                          return Column(children: [
-                            Row(children: [
-                              context.responsive(const SizedBox(),
-                                  desktop: Text(StringConstants.kCategories,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .xxTiny
-                                          .copyWith(
-                                              fontWeight: FontWeight.w700))),
-                              context.responsive(const SizedBox(),
-                                  desktop: const Spacer()),
-                              const Spacer(),
-                              AddCategoryPopUp()
-                            ]),
-                            const SizedBox(height: spacingStandard),
-                            CategoriesGrid(productCategory: state.categoryList),
-                            Visibility(
-                                visible: state.categoryList.isEmpty,
-                                child: Center(
-                                    child: Text(
-                                        StringConstants.kNoDataAvailable,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .tinier
-                                            .copyWith(
-                                                fontWeight: FontWeight.w500,
-                                                color: AppColor
-                                                    .saasifyLightGrey)))),
-                            Visibility(
-                                visible: state.categoryList.isEmpty,
-                                child: const Spacer())
-                          ]);
+                          return LayoutBuilder(builder: (BuildContext context,
+                              BoxConstraints constraints) {
+                            return (constraints.maxWidth < 600)
+                                ? CategoryMobileScreen(
+                                    categoryList: state.categoryList)
+                                : CategoryWebScreen(
+                                    categoryList: state.categoryList);
+                          });
                         } else if (state is ErrorFetchingCategories) {
                           return Expanded(
                               child: Center(

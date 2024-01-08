@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:saasify/configs/app_dimensions.dart';
 import 'package:saasify/configs/app_theme.dart';
 import '../configs/app_color.dart';
+import '../configs/app_colors.dart';
 
 class SecondaryButton extends StatelessWidget {
   final void Function()? onPressed;
@@ -31,19 +32,23 @@ class SecondaryButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(kCircularRadius)),
             backgroundColor: AppColor.saasifyWhite,
             side: (side == null)
-                ? const BorderSide(color: AppColor.saasifyLightDeepBlue)
+                ? const BorderSide(color: AppColors.orange)
                 : side,
             minimumSize: Size(buttonWidth ?? double.maxFinite, 50)),
-        child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              (icon == null) ? const SizedBox.shrink() : Icon(icon),
-              Text(buttonTitle,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.xTiniest.copyWith(
-                      color: AppColor.saasifyBlack,
-                      fontWeight: FontWeight.w600)),
-            ]));
+        child: Expanded(
+          child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                (icon == null) ? const SizedBox.shrink() : Icon(icon),
+                FittedBox(
+                  child: Text(buttonTitle,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.xTiniest.copyWith(
+                          color: AppColor.saasifyBlack,
+                          fontWeight: FontWeight.w600)),
+                ),
+              ]),
+        ));
   }
 }

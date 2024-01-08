@@ -80,7 +80,9 @@ class CategoriesPopUpMenuWidget extends StatelessWidget {
                                               .kDoYouWantToDeactivateGST,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .xTiniest),
+                                              .xxTiniest
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500)),
                                       ToggleSwitchWidget(
                                           value: true, onChanged: (value) {})
                                     ]),
