@@ -7,9 +7,13 @@ import '../configs/app_colors.dart';
 class TopBar extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final String headingText;
+  final bool backButtonVisible;
 
   const TopBar(
-      {super.key, required this.scaffoldKey, required this.headingText});
+      {super.key,
+      required this.scaffoldKey,
+      required this.headingText,
+      this.backButtonVisible = false});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,16 @@ class TopBar extends StatelessWidget {
                 },
                 iconSize: 30,
                 icon: const Icon(Icons.menu)),
+          ),
+          Visibility(
+            visible: backButtonVisible,
+            child: Align(
+                alignment: Alignment.centerLeft,
+                child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(Icons.arrow_back_ios_new))),
           ),
           Text(headingText,
               style: Theme.of(context)

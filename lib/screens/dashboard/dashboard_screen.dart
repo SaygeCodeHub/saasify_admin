@@ -48,8 +48,7 @@ class DashboardsScreen extends StatelessWidget {
                               context: context,
                               builder: (dialogueCtx) {
                                 return AlertDialogueBox(
-                                    title:
-                                        StringConstants.kSomethingWentWrong,
+                                    title: StringConstants.kSomethingWentWrong,
                                     message: state.message,
                                     errorMarkVisible: true,
                                     primaryButtonTitle: StringConstants.kOk,
@@ -59,8 +58,7 @@ class DashboardsScreen extends StatelessWidget {
                               });
                         }
                       }, buildWhen: (prev, curr) {
-                        return curr is FetchedOrders ||
-                            curr is FetchingOrders;
+                        return curr is FetchedOrders || curr is FetchingOrders;
                       }, builder: (context, state) {
                         if (state is FetchingOrders) {
                           return const Center(
@@ -71,15 +69,13 @@ class DashboardsScreen extends StatelessWidget {
                               children: [
                                 Row(children: [
                                   context.responsive(const SizedBox(),
-                                      desktop: Text(
-                                          StringConstants.kDashboard,
+                                      desktop: Text(StringConstants.kDashboard,
                                           maxLines: 2,
                                           style: Theme.of(context)
                                               .textTheme
                                               .xxTiny
                                               .copyWith(
-                                                  fontWeight:
-                                                      FontWeight.w700)))
+                                                  fontWeight: FontWeight.w700)))
                                 ]),
                                 context.responsive(const SizedBox(),
                                     desktop:
